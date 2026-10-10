@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SmartPicTools - All-in-One Online Image Suite & Compressor</title>
-    <meta name="description" content="Free online suite to Compress to exact KB/MB, Crop, Resize, Watermark with live preview, and Batch Convert images to AVIF, WEBP, JPG, PDF.">
+    <meta name="description" content="Free online suite to Compress to exact KB/MB, Crop, Resize, Watermark, and Convert HEIC, AVIF, JPG, PNG, PDF.">
 
     <!-- ⚡ FAVICON -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' stop-color='%236366f1'/><stop offset='50%25' stop-color='%23a855f7'/><stop offset='100%25' stop-color='%23ec4899'/></linearGradient></defs><rect width='100' height='100' rx='28' fill='url(%23g)'/><path d='M52 16 L24 54 L46 54 L42 84 L76 44 L54 44 Z' fill='%23fbbf24'/></svg>">
@@ -57,15 +57,11 @@
         </div>
     </header>
 
-    <!-- 2. TOP AD BANNER -->
-    <div class="max-w-5xl mx-auto w-full px-4 mt-6">
-        <div class="w-full bg-slate-900 border border-dashed border-slate-800 rounded-2xl py-3 px-4 text-center text-xs text-slate-500 uppercase tracking-widest font-semibold">
-            📢 Advertisement (Leaderboard 728x90 Ad Slot)
-        </div>
-    </div>
+    <!-- 2. TOP AD BANNER (HIDDEN FOR CLEAN UX - READY FOR FUTURE ADSENSE) -->
+    <!-- <div class="max-w-5xl mx-auto w-full px-4 mt-6"><div class="w-full bg-slate-900 border border-dashed border-slate-800 rounded-2xl py-3 px-4 text-center text-xs text-slate-500 font-semibold">📢 Ad Slot 1</div></div> -->
 
     <!-- 3. LIVE STATS STRIP -->
-    <section class="max-w-5xl mx-auto w-full px-4 mt-6">
+    <section class="max-w-5xl mx-auto w-full px-4 mt-8">
         <div class="grid grid-cols-2 md:grid-cols-4 gap-3 bg-slate-900/60 p-4 rounded-2xl border border-slate-800/80 text-center">
             <div class="p-2">
                 <div class="text-xl sm:text-2xl font-extrabold text-white">⚡ 0.2s</div>
@@ -119,8 +115,9 @@
 
         <div class="bg-slate-900 rounded-3xl p-6 sm:p-10 border border-slate-800 shadow-2xl relative">
             
+            <!-- UPLOAD DROP AREA (SUPPORTS IPHONE HEIC) -->
             <div id="drop-area" class="group border-2 border-dashed border-slate-700 hover:border-indigo-500 bg-slate-950/60 hover:bg-indigo-950/20 rounded-2xl p-8 sm:p-14 text-center cursor-pointer transition-all duration-300 block">
-                <input type="file" id="image-upload" accept="image/png, image/jpeg, image/jpg, image/webp, image/avif, .avif" class="hidden">
+                <input type="file" id="image-upload" accept="image/*, .heic, .HEIC, .heif, .HEIF, image/heic, image/heif" class="hidden">
                 <div class="w-20 h-20 rounded-3xl bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-4xl flex items-center justify-center mx-auto mb-5 group-hover:scale-110 group-hover:bg-indigo-500/20 transition duration-300 shadow-inner">
                     📁
                 </div>
@@ -128,7 +125,7 @@
                     Click here to select image, or drag & drop file here
                 </h3>
                 <p id="upload-subtext" class="text-xs sm:text-sm text-slate-400 font-medium">
-                    Supports JPG, PNG, WEBP, AVIF (Max: 50MB)
+                    Supports JPG, PNG, WEBP, AVIF, iPhone HEIC/HEIF (Max: 50MB)
                 </p>
             </div>
 
@@ -240,7 +237,7 @@
                         </div>
                     </div>
 
-                    <!-- 4. CONVERT (NOW WITH AVIF OPTION!) -->
+                    <!-- 4. CONVERT -->
                     <div id="ctrl-convert" class="tool-ctrl hidden space-y-3">
                         <label class="block text-xs font-bold text-slate-400">Convert Image To:</label>
                         <select id="convert-format" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2.5 text-sm text-white focus:outline-none focus:border-indigo-500 font-semibold">
@@ -350,15 +347,11 @@
         </div>
     </main>
 
-    <!-- 5. GOOGLE AD SLOT 2 -->
-    <div class="max-w-5xl mx-auto w-full px-4 mb-14">
-        <div class="w-full bg-slate-900 border border-dashed border-slate-800 rounded-2xl py-3 px-4 text-center text-xs text-slate-500 uppercase tracking-widest font-semibold">
-            📢 High Revenue Ad Slot (728x90 Mid Page)
-        </div>
-    </div>
+    <!-- 5. MID AD SLOT (HIDDEN FOR CLEAN UX) -->
+    <!-- <div class="max-w-5xl mx-auto w-full px-4 mb-14"><div class="w-full bg-slate-900 border border-dashed border-slate-800 rounded-2xl py-3 px-4 text-center text-xs text-slate-500 font-semibold">📢 Ad Slot 2</div></div> -->
 
-    <!-- 6. ALL TOOLS CATALOG -->
-    <section class="max-w-5xl mx-auto w-full px-4 mb-20" id="all-tools-grid">
+    <!-- 6. ALL 7 TOOLS CATALOG (EXACTLY 7 TOOLS NOW INCLUDED) -->
+    <section class="max-w-5xl mx-auto w-full px-4 mb-20 mt-8" id="all-tools-grid">
         <div class="text-center mb-10">
             <span class="text-xs font-extrabold uppercase tracking-widest text-indigo-400 bg-indigo-500/10 px-3 py-1 rounded-full border border-indigo-500/20">All-In-One Hub</span>
             <h2 class="text-2xl sm:text-4xl font-extrabold text-white mt-3">Browse All Image Tools</h2>
@@ -366,36 +359,49 @@
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            <!-- 1. COMPRESS -->
             <div onclick="switchTool('compress'); window.scrollTo({top: 0, behavior: 'smooth'});" class="bg-slate-900/80 hover:bg-slate-900 border border-slate-800 hover:border-indigo-500/50 p-6 rounded-2xl transition cursor-pointer group shadow-lg">
                 <div class="w-12 h-12 rounded-xl bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition">⚡</div>
                 <h3 class="text-lg font-bold text-white group-hover:text-indigo-400 transition">Compress to Target KB</h3>
                 <p class="text-xs text-slate-400 mt-2 leading-relaxed">Type your desired KB or MB value. Shrink size accurately with high clarity.</p>
             </div>
 
+            <!-- 2. CROP -->
             <div onclick="switchTool('crop'); window.scrollTo({top: 0, behavior: 'smooth'});" class="bg-slate-900/80 hover:bg-slate-900 border border-slate-800 hover:border-purple-500/50 p-6 rounded-2xl transition cursor-pointer group shadow-lg">
                 <div class="w-12 h-12 rounded-xl bg-purple-500/10 text-purple-400 border border-purple-500/20 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition">✂️</div>
                 <h3 class="text-lg font-bold text-white group-hover:text-purple-400 transition">Crop with Templates</h3>
                 <p class="text-xs text-slate-400 mt-2 leading-relaxed">Crop visually for Instagram (1:1), YouTube (16:9), and Shorts/Reels (9:16).</p>
             </div>
 
+            <!-- 3. RESIZE -->
             <div onclick="switchTool('resize'); window.scrollTo({top: 0, behavior: 'smooth'});" class="bg-slate-900/80 hover:bg-slate-900 border border-slate-800 hover:border-blue-500/50 p-6 rounded-2xl transition cursor-pointer group shadow-lg">
                 <div class="w-12 h-12 rounded-xl bg-blue-500/10 text-blue-400 border border-blue-500/20 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition">📐</div>
                 <h3 class="text-lg font-bold text-white group-hover:text-blue-400 transition">Resize Dimensions</h3>
                 <p class="text-xs text-slate-400 mt-2 leading-relaxed">Change exact pixel width and height without breaking proportions.</p>
             </div>
 
+            <!-- 4. IPHONE HEIC CONVERTER (NEW 7TH TOOL!) -->
+            <div onclick="switchTool('convert'); window.scrollTo({top: 0, behavior: 'smooth'});" class="bg-slate-900/80 hover:bg-slate-900 border border-slate-800 hover:border-emerald-500/50 p-6 rounded-2xl transition cursor-pointer group shadow-lg">
+                <div class="w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition">📱</div>
+                <h3 class="text-lg font-bold text-white group-hover:text-emerald-400 transition">iPhone HEIC Converter</h3>
+                <p class="text-xs text-slate-400 mt-2 leading-relaxed">Easily convert Apple HEIC / HEIF photos to standard JPG, PNG, WEBP, or PDF.</p>
+            </div>
+
+            <!-- 5. WATERMARK -->
             <div onclick="switchTool('watermark'); window.scrollTo({top: 0, behavior: 'smooth'});" class="bg-slate-900/80 hover:bg-slate-900 border border-slate-800 hover:border-amber-500/50 p-6 rounded-2xl transition cursor-pointer group shadow-lg">
                 <div class="w-12 h-12 rounded-xl bg-amber-500/10 text-amber-400 border border-amber-500/20 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition">🏷️</div>
                 <h3 class="text-lg font-bold text-white group-hover:text-amber-400 transition">Diagonal Grid Watermark</h3>
                 <p class="text-xs text-slate-400 mt-2 leading-relaxed">Protect photos with diagonal repeat grids with live screen preview.</p>
             </div>
 
-            <div onclick="switchTool('convert'); window.scrollTo({top: 0, behavior: 'smooth'});" class="bg-slate-900/80 hover:bg-slate-900 border border-slate-800 hover:border-emerald-500/50 p-6 rounded-2xl transition cursor-pointer group shadow-lg">
-                <div class="w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition">🔄</div>
-                <h3 class="text-lg font-bold text-white group-hover:text-emerald-400 transition">Batch Format Converter</h3>
+            <!-- 6. BATCH CONVERTER -->
+            <div onclick="switchTool('convert'); window.scrollTo({top: 0, behavior: 'smooth'});" class="bg-slate-900/80 hover:bg-slate-900 border border-slate-800 hover:border-pink-500/50 p-6 rounded-2xl transition cursor-pointer group shadow-lg">
+                <div class="w-12 h-12 rounded-xl bg-pink-500/10 text-pink-400 border border-pink-500/20 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition">🔄</div>
+                <h3 class="text-lg font-bold text-white group-hover:text-pink-400 transition">Batch Format Converter</h3>
                 <p class="text-xs text-slate-400 mt-2 leading-relaxed">Convert up to 10 images at once to JPG, PNG, WEBP, AVIF, PDF with 1-click ZIP download.</p>
             </div>
 
+            <!-- 7. ROTATE & FLIP -->
             <div onclick="switchTool('rotate'); window.scrollTo({top: 0, behavior: 'smooth'});" class="bg-slate-900/80 hover:bg-slate-900 border border-slate-800 hover:border-cyan-500/50 p-6 rounded-2xl transition cursor-pointer group shadow-lg">
                 <div class="w-12 h-12 rounded-xl bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition">🔁</div>
                 <h3 class="text-lg font-bold text-white group-hover:text-cyan-400 transition">Rotate & Flip</h3>
@@ -416,7 +422,7 @@
                 <div class="bg-slate-900 p-6 rounded-2xl border border-slate-800">
                     <div class="w-8 h-8 rounded-full bg-indigo-600 text-white font-extrabold text-sm flex items-center justify-center mb-4">1</div>
                     <h3 class="font-bold text-white text-base">Select or Drop</h3>
-                    <p class="text-xs text-slate-400 mt-2 leading-relaxed">Choose single or multiple files from your computer or phone. Supports JPG, PNG, WEBP, AVIF.</p>
+                    <p class="text-xs text-slate-400 mt-2 leading-relaxed">Choose single or multiple files from your computer or phone. Supports JPG, PNG, WEBP, AVIF, HEIC.</p>
                 </div>
                 <div class="bg-slate-900 p-6 rounded-2xl border border-slate-800">
                     <div class="w-8 h-8 rounded-full bg-indigo-600 text-white font-extrabold text-sm flex items-center justify-center mb-4">2</div>
@@ -432,7 +438,7 @@
         </div>
     </section>
 
-    <!-- 8. 7 EXPANDED RICH FAQS (AdSense & SEO Optimized) -->
+    <!-- 8. 7 EXPANDED RICH FAQS -->
     <section class="max-w-4xl mx-auto w-full px-4 py-16" id="faq">
         <div class="text-center mb-10">
             <h2 class="text-2xl sm:text-3xl font-extrabold text-white">Frequently Asked Questions</h2>
@@ -440,7 +446,6 @@
         </div>
 
         <div class="space-y-4 text-sm">
-            <!-- FAQ 1 -->
             <details class="group bg-slate-900 p-5 rounded-2xl border border-slate-800 cursor-pointer">
                 <summary class="font-bold text-white flex justify-between items-center">
                     Is SmartPicTools really 100% free with unlimited usage?
@@ -449,7 +454,6 @@
                 <p class="text-slate-400 mt-3 leading-relaxed">Yes! SmartPicTools is completely free to use for both personal and commercial projects. There are no hidden subscription fees, watermark restrictions, or daily upload caps.</p>
             </details>
 
-            <!-- FAQ 2 -->
             <details class="group bg-slate-900 p-5 rounded-2xl border border-slate-800 cursor-pointer">
                 <summary class="font-bold text-white flex justify-between items-center">
                     How does exact KB/MB target compression work?
@@ -458,7 +462,6 @@
                 <p class="text-slate-400 mt-3 leading-relaxed">Unlike traditional tools that only use percentages, our binary search algorithm dynamically tests file sizes in memory to match your exact requested KB or MB value while maintaining maximum visual sharpness.</p>
             </details>
 
-            <!-- FAQ 3 -->
             <details class="group bg-slate-900 p-5 rounded-2xl border border-slate-800 cursor-pointer">
                 <summary class="font-bold text-white flex justify-between items-center">
                     Are my uploaded images safe and private?
@@ -467,7 +470,6 @@
                 <p class="text-slate-400 mt-3 leading-relaxed">100%. We practice strict in-memory execution. Files are processed directly in temporary RAM buffers and permanently wiped immediately after download. We never store, index, or share your photos.</p>
             </details>
 
-            <!-- FAQ 4 -->
             <details class="group bg-slate-900 p-5 rounded-2xl border border-slate-800 cursor-pointer">
                 <summary class="font-bold text-white flex justify-between items-center">
                     What image formats can I convert to?
@@ -476,7 +478,6 @@
                 <p class="text-slate-400 mt-3 leading-relaxed">Our Converter supports JPG, PNG (with transparency), WEBP, AVIF (next-gen ultra-compact format), PDF documents, BMP, and website Favicon (ICO) formats.</p>
             </details>
 
-            <!-- FAQ 5 -->
             <details class="group bg-slate-900 p-5 rounded-2xl border border-slate-800 cursor-pointer">
                 <summary class="font-bold text-white flex justify-between items-center">
                     Can I convert multiple images at once (Batch Mode)?
@@ -485,7 +486,6 @@
                 <p class="text-slate-400 mt-3 leading-relaxed">Yes! You can select up to 10 images simultaneously in the converter. Our server will process all files together and package them into a single, organized ZIP file for 1-click download.</p>
             </details>
 
-            <!-- FAQ 6 -->
             <details class="group bg-slate-900 p-5 rounded-2xl border border-slate-800 cursor-pointer">
                 <summary class="font-bold text-white flex justify-between items-center">
                     How does the Diagonal Grid Watermark prevent theft?
@@ -494,7 +494,6 @@
                 <p class="text-slate-400 mt-3 leading-relaxed">Single corner watermarks can easily be cropped out by thieves. Our Diagonal Grid feature tiles your name or copyright across the entire image diagonally, making unauthorized use and cropping impossible.</p>
             </details>
 
-            <!-- FAQ 7 -->
             <details class="group bg-slate-900 p-5 rounded-2xl border border-slate-800 cursor-pointer">
                 <summary class="font-bold text-white flex justify-between items-center">
                     Does SmartPicTools work on mobile phones without installing an app?
@@ -576,7 +575,7 @@
             compress: { title: "Compress Image to Exact Size", desc: "Type your desired KB or MB value for precise file size reduction.", btn: "⚡ Compress & Download" },
             crop: { title: "Crop Image with Templates", desc: "Crop visually with custom ratios for Instagram, YouTube, and Shorts.", btn: "✂️ Crop & Download" },
             resize: { title: "Resize Image Dimensions", desc: "Change width and height pixels easily for social media or web.", btn: "📐 Resize & Download" },
-            convert: { title: "Batch Format Converter", desc: "Select up to 10 images and convert to JPG, PNG, WEBP, AVIF, or PDF.", btn: "🔄 Convert & Download" },
+            convert: { title: "Batch Format Converter", desc: "Convert HEIC, AVIF, JPG, PNG, WEBP, PDF with 1-click download.", btn: "🔄 Convert & Download" },
             watermark: { title: "Pro Watermark Studio", desc: "Stamp copyright text in corner or repeat diagonal security grid with live preview.", btn: "🏷️ Watermark & Download" },
             rotate: { title: "Rotate & Flip Image", desc: "Rotate orientation clockwise, anti-clockwise or flip horizontal / vertical.", btn: "🔁 Process & Download" }
         };
@@ -627,10 +626,10 @@
             const fileInput = document.getElementById('image-upload');
             if (tool === 'convert') {
                 fileInput.setAttribute('multiple', 'multiple');
-                document.getElementById('upload-subtext').innerText = "Select up to 10 images for batch conversion (Max: 50MB total)";
+                document.getElementById('upload-subtext').innerText = "Select up to 10 images (Supports iPhone HEIC, AVIF, JPG, PNG) - Max: 50MB";
             } else {
                 fileInput.removeAttribute('multiple');
-                document.getElementById('upload-subtext').innerText = "Supports JPG, PNG, WEBP, AVIF (Max: 50MB)";
+                document.getElementById('upload-subtext').innerText = "Supports JPG, PNG, WEBP, AVIF, iPhone HEIC (Max: 50MB)";
             }
         }
 
