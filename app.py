@@ -7,8 +7,15 @@ import datetime
 from flask import Flask, render_template, request, send_file, jsonify
 from PIL import Image, ImageDraw, ImageFont
 
+# Support for AVIF and iPhone HEIC/HEIF
 try:
     import pillow_avif
+except ImportError:
+    pass
+
+try:
+    import pillow_heif
+    pillow_heif.register_heif_opener()
 except ImportError:
     pass
 
@@ -77,12 +84,42 @@ def make_rgb(im):
         return bg
     return im.convert('RGB')
 
+def get_universal_font(size):
+    """Loads fonts safely on Linux (Render) and Windows"""
+    font_candidates = [
+        "DejaVuSans-Bold.ttf", "DejaVuSans.ttf",
+        "FreeSansBold.ttf", "FreeSans.ttf",
+        "LiberationSans-Bold.ttf", "LiberationSans-Regular.ttf",
+        "arial.ttf"
+    ]
+    for fn in font_candidates:
+        try:
+            return ImageFont.truetype(fn, size)
+        except Exception:
+            continue
+    try:
+        return ImageFont.load_default(size=size)
+    except Exception:
+        return ImageFont.load_default()
+
 def compress_to_target_bytes(img, target_bytes):
+    """High-accuracy, high-speed target size compressor with 4:4:4 color preservation"""
     img_rgb = make_rgb(img)
-    low, high = 10, 95
+    
+    # 1. Fast test at maximum quality (98) with full chroma subsampling (subsampling=0)
+    buf = io.BytesIO()
+    img_rgb.save(buf, format='JPEG', quality=98, subsampling=0)
+    max_data = buf.getvalue()
+    
+    # If at pristine quality 98 it is already within target, return immediately (superfast 0.2s)!
+    if len(max_data) <= target_bytes:
+        return max_data
+
+    # 2. Binary search between quality 20 and 95 (Fast 5 iterations)
+    low, high = 20, 95
     best_data = None
     
-    while low <= high:
+    for _ in range(6):
         mid = (low + high) // 2
         buf = io.BytesIO()
         img_rgb.save(buf, format='JPEG', optimize=True, quality=mid)
@@ -92,21 +129,24 @@ def compress_to_target_bytes(img, target_bytes):
             low = mid + 1
         else:
             high = mid - 1
+        if low > high:
+            break
             
+    # 3. If image dimensions are too huge, downscale minimally
     if best_data is None:
         curr_img = img_rgb.copy()
-        while True:
-            buf = io.BytesIO()
-            curr_img.save(buf, format='JPEG', optimize=True, quality=30)
-            data = buf.getvalue()
-            if len(data) <= target_bytes or curr_img.width < 100 or curr_img.height < 100:
-                best_data = data
-                break
-            new_w = max(100, int(curr_img.width * 0.85))
-            new_h = max(100, int(curr_img.height * 0.85))
+        for _ in range(4):
+            scale = math.sqrt(target_bytes / len(data)) * 0.95
+            new_w = max(100, int(curr_img.width * scale))
+            new_h = max(100, int(curr_img.height * scale))
             curr_img = curr_img.resize((new_w, new_h), Image.Resampling.LANCZOS)
-            
-    return best_data
+            buf = io.BytesIO()
+            curr_img.save(buf, format='JPEG', optimize=True, quality=60)
+            best_data = buf.getvalue()
+            if len(best_data) <= target_bytes:
+                break
+                
+    return best_data or max_data
 
 @app.route('/process', methods=['POST'])
 def process_image():
@@ -117,7 +157,7 @@ def process_image():
         if not files or files[0].filename == '':
             return jsonify({'error': 'No file selected'}), 400
 
-        # BATCH CONVERT (WITH AVIF SUPPORT)
+        # BATCH CONVERT (Multi-file)
         if tool == 'convert' and len(files) > 1:
             target_fmt = request.form.get('format', 'JPG').upper()
             zip_buffer = io.BytesIO()
@@ -125,7 +165,8 @@ def process_image():
             with zipfile.ZipFile(zip_buffer, 'w', zipfile.ZIP_DEFLATED) as zip_file:
                 for idx, f in enumerate(files[:10]):
                     raw_name, _ = os.path.splitext(f.filename)
-                    single_img = Image.open(f.stream)
+                    # io.BytesIO(f.read()) fixes HEIC/HEIF files cleanly
+                    single_img = Image.open(io.BytesIO(f.read()))
                     single_buf = io.BytesIO()
                     out_ext = target_fmt.lower()
 
@@ -163,10 +204,11 @@ def process_image():
                 download_name='smartpic_converted_batch.zip'
             )
 
-        # SINGLE IMAGE PROCESS
+        # SINGLE IMAGE PROCESS (io.BytesIO fixes iPhone HEIC permanently)
         file = files[0]
         filename, orig_ext = os.path.splitext(file.filename)
-        img = Image.open(file.stream)
+        raw_bytes = file.read()
+        img = Image.open(io.BytesIO(raw_bytes))
         
         output_data = None
         mimetype = 'image/jpeg'
@@ -271,10 +313,8 @@ def process_image():
             img_rgba = img.convert('RGBA')
             txt_layer = Image.new('RGBA', img_rgba.size, (255, 255, 255, 0))
 
-            try:
-                font = ImageFont.truetype("arial.ttf", size_choice)
-            except Exception:
-                font = ImageFont.load_default()
+            # Loads fonts cleanly on Linux / Windows
+            font = get_universal_font(size_choice)
 
             color_map = {
                 'white': (255, 255, 255),
@@ -292,9 +332,9 @@ def process_image():
                 tw = bbox[2] - bbox[0]
                 th = bbox[3] - bbox[1]
 
-                stamp = Image.new('RGBA', (tw + 80, th + 50), (255, 255, 255, 0))
+                stamp = Image.new('RGBA', (tw + 90, th + 55), (255, 255, 255, 0))
                 draw_stamp = ImageDraw.Draw(stamp)
-                draw_stamp.text((40, 25), text, font=font, fill=fill_color)
+                draw_stamp.text((45, 25), text, font=font, fill=fill_color)
                 rotated_stamp = stamp.rotate(30, expand=True, resample=Image.Resampling.BICUBIC)
 
                 rw, rh = rotated_stamp.size
@@ -317,7 +357,7 @@ def process_image():
                     x, y = img.width - tw - margin, margin
                 elif pos == 'bottom-left':
                     x, y = margin, img.height - th - margin
-                else:
+                else:  # bottom-right
                     x, y = img.width - tw - margin, img.height - th - margin
 
                 draw.text((x, y), text, font=font, fill=fill_color)
