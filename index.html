@@ -1,0 +1,1099 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartPicTools - All-in-One Online Image Suite & Compressor</title>
+    <meta name="description" content="Free online suite to Compress to exact KB/MB, Crop, Resize, Watermark, and Convert HEIC, AVIF, JPG, PNG, PDF.">
+
+    <!-- ⚡ FAVICON -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' stop-color='%236366f1'/><stop offset='50%25' stop-color='%23a855f7'/><stop offset='100%25' stop-color='%23ec4899'/></linearGradient></defs><rect width='100' height='100' rx='28' fill='url(%23g)'/><path d='M52 16 L24 54 L46 54 L42 84 L76 44 L54 44 Z' fill='%23fbbf24'/></svg>">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .cropper-view-box, .cropper-face { border-radius: 8px; }
+        #image-preview { transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+        .tiled-watermark-overlay {
+            background-repeat: repeat;
+            transform: rotate(-25deg) scale(1.4);
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col justify-between selection:bg-indigo-500 selection:text-white">
+
+    <!-- 1. HEADER -->
+    <header class="border-b border-slate-800 bg-slate-900/80 backdrop-blur-xl sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 h-20 flex items-center justify-between">
+            <a href="/" class="flex items-center gap-3 group">
+                <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-indigo-500 via-purple-500 to-pink-500 flex items-center justify-center text-white text-xl shadow-lg shadow-indigo-500/30 group-hover:scale-105 transition">
+                    ⚡
+                </div>
+                <div>
+                    <span class="text-2xl font-black tracking-tight text-white">SmartPic<span class="text-indigo-400">Tools</span></span>
+                    <span class="block text-[10px] uppercase font-bold tracking-widest text-slate-400 -mt-1">Pro Image Suite</span>
+                </div>
+            </a>
+            
+            <nav class="hidden md:flex items-center gap-8 text-sm font-semibold text-slate-300">
+                <a href="#tool-workspace" class="hover:text-indigo-400 transition">Workspace</a>
+                <a href="#all-tools-grid" class="hover:text-indigo-400 transition">Browse All Tools</a>
+                <a href="#how-it-works" class="hover:text-indigo-400 transition">How it Works</a>
+                <a href="#faq" class="hover:text-indigo-400 transition">FAQs</a>
+            </nav>
+
+            <div class="flex items-center gap-3">
+                <button type="button" onclick="openFeedbackModal()" class="py-2 px-3.5 rounded-xl bg-slate-800 hover:bg-slate-700 active:scale-95 text-xs font-bold text-amber-300 border border-slate-700 transition flex items-center gap-1.5 shadow-md">
+                    <span>💡 Suggestions</span>
+                </button>
+                <span class="hidden sm:inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-bold bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Free Forever
+                </span>
+            </div>
+        </div>
+    </header>
+
+    <!-- 2. TOP AD BANNER (HIDDEN FOR CLEAN UX) -->
+    <!-- <div class="max-w-5xl mx-auto w-full px-4 mt-6"><div class="w-full bg-slate-900 border border-dashed border-slate-800 rounded-2xl py-3 px-4 text-center text-xs text-slate-500 font-semibold">📢 Ad Slot 1</div></div> -->
+
+    <!-- 3. LIVE STATS STRIP -->
+    <section class="max-w-5xl mx-auto w-full px-4 mt-8">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-3 bg-slate-900/60 p-4 rounded-2xl border border-slate-800/80 text-center">
+            <div class="p-2">
+                <div class="text-xl sm:text-2xl font-extrabold text-white">⚡ 0.2s</div>
+                <div class="text-[11px] text-slate-400 font-semibold uppercase tracking-wider mt-0.5">Average Speed</div>
+            </div>
+            <div class="p-2 border-l border-slate-800">
+                <div class="text-xl sm:text-2xl font-extrabold text-indigo-400">Exact KB</div>
+                <div class="text-[11px] text-slate-400 font-semibold uppercase tracking-wider mt-0.5">Target Compression</div>
+            </div>
+            <div class="p-2 border-l border-slate-800">
+                <div class="text-xl sm:text-2xl font-extrabold text-white">🔒 100%</div>
+                <div class="text-[11px] text-slate-400 font-semibold uppercase tracking-wider mt-0.5">Privacy Safe</div>
+            </div>
+            <div class="p-2 border-l border-slate-800">
+                <div class="text-xl sm:text-2xl font-extrabold text-emerald-400">⭐ 4.9/5</div>
+                <div class="text-[11px] text-slate-400 font-semibold uppercase tracking-wider mt-0.5">User Satisfaction</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. MAIN WORKSPACE -->
+    <main class="max-w-5xl mx-auto w-full px-4 py-8 flex-1" id="tool-workspace">
+        
+        <!-- TOP 5 TABS -->
+        <div class="grid grid-cols-2 sm:grid-cols-5 gap-2 mb-8 bg-slate-900 p-2 rounded-2xl border border-slate-800 max-w-3xl mx-auto">
+            <button onclick="switchTool('compress')" id="tab-compress" class="tool-tab py-3 px-2 rounded-xl text-xs font-bold transition flex items-center justify-center gap-1.5 bg-indigo-600 text-white shadow-lg shadow-indigo-600/30">
+                ⚡ Compress
+            </button>
+            <button onclick="switchTool('crop')" id="tab-crop" class="tool-tab py-3 px-2 rounded-xl text-xs font-bold transition flex items-center justify-center gap-1.5 text-slate-400 hover:text-white hover:bg-slate-800">
+                ✂️ Crop
+            </button>
+            <button onclick="switchTool('resize')" id="tab-resize" class="tool-tab py-3 px-2 rounded-xl text-xs font-bold transition flex items-center justify-center gap-1.5 text-slate-400 hover:text-white hover:bg-slate-800">
+                📐 Resize
+            </button>
+            <button onclick="switchTool('convert')" id="tab-convert" class="tool-tab py-3 px-2 rounded-xl text-xs font-bold transition flex items-center justify-center gap-1.5 text-slate-400 hover:text-white hover:bg-slate-800">
+                🔄 Convert
+            </button>
+            <button onclick="switchTool('watermark')" id="tab-watermark" class="tool-tab py-3 px-2 rounded-xl text-xs font-bold transition flex items-center justify-center gap-1.5 text-slate-400 hover:text-white hover:bg-slate-800">
+                🏷️ Watermark
+            </button>
+        </div>
+
+        <div class="text-center max-w-2xl mx-auto mb-8">
+            <h1 id="tool-title" class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
+                Compress Image to Exact Size
+            </h1>
+            <p id="tool-desc" class="mt-3 text-slate-400 text-sm sm:text-base">
+                Type your desired KB or MB value for precise file size reduction.
+            </p>
+        </div>
+
+        <div class="bg-slate-900 rounded-3xl p-6 sm:p-10 border border-slate-800 shadow-2xl relative">
+            
+            <!-- UPLOAD DROP AREA -->
+            <div id="drop-area" class="group border-2 border-dashed border-slate-700 hover:border-indigo-500 bg-slate-950/60 hover:bg-indigo-950/20 rounded-2xl p-8 sm:p-14 text-center cursor-pointer transition-all duration-300 block">
+                <input type="file" id="image-upload" accept="image/*, .heic, .HEIC, .heif, .HEIF, image/heic, image/heif" class="hidden">
+                <div class="w-20 h-20 rounded-3xl bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-4xl flex items-center justify-center mx-auto mb-5 group-hover:scale-110 group-hover:bg-indigo-500/20 transition duration-300 shadow-inner">
+                    📁
+                </div>
+                <h3 class="text-lg sm:text-xl font-bold text-white mb-2">
+                    Click here to select image, or drag & drop file here
+                </h3>
+                <p id="upload-subtext" class="text-xs sm:text-sm text-slate-400 font-medium">
+                    Supports JPG, PNG, WEBP, AVIF, iPhone HEIC/HEIF (Max: 50MB)
+                </p>
+            </div>
+
+            <!-- CONTROLS & PREVIEW -->
+            <div id="settings-panel" class="hidden mt-8 pt-8 border-t border-slate-800">
+                
+                <div class="flex items-center justify-between mb-4">
+                    <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Workspace Preview</span>
+                    <button type="button" onclick="resetWorkspace()" class="py-1.5 px-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-bold text-indigo-400 hover:text-white transition flex items-center gap-1.5">
+                        <span>🔄 Upload Different Image</span>
+                    </button>
+                </div>
+
+                <!-- PREVIEW CONTAINER: TIGHT FIT WRAPPER LOCKS WATERMARK INSIDE BOUNDARIES -->
+                <div id="single-preview-box" class="bg-slate-950/80 p-5 rounded-2xl border border-slate-800 mb-6">
+                    <div class="max-h-[420px] overflow-hidden flex items-center justify-center bg-slate-900/50 rounded-xl p-2 select-none">
+                        
+                        <div class="relative inline-block max-h-[380px] max-w-full rounded-xl overflow-hidden leading-none shadow-xl border border-slate-800/60">
+                            
+                            <!-- Normal Image Preview -->
+                            <img id="image-preview" src="#" alt="Preview" class="max-h-[380px] w-auto max-w-full block rounded-xl object-contain">
+
+                            <!-- HEIC Custom Placeholder (When browser cannot show HEIC natively) -->
+                            <div id="heic-preview-card" class="hidden flex flex-col items-center justify-center p-12 bg-slate-900 text-center rounded-xl border border-slate-800">
+                                <span class="text-5xl mb-3">📱</span>
+                                <h4 class="text-base font-bold text-white">Apple HEIC Image Selected</h4>
+                                <p class="text-xs text-indigo-400 mt-1">Ready to convert into JPG, PNG, WEBP or PDF</p>
+                            </div>
+                            
+                            <!-- 1. LIVE WATERMARK OVERLAY: SINGLE STAMP -->
+                            <div id="live-wm-single" class="hidden absolute pointer-events-none font-bold tracking-wider px-3 py-1.5 rounded transition-all shadow-sm">
+                                © SmartPicTools
+                            </div>
+
+                            <!-- 2. LIVE WATERMARK OVERLAY: DIAGONAL REPEATED GRID -->
+                            <div id="live-wm-grid" class="hidden absolute inset-0 overflow-hidden pointer-events-none flex items-center justify-center">
+                                <div id="live-wm-pattern" class="w-[200%] h-[200%] flex flex-wrap content-center justify-around gap-12 font-bold tracking-widest select-none tiled-watermark-overlay opacity-60">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-center justify-between mt-4 text-xs font-semibold">
+                        <span id="file-name" class="text-white truncate max-w-xs">photo.jpg</span>
+                        <span class="text-indigo-400">Original Size: <span id="file-size">0 KB</span></span>
+                    </div>
+                </div>
+
+                <!-- MULTI-IMAGE BATCH GALLERY -->
+                <div id="multi-preview-box" class="hidden mb-6">
+                    <div class="text-xs font-bold text-slate-300 mb-2 flex items-center justify-between">
+                        <span>Selected Images (<span id="multi-count">0</span>):</span>
+                        <span class="text-slate-400">Click ❌ to remove any image</span>
+                    </div>
+                    <div id="multi-grid" class="grid grid-cols-2 sm:grid-cols-4 gap-3 max-h-80 overflow-y-auto p-2 bg-slate-950/80 rounded-2xl border border-slate-800">
+                    </div>
+                </div>
+
+                <!-- CONTROLS PANEL -->
+                <div class="bg-slate-950/80 p-5 rounded-2xl border border-slate-800">
+                    
+                    <!-- 1. COMPRESS -->
+                    <div id="ctrl-compress" class="tool-ctrl space-y-4">
+                        <div class="flex gap-2 p-1 bg-slate-900 rounded-xl border border-slate-800 max-w-xs mx-auto">
+                            <button type="button" onclick="setCompressMode('target')" id="mode-target-btn" class="flex-1 py-1.5 px-3 rounded-lg text-xs font-bold bg-indigo-600 text-white transition">
+                                Exact Size (KB/MB)
+                            </button>
+                            <button type="button" onclick="setCompressMode('slider')" id="mode-slider-btn" class="flex-1 py-1.5 px-3 rounded-lg text-xs font-bold text-slate-400 hover:text-white transition">
+                                Percentage (%)
+                            </button>
+                        </div>
+
+                        <div id="target-box" class="space-y-3">
+                            <label class="block text-xs font-bold text-slate-400">Set Desired File Size:</label>
+                            <div class="flex gap-3">
+                                <input type="number" id="target-val" placeholder="e.g. 500" class="flex-1 bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-indigo-500 font-bold">
+                                <select id="target-unit" class="bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-indigo-500 font-bold">
+                                    <option value="kb" selected>KB</option>
+                                    <option value="mb">MB</option>
+                                </select>
+                            </div>
+                            <div id="target-guidance" class="text-xs font-semibold text-slate-400">
+                                💡 Tip: Enter a value lower than original file size. We'll compress as close as possible.
+                            </div>
+                        </div>
+
+                        <div id="slider-box" class="hidden">
+                            <div class="flex justify-between text-xs font-semibold text-slate-300 mb-2">
+                                <span>Compression Level</span>
+                                <span id="quality-display" class="text-indigo-400 font-bold">65% (Recommended)</span>
+                            </div>
+                            <input type="range" id="quality-slider" min="10" max="95" value="65" class="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-indigo-500">
+                        </div>
+                    </div>
+
+                    <!-- 2. CROP -->
+                    <div id="ctrl-crop" class="tool-ctrl hidden">
+                        <label class="block text-xs font-bold text-slate-400 mb-3">Select Aspect Ratio Template:</label>
+                        <div class="grid grid-cols-2 sm:grid-cols-5 gap-2">
+                            <button type="button" onclick="setCropRatio(NaN)" class="ratio-btn py-2.5 px-3 rounded-xl bg-indigo-600 text-white text-xs font-bold transition">Freeform</button>
+                            <button type="button" onclick="setCropRatio(1)" class="ratio-btn py-2.5 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 text-xs font-bold transition">1:1 (Square)</button>
+                            <button type="button" onclick="setCropRatio(16/9)" class="ratio-btn py-2.5 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 text-xs font-bold transition">16:9 (YouTube)</button>
+                            <button type="button" onclick="setCropRatio(9/16)" class="ratio-btn py-2.5 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 text-xs font-bold transition">9:16 (Story)</button>
+                            <button type="button" onclick="setCropRatio(4/5)" class="ratio-btn py-2.5 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 text-xs font-bold transition">4:5 (Portrait)</button>
+                        </div>
+                    </div>
+
+                    <!-- 3. RESIZE -->
+                    <div id="ctrl-resize" class="tool-ctrl hidden grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-400 mb-1">Target Width (px)</label>
+                            <input type="number" id="resize-width" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-indigo-500">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-400 mb-1">Target Height (px)</label>
+                            <input type="number" id="resize-height" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-indigo-500">
+                        </div>
+                    </div>
+
+                    <!-- 4. CONVERT -->
+                    <div id="ctrl-convert" class="tool-ctrl hidden space-y-3">
+                        <label class="block text-xs font-bold text-slate-400">Convert Image To:</label>
+                        <select id="convert-format" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2.5 text-sm text-white focus:outline-none focus:border-indigo-500 font-semibold">
+                            <option value="" disabled selected>-- Select Target Format --</option>
+                            <option value="JPG">Convert to JPG (Standard Photo)</option>
+                            <option value="PNG">Convert to PNG (Transparent)</option>
+                            <option value="WEBP">Convert to WEBP (Super Fast Web)</option>
+                            <option value="AVIF">Convert to AVIF (Next-Gen Ultra Compact)</option>
+                            <option value="PDF">Convert to PDF Document</option>
+                            <option value="BMP">Convert to BMP</option>
+                            <option value="ICO">Convert to ICO (Favicon)</option>
+                        </select>
+                    </div>
+
+                    <!-- 5. PRO WATERMARK -->
+                    <div id="ctrl-watermark" class="tool-ctrl hidden space-y-4">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-400 mb-1.5">Watermark Layout Style:</label>
+                            <div class="grid grid-cols-2 gap-2">
+                                <button type="button" onclick="setWatermarkMode('single')" id="wm-single-btn" class="py-2.5 px-3 rounded-xl bg-indigo-600 text-white text-xs font-bold transition">
+                                    📍 Single Stamp
+                                </button>
+                                <button type="button" onclick="setWatermarkMode('repeat')" id="wm-repeat-btn" class="py-2.5 px-3 rounded-xl bg-slate-900 text-slate-300 hover:text-white text-xs font-bold border border-slate-700 transition">
+                                    🌐 Diagonal Grid (Full Security)
+                                </button>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold text-slate-400 mb-1">Watermark Text</label>
+                            <input type="text" id="watermark-text" value="© SmartPicTools" oninput="updateLiveWatermarkPreview()" placeholder="Enter text" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-indigo-500 font-semibold">
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                            <div id="wm-pos-container">
+                                <label class="block text-xs font-bold text-slate-400 mb-1">Position</label>
+                                <select id="watermark-pos" onchange="updateLiveWatermarkPreview()" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-indigo-500">
+                                    <option value="bottom-right">Bottom Right</option>
+                                    <option value="center">Center</option>
+                                    <option value="bottom-left">Bottom Left</option>
+                                    <option value="top-right">Top Right</option>
+                                    <option value="top-left">Top Left</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-bold text-slate-400 mb-1">Color</label>
+                                <select id="watermark-color" onchange="updateLiveWatermarkPreview()" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-indigo-500">
+                                    <option value="white">White</option>
+                                    <option value="black">Black</option>
+                                    <option value="gold">Gold / Yellow</option>
+                                    <option value="red">Red</option>
+                                    <option value="cyan">Neon Cyan</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-bold text-slate-400 mb-1">Font Size</label>
+                                <select id="watermark-size" onchange="updateLiveWatermarkPreview()" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-indigo-500">
+                                    <option value="16">Small (16px)</option>
+                                    <option value="24" selected>Medium (24px)</option>
+                                    <option value="36">Large (36px)</option>
+                                    <option value="50">Extra Large (50px)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="flex justify-between text-xs font-semibold text-slate-400 mb-1">
+                                <span>Opacity / Transparency</span>
+                                <span id="wm-opacity-display" class="text-indigo-400 font-bold">60%</span>
+                            </div>
+                            <input type="range" id="watermark-opacity" min="40" max="255" value="150" oninput="updateLiveWatermarkPreview()" class="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-indigo-500">
+                        </div>
+                    </div>
+
+                    <!-- 6. ROTATE & FLIP -->
+                    <div id="ctrl-rotate" class="tool-ctrl hidden space-y-4">
+                        <label class="block text-xs font-bold text-slate-400">Orientation & Flip:</label>
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+                            <button type="button" onclick="applyLiveRotate(90)" class="py-2.5 px-3 rounded-xl bg-slate-900 hover:bg-indigo-600 text-white text-xs font-bold border border-slate-700 transition">
+                                ↻ 90° Clockwise
+                            </button>
+                            <button type="button" onclick="applyLiveRotate(-90)" class="py-2.5 px-3 rounded-xl bg-slate-900 hover:bg-indigo-600 text-white text-xs font-bold border border-slate-700 transition">
+                                ↺ 90° Anti-Clock
+                            </button>
+                            <button type="button" onclick="applyLiveFlip('horizontal')" id="flip-h-btn" class="py-2.5 px-3 rounded-xl bg-slate-900 hover:bg-indigo-600 text-white text-xs font-bold border border-slate-700 transition">
+                                ⇄ Flip Horizontal
+                            </button>
+                            <button type="button" onclick="applyLiveFlip('vertical')" id="flip-v-btn" class="py-2.5 px-3 rounded-xl bg-slate-900 hover:bg-indigo-600 text-white text-xs font-bold border border-slate-700 transition">
+                                ⇅ Flip Vertical
+                            </button>
+                        </div>
+                        <input type="hidden" id="rotate-angle" value="0">
+                        <input type="hidden" id="flip-mode" value="none">
+                    </div>
+                </div>
+
+                <button id="action-btn" class="w-full mt-6 py-4 px-6 rounded-2xl bg-gradient-to-r from-indigo-600 via-indigo-500 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-extrabold text-base shadow-lg shadow-indigo-500/25 transition active:scale-[0.99] flex items-center justify-center gap-3">
+                    <span id="btn-text">⚡ Process & Download</span>
+                </button>
+            </div>
+
+            <div id="status-box" class="hidden mt-6 p-4 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 text-center">
+                <p class="text-emerald-400 font-bold text-sm">🎉 Success! File downloaded successfully.</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- 5. MID AD SLOT (HIDDEN FOR CLEAN UX) -->
+    <!-- <div class="max-w-5xl mx-auto w-full px-4 mb-14"><div class="w-full bg-slate-900 border border-dashed border-slate-800 rounded-2xl py-3 px-4 text-center text-xs text-slate-500 font-semibold">📢 Ad Slot 2</div></div> -->
+
+    <!-- 6. ALL 7 TOOLS CATALOG (EXACTLY 7 UNIQUE TOOLS) -->
+    <section class="max-w-5xl mx-auto w-full px-4 mb-20 mt-8" id="all-tools-grid">
+        <div class="text-center mb-10">
+            <span class="text-xs font-extrabold uppercase tracking-widest text-indigo-400 bg-indigo-500/10 px-3 py-1 rounded-full border border-indigo-500/20">All-In-One Hub</span>
+            <h2 class="text-2xl sm:text-4xl font-extrabold text-white mt-3">Browse All Image Tools</h2>
+            <p class="text-slate-400 text-sm mt-2">Everything you need to optimize and protect pictures in one place.</p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            <!-- 1. COMPRESS -->
+            <div onclick="switchTool('compress'); window.scrollTo({top: 0, behavior: 'smooth'});" class="bg-slate-900/80 hover:bg-slate-900 border border-slate-800 hover:border-indigo-500/50 p-6 rounded-2xl transition cursor-pointer group shadow-lg">
+                <div class="w-12 h-12 rounded-xl bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition">⚡</div>
+                <h3 class="text-lg font-bold text-white group-hover:text-indigo-400 transition">Compress to Target KB</h3>
+                <p class="text-xs text-slate-400 mt-2 leading-relaxed">Type your desired KB or MB value. Shrink size accurately with high clarity.</p>
+            </div>
+
+            <!-- 2. CROP -->
+            <div onclick="switchTool('crop'); window.scrollTo({top: 0, behavior: 'smooth'});" class="bg-slate-900/80 hover:bg-slate-900 border border-slate-800 hover:border-purple-500/50 p-6 rounded-2xl transition cursor-pointer group shadow-lg">
+                <div class="w-12 h-12 rounded-xl bg-purple-500/10 text-purple-400 border border-purple-500/20 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition">✂️</div>
+                <h3 class="text-lg font-bold text-white group-hover:text-purple-400 transition">Crop with Templates</h3>
+                <p class="text-xs text-slate-400 mt-2 leading-relaxed">Crop visually for Instagram (1:1), YouTube (16:9), and Shorts/Reels (9:16).</p>
+            </div>
+
+            <!-- 3. RESIZE -->
+            <div onclick="switchTool('resize'); window.scrollTo({top: 0, behavior: 'smooth'});" class="bg-slate-900/80 hover:bg-slate-900 border border-slate-800 hover:border-blue-500/50 p-6 rounded-2xl transition cursor-pointer group shadow-lg">
+                <div class="w-12 h-12 rounded-xl bg-blue-500/10 text-blue-400 border border-blue-500/20 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition">📐</div>
+                <h3 class="text-lg font-bold text-white group-hover:text-blue-400 transition">Resize Dimensions</h3>
+                <p class="text-xs text-slate-400 mt-2 leading-relaxed">Change exact pixel width and height without breaking proportions.</p>
+            </div>
+
+            <!-- 4. IPHONE HEIC CONVERTER -->
+            <div onclick="switchTool('convert'); window.scrollTo({top: 0, behavior: 'smooth'});" class="bg-slate-900/80 hover:bg-slate-900 border border-slate-800 hover:border-emerald-500/50 p-6 rounded-2xl transition cursor-pointer group shadow-lg">
+                <div class="w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition">📱</div>
+                <h3 class="text-lg font-bold text-white group-hover:text-emerald-400 transition">iPhone HEIC Converter</h3>
+                <p class="text-xs text-slate-400 mt-2 leading-relaxed">Easily convert Apple HEIC / HEIF photos to standard JPG, PNG, WEBP, or PDF.</p>
+            </div>
+
+            <!-- 5. WATERMARK -->
+            <div onclick="switchTool('watermark'); window.scrollTo({top: 0, behavior: 'smooth'});" class="bg-slate-900/80 hover:bg-slate-900 border border-slate-800 hover:border-amber-500/50 p-6 rounded-2xl transition cursor-pointer group shadow-lg">
+                <div class="w-12 h-12 rounded-xl bg-amber-500/10 text-amber-400 border border-amber-500/20 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition">🏷️</div>
+                <h3 class="text-lg font-bold text-white group-hover:text-amber-400 transition">Diagonal Grid Watermark</h3>
+                <p class="text-xs text-slate-400 mt-2 leading-relaxed">Protect photos with diagonal repeat grids with live screen preview.</p>
+            </div>
+
+            <!-- 6. BATCH CONVERTER -->
+            <div onclick="switchTool('convert'); window.scrollTo({top: 0, behavior: 'smooth'});" class="bg-slate-900/80 hover:bg-slate-900 border border-slate-800 hover:border-pink-500/50 p-6 rounded-2xl transition cursor-pointer group shadow-lg">
+                <div class="w-12 h-12 rounded-xl bg-pink-500/10 text-pink-400 border border-pink-500/20 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition">🔄</div>
+                <h3 class="text-lg font-bold text-white group-hover:text-pink-400 transition">Batch Format Converter</h3>
+                <p class="text-xs text-slate-400 mt-2 leading-relaxed">Convert up to 10 images at once to JPG, PNG, WEBP, AVIF, PDF with 1-click ZIP download.</p>
+            </div>
+
+            <!-- 7. ROTATE & FLIP -->
+            <div onclick="switchTool('rotate'); window.scrollTo({top: 0, behavior: 'smooth'});" class="bg-slate-900/80 hover:bg-slate-900 border border-slate-800 hover:border-cyan-500/50 p-6 rounded-2xl transition cursor-pointer group shadow-lg">
+                <div class="w-12 h-12 rounded-xl bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition">🔁</div>
+                <h3 class="text-lg font-bold text-white group-hover:text-cyan-400 transition">Rotate & Flip</h3>
+                <p class="text-xs text-slate-400 mt-2 leading-relaxed">Flip horizontal mirror, vertical flip, or rotate 90 degrees with live screen preview.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. HOW IT WORKS -->
+    <section class="bg-slate-900/50 border-t border-slate-800 py-16 px-4" id="how-it-works">
+        <div class="max-w-5xl mx-auto">
+            <div class="text-center mb-12">
+                <h2 class="text-2xl sm:text-3xl font-extrabold text-white">How SmartPicTools Works in 3 Steps</h2>
+                <p class="text-slate-400 text-sm mt-2">Zero complex software. No watermarks. 100% automated.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-slate-900 p-6 rounded-2xl border border-slate-800">
+                    <div class="w-8 h-8 rounded-full bg-indigo-600 text-white font-extrabold text-sm flex items-center justify-center mb-4">1</div>
+                    <h3 class="font-bold text-white text-base">Select or Drop</h3>
+                    <p class="text-xs text-slate-400 mt-2 leading-relaxed">Choose single or multiple files from your computer or phone. Supports JPG, PNG, WEBP, AVIF, HEIC.</p>
+                </div>
+                <div class="bg-slate-900 p-6 rounded-2xl border border-slate-800">
+                    <div class="w-8 h-8 rounded-full bg-indigo-600 text-white font-extrabold text-sm flex items-center justify-center mb-4">2</div>
+                    <h3 class="font-bold text-white text-base">Fine-Tune Settings</h3>
+                    <p class="text-xs text-slate-400 mt-2 leading-relaxed">Enter target KB, choose ratio presets, see live watermark or rotate with instant feedback.</p>
+                </div>
+                <div class="bg-slate-900 p-6 rounded-2xl border border-slate-800">
+                    <div class="w-8 h-8 rounded-full bg-indigo-600 text-white font-extrabold text-sm flex items-center justify-center mb-4">3</div>
+                    <h3 class="font-bold text-white text-base">Instant Download</h3>
+                    <p class="text-xs text-slate-400 mt-2 leading-relaxed">Our in-memory Python engine processes files in 0.2s and saves directly to your device.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 8. 7 EXPANDED FAQS -->
+    <section class="max-w-4xl mx-auto w-full px-4 py-16" id="faq">
+        <div class="text-center mb-10">
+            <h2 class="text-2xl sm:text-3xl font-extrabold text-white">Frequently Asked Questions</h2>
+            <p class="text-slate-400 text-sm mt-2">Everything you need to know about SmartPicTools features and security.</p>
+        </div>
+
+        <div class="space-y-4 text-sm">
+            <details class="group bg-slate-900 p-5 rounded-2xl border border-slate-800 cursor-pointer">
+                <summary class="font-bold text-white flex justify-between items-center">
+                    Is SmartPicTools really 100% free with unlimited usage?
+                    <span class="text-indigo-400 group-open:rotate-180 transition">▼</span>
+                </summary>
+                <p class="text-slate-400 mt-3 leading-relaxed">Yes! SmartPicTools is completely free to use for both personal and commercial projects. There are no hidden subscription fees, watermark restrictions, or daily upload caps.</p>
+            </details>
+
+            <details class="group bg-slate-900 p-5 rounded-2xl border border-slate-800 cursor-pointer">
+                <summary class="font-bold text-white flex justify-between items-center">
+                    How does exact KB/MB target compression work?
+                    <span class="text-indigo-400 group-open:rotate-180 transition">▼</span>
+                </summary>
+                <p class="text-slate-400 mt-3 leading-relaxed">Unlike traditional tools that only use percentages, our binary search algorithm dynamically tests file sizes in memory to match your exact requested KB or MB value while maintaining maximum visual sharpness.</p>
+            </details>
+
+            <details class="group bg-slate-900 p-5 rounded-2xl border border-slate-800 cursor-pointer">
+                <summary class="font-bold text-white flex justify-between items-center">
+                    Are my uploaded images safe and private?
+                    <span class="text-indigo-400 group-open:rotate-180 transition">▼</span>
+                </summary>
+                <p class="text-slate-400 mt-3 leading-relaxed">100%. We practice strict in-memory execution. Files are processed directly in temporary RAM buffers and permanently wiped immediately after download. We never store, index, or share your photos.</p>
+            </details>
+
+            <details class="group bg-slate-900 p-5 rounded-2xl border border-slate-800 cursor-pointer">
+                <summary class="font-bold text-white flex justify-between items-center">
+                    What image formats can I convert to?
+                    <span class="text-indigo-400 group-open:rotate-180 transition">▼</span>
+                </summary>
+                <p class="text-slate-400 mt-3 leading-relaxed">Our Converter supports JPG, PNG (with transparency), WEBP, AVIF (next-gen ultra-compact format), PDF documents, BMP, and website Favicon (ICO) formats.</p>
+            </details>
+
+            <details class="group bg-slate-900 p-5 rounded-2xl border border-slate-800 cursor-pointer">
+                <summary class="font-bold text-white flex justify-between items-center">
+                    Can I convert multiple images at once (Batch Mode)?
+                    <span class="text-indigo-400 group-open:rotate-180 transition">▼</span>
+                </summary>
+                <p class="text-slate-400 mt-3 leading-relaxed">Yes! You can select up to 10 images simultaneously in the converter. Our server will process all files together and package them into a single, organized ZIP file for 1-click download.</p>
+            </details>
+
+            <details class="group bg-slate-900 p-5 rounded-2xl border border-slate-800 cursor-pointer">
+                <summary class="font-bold text-white flex justify-between items-center">
+                    How does the Diagonal Grid Watermark prevent theft?
+                    <span class="text-indigo-400 group-open:rotate-180 transition">▼</span>
+                </summary>
+                <p class="text-slate-400 mt-3 leading-relaxed">Single corner watermarks can easily be cropped out by thieves. Our Diagonal Grid feature tiles your name or copyright across the entire image diagonally, making unauthorized use and cropping impossible.</p>
+            </details>
+
+            <details class="group bg-slate-900 p-5 rounded-2xl border border-slate-800 cursor-pointer">
+                <summary class="font-bold text-white flex justify-between items-center">
+                    Does SmartPicTools work on mobile phones without installing an app?
+                    <span class="text-indigo-400 group-open:rotate-180 transition">▼</span>
+                </summary>
+                <p class="text-slate-400 mt-3 leading-relaxed">Yes, SmartPicTools is built mobile-first. It runs smoothly on all Android Chrome, iOS Safari, and tablet browsers without requiring any downloads or installations from app stores.</p>
+            </details>
+        </div>
+    </section>
+
+    <!-- 9. FOOTER -->
+    <footer class="border-t border-slate-800 bg-slate-950 py-10 px-4 text-xs text-slate-400">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+            <p>© 2026 SmartPicTools. All rights reserved.</p>
+            <div class="flex flex-wrap justify-center gap-6 font-semibold">
+                <a href="/about" class="hover:text-indigo-400 transition">About Us</a>
+                <a href="/privacy" class="hover:text-indigo-400 transition">Privacy Policy</a>
+                <a href="/terms" class="hover:text-indigo-400 transition">Terms of Service</a>
+                <a href="/contact" class="hover:text-indigo-400 transition">Contact Us</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 💡 FEEDBACK MODAL -->
+    <div id="feedback-modal" class="hidden fixed inset-0 z-50 bg-black/70 backdrop-blur-md flex items-center justify-center p-4">
+        <div class="bg-slate-900 border border-slate-800 rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-2xl relative">
+            <button onclick="closeFeedbackModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-lg font-bold">✕</button>
+            <div class="flex items-center gap-2 mb-2">
+                <span class="text-2xl">💡</span>
+                <h3 class="text-lg font-black text-white">Suggestions & Feedback</h3>
+            </div>
+            <p class="text-xs text-slate-400 mb-6">Tell us what new tools or improvements you want to see!</p>
+
+            <form id="feedback-form" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-bold text-slate-400 mb-1">Feedback Category</label>
+                    <select id="fb-category" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-indigo-500 font-semibold">
+                        <option value="New Tool Request">New Tool Request</option>
+                        <option value="Improve Existing Tool">Improve Existing Tool</option>
+                        <option value="Report Bug/Issue">Report a Bug / Issue</option>
+                        <option value="General Suggestion">General Suggestion</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-slate-400 mb-1">Your Suggestion / Message</label>
+                    <textarea id="fb-message" rows="3" required placeholder="What tool or feature do you need?" class="w-full bg-slate-950 border border-slate-700 rounded-xl p-3 text-xs text-white focus:outline-none focus:border-indigo-500"></textarea>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-slate-400 mb-1">Email Address (Optional)</label>
+                    <input type="email" id="fb-email" placeholder="In case you want a reply" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-indigo-500">
+                </div>
+
+                <button type="submit" id="fb-submit-btn" class="w-full py-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 active:scale-95 text-white font-bold text-xs shadow-lg shadow-indigo-600/30 transition">
+                    Send Suggestion
+                </button>
+            </form>
+
+            <div id="fb-success" class="hidden mt-4 p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs text-center font-bold">
+                🎉 Thank you! Your feedback has been saved to feedback.json!
+            </div>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        let currentTool = 'compress';
+        let compressMode = 'target';
+        let watermarkMode = 'single';
+        let uploadedFiles = [];
+        let cropper = null;
+        
+        let currentRotation = 0;
+        let isFlippedH = false;
+        let isFlippedV = false;
+
+        const toolConfig = {
+            compress: { title: "Compress Image to Exact Size", desc: "Type your desired KB or MB value for precise file size reduction.", btn: "⚡ Compress & Download" },
+            crop: { title: "Crop Image with Templates", desc: "Crop visually with custom ratios for Instagram, YouTube, and Shorts.", btn: "✂️ Crop & Download" },
+            resize: { title: "Resize Image Dimensions", desc: "Change width and height pixels easily for social media or web.", btn: "📐 Resize & Download" },
+            convert: { title: "Batch Format Converter", desc: "Convert HEIC, AVIF, JPG, PNG, WEBP, PDF with 1-click download.", btn: "🔄 Convert & Download" },
+            watermark: { title: "Pro Watermark Studio", desc: "Stamp copyright text in corner or repeat diagonal security grid with live preview.", btn: "🏷️ Watermark & Download" },
+            rotate: { title: "Rotate & Flip Image", desc: "Rotate orientation clockwise, anti-clockwise or flip horizontal / vertical.", btn: "🔁 Process & Download" }
+        };
+
+        function resetWorkspace() {
+            uploadedFiles = [];
+            document.getElementById('image-upload').value = '';
+            document.getElementById('settings-panel').classList.add('hidden');
+            document.getElementById('drop-area').classList.remove('hidden');
+            document.getElementById('status-box').classList.add('hidden');
+            document.getElementById('multi-preview-box').classList.add('hidden');
+            document.getElementById('single-preview-box').classList.remove('hidden');
+            document.getElementById('heic-preview-card').classList.add('hidden');
+            document.getElementById('image-preview').classList.remove('hidden');
+            document.getElementById('action-btn').disabled = false;
+            
+            if (cropper) {
+                cropper.destroy();
+                cropper = null;
+            }
+            
+            currentRotation = 0;
+            isFlippedH = false;
+            isFlippedV = false;
+            document.getElementById('image-preview').style.transform = 'none';
+
+            document.getElementById('live-wm-single').classList.add('hidden');
+            document.getElementById('live-wm-grid').classList.add('hidden');
+        }
+
+        function switchTool(tool) {
+            resetWorkspace();
+            currentTool = tool;
+            
+            document.querySelectorAll('.tool-tab').forEach(btn => {
+                btn.className = "tool-tab py-3 px-2 rounded-xl text-xs font-bold transition flex items-center justify-center gap-1.5 text-slate-400 hover:text-white hover:bg-slate-800";
+            });
+            const activeTab = document.getElementById('tab-' + tool);
+            if (activeTab) {
+                activeTab.className = "tool-tab py-3 px-2 rounded-xl text-xs font-bold transition flex items-center justify-center gap-1.5 bg-indigo-600 text-white shadow-lg shadow-indigo-600/30";
+            }
+
+            document.getElementById('tool-title').innerText = toolConfig[tool].title;
+            document.getElementById('tool-desc').innerText = toolConfig[tool].desc;
+            document.getElementById('btn-text').innerText = toolConfig[tool].btn;
+
+            document.querySelectorAll('.tool-ctrl').forEach(ctrl => ctrl.classList.add('hidden'));
+            document.getElementById('ctrl-' + tool).classList.remove('hidden');
+
+            const fileInput = document.getElementById('image-upload');
+            if (tool === 'convert') {
+                fileInput.setAttribute('multiple', 'multiple');
+                document.getElementById('upload-subtext').innerText = "Select up to 10 images (Supports iPhone HEIC, AVIF, JPG, PNG) - Max: 50MB";
+            } else {
+                fileInput.removeAttribute('multiple');
+                document.getElementById('upload-subtext').innerText = "Supports JPG, PNG, WEBP, AVIF, iPhone HEIC (Max: 50MB)";
+            }
+        }
+
+        // COMPRESS
+        function setCompressMode(mode) {
+            compressMode = mode;
+            if (mode === 'target') {
+                document.getElementById('mode-target-btn').className = "flex-1 py-1.5 px-3 rounded-lg text-xs font-bold bg-indigo-600 text-white transition";
+                document.getElementById('mode-slider-btn').className = "flex-1 py-1.5 px-3 rounded-lg text-xs font-bold text-slate-400 hover:text-white transition";
+                document.getElementById('target-box').classList.remove('hidden');
+                document.getElementById('slider-box').classList.add('hidden');
+                validateTargetSize();
+            } else {
+                document.getElementById('mode-slider-btn').className = "flex-1 py-1.5 px-3 rounded-lg text-xs font-bold bg-indigo-600 text-white transition";
+                document.getElementById('mode-target-btn').className = "flex-1 py-1.5 px-3 rounded-lg text-xs font-bold text-slate-400 hover:text-white transition";
+                document.getElementById('slider-box').classList.remove('hidden');
+                document.getElementById('target-box').classList.add('hidden');
+                document.getElementById('action-btn').disabled = false;
+            }
+        }
+
+        function validateTargetSize() {
+            if (uploadedFiles.length === 0 || compressMode !== 'target' || currentTool !== 'compress') {
+                document.getElementById('action-btn').disabled = false;
+                return;
+            }
+            
+            const origBytes = uploadedFiles[0].size;
+            const targetVal = parseFloat(document.getElementById('target-val').value);
+            const unit = document.getElementById('target-unit').value;
+            const guidance = document.getElementById('target-guidance');
+            const btn = document.getElementById('action-btn');
+
+            if (!targetVal || targetVal <= 0) {
+                guidance.innerHTML = `<span class="text-amber-400">⚠️ Please enter a target size value (e.g. 500 KB).</span>`;
+                btn.disabled = true;
+                return;
+            }
+
+            const targetBytes = unit === 'mb' ? targetVal * 1024 * 1024 : targetVal * 1024;
+            const origReadable = (origBytes / (1024 * 1024)).toFixed(2) + ' MB';
+
+            if (targetBytes >= origBytes) {
+                guidance.innerHTML = `<span class="text-rose-400">⚠️ Target size cannot be larger than the original image (${origReadable}). Enter a smaller value to compress.</span>`;
+                btn.disabled = true;
+            } else {
+                guidance.innerHTML = `<span class="text-emerald-400 font-bold">✓ Valid target! We'll compress your image to approximately ${targetVal} ${unit.toUpperCase()}.</span>`;
+                btn.disabled = false;
+            }
+        }
+
+        document.getElementById('target-val').addEventListener('input', validateTargetSize);
+        document.getElementById('target-unit').addEventListener('change', validateTargetSize);
+        document.getElementById('quality-slider').addEventListener('input', (e) => {
+            document.getElementById('quality-display').innerText = e.target.value + '%';
+        });
+
+        // WATERMARK LIVE PREVIEW
+        function setWatermarkMode(m) {
+            watermarkMode = m;
+            const singleBtn = document.getElementById('wm-single-btn');
+            const repeatBtn = document.getElementById('wm-repeat-btn');
+            const posContainer = document.getElementById('wm-pos-container');
+
+            if (m === 'single') {
+                singleBtn.className = "py-2.5 px-3 rounded-xl bg-indigo-600 text-white text-xs font-bold transition";
+                repeatBtn.className = "py-2.5 px-3 rounded-xl bg-slate-900 text-slate-300 hover:text-white text-xs font-bold border border-slate-700 transition";
+                posContainer.classList.remove('hidden');
+            } else {
+                repeatBtn.className = "py-2.5 px-3 rounded-xl bg-indigo-600 text-white text-xs font-bold transition";
+                singleBtn.className = "py-2.5 px-3 rounded-xl bg-slate-900 text-slate-300 hover:text-white text-xs font-bold border border-slate-700 transition";
+                posContainer.classList.add('hidden');
+            }
+            updateLiveWatermarkPreview();
+        }
+
+        function updateLiveWatermarkPreview() {
+            if (currentTool !== 'watermark' || uploadedFiles.length === 0) return;
+
+            const text = document.getElementById('watermark-text').value || '© SmartPicTools';
+            const color = document.getElementById('watermark-color').value;
+            const size = document.getElementById('watermark-size').value;
+            const rawOpacity = document.getElementById('watermark-opacity').value;
+            const opacityPct = (rawOpacity / 255).toFixed(2);
+            document.getElementById('wm-opacity-display').innerText = Math.round((rawOpacity / 255) * 100) + '%';
+
+            const singleEl = document.getElementById('live-wm-single');
+            const gridEl = document.getElementById('live-wm-grid');
+            const patternEl = document.getElementById('live-wm-pattern');
+
+            const colorHex = {
+                white: '#ffffff',
+                black: '#000000',
+                gold: '#fbbf24',
+                red: '#ef4444',
+                cyan: '#06b6d4'
+            }[color] || '#ffffff';
+
+            if (watermarkMode === 'single') {
+                gridEl.classList.add('hidden');
+                singleEl.classList.remove('hidden');
+
+                singleEl.innerText = text;
+                singleEl.style.color = colorHex;
+                singleEl.style.opacity = opacityPct;
+                singleEl.style.fontSize = Math.max(14, Math.round(size * 0.6)) + 'px';
+
+                singleEl.className = "absolute pointer-events-none font-bold tracking-wider px-3 py-1.5 transition-all shadow-sm";
+                const pos = document.getElementById('watermark-pos').value;
+                if (pos === 'center') singleEl.classList.add('top-1/2', 'left-1/2', '-translate-x-1/2', '-translate-y-1/2');
+                else if (pos === 'top-left') singleEl.classList.add('top-3', 'left-3');
+                else if (pos === 'top-right') singleEl.classList.add('top-3', 'right-3');
+                else if (pos === 'bottom-left') singleEl.classList.add('bottom-3', 'left-3');
+                else singleEl.classList.add('bottom-3', 'right-3');
+
+            } else {
+                singleEl.classList.add('hidden');
+                gridEl.classList.remove('hidden');
+
+                patternEl.innerHTML = '';
+                for (let i = 0; i < 48; i++) {
+                    const span = document.createElement('span');
+                    span.innerText = text;
+                    span.style.color = colorHex;
+                    span.style.fontSize = Math.max(12, Math.round(size * 0.45)) + 'px';
+                    span.style.opacity = opacityPct;
+                    patternEl.appendChild(span);
+                }
+            }
+        }
+
+        // ROTATE & FLIP
+        function applyLiveRotate(deg) {
+            currentRotation = (currentRotation + deg) % 360;
+            if (currentRotation < 0) currentRotation += 360;
+            updateOrientationTransform();
+        }
+
+        function applyLiveFlip(mode) {
+            if (mode === 'horizontal') isFlippedH = !isFlippedH;
+            if (mode === 'vertical') isFlippedV = !isFlippedV;
+            updateOrientationTransform();
+        }
+
+        function updateOrientationTransform() {
+            const scaleX = isFlippedH ? -1 : 1;
+            const scaleY = isFlippedV ? -1 : 1;
+            document.getElementById('image-preview').style.transform = `rotate(${currentRotation}deg) scale(${scaleX}, ${scaleY})`;
+            document.getElementById('rotate-angle').value = currentRotation;
+
+            let flipVal = 'none';
+            if (isFlippedH && isFlippedV) flipVal = 'both';
+            else if (isFlippedH) flipVal = 'horizontal';
+            else if (isFlippedV) flipVal = 'vertical';
+            document.getElementById('flip-mode').value = flipVal;
+
+            const hBtn = document.getElementById('flip-h-btn');
+            const vBtn = document.getElementById('flip-v-btn');
+            hBtn.className = isFlippedH ? "py-2.5 px-3 rounded-xl bg-indigo-600 text-white text-xs font-bold border border-indigo-500 transition" : "py-2.5 px-3 rounded-xl bg-slate-900 hover:bg-indigo-600 text-white text-xs font-bold border border-slate-700 transition";
+            vBtn.className = isFlippedV ? "py-2.5 px-3 rounded-xl bg-indigo-600 text-white text-xs font-bold border border-indigo-500 transition" : "py-2.5 px-3 rounded-xl bg-slate-900 hover:bg-indigo-600 text-white text-xs font-bold border border-slate-700 transition";
+        }
+
+        // DRAG & DROP
+        const dropArea = document.getElementById('drop-area');
+        const fileInput = document.getElementById('image-upload');
+
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+            window.addEventListener(eventName, (e) => e.preventDefault(), false);
+            dropArea.addEventListener(eventName, (e) => e.preventDefault(), false);
+        });
+
+        ['dragenter', 'dragover'].forEach(eventName => {
+            dropArea.addEventListener(eventName, () => dropArea.classList.add('border-indigo-500', 'bg-indigo-950/40'), false);
+        });
+
+        ['dragleave', 'drop'].forEach(eventName => {
+            dropArea.addEventListener(eventName, () => dropArea.classList.remove('border-indigo-500', 'bg-indigo-950/40'), false);
+        });
+
+        dropArea.addEventListener('drop', (e) => {
+            const dt = e.dataTransfer;
+            if (dt.files.length > 0) handleFiles(dt.files);
+        });
+
+        dropArea.addEventListener('click', () => fileInput.click());
+        fileInput.addEventListener('change', (e) => {
+            if (e.target.files.length > 0) handleFiles(e.target.files);
+        });
+
+        function handleFiles(files) {
+            uploadedFiles = Array.from(files).slice(0, 10);
+            if (uploadedFiles.length === 0) return;
+
+            document.getElementById('action-btn').disabled = false;
+
+            if (currentTool === 'convert' && uploadedFiles.length > 1) {
+                renderMultiGallery();
+            } else {
+                renderSinglePreview(uploadedFiles[0]);
+            }
+
+            document.getElementById('settings-panel').classList.remove('hidden');
+            document.getElementById('drop-area').classList.add('hidden');
+            document.getElementById('status-box').classList.add('hidden');
+        }
+
+        function renderSinglePreview(file) {
+            document.getElementById('single-preview-box').classList.remove('hidden');
+            document.getElementById('multi-preview-box').classList.add('hidden');
+            document.getElementById('file-name').innerText = file.name;
+            document.getElementById('file-size').innerText = (file.size / 1024).toFixed(1) + ' KB';
+
+            const isHeic = file.name.toLowerCase().endsWith('.heic') || file.name.toLowerCase().endsWith('.heif');
+            
+            if (isHeic) {
+                document.getElementById('image-preview').classList.add('hidden');
+                document.getElementById('heic-preview-card').classList.remove('hidden');
+                document.getElementById('resize-width').value = 1920;
+                document.getElementById('resize-height').value = 1080;
+            } else {
+                document.getElementById('image-preview').classList.remove('hidden');
+                document.getElementById('heic-preview-card').classList.add('hidden');
+
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    const img = document.getElementById('image-preview');
+                    img.src = event.target.result;
+                    img.onload = function() {
+                        document.getElementById('resize-width').value = img.naturalWidth;
+                        document.getElementById('resize-height').value = img.naturalHeight;
+                        if (currentTool === 'crop') initCropper();
+                        if (currentTool === 'watermark') updateLiveWatermarkPreview();
+                    };
+                    if (currentTool === 'compress') validateTargetSize();
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function renderMultiGallery() {
+            document.getElementById('single-preview-box').classList.add('hidden');
+            document.getElementById('multi-preview-box').classList.remove('hidden');
+            document.getElementById('multi-count').innerText = uploadedFiles.length;
+
+            const grid = document.getElementById('multi-grid');
+            grid.innerHTML = '';
+
+            uploadedFiles.forEach((file, index) => {
+                const card = document.createElement('div');
+                card.className = "relative bg-slate-900 p-2 rounded-xl border border-slate-800 text-center group";
+                
+                const deleteBtn = document.createElement('button');
+                deleteBtn.type = "button";
+                deleteBtn.className = "absolute top-1 right-1 w-6 h-6 rounded-full bg-rose-600 hover:bg-rose-500 text-white text-xs font-black flex items-center justify-center shadow-lg transition z-10";
+                deleteBtn.innerHTML = "✕";
+                deleteBtn.onclick = () => removeFile(index);
+
+                const thumb = document.createElement('img');
+                thumb.className = "w-full h-20 object-cover rounded-lg mb-1.5";
+                
+                const isHeic = file.name.toLowerCase().endsWith('.heic') || file.name.toLowerCase().endsWith('.heif');
+                if (isHeic) {
+                    thumb.src = "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%231e293b'/><text x='50%' y='55%' dominant-baseline='central' text-anchor='middle' font-size='40'>📱</text></svg>";
+                } else {
+                    const reader = new FileReader();
+                    reader.onload = (e) => thumb.src = e.target.result;
+                    reader.readAsDataURL(file);
+                }
+
+                const nameText = document.createElement('p');
+                nameText.className = "text-[11px] font-bold text-white truncate";
+                nameText.innerText = file.name;
+
+                const sizeText = document.createElement('p');
+                sizeText.className = "text-[10px] text-slate-400";
+                sizeText.innerText = (file.size / 1024).toFixed(1) + ' KB';
+
+                card.appendChild(deleteBtn);
+                card.appendChild(thumb);
+                card.appendChild(nameText);
+                card.appendChild(sizeText);
+                grid.appendChild(card);
+            });
+        }
+
+        function removeFile(index) {
+            uploadedFiles.splice(index, 1);
+            if (uploadedFiles.length === 0) {
+                resetWorkspace();
+            } else if (uploadedFiles.length === 1) {
+                renderSinglePreview(uploadedFiles[0]);
+            } else {
+                renderMultiGallery();
+            }
+        }
+
+        // CROPPER
+        function initCropper() {
+            const imgElement = document.getElementById('image-preview');
+            if (cropper) cropper.destroy();
+            cropper = new Cropper(imgElement, {
+                aspectRatio: NaN,
+                viewMode: 1,
+                autoCropArea: 0.9,
+                responsive: true
+            });
+        }
+
+        function setCropRatio(ratio) {
+            if (cropper) cropper.setAspectRatio(ratio);
+            const eventTarget = event.currentTarget;
+            document.querySelectorAll('.ratio-btn').forEach(b => {
+                b.className = "ratio-btn py-2.5 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 text-xs font-bold transition";
+            });
+            eventTarget.className = "ratio-btn py-2.5 px-3 rounded-xl bg-indigo-600 text-white text-xs font-bold transition";
+        }
+
+        // ACTION BUTTON
+        document.getElementById('action-btn').addEventListener('click', async function() {
+            if (uploadedFiles.length === 0) return;
+
+            const btn = document.getElementById('action-btn');
+            
+            if (currentTool === 'convert') {
+                const fmt = document.getElementById('convert-format').value;
+                if (!fmt) {
+                    alert('Please select a target format from the dropdown list!');
+                    return;
+                }
+            }
+
+            btn.disabled = true;
+            document.getElementById('btn-text').innerText = "⏳ Processing files...";
+
+            const formData = new FormData();
+            uploadedFiles.forEach(f => formData.append('image', f));
+            formData.append('tool', currentTool);
+            formData.append('compress_mode', compressMode);
+            formData.append('target_val', document.getElementById('target-val').value);
+            formData.append('target_unit', document.getElementById('target-unit').value);
+            formData.append('quality', document.getElementById('quality-slider').value);
+            formData.append('width', document.getElementById('resize-width').value);
+            formData.append('height', document.getElementById('resize-height').value);
+            formData.append('format', document.getElementById('convert-format').value);
+            formData.append('angle', document.getElementById('rotate-angle').value);
+            formData.append('flip', document.getElementById('flip-mode').value);
+            formData.append('watermark_text', document.getElementById('watermark-text').value);
+            formData.append('watermark_mode', watermarkMode);
+            formData.append('watermark_pos', document.getElementById('watermark-pos').value);
+            formData.append('watermark_color', document.getElementById('watermark-color').value);
+            formData.append('watermark_size', document.getElementById('watermark-size').value);
+            formData.append('watermark_opacity', document.getElementById('watermark-opacity').value);
+
+            if (currentTool === 'crop' && cropper) {
+                const data = cropper.getData(true);
+                formData.append('crop_x', data.x);
+                formData.append('crop_y', data.y);
+                formData.append('crop_w', data.width);
+                formData.append('crop_h', data.height);
+            }
+
+            try {
+                const response = await fetch('/process', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                if (response.ok) {
+                    const blob = await response.blob();
+                    const url = window.URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    
+                    if (uploadedFiles.length > 1 && currentTool === 'convert') {
+                        a.download = `smartpic_converted_batch.zip`;
+                    } else {
+                        const firstFile = uploadedFiles[0];
+                        let rawName = firstFile.name.substring(0, firstFile.name.lastIndexOf('.')) || firstFile.name;
+                        let targetExt = 'jpg';
+                        if (currentTool === 'convert') {
+                            targetExt = document.getElementById('convert-format').value.toLowerCase();
+                        } else if (currentTool === 'compress') {
+                            targetExt = 'jpg';
+                        } else if (currentTool === 'crop' || currentTool === 'resize' || currentTool === 'rotate' || currentTool === 'watermark') {
+                            targetExt = firstFile.name.split('.').pop().toLowerCase();
+                            if (targetExt === 'heic' || targetExt === 'heif' || targetExt === 'avif') targetExt = 'jpg';
+                        }
+                        a.download = `smartpic_${currentTool}_${rawName}.${targetExt}`;
+                    }
+
+                    document.body.appendChild(a);
+                    a.click();
+                    a.remove();
+                    document.getElementById('status-box').classList.remove('hidden');
+                } else {
+                    const errData = await response.json();
+                    alert(errData.error || 'Error processing image.');
+                }
+            } catch (err) {
+                alert('Something went wrong during processing!');
+            } finally {
+                btn.disabled = false;
+                document.getElementById('btn-text').innerText = toolConfig[currentTool].btn;
+            }
+        });
+
+        // FEEDBACK MODAL
+        function openFeedbackModal() {
+            document.getElementById('feedback-modal').classList.remove('hidden');
+        }
+
+        function closeFeedbackModal() {
+            document.getElementById('feedback-modal').classList.add('hidden');
+            document.getElementById('fb-success').classList.add('hidden');
+        }
+
+        document.getElementById('feedback-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const btn = document.getElementById('fb-submit-btn');
+            btn.disabled = true;
+            btn.innerText = 'Saving...';
+
+            const payload = {
+                category: document.getElementById('fb-category').value,
+                message: document.getElementById('fb-message').value,
+                email: document.getElementById('fb-email').value
+            };
+
+            try {
+                const res = await fetch('/submit-feedback', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                if (res.ok) {
+                    document.getElementById('fb-success').classList.remove('hidden');
+                    document.getElementById('feedback-form').reset();
+                    setTimeout(() => {
+                        closeFeedbackModal();
+                        btn.disabled = false;
+                        btn.innerText = 'Send Suggestion';
+                    }, 2500);
+                } else {
+                    alert('Could not save feedback.');
+                    btn.disabled = false;
+                    btn.innerText = 'Send Suggestion';
+                }
+            } catch (err) {
+                alert('Error submitting feedback.');
+                btn.disabled = false;
+                btn.innerText = 'Send Suggestion';
+            }
+        });
+    </script>
+</body>
+</html>
