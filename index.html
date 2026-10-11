@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SmartPicTools - All-in-One Online Image Suite & Compressor</title>
-    <meta name="description" content="Free online suite to Compress to exact KB/MB, Crop, Resize, Watermark, and Convert HEIC, AVIF, JPG, PNG, PDF.">
+    <meta name="description" content="Free online suite to Compress to exact KB/MB, Crop, Resize with live preview, Watermark, and Convert HEIC, AVIF, JPG, PNG, PDF.">
 
     <!-- ⚡ FAVICON -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' stop-color='%236366f1'/><stop offset='50%25' stop-color='%23a855f7'/><stop offset='100%25' stop-color='%23ec4899'/></linearGradient></defs><rect width='100' height='100' rx='28' fill='url(%23g)'/><path d='M52 16 L24 54 L46 54 L42 84 L76 44 L54 44 Z' fill='%23fbbf24'/></svg>">
@@ -13,10 +13,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css"/>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
+    <!-- HEIC2ANY: DECODES IPHONE HEIC DIRECTLY IN BROWSER FOR LIVE PREVIEW -->
+    <script src="https://cdn.jsdelivr.net/npm/heic2any@0.0.4/dist/heic2any.min.js"></script>
     <style>
         body { font-family: 'Plus Jakarta Sans', sans-serif; }
         .cropper-view-box, .cropper-face { border-radius: 8px; }
-        #image-preview { transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+        #image-preview { transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), aspect-ratio 0.2s ease, width 0.2s ease, height 0.2s ease; }
         .tiled-watermark-overlay {
             background-repeat: repeat;
             transform: rotate(-25deg) scale(1.4);
@@ -56,9 +58,6 @@
             </div>
         </div>
     </header>
-
-    <!-- 2. TOP AD BANNER (HIDDEN FOR CLEAN UX) -->
-    <!-- <div class="max-w-5xl mx-auto w-full px-4 mt-6"><div class="w-full bg-slate-900 border border-dashed border-slate-800 rounded-2xl py-3 px-4 text-center text-xs text-slate-500 font-semibold">📢 Ad Slot 1</div></div> -->
 
     <!-- 3. LIVE STATS STRIP -->
     <section class="max-w-5xl mx-auto w-full px-4 mt-8">
@@ -139,21 +138,24 @@
                     </button>
                 </div>
 
-                <!-- PREVIEW CONTAINER: TIGHT FIT WRAPPER LOCKS WATERMARK INSIDE BOUNDARIES -->
+                <!-- PREVIEW CONTAINER: TIGHT FIT WRAPPER -->
                 <div id="single-preview-box" class="bg-slate-950/80 p-5 rounded-2xl border border-slate-800 mb-6">
-                    <div class="max-h-[420px] overflow-hidden flex items-center justify-center bg-slate-900/50 rounded-xl p-2 select-none">
-                        
-                        <div class="relative inline-block max-h-[380px] max-w-full rounded-xl overflow-hidden leading-none shadow-xl border border-slate-800/60">
-                            
-                            <!-- Normal Image Preview -->
-                            <img id="image-preview" src="#" alt="Preview" class="max-h-[380px] w-auto max-w-full block rounded-xl object-contain">
+                    
+                    <!-- LIVE BADGES (RESIZER & HEIC STATUS) -->
+                    <div class="flex items-center justify-between mb-2 px-1">
+                        <span id="heic-status-badge" class="hidden text-[11px] font-bold text-amber-400 bg-amber-500/10 border border-amber-500/20 px-2.5 py-1 rounded-lg">
+                            📱 iPhone HEIC Decoded Live
+                        </span>
+                        <span id="resize-live-badge" class="hidden text-[11px] font-bold text-indigo-400 bg-indigo-500/10 border border-indigo-500/20 px-2.5 py-1 rounded-lg ml-auto">
+                            📐 Live Scale: 0 × 0 px
+                        </span>
+                    </div>
 
-                            <!-- HEIC Custom Placeholder (When browser cannot show HEIC natively) -->
-                            <div id="heic-preview-card" class="hidden flex flex-col items-center justify-center p-12 bg-slate-900 text-center rounded-xl border border-slate-800">
-                                <span class="text-5xl mb-3">📱</span>
-                                <h4 class="text-base font-bold text-white">Apple HEIC Image Selected</h4>
-                                <p class="text-xs text-indigo-400 mt-1">Ready to convert into JPG, PNG, WEBP or PDF</p>
-                            </div>
+                    <div class="max-h-[440px] overflow-hidden flex items-center justify-center bg-slate-900/50 rounded-xl p-3 select-none">
+                        <div id="preview-wrapper" class="relative inline-block max-h-[400px] max-w-full rounded-xl overflow-hidden leading-none shadow-xl border border-slate-800/60 transition-all">
+                            
+                            <!-- Image Element -->
+                            <img id="image-preview" src="#" alt="Preview" class="max-h-[380px] w-auto max-w-full block rounded-xl object-contain">
                             
                             <!-- 1. LIVE WATERMARK OVERLAY: SINGLE STAMP -->
                             <div id="live-wm-single" class="hidden absolute pointer-events-none font-bold tracking-wider px-3 py-1.5 rounded transition-all shadow-sm">
@@ -233,15 +235,28 @@
                         </div>
                     </div>
 
-                    <!-- 3. RESIZE -->
-                    <div id="ctrl-resize" class="tool-ctrl hidden grid grid-cols-2 gap-4">
-                        <div>
-                            <label class="block text-xs font-bold text-slate-400 mb-1">Target Width (px)</label>
-                            <input type="number" id="resize-width" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-indigo-500">
+                    <!-- 3. RESIZE (LIVE TRANSFORM & ASPECT RATIO LOCK) -->
+                    <div id="ctrl-resize" class="tool-ctrl hidden space-y-4">
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-bold text-slate-400 mb-1">Target Width (px)</label>
+                                <input type="number" id="resize-width" oninput="handleResizeInputChange('width')" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-indigo-500 font-bold">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-slate-400 mb-1">Target Height (px)</label>
+                                <input type="number" id="resize-height" oninput="handleResizeInputChange('height')" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-indigo-500 font-bold">
+                            </div>
                         </div>
-                        <div>
-                            <label class="block text-xs font-bold text-slate-400 mb-1">Target Height (px)</label>
-                            <input type="number" id="resize-height" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-indigo-500">
+
+                        <!-- Aspect Ratio Lock Toggle -->
+                        <div class="flex items-center justify-between p-3 bg-slate-900 rounded-xl border border-slate-800">
+                            <label for="resize-lock-ratio" class="flex items-center gap-2 cursor-pointer text-xs font-bold text-slate-300">
+                                <input type="checkbox" id="resize-lock-ratio" checked class="w-4 h-4 rounded accent-indigo-600 cursor-pointer">
+                                <span>🔒 Lock Aspect Ratio (Proportions barabar rakhein)</span>
+                            </label>
+                            <button type="button" onclick="resetToOriginalDimensions()" class="text-[11px] font-bold text-indigo-400 hover:underline">
+                                Reset to Original
+                            </button>
                         </div>
                     </div>
 
@@ -355,10 +370,7 @@
         </div>
     </main>
 
-    <!-- 5. MID AD SLOT (HIDDEN FOR CLEAN UX) -->
-    <!-- <div class="max-w-5xl mx-auto w-full px-4 mb-14"><div class="w-full bg-slate-900 border border-dashed border-slate-800 rounded-2xl py-3 px-4 text-center text-xs text-slate-500 font-semibold">📢 Ad Slot 2</div></div> -->
-
-    <!-- 6. ALL 7 TOOLS CATALOG (EXACTLY 7 UNIQUE TOOLS) -->
+    <!-- 6. ALL 7 TOOLS CATALOG (7 UNIQUE TOOLS) -->
     <section class="max-w-5xl mx-auto w-full px-4 mb-20 mt-8" id="all-tools-grid">
         <div class="text-center mb-10">
             <span class="text-xs font-extrabold uppercase tracking-widest text-indigo-400 bg-indigo-500/10 px-3 py-1 rounded-full border border-indigo-500/20">All-In-One Hub</span>
@@ -385,14 +397,14 @@
             <div onclick="switchTool('resize'); window.scrollTo({top: 0, behavior: 'smooth'});" class="bg-slate-900/80 hover:bg-slate-900 border border-slate-800 hover:border-blue-500/50 p-6 rounded-2xl transition cursor-pointer group shadow-lg">
                 <div class="w-12 h-12 rounded-xl bg-blue-500/10 text-blue-400 border border-blue-500/20 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition">📐</div>
                 <h3 class="text-lg font-bold text-white group-hover:text-blue-400 transition">Resize Dimensions</h3>
-                <p class="text-xs text-slate-400 mt-2 leading-relaxed">Change exact pixel width and height without breaking proportions.</p>
+                <p class="text-xs text-slate-400 mt-2 leading-relaxed">Live visual transform: preview width & height scaling with aspect ratio lock.</p>
             </div>
 
             <!-- 4. IPHONE HEIC CONVERTER -->
             <div onclick="switchTool('convert'); window.scrollTo({top: 0, behavior: 'smooth'});" class="bg-slate-900/80 hover:bg-slate-900 border border-slate-800 hover:border-emerald-500/50 p-6 rounded-2xl transition cursor-pointer group shadow-lg">
                 <div class="w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition">📱</div>
                 <h3 class="text-lg font-bold text-white group-hover:text-emerald-400 transition">iPhone HEIC Converter</h3>
-                <p class="text-xs text-slate-400 mt-2 leading-relaxed">Easily convert Apple HEIC / HEIF photos to standard JPG, PNG, WEBP, or PDF.</p>
+                <p class="text-xs text-slate-400 mt-2 leading-relaxed">Live photo preview & instant conversion of Apple HEIC/HEIF to JPG, PNG, WEBP, PDF.</p>
             </div>
 
             <!-- 5. WATERMARK -->
@@ -575,15 +587,21 @@
         let uploadedFiles = [];
         let cropper = null;
         
+        // ORIENTATION STATE
         let currentRotation = 0;
         let isFlippedH = false;
         let isFlippedV = false;
 
+        // ORIGINAL DIMENSIONS FOR RESIZE ENGINE
+        let naturalImgWidth = 0;
+        let naturalImgHeight = 0;
+        let originalAspectRatio = 1;
+
         const toolConfig = {
             compress: { title: "Compress Image to Exact Size", desc: "Type your desired KB or MB value for precise file size reduction.", btn: "⚡ Compress & Download" },
             crop: { title: "Crop Image with Templates", desc: "Crop visually with custom ratios for Instagram, YouTube, and Shorts.", btn: "✂️ Crop & Download" },
-            resize: { title: "Resize Image Dimensions", desc: "Change width and height pixels easily for social media or web.", btn: "📐 Resize & Download" },
-            convert: { title: "Batch Format Converter", desc: "Convert HEIC, AVIF, JPG, PNG, WEBP, PDF with 1-click download.", btn: "🔄 Convert & Download" },
+            resize: { title: "Resize Dimensions with Live Transform", desc: "Watch live preview stretch or shrink with instant aspect ratio calculations.", btn: "📐 Resize & Download" },
+            convert: { title: "Batch Format Converter", desc: "Convert iPhone HEIC, AVIF, JPG, PNG, WEBP, PDF with 1-click download.", btn: "🔄 Convert & Download" },
             watermark: { title: "Pro Watermark Studio", desc: "Stamp copyright text in corner or repeat diagonal security grid with live preview.", btn: "🏷️ Watermark & Download" },
             rotate: { title: "Rotate & Flip Image", desc: "Rotate orientation clockwise, anti-clockwise or flip horizontal / vertical.", btn: "🔁 Process & Download" }
         };
@@ -596,8 +614,8 @@
             document.getElementById('status-box').classList.add('hidden');
             document.getElementById('multi-preview-box').classList.add('hidden');
             document.getElementById('single-preview-box').classList.remove('hidden');
-            document.getElementById('heic-preview-card').classList.add('hidden');
-            document.getElementById('image-preview').classList.remove('hidden');
+            document.getElementById('heic-status-badge').classList.add('hidden');
+            document.getElementById('resize-live-badge').classList.add('hidden');
             document.getElementById('action-btn').disabled = false;
             
             if (cropper) {
@@ -605,10 +623,11 @@
                 cropper = null;
             }
             
+            // Reset orientation & resize styling
             currentRotation = 0;
             isFlippedH = false;
             isFlippedV = false;
-            document.getElementById('image-preview').style.transform = 'none';
+            resetResizePreviewStyle();
 
             document.getElementById('live-wm-single').classList.add('hidden');
             document.getElementById('live-wm-grid').classList.add('hidden');
@@ -640,6 +659,59 @@
             } else {
                 fileInput.removeAttribute('multiple');
                 document.getElementById('upload-subtext').innerText = "Supports JPG, PNG, WEBP, AVIF, iPhone HEIC (Max: 50MB)";
+            }
+        }
+
+        // ==========================================
+        // 📐 RESIZE LIVE TRANSFORM ENGINE
+        // ==========================================
+        function handleResizeInputChange(source) {
+            const wInput = document.getElementById('resize-width');
+            const hInput = document.getElementById('resize-height');
+            const lockRatio = document.getElementById('resize-lock-ratio').checked;
+
+            let w = parseInt(wInput.value) || 0;
+            let h = parseInt(hInput.value) || 0;
+
+            if (lockRatio && originalAspectRatio > 0) {
+                if (source === 'width' && w > 0) {
+                    h = Math.round(w / originalAspectRatio);
+                    hInput.value = h;
+                } else if (source === 'height' && h > 0) {
+                    w = Math.round(h * originalAspectRatio);
+                    wInput.value = w;
+                }
+            }
+
+            updateResizeLiveVisual(w, h);
+        }
+
+        function updateResizeLiveVisual(targetW, targetH) {
+            if (currentTool !== 'resize' || targetW <= 0 || targetH <= 0) return;
+
+            const badge = document.getElementById('resize-live-badge');
+            badge.classList.remove('hidden');
+            badge.innerText = `📐 Live Scale: ${targetW} × ${targetH} px`;
+
+            const img = document.getElementById('image-preview');
+            // Dynamically transform aspect ratio on screen so user sees stretching/squishing in real-time!
+            img.style.aspectRatio = `${targetW} / ${targetH}`;
+            img.style.objectFit = 'fill';
+        }
+
+        function resetResizePreviewStyle() {
+            const img = document.getElementById('image-preview');
+            img.style.aspectRatio = 'auto';
+            img.style.objectFit = 'contain';
+            img.style.transform = 'none';
+            document.getElementById('resize-live-badge').classList.add('hidden');
+        }
+
+        function resetToOriginalDimensions() {
+            if (naturalImgWidth > 0 && naturalImgHeight > 0) {
+                document.getElementById('resize-width').value = naturalImgWidth;
+                document.getElementById('resize-height').value = naturalImgHeight;
+                updateResizeLiveVisual(naturalImgWidth, naturalImgHeight);
             }
         }
 
@@ -846,6 +918,9 @@
             document.getElementById('status-box').classList.add('hidden');
         }
 
+        // ==========================================
+        // 📱 REAL HEIC DECODER FOR LIVE PHOTO PREVIEW
+        // ==========================================
         function renderSinglePreview(file) {
             document.getElementById('single-preview-box').classList.remove('hidden');
             document.getElementById('multi-preview-box').classList.add('hidden');
@@ -855,28 +930,59 @@
             const isHeic = file.name.toLowerCase().endsWith('.heic') || file.name.toLowerCase().endsWith('.heif');
             
             if (isHeic) {
-                document.getElementById('image-preview').classList.add('hidden');
-                document.getElementById('heic-preview-card').classList.remove('hidden');
-                document.getElementById('resize-width').value = 1920;
-                document.getElementById('resize-height').value = 1080;
+                document.getElementById('file-name').innerText = file.name + ' (Decoding iPhone Photo...)';
+                
+                // Real in-browser HEIC to JPEG conversion so users see the REAL photo!
+                if (typeof heic2any !== 'undefined') {
+                    heic2any({
+                        blob: file,
+                        toType: "image/jpeg",
+                        quality: 0.65
+                    }).then(function(convertedBlob) {
+                        const previewUrl = URL.createObjectURL(convertedBlob);
+                        displayPreviewImage(previewUrl, file.name);
+                        document.getElementById('heic-status-badge').classList.remove('hidden');
+                    }).catch(function() {
+                        fallbackDefaultFileReader(file);
+                    });
+                } else {
+                    fallbackDefaultFileReader(file);
+                }
             } else {
-                document.getElementById('image-preview').classList.remove('hidden');
-                document.getElementById('heic-preview-card').classList.add('hidden');
-
-                const reader = new FileReader();
-                reader.onload = function(event) {
-                    const img = document.getElementById('image-preview');
-                    img.src = event.target.result;
-                    img.onload = function() {
-                        document.getElementById('resize-width').value = img.naturalWidth;
-                        document.getElementById('resize-height').value = img.naturalHeight;
-                        if (currentTool === 'crop') initCropper();
-                        if (currentTool === 'watermark') updateLiveWatermarkPreview();
-                    };
-                    if (currentTool === 'compress') validateTargetSize();
-                };
-                reader.readAsDataURL(file);
+                document.getElementById('heic-status-badge').classList.add('hidden');
+                fallbackDefaultFileReader(file);
             }
+        }
+
+        function fallbackDefaultFileReader(file) {
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                displayPreviewImage(event.target.result, file.name);
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function displayPreviewImage(srcUrl, fileName) {
+            const img = document.getElementById('image-preview');
+            img.src = srcUrl;
+            document.getElementById('file-name').innerText = fileName;
+
+            img.onload = function() {
+                naturalImgWidth = img.naturalWidth || 1920;
+                naturalImgHeight = img.naturalHeight || 1080;
+                originalAspectRatio = naturalImgWidth / naturalImgHeight;
+
+                document.getElementById('resize-width').value = naturalImgWidth;
+                document.getElementById('resize-height').value = naturalImgHeight;
+
+                if (currentTool === 'resize') {
+                    updateResizeLiveVisual(naturalImgWidth, naturalImgHeight);
+                }
+                if (currentTool === 'crop') initCropper();
+                if (currentTool === 'watermark') updateLiveWatermarkPreview();
+            };
+
+            if (currentTool === 'compress') validateTargetSize();
         }
 
         function renderMultiGallery() {
@@ -901,8 +1007,12 @@
                 thumb.className = "w-full h-20 object-cover rounded-lg mb-1.5";
                 
                 const isHeic = file.name.toLowerCase().endsWith('.heic') || file.name.toLowerCase().endsWith('.heif');
-                if (isHeic) {
-                    thumb.src = "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%231e293b'/><text x='50%' y='55%' dominant-baseline='central' text-anchor='middle' font-size='40'>📱</text></svg>";
+                if (isHeic && typeof heic2any !== 'undefined') {
+                    heic2any({ blob: file, toType: "image/jpeg", quality: 0.3 }).then(b => {
+                        thumb.src = URL.createObjectURL(b);
+                    }).catch(() => {
+                        thumb.src = "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%231e293b'/><text x='50%' y='55%' dominant-baseline='central' text-anchor='middle' font-size='40'>📱</text></svg>";
+                    });
                 } else {
                     const reader = new FileReader();
                     reader.onload = (e) => thumb.src = e.target.result;
