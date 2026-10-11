@@ -103,7 +103,7 @@ def get_universal_font(size):
         return ImageFont.load_default()
 
 def compress_to_target_bytes(img, target_bytes):
-    """High-accuracy, high-speed target size compressor with 4:4:4 color preservation"""
+    """High accuracy target compressor with 4:4:4 color preservation"""
     img_rgb = make_rgb(img)
     
     # 1. Fast test at maximum quality (98) with full chroma subsampling (subsampling=0)
@@ -111,7 +111,7 @@ def compress_to_target_bytes(img, target_bytes):
     img_rgb.save(buf, format='JPEG', quality=98, subsampling=0)
     max_data = buf.getvalue()
     
-    # If at pristine quality 98 it is already within target, return immediately (superfast 0.2s)!
+    # If already within target, return immediately (superfast 0.2s)!
     if len(max_data) <= target_bytes:
         return max_data
 
@@ -119,10 +119,10 @@ def compress_to_target_bytes(img, target_bytes):
     low, high = 20, 95
     best_data = None
     
-    for _ in range(6):
+    for _ in range(5):
         mid = (low + high) // 2
         buf = io.BytesIO()
-        img_rgb.save(buf, format='JPEG', optimize=True, quality=mid)
+        img_rgb.save(buf, format='JPEG', quality=mid)
         data = buf.getvalue()
         if len(data) <= target_bytes:
             best_data = data
@@ -132,16 +132,16 @@ def compress_to_target_bytes(img, target_bytes):
         if low > high:
             break
             
-    # 3. If image dimensions are too huge, downscale minimally
+    # 3. If image dimensions are too huge, scale down minimally
     if best_data is None:
         curr_img = img_rgb.copy()
-        for _ in range(4):
+        for _ in range(3):
             scale = math.sqrt(target_bytes / len(data)) * 0.95
             new_w = max(100, int(curr_img.width * scale))
             new_h = max(100, int(curr_img.height * scale))
             curr_img = curr_img.resize((new_w, new_h), Image.Resampling.LANCZOS)
             buf = io.BytesIO()
-            curr_img.save(buf, format='JPEG', optimize=True, quality=60)
+            curr_img.save(buf, format='JPEG', quality=65)
             best_data = buf.getvalue()
             if len(best_data) <= target_bytes:
                 break
@@ -165,8 +165,8 @@ def process_image():
             with zipfile.ZipFile(zip_buffer, 'w', zipfile.ZIP_DEFLATED) as zip_file:
                 for idx, f in enumerate(files[:10]):
                     raw_name, _ = os.path.splitext(f.filename)
-                    # io.BytesIO(f.read()) fixes HEIC/HEIF files cleanly
-                    single_img = Image.open(io.BytesIO(f.read()))
+                    single_raw = f.read()
+                    single_img = Image.open(io.BytesIO(single_raw))
                     single_buf = io.BytesIO()
                     out_ext = target_fmt.lower()
 
@@ -180,10 +180,13 @@ def process_image():
                         single_img.save(single_buf, format='WEBP', quality=85)
                         out_ext = 'webp'
                     elif target_fmt == 'AVIF':
+                        avif_img = make_rgb(single_img)
+                        if avif_img.width > 1920 or avif_img.height > 1920:
+                            avif_img.thumbnail((1920, 1920), Image.Resampling.LANCZOS)
                         try:
-                            make_rgb(single_img).save(single_buf, format='AVIF', quality=80)
+                            avif_img.save(single_buf, format='AVIF', quality=75)
                         except Exception:
-                            make_rgb(single_img).save(single_buf, format='WEBP', quality=85)
+                            avif_img.save(single_buf, format='WEBP', quality=85)
                         out_ext = 'avif'
                     elif target_fmt == 'PDF':
                         make_rgb(single_img).save(single_buf, format='PDF')
@@ -204,7 +207,7 @@ def process_image():
                 download_name='smartpic_converted_batch.zip'
             )
 
-        # SINGLE IMAGE PROCESS (io.BytesIO fixes iPhone HEIC permanently)
+        # SINGLE IMAGE PROCESS (io.BytesIO(raw_bytes) fixes iPhone HEIC permanently)
         file = files[0]
         filename, orig_ext = os.path.splitext(file.filename)
         raw_bytes = file.read()
@@ -286,10 +289,14 @@ def process_image():
                 download_name = f"{filename}_converted.webp"
                 mimetype = 'image/webp'
             elif target_fmt == 'AVIF':
+                # Fast optimized AVIF encoding to prevent 0.1 CPU timeout
+                avif_img = make_rgb(img)
+                if avif_img.width > 1920 or avif_img.height > 1920:
+                    avif_img.thumbnail((1920, 1920), Image.Resampling.LANCZOS)
                 try:
-                    make_rgb(img).save(buf, format='AVIF', quality=80)
+                    avif_img.save(buf, format='AVIF', quality=75)
                 except Exception:
-                    make_rgb(img).save(buf, format='WEBP', quality=85)
+                    avif_img.save(buf, format='WEBP', quality=85)
                 download_name = f"{filename}_converted.avif"
                 mimetype = 'image/avif'
             elif target_fmt == 'BMP':
@@ -313,7 +320,6 @@ def process_image():
             img_rgba = img.convert('RGBA')
             txt_layer = Image.new('RGBA', img_rgba.size, (255, 255, 255, 0))
 
-            # Loads fonts cleanly on Linux / Windows
             font = get_universal_font(size_choice)
 
             color_map = {
