@@ -609,7 +609,7 @@
         }
 
         // ==========================================
-        // 📐 CLIENT-SIDE RESIZE LIVE TRANSFORM & PROPORTION ENGINE
+        // 📐 CLIENT-SIDE RESIZE LIVE TRANSFORM & DRAG/DROP FIX
         // ==========================================
         function handleResizeInputChange(source) {
             const wInput = document.getElementById('resize-width');
@@ -643,7 +643,6 @@
             badge.innerText = `📐 Live Scale: ${targetW} × ${targetH} px (${scalePctW}%)`;
 
             const img = document.getElementById('image-preview');
-            // INSTANT CLIENT-SIDE CSS RESIZE TRANSFORM (0 Server Load!)
             img.style.width = Math.min(450, Math.max(80, (targetW / naturalImgWidth) * 300)) + 'px';
             img.style.height = Math.min(450, Math.max(80, (targetH / naturalImgHeight) * 300)) + 'px';
             img.style.objectFit = 'fill';
@@ -824,13 +823,15 @@
             vBtn.className = isFlippedV ? "py-2.5 px-3 rounded-xl bg-indigo-600 text-white text-xs font-bold border border-indigo-500 transition" : "py-2.5 px-3 rounded-xl bg-slate-900 hover:bg-indigo-600 text-white text-xs font-bold border border-slate-700 transition";
         }
 
-        // DRAG & DROP
+        // ==========================================
+        // 📁 BULLETPROOF DRAG & DROP & FILE HANDLER
+        // ==========================================
         const dropArea = document.getElementById('drop-area');
         const fileInput = document.getElementById('image-upload');
 
         ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
-            window.addEventListener(eventName, (e) => e.preventDefault(), false);
-            dropArea.addEventListener(eventName, (e) => e.preventDefault(), false);
+            window.addEventListener(eventName, (e) => { e.preventDefault(); e.stopPropagation(); }, false);
+            dropArea.addEventListener(eventName, (e) => { e.preventDefault(); e.stopPropagation(); }, false);
         });
 
         ['dragenter', 'dragover'].forEach(eventName => {
@@ -843,12 +844,13 @@
 
         dropArea.addEventListener('drop', (e) => {
             const dt = e.dataTransfer;
-            if (dt.files.length > 0) handleFiles(dt.files);
+            const files = dt.files;
+            if (files && files.length > 0) handleFiles(files);
         });
 
         dropArea.addEventListener('click', () => fileInput.click());
         fileInput.addEventListener('change', (e) => {
-            if (e.target.files.length > 0) handleFiles(e.target.files);
+            if (e.target.files && e.target.files.length > 0) handleFiles(e.target.files);
         });
 
         function handleFiles(files) {
@@ -874,27 +876,42 @@
             document.getElementById('file-name').innerText = file.name;
             document.getElementById('file-size').innerText = (file.size / 1024).toFixed(1) + ' KB';
 
-            const reader = new FileReader();
-            reader.onload = function(event) {
-                const img = document.getElementById('image-preview');
-                img.src = event.target.result;
-                img.onload = function() {
-                    naturalImgWidth = img.naturalWidth || 1920;
-                    naturalImgHeight = img.naturalHeight || 1080;
-                    originalAspectRatio = naturalImgWidth / naturalImgHeight;
+            const isHeic = file.name.toLowerCase().endsWith('.heic') || file.name.toLowerCase().endsWith('.heif');
+            
+            if (isHeic) {
+                document.getElementById('image-preview').classList.add('hidden');
+                document.getElementById('heic-preview-card').classList.remove('hidden');
+                naturalImgWidth = 1920;
+                naturalImgHeight = 1080;
+                originalAspectRatio = 1920 / 1080;
+                document.getElementById('resize-width').value = 1920;
+                document.getElementById('resize-height').value = 1080;
+            } else {
+                document.getElementById('image-preview').classList.remove('hidden');
+                document.getElementById('heic-preview-card').classList.add('hidden');
 
-                    document.getElementById('resize-width').value = naturalImgWidth;
-                    document.getElementById('resize-height').value = naturalImgHeight;
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    const img = document.getElementById('image-preview');
+                    img.src = event.target.result;
+                    img.onload = function() {
+                        naturalImgWidth = img.naturalWidth || 1920;
+                        naturalImgHeight = img.naturalHeight || 1080;
+                        originalAspectRatio = naturalImgWidth / naturalImgHeight;
 
-                    if (currentTool === 'resize') {
-                        updateResizeLiveVisual(naturalImgWidth, naturalImgHeight);
-                    }
-                    if (currentTool === 'crop') initCropper();
-                    if (currentTool === 'watermark') updateLiveWatermarkPreview();
+                        document.getElementById('resize-width').value = naturalImgWidth;
+                        document.getElementById('resize-height').value = naturalImgHeight;
+
+                        if (currentTool === 'resize') {
+                            updateResizeLiveVisual(naturalImgWidth, naturalImgHeight);
+                        }
+                        if (currentTool === 'crop') initCropper();
+                        if (currentTool === 'watermark') updateLiveWatermarkPreview();
+                    };
+                    if (currentTool === 'compress') validateTargetSize();
                 };
-                if (currentTool === 'compress') validateTargetSize();
-            };
-            reader.readAsDataURL(file);
+                reader.readAsDataURL(file);
+            }
         }
 
         function renderMultiGallery() {
@@ -918,9 +935,14 @@
                 const thumb = document.createElement('img');
                 thumb.className = "w-full h-20 object-cover rounded-lg mb-1.5";
                 
-                const reader = new FileReader();
-                reader.onload = (e) => thumb.src = e.target.result;
-                reader.readAsDataURL(file);
+                const isHeic = file.name.toLowerCase().endsWith('.heic') || file.name.toLowerCase().endsWith('.heif');
+                if (isHeic) {
+                    thumb.src = "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%231e293b'/><text x='50%' y='55%' dominant-baseline='central' text-anchor='middle' font-size='40'>📱</text></svg>";
+                } else {
+                    const reader = new FileReader();
+                    reader.onload = (e) => thumb.src = e.target.result;
+                    reader.readAsDataURL(file);
+                }
 
                 const nameText = document.createElement('p');
                 nameText.className = "text-[11px] font-bold text-white truncate";
@@ -1060,7 +1082,6 @@
 
         // FEEDBACK MODAL
         function openFeedbackModal() {
-            document.getElementById('feedback-modal').classList.0('hidden'); // Fixed class toggle
             document.getElementById('feedback-modal').classList.remove('hidden');
         }
 
@@ -1082,10 +1103,6 @@
             };
 
             try {
-                const res = await fetch('/submit-frontend-feedback', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) }); // handled smoothly via existing route
-            } catch(e) {}
-
-            try {
                 const res = await fetch('/submit-feedback', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
@@ -1093,7 +1110,7 @@
                 });
 
                 if (res.ok) {
-                    document.getElementById('feedback-success-box'] || document.getElementById('fb-success').classList.remove('hidden');
+                    document.getElementById('fb-success').classList.remove('hidden');
                     document.getElementById('feedback-form').reset();
                     setTimeout(() => {
                         closeFeedbackModal();
@@ -1108,7 +1125,7 @@
             } catch (err) {
                 alert('Error submitting feedback.');
                 btn.disabled = false;
-                btn.innerText = 'Send Job';
+                btn.innerText = 'Send Suggestion';
             }
         });
     </script>
