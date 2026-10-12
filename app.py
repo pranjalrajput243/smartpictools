@@ -45,12 +45,9 @@ def about():
 def contact():
     return render_template('contact.html')
 
-# ==========================================
-# SEO ENGINE: SITEMAP & ROBOTS.TXT
-# ==========================================
 @app.route('/sitemap.xml')
 def sitemap():
-    sitemap_xml = """<?xml version="1.0" encoding="UTF-8"?>
+    xml = """<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://smartpictools.in/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
   <url><loc>https://smartpictools.in/about</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
@@ -58,19 +55,13 @@ def sitemap():
   <url><loc>https://smartpictools.in/terms</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://smartpictools.in/contact</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
 </urlset>"""
-    return Response(sitemap_xml, mimetype='application/xml')
+    return Response(xml, mimetype='application/xml')
 
 @app.route('/robots.txt')
 def robots():
-    robots_txt = """User-agent: *
-Allow: /
-Sitemap: https://smartpictools.in/sitemap.xml
-"""
-    return Response(robots_txt, mimetype='text/plain')
+    txt = "User-agent: *\nAllow: /\nSitemap: https://smartpictools.in/sitemap.xml\n"
+    return Response(txt, mimetype='text/plain')
 
-# ==========================================
-# FEEDBACK SYSTEM
-# ==========================================
 @app.route('/submit-feedback', methods=['POST'])
 def submit_feedback():
     try:
@@ -106,7 +97,7 @@ def submit_feedback():
         return jsonify({'error': str(e)}), 500
 
 # ==========================================
-# TURBO HELPERS (RGB, FONTS, SPEED GATEKEEPER)
+# HELPER FUNCTIONS
 # ==========================================
 def make_rgb(im):
     if im.mode in ('RGBA', 'LA') or (im.mode == 'P' and 'transparency' in im.info):
@@ -117,7 +108,6 @@ def make_rgb(im):
     return im.convert('RGB')
 
 def get_universal_font(size):
-    """Loads fonts safely on Linux (Render) and Windows"""
     font_candidates = [
         "DejaVuSans-Bold.ttf", "DejaVuSans.ttf",
         "FreeSansBold.ttf", "FreeSans.ttf",
@@ -134,58 +124,36 @@ def get_universal_font(size):
     except Exception:
         return ImageFont.load_default()
 
-def turbo_speed_gatekeeper(img):
-    """Downsamples massive 4K/8K images safely to prevent 0.1 CPU timeouts"""
-    max_dim = 2560
-    if img.width > max_dim or img.height > max_dim:
-        scale = max_dim / max(img.width, img.height)
-        new_w = int(img.width * scale)
-        new_h = int(img.height * scale)
-        return img.resize((new_w, new_h), Image.Resampling.BILINEAR)
-    return img
-
-def compress_to_target_bytes(img, target_bytes):
-    """Fast 2-Pass Target Compressor (No heavy loops, hits exact size in 1s)"""
+# ==========================================
+# ⚡ 1-PASS INSTANT TARGET COMPRESSOR (NO LOOPS!)
+# ==========================================
+def fast_direct_compress(img, original_size_bytes, target_bytes):
     img_rgb = make_rgb(img)
-    
-    # Pass 1: Test at high quality (98) with full 4:4:4 color (subsampling=0)
+    ratio = target_bytes / max(1, original_size_bytes)
+
+    # Smart 1-step direct quality calculation (Zero loop, takes 0.2s!)
+    if ratio <= 0.15:
+        # Extreme compression: scale down slightly & low quality
+        scale = math.sqrt(ratio * 2.5)
+        new_w = max(400, int(img_rgb.width * scale))
+        new_h = max(400, int(img_rgb.height * scale))
+        img_rgb = img_rgb.resize((new_w, new_h), Image.Resampling.BILINEAR)
+        quality = 40
+    elif ratio <= 0.35:
+        quality = 55
+    elif ratio <= 0.60:
+        quality = 70
+    elif ratio <= 0.85:
+        quality = 82
+    else:
+        quality = 92
+
     buf = io.BytesIO()
-    img_rgb.save(buf, format='JPEG', quality=98, subsampling=0)
-    max_data = buf.getvalue()
-    if len(max_data) <= target_bytes:
-        return max_data
-
-    # Pass 2: Fast 4-step convergence
-    low, high = 20, 95
-    best_data = None
-    for _ in range(4):
-        mid = (low + high) // 2
-        buf = io.BytesIO()
-        img_rgb.save(buf, format='JPEG', quality=mid)
-        data = buf.getvalue()
-        if len(data) <= target_bytes:
-            best_data = data
-            low = mid + 1
-        else:
-            high = mid - 1
-        if low > high:
-            break
-
-    # Scale down minimally if file is too huge
-    if best_data is None:
-        curr = img_rgb.copy()
-        scale = math.sqrt(target_bytes / len(data)) * 0.95
-        new_w = max(100, int(curr.width * scale))
-        new_h = max(100, int(curr.height * scale))
-        curr = curr.resize((new_w, new_h), Image.Resampling.BILINEAR)
-        buf = io.BytesIO()
-        curr.save(buf, format='JPEG', quality=70)
-        best_data = buf.getvalue()
-
-    return best_data or max_data
+    img_rgb.save(buf, format='JPEG', quality=quality)
+    return buf.getvalue()
 
 # ==========================================
-# MASTER PROCESS ENGINE (ALL 7 TOOLS)
+# MASTER PROCESS ROUTE (ALL 7 TOOLS DIRECT)
 # ==========================================
 @app.route('/process', methods=['POST'])
 def process_image():
@@ -197,7 +165,7 @@ def process_image():
             return jsonify({'error': 'No file selected'}), 400
 
         # ----------------------------------------------------
-        # 1. BATCH FORMAT CONVERTER (Single & Multi-file ZIP)
+        # 1. BATCH CONVERT (Multi-file ZIP)
         # ----------------------------------------------------
         if tool == 'convert' and len(files) > 1:
             target_fmt = request.form.get('format', 'JPG').upper()
@@ -206,13 +174,12 @@ def process_image():
             with zipfile.ZipFile(zip_buffer, 'w', zipfile.ZIP_DEFLATED) as zip_file:
                 for idx, f in enumerate(files[:10]):
                     raw_name, _ = os.path.splitext(f.filename)
-                    # io.BytesIO(f.read()) handles Apple HEIC seamlessly
-                    s_img = turbo_speed_gatekeeper(Image.open(io.BytesIO(f.read())))
+                    s_img = Image.open(io.BytesIO(f.read()))
                     s_buf = io.BytesIO()
                     out_ext = target_fmt.lower()
 
                     if target_fmt in ['JPG', 'JPEG']:
-                        make_rgb(s_img).save(s_buf, format='JPEG', quality=92)
+                        make_rgb(s_img).save(s_buf, format='JPEG', quality=90)
                         out_ext = 'jpg'
                     elif target_fmt == 'PNG':
                         s_img.save(s_buf, format='PNG')
@@ -221,13 +188,13 @@ def process_image():
                         s_img.save(s_buf, format='WEBP', quality=85)
                         out_ext = 'webp'
                     elif target_fmt == 'AVIF':
-                        av_img = make_rgb(s_img)
-                        if av_img.width > 1920 or av_img.height > 1920:
-                            av_img.thumbnail((1920, 1920), Image.Resampling.BILINEAR)
+                        av = make_rgb(s_img)
+                        if av.width > 1920 or av.height > 1920:
+                            av.thumbnail((1920, 1920), Image.Resampling.BILINEAR)
                         try:
-                            av_img.save(s_buf, format='AVIF', quality=75)
+                            av.save(s_buf, format='AVIF', quality=75)
                         except Exception:
-                            av_img.save(s_buf, format='WEBP', quality=85)
+                            av.save(s_buf, format='WEBP', quality=85)
                         out_ext = 'avif'
                     elif target_fmt == 'PDF':
                         make_rgb(s_img).save(s_buf, format='PDF')
@@ -249,25 +216,26 @@ def process_image():
             )
 
         # ----------------------------------------------------
-        # SINGLE IMAGE ENGINE (Fast & Memory Safe)
+        # SINGLE IMAGE ENGINE (DIRECT 1-PASS SPEED)
         # ----------------------------------------------------
         file = files[0]
         filename, orig_ext = os.path.splitext(file.filename)
-        # Raw bytes stream prevents any HEIC/HEIF identification errors
-        img = turbo_speed_gatekeeper(Image.open(io.BytesIO(file.read())))
+        raw_bytes = file.read()
+        original_size_bytes = len(raw_bytes)
+        img = Image.open(io.BytesIO(raw_bytes))
         
         output_data = None
         mimetype = 'image/jpeg'
         download_name = f"{filename}_processed.jpg"
 
-        # TOOL 1: COMPRESS
+        # TOOL 1: COMPRESS (1-Pass Fast)
         if tool == 'compress':
             compress_mode = request.form.get('compress_mode', 'slider')
             if compress_mode == 'target':
                 target_val = float(request.form.get('target_val', 500))
                 target_unit = request.form.get('target_unit', 'kb').lower()
                 target_bytes = int(target_val * 1024 * 1024) if target_unit == 'mb' else int(target_val * 1024)
-                output_data = compress_to_target_bytes(img, target_bytes)
+                output_data = fast_direct_compress(img, original_size_bytes, target_bytes)
                 download_name = f"{filename}_compressed_{int(target_val)}{target_unit.upper()}.jpg"
                 mimetype = 'image/jpeg'
             else:
@@ -297,7 +265,7 @@ def process_image():
                 mimetype = 'image/jpeg'
             output_data = buf.getvalue()
 
-        # TOOL 3: RESIZE (Superfast Bicubic Resampling)
+        # TOOL 3: RESIZE
         elif tool == 'resize':
             width = int(request.form.get('width', img.width))
             height = int(request.form.get('height', img.height))
@@ -314,7 +282,7 @@ def process_image():
                 mimetype = 'image/jpeg'
             output_data = buf.getvalue()
 
-        # TOOL 4 & 5: CONVERT (Includes Apple HEIC & Turbo AVIF)
+        # TOOL 4 & 5: CONVERT (Includes Apple HEIC & AVIF)
         elif tool == 'convert':
             target_fmt = request.form.get('format', 'JPG').upper()
             buf = io.BytesIO()
@@ -355,7 +323,7 @@ def process_image():
                 mimetype = 'image/x-icon'
             output_data = buf.getvalue()
 
-        # TOOL 6: WATERMARK (Universal Fonts & Boundary Safe)
+        # TOOL 6: WATERMARK (Universal Linux Fonts)
         elif tool == 'watermark':
             text = request.form.get('watermark_text', '© SmartPicTools')
             mode = request.form.get('watermark_mode', 'single')
@@ -464,7 +432,7 @@ def process_image():
 
 if __name__ == '__main__':
     print("\n---------------------------------------------------------")
-    print(" 🚀 SmartPicTools Pro Live: http://127.0.0.1:5000 ")
+    print(" 🚀 SmartPicTools Turbo Live: http://127.0.0.1:5000 ")
     print(" Network: http://0.0.0.0:5000 ")
     print("---------------------------------------------------------\n")
     app.run(host='0.0.0.0', port=5000, debug=True)
