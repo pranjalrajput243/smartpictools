@@ -17,7 +17,7 @@
     <style>
         body { font-family: 'Plus Jakarta Sans', sans-serif; }
         .cropper-view-box, .cropper-face { border-radius: 8px; }
-        #image-preview { transition: transform 0.25s ease-out, aspect-ratio 0.25s ease-out; }
+        #image-preview { transition: transform 0.2s ease-out, aspect-ratio 0.2s ease-out; }
         .tiled-watermark-overlay {
             background-repeat: repeat;
             transform: rotate(-25deg) scale(1.4);
@@ -113,7 +113,7 @@
 
         <div class="bg-slate-900 rounded-3xl p-6 sm:p-10 border border-slate-800 shadow-2xl relative">
             
-            <!-- UPLOAD DROP AREA (SUPPORTS HEIC/HEIF) -->
+            <!-- UPLOAD DROP AREA (SUPPORTS IPHONE HEIC) -->
             <div id="drop-area" class="group border-2 border-dashed border-slate-700 hover:border-indigo-500 bg-slate-950/60 hover:bg-indigo-950/20 rounded-2xl p-8 sm:p-14 text-center cursor-pointer transition-all duration-300 block">
                 <input type="file" id="image-upload" accept="image/*, .heic, .HEIC, .heif, .HEIF, image/heic, image/heif" class="hidden">
                 <div class="w-20 h-20 rounded-3xl bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-4xl flex items-center justify-center mx-auto mb-5 group-hover:scale-110 group-hover:bg-indigo-500/20 transition duration-300 shadow-inner">
@@ -149,22 +149,21 @@
                     <div class="max-h-[440px] overflow-hidden flex items-center justify-center bg-slate-900/50 rounded-xl p-3 select-none">
                         <div id="preview-wrapper" class="relative inline-block max-h-[400px] max-w-full rounded-xl overflow-hidden leading-none shadow-xl border border-slate-800/60">
                             
-                            <!-- 1. Normal Image Element -->
                             <img id="image-preview" src="#" alt="Preview" class="max-h-[380px] w-auto max-w-full block rounded-xl object-contain">
 
-                            <!-- 2. Apple HEIC Dedicated Card (Clean Preview, No Broken Icon!) -->
+                            <!-- Apple HEIC Clean Card -->
                             <div id="heic-preview-card" class="hidden flex flex-col items-center justify-center p-12 bg-slate-900 text-center rounded-xl border border-slate-800 min-w-[280px]">
                                 <span class="text-5xl mb-3">📱</span>
                                 <h4 class="text-base font-bold text-white">Apple HEIC Photo Loaded</h4>
                                 <p class="text-xs text-indigo-400 mt-1">Ready to convert into JPG, PNG, WEBP, or PDF</p>
                             </div>
                             
-                            <!-- 3. LIVE WATERMARK OVERLAY: SINGLE STAMP -->
+                            <!-- 1. LIVE WATERMARK OVERLAY: SINGLE STAMP -->
                             <div id="live-wm-single" class="hidden absolute pointer-events-none font-bold tracking-wider px-3 py-1.5 rounded transition-all shadow-sm">
                                 © SmartPicTools
                             </div>
 
-                            <!-- 4. LIVE WATERMARK OVERLAY: DIAGONAL REPEATED GRID -->
+                            <!-- 2. LIVE WATERMARK OVERLAY: DIAGONAL REPEATED GRID -->
                             <div id="live-wm-grid" class="hidden absolute inset-0 overflow-hidden pointer-events-none flex items-center justify-center">
                                 <div id="live-wm-pattern" class="w-[200%] h-[200%] flex flex-wrap content-center justify-around gap-12 font-bold tracking-widest select-none tiled-watermark-overlay opacity-60">
                                 </div>
@@ -237,7 +236,7 @@
                         </div>
                     </div>
 
-                    <!-- 3. RESIZE (TRUE VISUAL ASPECT RATIO TRANSFORM) -->
+                    <!-- 3. RESIZE (TRUE REAL ASPECT RATIO TRANSFORM) -->
                     <div id="ctrl-resize" class="tool-ctrl hidden space-y-4">
                         <div class="grid grid-cols-2 gap-4">
                             <div>
@@ -250,7 +249,6 @@
                             </div>
                         </div>
 
-                        <!-- Aspect Ratio Lock Toggle & Reset -->
                         <div class="flex items-center justify-between p-3 bg-slate-900 rounded-xl border border-slate-800">
                             <label for="resize-lock-ratio" class="flex items-center gap-2 cursor-pointer text-xs font-bold text-slate-300">
                                 <input type="checkbox" id="resize-lock-ratio" checked class="w-4 h-4 rounded accent-indigo-600 cursor-pointer">
@@ -381,49 +379,42 @@
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            <!-- 1. COMPRESS -->
             <div onclick="switchTool('compress'); window.scrollTo({top: 0, behavior: 'smooth'});" class="bg-slate-900/80 hover:bg-slate-900 border border-slate-800 hover:border-indigo-500/50 p-6 rounded-2xl transition cursor-pointer group shadow-lg">
                 <div class="w-12 h-12 rounded-xl bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition">⚡</div>
                 <h3 class="text-lg font-bold text-white group-hover:text-indigo-400 transition">Compress to Target KB</h3>
                 <p class="text-xs text-slate-400 mt-2 leading-relaxed">Type your desired KB or MB value. Shrink size accurately with high clarity.</p>
             </div>
 
-            <!-- 2. CROP -->
             <div onclick="switchTool('crop'); window.scrollTo({top: 0, behavior: 'smooth'});" class="bg-slate-900/80 hover:bg-slate-900 border border-slate-800 hover:border-purple-500/50 p-6 rounded-2xl transition cursor-pointer group shadow-lg">
                 <div class="w-12 h-12 rounded-xl bg-purple-500/10 text-purple-400 border border-purple-500/20 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition">✂️</div>
                 <h3 class="text-lg font-bold text-white group-hover:text-purple-400 transition">Crop with Templates</h3>
                 <p class="text-xs text-slate-400 mt-2 leading-relaxed">Crop visually for Instagram (1:1), YouTube (16:9), and Shorts/Reels (9:16).</p>
             </div>
 
-            <!-- 3. RESIZE -->
             <div onclick="switchTool('resize'); window.scrollTo({top: 0, behavior: 'smooth'});" class="bg-slate-900/80 hover:bg-slate-900 border border-slate-800 hover:border-blue-500/50 p-6 rounded-2xl transition cursor-pointer group shadow-lg">
                 <div class="w-12 h-12 rounded-xl bg-blue-500/10 text-blue-400 border border-blue-500/20 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition">📐</div>
                 <h3 class="text-lg font-bold text-white group-hover:text-blue-400 transition">Resize Dimensions</h3>
                 <p class="text-xs text-slate-400 mt-2 leading-relaxed">Change exact pixel width and height with live scaling preview and aspect ratio lock.</p>
             </div>
 
-            <!-- 4. IPHONE HEIC CONVERTER -->
             <div onclick="switchTool('convert'); window.scrollTo({top: 0, behavior: 'smooth'});" class="bg-slate-900/80 hover:bg-slate-900 border border-slate-800 hover:border-emerald-500/50 p-6 rounded-2xl transition cursor-pointer group shadow-lg">
                 <div class="w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition">📱</div>
                 <h3 class="text-lg font-bold text-white group-hover:text-emerald-400 transition">iPhone HEIC Converter</h3>
                 <p class="text-xs text-slate-400 mt-2 leading-relaxed">Easily convert Apple HEIC / HEIF photos to standard JPG, PNG, WEBP, or PDF.</p>
             </div>
 
-            <!-- 5. WATERMARK -->
             <div onclick="switchTool('watermark'); window.scrollTo({top: 0, behavior: 'smooth'});" class="bg-slate-900/80 hover:bg-slate-900 border border-slate-800 hover:border-amber-500/50 p-6 rounded-2xl transition cursor-pointer group shadow-lg">
                 <div class="w-12 h-12 rounded-xl bg-amber-500/10 text-amber-400 border border-amber-500/20 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition">🏷️</div>
                 <h3 class="text-lg font-bold text-white group-hover:text-amber-400 transition">Diagonal Grid Watermark</h3>
                 <p class="text-xs text-slate-400 mt-2 leading-relaxed">Protect photos with diagonal repeat grids with live screen preview.</p>
             </div>
 
-            <!-- 6. BATCH CONVERTER -->
             <div onclick="switchTool('convert'); window.scrollTo({top: 0, behavior: 'smooth'});" class="bg-slate-900/80 hover:bg-slate-900 border border-slate-800 hover:border-pink-500/50 p-6 rounded-2xl transition cursor-pointer group shadow-lg">
                 <div class="w-12 h-12 rounded-xl bg-pink-500/10 text-pink-400 border border-pink-500/20 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition">🔄</div>
                 <h3 class="text-lg font-bold text-white group-hover:text-pink-400 transition">Batch Format Converter</h3>
                 <p class="text-xs text-slate-400 mt-2 leading-relaxed">Convert up to 10 images at once to JPG, PNG, WEBP, AVIF, PDF with 1-click ZIP download.</p>
             </div>
 
-            <!-- 7. ROTATE & FLIP -->
             <div onclick="switchTool('rotate'); window.scrollTo({top: 0, behavior: 'smooth'});" class="bg-slate-900/80 hover:bg-slate-900 border border-slate-800 hover:border-cyan-500/50 p-6 rounded-2xl transition cursor-pointer group shadow-lg">
                 <div class="w-12 h-12 rounded-xl bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition">🔁</div>
                 <h3 class="text-lg font-bold text-white group-hover:text-cyan-400 transition">Rotate & Flip</h3>
@@ -490,6 +481,14 @@
                     <span class="text-indigo-400 group-open:rotate-180 transition">▼</span>
                 </summary>
                 <p class="text-slate-400 mt-3 leading-relaxed">100%. We practice strict in-memory execution. Files are processed directly in temporary RAM buffers and permanently wiped immediately after download. We never store, index, or share your photos.</p>
+            </details>
+
+            <details class="group bg-slate-900 p-5 rounded-2xl border border-slate-800 cursor-pointer">
+                <summary class="font-bold text-white flex justify-between items-center">
+                    What image formats can I convert to?
+                    <span class="text-indigo-400 group-open:rotate-180 transition">▼</span>
+                </summary>
+                <p class="text-slate-400 mt-3 leading-relaxed">Our Converter supports JPG, PNG (with transparency), WEBP, AVIF (next-gen ultra-compact format), PDF documents, BMP, and website Favicon (ICO) formats.</p>
             </details>
         </div>
     </section>
@@ -630,7 +629,7 @@
         }
 
         // ==========================================
-        // 📐 RESIZE ENGINE (TRUE VISUAL SCALE TRANSFORM)
+        // 📐 RESIZE ENGINE (TRUE REAL ASPECT RATIO TRANSFORM)
         // ==========================================
         function handleResizeInputChange(source) {
             const wInput = document.getElementById('resize-width');
@@ -664,7 +663,7 @@
             badge.innerText = `📐 Live Scale: ${targetW} × ${targetH} px (${scalePctW}%)`;
 
             const img = document.getElementById('image-preview');
-            // True real-time aspect-ratio transform: squishes, flattens or stretches image visibly!
+            // True aspect ratio transform: instantly squishes or stretches image visibly!
             img.style.aspectRatio = `${targetW} / ${targetH}`;
             img.style.objectFit = 'fill';
         }
@@ -843,9 +842,7 @@
             vBtn.className = isFlippedV ? "py-2.5 px-3 rounded-xl bg-indigo-600 text-white text-xs font-bold border border-indigo-500 transition" : "py-2.5 px-3 rounded-xl bg-slate-900 hover:bg-indigo-600 text-white text-xs font-bold border border-slate-700 transition";
         }
 
-        // ==========================================
-        // 📁 BULLETPROOF DRAG & DROP & FILE HANDLER
-        // ==========================================
+        // BULLETPROOF DRAG & DROP
         const dropArea = document.getElementById('drop-area');
         const fileInput = document.getElementById('image-upload');
 
@@ -899,7 +896,6 @@
             const isHeic = file.name.toLowerCase().endsWith('.heic') || file.name.toLowerCase().endsWith('.heif');
             
             if (isHeic) {
-                // Apple Dedicated Clean Card (No broken [x] Preview icon!)
                 document.getElementById('image-preview').classList.add('hidden');
                 document.getElementById('heic-preview-card').classList.remove('hidden');
                 naturalImgWidth = 1920;
@@ -1013,7 +1009,7 @@
             eventTarget.className = "ratio-btn py-2.5 px-3 rounded-xl bg-indigo-600 text-white text-xs font-bold transition";
         }
 
-        // ACTION BUTTON (ULTRA RELIABLE PROCESSING & TIMEOUT SAFE)
+        // ACTION BUTTON
         document.getElementById('action-btn').addEventListener('click', async function() {
             if (uploadedFiles.length === 0) return;
 
