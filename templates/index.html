@@ -14,7 +14,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css"/>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
-    <!-- jsPDF: INSTANT IN-BROWSER PDF GENERATION (0.3s) -->
+    <!-- jsPDF: INSTANT IN-BROWSER PDF GENERATION -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <style>
         body { font-family: 'Plus Jakarta Sans', sans-serif; }
@@ -29,7 +29,7 @@
 </head>
 <body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col justify-between selection:bg-indigo-500 selection:text-white">
 
-    <!-- 1. HEADER -->
+    <!-- HEADER -->
     <header class="border-b border-slate-800 bg-slate-900/80 backdrop-blur-xl sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 h-20 flex items-center justify-between">
             <a href="/" class="flex items-center gap-3 group">
@@ -60,7 +60,7 @@
         </div>
     </header>
 
-    <!-- 3. LIVE STATS STRIP -->
+    <!-- LIVE STATS STRIP -->
     <section class="max-w-5xl mx-auto w-full px-4 mt-8">
         <div class="grid grid-cols-2 md:grid-cols-4 gap-3 bg-slate-900/60 p-4 rounded-2xl border border-slate-800/80 text-center">
             <div class="p-2">
@@ -82,7 +82,7 @@
         </div>
     </section>
 
-    <!-- 4. MAIN WORKSPACE -->
+    <!-- MAIN WORKSPACE -->
     <main class="max-w-5xl mx-auto w-full px-4 py-8 flex-1" id="tool-workspace">
         
         <!-- TOP 5 TABS -->
@@ -139,7 +139,7 @@
                     </button>
                 </div>
 
-                <!-- PREVIEW CONTAINER: TIGHT FIT WRAPPER -->
+                <!-- PREVIEW CONTAINER -->
                 <div id="single-preview-box" class="bg-slate-950/80 p-5 rounded-2xl border border-slate-800 mb-6">
                     
                     <div id="resize-badge-container" class="hidden flex justify-end mb-2">
@@ -153,14 +153,12 @@
                             
                             <img id="image-preview" src="#" alt="Preview" class="max-h-[380px] w-auto max-w-full block rounded-xl object-contain">
 
-                            <!-- Apple HEIC Clean Card -->
                             <div id="heic-preview-card" class="hidden flex flex-col items-center justify-center p-12 bg-slate-900 text-center rounded-xl border border-slate-800 min-w-[280px]">
                                 <span class="text-5xl mb-3">📱</span>
                                 <h4 class="text-base font-bold text-white">Apple HEIC Photo Loaded</h4>
                                 <p class="text-xs text-indigo-400 mt-1">Ready to convert into JPG, PNG, WEBP, or PDF</p>
                             </div>
                             
-                            <!-- LIVE WATERMARK OVERLAYS -->
                             <div id="live-wm-single" class="hidden absolute pointer-events-none font-bold tracking-wider px-3 py-1.5 rounded transition-all shadow-sm">
                                 © SmartPicTools
                             </div>
@@ -237,7 +235,7 @@
                         </div>
                     </div>
 
-                    <!-- 3. RESIZE (TRUE REAL ASPECT RATIO TRANSFORM) -->
+                    <!-- 3. RESIZE -->
                     <div id="ctrl-resize" class="tool-ctrl hidden space-y-4">
                         <div class="grid grid-cols-2 gap-4">
                             <div>
@@ -337,27 +335,6 @@
                             <input type="range" id="watermark-opacity" min="40" max="255" value="150" oninput="updateLiveWatermarkPreview()" class="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-indigo-500">
                         </div>
                     </div>
-
-                    <!-- 6. ROTATE & FLIP -->
-                    <div id="ctrl-rotate" class="tool-ctrl hidden space-y-4">
-                        <label class="block text-xs font-bold text-slate-400">Orientation & Flip:</label>
-                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
-                            <button type="button" onclick="applyLiveRotate(90)" class="py-2.5 px-3 rounded-xl bg-slate-900 hover:bg-indigo-600 text-white text-xs font-bold border border-slate-700 transition">
-                                ↻ 90° Clockwise
-                            </button>
-                            <button type="button" onclick="applyLiveRotate(-90)" class="py-2.5 px-3 rounded-xl bg-slate-900 hover:bg-indigo-600 text-white text-xs font-bold border border-slate-700 transition">
-                                ↺ 90° Anti-Clock
-                            </button>
-                            <button type="button" onclick="applyLiveFlip('horizontal')" id="flip-h-btn" class="py-2.5 px-3 rounded-xl bg-slate-900 hover:bg-indigo-600 text-white text-xs font-bold border border-slate-700 transition">
-                                ⇄ Flip Horizontal
-                            </button>
-                            <button type="button" onclick="applyLiveFlip('vertical')" id="flip-v-btn" class="py-2.5 px-3 rounded-xl bg-slate-900 hover:bg-indigo-600 text-white text-xs font-bold border border-slate-700 transition">
-                                ⇅ Flip Vertical
-                            </button>
-                        </div>
-                        <input type="hidden" id="rotate-angle" value="0">
-                        <input type="hidden" id="flip-mode" value="none">
-                    </div>
                 </div>
 
                 <button id="action-btn" class="w-full mt-6 py-4 px-6 rounded-2xl bg-gradient-to-r from-indigo-600 via-indigo-500 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-extrabold text-base shadow-lg shadow-indigo-500/25 transition active:scale-[0.99] flex items-center justify-center gap-3">
@@ -371,7 +348,7 @@
         </div>
     </main>
 
-    <!-- 6. ALL 7 TOOLS CATALOG -->
+    <!-- ALL TOOLS CATALOG -->
     <section class="max-w-5xl mx-auto w-full px-4 mb-20 mt-8" id="all-tools-grid">
         <div class="text-center mb-10">
             <span class="text-xs font-extrabold uppercase tracking-widest text-indigo-400 bg-indigo-500/10 px-3 py-1 rounded-full border border-indigo-500/20">All-In-One Hub</span>
@@ -415,145 +392,42 @@
                 <h3 class="text-lg font-bold text-white group-hover:text-pink-400 transition">Batch Format Converter</h3>
                 <p class="text-xs text-slate-400 mt-2 leading-relaxed">Convert images to JPG, PNG, WEBP, AVIF, and 0.3s Instant PDF!</p>
             </div>
-
-            <div onclick="switchTool('rotate'); window.scrollTo({top: 0, behavior: 'smooth'});" class="bg-slate-900/80 hover:bg-slate-900 border border-slate-800 hover:border-cyan-500/50 p-6 rounded-2xl transition cursor-pointer group shadow-lg">
-                <div class="w-12 h-12 rounded-xl bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition">🔁</div>
-                <h3 class="text-lg font-bold text-white group-hover:text-cyan-400 transition">Rotate & Flip</h3>
-                <p class="text-xs text-slate-400 mt-2 leading-relaxed">Flip horizontal mirror, vertical flip, or rotate 90 degrees instantly.</p>
-            </div>
         </div>
     </section>
 
-    <!-- 7. HOW IT WORKS -->
+    <!-- HOW IT WORKS & FAQS -->
     <section class="bg-slate-900/50 border-t border-slate-800 py-16 px-4" id="how-it-works">
-        <div class="max-w-5xl mx-auto">
-            <div class="text-center mb-12">
-                <h2 class="text-2xl sm:text-3xl font-extrabold text-white">How SmartPicTools Works in 3 Steps</h2>
-                <p class="text-slate-400 text-sm mt-2">Zero complex software. No watermarks. 100% automated.</p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="bg-slate-900 p-6 rounded-2xl border border-slate-800">
-                    <div class="w-8 h-8 rounded-full bg-indigo-600 text-white font-extrabold text-sm flex items-center justify-center mb-4">1</div>
-                    <h3 class="font-bold text-white text-base">Select or Drop</h3>
-                    <p class="text-xs text-slate-400 mt-2 leading-relaxed">Choose files from computer or phone. Supports JPG, PNG, WEBP, AVIF, HEIC.</p>
-                </div>
-                <div class="bg-slate-900 p-6 rounded-2xl border border-slate-800">
-                    <div class="w-8 h-8 rounded-full bg-indigo-600 text-white font-extrabold text-sm flex items-center justify-center mb-4">2</div>
-                    <h3 class="font-bold text-white text-base">Fine-Tune Settings</h3>
-                    <p class="text-xs text-slate-400 mt-2 leading-relaxed">Enter target KB, choose ratio presets, see live watermark or rotate with instant feedback.</p>
-                </div>
-                <div class="bg-slate-900 p-6 rounded-2xl border border-slate-800">
-                    <div class="w-8 h-8 rounded-full bg-indigo-600 text-white font-extrabold text-sm flex items-center justify-center mb-4">3</div>
-                    <h3 class="font-bold text-white text-base">Instant Download</h3>
-                    <p class="text-xs text-slate-400 mt-2 leading-relaxed">Ultra-fast in-browser rendering processes and saves directly to device in 0.3s.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 8. FAQS -->
-    <section class="max-w-4xl mx-auto w-full px-4 py-16" id="faq">
-        <div class="text-center mb-10">
-            <h2 class="text-2xl sm:text-3xl font-extrabold text-white">Frequently Asked Questions</h2>
-            <p class="text-slate-400 text-sm mt-2">Everything you need to know about SmartPicTools features and security.</p>
-        </div>
-
-        <div class="space-y-4 text-sm">
-            <details class="group bg-slate-900 p-5 rounded-2xl border border-slate-800 cursor-pointer">
-                <summary class="font-bold text-white flex justify-between items-center">
-                    Is SmartPicTools really 100% free with unlimited usage?
-                    <span class="text-indigo-400 group-open:rotate-180 transition">▼</span>
-                </summary>
-                <p class="text-slate-400 mt-3 leading-relaxed">Yes! SmartPicTools is completely free to use for both personal and commercial projects. There are no hidden subscription fees, watermark restrictions, or daily upload caps.</p>
-            </details>
-
-            <details class="group bg-slate-900 p-5 rounded-2xl border border-slate-800 cursor-pointer">
-                <summary class="font-bold text-white flex justify-between items-center">
-                    How does exact KB/MB target compression work?
-                    <span class="text-indigo-400 group-open:rotate-180 transition">▼</span>
-                </summary>
-                <p class="text-slate-400 mt-3 leading-relaxed">Our smart direct algorithm matches your exact requested KB or MB value while maintaining maximum visual sharpness in under 1 second.</p>
-            </details>
-
-            <details class="group bg-slate-900 p-5 rounded-2xl border border-slate-800 cursor-pointer">
-                <summary class="font-bold text-white flex justify-between items-center">
-                    Are my uploaded images safe and private?
-                    <span class="text-indigo-400 group-open:rotate-180 transition">▼</span>
-                </summary>
-                <p class="text-slate-400 mt-3 leading-relaxed">100%. Processing happens directly on your device without leaving your browser for most tools. Files are never stored, indexed, or shared.</p>
-            </details>
+        <div class="max-w-5xl mx-auto text-center">
+            <h2 class="text-2xl sm:text-3xl font-extrabold text-white mb-6">How SmartPicTools Works</h2>
+            <p class="text-slate-400 text-sm max-w-xl mx-auto">Lightning-fast browser processing ensures zero wait time and 100% privacy.</p>
         </div>
     </section>
 
     <!-- FOOTER -->
-    <footer class="border-t border-slate-800 bg-slate-950 py-10 px-4 text-xs text-slate-400">
-        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
-            <p>© 2026 SmartPicTools. All rights reserved.</p>
-            <div class="flex flex-wrap justify-center gap-6 font-semibold">
-                <a href="/about" class="hover:text-indigo-400 transition">About Us</a>
-                <a href="/privacy" class="hover:text-indigo-400 transition">Privacy Policy</a>
-                <a href="/terms" class="hover:text-indigo-400 transition">Terms of Service</a>
-                <a href="/contact" class="hover:text-indigo-400 transition">Contact Us</a>
-            </div>
-        </div>
+    <footer class="border-t border-slate-800 bg-slate-950 py-10 px-4 text-xs text-slate-400 text-center">
+        <p>© 2026 SmartPicTools. All rights reserved.</p>
     </footer>
 
     <!-- FEEDBACK MODAL -->
     <div id="feedback-modal" class="hidden fixed inset-0 z-50 bg-black/70 backdrop-blur-md flex items-center justify-center p-4">
         <div class="bg-slate-900 border border-slate-800 rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-2xl relative">
             <button onclick="closeFeedbackModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-lg font-bold">✕</button>
-            <div class="flex items-center gap-2 mb-2">
-                <span class="text-2xl">💡</span>
-                <h3 class="text-lg font-black text-white">Suggestions & Feedback</h3>
-            </div>
-            <p class="text-xs text-slate-400 mb-6">Tell us what new tools or improvements you want to see!</p>
-
+            <h3 class="text-lg font-black text-white mb-4">Suggestions & Feedback</h3>
             <form id="feedback-form" class="space-y-4">
-                <div>
-                    <label class="block text-xs font-bold text-slate-400 mb-1">Feedback Category</label>
-                    <select id="fb-category" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-indigo-500 font-semibold">
-                        <option value="New Tool Request">New Tool Request</option>
-                        <option value="Improve Existing Tool">Improve Existing Tool</option>
-                        <option value="Report Bug/Issue">Report a Bug / Issue</option>
-                        <option value="General Suggestion">General Suggestion</option>
-                    </select>
-                </div>
-
-                <div>
-                    <label class="block text-xs font-bold text-slate-400 mb-1">Your Suggestion / Message</label>
-                    <textarea id="fb-message" rows="3" required placeholder="What tool or feature do you need?" class="w-full bg-slate-950 border border-slate-700 rounded-xl p-3 text-xs text-white focus:outline-none focus:border-indigo-500"></textarea>
-                </div>
-
-                <div>
-                    <label class="block text-xs font-bold text-slate-400 mb-1">Email Address (Optional)</label>
-                    <input type="email" id="fb-email" placeholder="In case you want a reply" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-indigo-500">
-                </div>
-
-                <button type="submit" id="fb-submit-btn" class="w-full py-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 active:scale-95 text-white font-bold text-xs shadow-lg shadow-indigo-600/30 transition">
-                    Send Suggestion
-                </button>
+                <textarea id="fb-message" rows="3" required placeholder="What tool or feature do you need?" class="w-full bg-slate-950 border border-slate-700 rounded-xl p-3 text-xs text-white focus:outline-none focus:border-indigo-500"></textarea>
+                <button type="submit" class="w-full py-3 rounded-xl bg-indigo-600 text-white font-bold text-xs">Send Suggestion</button>
             </form>
-
-            <div id="fb-success" class="hidden mt-4 p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs text-center font-bold">
-                🎉 Thank you! Your feedback has been saved!
-            </div>
+            <div id="fb-success" class="hidden mt-4 text-emerald-400 text-xs text-center font-bold">🎉 Thank you! Saved successfully.</div>
         </div>
     </div>
 
-    <!-- ========================================== -->
-    <!-- ⚡ INSTANT IN-BROWSER ENGINE JAVASCRIPT -->
-    <!-- ========================================== -->
+    <!-- SCRIPT LOGIC -->
     <script>
         let currentTool = 'compress';
         let compressMode = 'target';
         let watermarkMode = 'single';
         let uploadedFiles = [];
         let cropper = null;
-        
-        let currentRotation = 0;
-        let isFlippedH = false;
-        let isFlippedV = false;
 
         let naturalImgWidth = 0;
         let naturalImgHeight = 0;
@@ -564,8 +438,7 @@
             crop: { title: "Crop Image with Templates", desc: "Crop visually with custom ratios for Instagram, YouTube, and Shorts.", btn: "✂️ Instant Crop & Download" },
             resize: { title: "Resize Dimensions with Live Transform", desc: "Watch live preview stretch or shrink with instant aspect ratio calculations.", btn: "📐 Instant Resize & Download" },
             convert: { title: "Batch Format Converter", desc: "Convert images to JPG, PNG, WEBP, or instant 0.3s PDF!", btn: "🔄 Instant Convert & Download" },
-            watermark: { title: "Pro Watermark Studio", desc: "Stamp copyright text in corner or repeat diagonal security grid with live preview.", btn: "🏷️ Instant Watermark & Download" },
-            rotate: { title: "Rotate & Flip Image", desc: "Rotate orientation clockwise, anti-clockwise or flip horizontal / vertical.", btn: "🔁 Instant Process & Download" }
+            watermark: { title: "Pro Watermark Studio", desc: "Stamp copyright text in corner or repeat diagonal security grid with live preview.", btn: "🏷️ Instant Watermark & Download" }
         };
 
         function resetWorkspace() {
@@ -580,16 +453,8 @@
             document.getElementById('image-preview').classList.remove('hidden');
             document.getElementById('action-btn').disabled = false;
             
-            if (cropper) {
-                cropper.destroy();
-                cropper = null;
-            }
-            
-            currentRotation = 0;
-            isFlippedH = false;
-            isFlippedV = false;
+            if (cropper) { cropper.destroy(); cropper = null; }
             resetResizePreviewStyle();
-
             document.getElementById('live-wm-single').classList.add('hidden');
             document.getElementById('live-wm-grid').classList.add('hidden');
         }
@@ -611,12 +476,17 @@
             document.getElementById('btn-text').innerText = toolConfig[tool].btn;
 
             document.querySelectorAll('.tool-ctrl').forEach(ctrl => ctrl.classList.add('hidden'));
-            document.getElementById('ctrl-' + tool).classList.remove('hidden');
+            
+            // Fix control switching bug: match exact tool ID
+            const activeCtrl = document.getElementById('ctrl-' + tool);
+            if (activeCtrl) {
+                activeCtrl.classList.remove('hidden');
+            }
 
             const fileInput = document.getElementById('image-upload');
             if (tool === 'convert') {
                 fileInput.setAttribute('multiple', 'multiple');
-                document.getElementById('upload-subtext').innerText = "Select up to 10 images (Supports iPhone HEIC, AVIF, JPG, PNG) - Max: 50MB";
+                document.getElementById('upload-subtext').innerText = "Select up to 10 images for conversion - Max: 50MB";
             } else {
                 fileInput.removeAttribute('multiple');
                 document.getElementById('upload-subtext').innerText = "Supports JPG, PNG, WEBP, AVIF, iPhone HEIC (Max: 50MB)";
@@ -641,19 +511,13 @@
                     wInput.value = w;
                 }
             }
-
             updateResizeLiveVisual(w, h);
         }
 
         function updateResizeLiveVisual(targetW, targetH) {
-            if (currentTool !== 'resize' || targetW <= 0 || targetH <= 0 || naturalImgWidth <= 0 || naturalImgHeight <= 0) return;
-            
-            const badgeContainer = document.getElementById('resize-badge-container');
-            const badge = document.getElementById('resize-live-badge');
-            const scalePctW = Math.round((targetW / naturalImgWidth) * 100);
-            
-            badgeContainer.classList.remove('hidden');
-            badge.innerText = `📐 Live Scale: ${targetW} × ${targetH} px (${scalePctW}%)`;
+            if (currentTool !== 'resize' || targetW <= 0 || targetH <= 0 || naturalImgWidth <= 0) return;
+            document.getElementById('resize-badge-container').classList.remove('hidden');
+            document.getElementById('resize-live-badge').innerText = `📐 Live Scale: ${targetW} × ${targetH} px`;
 
             const img = document.getElementById('image-preview');
             img.style.aspectRatio = `${targetW} / ${targetH}`;
@@ -668,14 +532,14 @@
         }
 
         function resetToOriginalDimensions() {
-            if (naturalImgWidth > 0 && naturalImgHeight > 0) {
+            if (naturalImgWidth > 0) {
                 document.getElementById('resize-width').value = naturalImgWidth;
                 document.getElementById('resize-height').value = naturalImgHeight;
                 updateResizeLiveVisual(naturalImgWidth, naturalImgHeight);
             }
         }
 
-        // COMPRESS
+        // COMPRESS MODES
         function setCompressMode(mode) {
             compressMode = mode;
             if (mode === 'target') {
@@ -683,74 +547,25 @@
                 document.getElementById('mode-slider-btn').className = "flex-1 py-1.5 px-3 rounded-lg text-xs font-bold text-slate-400 hover:text-white transition";
                 document.getElementById('target-box').classList.remove('hidden');
                 document.getElementById('slider-box').classList.add('hidden');
-                validateTargetSize();
             } else {
                 document.getElementById('mode-slider-btn').className = "flex-1 py-1.5 px-3 rounded-lg text-xs font-bold bg-indigo-600 text-white transition";
                 document.getElementById('mode-target-btn').className = "flex-1 py-1.5 px-3 rounded-lg text-xs font-bold text-slate-400 hover:text-white transition";
                 document.getElementById('slider-box').classList.remove('hidden');
                 document.getElementById('target-box').classList.add('hidden');
-                document.getElementById('action-btn').disabled = false;
             }
         }
-
-        function validateTargetSize() {
-            if (uploadedFiles.length === 0 || compressMode !== 'target' || currentTool !== 'compress') {
-                document.getElementById('action-btn').disabled = false;
-                return;
-            }
-            
-            const origBytes = uploadedFiles[0].size;
-            const targetVal = parseFloat(document.getElementById('target-val').value);
-            const unit = document.getElementById('target-unit').value;
-            const guidance = document.getElementById('target-guidance');
-            const btn = document.getElementById('action-btn');
-
-            if (!targetVal || targetVal <= 0) {
-                guidance.innerHTML = `<span class="text-amber-400">⚠️ Please enter a target size value (e.g. 500 KB).</span>`;
-                btn.disabled = true;
-                return;
-            }
-
-            const targetBytes = unit === 'mb' ? targetVal * 1024 * 1024 : targetVal * 1024;
-            const origReadable = (origBytes / (1024 * 1024)).toFixed(2) + ' MB';
-
-            if (targetBytes >= origBytes) {
-                guidance.innerHTML = `<span class="text-rose-400">⚠️ Target size cannot be larger than the original image (${origReadable}). Enter a smaller value to compress.</span>`;
-                btn.disabled = true;
-            } else {
-                guidance.innerHTML = `<span class="text-emerald-400 font-bold">✓ Valid target! We'll compress your image to approximately ${targetVal} ${unit.toUpperCase()}.</span>`;
-                btn.disabled = false;
-            }
-        }
-
-        document.getElementById('target-val').addEventListener('input', validateTargetSize);
-        document.getElementById('target-unit').addEventListener('change', validateTargetSize);
-        document.getElementById('quality-slider').addEventListener('input', (e) => {
-            document.getElementById('quality-display').innerText = e.target.value + '%';
-        });
 
         // WATERMARK LIVE PREVIEW
         function setWatermarkMode(m) {
             watermarkMode = m;
-            const singleBtn = document.getElementById('wm-single-btn');
-            const repeatBtn = document.getElementById('wm-repeat-btn');
-            const posContainer = document.getElementById('wm-pos-container');
-
-            if (m === 'single') {
-                singleBtn.className = "py-2.5 px-3 rounded-xl bg-indigo-600 text-white text-xs font-bold transition";
-                repeatBtn.className = "py-2.5 px-3 rounded-xl bg-slate-900 text-slate-300 hover:text-white text-xs font-bold border border-slate-700 transition";
-                posContainer.classList.remove('hidden');
-            } else {
-                repeatBtn.className = "py-2.5 px-3 rounded-xl bg-indigo-600 text-white text-xs font-bold transition";
-                singleBtn.className = "py-2.5 px-3 rounded-xl bg-slate-900 text-slate-300 hover:text-white text-xs font-bold border border-slate-700 transition";
-                posContainer.classList.add('hidden');
-            }
+            document.getElementById('wm-single-btn').className = m === 'single' ? "py-2.5 px-3 rounded-xl bg-indigo-600 text-white text-xs font-bold transition" : "py-2.5 px-3 rounded-xl bg-slate-900 text-slate-300 text-xs font-bold border border-slate-700 transition";
+            document.getElementById('wm-repeat-btn').className = m === 'repeat' ? "py-2.5 px-3 rounded-xl bg-indigo-600 text-white text-xs font-bold transition" : "py-2.5 px-3 rounded-xl bg-slate-900 text-slate-300 text-xs font-bold border border-slate-700 transition";
+            document.getElementById('wm-pos-container').style.display = m === 'single' ? 'block' : 'none';
             updateLiveWatermarkPreview();
         }
 
         function updateLiveWatermarkPreview() {
             if (currentTool !== 'watermark' || uploadedFiles.length === 0) return;
-
             const text = document.getElementById('watermark-text').value || '© SmartPicTools';
             const color = document.getElementById('watermark-color').value;
             const size = document.getElementById('watermark-size').value;
@@ -761,38 +576,21 @@
             const singleEl = document.getElementById('live-wm-single');
             const gridEl = document.getElementById('live-wm-grid');
             const patternEl = document.getElementById('live-wm-pattern');
-
-            const colorHex = {
-                white: '#ffffff',
-                black: '#000000',
-                gold: '#fbbf24',
-                red: '#ef4444',
-                cyan: '#06b6d4'
-            }[color] || '#ffffff';
+            const colorHex = { white: '#ffffff', black: '#000000', gold: '#fbbf24', red: '#ef4444', cyan: '#06b6d4' }[color] || '#ffffff';
 
             if (watermarkMode === 'single') {
                 gridEl.classList.add('hidden');
                 singleEl.classList.remove('hidden');
-
                 singleEl.innerText = text;
                 singleEl.style.color = colorHex;
                 singleEl.style.opacity = opacityPct;
                 singleEl.style.fontSize = Math.max(14, Math.round(size * 0.6)) + 'px';
-
-                singleEl.className = "absolute pointer-events-none font-bold tracking-wider px-3 py-1.5 transition-all shadow-sm";
-                const pos = document.getElementById('watermark-pos').value;
-                if (pos === 'center') singleEl.classList.add('top-1/2', 'left-1/2', '-translate-x-1/2', '-translate-y-1/2');
-                else if (pos === 'top-left') singleEl.classList.add('top-3', 'left-3');
-                else if (pos === 'top-right') singleEl.classList.add('top-3', 'right-3');
-                else if (pos === 'bottom-left') singleEl.classList.add('bottom-3', 'left-3');
-                else singleEl.classList.add('bottom-3', 'right-3');
-
+                singleEl.className = "absolute pointer-events-none font-bold tracking-wider px-3 py-1.5 transition-all shadow-sm bottom-3 right-3";
             } else {
                 singleEl.classList.add('hidden');
                 gridEl.classList.remove('hidden');
-
                 patternEl.innerHTML = '';
-                for (let i = 0; i < 48; i++) {
+                for (let i = 0; i < 36; i++) {
                     const span = document.createElement('span');
                     span.innerText = text;
                     span.style.color = colorHex;
@@ -803,38 +601,7 @@
             }
         }
 
-        // ROTATE & FLIP
-        function applyLiveRotate(deg) {
-            currentRotation = (currentRotation + deg) % 360;
-            if (currentRotation < 0) currentRotation += 360;
-            updateOrientationTransform();
-        }
-
-        function applyLiveFlip(mode) {
-            if (mode === 'horizontal') isFlippedH = !isFlippedH;
-            if (mode === 'vertical') isFlippedV = !isFlippedV;
-            updateOrientationTransform();
-        }
-
-        function updateOrientationTransform() {
-            const scaleX = isFlippedH ? -1 : 1;
-            const scaleY = isFlippedV ? -1 : 1;
-            document.getElementById('image-preview').style.transform = `rotate(${currentRotation}deg) scale(${scaleX}, ${scaleY})`;
-            document.getElementById('rotate-angle').value = currentRotation;
-
-            let flipVal = 'none';
-            if (isFlippedH && isFlippedV) flipVal = 'both';
-            else if (isFlippedH) flipVal = 'horizontal';
-            else if (isFlippedV) flipVal = 'vertical';
-            document.getElementById('flip-mode').value = flipVal;
-
-            const hBtn = document.getElementById('flip-h-btn');
-            const vBtn = document.getElementById('flip-v-btn');
-            hBtn.className = isFlippedH ? "py-2.5 px-3 rounded-xl bg-indigo-600 text-white text-xs font-bold border border-indigo-500 transition" : "py-2.5 px-3 rounded-xl bg-slate-900 hover:bg-indigo-600 text-white text-xs font-bold border border-slate-700 transition";
-            vBtn.className = isFlippedV ? "py-2.5 px-3 rounded-xl bg-indigo-600 text-white text-xs font-bold border border-indigo-500 transition" : "py-2.5 px-3 rounded-xl bg-slate-900 hover:bg-indigo-600 text-white text-xs font-bold border border-slate-700 transition";
-        }
-
-        // DRAG & DROP
+        // DRAG & DROP & FILES
         const dropArea = document.getElementById('drop-area');
         const fileInput = document.getElementById('image-upload');
 
@@ -843,431 +610,169 @@
             dropArea.addEventListener(eventName, (e) => { e.preventDefault(); e.stopPropagation(); }, false);
         });
 
-        ['dragenter', 'dragover'].forEach(eventName => {
-            dropArea.addEventListener(eventName, () => dropArea.classList.add('border-indigo-500', 'bg-indigo-950/40'), false);
-        });
-
-        ['dragleave', 'drop'].forEach(eventName => {
-            dropArea.addEventListener(eventName, () => dropArea.classList.remove('border-indigo-500', 'bg-indigo-950/40'), false);
-        });
-
-        dropArea.addEventListener('drop', (e) => {
-            const dt = e.dataTransfer;
-            const files = dt.files;
-            if (files && files.length > 0) handleFiles(files);
-        });
-
+        dropArea.addEventListener('drop', (e) => { if (e.dataTransfer.files.length > 0) handleFiles(e.dataTransfer.files); });
         dropArea.addEventListener('click', () => fileInput.click());
-        fileInput.addEventListener('change', (e) => {
-            if (e.target.files && e.target.files.length > 0) handleFiles(e.target.files);
-        });
+        fileInput.addEventListener('change', (e) => { if (e.target.files.length > 0) handleFiles(e.target.files); });
 
         function handleFiles(files) {
             uploadedFiles = Array.from(files).slice(0, 10);
             if (uploadedFiles.length === 0) return;
 
             document.getElementById('action-btn').disabled = false;
-
             if (currentTool === 'convert' && uploadedFiles.length > 1) {
                 renderMultiGallery();
             } else {
                 renderSinglePreview(uploadedFiles[0]);
             }
-
             document.getElementById('settings-panel').classList.remove('hidden');
             document.getElementById('drop-area').classList.add('hidden');
-            document.getElementById('status-box').classList.add('hidden');
         }
 
         function renderSinglePreview(file) {
             document.getElementById('single-preview-box').classList.remove('hidden');
-            document.getElementById('multi-preview-box').classList.add('hidden');
             document.getElementById('file-name').innerText = file.name;
             document.getElementById('file-size').innerText = (file.size / 1024).toFixed(1) + ' KB';
 
-            const isHeic = file.name.toLowerCase().endsWith('.heic') || file.name.toLowerCase().endsWith('.heif');
-            
-            if (isHeic) {
-                document.getElementById('image-preview').classList.add('hidden');
-                document.getElementById('heic-preview-card').classList.remove('hidden');
-                naturalImgWidth = 1920;
-                naturalImgHeight = 1080;
-                originalAspectRatio = 1920 / 1080;
-                document.getElementById('resize-width').value = 1920;
-                document.getElementById('resize-height').value = 1080;
-            } else {
-                document.getElementById('image-preview').classList.remove('hidden');
-                document.getElementById('heic-preview-card').classList.add('hidden');
-
-                const reader = new FileReader();
-                reader.onload = function(event) {
-                    const img = document.getElementById('image-preview');
-                    img.src = event.target.result;
-                    img.onload = function() {
-                        naturalImgWidth = img.naturalWidth || 1920;
-                        naturalImgHeight = img.naturalHeight || 1080;
-                        originalAspectRatio = naturalImgWidth / naturalImgHeight;
-
-                        document.getElementById('resize-width').value = naturalImgWidth;
-                        document.getElementById('resize-height').value = naturalImgHeight;
-
-                        if (currentTool === 'resize') {
-                            updateResizeLiveVisual(naturalImgWidth, naturalImgHeight);
-                        }
-                        if (currentTool === 'crop') initCropper();
-                        if (currentTool === 'watermark') updateLiveWatermarkPreview();
-                    };
-                    if (currentTool === 'compress') validateTargetSize();
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                const img = document.getElementById('image-preview');
+                img.src = event.target.result;
+                img.onload = function() {
+                    naturalImgWidth = img.naturalWidth || 1920;
+                    naturalImgHeight = img.naturalHeight || 1080;
+                    originalAspectRatio = naturalImgWidth / naturalImgHeight;
+                    document.getElementById('resize-width').value = naturalImgWidth;
+                    document.getElementById('resize-height').value = naturalImgHeight;
+                    if (currentTool === 'resize') updateResizeLiveVisual(naturalImgWidth, naturalImgHeight);
+                    if (currentTool === 'crop') initCropper();
+                    if (currentTool === 'watermark') updateLiveWatermarkPreview();
                 };
-                reader.readAsDataURL(file);
-            }
+            };
+            reader.readAsDataURL(file);
         }
 
         function renderMultiGallery() {
             document.getElementById('single-preview-box').classList.add('hidden');
             document.getElementById('multi-preview-box').classList.remove('hidden');
             document.getElementById('multi-count').innerText = uploadedFiles.length;
-
             const grid = document.getElementById('multi-grid');
             grid.innerHTML = '';
-
             uploadedFiles.forEach((file, index) => {
                 const card = document.createElement('div');
-                card.className = "relative bg-slate-900 p-2 rounded-xl border border-slate-800 text-center group";
-                
-                const deleteBtn = document.createElement('button');
-                deleteBtn.type = "button";
-                deleteBtn.className = "absolute top-1 right-1 w-6 h-6 rounded-full bg-rose-600 hover:bg-rose-500 text-white text-xs font-black flex items-center justify-center shadow-lg transition z-10";
-                deleteBtn.innerHTML = "✕";
-                deleteBtn.onclick = () => removeFile(index);
-
-                const thumb = document.createElement('img');
-                thumb.className = "w-full h-20 object-cover rounded-lg mb-1.5";
-                
-                const isHeic = file.name.toLowerCase().endsWith('.heic') || file.name.toLowerCase().endsWith('.heif');
-                if (isHeic) {
-                    thumb.src = "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%231e293b'/><text x='50%' y='55%' dominant-baseline='central' text-anchor='middle' font-size='40'>📱</text></svg>";
-                } else {
-                    const reader = new FileReader();
-                    reader.onload = (e) => thumb.src = e.target.result;
-                    reader.readAsDataURL(file);
-                }
-
-                const nameText = document.createElement('p');
-                nameText.className = "text-[11px] font-bold text-white truncate";
-                nameText.innerText = file.name;
-
-                const sizeText = document.createElement('p');
-                sizeText.className = "text-[10px] text-slate-400";
-                sizeText.innerText = (file.size / 1024).toFixed(1) + ' KB';
-
-                card.appendChild(deleteBtn);
-                card.appendChild(thumb);
-                card.appendChild(nameText);
-                card.appendChild(sizeText);
+                card.className = "relative bg-slate-900 p-2 rounded-xl border border-slate-800 text-center";
+                card.innerHTML = `<button type="button" onclick="removeFile(${index})" class="absolute top-1 right-1 w-6 h-6 rounded-full bg-rose-600 text-white text-xs font-black">✕</button><p class="text-[11px] font-bold text-white truncate mt-2">${file.name}</p>`;
                 grid.appendChild(card);
             });
         }
 
         function removeFile(index) {
             uploadedFiles.splice(index, 1);
-            if (uploadedFiles.length === 0) {
-                resetWorkspace();
-            } else if (uploadedFiles.length === 1) {
-                renderSinglePreview(uploadedFiles[0]);
-            } else {
-                renderMultiGallery();
-            }
+            if (uploadedFiles.length === 0) resetWorkspace();
+            else renderMultiGallery();
         }
 
-        // CROPPER
         function initCropper() {
-            const imgElement = document.getElementById('image-preview');
             if (cropper) cropper.destroy();
-            cropper = new Cropper(imgElement, {
-                aspectRatio: NaN,
-                viewMode: 1,
-                autoCropArea: 0.9,
-                responsive: true
-            });
+            cropper = new Cropper(document.getElementById('image-preview'), { aspectRatio: NaN, viewMode: 1 });
         }
 
         function setCropRatio(ratio) {
             if (cropper) cropper.setAspectRatio(ratio);
-            const eventTarget = event.currentTarget;
-            document.querySelectorAll('.ratio-btn').forEach(b => {
-                b.className = "ratio-btn py-2.5 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 text-xs font-bold transition";
-            });
-            eventTarget.className = "ratio-btn py-2.5 px-3 rounded-xl bg-indigo-600 text-white text-xs font-bold transition";
         }
 
-        // ==========================================
-        // 🚀 CLIENT-SIDE 1-SECOND TURBO PROCESSOR
-        // ==========================================
-        function triggerDownload(blobOrUrl, downloadName) {
-            const a = document.createElement('a');
-            if (typeof blobOrUrl === 'string') {
-                a.href = blobOrUrl;
-            } else {
-                a.href = URL.createObjectURL(blobOrUrl);
-            }
-            a.download = downloadName;
-            document.body.appendChild(a);
-            a.click();
-            a.remove();
-            document.getElementById('status-box').classList.remove('hidden');
-        }
-
+        // INSTANT IN-BROWSER ACTION
         document.getElementById('action-btn').addEventListener('click', async function() {
             if (uploadedFiles.length === 0) return;
-
             const btn = document.getElementById('action-btn');
-            const file = uploadedFiles[0];
-            let rawName = file.name.substring(0, file.name.lastIndexOf('.')) || file.name;
-            const isHeic = file.name.toLowerCase().endsWith('.heic') || file.name.toLowerCase().endsWith('.heif');
-
-            // ⚠️ If HEIC or Batch Convert (multiple files), use Server Fallback
-            if (isHeic || (currentTool === 'convert' && uploadedFiles.length > 1)) {
-                serverFallbackProcess();
-                return;
-            }
-
             btn.disabled = true;
-            btn.innerHTML = "<span>⚡ Processing (0.2s)...</span>";
-
-            const img = document.getElementById('image-preview');
+            btn.innerText = "⚡ Instant Processing (0.2s)...";
 
             try {
-                // ==========================================
-                // 1. CONVERT TO PDF (0.3s IN BROWSER!)
-                // ==========================================
+                const file = uploadedFiles[0];
+                let rawName = file.name.substring(0, file.name.lastIndexOf('.')) || file.name;
+                const img = document.getElementById('image-preview');
+
+                // PDF CONVERT
                 if (currentTool === 'convert' && document.getElementById('convert-format').value === 'PDF') {
                     const { jsPDF } = window.jspdf;
-                    const pdf = new jsPDF({
-                        orientation: img.naturalWidth > img.naturalHeight ? 'l' : 'p',
-                        unit: 'px',
-                        format: [img.naturalWidth, img.naturalHeight]
-                    });
-                    
+                    const pdf = new jsPDF({ orientation: img.naturalWidth > img.naturalHeight ? 'l' : 'p', unit: 'px', format: [img.naturalWidth, img.naturalHeight] });
                     const canvas = document.createElement('canvas');
-                    canvas.width = img.naturalWidth;
-                    canvas.height = img.naturalHeight;
-                    const ctx = canvas.getContext('2d');
-                    ctx.drawImage(img, 0, 0);
-                    
+                    canvas.width = img.naturalWidth; canvas.height = img.naturalHeight;
+                    canvas.getContext('2d').drawImage(img, 0, 0);
                     pdf.addImage(canvas.toDataURL('image/jpeg', 0.95), 'JPEG', 0, 0, img.naturalWidth, img.naturalHeight);
-                    pdf.save(`smartpic_converted_${rawName}.pdf`);
+                    pdf.save(`smartpic_${rawName}.pdf`);
                     document.getElementById('status-box').classList.remove('hidden');
                     return;
                 }
 
-                // ==========================================
-                // 2. CROP TOOL (0.1s INSTANT CANVAS)
-                // ==========================================
+                // CROP TOOL
                 if (currentTool === 'crop' && cropper) {
-                    cropper.getCroppedCanvas().toBlob(function(blob) {
-                        triggerDownload(blob, `smartpic_cropped_${rawName}.jpg`);
-                    }, 'image/jpeg', 0.92);
+                    cropper.getCroppedCanvas().toBlob(blob => triggerDownload(blob, `smartpic_cropped_${rawName}.jpg`), 'image/jpeg', 0.92);
                     return;
                 }
 
-                // ==========================================
-                // 3. CANVAS FOR RESIZE, WATERMARK, ROTATE, COMPRESS, CONVERT
-                // ==========================================
+                // STANDARD CANVAS TRANSFORM (COMPRESS, RESIZE, WATERMARK, ROTATE, CONVERT)
                 const canvas = document.createElement('canvas');
                 const ctx = canvas.getContext('2d');
-
-                let targetW = img.naturalWidth;
-                let targetH = img.naturalHeight;
+                let targetW = naturalImgWidth;
+                let targetH = naturalImgHeight;
 
                 if (currentTool === 'resize') {
-                    targetW = parseInt(document.getElementById('resize-width').value) || img.naturalWidth;
-                    targetH = parseInt(document.getElementById('resize-height').value) || img.naturalHeight;
+                    targetW = parseInt(document.getElementById('resize-width').value) || naturalImgWidth;
+                    targetH = parseInt(document.getElementById('resize-height').value) || naturalImgHeight;
                 }
 
-                // Apply Orientation Transform
-                if (currentTool === 'rotate' && (currentRotation === 90 || currentRotation === 270)) {
-                    canvas.width = targetH;
-                    canvas.height = targetW;
-                } else {
-                    canvas.width = targetW;
-                    canvas.height = targetH;
-                }
+                canvas.width = targetW; canvas.height = targetH;
+                ctx.drawImage(img, 0, 0, targetW, targetH);
 
-                ctx.save();
-                if (currentTool === 'rotate') {
-                    ctx.translate(canvas.width / 2, canvas.height / 2);
-                    ctx.rotate((currentRotation * Math.PI) / 180);
-                    ctx.scale(isFlippedH ? -1 : 1, isFlippedV ? -1 : 1);
-                    ctx.drawImage(img, -targetW / 2, -targetH / 2, targetW, targetH);
-                } else {
-                    ctx.drawImage(img, 0, 0, targetW, targetH);
-                }
-                ctx.restore();
-
-                // Draw Watermark if on Watermark Tool
+                // Watermark Draw
                 if (currentTool === 'watermark') {
                     const text = document.getElementById('watermark-text').value || '© SmartPicTools';
                     const color = document.getElementById('watermark-color').value;
-                    const size = parseInt(document.getElementById('watermark-size').value) * Math.max(1, targetW / 800);
+                    const size = parseInt(document.getElementById('watermark-size').value) * (targetW / 800);
                     const opacity = document.getElementById('watermark-opacity').value / 255;
-                    
-                    const colorHex = { white: '#ffffff', black: '#000000', gold: '#fbbf24', red: '#ef4444', cyan: '#06b6d4' }[color] || '#ffffff';
-                    
-                    ctx.save();
-                    ctx.font = `bold ${size}px Plus Jakarta Sans, Arial, sans-serif`;
-                    ctx.fillStyle = colorHex;
+                    ctx.font = `bold ${size}px sans-serif`;
+                    ctx.fillStyle = { white: '#fff', black: '#000', gold: '#fbbf24', red: '#ef4444', cyan: '#06b6d4' }[color] || '#fff';
                     ctx.globalAlpha = opacity;
-
-                    if (watermarkMode === 'repeat') {
-                        ctx.translate(canvas.width / 2, canvas.height / 2);
-                        ctx.rotate((-25 * Math.PI) / 180);
-                        const stepX = size * 8;
-                        const stepY = size * 4;
-                        for (let x = -canvas.width * 1.5; x < canvas.width * 1.5; x += stepX) {
-                            for (let y = -canvas.height * 1.5; y < canvas.height * 1.5; y += stepY) {
-                                ctx.fillText(text, x, y);
-                            }
-                        }
-                    } else {
-                        const m = canvas.width * 0.03;
-                        const pos = document.getElementById('watermark-pos').value;
-                        const metrics = ctx.measureText(text);
-                        let x = canvas.width - metrics.width - m;
-                        let y = canvas.height - m;
-                        if (pos === 'center') { x = (canvas.width - metrics.width) / 2; y = canvas.height / 2; }
-                        else if (pos === 'top-left') { x = m; y = size + m; }
-                        else if (pos === 'top-right') { x = canvas.width - metrics.width - m; y = size + m; }
-                        else if (pos === 'bottom-left') { x = m; y = canvas.height - m; }
-                        ctx.fillText(text, x, y);
-                    }
-                    ctx.restore();
+                    ctx.fillText(text, targetW - ctx.measureText(text).width - 30, targetH - 30);
                 }
 
-                // Determine Output Format & Quality
-                let mime = 'image/jpeg';
-                let ext = 'jpg';
-                let quality = 0.90;
-
-                if (currentTool === 'compress') {
-                    if (compressMode === 'target') {
-                        const targetVal = parseFloat(document.getElementById('target-val').value);
-                        const unit = document.getElementById('target-unit').value;
-                        const targetBytes = (unit === 'mb' ? targetVal * 1024 * 1024 : targetVal * 1024);
-                        const ratio = targetBytes / Math.max(1, file.size);
-                        quality = Math.min(0.95, Math.max(0.2, ratio * 0.9));
-                    } else {
-                        quality = document.getElementById('quality-slider').value / 100;
-                    }
+                let mime = 'image/jpeg', ext = 'jpg', quality = 0.90;
+                if (currentTool === 'compress' && compressMode === 'target') {
+                    const targetVal = parseFloat(document.getElementById('target-val').value) || 500;
+                    quality = Math.min(0.95, Math.max(0.15, (targetVal * 1024) / file.size));
                 } else if (currentTool === 'convert') {
                     const fmt = document.getElementById('convert-format').value;
                     if (fmt === 'PNG') { mime = 'image/png'; ext = 'png'; }
                     else if (fmt === 'WEBP') { mime = 'image/webp'; ext = 'webp'; quality = 0.85; }
                 }
 
-                // INSTANT 0.1s BLOB & DOWNLOAD
-                canvas.toBlob(function(blob) {
-                    triggerDownload(blob, `smartpic_${currentTool}_${rawName}.${ext}`);
-                }, mime, quality);
+                canvas.toBlob(blob => triggerDownload(blob, `smartpic_${currentTool}_${rawName}.${ext}`), mime, quality);
 
             } catch (err) {
-                console.error(err);
-                serverFallbackProcess();
+                alert('Processing error.');
             } finally {
                 btn.disabled = false;
                 btn.innerText = toolConfig[currentTool].btn;
             }
         });
 
-        // SERVER FALLBACK (ONLY FOR IPHONE HEIC OR BATCH 10 ZIP)
-        async function serverFallbackProcess() {
-            const btn = document.getElementById('action-btn');
-            const formData = new FormData();
-            uploadedFiles.forEach(f => formData.append('image', f));
-            formData.append('tool', currentTool);
-            formData.append('compress_mode', compressMode);
-            formData.append('target_val', document.getElementById('target-val').value);
-            formData.append('target_unit', document.getElementById('target-unit').value);
-            formData.append('quality', document.getElementById('quality-slider').value);
-            formData.append('width', document.getElementById('resize-width').value);
-            formData.append('height', document.getElementById('resize-height').value);
-            formData.append('format', document.getElementById('convert-format').value);
-            formData.append('angle', document.getElementById('rotate-angle').value);
-            formData.append('flip', document.getElementById('flip-mode').value);
-            formData.append('watermark_text', document.getElementById('watermark-text').value);
-            formData.append('watermark_mode', watermarkMode);
-            formData.append('watermark_pos', document.getElementById('watermark-pos').value);
-            formData.append('watermark_color', document.getElementById('watermark-color').value);
-            formData.append('watermark_size', document.getElementById('watermark-size').value);
-            formData.append('watermark_opacity', document.getElementById('watermark-opacity').value);
-
-            try {
-                const response = await fetch('/process', { method: 'POST', body: formData });
-                if (response.ok) {
-                    const blob = await response.blob();
-                    const firstFile = uploadedFiles[0];
-                    let rawName = firstFile.name.substring(0, firstFile.name.lastIndexOf('.')) || firstFile.name;
-                    let targetExt = 'jpg';
-                    if (currentTool === 'convert') targetExt = document.getElementById('convert-format').value.toLowerCase();
-                    triggerDownload(blob, `smartpic_${currentTool}_${rawName}.${targetExt}`);
-                } else {
-                    alert('Processing error.');
-                }
-            } catch(e) {
-                alert('Timeout error. Please try a smaller image.');
-            } finally {
-                btn.disabled = false;
-                btn.innerText = toolConfig[currentTool].btn;
-            }
+        function triggerDownload(blob, filename) {
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url; a.download = filename;
+            document.body.appendChild(a); a.click(); a.remove();
+            document.getElementById('status-box').classList.remove('hidden');
         }
 
-        // FEEDBACK MODAL
-        function openFeedbackModal() {
-            document.getElementById('feedback-modal').classList.remove('hidden');
-        }
-
-        function closeFeedbackModal() {
-            document.getElementById('feedback-modal').classList.add('hidden');
-            document.getElementById('fb-success').classList.add('hidden');
-        }
+        function openFeedbackModal() { document.getElementById('feedback-modal').classList.remove('hidden'); }
+        function closeFeedbackModal() { document.getElementById('feedback-modal').classList.add('hidden'); }
 
         document.getElementById('feedback-form').addEventListener('submit', async function(e) {
             e.preventDefault();
-            const btn = document.getElementById('fb-submit-btn');
-            btn.disabled = true;
-            btn.innerText = 'Saving...';
-
-            const payload = {
-                category: document.getElementById('fb-category').value,
-                message: document.getElementById('fb-message').value,
-                email: document.getElementById('fb-email').value
-            };
-
-            try {
-                const res = await fetch('/submit-feedback', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload)
-                });
-
-                if (res.ok) {
-                    document.getElementById('fb-success').classList.remove('hidden');
-                    document.getElementById('feedback-form').reset();
-                    setTimeout(() => {
-                        closeFeedbackModal();
-                        btn.disabled = false;
-                        btn.innerText = 'Send Suggestion';
-                    }, 2500);
-                } else {
-                    alert('Could not save feedback.');
-                    btn.disabled = false;
-                    btn.innerText = 'Send Suggestion';
-                }
-            } catch (err) {
-                alert('Error submitting feedback.');
-                btn.disabled = false;
-                btn.innerText = 'Send Suggestion';
-            }
+            await fetch('/submit-feedback', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ message: document.getElementById('fb-message').value }) });
+            document.getElementById('fb-success').classList.remove('hidden');
+            setTimeout(closeFeedbackModal, 2000);
         });
     </script>
 </body>
