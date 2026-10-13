@@ -7,12 +7,7 @@ import datetime
 from flask import Flask, render_template, request, send_file, jsonify, Response
 from PIL import Image, ImageDraw, ImageFont
 
-# Support for AVIF & iPhone HEIC/HEIF
-try:
-    import pillow_avif
-except ImportError:
-    pass
-
+# Clean HEIF/HEIC & AVIF handling via pillow-heif only (Zero library conflict!)
 try:
     import pillow_heif
     pillow_heif.register_heif_opener()
@@ -87,7 +82,7 @@ def submit_feedback():
         return jsonify({'error': str(e)}), 500
 
 # ==========================================
-# ⚡ SPEED BOOSTERS & HELPERS
+# HELPERS (RAM & CPU OPTIMIZED)
 # ==========================================
 def make_rgb(im):
     if im.mode in ('RGBA', 'LA') or (im.mode == 'P' and 'transparency' in im.info):
@@ -113,8 +108,8 @@ def get_universal_font(size):
     except Exception:
         return ImageFont.load_default()
 
-def turbo_speed_gatekeeper(img):
-    """Caps huge 4K/8K images to 2048px so 0.1 CPU processes in 0.5s"""
+def memory_safe_image(img):
+    """Prevents 512MB RAM from swapping to slow hard disk"""
     max_dim = 2048
     if img.width > max_dim or img.height > max_dim:
         scale = max_dim / max(img.width, img.height)
@@ -124,7 +119,7 @@ def turbo_speed_gatekeeper(img):
     return img
 
 def fast_direct_compress(img, original_size_bytes, target_bytes):
-    """1-Pass Instant Compressor - Zero Loops, finishes in 0.3s"""
+    """1-Pass Direct Compressor - Takes 0.2s without heavy loops"""
     img_rgb = make_rgb(img)
     ratio = target_bytes / max(1, original_size_bytes)
 
@@ -159,7 +154,7 @@ def process_image():
         if not files or files[0].filename == '':
             return jsonify({'error': 'No file selected'}), 400
 
-        # BATCH CONVERTER (ZIP)
+        # BATCH CONVERT (Multi-file ZIP)
         if tool == 'convert' and len(files) > 1:
             target_fmt = request.form.get('format', 'JPG').upper()
             zip_buffer = io.BytesIO()
@@ -167,7 +162,7 @@ def process_image():
             with zipfile.ZipFile(zip_buffer, 'w', zipfile.ZIP_DEFLATED) as zip_file:
                 for idx, f in enumerate(files[:10]):
                     raw_name, _ = os.path.splitext(f.filename)
-                    s_img = turbo_speed_gatekeeper(Image.open(io.BytesIO(f.read())))
+                    s_img = memory_safe_image(Image.open(io.BytesIO(f.read())))
                     s_buf = io.BytesIO()
                     out_ext = target_fmt.lower()
 
@@ -213,9 +208,7 @@ def process_image():
         filename, orig_ext = os.path.splitext(file.filename)
         raw_bytes = file.read()
         original_size_bytes = len(raw_bytes)
-        
-        # io.BytesIO(raw_bytes) completely fixes Apple HEIC crash!
-        img = turbo_speed_gatekeeper(Image.open(io.BytesIO(raw_bytes)))
+        img = memory_safe_image(Image.open(io.BytesIO(raw_bytes)))
         
         output_data = None
         mimetype = 'image/jpeg'
@@ -315,7 +308,7 @@ def process_image():
                 mimetype = 'image/x-icon'
             output_data = buf.getvalue()
 
-        # TOOL 6: WATERMARK (Universal Fonts)
+        # TOOL 6: WATERMARK
         elif tool == 'watermark':
             text = request.form.get('watermark_text', '© SmartPicTools')
             mode = request.form.get('watermark_mode', 'single')
