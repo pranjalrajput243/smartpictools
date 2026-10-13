@@ -7,19 +7,17 @@ import datetime
 from flask import Flask, render_template, request, send_file, jsonify, Response
 from PIL import Image, ImageDraw, ImageFont
 
-# Clean HEIF/HEIC & AVIF handling via pillow-heif only (Zero library conflict!)
+# ⚡ Bulletproof AVIF & iPhone HEIC/HEIF Engine
 try:
     import pillow_heif
     pillow_heif.register_heif_opener()
-except ImportError:
-    pass
+    pillow_heif.register_avif_opener()
+except Exception as e:
+    print("HEIF/AVIF init error:", e)
 
 app = Flask(__name__)
 app.config['MAX_CONTENT_LENGTH'] = 100 * 1024 * 1024  # 100MB limit
 
-# ==========================================
-# PAGE ROUTES & LEGAL
-# ==========================================
 @app.route('/')
 def home():
     return render_template('index.html')
@@ -81,9 +79,6 @@ def submit_feedback():
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
-# ==========================================
-# HELPERS (RAM & CPU OPTIMIZED)
-# ==========================================
 def make_rgb(im):
     if im.mode in ('RGBA', 'LA') or (im.mode == 'P' and 'transparency' in im.info):
         im_rgba = im.convert('RGBA')
@@ -108,9 +103,8 @@ def get_universal_font(size):
     except Exception:
         return ImageFont.load_default()
 
-def memory_safe_image(img):
-    """Prevents 512MB RAM from swapping to slow hard disk"""
-    max_dim = 2048
+def turbo_speed_gatekeeper(img):
+    max_dim = 2560
     if img.width > max_dim or img.height > max_dim:
         scale = max_dim / max(img.width, img.height)
         new_w = max(100, int(img.width * scale))
@@ -119,7 +113,6 @@ def memory_safe_image(img):
     return img
 
 def fast_direct_compress(img, original_size_bytes, target_bytes):
-    """1-Pass Direct Compressor - Takes 0.2s without heavy loops"""
     img_rgb = make_rgb(img)
     ratio = target_bytes / max(1, original_size_bytes)
 
@@ -142,9 +135,6 @@ def fast_direct_compress(img, original_size_bytes, target_bytes):
     img_rgb.save(buf, format='JPEG', quality=quality)
     return buf.getvalue()
 
-# ==========================================
-# MASTER PROCESS ROUTE (ALL 7 TOOLS)
-# ==========================================
 @app.route('/process', methods=['POST'])
 def process_image():
     try:
@@ -154,7 +144,7 @@ def process_image():
         if not files or files[0].filename == '':
             return jsonify({'error': 'No file selected'}), 400
 
-        # BATCH CONVERT (Multi-file ZIP)
+        # BATCH CONVERTER (ZIP)
         if tool == 'convert' and len(files) > 1:
             target_fmt = request.form.get('format', 'JPG').upper()
             zip_buffer = io.BytesIO()
@@ -162,7 +152,7 @@ def process_image():
             with zipfile.ZipFile(zip_buffer, 'w', zipfile.ZIP_DEFLATED) as zip_file:
                 for idx, f in enumerate(files[:10]):
                     raw_name, _ = os.path.splitext(f.filename)
-                    s_img = memory_safe_image(Image.open(io.BytesIO(f.read())))
+                    s_img = turbo_speed_gatekeeper(Image.open(io.BytesIO(f.read())))
                     s_buf = io.BytesIO()
                     out_ext = target_fmt.lower()
 
@@ -177,12 +167,7 @@ def process_image():
                         out_ext = 'webp'
                     elif target_fmt == 'AVIF':
                         av = make_rgb(s_img)
-                        if av.width > 1600 or av.height > 1600:
-                            av.thumbnail((1600, 1600), Image.Resampling.BILINEAR)
-                        try:
-                            av.save(s_buf, format='AVIF', quality=75)
-                        except Exception:
-                            av.save(s_buf, format='WEBP', quality=85)
+                        av.save(s_buf, format='AVIF', quality=75)
                         out_ext = 'avif'
                     elif target_fmt == 'PDF':
                         make_rgb(s_img).save(s_buf, format='PDF')
@@ -208,7 +193,8 @@ def process_image():
         filename, orig_ext = os.path.splitext(file.filename)
         raw_bytes = file.read()
         original_size_bytes = len(raw_bytes)
-        img = memory_safe_image(Image.open(io.BytesIO(raw_bytes)))
+        
+        img = turbo_speed_gatekeeper(Image.open(io.BytesIO(raw_bytes)))
         
         output_data = None
         mimetype = 'image/jpeg'
@@ -216,7 +202,7 @@ def process_image():
 
         # TOOL 1: COMPRESS
         if tool == 'compress':
-            compress_mode = request.form.get('compress_mode', 'slider')
+            compress_mode = request.form.get('compress_mode', 'target')
             if compress_mode == 'target':
                 target_val = float(request.form.get('target_val', 500))
                 target_unit = request.form.get('target_unit', 'kb').lower()
@@ -267,7 +253,7 @@ def process_image():
                 mimetype = 'image/jpeg'
             output_data = buf.getvalue()
 
-        # TOOL 4 & 5: CONVERT (Includes Apple HEIC & AVIF)
+        # TOOL 4: CONVERT
         elif tool == 'convert':
             target_fmt = request.form.get('format', 'JPG').upper()
             buf = io.BytesIO()
@@ -290,12 +276,7 @@ def process_image():
                 mimetype = 'image/webp'
             elif target_fmt == 'AVIF':
                 av_img = make_rgb(img)
-                if av_img.width > 1600 or av_img.height > 1600:
-                    av_img.thumbnail((1600, 1600), Image.Resampling.BILINEAR)
-                try:
-                    av_img.save(buf, format='AVIF', quality=75)
-                except Exception:
-                    av_img.save(buf, format='WEBP', quality=85)
+                av_img.save(buf, format='AVIF', quality=75)
                 download_name = f"{filename}_converted.avif"
                 mimetype = 'image/avif'
             elif target_fmt == 'BMP':
@@ -308,7 +289,7 @@ def process_image():
                 mimetype = 'image/x-icon'
             output_data = buf.getvalue()
 
-        # TOOL 6: WATERMARK
+        # TOOL 5: WATERMARK
         elif tool == 'watermark':
             text = request.form.get('watermark_text', '© SmartPicTools')
             mode = request.form.get('watermark_mode', 'single')
@@ -362,7 +343,7 @@ def process_image():
                     x, y = img.width - tw - margin, margin
                 elif pos == 'bottom-left':
                     x, y = margin, img.height - th - margin
-                else:  # bottom-right
+                else:
                     x, y = img.width - tw - margin, img.height - th - margin
 
                 draw.text((x, y), text, font=font, fill=fill_color)
@@ -380,7 +361,7 @@ def process_image():
                 mimetype = 'image/jpeg'
             output_data = buf.getvalue()
 
-        # TOOL 7: ROTATE & FLIP
+        # TOOL 6: ROTATE & FLIP
         elif tool == 'rotate':
             angle = int(request.form.get('angle', 0))
             flip_mode = request.form.get('flip', 'none')
