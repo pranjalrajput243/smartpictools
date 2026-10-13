@@ -189,7 +189,7 @@
                 <!-- CONTROLS PANEL -->
                 <div class="bg-slate-950/80 p-5 rounded-2xl border border-slate-800">
                     
-                    <!-- 1. COMPRESS -->
+                    <!-- 1. COMPRESS CONTROLS -->
                     <div id="ctrl-compress" class="tool-ctrl space-y-4">
                         <div class="flex gap-2 p-1 bg-slate-900 rounded-xl border border-slate-800 max-w-xs mx-auto">
                             <button type="button" onclick="setCompressMode('target')" id="mode-target-btn" class="flex-1 py-1.5 px-3 rounded-lg text-xs font-bold bg-indigo-600 text-white transition">
@@ -223,7 +223,7 @@
                         </div>
                     </div>
 
-                    <!-- 2. CROP -->
+                    <!-- 2. CROP CONTROLS -->
                     <div id="ctrl-crop" class="tool-ctrl hidden">
                         <label class="block text-xs font-bold text-slate-400 mb-3">Select Aspect Ratio Template:</label>
                         <div class="grid grid-cols-2 sm:grid-cols-5 gap-2">
@@ -235,7 +235,7 @@
                         </div>
                     </div>
 
-                    <!-- 3. RESIZE -->
+                    <!-- 3. RESIZE CONTROLS -->
                     <div id="ctrl-resize" class="tool-ctrl hidden space-y-4">
                         <div class="grid grid-cols-2 gap-4">
                             <div>
@@ -251,7 +251,7 @@
                         <div class="flex items-center justify-between p-3 bg-slate-900 rounded-xl border border-slate-800">
                             <label for="resize-lock-ratio" class="flex items-center gap-2 cursor-pointer text-xs font-bold text-slate-300">
                                 <input type="checkbox" id="resize-lock-ratio" checked class="w-4 h-4 rounded accent-indigo-600 cursor-pointer">
-                                <span>🔒 Lock Aspect Ratio (Proportions barabar rakhein)</span>
+                                <span>🔒 Lock Aspect Ratio</span>
                             </label>
                             <button type="button" onclick="resetToOriginalDimensions()" class="text-[11px] font-bold text-indigo-400 hover:underline">
                                 Reset Original
@@ -259,7 +259,7 @@
                         </div>
                     </div>
 
-                    <!-- 4. CONVERT -->
+                    <!-- 4. CONVERT CONTROLS -->
                     <div id="ctrl-convert" class="tool-ctrl hidden space-y-3">
                         <label class="block text-xs font-bold text-slate-400">Convert Image To:</label>
                         <select id="convert-format" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2.5 text-sm text-white focus:outline-none focus:border-indigo-500 font-semibold">
@@ -274,7 +274,7 @@
                         </select>
                     </div>
 
-                    <!-- 5. PRO WATERMARK -->
+                    <!-- 5. WATERMARK CONTROLS -->
                     <div id="ctrl-watermark" class="tool-ctrl hidden space-y-4">
                         <div>
                             <label class="block text-xs font-bold text-slate-400 mb-1.5">Watermark Layout Style:</label>
@@ -335,6 +335,7 @@
                             <input type="range" id="watermark-opacity" min="40" max="255" value="150" oninput="updateLiveWatermarkPreview()" class="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-indigo-500">
                         </div>
                     </div>
+
                 </div>
 
                 <button id="action-btn" class="w-full mt-6 py-4 px-6 rounded-2xl bg-gradient-to-r from-indigo-600 via-indigo-500 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-extrabold text-base shadow-lg shadow-indigo-500/25 transition active:scale-[0.99] flex items-center justify-center gap-3">
@@ -372,13 +373,13 @@
             <div onclick="switchTool('resize'); window.scrollTo({top: 0, behavior: 'smooth'});" class="bg-slate-900/80 hover:bg-slate-900 border border-slate-800 hover:border-blue-500/50 p-6 rounded-2xl transition cursor-pointer group shadow-lg">
                 <div class="w-12 h-12 rounded-xl bg-blue-500/10 text-blue-400 border border-blue-500/20 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition">📐</div>
                 <h3 class="text-lg font-bold text-white group-hover:text-blue-400 transition">Resize Dimensions</h3>
-                <p class="text-xs text-slate-400 mt-2 leading-relaxed">Live visual transform with instant aspect ratio calculation.</p>
+                <p class="text-xs text-slate-400 mt-2 leading-relaxed">Change exact pixel width and height with live scaling preview and aspect ratio lock.</p>
             </div>
 
             <div onclick="switchTool('convert'); window.scrollTo({top: 0, behavior: 'smooth'});" class="bg-slate-900/80 hover:bg-slate-900 border border-slate-800 hover:border-emerald-500/50 p-6 rounded-2xl transition cursor-pointer group shadow-lg">
                 <div class="w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-400 border border-indigo-500/20 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition">📱</div>
                 <h3 class="text-lg font-bold text-white group-hover:text-emerald-400 transition">iPhone HEIC Converter</h3>
-                <p class="text-xs text-slate-400 mt-2 leading-relaxed">Convert Apple HEIC photos to JPG, PNG, WEBP, or PDF.</p>
+                <p class="text-xs text-slate-400 mt-2 leading-relaxed">Easily convert Apple HEIC / HEIF photos to standard JPG, PNG, WEBP, or PDF.</p>
             </div>
 
             <div onclick="switchTool('watermark'); window.scrollTo({top: 0, behavior: 'smooth'});" class="bg-slate-900/80 hover:bg-slate-900 border border-slate-800 hover:border-amber-500/50 p-6 rounded-2xl transition cursor-pointer group shadow-lg">
@@ -392,14 +393,6 @@
                 <h3 class="text-lg font-bold text-white group-hover:text-pink-400 transition">Batch Format Converter</h3>
                 <p class="text-xs text-slate-400 mt-2 leading-relaxed">Convert images to JPG, PNG, WEBP, AVIF, and 0.3s Instant PDF!</p>
             </div>
-        </div>
-    </section>
-
-    <!-- HOW IT WORKS & FAQS -->
-    <section class="bg-slate-900/50 border-t border-slate-800 py-16 px-4" id="how-it-works">
-        <div class="max-w-5xl mx-auto text-center">
-            <h2 class="text-2xl sm:text-3xl font-extrabold text-white mb-6">How SmartPicTools Works</h2>
-            <p class="text-slate-400 text-sm max-w-xl mx-auto">Lightning-fast browser processing ensures zero wait time and 100% privacy.</p>
         </div>
     </section>
 
@@ -421,7 +414,7 @@
         </div>
     </div>
 
-    <!-- SCRIPT LOGIC -->
+    <!-- JAVASCRIPT LOGIC -->
     <script>
         let currentTool = 'compress';
         let compressMode = 'target';
@@ -447,7 +440,6 @@
             document.getElementById('settings-panel').classList.add('hidden');
             document.getElementById('drop-area').classList.remove('hidden');
             document.getElementById('status-box').classList.add('hidden');
-            document.getElementById('multi-preview-box').classList.add('hidden');
             document.getElementById('single-preview-box').classList.remove('hidden');
             document.getElementById('heic-preview-card').classList.add('hidden');
             document.getElementById('image-preview').classList.remove('hidden');
@@ -475,9 +467,10 @@
             document.getElementById('tool-desc').innerText = toolConfig[tool].desc;
             document.getElementById('btn-text').innerText = toolConfig[tool].btn;
 
+            // Hide all tool controls
             document.querySelectorAll('.tool-ctrl').forEach(ctrl => ctrl.classList.add('hidden'));
             
-            // Fix control switching bug: match exact tool ID
+            // Show only the selected tool control box
             const activeCtrl = document.getElementById('ctrl-' + tool);
             if (activeCtrl) {
                 activeCtrl.classList.remove('hidden');
@@ -558,8 +551,8 @@
         // WATERMARK LIVE PREVIEW
         function setWatermarkMode(m) {
             watermarkMode = m;
-            document.getElementById('wm-single-btn').className = m === 'single' ? "py-2.5 px-3 rounded-xl bg-indigo-600 text-white text-xs font-bold transition" : "py-2.5 px-3 rounded-xl bg-slate-900 text-slate-300 text-xs font-bold border border-slate-700 transition";
-            document.getElementById('wm-repeat-btn').className = m === 'repeat' ? "py-2.5 px-3 rounded-xl bg-indigo-600 text-white text-xs font-bold transition" : "py-2.5 px-3 rounded-xl bg-slate-900 text-slate-300 text-xs font-bold border border-slate-700 transition";
+            document.getElementById('wm-single-btn').className = m === 'single' ? "py-2.5 px-3 rounded-xl bg-indigo-600 text-white text-xs font-bold transition" : "py-2.5 px-3 rounded-xl bg-slate-900 text-slate-300 hover:text-white text-xs font-bold border border-slate-700 transition";
+            document.getElementById('wm-repeat-btn').className = m === 'repeat' ? "py-2.5 px-3 rounded-xl bg-indigo-600 text-white text-xs font-bold transition" : "py-2.5 px-3 rounded-xl bg-slate-900 text-slate-300 hover:text-white text-xs font-bold border border-slate-700 transition";
             document.getElementById('wm-pos-container').style.display = m === 'single' ? 'block' : 'none';
             updateLiveWatermarkPreview();
         }
@@ -711,7 +704,7 @@
                     return;
                 }
 
-                // STANDARD CANVAS TRANSFORM (COMPRESS, RESIZE, WATERMARK, ROTATE, CONVERT)
+                // STANDARD CANVAS TRANSFORM (COMPRESS, RESIZE, WATERMARK, CONVERT)
                 const canvas = document.createElement('canvas');
                 const ctx = canvas.getContext('2d');
                 let targetW = naturalImgWidth;
