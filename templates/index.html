@@ -1080,7 +1080,7 @@
             if (uploadedFiles.length === 0) return;
             const btn = document.getElementById('action-btn');
             btn.disabled = true;
-            document.getElementById('btn-text').innerText = "⚡ Instant Processing...";
+            document.getElementById('btn-text').innerText = "⏳ Processing...";
 
             try {
                 // 1. BATCH ZIP CONVERTER
@@ -1126,7 +1126,7 @@
               // ⚡ TURBO AVIF SENDER (Pre-optimizes in browser so upload is 0.2s!)
                 if (currentTool === 'convert' && document.getElementById('convert-format').value === 'AVIF' && !canEncodeAvif()) {
                     btn.disabled = true;
-                    document.getElementById('btn-text').innerText = "⚡ Turbo Converting AVIF...";
+                    document.getElementById('btn-text').innerText = "⏳ Converting...";
 
                     let sendBlob = file;
                     // If image is huge, downscale on phone canvas in 0.05s so upload is 200KB instead of 10MB!
