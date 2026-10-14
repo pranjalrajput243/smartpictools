@@ -5,13 +5,17 @@ import datetime
 from flask import Flask, render_template, request, send_file, jsonify, Response
 from PIL import Image
 
-# ⚡ Bulletproof AVIF & iPhone HEIC/HEIF Library
+# ⚡ Bulletproof AVIF & iPhone HEIC/HEIF Library Setup
+try:
+    import pillow_avif
+except Exception:
+    pass
+
 try:
     import pillow_heif
     pillow_heif.register_heif_opener()
-    pillow_heif.register_avif_opener()
-except Exception as e:
-    print("HEIF/AVIF init notice:", e)
+except Exception:
+    pass
 
 app = Flask(__name__)
 app.config['MAX_CONTENT_LENGTH'] = 100 * 1024 * 1024  # 100MB limit
@@ -77,7 +81,7 @@ def submit_feedback():
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
-# Backend Smart Fallback for AVIF/HEIC when older mobile browsers don't support native encoding
+# ⚡ Bulletproof AVIF Fallback Route
 @app.route('/process', methods=['POST'])
 def process_fallback():
     try:
@@ -102,7 +106,7 @@ def process_fallback():
         if target_fmt == 'AVIF':
             img.save(buf, format='AVIF', quality=75)
         elif target_fmt in ['JPG', 'JPEG']:
-            img.save(buf, format='JPEG', quality=90)
+            img.save(buf, format='JPEG', quality=92)
             mimetype = 'image/jpeg'
         elif target_fmt == 'PNG':
             img.save(buf, format='PNG')
