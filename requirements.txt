@@ -1,4 +1,5 @@
 flask
 pillow
 pillow-heif
+pillow-avif-plugin
 gunicorn
