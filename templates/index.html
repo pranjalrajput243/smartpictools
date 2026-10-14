@@ -154,7 +154,6 @@
                     <div class="max-h-[380px] sm:max-h-[440px] overflow-hidden flex items-center justify-center bg-slate-900/50 rounded-xl p-2 select-none">
                         <div id="preview-wrapper" class="relative inline-block max-h-[360px] sm:max-h-[400px] max-w-full rounded-xl overflow-hidden leading-none shadow-xl border border-slate-800/60">
                             
-                            <!-- Display Image -->
                             <img id="image-preview" src="#" alt="Preview" class="max-h-[340px] sm:max-h-[380px] w-auto max-w-full block rounded-xl object-contain">
 
                             <!-- Live Single Watermark -->
@@ -162,9 +161,9 @@
                                 © SmartPicTools
                             </div>
 
-                            <!-- Live Diagonal Grid Watermark -->
+                            <!-- Live Diagonal Grid Watermark (Refined Spacing) -->
                             <div id="live-wm-grid" class="hidden absolute inset-0 overflow-hidden pointer-events-none flex items-center justify-center">
-                                <div id="live-wm-pattern" class="w-[200%] h-[200%] flex flex-wrap content-center justify-around gap-10 font-bold tracking-widest select-none tiled-watermark-overlay opacity-60">
+                                <div id="live-wm-pattern" class="w-[200%] h-[200%] flex flex-wrap content-center justify-around gap-14 font-bold tracking-widest select-none tiled-watermark-overlay opacity-30">
                                 </div>
                             </div>
                         </div>
@@ -186,7 +185,7 @@
                     </div>
                 </div>
 
-                <!-- STRICT SEPARATED CONTROL PANELS (ONE ACTIVE AT A TIME) -->
+                <!-- STRICT SEPARATED CONTROL PANELS -->
                 <div class="bg-slate-950/80 p-4 sm:p-5 rounded-2xl border border-slate-800">
                     
                     <!-- 1. COMPRESS CONTROLS -->
@@ -280,7 +279,7 @@
                                 <button type="button" onclick="setWatermarkMode('single')" id="wm-single-btn" class="py-2 px-3 rounded-xl bg-indigo-600 text-white text-xs font-bold transition">
                                     📍 Single Stamp
                                 </button>
-                                <button type="button" onclick="setWatermarkMode('repeat')" id="wm-repeat-btn" class="py-2 px-3 rounded-xl bg-slate-900 text-slate-300 hover:text-white text-xs font-bold border border-slate-700 transition">
+                                <button type="button" onclick="setWatermarkMode('repeat')" id="wm-repeat-btn" class="py-2 px-3 rounded-xl bg-slate-900 text-slate-300 text-xs font-bold border border-slate-700 transition">
                                     🌐 Diagonal Grid
                                 </button>
                             </div>
@@ -315,19 +314,19 @@
                             <div>
                                 <label class="block text-[11px] font-bold text-slate-400 mb-1">Size</label>
                                 <select id="watermark-size" onchange="updateLiveWatermarkPreview()" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-2 py-2 text-xs text-white">
-                                    <option value="18">Small</option>
-                                    <option value="26" selected>Medium</option>
-                                    <option value="38">Large</option>
+                                    <option value="16">Small</option>
+                                    <option value="22" selected>Medium</option>
+                                    <option value="32">Large</option>
                                 </select>
                             </div>
                         </div>
 
                         <div>
                             <div class="flex justify-between text-xs font-semibold text-slate-400 mb-1">
-                                <span>Opacity</span>
-                                <span id="wm-opacity-display" class="text-indigo-400 font-bold">60%</span>
+                                <span>Opacity (Transparency)</span>
+                                <span id="wm-opacity-display" class="text-indigo-400 font-bold">25% (Clean Security)</span>
                             </div>
-                            <input type="range" id="watermark-opacity" min="0.1" max="1" step="0.05" value="0.6" oninput="updateLiveWatermarkPreview()" class="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-indigo-500">
+                            <input type="range" id="watermark-opacity" min="0.1" max="0.9" step="0.05" value="0.25" oninput="updateLiveWatermarkPreview()" class="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-indigo-500">
                         </div>
                     </div>
 
@@ -364,7 +363,7 @@
         </div>
     </main>
 
-    <!-- 7 PRO TOOLS CATALOG (BROWSE ALL TOOLS SECTION) -->
+    <!-- 7 PRO TOOLS CATALOG -->
     <section class="max-w-5xl mx-auto w-full px-4 mb-16 sm:mb-20 mt-8" id="all-tools-grid">
         <div class="text-center mb-8 sm:mb-10">
             <span class="text-[11px] font-extrabold uppercase tracking-widest text-indigo-400 bg-indigo-500/10 px-3 py-1 rounded-full border border-indigo-500/20">Pro Image Suite</span>
@@ -424,6 +423,109 @@
         </div>
     </section>
 
+    <!-- ⚡ DYNAMIC HOW IT WORKS (CHANGES WITH EVERY TOOL) -->
+    <section class="bg-slate-900/50 border-t border-slate-800 py-14 px-4" id="how-it-works">
+        <div class="max-w-5xl mx-auto">
+            <div class="text-center mb-10">
+                <span class="text-[11px] font-extrabold uppercase tracking-widest text-indigo-400 bg-indigo-500/10 px-3 py-1 rounded-full border border-indigo-500/20">Step-by-Step Guide</span>
+                <h2 id="how-to-title" class="text-2xl sm:text-3xl font-extrabold text-white mt-2.5">How to Compress Image in 3 Easy Steps</h2>
+                <p id="how-to-desc" class="text-slate-400 text-xs sm:text-sm mt-1">Simple and automated. Zero software installation required.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+                <div class="bg-slate-900 p-5 sm:p-6 rounded-2xl border border-slate-800">
+                    <div class="w-8 h-8 rounded-full bg-indigo-600 text-white font-extrabold text-sm flex items-center justify-center mb-3.5">1</div>
+                    <h3 id="step1-title" class="font-bold text-white text-base">Select or Drop Photo</h3>
+                    <p id="step1-desc" class="text-xs text-slate-400 mt-1.5 leading-relaxed">Choose your image from device storage. Works with JPG, PNG, WEBP, AVIF, and iPhone HEIC.</p>
+                </div>
+                <div class="bg-slate-900 p-5 sm:p-6 rounded-2xl border border-slate-800">
+                    <div class="w-8 h-8 rounded-full bg-indigo-600 text-white font-extrabold text-sm flex items-center justify-center mb-3.5">2</div>
+                    <h3 id="step2-title" class="font-bold text-white text-base">Set Target Size (KB/MB)</h3>
+                    <p id="step2-desc" class="text-xs text-slate-400 mt-1.5 leading-relaxed">Type your desired target KB (e.g. 200 KB) or adjust the quality percentage slider.</p>
+                </div>
+                <div class="bg-slate-900 p-5 sm:p-6 rounded-2xl border border-slate-800">
+                    <div class="w-8 h-8 rounded-full bg-indigo-600 text-white font-extrabold text-sm flex items-center justify-center mb-3.5">3</div>
+                    <h3 id="step3-title" class="font-bold text-white text-base">Instant Download</h3>
+                    <p id="step3-desc" class="text-xs text-slate-400 mt-1.5 leading-relaxed">Click compress to process in 0.2s and download directly onto your device.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ⚡ EXACT 7 COMPREHENSIVE PRO FAQS -->
+    <section class="max-w-4xl mx-auto w-full px-4 py-16" id="faq">
+        <div class="text-center mb-10">
+            <span class="text-[11px] font-extrabold uppercase tracking-widest text-indigo-400 bg-indigo-500/10 px-3 py-1 rounded-full border border-indigo-500/20">Questions Answered</span>
+            <h2 class="text-2xl sm:text-3xl font-extrabold text-white mt-2.5">Frequently Asked Questions</h2>
+            <p class="text-slate-400 text-xs sm:text-sm mt-1">Everything you need to know about our 7 tools and device security.</p>
+        </div>
+
+        <div class="space-y-3.5 text-sm">
+            <!-- FAQ 1: COMPRESS -->
+            <details class="group bg-slate-900 p-4 sm:p-5 rounded-2xl border border-slate-800 cursor-pointer">
+                <summary class="font-bold text-white flex justify-between items-center">
+                    1. How does Exact KB/MB target compression work without losing sharpness?
+                    <span class="text-indigo-400 group-open:rotate-180 transition ml-2">▼</span>
+                </summary>
+                <p class="text-slate-400 mt-3 text-xs sm:text-sm leading-relaxed">Unlike basic compressors that force a random quality percentage, our engine runs a precision binary search algorithm in browser memory. It calculates the exact byte ratio to match your requested file weight (e.g. 50 KB, 200 KB) while preserving maximum visual sharpness and clarity.</p>
+            </details>
+
+            <!-- FAQ 2: CROP -->
+            <details class="group bg-slate-900 p-4 sm:p-5 rounded-2xl border border-slate-800 cursor-pointer">
+                <summary class="font-bold text-white flex justify-between items-center">
+                    2. Which aspect ratio templates are supported for social media platforms?
+                    <span class="text-indigo-400 group-open:rotate-180 transition ml-2">▼</span>
+                </summary>
+                <p class="text-slate-400 mt-3 text-xs sm:text-sm leading-relaxed">SmartPicTools provides 1-tap presets for Instagram Feed (1:1 Square), YouTube Thumbnails (16:9), Instagram Reels & YouTube Shorts (9:16), and Portrait Posts (4:5), as well as a Freeform drag mode to crop any custom dimensions smoothly.</p>
+            </details>
+
+            <!-- FAQ 3: RESIZE -->
+            <details class="group bg-slate-900 p-4 sm:p-5 rounded-2xl border border-slate-800 cursor-pointer">
+                <summary class="font-bold text-white flex justify-between items-center">
+                    3. How does the Proportion Lock prevent images from stretching or distortion?
+                    <span class="text-indigo-400 group-open:rotate-180 transition ml-2">▼</span>
+                </summary>
+                <p class="text-slate-400 mt-3 text-xs sm:text-sm leading-relaxed">When 'Lock Proportions' is checked, changing the Width automatically recalculates the Height proportionally (and vice versa). This ensures your photo maintains its exact natural aspect ratio without getting squished, flattened, or stretched.</p>
+            </details>
+
+            <!-- FAQ 4: HEIC -->
+            <details class="group bg-slate-900 p-4 sm:p-5 rounded-2xl border border-slate-800 cursor-pointer">
+                <summary class="font-bold text-white flex justify-between items-center">
+                    4. Can I convert Apple iPhone (.HEIC / .HEIF) photos into standard JPG or PNG?
+                    <span class="text-indigo-400 group-open:rotate-180 transition ml-2">▼</span>
+                </summary>
+                <p class="text-slate-400 mt-3 text-xs sm:text-sm leading-relaxed">Yes! Apple photos saved in HEIC format cannot be viewed on many Android devices or Windows PCs. Our built-in engine automatically decodes HEIC files and converts them directly to universal JPG, PNG, WEBP, or PDF with zero quality loss.</p>
+            </details>
+
+            <!-- FAQ 5: WATERMARK -->
+            <details class="group bg-slate-900 p-4 sm:p-5 rounded-2xl border border-slate-800 cursor-pointer">
+                <summary class="font-bold text-white flex justify-between items-center">
+                    5. How does the Diagonal Grid Watermark protect photos from copyright theft?
+                    <span class="text-indigo-400 group-open:rotate-180 transition ml-2">▼</span>
+                </summary>
+                <p class="text-slate-400 mt-3 text-xs sm:text-sm leading-relaxed">While single corner watermarks can easily be cropped out by unauthorized users, our Diagonal Grid style tiles your copyright watermark evenly across the entire surface at a subtle, professional transparency (25%). This makes unauthorized removal impossible without ruining image aesthetics.</p>
+            </details>
+
+            <!-- FAQ 6: BATCH & CONVERT -->
+            <details class="group bg-slate-900 p-4 sm:p-5 rounded-2xl border border-slate-800 cursor-pointer">
+                <summary class="font-bold text-white flex justify-between items-center">
+                    6. How many files can I convert at once, and how does the Batch ZIP download work?
+                    <span class="text-indigo-400 group-open:rotate-180 transition ml-2">▼</span>
+                </summary>
+                <p class="text-slate-400 mt-3 text-xs sm:text-sm leading-relaxed">You can select up to 10 photos simultaneously. When multiple files are processed, SmartPicTools bundles all converted images into a single compressed `.zip` archive so you can download everything in 1 click without dealing with multiple popups.</p>
+            </details>
+
+            <!-- FAQ 7: PRIVACY & COST -->
+            <details class="group bg-slate-900 p-4 sm:p-5 rounded-2xl border border-slate-800 cursor-pointer">
+                <summary class="font-bold text-white flex justify-between items-center">
+                    7. Is SmartPicTools really 100% free and are my uploaded pictures safe and private?
+                    <span class="text-indigo-400 group-open:rotate-180 transition ml-2">▼</span>
+                </summary>
+                <p class="text-slate-400 mt-3 text-xs sm:text-sm leading-relaxed">SmartPicTools is 100% free with no hidden fees or subscriptions. More importantly, your images never get uploaded to or stored on any external database. All compression and editing executes client-side inside your own browser RAM and is wiped immediately upon download.</p>
+            </details>
+        </div>
+    </section>
+
     <!-- FOOTER -->
     <footer class="border-t border-slate-800 bg-slate-950 py-8 px-4 text-xs text-slate-400">
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
@@ -437,7 +539,7 @@
         </div>
     </footer>
 
-    <!-- SUGGESTIONS & FEEDBACK MODAL (CLEAN RESET CATEGORY) -->
+    <!-- SUGGESTIONS & FEEDBACK MODAL -->
     <div id="feedback-modal" class="hidden fixed inset-0 z-50 bg-black/70 backdrop-blur-md flex items-center justify-center p-4">
         <div class="bg-slate-900 border border-slate-800 rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-2xl relative">
             <button onclick="closeFeedbackModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-lg font-bold">✕</button>
@@ -480,7 +582,7 @@
         </div>
     </div>
 
-    <!-- MASTER JAVASCRIPT (100% IN-BROWSER CLIENT TURBO ENGINE) -->
+    <!-- MASTER JAVASCRIPT ENGINE -->
     <script>
         let currentTool = 'compress';
         let compressMode = 'target';
@@ -505,6 +607,71 @@
             watermark: { title: "Pro Watermark Studio", desc: "Stamp copyright text in corner or repeat diagonal security grid.", btn: "🏷️ Watermark & Download" },
             rotate: { title: "Rotate & Mirror Flip", desc: "Rotate orientation 90 degrees or mirror flip horizontally / vertically.", btn: "🔁 Rotate & Download" }
         };
+
+        // ⚡ DYNAMIC HOW-TO-USE DATABASE FOR EACH TOOL
+        const howToConfig = {
+            compress: {
+                title: "How to Compress Image in 3 Easy Steps",
+                desc: "Shrink file size accurately to exact target KB or MB in seconds.",
+                s1_t: "Select or Drop Photo", s1_d: "Choose your picture from mobile or PC storage. Supports JPG, PNG, WEBP, and HEIC.",
+                s2_t: "Set Target Size (KB/MB)", s2_d: "Type your desired KB (e.g. 200 KB) or use the percentage slider to pick compression level.",
+                s3_t: "Instant Download", s3_d: "Click Compress & Download to save the shrunk photo directly onto your device."
+            },
+            crop: {
+                title: "How to Crop Images with Aspect Ratios in 3 Steps",
+                desc: "Crop visually for Instagram, YouTube, and Reels with live box handles.",
+                s1_t: "Upload Photo to Crop", s1_d: "Choose any image. The visual crop frame appears on screen immediately.",
+                s2_t: "Select Template or Freeform", s2_d: "Choose 1:1 (Square), 16:9 (YouTube), 9:16 (Story/Reels), 4:5 (Portrait) or Freeform.",
+                s3_t: "Crop & Save", s3_d: "Adjust the crop frame and click Crop & Download to save your cropped image."
+            },
+            resize: {
+                title: "How to Resize Pixel Dimensions in 3 Steps",
+                desc: "Scale width and height dimensions with live proportion lock.",
+                s1_t: "Upload Your Picture", s1_d: "Select a photo to automatically view its original width and height in pixels.",
+                s2_t: "Enter Width or Height", s2_d: "Type your new pixel values. Keep 'Lock Proportions' checked to prevent distortion.",
+                s3_t: "Resize & Download", s3_d: "Click Resize & Download to save the image scaled to your exact dimensions."
+            },
+            convert: {
+                title: "How to Convert Image Formats in 3 Steps",
+                desc: "Convert single or multiple images to AVIF, JPG, PNG, WEBP, or PDF.",
+                s1_t: "Select Single or Batch Files", s1_d: "Choose 1 image or select up to 10 photos (Supports Apple HEIC photos seamlessly).",
+                s2_t: "Pick Target Format", s2_d: "Choose your format from dropdown: AVIF, JPG, PNG, WEBP, or PDF Document.",
+                s3_t: "Convert & Download", s3_d: "Click Convert to save immediately (Multiple images download as a convenient ZIP file)."
+            },
+            heic: {
+                title: "How to Convert iPhone HEIC Photos in 3 Steps",
+                desc: "Turn Apple HEIC/HEIF photos into universal JPG, PNG, or PDF files.",
+                s1_t: "Select Apple HEIC Photo", s1_d: "Choose .heic or .heif pictures directly from your iPhone gallery or computer.",
+                s2_t: "Choose Universal Format", s2_d: "Select standard JPG (default), PNG, WEBP, or PDF document.",
+                s3_t: "Save Universal File", s3_d: "Click Convert & Download to save a photo compatible with all Windows and Android devices."
+            },
+            watermark: {
+                title: "How to Add Security Watermarks in 3 Steps",
+                desc: "Protect pictures with diagonal repeated grids or corner stamps.",
+                s1_t: "Upload Photo to Watermark", s1_d: "Select the photo you want to copyright. A live preview loads instantly.",
+                s2_t: "Customize Text & Style", s2_d: "Type watermark text, select color, size, and pick Single Stamp or Diagonal Grid.",
+                s3_t: "Watermark & Download", s3_d: "Click Watermark & Download to embed the copyright protection permanently."
+            },
+            rotate: {
+                title: "How to Rotate & Mirror Flip in 3 Steps",
+                desc: "Fix camera orientation or create mirror effects in 0.1 seconds.",
+                s1_t: "Upload Your Picture", s1_d: "Choose any photo needing rotation or mirror transformation.",
+                s2_t: "Click Orientation Buttons", s2_d: "Click 90° Clockwise, Anti-Clockwise, or Flip Horizontal / Vertical mirrors.",
+                s3_t: "Save Transformed Image", s3_d: "Click Rotate & Download to save your re-oriented image instantly."
+            }
+        };
+
+        function updateDynamicHowToUse(key) {
+            const cfg = howToConfig[key] || howToConfig['compress'];
+            document.getElementById('how-to-title').innerText = cfg.title;
+            document.getElementById('how-to-desc').innerText = cfg.desc;
+            document.getElementById('step1-title').innerText = cfg.s1_t;
+            document.getElementById('step1-desc').innerText = cfg.s1_d;
+            document.getElementById('step2-title').innerText = cfg.s2_t;
+            document.getElementById('step2-desc').innerText = cfg.s2_d;
+            document.getElementById('step3-title').innerText = cfg.s3_t;
+            document.getElementById('step3-desc').innerText = cfg.s3_d;
+        }
 
         // OPTION A: COMPLETE FRESH RESET
         function resetWorkspace() {
@@ -531,7 +698,7 @@
             document.getElementById('live-wm-grid').classList.add('hidden');
         }
 
-        // ⚡ TAB SWITCHER (APPLIES OPTION A)
+        // ⚡ TAB SWITCHER (APPLIES OPTION A + SYNCS DYNAMIC HOW TO USE)
         function switchTool(tool) {
             resetWorkspace();
             currentTool = tool;
@@ -564,21 +731,27 @@
                 fileInput.removeAttribute('multiple');
                 document.getElementById('upload-subtext').innerText = "Supports JPG, PNG, WEBP, AVIF, iPhone HEIC";
             }
+
+            // Sync Dynamic Guide
+            updateDynamicHowToUse(tool);
         }
 
         // BROWSE GRID CLICK HANDLER
         function launchToolFromGrid(tool, subMode = '') {
             if (tool === 'rotate') {
                 switchTool('rotate');
+                updateDynamicHowToUse('rotate');
             } else {
                 switchTool(tool);
                 if (subMode === 'heic') {
                     document.getElementById('convert-format').value = 'JPG';
-                    document.getElementById('tool-title').innerText = "iPhone HEIC/HEIF Converter";
+                    document.getElementById('tool-title').innerText = "iPhone HEIC/HEIF Image Converter";
                     document.getElementById('tool-desc').innerText = "Select Apple photos to convert to standard JPG, PNG, WEBP or PDF.";
+                    updateDynamicHowToUse('heic');
                 } else if (subMode === 'batch') {
-                    document.getElementById('tool-title').innerText = "Batch Format Converter";
+                    document.getElementById('tool-title').innerText = "Batch Format Converter (ZIP Download)";
                     document.getElementById('tool-desc').innerText = "Select up to 10 photos for 1-click ZIP conversion.";
+                    updateDynamicHowToUse('convert');
                 }
             }
             window.scrollTo({ top: document.getElementById('tool-workspace').offsetTop - 30, behavior: 'smooth' });
@@ -641,7 +814,7 @@
                     displayBlob = Array.isArray(convertedBlob) ? convertedBlob[0] : convertedBlob;
                     uploadedFiles[0] = new File([displayBlob], file.name.replace(/\.[^/.]+$/, ".jpg"), { type: "image/jpeg" });
                 } catch (err) {
-                    console.warn("heic2any client note:", err);
+                    console.warn("heic2any note:", err);
                 } finally {
                     document.getElementById('btn-text').innerText = toolConfig[currentTool].btn;
                 }
@@ -800,7 +973,7 @@
             document.getElementById('quality-display').innerText = e.target.value + '%';
         });
 
-        // WATERMARK LIVE PREVIEW
+        // ⚡ WATERMARK LIVE PREVIEW (BEAUTIFUL BALANCED SPACING)
         function setWatermarkMode(m) {
             watermarkMode = m;
             document.getElementById('wm-single-btn').className = m === 'single' ? "py-2 px-3 rounded-xl bg-indigo-600 text-white text-xs font-bold transition" : "py-2 px-3 rounded-xl bg-slate-900 text-slate-300 text-xs font-bold border border-slate-700 transition";
@@ -815,7 +988,7 @@
             const color = document.getElementById('watermark-color').value;
             const size = document.getElementById('watermark-size').value;
             const opacity = document.getElementById('watermark-opacity').value;
-            document.getElementById('wm-opacity-display').innerText = Math.round(opacity * 100) + '%';
+            document.getElementById('wm-opacity-display').innerText = Math.round(opacity * 100) + '% (Clean Security)';
 
             const singleEl = document.getElementById('live-wm-single');
             const gridEl = document.getElementById('live-wm-grid');
@@ -840,11 +1013,12 @@
                 singleEl.classList.add('hidden');
                 gridEl.classList.remove('hidden');
                 patternEl.innerHTML = '';
-                for (let i = 0; i < 40; i++) {
+                // Refined, spacious grid count (never mashes together)
+                for (let i = 0; i < 24; i++) {
                     const span = document.createElement('span');
                     span.innerText = text;
                     span.style.color = colorHex;
-                    span.style.fontSize = Math.max(11, Math.round(size * 0.5)) + 'px';
+                    span.style.fontSize = Math.max(12, Math.round(size * 0.6)) + 'px';
                     span.style.opacity = opacity;
                     patternEl.appendChild(span);
                 }
@@ -999,30 +1173,36 @@
                     }
                     ctx.restore();
 
-                    // WATERMARK STAMP
+                    // WATERMARK STAMP (ELEGANT SPACED REPEAT)
                     if (currentTool === 'watermark') {
                         const wmText = document.getElementById('watermark-text').value || '© SmartPicTools';
                         const wmColor = document.getElementById('watermark-color').value;
-                        const wmSize = parseInt(document.getElementById('watermark-size').value) * (canvas.width / 800);
+                        const basePx = parseInt(document.getElementById('watermark-size').value);
+                        const wmSize = Math.max(18, Math.round(basePx * (canvas.width / 1000)));
                         const wmOpacity = parseFloat(document.getElementById('watermark-opacity').value);
                         ctx.fillStyle = wmColor === 'gold' ? '#fbbf24' : (wmColor === 'black' ? '#000000' : (wmColor === 'red' ? '#ef4444' : (wmColor === 'cyan' ? '#06b6d4' : '#ffffff')));
                         ctx.globalAlpha = wmOpacity;
-                        ctx.font = `bold ${Math.max(16, Math.round(wmSize))}px Plus Jakarta Sans, sans-serif`;
+                        ctx.font = `bold ${wmSize}px Plus Jakarta Sans, sans-serif`;
 
                         if (watermarkMode === 'single') {
                             const pos = document.getElementById('watermark-pos').value;
                             const textWidth = ctx.measureText(wmText).width;
-                            let tx = canvas.width - textWidth - 25, ty = canvas.height - 25;
+                            let tx = canvas.width - textWidth - 30, ty = canvas.height - 30;
                             if (pos === 'center') { tx = (canvas.width - textWidth) / 2; ty = canvas.height / 2; }
-                            else if (pos === 'top-left') { tx = 25; ty = 40; }
-                            else if (pos === 'top-right') { tx = canvas.width - textWidth - 25; ty = 40; }
-                            else if (pos === 'bottom-left') { tx = 25; ty = canvas.height - 25; }
+                            else if (pos === 'top-left') { tx = 30; ty = 50; }
+                            else if (pos === 'top-right') { tx = canvas.width - textWidth - 30; ty = 50; }
+                            else if (pos === 'bottom-left') { tx = 30; ty = canvas.height - 30; }
                             ctx.fillText(wmText, tx, ty);
                         } else {
                             ctx.save();
                             ctx.translate(canvas.width / 2, canvas.height / 2);
                             ctx.rotate((-25 * Math.PI) / 180);
-                            const stepX = 220, stepY = 100;
+                            
+                            // ⚡ Wide, elegant spacing so it protects the image without turning into a barcode
+                            const textMetrics = ctx.measureText(wmText);
+                            const stepX = Math.max(340, textMetrics.width + 120);
+                            const stepY = Math.max(160, wmSize * 5);
+
                             for (let x = -canvas.width * 1.5; x < canvas.width * 1.5; x += stepX) {
                                 for (let y = -canvas.height * 1.5; y < canvas.height * 1.5; y += stepY) {
                                     ctx.fillText(wmText, x, y);
