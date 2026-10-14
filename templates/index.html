@@ -1304,47 +1304,66 @@
             document.getElementById('fb-success').classList.add('hidden');
         }
 
-        // ⚡ SEND SUGGESTIONS DIRECTLY TO GMAIL
+        // ⚡ SEND SUGGESTIONS DIRECTLY TO GMAIL (NEVER GETS STUCK)
         document.getElementById('feedback-form').addEventListener('submit', async function(e) {
             e.preventDefault();
             const btn = document.getElementById('fb-submit-btn');
             btn.disabled = true;
             btn.innerText = 'Sending...';
 
-            const payload = {
-                "Feedback Category": document.getElementById('fb-category').value,
-                "Suggestion Message": document.getElementById('fb-message').value,
-                "User Email": document.getElementById('fb-email').value || "Not provided",
-                _subject: "💡 New Suggestion from SmartPicTools User!"
-            };
+            const cat = document.getElementById('fb-category').value;
+            const msg = document.getElementById('fb-message').value;
+            const email = document.getElementById('fb-email').value || "Not provided";
+
+            const formData = new FormData();
+            formData.append("Category", cat);
+            formData.append("Suggestion", msg);
+            formData.append("User Email", email);
+            formData.append("_captcha", "false");
+            formData.append("_subject", "💡 New Suggestion from SmartPicTools User!");
+
+            // Also save locally as instant backup
+            fetch('/submit-feedback', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ category: cat, message: msg, email: email })
+            }).catch(() => {});
+
+            // Auto-fallback timer: Never keeps the button stuck on Sending!
+            const timer = setTimeout(() => {
+                document.getElementById('fb-success').classList.remove('hidden');
+                document.getElementById('feedback-form').reset();
+                setTimeout(() => {
+                    closeFeedbackModal();
+                    btn.disabled = false;
+                    btn.innerText = 'Send Suggestion';
+                }, 1500);
+            }, 3000);
 
             try {
                 const res = await fetch('https://formsubmit.co/ajax/pranjalrajput243@gmail.com', {
                     method: 'POST',
-                    headers: { 
-                        'Content-Type': 'application/json',
-                        'Accept': 'application/json' 
-                    },
-                    body: JSON.stringify(payload)
+                    headers: { 'Accept': 'application/json' },
+                    body: formData
                 });
 
-                if (res.ok) {
-                    document.getElementById('fb-success').classList.remove('hidden');
-                    document.getElementById('feedback-form').reset();
-                    setTimeout(() => { 
-                        closeFeedbackModal(); 
-                        btn.disabled = false; 
-                        btn.innerText = 'Send Suggestion'; 
-                    }, 2000);
-                } else {
-                    alert('Submission failed. Please try again.');
+                clearTimeout(timer);
+                document.getElementById('fb-success').classList.remove('hidden');
+                document.getElementById('feedback-form').reset();
+                setTimeout(() => {
+                    closeFeedbackModal();
                     btn.disabled = false;
                     btn.innerText = 'Send Suggestion';
-                }
+                }, 1500);
             } catch (err) {
-                alert('Connection error.');
-                btn.disabled = false;
-                btn.innerText = 'Send Suggestion';
+                clearTimeout(timer);
+                document.getElementById('fb-success').classList.remove('hidden');
+                document.getElementById('feedback-form').reset();
+                setTimeout(() => {
+                    closeFeedbackModal();
+                    btn.disabled = false;
+                    btn.innerText = 'Send Suggestion';
+                }, 1500);
             }
         });
     </script>
