@@ -104,7 +104,7 @@ def process_fallback():
         mimetype = f"image/{target_fmt.lower()}"
 
         if target_fmt == 'AVIF':
-            img.save(buf, format='AVIF', quality=75)
+            img.save(buf, format='AVIF', quality=75, speed=8)
         elif target_fmt in ['JPG', 'JPEG']:
             img.save(buf, format='JPEG', quality=92)
             mimetype = 'image/jpeg'
