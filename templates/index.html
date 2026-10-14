@@ -1293,33 +1293,45 @@
         }
 
         // FEEDBACK MODAL (CLEAN RESET)
-        function openFeedbackModal() {
-            document.getElementById('feedback-form').reset();
-            document.getElementById('fb-category').selectedIndex = 0;
-            document.getElementById('feedback-modal').classList.remove('hidden');
-        }
-
-        function closeFeedbackModal() {
-            document.getElementById('feedback-modal').classList.add('hidden');
-            document.getElementById('fb-success').classList.add('hidden');
-        }
-
+        // ⚡ SEND SUGGESTIONS DIRECTLY TO GMAIL
         document.getElementById('feedback-form').addEventListener('submit', async function(e) {
             e.preventDefault();
             const btn = document.getElementById('fb-submit-btn');
             btn.disabled = true;
-            btn.innerText = 'Saving...';
+            btn.innerText = 'Sending...';
+
+            const payload = {
+                "Feedback Category": document.getElementById('fb-category').value,
+                "Suggestion Message": document.getElementById('fb-message').value,
+                "User Email": document.getElementById('fb-email').value || "Not provided",
+                _subject: "💡 New Suggestion from SmartPicTools User!"
+            };
 
             try {
-                const res = await fetch('/submit-feedback', {
+                const res = await fetch('https://formsubmit.co/ajax/pranjalrajput243@gmail.com', {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        category: document.getElementById('fb-category').value,
-                        message: document.getElementById('fb-message').value,
-                        email: document.getElementById('fb-email').value
-                    })
+                    headers: { 
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json' 
+                    },
+                    body: JSON.stringify(payload)
                 });
+
+                if (res.ok) {
+                    document.getElementById('fb-success').classList.remove('hidden');
+                    document.getElementById('feedback-form').reset();
+                    setTimeout(() => { closeFeedbackModal(); btn.disabled = false; btn.innerText = 'Send Suggestion'; }, 2000);
+                } else {
+                    alert('Submission failed. Please try again.');
+                    btn.disabled = false;
+                    btn.innerText = 'Send Suggestion';
+                }
+            } catch (err) {
+                alert('Connection error.');
+                btn.disabled = false;
+                btn.innerText = 'Send Suggestion';
+            }
+        });
                 if (res.ok) {
                     document.getElementById('fb-success').classList.remove('hidden');
                     document.getElementById('feedback-form').reset();
