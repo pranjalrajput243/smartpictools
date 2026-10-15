@@ -1,32 +1,34 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-   <!-- ⚡ HIGH-RANKING GOOGLE SEO TAGS -->
-    <title>SmartPicTools - Compress to Exact KB, Crop, Resize & Convert Image Free</title>
-    <meta name="description" content="Free 100% private image tools: Compress image to exact 20KB, 50KB, 100KB, crop with social templates, resize dimensions, and convert iPhone HEIC, AVIF, JPG, PNG, PDF in 0.2s.">
-    <meta name="keywords" content="image compressor, compress image to 20kb, compress image to 50kb, compress photo to exact kb, online image resizer, crop image for instagram, convert heic to jpg, iphone photo converter, avif to jpg, bulk image converter, add watermark to photo">
+    
+    <!-- ⚡ HIGH-RANKING GOOGLE SEO TAGS -->
+    <title>SmartPicTools - Compress to Exact KB, Crop, Resize, Barcode & QR Generator</title>
+    <meta name="description" content="Free 100% private image & barcode tools: Compress image to exact 20KB/50KB, crop, resize, generate QR codes & barcodes, and convert iPhone HEIC, AVIF, JPG, PNG in 0.2s.">
+    <meta name="keywords" content="image compressor, compress image to 20kb, compress image to 50kb, qr code generator, barcode generator, online image resizer, crop image, convert heic to jpg, avif to jpg">
     <meta name="robots" content="index, follow, max-image-preview:large">
     <meta name="author" content="SmartPicTools">
     <link rel="canonical" href="https://smartpictools.in/">
     <meta name="google-site-verification" content="uUq17UUsROyHMRQ8jkqKqrjZmsJnkuxZMKKoJLw_X3E" />
 
-    <!-- ⚡ OPEN GRAPH TAGS (WhatsApp, Telegram & Social Sharing Preview) -->
+    <!-- ⚡ OPEN GRAPH TAGS (WhatsApp & Social Sharing Preview) -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://smartpictools.in/">
-    <meta property="og:title" content="SmartPicTools - Free In-Browser Image Suite & Compressor">
-    <meta property="og:description" content="Shrink to exact KB, crop, resize, and convert iPhone HEIC photos in 0.2s without uploading to any server.">
+    <meta property="og:title" content="SmartPicTools - Free In-Browser Image & QR Suite">
+    <meta property="og:description" content="Shrink to exact KB, crop, resize, create instant QR codes & barcodes, and convert HEIC photos in 0.2s without server lag.">
     <meta property="og:site_name" content="SmartPicTools">
 
-    <!-- ⚡ GOOGLE SCHEMA STRUCTURED DATA (Google Tool Ranking Booster) -->
+    <!-- ⚡ GOOGLE SCHEMA STRUCTURED DATA -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "WebApplication",
       "name": "SmartPicTools",
       "url": "https://smartpictools.in/",
-      "description": "Free private in-browser image tools to compress to exact KB, crop, resize dimensions, and convert HEIC/AVIF.",
+      "description": "Free private in-browser image tools to compress to exact KB, crop, resize, generate QR/barcodes, and convert HEIC.",
       "applicationCategory": "MultimediaApplication",
       "operatingSystem": "All",
       "offers": {
@@ -39,7 +41,6 @@
 
     <!-- FAVICON -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' stop-color='%236366f1'/><stop offset='50%25' stop-color='%23a855f7'/><stop offset='100%25' stop-color='%23ec4899'/></linearGradient></defs><rect width='100' height='100' rx='28' fill='url(%23g)'/><path d='M52 16 L24 54 L46 54 L42 84 L76 44 L54 44 Z' fill='%23fbbf24'/></svg>">
-    <link rel="canonical" href="https://smartpictools.in/">
 
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -50,6 +51,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/heic2any/0.0.4/heic2any.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    
+    <!-- ⚡ QR & BARCODE LIBRARIES (Instant In-Browser) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/JsBarcode.all.min.js"></script>
 
     <style>
         body { font-family: 'Plus Jakarta Sans', sans-serif; -webkit-tap-highlight-color: transparent; }
@@ -72,13 +77,13 @@
                 </div>
                 <div>
                     <span class="text-xl sm:text-2xl font-black tracking-tight text-white">SmartPic<span class="text-indigo-400">Tools</span></span>
-                    <span class="block text-[9px] sm:text-[10px] uppercase font-bold tracking-widest text-slate-400 -mt-1">Pro Image Suite</span>
+                    <span class="block text-[9px] sm:text-[10px] uppercase font-bold tracking-widest text-slate-400 -mt-1">Pro Suite</span>
                 </div>
             </a>
             
             <nav class="hidden md:flex items-center gap-7 text-sm font-semibold text-slate-300">
                 <a href="#tool-workspace" class="hover:text-indigo-400 transition">Workspace</a>
-                <a href="#all-tools-grid" class="hover:text-indigo-400 transition">Browse 7 Tools</a>
+                <a href="#all-tools-grid" class="hover:text-indigo-400 transition">Browse All Tools</a>
                 <a href="#how-it-works" class="hover:text-indigo-400 transition">How it Works</a>
                 <a href="#faq" class="hover:text-indigo-400 transition">FAQs</a>
             </nav>
@@ -119,8 +124,8 @@
     <!-- MAIN WORKSPACE -->
     <main class="max-w-5xl mx-auto w-full px-3 sm:px-4 py-6 sm:py-8 flex-1" id="tool-workspace">
         
-        <!-- TOP 5 MAIN TABS ONLY -->
-        <div class="grid grid-cols-3 sm:grid-cols-5 gap-1.5 sm:gap-2 mb-6 sm:mb-8 bg-slate-900 p-1.5 sm:p-2 rounded-2xl border border-slate-800 max-w-3xl mx-auto">
+        <!-- ⚡ TOP 6 MAIN TABS (INCLUDES BARCODE & QR) -->
+        <div class="grid grid-cols-3 sm:grid-cols-6 gap-1.5 sm:gap-2 mb-6 sm:mb-8 bg-slate-900 p-1.5 sm:p-2 rounded-2xl border border-slate-800 max-w-4xl mx-auto">
             <button onclick="switchTool('compress')" id="tab-compress" class="tool-tab py-2.5 sm:py-3 px-2 rounded-xl text-xs font-bold transition flex items-center justify-center gap-1.5 bg-indigo-600 text-white shadow-lg shadow-indigo-600/30">
                 ⚡ Compress
             </button>
@@ -133,8 +138,11 @@
             <button onclick="switchTool('convert')" id="tab-convert" class="tool-tab py-2.5 sm:py-3 px-2 rounded-xl text-xs font-bold transition flex items-center justify-center gap-1.5 text-slate-400 hover:text-white hover:bg-slate-800">
                 🔄 Convert
             </button>
-            <button onclick="switchTool('watermark')" id="tab-watermark" class="tool-tab py-2.5 sm:py-3 px-2 rounded-xl text-xs font-bold transition flex items-center justify-center gap-1.5 text-slate-400 hover:text-white hover:bg-slate-800 col-span-2 sm:col-span-1">
+            <button onclick="switchTool('watermark')" id="tab-watermark" class="tool-tab py-2.5 sm:py-3 px-2 rounded-xl text-xs font-bold transition flex items-center justify-center gap-1.5 text-slate-400 hover:text-white hover:bg-slate-800">
                 🏷️ Watermark
+            </button>
+            <button onclick="switchTool('barcode')" id="tab-barcode" class="tool-tab py-2.5 sm:py-3 px-2 rounded-xl text-xs font-bold transition flex items-center justify-center gap-1.5 text-slate-400 hover:text-white hover:bg-slate-800">
+                📊 QR/Barcode
             </button>
         </div>
 
@@ -150,7 +158,7 @@
 
         <div class="bg-slate-900 rounded-3xl p-4 sm:p-10 border border-slate-800 shadow-2xl relative">
             
-            <!-- UPLOAD DROP AREA (Desktop Drag & Drop + Mobile 1-Tap) -->
+            <!-- UPLOAD DROP AREA (FOR IMAGE TOOLS) -->
             <div id="drop-area" class="group border-2 border-dashed border-slate-700 hover:border-indigo-500 bg-slate-950/60 hover:bg-indigo-950/20 rounded-2xl p-6 sm:p-14 text-center cursor-pointer transition-all duration-300 block">
                 <input type="file" id="image-upload" accept="image/*, .heic, .HEIC, .heif, .HEIF, image/heic, image/heif" class="hidden">
                 <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-3xl bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-3xl sm:text-4xl flex items-center justify-center mx-auto mb-4 sm:mb-5 group-hover:scale-110 transition duration-300 shadow-inner">
@@ -167,14 +175,14 @@
             <!-- CONTROLS & PREVIEW WORKSPACE -->
             <div id="settings-panel" class="hidden mt-6 pt-6 sm:mt-8 sm:pt-8 border-t border-slate-800">
                 
-                <div class="flex items-center justify-between mb-4">
+                <div class="flex items-center justify-between mb-4" id="preview-header-bar">
                     <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Workspace Preview</span>
                     <button type="button" onclick="resetWorkspace()" class="py-1.5 px-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-bold text-indigo-400 hover:text-white transition flex items-center gap-1.5">
                         <span>🔄 Change Photo</span>
                     </button>
                 </div>
 
-                <!-- PREVIEW CONTAINER -->
+                <!-- 1. REGULAR IMAGE PREVIEW CONTAINER -->
                 <div id="single-preview-box" class="bg-slate-950/80 p-3 sm:p-5 rounded-2xl border border-slate-800 mb-6">
                     <div id="resize-badge-container" class="hidden flex justify-end mb-2">
                         <span id="resize-live-badge" class="text-[11px] font-bold text-indigo-400 bg-indigo-500/10 border border-indigo-500/20 px-3 py-1 rounded-lg">
@@ -192,7 +200,7 @@
                                 © SmartPicTools
                             </div>
 
-                            <!-- Live Diagonal Grid Watermark (Refined Spacing) -->
+                            <!-- Live Diagonal Grid Watermark -->
                             <div id="live-wm-grid" class="hidden absolute inset-0 overflow-hidden pointer-events-none flex items-center justify-center">
                                 <div id="live-wm-pattern" class="w-[200%] h-[200%] flex flex-wrap content-center justify-around gap-14 font-bold tracking-widest select-none tiled-watermark-overlay opacity-30">
                                 </div>
@@ -204,6 +212,18 @@
                         <span id="file-name" class="text-white truncate max-w-[180px] sm:max-w-xs">photo.jpg</span>
                         <span class="text-indigo-400">Size: <span id="file-size">0 KB</span></span>
                     </div>
+                </div>
+
+                <!-- 2. ⚡ LIVE QR & BARCODE PREVIEW BOX -->
+                <div id="barcode-preview-box" class="hidden bg-slate-950/80 p-5 rounded-2xl border border-slate-800 mb-6 text-center">
+                    <span class="text-xs font-bold text-slate-400 uppercase tracking-wider block mb-3">Live Graphic Display</span>
+                    <div class="inline-flex items-center justify-center p-6 bg-white rounded-2xl shadow-2xl min-w-[200px] min-h-[200px] max-w-full overflow-hidden">
+                        <!-- QR Display -->
+                        <div id="qrcode-render" class="flex items-center justify-center"></div>
+                        <!-- Barcode Display -->
+                        <svg id="barcode-render" class="hidden"></svg>
+                    </div>
+                    <p class="text-xs text-indigo-400 font-semibold mt-3">⚡ Live Generated in Real-Time as You Type</p>
                 </div>
 
                 <!-- MULTI-IMAGE GALLERY (FOR BATCH CONVERT) -->
@@ -310,7 +330,7 @@
                                 <button type="button" onclick="setWatermarkMode('single')" id="wm-single-btn" class="py-2 px-3 rounded-xl bg-indigo-600 text-white text-xs font-bold transition">
                                     📍 Single Stamp
                                 </button>
-                                <button type="button" onclick="setWatermarkMode('repeat')" id="wm-repeat-btn" class="py-2 px-3 rounded-xl bg-slate-900 text-slate-300 text-xs font-bold border border-slate-700 transition">
+                                <button type="button" onclick="setWatermarkMode('repeat')" id="wm-repeat-btn" class="py-2 px-3 rounded-xl bg-slate-900 text-slate-300 hover:text-white text-xs font-bold border border-slate-700 transition">
                                     🌐 Diagonal Grid
                                 </button>
                             </div>
@@ -379,9 +399,52 @@
                             </button>
                         </div>
                     </div>
+
+                    <!-- ⚡ 7. QR & BARCODE GENERATOR CONTROLS -->
+                    <div id="ctrl-barcode" class="tool-ctrl hidden space-y-4">
+                        <div class="flex gap-2 p-1 bg-slate-900 rounded-xl border border-slate-800 max-w-xs mx-auto">
+                            <button type="button" onclick="setBarcodeType('qr')" id="btn-mode-qr" class="flex-1 py-1.5 px-3 rounded-lg text-xs font-bold bg-indigo-600 text-white transition">
+                                📱 QR Code
+                            </button>
+                            <button type="button" onclick="setBarcodeType('barcode')" id="btn-mode-bc" class="flex-1 py-1.5 px-3 rounded-lg text-xs font-bold text-slate-400 hover:text-white transition">
+                                📊 Barcode
+                            </button>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold text-slate-400 mb-1">Enter Text, Link (URL), or Number:</label>
+                            <input type="text" id="barcode-input-text" value="https://smartpictools.in" oninput="renderLiveGraphic()" placeholder="e.g. https://yourwebsite.com or UPI ID" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-3 text-sm text-white focus:outline-none focus:border-indigo-500 font-semibold">
+                            <p class="text-[11px] text-slate-400 mt-1">💡 Supports Website links, WhatsApp messages, plain text, and UPI payment strings.</p>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3" id="barcode-extra-opts">
+                            <div>
+                                <label class="block text-xs font-bold text-slate-400 mb-1">Color Theme</label>
+                                <select id="barcode-color" onchange="renderLiveGraphic()" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white">
+                                    <option value="#000000" selected>Classic Black</option>
+                                    <option value="#4f46e5">Indigo Purple</option>
+                                    <option value="#0284c7">Sky Blue</option>
+                                    <option value="#059669">Emerald Green</option>
+                                </select>
+                            </div>
+                            <div id="barcode-format-container" class="hidden">
+                                <label class="block text-xs font-bold text-slate-400 mb-1">Barcode Standard</label>
+                                <select id="barcode-format-select" onchange="renderLiveGraphic()" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white">
+                                    <option value="CODE128" selected>CODE128 (Standard Alpha-Numeric)</option>
+                                    <option value="EAN13">EAN13 (Products)</option>
+                                    <option value="UPC">UPC (Retail)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <button type="button" onclick="downloadGraphicPNG()" class="w-full py-3.5 px-6 rounded-2xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-extrabold text-sm shadow-lg shadow-emerald-600/25 transition active:scale-[0.99] flex items-center justify-center gap-2">
+                            <span>📥 Download Graphic (High-Res PNG)</span>
+                        </button>
+                    </div>
+
                 </div>
 
-                <!-- DOWNLOAD ACTION BUTTON -->
+                <!-- DOWNLOAD ACTION BUTTON (FOR IMAGE TOOLS) -->
                 <button id="action-btn" class="w-full mt-5 py-3.5 sm:py-4 px-6 rounded-2xl bg-gradient-to-r from-indigo-600 via-indigo-500 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-extrabold text-sm sm:text-base shadow-lg shadow-indigo-500/25 transition active:scale-[0.99] flex items-center justify-center gap-3">
                     <span id="btn-text">⚡ Compress & Download</span>
                 </button>
@@ -394,11 +457,11 @@
         </div>
     </main>
 
-    <!-- 7 PRO TOOLS CATALOG -->
+    <!-- ⚡ 8 PRO TOOLS CATALOG (BROWSE ALL TOOLS SECTION) -->
     <section class="max-w-5xl mx-auto w-full px-4 mb-16 sm:mb-20 mt-8" id="all-tools-grid">
         <div class="text-center mb-8 sm:mb-10">
-            <span class="text-[11px] font-extrabold uppercase tracking-widest text-indigo-400 bg-indigo-500/10 px-3 py-1 rounded-full border border-indigo-500/20">Pro Image Suite</span>
-            <h2 class="text-2xl sm:text-4xl font-extrabold text-white mt-2.5">Browse All 7 Live Tools</h2>
+            <span class="text-[11px] font-extrabold uppercase tracking-widest text-indigo-400 bg-indigo-500/10 px-3 py-1 rounded-full border border-indigo-500/20">Pro Image & Utility Suite</span>
+            <h2 class="text-2xl sm:text-4xl font-extrabold text-white mt-2.5">Browse All Tools</h2>
             <p class="text-slate-400 text-xs sm:text-sm mt-1.5">Click any tool to launch workspace immediately.</p>
         </div>
 
@@ -446,10 +509,17 @@
             </div>
 
             <!-- 7. ROTATE & FLIP -->
-            <div onclick="launchToolFromGrid('rotate')" class="bg-slate-900/80 hover:bg-slate-900 border border-slate-800 hover:border-cyan-500/50 p-5 sm:p-6 rounded-2xl transition cursor-pointer group shadow-lg sm:col-span-2 lg:col-span-1">
+            <div onclick="launchToolFromGrid('rotate')" class="bg-slate-900/80 hover:bg-slate-900 border border-slate-800 hover:border-cyan-500/50 p-5 sm:p-6 rounded-2xl transition cursor-pointer group shadow-lg">
                 <div class="w-11 h-11 rounded-xl bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 flex items-center justify-center text-2xl mb-3.5 group-hover:scale-110 transition">🔁</div>
                 <h3 class="text-base sm:text-lg font-bold text-white group-hover:text-cyan-400 transition">Rotate & Mirror Flip</h3>
                 <p class="text-xs text-slate-400 mt-1.5 leading-relaxed">Rotate 90 degrees or mirror flip horizontally and vertically in 0.1s.</p>
+            </div>
+
+            <!-- ⚡ 8. LIVE QR & BARCODE GENERATOR -->
+            <div onclick="launchToolFromGrid('barcode')" class="bg-slate-900/80 hover:bg-slate-900 border border-slate-800 hover:border-teal-500/50 p-5 sm:p-6 rounded-2xl transition cursor-pointer group shadow-lg sm:col-span-2 lg:col-span-1">
+                <div class="w-11 h-11 rounded-xl bg-teal-500/10 text-teal-400 border border-teal-500/20 flex items-center justify-center text-2xl mb-3.5 group-hover:scale-110 transition">📊</div>
+                <h3 class="text-base sm:text-lg font-bold text-white group-hover:text-teal-400 transition">Live QR Code & Barcode Studio</h3>
+                <p class="text-xs text-slate-400 mt-1.5 leading-relaxed">Instant live preview for website links, UPI payments, and standard product barcodes.</p>
             </div>
         </div>
     </section>
@@ -472,7 +542,7 @@
                 <div class="bg-slate-900 p-5 sm:p-6 rounded-2xl border border-slate-800">
                     <div class="w-8 h-8 rounded-full bg-indigo-600 text-white font-extrabold text-sm flex items-center justify-center mb-3.5">2</div>
                     <h3 id="step2-title" class="font-bold text-white text-base">Set Target Size (KB/MB)</h3>
-                    <p id="step2-desc" class="text-xs text-slate-400 mt-1.5 leading-relaxed">Type your desired target KB (e.g. 200 KB) or adjust the quality percentage slider.</p>
+                    <p id="step2-desc" class="text-xs text-slate-400 mt-1.5 leading-relaxed">Type your desired KB (e.g. 200 KB) or adjust the quality percentage slider.</p>
                 </div>
                 <div class="bg-slate-900 p-5 sm:p-6 rounded-2xl border border-slate-800">
                     <div class="w-8 h-8 rounded-full bg-indigo-600 text-white font-extrabold text-sm flex items-center justify-center mb-3.5">3</div>
@@ -488,11 +558,10 @@
         <div class="text-center mb-10">
             <span class="text-[11px] font-extrabold uppercase tracking-widest text-indigo-400 bg-indigo-500/10 px-3 py-1 rounded-full border border-indigo-500/20">Questions Answered</span>
             <h2 class="text-2xl sm:text-3xl font-extrabold text-white mt-2.5">Frequently Asked Questions</h2>
-            <p class="text-slate-400 text-xs sm:text-sm mt-1">Everything you need to know about our 7 tools and device security.</p>
+            <p class="text-slate-400 text-xs sm:text-sm mt-1">Everything you need to know about our suite and device security.</p>
         </div>
 
         <div class="space-y-3.5 text-sm">
-            <!-- FAQ 1: COMPRESS -->
             <details class="group bg-slate-900 p-4 sm:p-5 rounded-2xl border border-slate-800 cursor-pointer">
                 <summary class="font-bold text-white flex justify-between items-center">
                     1. How does Exact KB/MB target compression work without losing sharpness?
@@ -501,25 +570,22 @@
                 <p class="text-slate-400 mt-3 text-xs sm:text-sm leading-relaxed">Unlike basic compressors that force a random quality percentage, our engine runs a precision binary search algorithm in browser memory. It calculates the exact byte ratio to match your requested file weight (e.g. 50 KB, 200 KB) while preserving maximum visual sharpness and clarity.</p>
             </details>
 
-            <!-- FAQ 2: CROP -->
             <details class="group bg-slate-900 p-4 sm:p-5 rounded-2xl border border-slate-800 cursor-pointer">
                 <summary class="font-bold text-white flex justify-between items-center">
                     2. Which aspect ratio templates are supported for social media platforms?
                     <span class="text-indigo-400 group-open:rotate-180 transition ml-2">▼</span>
                 </summary>
-                <p class="text-slate-400 mt-3 text-xs sm:text-sm leading-relaxed">SmartPicTools provides 1-tap presets for Instagram Feed (1:1 Square), YouTube Thumbnails (16:9), Instagram Reels & YouTube Shorts (9:16), and Portrait Posts (4:5), as well as a Freeform drag mode to crop any custom dimensions smoothly.</p>
+                <p class="text-slate-400 mt-3 text-xs sm:text-sm leading-relaxed">SmartPicTools provides 1-tap presets for Instagram Feed (1:1 Square), YouTube Thumbnails (16:9), Instagram Reels & YouTube Shorts (9:16), and Portrait Posts (4:5), as well as a Freeform drag mode to crop custom dimensions smoothly.</p>
             </details>
 
-            <!-- FAQ 3: RESIZE -->
             <details class="group bg-slate-900 p-4 sm:p-5 rounded-2xl border border-slate-800 cursor-pointer">
                 <summary class="font-bold text-white flex justify-between items-center">
                     3. How does the Proportion Lock prevent images from stretching or distortion?
                     <span class="text-indigo-400 group-open:rotate-180 transition ml-2">▼</span>
                 </summary>
-                <p class="text-slate-400 mt-3 text-xs sm:text-sm leading-relaxed">When 'Lock Proportions' is checked, changing the Width automatically recalculates the Height proportionally (and vice versa). This ensures your photo maintains its exact natural aspect ratio without getting squished, flattened, or stretched.</p>
+                <p class="text-slate-400 mt-3 text-xs sm:text-sm leading-relaxed">When 'Lock Proportions' is checked, changing the Width automatically recalculates the Height proportionally (and vice versa). This ensures your photo maintains its exact natural aspect ratio without getting squished or stretched.</p>
             </details>
 
-            <!-- FAQ 4: HEIC -->
             <details class="group bg-slate-900 p-4 sm:p-5 rounded-2xl border border-slate-800 cursor-pointer">
                 <summary class="font-bold text-white flex justify-between items-center">
                     4. Can I convert Apple iPhone (.HEIC / .HEIF) photos into standard JPG or PNG?
@@ -528,31 +594,28 @@
                 <p class="text-slate-400 mt-3 text-xs sm:text-sm leading-relaxed">Yes! Apple photos saved in HEIC format cannot be viewed on many Android devices or Windows PCs. Our built-in engine automatically decodes HEIC files and converts them directly to universal JPG, PNG, WEBP, or PDF with zero quality loss.</p>
             </details>
 
-            <!-- FAQ 5: WATERMARK -->
             <details class="group bg-slate-900 p-4 sm:p-5 rounded-2xl border border-slate-800 cursor-pointer">
                 <summary class="font-bold text-white flex justify-between items-center">
                     5. How does the Diagonal Grid Watermark protect photos from copyright theft?
                     <span class="text-indigo-400 group-open:rotate-180 transition ml-2">▼</span>
                 </summary>
-                <p class="text-slate-400 mt-3 text-xs sm:text-sm leading-relaxed">While single corner watermarks can easily be cropped out by unauthorized users, our Diagonal Grid style tiles your copyright watermark evenly across the entire surface at a subtle, professional transparency (25%). This makes unauthorized removal impossible without ruining image aesthetics.</p>
+                <p class="text-slate-400 mt-3 text-xs sm:text-sm leading-relaxed">While single corner watermarks can easily be cropped out, our Diagonal Grid style tiles your copyright watermark evenly across the entire surface at a subtle, professional transparency (25%), making unauthorized removal impossible.</p>
             </details>
 
-            <!-- FAQ 6: BATCH & CONVERT -->
             <details class="group bg-slate-900 p-4 sm:p-5 rounded-2xl border border-slate-800 cursor-pointer">
                 <summary class="font-bold text-white flex justify-between items-center">
                     6. How many files can I convert at once, and how does the Batch ZIP download work?
                     <span class="text-indigo-400 group-open:rotate-180 transition ml-2">▼</span>
                 </summary>
-                <p class="text-slate-400 mt-3 text-xs sm:text-sm leading-relaxed">You can select up to 10 photos simultaneously. When multiple files are processed, SmartPicTools bundles all converted images into a single compressed `.zip` archive so you can download everything in 1 click without dealing with multiple popups.</p>
+                <p class="text-slate-400 mt-3 text-xs sm:text-sm leading-relaxed">You can select up to 10 photos simultaneously. When multiple files are processed, SmartPicTools bundles all converted images into a single compressed `.zip` archive for convenient 1-click download.</p>
             </details>
 
-            <!-- FAQ 7: PRIVACY & COST -->
             <details class="group bg-slate-900 p-4 sm:p-5 rounded-2xl border border-slate-800 cursor-pointer">
                 <summary class="font-bold text-white flex justify-between items-center">
                     7. Is SmartPicTools really 100% free and are my uploaded pictures safe and private?
                     <span class="text-indigo-400 group-open:rotate-180 transition ml-2">▼</span>
                 </summary>
-                <p class="text-slate-400 mt-3 text-xs sm:text-sm leading-relaxed">SmartPicTools is 100% free with no hidden fees or subscriptions. More importantly, your images never get uploaded to or stored on any external database. All compression and editing executes client-side inside your own browser RAM and is wiped immediately upon download.</p>
+                <p class="text-slate-400 mt-3 text-xs sm:text-sm leading-relaxed">SmartPicTools is 100% free with no hidden fees or subscriptions. Your images never get uploaded to or stored on any external database. All compression and editing executes client-side inside your browser RAM and is wiped immediately upon download.</p>
             </details>
         </div>
     </section>
@@ -618,9 +681,11 @@
         let currentTool = 'compress';
         let compressMode = 'target';
         let watermarkMode = 'single';
+        let barcodeType = 'qr';
         let uploadedFiles = [];
         let cropper = null;
         let loadedImageElement = new Image();
+        let qrcodeObj = null;
         
         let currentRotation = 0;
         let isFlippedH = false;
@@ -636,10 +701,11 @@
             resize: { title: "Resize Dimensions with Live Transform", desc: "Change exact pixel dimensions with instant proportion lock.", btn: "📐 Resize & Download" },
             convert: { title: "Format & iPhone HEIC Converter", desc: "Convert HEIC, AVIF, JPG, PNG, WEBP, PDF instantly on your device.", btn: "🔄 Convert & Download" },
             watermark: { title: "Pro Watermark Studio", desc: "Stamp copyright text in corner or repeat diagonal security grid.", btn: "🏷️ Watermark & Download" },
-            rotate: { title: "Rotate & Mirror Flip", desc: "Rotate orientation 90 degrees or mirror flip horizontally / vertically.", btn: "🔁 Rotate & Download" }
+            rotate: { title: "Rotate & Mirror Flip", desc: "Rotate orientation 90 degrees or mirror flip horizontally / vertically.", btn: "🔁 Rotate & Download" },
+            barcode: { title: "Live QR Code & Barcode Studio", desc: "Generate custom QR codes and barcodes with live preview and instant 1-click download.", btn: "📥 Download Graphic (PNG)" }
         };
 
-        // ⚡ DYNAMIC HOW-TO-USE DATABASE FOR EACH TOOL
+        // ⚡ DYNAMIC HOW-TO-USE DATABASE
         const howToConfig = {
             compress: {
                 title: "How to Compress Image in 3 Easy Steps",
@@ -689,6 +755,13 @@
                 s1_t: "Upload Your Picture", s1_d: "Choose any photo needing rotation or mirror transformation.",
                 s2_t: "Click Orientation Buttons", s2_d: "Click 90° Clockwise, Anti-Clockwise, or Flip Horizontal / Vertical mirrors.",
                 s3_t: "Save Transformed Image", s3_d: "Click Rotate & Download to save your re-oriented image instantly."
+            },
+            barcode: {
+                title: "How to Generate QR Code & Barcode in 3 Steps",
+                desc: "Create free custom QR codes or product barcodes with instant live preview.",
+                s1_t: "Choose Type & Enter Content", s1_d: "Select QR Code or Barcode, then enter your website URL, text, or UPI string.",
+                s2_t: "Live Visual Preview", s2_d: "The graphic renders in real-time as you type with color and style options.",
+                s3_t: "Instant High-Res Download", s3_d: "Click Download to save a crystal-clear, high-resolution PNG to your device."
             }
         };
 
@@ -713,7 +786,10 @@
             document.getElementById('status-box').classList.add('hidden');
             document.getElementById('multi-preview-box').classList.add('hidden');
             document.getElementById('single-preview-box').classList.remove('hidden');
+            document.getElementById('barcode-preview-box').classList.add('hidden');
+            document.getElementById('action-btn').classList.remove('hidden');
             document.getElementById('action-btn').disabled = false;
+            document.getElementById('preview-header-bar').classList.remove('hidden');
             
             if (cropper) {
                 cropper.destroy();
@@ -729,7 +805,7 @@
             document.getElementById('live-wm-grid').classList.add('hidden');
         }
 
-        // ⚡ TAB SWITCHER (APPLIES OPTION A + SYNCS DYNAMIC HOW TO USE)
+        // ⚡ TAB SWITCHER (APPLIES OPTION A + SUPPORTS QR/BARCODE)
         function switchTool(tool) {
             resetWorkspace();
             currentTool = tool;
@@ -754,6 +830,22 @@
                 targetCtrl.classList.remove('hidden');
             }
 
+            // SPECIFIC QR / BARCODE HANDLING (NO IMAGE UPLOAD REQUIRED!)
+            if (tool === 'barcode') {
+                document.getElementById('drop-area').classList.add('hidden');
+                document.getElementById('single-preview-box').classList.add('hidden');
+                document.getElementById('multi-preview-box').classList.add('hidden');
+                document.getElementById('preview-header-bar').classList.add('hidden');
+                document.getElementById('barcode-preview-box').classList.remove('hidden');
+                document.getElementById('settings-panel').classList.remove('hidden');
+                document.getElementById('action-btn').classList.add('hidden');
+                renderLiveGraphic();
+            } else {
+                document.getElementById('barcode-preview-box').classList.add('hidden');
+                document.getElementById('action-btn').classList.remove('hidden');
+                document.getElementById('preview-header-bar').classList.remove('hidden');
+            }
+
             const fileInput = document.getElementById('image-upload');
             if (tool === 'convert') {
                 fileInput.setAttribute('multiple', 'multiple');
@@ -763,7 +855,6 @@
                 document.getElementById('upload-subtext').innerText = "Supports JPG, PNG, WEBP, AVIF, iPhone HEIC";
             }
 
-            // Sync Dynamic Guide
             updateDynamicHowToUse(tool);
         }
 
@@ -772,6 +863,9 @@
             if (tool === 'rotate') {
                 switchTool('rotate');
                 updateDynamicHowToUse('rotate');
+            } else if (tool === 'barcode') {
+                switchTool('barcode');
+                updateDynamicHowToUse('barcode');
             } else {
                 switchTool(tool);
                 if (subMode === 'heic') {
@@ -786,6 +880,112 @@
                 }
             }
             window.scrollTo({ top: document.getElementById('tool-workspace').offsetTop - 30, behavior: 'smooth' });
+        }
+
+        // ==========================================
+        // ⚡ QR & BARCODE GENERATOR ENGINE
+        // ==========================================
+        function setBarcodeType(type) {
+            barcodeType = type;
+            document.getElementById('btn-mode-qr').className = type === 'qr' ? "flex-1 py-1.5 px-3 rounded-lg text-xs font-bold bg-indigo-600 text-white transition" : "flex-1 py-1.5 px-3 rounded-lg text-xs font-bold text-slate-400 hover:text-white transition";
+            document.getElementById('btn-mode-bc').className = type === 'barcode' ? "flex-1 py-1.5 px-3 rounded-lg text-xs font-bold bg-indigo-600 text-white transition" : "flex-1 py-1.5 px-3 rounded-lg text-xs font-bold text-slate-400 hover:text-white transition";
+            
+            document.getElementById('barcode-format-container').classList.toggle('hidden', type === 'qr');
+            renderLiveGraphic();
+        }
+
+        function renderLiveGraphic() {
+            if (currentTool !== 'barcode') return;
+            const text = document.getElementById('barcode-input-text').value.trim() || 'SmartPicTools';
+            const color = document.getElementById('barcode-color').value;
+            const qrContainer = document.getElementById('qrcode-render');
+            const bcContainer = document.getElementById('barcode-render');
+
+            if (barcodeType === 'qr') {
+                bcContainer.classList.add('hidden');
+                qrContainer.classList.remove('hidden');
+                qrContainer.innerHTML = '';
+                try {
+                    qrcodeObj = new QRCode(qrContainer, {
+                        text: text,
+                        width: 200,
+                        height: 200,
+                        colorDark: color,
+                        colorLight: "#ffffff",
+                        correctLevel: QRCode.CorrectLevel.H
+                    });
+                } catch(e) {
+                    console.warn(e);
+                }
+            } else {
+                qrContainer.classList.add('hidden');
+                bcContainer.classList.remove('hidden');
+                const fmt = document.getElementById('barcode-format-select').value;
+                try {
+                    JsBarcode("#barcode-render", text, {
+                        format: fmt,
+                        lineColor: color,
+                        width: 2,
+                        height: 80,
+                        displayValue: true
+                    });
+                } catch(e) {
+                    // Fallback to Code128 if invalid digits for EAN/UPC
+                    JsBarcode("#barcode-render", text, {
+                        format: "CODE128",
+                        lineColor: color,
+                        width: 2,
+                        height: 80,
+                        displayValue: true
+                    });
+                }
+            }
+        }
+
+        function downloadGraphicPNG() {
+            if (barcodeType === 'qr') {
+                const img = document.querySelector('#qrcode-render img');
+                if (img && img.src) {
+                    const a = document.createElement('a');
+                    a.href = img.src;
+                    a.download = `smartpic_qr_${Date.now()}.png`;
+                    a.click();
+                    document.getElementById('status-box').classList.remove('hidden');
+                } else {
+                    const canvas = document.querySelector('#qrcode-render canvas');
+                    if (canvas) {
+                        const a = document.createElement('a');
+                        a.href = canvas.toDataURL('image/png');
+                        a.download = `smartpic_qr_${Date.now()}.png`;
+                        a.click();
+                        document.getElementById('status-box').classList.remove('hidden');
+                    }
+                }
+            } else {
+                const svg = document.getElementById('barcode-render');
+                const xml = new XMLSerializer().serializeToString(svg);
+                const svg64 = btoa(xml);
+                const b64Start = 'data:image/svg+xml;base64,';
+                const image64 = b64Start + svg64;
+
+                const img = new Image();
+                img.onload = function() {
+                    const canvas = document.createElement('canvas');
+                    canvas.width = img.width + 40;
+                    canvas.height = img.height + 40;
+                    const ctx = canvas.getContext('2d');
+                    ctx.fillStyle = '#ffffff';
+                    ctx.fillRect(0, 0, canvas.width, canvas.height);
+                    ctx.drawImage(img, 20, 20);
+
+                    const a = document.createElement('a');
+                    a.href = canvas.toDataURL('image/png');
+                    a.download = `smartpic_barcode_${Date.now()}.png`;
+                    a.click();
+                    document.getElementById('status-box').classList.remove('hidden');
+                };
+                img.src = image64;
+            }
         }
 
         // DRAG & DROP + CLICK UPLOAD
@@ -839,7 +1039,7 @@
             
             // ⚡ BULLETPROOF IN-BROWSER HEIC CONVERTER
             if (isHeic) {
-                document.getElementById('btn-text').innerText = "⏳ Reading Apple HEIC photo...";
+                document.getElementById('btn-text').innerText = "⏳ Loading photo...";
                 try {
                     const convertedBlob = await heic2any({ blob: file, toType: "image/jpeg", quality: 0.92 });
                     displayBlob = Array.isArray(convertedBlob) ? convertedBlob[0] : convertedBlob;
@@ -1004,7 +1204,7 @@
             document.getElementById('quality-display').innerText = e.target.value + '%';
         });
 
-        // ⚡ WATERMARK LIVE PREVIEW (BEAUTIFUL BALANCED SPACING)
+        // ⚡ WATERMARK LIVE PREVIEW
         function setWatermarkMode(m) {
             watermarkMode = m;
             document.getElementById('wm-single-btn').className = m === 'single' ? "py-2 px-3 rounded-xl bg-indigo-600 text-white text-xs font-bold transition" : "py-2 px-3 rounded-xl bg-slate-900 text-slate-300 text-xs font-bold border border-slate-700 transition";
@@ -1044,7 +1244,6 @@
                 singleEl.classList.add('hidden');
                 gridEl.classList.remove('hidden');
                 patternEl.innerHTML = '';
-                // Refined, spacious grid count (never mashes together)
                 for (let i = 0; i < 24; i++) {
                     const span = document.createElement('span');
                     span.innerText = text;
@@ -1093,7 +1292,6 @@
             eventTarget.className = "ratio-btn py-2 px-3 rounded-xl bg-indigo-600 text-white text-xs font-bold transition";
         }
 
-        // ⚡ NATIVE AVIF DETECTOR
         function canEncodeAvif() {
             try {
                 const c = document.createElement('canvas');
@@ -1154,20 +1352,20 @@
                     return;
                 }
 
-              // ⚡ TURBO AVIF SENDER (Pre-optimizes in browser so upload is 0.2s!)
+                // ⚡ MAX TURBO AVIF PRE-PROCESSOR (Only 90KB Upload!)
                 if (currentTool === 'convert' && document.getElementById('convert-format').value === 'AVIF' && !canEncodeAvif()) {
                     btn.disabled = true;
                     document.getElementById('btn-text').innerText = "⏳ Converting...";
 
                     let sendBlob = file;
-                    // If image is huge, downscale on phone canvas in 0.05s so upload is 200KB instead of 10MB!
-                    if (loadedImageElement.naturalWidth > 1920 || loadedImageElement.naturalHeight > 1920) {
-                        const scale = 1920 / Math.max(loadedImageElement.naturalWidth, loadedImageElement.naturalHeight);
+                    const maxDim = 1280;
+                    if (loadedImageElement.naturalWidth > maxDim || loadedImageElement.naturalHeight > maxDim) {
+                        const scale = maxDim / Math.max(loadedImageElement.naturalWidth, loadedImageElement.naturalHeight);
                         const tc = document.createElement('canvas');
                         tc.width = Math.round(loadedImageElement.naturalWidth * scale);
                         tc.height = Math.round(loadedImageElement.naturalHeight * scale);
                         tc.getContext('2d').drawImage(loadedImageElement, 0, 0, tc.width, tc.height);
-                        sendBlob = await new Promise(r => tc.toBlob(r, 'image/jpeg', 0.90));
+                        sendBlob = await new Promise(r => tc.toBlob(r, 'image/jpeg', 0.85));
                     }
 
                     const fd = new FormData();
@@ -1193,7 +1391,6 @@
                     let w = naturalImgWidth;
                     let h = naturalImgHeight;
 
-                    // Automatically caps huge 10MB/48MP photos to crisp 2560px so it finishes in 0.4s!
                     const maxTurboDim = 2560;
                     if (currentTool !== 'resize' && (w > maxTurboDim || h > maxTurboDim)) {
                         const scale = maxTurboDim / Math.max(w, h);
@@ -1227,7 +1424,7 @@
                     }
                     ctx.restore();
 
-                    // WATERMARK STAMP (ELEGANT SPACED REPEAT)
+                    // WATERMARK STAMP
                     if (currentTool === 'watermark') {
                         const wmText = document.getElementById('watermark-text').value || '© SmartPicTools';
                         const wmColor = document.getElementById('watermark-color').value;
@@ -1252,7 +1449,6 @@
                             ctx.translate(canvas.width / 2, canvas.height / 2);
                             ctx.rotate((-25 * Math.PI) / 180);
                             
-                            // ⚡ Wide, elegant spacing so it protects the image without turning into a barcode
                             const textMetrics = ctx.measureText(wmText);
                             const stepX = Math.max(340, textMetrics.width + 120);
                             const stepY = Math.max(160, wmSize * 5);
@@ -1360,7 +1556,7 @@
                 body: JSON.stringify({ category: cat, message: msg, email: email })
             }).catch(() => {});
 
-            // Auto-fallback timer: Never keeps the button stuck on Sending!
+            // Auto-fallback timer
             const timer = setTimeout(() => {
                 document.getElementById('fb-success').classList.remove('hidden');
                 document.getElementById('feedback-form').reset();
@@ -1400,3 +1596,4 @@
     </script>
 </body>
 </html>
+```
