@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    
+    <!-- ⚡ HIGH-RANKING KEYWORDS FOR HEIC TO JPG -->
+    <title>Convert iPhone HEIC to JPG Online Free | SmartPicTools</title>
+    <meta name="description" content="Free online tool to convert Apple iPhone HEIC and HEIF photos to standard JPG or PNG. 100% private in-browser tool with zero server uploads.">
+    <meta name="keywords" content="convert heic to jpg, heic to jpg online, iphone photo to jpg, apple heic converter, heif to jpg, convert heic to png free">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <meta name="author" content="SmartPicTools">
+    <link rel="canonical" href="https://smartpictools.in/heic-to-jpg">
+    <meta name="google-site-verification" content="uUq17UUsROyHMRQ8jkqKqrjZmsJnkuxZMKKoJLw_X3E" />
+
+    <!-- OPEN GRAPH -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://smartpictools.in/heic-to-jpg">
+    <meta property="og:title" content="Convert iPhone HEIC to JPG Online Free - SmartPicTools">
+    <meta property="og:description" content="Turn Apple HEIC photos into universal JPG images in 0.5s directly in your browser.">
+
+    <!-- FAVICON -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' stop-color='%236366f1'/><stop offset='50%25' stop-color='%23a855f7'/><stop offset='100%25' stop-color='%23ec4899'/></linearGradient></defs><rect width='100' height='100' rx='28' fill='url(%23g)'/><path d='M52 16 L24 54 L46 54 L42 84 L76 44 L54 44 Z' fill='%23fbbf24'/></svg>">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/heic2any/0.0.4/heic2any.min.js"></script>
+
+    <style>body { font-family: 'Plus Jakarta Sans', sans-serif; -webkit-tap-highlight-color: transparent; }</style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col justify-between selection:bg-indigo-500 selection:text-white">
+
+    <header class="border-b border-slate-800 bg-slate-900/80 backdrop-blur-xl sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 h-18 sm:h-20 flex items-center justify-between">
+            <a href="/" class="flex items-center gap-2.5 sm:gap-3 group">
+                <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-2xl bg-gradient-to-tr from-indigo-500 via-purple-500 to-pink-500 flex items-center justify-center text-white text-lg sm:text-xl shadow-lg shadow-indigo-500/30 group-hover:scale-105 transition">
+                    ⚡
+                </div>
+                <div>
+                    <span class="text-xl sm:text-2xl font-black tracking-tight text-white">SmartPic<span class="text-indigo-400">Tools</span></span>
+                    <span class="block text-[9px] sm:text-[10px] uppercase font-bold tracking-widest text-slate-400 -mt-1">iPhone Converter</span>
+                </div>
+            </a>
+            <a href="/" class="py-2 px-3.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-bold text-indigo-400 hover:text-white border border-slate-700 transition flex items-center gap-1.5 shadow-md">
+                <span>← All Tools</span>
+            </a>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto w-full px-4 py-8 sm:py-12 flex-1">
+        <div class="text-center max-w-2xl mx-auto mb-8 sm:mb-10">
+            <h1 class="text-3xl sm:text-5xl font-black text-white tracking-tight">Convert iPhone HEIC to JPG</h1>
+            <p class="mt-2.5 text-slate-400 text-xs sm:text-sm">Turn Apple HEIC and HEIF photos into universal JPG or PNG files compatible with all devices.</p>
+        </div>
+
+        <div class="bg-slate-900 rounded-3xl p-5 sm:p-10 border border-slate-800 shadow-2xl relative">
+            <div id="drop-area" class="border-2 border-dashed border-slate-700 hover:border-indigo-500 bg-slate-950/60 hover:bg-indigo-950/20 rounded-2xl p-8 sm:p-14 text-center cursor-pointer transition-all duration-300">
+                <input type="file" id="file-input" accept=".heic, .HEIC, .heif, .HEIF, image/heic, image/heif" class="hidden">
+                <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-3xl bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-3xl sm:text-4xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition duration-300 shadow-inner">
+                    📱
+                </div>
+                <h3 class="text-base sm:text-xl font-bold text-white mb-1.5">Select iPhone HEIC Photo</h3>
+                <p class="text-xs sm:text-sm text-slate-400">Select any .heic or .heif file from your phone or PC</p>
+            </div>
+
+            <div id="workspace" class="hidden mt-6 space-y-6">
+                <div class="flex items-center justify-between">
+                    <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Converted Preview</span>
+                    <button type="button" onclick="document.getElementById('file-input').click()" class="text-xs font-bold text-indigo-400 hover:text-white bg-slate-800 hover:bg-slate-700 px-3 py-1.5 rounded-xl border border-slate-700 transition">
+                        🔄 Change Photo
+                    </button>
+                </div>
+
+                <div class="bg-slate-950/80 p-4 rounded-2xl border border-slate-800 flex items-center justify-center max-h-[380px] overflow-hidden">
+                    <img id="preview-img" src="#" alt="Preview" class="max-h-[340px] w-auto rounded-xl object-contain">
+                </div>
+
+                <div class="flex justify-between text-xs font-semibold px-1">
+                    <span id="file-name" class="text-white truncate max-w-xs">photo.heic</span>
+                    <span class="text-indigo-400">Ready to save as JPG</span>
+                </div>
+
+                <div class="bg-slate-950/80 p-4 sm:p-5 rounded-2xl border border-slate-800 space-y-2">
+                    <label class="block text-xs font-bold text-slate-400">Convert To:</label>
+                    <select id="target-format" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-3 text-sm text-white focus:outline-none font-bold">
+                        <option value="JPG" selected>Universal JPG Photo (Recommended)</option>
+                        <option value="PNG">Lossless PNG Image</option>
+                    </select>
+                </div>
+
+                <button type="button" id="download-btn" onclick="downloadConvertedFile()" class="w-full py-4 px-6 rounded-2xl bg-gradient-to-r from-indigo-600 via-indigo-500 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-extrabold text-sm sm:text-base shadow-lg shadow-indigo-500/25 transition active:scale-[0.99] flex items-center justify-center gap-3">
+                    <span>📥 Download Converted File</span>
+                </button>
+            </div>
+
+            <div id="status-box" class="hidden mt-5 p-3.5 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 text-center">
+                <p class="text-emerald-400 font-bold text-xs sm:text-sm">🎉 Success! File converted and downloaded directly to your device.</p>
+            </div>
+        </div>
+
+        <section class="mt-14 border-t border-slate-800 pt-10">
+            <h2 class="text-xl sm:text-2xl font-bold text-white text-center mb-6">How to Convert HEIC to JPG in 3 Easy Steps</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs sm:text-sm">
+                <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800">
+                    <span class="w-7 h-7 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center mb-2.5 text-xs">1</span>
+                    <h3 class="font-bold text-white text-sm mb-1">Select Apple Photo</h3>
+                    <p class="text-slate-400">Choose .heic or .heif photo taken on iPhone or iPad.</p>
+                </div>
+                <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800">
+                    <span class="w-7 h-7 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center mb-2.5 text-xs">2</span>
+                    <h3 class="font-bold text-white text-sm mb-1">Automatic Decoding</h3>
+                    <p class="text-slate-400">Our in-browser engine decodes the photo into standard pixels in 0.5s.</p>
+                </div>
+                <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800">
+                    <span class="w-7 h-7 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center mb-2.5 text-xs">3</span>
+                    <h3 class="font-bold text-white text-sm mb-1">Download JPG</h3>
+                    <p class="text-slate-400">Click download to save a universal photo viewable on Windows & Android.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="mt-12 space-y-3">
+            <h2 class="text-xl font-bold text-white mb-4">Frequently Asked Questions</h2>
+            <details class="bg-slate-900 p-4 rounded-xl border border-slate-800 text-xs sm:text-sm cursor-pointer">
+                <summary class="font-bold text-white flex justify-between items-center">
+                    Why can't I open HEIC photos on Windows or Android?
+                    <span class="text-indigo-400">▼</span>
+                </summary>
+                <p class="text-slate-400 mt-2 leading-relaxed">HEIC is Apple's proprietary format. Windows and Android do not natively support it without paid plugins. Converting to JPG makes it viewable everywhere.</p>
+            </details>
+        </section>
+    </main>
+
+    <footer class="border-t border-slate-800 bg-slate-950 py-8 px-4 text-xs text-slate-400 text-center">
+        <p>© 2026 SmartPicTools. 100% Free & Private in-browser suite. <a href="/" class="text-indigo-400 hover:underline">Explore All Tools</a></p>
+    </footer>
+
+    <script>
+        let convertedBlob = null;
+        let originalFileName = 'photo';
+
+        const dropArea = document.getElementById('drop-area');
+        const fileInput = document.getElementById('file-input');
+
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(ev => {
+            window.addEventListener(ev, (e) => { e.preventDefault(); e.stopPropagation(); }, false);
+            dropArea.addEventListener(ev, (e) => { e.preventDefault(); e.stopPropagation(); }, false);
+        });
+
+        ['dragenter', 'dragover'].forEach(ev => dropArea.classList.add('border-indigo-500', 'bg-indigo-950/40'));
+        ['dragleave', 'drop'].forEach(ev => dropArea.classList.remove('border-indigo-500', 'bg-indigo-950/40'));
+
+        dropArea.addEventListener('drop', (e) => {
+            if (e.dataTransfer && e.dataTransfer.files.length > 0) processHeic(e.dataTransfer.files[0]);
+        });
+        dropArea.addEventListener('click', () => fileInput.click());
+        fileInput.addEventListener('change', (e) => {
+            if (e.target.files && e.target.files.length > 0) processHeic(e.target.files[0]);
+        });
+
+        async function processHeic(file) {
+            originalFileName = file.name.substring(0, file.name.lastIndexOf('.')) || file.name;
+            document.getElementById('file-name').innerText = file.name;
+
+            try {
+                const conv = await heic2any({ blob: file, toType: 'image/jpeg', quality: 0.92 });
+                convertedBlob = Array.isArray(conv) ? conv[0] : conv;
+                document.getElementById('preview-img').src = URL.createObjectURL(convertedBlob);
+
+                document.getElementById('drop-area').classList.add('hidden');
+                document.getElementById('workspace').classList.remove('hidden');
+                document.getElementById('status-box').classList.add('hidden');
+            } catch(e) {
+                alert('Could not decode HEIC file: ' + e.message);
+            }
+        }
+
+        function downloadConvertedFile() {
+            if (!convertedBlob) return;
+            const fmt = document.getElementById('target-format').value.toLowerCase();
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(convertedBlob);
+            a.download = `smartpic_${originalFileName}.${fmt}`;
+            a.click();
+            document.getElementById('status-box').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
