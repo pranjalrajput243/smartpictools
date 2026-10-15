@@ -20,17 +20,43 @@ app = Flask(__name__)
 app.config['MAX_CONTENT_LENGTH'] = 100 * 1024 * 1024  # 100MB limit
 
 # ==========================================
-# PAGE ROUTES
+# ⚡ ALL DEDICATED TOOL ROUTES
 # ==========================================
 @app.route('/')
 def home():
     return render_template('index.html')
 
-# ⚡ DEDICATED IMAGE TO PDF ROUTE
+@app.route('/compress-image')
+def compress_page():
+    return render_template('compress-image.html')
+
+@app.route('/crop-image')
+def crop_page():
+    return render_template('crop-image.html')
+
+@app.route('/resize-image')
+def resize_page():
+    return render_template('resize-image.html')
+
+@app.route('/heic-to-jpg')
+def heic_page():
+    return render_template('heic-to-jpg.html')
+
+@app.route('/add-watermark')
+def watermark_page():
+    return render_template('add-watermark.html')
+
+@app.route('/qr-code-generator')
+def qr_page():
+    return render_template('qr-code-generator.html')
+
 @app.route('/image-to-pdf')
 def image_to_pdf():
     return render_template('image-to-pdf.html')
 
+# ==========================================
+# LEGAL & INFO ROUTES
+# ==========================================
 @app.route('/privacy')
 def privacy():
     return render_template('privacy.html')
@@ -47,13 +73,19 @@ def about():
 def contact():
     return render_template('contact.html')
 
-# ⚡ SITEMAP (NOW INCLUDES /image-to-pdf FOR GOOGLE RANKING)
+# ⚡ MASTER SITEMAP (ALL DEDICATED URLS FOR GOOGLE #1 RANKING)
 @app.route('/sitemap.xml')
 def sitemap():
     xml = """<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://smartpictools.in/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://smartpictools.in/compress-image</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
   <url><loc>https://smartpictools.in/image-to-pdf</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://smartpictools.in/crop-image</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://smartpictools.in/resize-image</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://smartpictools.in/heic-to-jpg</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://smartpictools.in/add-watermark</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://smartpictools.in/qr-code-generator</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
   <url><loc>https://smartpictools.in/about</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://smartpictools.in/privacy</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://smartpictools.in/terms</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
