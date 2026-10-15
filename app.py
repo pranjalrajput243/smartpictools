@@ -20,7 +20,7 @@ app = Flask(__name__)
 app.config['MAX_CONTENT_LENGTH'] = 100 * 1024 * 1024  # 100MB limit
 
 # ==========================================
-# ⚡ ALL DEDICATED TOOL ROUTES
+# ⚡ ALL 9 DEDICATED TOOL ROUTES
 # ==========================================
 @app.route('/')
 def home():
@@ -38,6 +38,10 @@ def crop_page():
 def resize_page():
     return render_template('resize-image.html')
 
+@app.route('/convert-image')
+def convert_page():
+    return render_template('convert-image.html')
+
 @app.route('/heic-to-jpg')
 def heic_page():
     return render_template('heic-to-jpg.html')
@@ -45,6 +49,10 @@ def heic_page():
 @app.route('/add-watermark')
 def watermark_page():
     return render_template('add-watermark.html')
+
+@app.route('/rotate-image')
+def rotate_page():
+    return render_template('rotate-image.html')
 
 @app.route('/qr-code-generator')
 def qr_page():
@@ -73,7 +81,9 @@ def about():
 def contact():
     return render_template('contact.html')
 
-# ⚡ MASTER SITEMAP (ALL DEDICATED URLS FOR GOOGLE #1 RANKING)
+# ==========================================
+# ⚡ MASTER SITEMAP (ALL 9 TOOLS FOR GOOGLE RANKING)
+# ==========================================
 @app.route('/sitemap.xml')
 def sitemap():
     xml = """<?xml version="1.0" encoding="UTF-8"?>
@@ -83,8 +93,10 @@ def sitemap():
   <url><loc>https://smartpictools.in/image-to-pdf</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
   <url><loc>https://smartpictools.in/crop-image</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
   <url><loc>https://smartpictools.in/resize-image</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://smartpictools.in/convert-image</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
   <url><loc>https://smartpictools.in/heic-to-jpg</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
   <url><loc>https://smartpictools.in/add-watermark</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://smartpictools.in/rotate-image</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
   <url><loc>https://smartpictools.in/qr-code-generator</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
   <url><loc>https://smartpictools.in/about</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://smartpictools.in/privacy</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
