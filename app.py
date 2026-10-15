@@ -5,7 +5,6 @@ import datetime
 from flask import Flask, render_template, request, send_file, jsonify, Response
 from PIL import Image
 
-# ⚡ Bulletproof AVIF & iPhone HEIC/HEIF Library Setup
 try:
     import pillow_avif
 except Exception:
@@ -20,9 +19,17 @@ except Exception:
 app = Flask(__name__)
 app.config['MAX_CONTENT_LENGTH'] = 100 * 1024 * 1024  # 100MB limit
 
+# ==========================================
+# PAGE ROUTES
+# ==========================================
 @app.route('/')
 def home():
     return render_template('index.html')
+
+# ⚡ DEDICATED IMAGE TO PDF ROUTE
+@app.route('/image-to-pdf')
+def image_to_pdf():
+    return render_template('image-to-pdf.html')
 
 @app.route('/privacy')
 def privacy():
@@ -40,11 +47,13 @@ def about():
 def contact():
     return render_template('contact.html')
 
+# ⚡ SITEMAP (NOW INCLUDES /image-to-pdf FOR GOOGLE RANKING)
 @app.route('/sitemap.xml')
 def sitemap():
     xml = """<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://smartpictools.in/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://smartpictools.in/image-to-pdf</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
   <url><loc>https://smartpictools.in/about</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://smartpictools.in/privacy</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://smartpictools.in/terms</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
@@ -81,7 +90,7 @@ def submit_feedback():
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
-# ⚡ TURBO AVIF SPEED ENGINE (Finishes in 0.8s)
+# ⚡ TURBO AVIF FALLBACK ENGINE
 @app.route('/process', methods=['POST'])
 def process_fallback():
     try:
@@ -99,20 +108,18 @@ def process_fallback():
         else:
             img = img.convert('RGB')
 
-        # ⚡ Cap to 1920px (Full HD) - 5x faster processing!
-        if img.width > 1920 or img.height > 1920:
-            img.thumbnail((1920, 1920), Image.Resampling.BILINEAR)
+        if img.width > 1280 or img.height > 1280:
+            img.thumbnail((1280, 1280), Image.Resampling.BILINEAR)
 
         buf = io.BytesIO()
         out_name = f"smartpic_converted.{target_fmt.lower()}"
         mimetype = f"image/{target_fmt.lower()}"
 
         if target_fmt == 'AVIF':
-            # ⚡ speed=9 makes AVIF encode 10x faster!
             try:
-                img.save(buf, format='AVIF', quality=68, speed=9)
+                img.save(buf, format='AVIF', quality=60, speed=10)
             except Exception:
-                img.save(buf, format='AVIF', quality=68)
+                img.save(buf, format='AVIF', quality=60)
         elif target_fmt in ['JPG', 'JPEG']:
             img.save(buf, format='JPEG', quality=90)
             mimetype = 'image/jpeg'
@@ -124,3 +131,6 @@ def process_fallback():
         return send_file(io.BytesIO(buf.getvalue()), mimetype=mimetype, as_attachment=True, download_name=out_name)
     except Exception as e:
         return jsonify({'error': str(e)}), 500
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5000, debug=True)
