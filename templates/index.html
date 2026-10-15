@@ -400,14 +400,13 @@
                         </div>
                     </div>
 
-                    <!-- ⚡ 7. QR & BARCODE GENERATOR CONTROLS -->
-                    <div id="ctrl-barcode" class="tool-ctrl hidden space-y-4">
+                    <!-- ⚡ Barcode Left, QR Code Right -->
                         <div class="flex gap-2 p-1 bg-slate-900 rounded-xl border border-slate-800 max-w-xs mx-auto">
-                            <button type="button" onclick="setBarcodeType('qr')" id="btn-mode-qr" class="flex-1 py-1.5 px-3 rounded-lg text-xs font-bold bg-indigo-600 text-white transition">
-                                📱 QR Code
-                            </button>
-                            <button type="button" onclick="setBarcodeType('barcode')" id="btn-mode-bc" class="flex-1 py-1.5 px-3 rounded-lg text-xs font-bold text-slate-400 hover:text-white transition">
+                            <button type="button" onclick="setBarcodeType('barcode')" id="btn-mode-bc" class="flex-1 py-1.5 px-3 rounded-lg text-xs font-bold bg-indigo-600 text-white transition">
                                 📊 Barcode
+                            </button>
+                            <button type="button" onclick="setBarcodeType('qr')" id="btn-mode-qr" class="flex-1 py-1.5 px-3 rounded-lg text-xs font-bold text-slate-400 hover:text-white transition">
+                                📱 QR Code
                             </button>
                         </div>
 
@@ -681,7 +680,7 @@
         let currentTool = 'compress';
         let compressMode = 'target';
         let watermarkMode = 'single';
-        let barcodeType = 'qr';
+        let barcodeType = 'barcode';
         let uploadedFiles = [];
         let cropper = null;
         let loadedImageElement = new Image();
