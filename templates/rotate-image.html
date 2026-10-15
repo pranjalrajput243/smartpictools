@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    
+    <!-- ⚡ HIGH-RANKING KEYWORDS FOR ROTATE & FLIP -->
+    <title>Rotate & Flip Image Online Free - 90 Degree & Mirror | SmartPicTools</title>
+    <meta name="description" content="Rotate images 90 degrees clockwise or anti-clockwise and mirror flip horizontally or vertically online for free. 100% private in-browser tool.">
+    <meta name="keywords" content="rotate image online, flip image horizontally, mirror photo online, rotate picture 90 degrees, flip photo vertical, free photo rotator">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <meta name="author" content="SmartPicTools">
+    <link rel="canonical" href="https://smartpictools.in/rotate-image">
+    <meta name="google-site-verification" content="uUq17UUsROyHMRQ8jkqKqrjZmsJnkuxZMKKoJLw_X3E" />
+
+    <!-- OPEN GRAPH -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://smartpictools.in/rotate-image">
+    <meta property="og:title" content="Rotate & Flip Image Online Free - SmartPicTools">
+    <meta property="og:description" content="Rotate orientation and mirror flip photos in 0.05s directly on your device.">
+
+    <!-- FAVICON -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' stop-color='%236366f1'/><stop offset='50%25' stop-color='%23a855f7'/><stop offset='100%25' stop-color='%23ec4899'/></linearGradient></defs><rect width='100' height='100' rx='28' fill='url(%23g)'/><path d='M52 16 L24 54 L46 54 L42 84 L76 44 L54 44 Z' fill='%23fbbf24'/></svg>">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/heic2any/0.0.4/heic2any.min.js"></script>
+
+    <style>body { font-family: 'Plus Jakarta Sans', sans-serif; -webkit-tap-highlight-color: transparent; }</style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col justify-between selection:bg-indigo-500 selection:text-white">
+
+    <header class="border-b border-slate-800 bg-slate-900/80 backdrop-blur-xl sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 h-18 sm:h-20 flex items-center justify-between">
+            <a href="/" class="flex items-center gap-2.5 sm:gap-3 group">
+                <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-2xl bg-gradient-to-tr from-indigo-500 via-purple-500 to-pink-500 flex items-center justify-center text-white text-lg sm:text-xl shadow-lg shadow-indigo-500/30 group-hover:scale-105 transition">
+                    ⚡
+                </div>
+                <div>
+                    <span class="text-xl sm:text-2xl font-black tracking-tight text-white">SmartPic<span class="text-indigo-400">Tools</span></span>
+                    <span class="block text-[9px] sm:text-[10px] uppercase font-bold tracking-widest text-slate-400 -mt-1">Rotate Studio</span>
+                </div>
+            </a>
+            <a href="/" class="py-2 px-3.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-bold text-indigo-400 hover:text-white border border-slate-700 transition flex items-center gap-1.5 shadow-md">
+                <span>← All Tools</span>
+            </a>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto w-full px-4 py-8 sm:py-12 flex-1">
+        <div class="text-center max-w-2xl mx-auto mb-8 sm:mb-10">
+            <h1 class="text-3xl sm:text-5xl font-black text-white tracking-tight">Rotate & Mirror Flip Image</h1>
+            <p class="mt-2.5 text-slate-400 text-xs sm:text-sm">Rotate 90 degrees clockwise or anti-clockwise, and mirror flip horizontally or vertically in 0.05s.</p>
+        </div>
+
+        <div class="bg-slate-900 rounded-3xl p-5 sm:p-10 border border-slate-800 shadow-2xl relative">
+            <div id="drop-area" class="border-2 border-dashed border-slate-700 hover:border-indigo-500 bg-slate-950/60 hover:bg-indigo-950/20 rounded-2xl p-8 sm:p-14 text-center cursor-pointer transition-all duration-300">
+                <input type="file" id="file-input" accept="image/*, .heic, .HEIC, .heif, .HEIF" class="hidden">
+                <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-3xl bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-3xl sm:text-4xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition duration-300 shadow-inner">
+                    🔁
+                </div>
+                <h3 class="text-base sm:text-xl font-bold text-white mb-1.5">Select Image to Rotate or Flip</h3>
+                <p class="text-xs sm:text-sm text-slate-400">Supports JPG, PNG, WEBP, and iPhone HEIC</p>
+            </div>
+
+            <div id="workspace" class="hidden mt-6 space-y-6">
+                <div class="flex items-center justify-between">
+                    <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Live Preview</span>
+                    <button type="button" onclick="document.getElementById('file-input').click()" class="text-xs font-bold text-indigo-400 hover:text-white bg-slate-800 hover:bg-slate-700 px-3 py-1.5 rounded-xl border border-slate-700 transition">
+                        🔄 Change Photo
+                    </button>
+                </div>
+
+                <div class="bg-slate-950/80 p-4 rounded-2xl border border-slate-800 flex items-center justify-center max-h-[380px] overflow-hidden">
+                    <img id="preview-img" src="#" alt="Preview" class="max-h-[340px] w-auto rounded-xl object-contain transition-transform duration-200">
+                </div>
+
+                <!-- CONTROLS -->
+                <div class="bg-slate-950/80 p-4 sm:p-5 rounded-2xl border border-slate-800 space-y-3">
+                    <label class="block text-xs font-bold text-slate-400">Click to Adjust Orientation:</label>
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                        <button type="button" onclick="rotate(90)" class="py-2.5 px-2 rounded-xl bg-slate-900 hover:bg-indigo-600 text-white text-xs font-bold border border-slate-700 transition">
+                            ↻ 90° Clockwise
+                        </button>
+                        <button type="button" onclick="rotate(-90)" class="py-2.5 px-2 rounded-xl bg-slate-900 hover:bg-indigo-600 text-white text-xs font-bold border border-slate-700 transition">
+                            ↺ 90° Anti-Clock
+                        </button>
+                        <button type="button" onclick="flip('h')" id="btn-fliph" class="py-2.5 px-2 rounded-xl bg-slate-900 hover:bg-indigo-600 text-white text-xs font-bold border border-slate-700 transition">
+                            ⇄ Flip Horizontal
+                        </button>
+                        <button type="button" onclick="flip('v')" id="btn-flipv" class="py-2.5 px-2 rounded-xl bg-slate-900 hover:bg-indigo-600 text-white text-xs font-bold border border-slate-700 transition">
+                            ⇅ Flip Vertical
+                        </button>
+                    </div>
+                </div>
+
+                <button type="button" id="download-btn" onclick="executeDownload()" class="w-full py-4 px-6 rounded-2xl bg-gradient-to-r from-indigo-600 via-indigo-500 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-extrabold text-sm sm:text-base shadow-lg shadow-indigo-500/25 transition active:scale-[0.99] flex items-center justify-center gap-3">
+                    <span>🔁 Rotate & Download Image</span>
+                </button>
+            </div>
+
+            <div id="status-box" class="hidden mt-5 p-3.5 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 text-center">
+                <p class="text-emerald-400 font-bold text-xs sm:text-sm">🎉 Success! Image saved and downloaded directly to your device.</p>
+            </div>
+        </div>
+
+        <section class="mt-14 border-t border-slate-800 pt-10">
+            <h2 class="text-xl sm:text-2xl font-bold text-white text-center mb-6">How to Rotate Photos in 3 Easy Steps</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs sm:text-sm">
+                <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800">
+                    <span class="w-7 h-7 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center mb-2.5 text-xs">1</span>
+                    <h3 class="font-bold text-white text-sm mb-1">Select Photo</h3>
+                    <p class="text-slate-400">Choose the photo needing orientation fix.</p>
+                </div>
+                <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800">
+                    <span class="w-7 h-7 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center mb-2.5 text-xs">2</span>
+                    <h3 class="font-bold text-white text-sm mb-1">Rotate or Flip</h3>
+                    <p class="text-slate-400">Click 90° buttons or mirror flip horizontally/vertically.</p>
+                </div>
+                <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800">
+                    <span class="w-7 h-7 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center mb-2.5 text-xs">3</span>
+                    <h3 class="font-bold text-white text-sm mb-1">Instant Download</h3>
+                    <p class="text-slate-400">Click download to save your properly oriented image in 0.05s.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="border-t border-slate-800 bg-slate-950 py-8 px-4 text-xs text-slate-400 text-center">
+        <p>© 2026 SmartPicTools. 100% Free & Private in-browser suite. <a href="/" class="text-indigo-400 hover:underline">Explore All Tools</a></p>
+    </footer>
+
+    <script>
+        let currentFile = null;
+        let loadedImg = new Image();
+        let currentRot = 0;
+        let isH = false, isV = false;
+
+        const dropArea = document.getElementById('drop-area');
+        const fileInput = document.getElementById('file-input');
+
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(ev => {
+            window.addEventListener(ev, (e) => { e.preventDefault(); e.stopPropagation(); }, false);
+            dropArea.addEventListener(ev, (e) => { e.preventDefault(); e.stopPropagation(); }, false);
+        });
+
+        ['dragenter', 'dragover'].forEach(ev => dropArea.classList.add('border-indigo-500', 'bg-indigo-950/40'));
+        ['dragleave', 'drop'].forEach(ev => dropArea.classList.remove('border-indigo-500', 'bg-indigo-950/40'));
+
+        dropArea.addEventListener('drop', (e) => {
+            if (e.dataTransfer && e.dataTransfer.files.length > 0) handleFile(e.dataTransfer.files[0]);
+        });
+        dropArea.addEventListener('click', () => fileInput.click());
+        fileInput.addEventListener('change', (e) => {
+            if (e.target.files && e.target.files.length > 0) handleFile(e.target.files[0]);
+        });
+
+        async function handleFile(file) {
+            currentFile = file;
+            let displayBlob = file;
+
+            if (file.name.toLowerCase().endsWith('.heic') || file.name.toLowerCase().endsWith('.heif')) {
+                try {
+                    const conv = await heic2any({ blob: file, toType: 'image/jpeg', quality: 0.92 });
+                    displayBlob = Array.isArray(conv) ? conv[0] : conv;
+                } catch(e) {}
+            }
+
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                document.getElementById('preview-img').src = e.target.result;
+                loadedImg.src = e.target.result;
+            };
+            reader.readAsDataURL(displayBlob);
+
+            currentRot = 0;
+            isH = false;
+            isV = false;
+            updateTransform();
+
+            document.getElementById('drop-area').classList.add('hidden');
+            document.getElementById('workspace').classList.remove('hidden');
+            document.getElementById('status-box').classList.add('hidden');
+        }
+
+        function rotate(deg) {
+            currentRot = (currentRot + deg) % 360;
+            if (currentRot < 0) currentRot += 360;
+            updateTransform();
+        }
+
+        function flip(mode) {
+            if (mode === 'h') isH = !isH;
+            if (mode === 'v') isV = !isV;
+            updateTransform();
+        }
+
+        function updateTransform() {
+            const sX = isH ? -1 : 1;
+            const sY = isV ? -1 : 1;
+            document.getElementById('preview-img').style.transform = `rotate(${currentRot}deg) scale(${sX}, ${sY})`;
+            document.getElementById('btn-fliph').className = isH ? "py-2.5 px-2 rounded-xl bg-indigo-600 text-white text-xs font-bold border border-indigo-500 transition" : "py-2.5 px-2 rounded-xl bg-slate-900 text-white text-xs font-bold border border-slate-700 transition";
+            document.getElementById('btn-flipv').className = isV ? "py-2.5 px-2 rounded-xl bg-indigo-600 text-white text-xs font-bold border border-indigo-500 transition" : "py-2.5 px-2 rounded-xl bg-slate-900 text-white text-xs font-bold border border-slate-700 transition";
+        }
+
+        function executeDownload() {
+            if (!currentFile || !loadedImg.naturalWidth) return;
+            const canvas = document.createElement('canvas');
+            const w = loadedImg.naturalWidth;
+            const h = loadedImg.naturalHeight;
+
+            if (currentRot === 90 || currentRot === 270) {
+                canvas.width = h;
+                canvas.height = w;
+            } else {
+                canvas.width = w;
+                canvas.height = h;
+            }
+
+            const ctx = canvas.getContext('2d');
+            ctx.translate(canvas.width / 2, canvas.height / 2);
+            ctx.rotate((currentRot * Math.PI) / 180);
+            ctx.scale(isH ? -1 : 1, isV ? -1 : 1);
+            ctx.drawImage(loadedImg, -w / 2, -h / 2, w, h);
+
+            const rawName = currentFile.name.substring(0, currentFile.name.lastIndexOf('.')) || currentFile.name;
+            canvas.toBlob((blob) => {
+                const a = document.createElement('a');
+                a.href = URL.createObjectURL(blob);
+                a.download = `smartpic_rotated_${rawName}.jpg`;
+                a.click();
+                document.getElementById('status-box').classList.remove('hidden');
+            }, 'image/jpeg', 0.92);
+        }
+    </script>
+</body>
+</html>
