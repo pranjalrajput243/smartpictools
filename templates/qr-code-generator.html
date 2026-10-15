@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    
+    <!-- ⚡ HIGH-RANKING KEYWORDS FOR QR & BARCODE -->
+    <title>Free QR Code & Barcode Generator Online with Live Preview | SmartPicTools</title>
+    <meta name="description" content="Generate custom QR codes and standard barcodes online for free with instant live preview. Supports URLs, text, UPI payments, and product barcodes. 100% private.">
+    <meta name="keywords" content="free qr code generator, online barcode maker, generate upi qr code, code128 barcode generator, custom qr maker, live qr code generator">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <meta name="author" content="SmartPicTools">
+    <link rel="canonical" href="https://smartpictools.in/qr-code-generator">
+    <meta name="google-site-verification" content="uUq17UUsROyHMRQ8jkqKqrjZmsJnkuxZMKKoJLw_X3E" />
+
+    <!-- OPEN GRAPH -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://smartpictools.in/qr-code-generator">
+    <meta property="og:title" content="Free QR Code & Barcode Generator Online - SmartPicTools">
+    <meta property="og:description" content="Instant real-time live preview for custom QR codes and barcodes with 1-click PNG download.">
+
+    <!-- FAVICON -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' stop-color='%236366f1'/><stop offset='50%25' stop-color='%23a855f7'/><stop offset='100%25' stop-color='%23ec4899'/></linearGradient></defs><rect width='100' height='100' rx='28' fill='url(%23g)'/><path d='M52 16 L24 54 L46 54 L42 84 L76 44 L54 44 Z' fill='%23fbbf24'/></svg>">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/JsBarcode.all.min.js"></script>
+
+    <style>body { font-family: 'Plus Jakarta Sans', sans-serif; -webkit-tap-highlight-color: transparent; }</style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col justify-between selection:bg-indigo-500 selection:text-white">
+
+    <header class="border-b border-slate-800 bg-slate-900/80 backdrop-blur-xl sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 h-18 sm:h-20 flex items-center justify-between">
+            <a href="/" class="flex items-center gap-2.5 sm:gap-3 group">
+                <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-2xl bg-gradient-to-tr from-indigo-500 via-purple-500 to-pink-500 flex items-center justify-center text-white text-lg sm:text-xl shadow-lg shadow-indigo-500/30 group-hover:scale-105 transition">
+                    ⚡
+                </div>
+                <div>
+                    <span class="text-xl sm:text-2xl font-black tracking-tight text-white">SmartPic<span class="text-indigo-400">Tools</span></span>
+                    <span class="block text-[9px] sm:text-[10px] uppercase font-bold tracking-widest text-slate-400 -mt-1">QR & Barcode</span>
+                </div>
+            </a>
+            <a href="/" class="py-2 px-3.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-bold text-indigo-400 hover:text-white border border-slate-700 transition flex items-center gap-1.5 shadow-md">
+                <span>← All Tools</span>
+            </a>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto w-full px-4 py-8 sm:py-12 flex-1">
+        <div class="text-center max-w-2xl mx-auto mb-8 sm:mb-10">
+            <h1 class="text-3xl sm:text-5xl font-black text-white tracking-tight">Free QR Code & Barcode Generator</h1>
+            <p class="mt-2.5 text-slate-400 text-xs sm:text-sm">Create custom QR codes for websites and UPI payments, or generate product barcodes with live instant preview.</p>
+        </div>
+
+        <div class="bg-slate-900 rounded-3xl p-5 sm:p-10 border border-slate-800 shadow-2xl relative space-y-6">
+            
+            <!-- LIVE DISPLAY CARD -->
+            <div class="bg-slate-950/80 p-6 rounded-2xl border border-slate-800 text-center">
+                <span class="text-xs font-bold text-slate-400 uppercase tracking-wider block mb-3">Live Graphic Display</span>
+                <div class="inline-flex items-center justify-center p-6 bg-white rounded-2xl shadow-2xl min-w-[200px] min-h-[200px] max-w-full overflow-hidden">
+                    <div id="qrcode-render" class="flex items-center justify-center"></div>
+                    <svg id="barcode-render" class="hidden"></svg>
+                </div>
+                <p class="text-xs text-indigo-400 font-semibold mt-3">⚡ Live Generated in Real-Time</p>
+            </div>
+
+            <!-- CONTROLS -->
+            <div class="bg-slate-950/80 p-4 sm:p-5 rounded-2xl border border-slate-800 space-y-4">
+                <div class="flex gap-2 p-1 bg-slate-900 rounded-xl border border-slate-800 max-w-xs mx-auto">
+                    <button type="button" onclick="setType('barcode')" id="btn-bc" class="flex-1 py-1.5 px-3 rounded-lg text-xs font-bold bg-indigo-600 text-white transition">
+                        📊 Barcode
+                    </button>
+                    <button type="button" onclick="setType('qr')" id="btn-qr" class="flex-1 py-1.5 px-3 rounded-lg text-xs font-bold text-slate-400 hover:text-white transition">
+                        📱 QR Code
+                    </button>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-slate-400 mb-1">Enter Text, Link (URL), or Code Number:</label>
+                    <input type="text" id="input-text" value="https://smartpictools.in" oninput="renderGraphic()" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-3 text-sm text-white focus:outline-none font-semibold">
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-400 mb-1">Color Theme</label>
+                        <select id="color-select" onchange="renderGraphic()" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white">
+                            <option value="#000000" selected>Classic Black</option>
+                            <option value="#4f46e5">Indigo Purple</option>
+                            <option value="#0284c7">Sky Blue</option>
+                            <option value="#059669">Emerald Green</option>
+                        </select>
+                    </div>
+                    <div id="bc-opts">
+                        <label class="block text-xs font-bold text-slate-400 mb-1">Barcode Standard</label>
+                        <select id="format-select" onchange="renderGraphic()" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white">
+                            <option value="CODE128" selected>CODE128 (Standard)</option>
+                            <option value="EAN13">EAN13 (Products)</option>
+                            <option value="UPC">UPC (Retail)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button type="button" onclick="downloadGraphic()" class="w-full py-4 px-6 rounded-2xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-extrabold text-sm sm:text-base shadow-lg shadow-emerald-600/25 transition active:scale-[0.99] flex items-center justify-center gap-2">
+                    <span>📥 Download High-Res PNG</span>
+                </button>
+            </div>
+
+            <div id="status-box" class="hidden mt-5 p-3.5 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 text-center">
+                <p class="text-emerald-400 font-bold text-xs sm:text-sm">🎉 Success! Graphic downloaded directly to your device.</p>
+            </div>
+        </div>
+
+        <section class="mt-14 border-t border-slate-800 pt-10">
+            <h2 class="text-xl sm:text-2xl font-bold text-white text-center mb-6">How to Generate QR & Barcodes in 3 Easy Steps</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs sm:text-sm">
+                <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800">
+                    <span class="w-7 h-7 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center mb-2.5 text-xs">1</span>
+                    <h3 class="font-bold text-white text-sm mb-1">Choose Barcode or QR</h3>
+                    <p class="text-slate-400">Select whether you need a QR Code or product Barcode.</p>
+                </div>
+                <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800">
+                    <span class="w-7 h-7 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center mb-2.5 text-xs">2</span>
+                    <h3 class="font-bold text-white text-sm mb-1">Type Content</h3>
+                    <p class="text-slate-400">Enter your link or number. It renders live on screen immediately.</p>
+                </div>
+                <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800">
+                    <span class="w-7 h-7 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center mb-2.5 text-xs">3</span>
+                    <h3 class="font-bold text-white text-sm mb-1">Download PNG</h3>
+                    <p class="text-slate-400">Click download to save a crisp, high-resolution PNG file.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="border-t border-slate-800 bg-slate-950 py-8 px-4 text-xs text-slate-400 text-center">
+        <p>© 2026 SmartPicTools. 100% Free & Private in-browser suite. <a href="/" class="text-indigo-400 hover:underline">Explore All Tools</a></p>
+    </footer>
+
+    <script>
+        let currentType = 'barcode';
+
+        window.onload = () => renderGraphic();
+
+        function setType(t) {
+            currentType = t;
+            document.getElementById('btn-bc').className = t === 'barcode' ? "flex-1 py-1.5 px-3 rounded-lg text-xs font-bold bg-indigo-600 text-white transition" : "flex-1 py-1.5 px-3 rounded-lg text-xs font-bold text-slate-400 hover:text-white transition";
+            document.getElementById('btn-qr').className = t === 'qr' ? "flex-1 py-1.5 px-3 rounded-lg text-xs font-bold bg-indigo-600 text-white transition" : "flex-1 py-1.5 px-3 rounded-lg text-xs font-bold text-slate-400 hover:text-white transition";
+            document.getElementById('bc-opts').classList.toggle('hidden', t === 'qr');
+            renderGraphic();
+        }
+
+        function renderGraphic() {
+            const text = document.getElementById('input-text').value.trim() || 'SmartPicTools';
+            const color = document.getElementById('color-select').value;
+            const qrBox = document.getElementById('qrcode-render');
+            const bcBox = document.getElementById('barcode-render');
+
+            if (currentType === 'qr') {
+                bcBox.classList.add('hidden');
+                qrBox.classList.remove('hidden');
+                qrBox.innerHTML = '';
+                new QRCode(qrBox, {
+                    text: text,
+                    width: 200,
+                    height: 200,
+                    colorDark: color,
+                    colorLight: "#ffffff",
+                    correctLevel: QRCode.CorrectLevel.H
+                });
+            } else {
+                qrBox.classList.add('hidden');
+                bcBox.classList.remove('hidden');
+                const fmt = document.getElementById('format-select').value;
+                try {
+                    JsBarcode("#barcode-render", text, {
+                        format: fmt,
+                        lineColor: color,
+                        width: 2,
+                        height: 80,
+                        displayValue: true
+                    });
+                } catch(e) {
+                    JsBarcode("#barcode-render", text, {
+                        format: "CODE128",
+                        lineColor: color,
+                        width: 2,
+                        height: 80,
+                        displayValue: true
+                    });
+                }
+            }
+        }
+
+        function downloadGraphic() {
+            if (currentType === 'qr') {
+                const img = document.querySelector('#qrcode-render img');
+                if (img && img.src) {
+                    triggerDl(img.src, `smartpic_qr_${Date.now()}.png`);
+                } else {
+                    const canvas = document.querySelector('#qrcode-render canvas');
+                    if (canvas) triggerDl(canvas.toDataURL('image/png'), `smartpic_qr_${Date.now()}.png`);
+                }
+            } else {
+                const svg = document.getElementById('barcode-render');
+                const xml = new XMLSerializer().serializeToString(svg);
+                const svg64 = btoa(xml);
+                const img = new Image();
+                img.onload = function() {
+                    const canvas = document.createElement('canvas');
+                    canvas.width = img.width + 40;
+                    canvas.height = img.height + 40;
+                    const ctx = canvas.getContext('2d');
+                    ctx.fillStyle = '#ffffff';
+                    ctx.fillRect(0, 0, canvas.width, canvas.height);
+                    ctx.drawImage(img, 20, 20);
+                    triggerDl(canvas.toDataURL('image/png'), `smartpic_barcode_${Date.now()}.png`);
+                };
+                img.src = 'data:image/svg+xml;base64,' + svg64;
+            }
+        }
+
+        function triggerDl(url, filename) {
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            a.click();
+            document.getElementById('status-box').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
