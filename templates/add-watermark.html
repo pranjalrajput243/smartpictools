@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    
+    <!-- ⚡ HIGH-RANKING KEYWORDS FOR WATERMARK -->
+    <title>Add Watermark to Photo Online Free - Grid & Stamp | SmartPicTools</title>
+    <meta name="description" content="Add text watermarks to images online for free. Protect photos with full diagonal repeated security grids or single corner stamps. 100% private in-browser.">
+    <meta name="keywords" content="add watermark to photo, watermark image online, diagonal grid watermark, copyright photo watermark, free online watermark maker">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <meta name="author" content="SmartPicTools">
+    <link rel="canonical" href="https://smartpictools.in/add-watermark">
+    <meta name="google-site-verification" content="uUq17UUsROyHMRQ8jkqKqrjZmsJnkuxZMKKoJLw_X3E" />
+
+    <!-- OPEN GRAPH -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://smartpictools.in/add-watermark">
+    <meta property="og:title" content="Add Watermark to Photo Online Free - SmartPicTools">
+    <meta property="og:description" content="Protect pictures with live diagonal grid or corner stamp watermarks in 0.1s directly on your device.">
+
+    <!-- FAVICON -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' stop-color='%236366f1'/><stop offset='50%25' stop-color='%23a855f7'/><stop offset='100%25' stop-color='%23ec4899'/></linearGradient></defs><rect width='100' height='100' rx='28' fill='url(%23g)'/><path d='M52 16 L24 54 L46 54 L42 84 L76 44 L54 44 Z' fill='%23fbbf24'/></svg>">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/heic2any/0.0.4/heic2any.min.js"></script>
+
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; -webkit-tap-highlight-color: transparent; }
+        .tiled-watermark-overlay {
+            background-repeat: repeat;
+            transform: rotate(-25deg) scale(1.4);
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col justify-between selection:bg-indigo-500 selection:text-white">
+
+    <header class="border-b border-slate-800 bg-slate-900/80 backdrop-blur-xl sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 h-18 sm:h-20 flex items-center justify-between">
+            <a href="/" class="flex items-center gap-2.5 sm:gap-3 group">
+                <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-2xl bg-gradient-to-tr from-indigo-500 via-purple-500 to-pink-500 flex items-center justify-center text-white text-lg sm:text-xl shadow-lg shadow-indigo-500/30 group-hover:scale-105 transition">
+                    ⚡
+                </div>
+                <div>
+                    <span class="text-xl sm:text-2xl font-black tracking-tight text-white">SmartPic<span class="text-indigo-400">Tools</span></span>
+                    <span class="block text-[9px] sm:text-[10px] uppercase font-bold tracking-widest text-slate-400 -mt-1">Watermark Studio</span>
+                </div>
+            </a>
+            <a href="/" class="py-2 px-3.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-bold text-indigo-400 hover:text-white border border-slate-700 transition flex items-center gap-1.5 shadow-md">
+                <span>← All Tools</span>
+            </a>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto w-full px-4 py-8 sm:py-12 flex-1">
+        <div class="text-center max-w-2xl mx-auto mb-8 sm:mb-10">
+            <h1 class="text-3xl sm:text-5xl font-black text-white tracking-tight">Add Watermark to Photo</h1>
+            <p class="mt-2.5 text-slate-400 text-xs sm:text-sm">Stamp custom copyright text in corners or protect pictures with elegant diagonal security grids.</p>
+        </div>
+
+        <div class="bg-slate-900 rounded-3xl p-5 sm:p-10 border border-slate-800 shadow-2xl relative">
+            <div id="drop-area" class="border-2 border-dashed border-slate-700 hover:border-indigo-500 bg-slate-950/60 hover:bg-indigo-950/20 rounded-2xl p-8 sm:p-14 text-center cursor-pointer transition-all duration-300">
+                <input type="file" id="file-input" accept="image/*, .heic, .HEIC, .heif, .HEIF" class="hidden">
+                <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-3xl bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-3xl sm:text-4xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition duration-300 shadow-inner">
+                    🏷️
+                </div>
+                <h3 class="text-base sm:text-xl font-bold text-white mb-1.5">Select Image to Watermark</h3>
+                <p class="text-xs sm:text-sm text-slate-400">Supports JPG, PNG, WEBP, and iPhone HEIC</p>
+            </div>
+
+            <div id="workspace" class="hidden mt-6 space-y-6">
+                <div class="flex items-center justify-between">
+                    <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Live Preview</span>
+                    <button type="button" onclick="document.getElementById('file-input').click()" class="text-xs font-bold text-indigo-400 hover:text-white bg-slate-800 hover:bg-slate-700 px-3 py-1.5 rounded-xl border border-slate-700 transition">
+                        🔄 Change Photo
+                    </button>
+                </div>
+
+                <div class="bg-slate-950/80 p-4 rounded-2xl border border-slate-800 flex items-center justify-center max-h-[380px] overflow-hidden">
+                    <div id="preview-wrapper" class="relative inline-block max-h-[340px] max-w-full rounded-xl overflow-hidden leading-none shadow-xl border border-slate-800/60">
+                        <img id="preview-img" src="#" alt="Preview" class="max-h-[340px] w-auto rounded-xl object-contain block">
+                        
+                        <div id="live-wm-single" class="hidden absolute pointer-events-none font-bold tracking-wider px-3 py-1.5 rounded transition-all shadow-sm">
+                            © SmartPicTools
+                        </div>
+
+                        <div id="live-wm-grid" class="hidden absolute inset-0 overflow-hidden pointer-events-none flex items-center justify-center">
+                            <div id="live-wm-pattern" class="w-[200%] h-[200%] flex flex-wrap content-center justify-around gap-14 font-bold tracking-widest select-none tiled-watermark-overlay opacity-30">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CONTROLS -->
+                <div class="bg-slate-950/80 p-4 sm:p-5 rounded-2xl border border-slate-800 space-y-3.5">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-400 mb-1.5">Watermark Style:</label>
+                        <div class="grid grid-cols-2 gap-2">
+                            <button type="button" onclick="setWmMode('single')" id="btn-single" class="py-2 px-3 rounded-xl bg-indigo-600 text-white text-xs font-bold transition">
+                                📍 Single Stamp
+                            </button>
+                            <button type="button" onclick="setWmMode('repeat')" id="btn-repeat" class="py-2 px-3 rounded-xl bg-slate-900 text-slate-300 text-xs font-bold border border-slate-700 transition">
+                                🌐 Diagonal Grid
+                            </button>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-slate-400 mb-1">Watermark Text</label>
+                        <input type="text" id="wm-text" value="© SmartPicTools" oninput="updateLive()" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none font-semibold">
+                    </div>
+
+                    <div class="grid grid-cols-3 gap-2">
+                        <div id="pos-box">
+                            <label class="block text-[11px] font-bold text-slate-400 mb-1">Position</label>
+                            <select id="wm-pos" onchange="updateLive()" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-2 py-2 text-xs text-white">
+                                <option value="bottom-right">Bottom-Right</option>
+                                <option value="center">Center</option>
+                                <option value="bottom-left">Bottom-Left</option>
+                                <option value="top-right">Top-Right</option>
+                                <option value="top-left">Top-Left</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-[11px] font-bold text-slate-400 mb-1">Color</label>
+                            <select id="wm-color" onchange="updateLive()" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-2 py-2 text-xs text-white">
+                                <option value="white">White</option>
+                                <option value="black">Black</option>
+                                <option value="gold">Gold</option>
+                                <option value="red">Red</option>
+                                <option value="cyan">Cyan</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-[11px] font-bold text-slate-400 mb-1">Size</label>
+                            <select id="wm-size" onchange="updateLive()" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-2 py-2 text-xs text-white">
+                                <option value="16">Small</option>
+                                <option value="22" selected>Medium</option>
+                                <option value="32">Large</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="flex justify-between text-xs font-semibold text-slate-400 mb-1">
+                            <span>Transparency (Opacity)</span>
+                            <span id="opacity-val" class="text-indigo-400 font-bold">25%</span>
+                        </div>
+                        <input type="range" id="wm-opacity" min="0.1" max="0.9" step="0.05" value="0.25" oninput="updateLive()" class="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-indigo-500">
+                    </div>
+                </div>
+
+                <button type="button" id="download-btn" onclick="executeWatermark()" class="w-full py-4 px-6 rounded-2xl bg-gradient-to-r from-indigo-600 via-indigo-500 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-extrabold text-sm sm:text-base shadow-lg shadow-indigo-500/25 transition active:scale-[0.99] flex items-center justify-center gap-3">
+                    <span>🏷️ Watermark & Download Image</span>
+                </button>
+            </div>
+
+            <div id="status-box" class="hidden mt-5 p-3.5 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 text-center">
+                <p class="text-emerald-400 font-bold text-xs sm:text-sm">🎉 Success! Watermarked image downloaded directly to your device.</p>
+            </div>
+        </div>
+
+        <section class="mt-14 border-t border-slate-800 pt-10">
+            <h2 class="text-xl sm:text-2xl font-bold text-white text-center mb-6">How to Add Watermarks in 3 Easy Steps</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs sm:text-sm">
+                <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800">
+                    <span class="w-7 h-7 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center mb-2.5 text-xs">1</span>
+                    <h3 class="font-bold text-white text-sm mb-1">Select Photo</h3>
+                    <p class="text-slate-400">Choose the photo you want to copyright protect.</p>
+                </div>
+                <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800">
+                    <span class="w-7 h-7 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center mb-2.5 text-xs">2</span>
+                    <h3 class="font-bold text-white text-sm mb-1">Type Text & Style</h3>
+                    <p class="text-slate-400">Type text, select color, and pick Single Stamp or Diagonal Grid.</p>
+                </div>
+                <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800">
+                    <span class="w-7 h-7 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center mb-2.5 text-xs">3</span>
+                    <h3 class="font-bold text-white text-sm mb-1">Instant Download</h3>
+                    <p class="text-slate-400">Click download to embed the watermark permanently in 0.1s.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="border-t border-slate-800 bg-slate-950 py-8 px-4 text-xs text-slate-400 text-center">
+        <p>© 2026 SmartPicTools. 100% Free & Private in-browser suite. <a href="/" class="text-indigo-400 hover:underline">Explore All Tools</a></p>
+    </footer>
+
+    <script>
+        let currentFile = null;
+        let loadedImg = new Image();
+        let wmMode = 'single';
+
+        const dropArea = document.getElementById('drop-area');
+        const fileInput = document.getElementById('file-input');
+
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(ev => {
+            window.addEventListener(ev, (e) => { e.preventDefault(); e.stopPropagation(); }, false);
+            dropArea.addEventListener(ev, (e) => { e.preventDefault(); e.stopPropagation(); }, false);
+        });
+
+        ['dragenter', 'dragover'].forEach(ev => dropArea.classList.add('border-indigo-500', 'bg-indigo-950/40'));
+        ['dragleave', 'drop'].forEach(ev => dropArea.classList.remove('border-indigo-500', 'bg-indigo-950/40'));
+
+        dropArea.addEventListener('drop', (e) => {
+            if (e.dataTransfer && e.dataTransfer.files.length > 0) handleFile(e.dataTransfer.files[0]);
+        });
+        dropArea.addEventListener('click', () => fileInput.click());
+        fileInput.addEventListener('change', (e) => {
+            if (e.target.files && e.target.files.length > 0) handleFile(e.target.files[0]);
+        });
+
+        async function handleFile(file) {
+            currentFile = file;
+            let displayBlob = file;
+
+            if (file.name.toLowerCase().endsWith('.heic') || file.name.toLowerCase().endsWith('.heif')) {
+                try {
+                    const conv = await heic2any({ blob: file, toType: 'image/jpeg', quality: 0.92 });
+                    displayBlob = Array.isArray(conv) ? conv[0] : conv;
+                } catch(e) {}
+            }
+
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                document.getElementById('preview-img').src = e.target.result;
+                loadedImg.src = e.target.result;
+                loadedImg.onload = () => updateLive();
+            };
+            reader.readAsDataURL(displayBlob);
+
+            document.getElementById('drop-area').classList.add('hidden');
+            document.getElementById('workspace').classList.remove('hidden');
+            document.getElementById('status-box').classList.add('hidden');
+        }
+
+        function setWmMode(m) {
+            wmMode = m;
+            document.getElementById('btn-single').className = m === 'single' ? "py-2 px-3 rounded-xl bg-indigo-600 text-white text-xs font-bold transition" : "py-2 px-3 rounded-xl bg-slate-900 text-slate-300 text-xs font-bold border border-slate-700 transition";
+            document.getElementById('btn-repeat').className = m === 'repeat' ? "py-2 px-3 rounded-xl bg-indigo-600 text-white text-xs font-bold transition" : "py-2 px-3 rounded-xl bg-slate-900 text-slate-300 text-xs font-bold border border-slate-700 transition";
+            document.getElementById('pos-box').classList.toggle('hidden', m === 'repeat');
+            updateLive();
+        }
+
+        function updateLive() {
+            if (!currentFile) return;
+            const text = document.getElementById('wm-text').value || '© SmartPicTools';
+            const color = document.getElementById('wm-color').value;
+            const size = document.getElementById('wm-size').value;
+            const opacity = document.getElementById('wm-opacity').value;
+            document.getElementById('opacity-val').innerText = Math.round(opacity * 100) + '%';
+
+            const singleEl = document.getElementById('live-wm-single');
+            const gridEl = document.getElementById('live-wm-grid');
+            const patternEl = document.getElementById('live-wm-pattern');
+            const colorHex = { white: '#ffffff', black: '#000000', gold: '#fbbf24', red: '#ef4444', cyan: '#06b6d4' }[color] || '#ffffff';
+
+            if (wmMode === 'single') {
+                gridEl.classList.add('hidden');
+                singleEl.classList.remove('hidden');
+                singleEl.innerText = text;
+                singleEl.style.color = colorHex;
+                singleEl.style.opacity = opacity;
+                singleEl.style.fontSize = Math.max(12, Math.round(size * 0.7)) + 'px';
+                singleEl.className = "absolute pointer-events-none font-bold tracking-wider px-3 py-1.5 transition-all shadow-sm";
+                const pos = document.getElementById('wm-pos').value;
+                if (pos === 'center') singleEl.classList.add('top-1/2', 'left-1/2', '-translate-x-1/2', '-translate-y-1/2');
+                else if (pos === 'top-left') singleEl.classList.add('top-2', 'left-2');
+                else if (pos === 'top-right') singleEl.classList.add('top-2', 'right-2');
+                else if (pos === 'bottom-left') singleEl.classList.add('bottom-2', 'left-2');
+                else singleEl.classList.add('bottom-2', 'right-2');
+            } else {
+                singleEl.classList.add('hidden');
+                gridEl.classList.remove('hidden');
+                patternEl.innerHTML = '';
+                for (let i = 0; i < 24; i++) {
+                    const span = document.createElement('span');
+                    span.innerText = text;
+                    span.style.color = colorHex;
+                    span.style.fontSize = Math.max(12, Math.round(size * 0.6)) + 'px';
+                    span.style.opacity = opacity;
+                    patternEl.appendChild(span);
+                }
+            }
+        }
+
+        function executeWatermark() {
+            if (!currentFile || !loadedImg.naturalWidth) return;
+
+            const canvas = document.createElement('canvas');
+            canvas.width = loadedImg.naturalWidth;
+            canvas.height = loadedImg.naturalHeight;
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(loadedImg, 0, 0);
+
+            const wmText = document.getElementById('wm-text').value || '© SmartPicTools';
+            const wmColor = document.getElementById('wm-color').value;
+            const basePx = parseInt(document.getElementById('wm-size').value);
+            const wmSize = Math.max(18, Math.round(basePx * (canvas.width / 1000)));
+            const wmOpacity = parseFloat(document.getElementById('wm-opacity').value);
+            ctx.fillStyle = wmColor === 'gold' ? '#fbbf24' : (wmColor === 'black' ? '#000000' : (wmColor === 'red' ? '#ef4444' : (wmColor === 'cyan' ? '#06b6d4' : '#ffffff')));
+            ctx.globalAlpha = wmOpacity;
+            ctx.font = `bold ${wmSize}px Plus Jakarta Sans, sans-serif`;
+
+            if (wmMode === 'single') {
+                const pos = document.getElementById('wm-pos').value;
+                const textWidth = ctx.measureText(wmText).width;
+                let tx = canvas.width - textWidth - 30, ty = canvas.height - 30;
+                if (pos === 'center') { tx = (canvas.width - textWidth) / 2; ty = canvas.height / 2; }
+                else if (pos === 'top-left') { tx = 30; ty = 50; }
+                else if (pos === 'top-right') { tx = canvas.width - textWidth - 30; ty = 50; }
+                else if (pos === 'bottom-left') { tx = 30; ty = canvas.height - 30; }
+                ctx.fillText(wmText, tx, ty);
+            } else {
+                ctx.save();
+                ctx.translate(canvas.width / 2, canvas.height / 2);
+                ctx.rotate((-25 * Math.PI) / 180);
+                const textMetrics = ctx.measureText(wmText);
+                const stepX = Math.max(340, textMetrics.width + 120);
+                const stepY = Math.max(160, wmSize * 5);
+
+                for (let x = -canvas.width * 1.5; x < canvas.width * 1.5; x += stepX) {
+                    for (let y = -canvas.height * 1.5; y < canvas.height * 1.5; y += stepY) {
+                        ctx.fillText(wmText, x, y);
+                    }
+                }
+                ctx.restore();
+            }
+
+            const rawName = currentFile.name.substring(0, currentFile.name.lastIndexOf('.')) || currentFile.name;
+            canvas.toBlob((blob) => {
+                const a = document.createElement('a');
+                a.href = URL.createObjectURL(blob);
+                a.download = `smartpic_watermarked_${rawName}.jpg`;
+                a.click();
+                document.getElementById('status-box').classList.remove('hidden');
+            }, 'image/jpeg', 0.92);
+        }
+    </script>
+</body>
+</html>
