@@ -4,51 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     
-    <!-- ⚡ ALL 9 TOOLS HIGH-RANKING GOOGLE SEARCH TAGS -->
-    <title>SmartPicTools - All-in-One Image Suite, PDF Maker & QR Generator Free</title>
-    <meta name="description" content="Free 100% private in-browser image suite: Compress to exact 20KB/50KB for online forms, crop for Instagram/YouTube, resize dimensions, create QR codes & barcodes, convert HEIC, and merge Images to PDF in 0.2s.">
-    <meta name="keywords" content="image compressor, compress image to 20kb, compress image to 50kb, compress photo for online exam, crop image for instagram, crop image 16:9 youtube, image resizer online, convert heic to jpg, apple photo converter, avif to jpg converter, online watermark photo, free qr code generator, online barcode generator, image to pdf, convert jpg to pdf, merge images to pdf">
+    <!-- ⚡ HIGH-RANKING KEYWORDS FOR PDF MAKER -->
+    <title>PDF Maker - Merge Images to PDF Online Free (Zero White Space) | SmartPicTools</title>
+    <meta name="description" content="Free 100% private in-browser PDF maker to merge multiple JPG, PNG, WEBP, and HEIC photos into one PDF document with zero white borders. Fast 0.5s generation.">
+    <meta name="keywords" content="pdf maker, merge pdf, image to pdf, convert jpg to pdf, merge images to pdf, photo to pdf maker, free online pdf merger">
     <meta name="robots" content="index, follow, max-image-preview:large">
     <meta name="author" content="SmartPicTools">
-    <link rel="canonical" href="https://smartpictools.in/">
-    
-    <!-- ⚡ PERMANENT GOOGLE SEARCH CONSOLE VERIFICATION TAG -->
+    <link rel="canonical" href="https://smartpictools.in/image-to-pdf">
     <meta name="google-site-verification" content="uUq17UUsROyHMRQ8jkqKqrjZmsJnkuxZMKKoJLw_X3E" />
 
-    <!-- ⚡ OPEN GRAPH PREVIEW -->
+    <!-- OPEN GRAPH -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://smartpictools.in/">
-    <meta property="og:title" content="SmartPicTools - All-in-One Image, PDF & QR Suite Free">
-    <meta property="og:description" content="Instant 0.2s in-browser image tools: Compress to 20KB/50KB, Crop, Resize, QR Generator, and Image to PDF without uploading to servers.">
-    <meta property="og:site_name" content="SmartPicTools">
-
-    <!-- ⚡ GOOGLE SCHEMA STRUCTURED DATA -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebApplication",
-      "name": "SmartPicTools",
-      "url": "https://smartpictools.in/",
-      "description": "Free private in-browser image tools to compress to exact KB, crop, resize, generate QR/barcodes, and convert HEIC to PDF.",
-      "applicationCategory": "MultimediaApplication",
-      "operatingSystem": "All",
-      "offers": {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "USD"
-      }
-    }
-    </script>
+    <meta property="og:url" content="https://smartpictools.in/image-to-pdf">
+    <meta property="og:title" content="PDF Maker - Merge Images to PDF Online Free - SmartPicTools">
+    <meta property="og:description" content="Merge multiple photos into one clean PDF document with 0% white borders in 0.5s.">
 
     <!-- FAVICON -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' stop-color='%236366f1'/><stop offset='50%25' stop-color='%23a855f7'/><stop offset='100%25' stop-color='%23ec4899'/></linearGradient></defs><rect width='100' height='100' rx='28' fill='url(%23g)'/><path d='M52 16 L24 54 L46 54 L42 84 L76 44 L54 44 Z' fill='%23fbbf24'/></svg>">
 
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/heic2any/0.0.4/heic2any.min.js"></script>
 
     <style>body { font-family: 'Plus Jakarta Sans', sans-serif; -webkit-tap-highlight-color: transparent; }</style>
 </head>
-<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col justify-between selection:bg-indigo-500 selection:text-white overflow-x-hidden">
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col justify-between selection:bg-indigo-500 selection:text-white">
 
     <!-- HEADER -->
     <header class="border-b border-slate-800 bg-slate-900/80 backdrop-blur-xl sticky top-0 z-50">
@@ -59,358 +40,268 @@
                 </div>
                 <div>
                     <span class="text-xl sm:text-2xl font-black tracking-tight text-white">SmartPic<span class="text-indigo-400">Tools</span></span>
-                    <span class="block text-[9px] sm:text-[10px] uppercase font-bold tracking-widest text-slate-400 -mt-1">Pro Image Suite</span>
+                    <span class="block text-[9px] sm:text-[10px] uppercase font-bold tracking-widest text-slate-400 -mt-1">PDF Studio</span>
                 </div>
             </a>
-            
-            <nav class="hidden md:flex items-center gap-7 text-sm font-semibold text-slate-300">
-                <a href="#all-tools-grid" class="hover:text-indigo-400 transition">All 9 Tools</a>
-                <a href="#how-it-works" class="hover:text-indigo-400 transition">How it Works</a>
-                <a href="#faq" class="hover:text-indigo-400 transition">FAQs</a>
-            </nav>
-
-            <div class="flex items-center gap-2.5">
-                <button type="button" onclick="openFeedbackModal()" class="py-2 px-3 sm:px-3.5 rounded-xl bg-slate-800 hover:bg-slate-700 active:scale-95 text-xs font-bold text-amber-300 border border-slate-700 transition flex items-center gap-1.5 shadow-md">
-                    <span>💡 Suggestions</span>
-                </button>
-                <span class="hidden sm:inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-bold bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">
-                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> 100% Free & Private
-                </span>
-            </div>
+            <a href="/" class="py-2 px-3.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-bold text-indigo-400 hover:text-white border border-slate-700 transition flex items-center gap-1.5 shadow-md">
+                <span>← All Tools</span>
+            </a>
         </div>
     </header>
 
-    <!-- HERO SECTION -->
-    <section class="max-w-5xl mx-auto w-full px-4 pt-10 pb-6 text-center">
-        <h1 class="text-3xl sm:text-6xl font-black text-white tracking-tight leading-tight">
-            Every Tool You Need to Edit & Optimize Images
-        </h1>
-        <p class="mt-4 text-slate-400 text-sm sm:text-lg max-w-2xl mx-auto leading-relaxed">
-            100% free, private, and instant in-browser image tools. Compress to exact KB, crop, resize, generate QR codes, and convert to PDF in 0.2s without server uploads.
-        </p>
-
-        <!-- TOP QUICK-ACCESS TABS (DIRECT DEDICATED LINKS) -->
-        <div class="grid grid-cols-3 sm:grid-cols-6 gap-2 mt-8 bg-slate-900 p-2 rounded-2xl border border-slate-800 max-w-4xl mx-auto">
-            <a href="/compress-image" class="py-2.5 sm:py-3 px-2 rounded-xl text-xs font-bold transition flex items-center justify-center gap-1.5 bg-indigo-600 text-white shadow-lg shadow-indigo-600/30 hover:scale-105">
-                ⚡ Compress
-            </a>
-            <a href="/crop-image" class="py-2.5 sm:py-3 px-2 rounded-xl text-xs font-bold transition flex items-center justify-center gap-1.5 text-slate-300 hover:text-white hover:bg-slate-800">
-                ✂️ Crop
-            </a>
-            <a href="/resize-image" class="py-2.5 sm:py-3 px-2 rounded-xl text-xs font-bold transition flex items-center justify-center gap-1.5 text-slate-300 hover:text-white hover:bg-slate-800">
-                📐 Resize
-            </a>
-            <a href="/convert-image" class="py-2.5 sm:py-3 px-2 rounded-xl text-xs font-bold transition flex items-center justify-center gap-1.5 text-slate-300 hover:text-white hover:bg-slate-800">
-                🔄 Convert
-            </a>
-            <a href="/image-to-pdf" class="py-2.5 sm:py-3 px-2 rounded-xl text-xs font-bold transition flex items-center justify-center gap-1.5 text-slate-300 hover:text-white hover:bg-slate-800">
-                📄 To PDF
-            </a>
-            <a href="/qr-code-generator" class="py-2.5 sm:py-3 px-2 rounded-xl text-xs font-bold transition flex items-center justify-center gap-1.5 text-slate-300 hover:text-white hover:bg-slate-800">
-                📊 QR Code
-            </a>
-        </div>
-    </section>
-
-    <!-- LIVE STATS STRIP -->
-    <section class="max-w-5xl mx-auto w-full px-4 mb-10">
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-2.5 sm:gap-3 bg-slate-900/60 p-3.5 sm:p-4 rounded-2xl border border-slate-800/80 text-center">
-            <div class="p-1.5 sm:p-2">
-                <div class="text-lg sm:text-2xl font-extrabold text-white">⚡ 0.2s Instant</div>
-                <div class="text-[10px] sm:text-[11px] text-slate-400 font-semibold uppercase tracking-wider mt-0.5">Device Speed</div>
-            </div>
-            <div class="p-1.5 sm:p-2 border-l border-slate-800">
-                <div class="text-lg sm:text-2xl font-extrabold text-indigo-400">Exact KB</div>
-                <div class="text-[10px] sm:text-[11px] text-slate-400 font-semibold uppercase tracking-wider mt-0.5">Target Shrunk</div>
-            </div>
-            <div class="p-1.5 sm:p-2 border-l border-slate-800">
-                <div class="text-lg sm:text-2xl font-extrabold text-emerald-400">🔒 100% Client-Side</div>
-                <div class="text-[10px] sm:text-[11px] text-slate-400 font-semibold uppercase tracking-wider mt-0.5">Never Leaves Phone</div>
-            </div>
-            <div class="p-1.5 sm:p-2 border-l border-slate-800">
-                <div class="text-lg sm:text-2xl font-extrabold text-white">⭐ 4.9/5</div>
-                <div class="text-[10px] sm:text-[11px] text-slate-400 font-semibold uppercase tracking-wider mt-0.5">Free Forever</div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ⚡ ALL 9 DEDICATED TOOLS CATALOG (iLoveIMG STYLE DIRECT HUBS) -->
-    <section class="max-w-5xl mx-auto w-full px-4 mb-20" id="all-tools-grid">
-        <div class="text-center mb-10">
-            <h2 class="text-2xl sm:text-4xl font-extrabold text-white">Explore All 9 Image & Document Tools</h2>
-            <p class="text-slate-400 text-xs sm:text-sm mt-2">Select a tool to open its dedicated studio.</p>
+    <!-- MAIN WORKSPACE -->
+    <main class="max-w-4xl mx-auto w-full px-4 py-8 sm:py-12 flex-1">
+        <div class="text-center max-w-2xl mx-auto mb-8 sm:mb-10">
+            <h1 class="text-3xl sm:text-5xl font-black text-white tracking-tight">PDF Maker & Merge Photos</h1>
+            <p class="mt-2.5 text-slate-400 text-xs sm:text-sm">Merge multiple JPG, PNG, WEBP, or iPhone HEIC photos into one single PDF document with edge-to-edge fit and zero white borders.</p>
         </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
-            <!-- 1. COMPRESS -->
-            <a href="/compress-image" class="bg-slate-900/80 hover:bg-slate-900 border border-slate-800 hover:border-indigo-500/60 p-6 rounded-3xl transition duration-200 group shadow-lg flex flex-col justify-between">
-                <div>
-                    <div class="w-12 h-12 rounded-2xl bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition">⚡</div>
-                    <h3 class="text-lg font-bold text-white group-hover:text-indigo-400 transition">Compress Image to Exact KB</h3>
-                    <p class="text-xs text-slate-400 mt-2 leading-relaxed">Shrink file weight accurately to 20KB, 50KB, or 100KB for government exam forms with maximum clarity.</p>
+        <div class="bg-slate-900 rounded-3xl p-5 sm:p-10 border border-slate-800 shadow-2xl relative">
+            <div id="drop-area" class="border-2 border-dashed border-slate-700 hover:border-indigo-500 bg-slate-950/60 hover:bg-indigo-950/20 rounded-2xl p-8 sm:p-14 text-center cursor-pointer transition-all duration-300">
+                <input type="file" id="pdf-file-input" multiple accept="image/*, .heic, .HEIC, .heif, .HEIF" class="hidden">
+                <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-3xl bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-3xl sm:text-4xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition duration-300 shadow-inner">
+                    📄
                 </div>
-                <span class="text-xs font-bold text-indigo-400 mt-5 flex items-center gap-1 group-hover:translate-x-1 transition">Open Tool →</span>
-            </a>
-
-            <!-- 2. CROP -->
-            <a href="/crop-image" class="bg-slate-900/80 hover:bg-slate-900 border border-slate-800 hover:border-purple-500/60 p-6 rounded-3xl transition duration-200 group shadow-lg flex flex-col justify-between">
-                <div>
-                    <div class="w-12 h-12 rounded-2xl bg-purple-500/10 text-purple-400 border border-purple-500/20 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition">✂️</div>
-                    <h3 class="text-lg font-bold text-white group-hover:text-purple-400 transition">Crop Image with Aspect Ratios</h3>
-                    <p class="text-xs text-slate-400 mt-2 leading-relaxed">Crop visually with exact aspect ratio presets for Instagram (1:1), YouTube (16:9), and Reels (9:16).</p>
-                </div>
-                <span class="text-xs font-bold text-purple-400 mt-5 flex items-center gap-1 group-hover:translate-x-1 transition">Open Tool →</span>
-            </a>
-
-            <!-- 3. RESIZE -->
-            <a href="/resize-image" class="bg-slate-900/80 hover:bg-slate-900 border border-slate-800 hover:border-blue-500/60 p-6 rounded-3xl transition duration-200 group shadow-lg flex flex-col justify-between">
-                <div>
-                    <div class="w-12 h-12 rounded-2xl bg-blue-500/10 text-blue-400 border border-blue-500/20 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition">📐</div>
-                    <h3 class="text-lg font-bold text-white group-hover:text-blue-400 transition">Resize Image Dimensions</h3>
-                    <p class="text-xs text-slate-400 mt-2 leading-relaxed">Change exact pixel width and height with live scaling preview and proportion lock to prevent distortion.</p>
-                </div>
-                <span class="text-xs font-bold text-blue-400 mt-5 flex items-center gap-1 group-hover:translate-x-1 transition">Open Tool →</span>
-            </a>
-
-            <!-- 4. CONVERT -->
-            <a href="/convert-image" class="bg-slate-900/80 hover:bg-slate-900 border border-slate-800 hover:border-pink-500/60 p-6 rounded-3xl transition duration-200 group shadow-lg flex flex-col justify-between">
-                <div>
-                    <div class="w-12 h-12 rounded-2xl bg-pink-500/10 text-pink-400 border border-pink-500/20 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition">🔄</div>
-                    <h3 class="text-lg font-bold text-white group-hover:text-pink-400 transition">Image Format Converter</h3>
-                    <p class="text-xs text-slate-400 mt-2 leading-relaxed">Convert single or batch photos to JPG, PNG, WEBP, or AVIF with instant 1-click ZIP downloads.</p>
-                </div>
-                <span class="text-xs font-bold text-pink-400 mt-5 flex items-center gap-1 group-hover:translate-x-1 transition">Open Tool →</span>
-            </a>
-
-            <!-- 5. IMAGES TO PDF -->
-            <a href="/image-to-pdf" class="bg-slate-900/80 hover:bg-slate-900 border border-slate-800 hover:border-amber-500/60 p-6 rounded-3xl transition duration-200 group shadow-lg flex flex-col justify-between">
-                <div>
-                    <div class="w-12 h-12 rounded-2xl bg-amber-500/10 text-amber-400 border border-amber-500/20 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition">📄</div>
-                    <h3 class="text-lg font-bold text-white group-hover:text-amber-400 transition">Images to PDF Converter</h3>
-                    <p class="text-xs text-slate-400 mt-2 leading-relaxed">Merge multiple JPG, PNG, or HEIC photos into a single clean PDF document in 0.5s directly on your device.</p>
-                </div>
-                <span class="text-xs font-bold text-amber-400 mt-5 flex items-center gap-1 group-hover:translate-x-1 transition">Open Tool →</span>
-            </a>
-
-            <!-- 6. IPHONE HEIC -->
-            <a href="/heic-to-jpg" class="bg-slate-900/80 hover:bg-slate-900 border border-slate-800 hover:border-emerald-500/60 p-6 rounded-3xl transition duration-200 group shadow-lg flex flex-col justify-between">
-                <div>
-                    <div class="w-12 h-12 rounded-2xl bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition">📱</div>
-                    <h3 class="text-lg font-bold text-white group-hover:text-emerald-400 transition">iPhone HEIC to JPG Converter</h3>
-                    <p class="text-xs text-slate-400 mt-2 leading-relaxed">Instantly convert Apple iPhone HEIC/HEIF photos into universal JPG images viewable on all devices.</p>
-                </div>
-                <span class="text-xs font-bold text-emerald-400 mt-5 flex items-center gap-1 group-hover:translate-x-1 transition">Open Tool →</span>
-            </a>
-
-            <!-- 7. WATERMARK -->
-            <a href="/add-watermark" class="bg-slate-900/80 hover:bg-slate-900 border border-slate-800 hover:border-yellow-500/60 p-6 rounded-3xl transition duration-200 group shadow-lg flex flex-col justify-between">
-                <div>
-                    <div class="w-12 h-12 rounded-2xl bg-yellow-500/10 text-yellow-400 border border-yellow-500/20 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition">🏷️</div>
-                    <h3 class="text-lg font-bold text-white group-hover:text-yellow-400 transition">Add Watermark to Photo</h3>
-                    <p class="text-xs text-slate-400 mt-2 leading-relaxed">Protect your pictures with custom copyright corner stamps or elegant diagonal repeated security grids.</p>
-                </div>
-                <span class="text-xs font-bold text-yellow-400 mt-5 flex items-center gap-1 group-hover:translate-x-1 transition">Open Tool →</span>
-            </a>
-
-            <!-- 8. ROTATE & FLIP -->
-            <a href="/rotate-image" class="bg-slate-900/80 hover:bg-slate-900 border border-slate-800 hover:border-cyan-500/60 p-6 rounded-3xl transition duration-200 group shadow-lg flex flex-col justify-between">
-                <div>
-                    <div class="w-12 h-12 rounded-2xl bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition">🔁</div>
-                    <h3 class="text-lg font-bold text-white group-hover:text-cyan-400 transition">Rotate & Mirror Flip Image</h3>
-                    <p class="text-xs text-slate-400 mt-2 leading-relaxed">Rotate pictures 90 degrees clockwise or anti-clockwise and mirror flip horizontally or vertically.</p>
-                </div>
-                <span class="text-xs font-bold text-cyan-400 mt-5 flex items-center gap-1 group-hover:translate-x-1 transition">Open Tool →</span>
-            </a>
-
-            <!-- 9. QR & BARCODE -->
-            <a href="/qr-code-generator" class="bg-slate-900/80 hover:bg-slate-900 border border-slate-800 hover:border-teal-500/60 p-6 rounded-3xl transition duration-200 group shadow-lg flex flex-col justify-between">
-                <div>
-                    <div class="w-12 h-12 rounded-2xl bg-teal-500/10 text-teal-400 border border-teal-500/20 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition">📊</div>
-                    <h3 class="text-lg font-bold text-white group-hover:text-teal-400 transition">QR Code & Barcode Generator</h3>
-                    <p class="text-xs text-slate-400 mt-2 leading-relaxed">Create custom QR codes for websites and UPI payments, or generate product barcodes with live preview.</p>
-                </div>
-                <span class="text-xs font-bold text-teal-400 mt-5 flex items-center gap-1 group-hover:translate-x-1 transition">Open Tool →</span>
-            </a>
-        </div>
-    </section>
-
-    <!-- HOW IT WORKS -->
-    <section class="bg-slate-900/50 border-t border-slate-800 py-16 px-4" id="how-it-works">
-        <div class="max-w-5xl mx-auto">
-            <div class="text-center mb-12">
-                <h2 class="text-2xl sm:text-3xl font-extrabold text-white">How SmartPicTools Works in 3 Steps</h2>
-                <p class="text-slate-400 text-xs sm:text-sm mt-2">Zero complex software. 100% private in-browser automation.</p>
+                <h3 class="text-base sm:text-xl font-bold text-white mb-1.5">Select Photos to Merge into PDF</h3>
+                <p class="text-xs sm:text-sm text-slate-400">Select single or multiple photos (Supports JPG, PNG, WEBP, and iPhone HEIC)</p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="bg-slate-900 p-6 rounded-2xl border border-slate-800">
-                    <div class="w-8 h-8 rounded-full bg-indigo-600 text-white font-extrabold text-sm flex items-center justify-center mb-4">1</div>
-                    <h3 class="font-bold text-white text-base">Select Your Tool</h3>
-                    <p class="text-xs text-slate-400 mt-2 leading-relaxed">Pick from our suite of 9 specialized image, document, and barcode tools.</p>
+            <div id="pdf-workspace" class="hidden mt-6 space-y-6">
+                <div class="flex items-center justify-between">
+                    <span class="text-xs font-bold text-slate-300">Selected Pages (<span id="page-count" class="text-indigo-400 font-extrabold">0</span>):</span>
+                    <button type="button" onclick="document.getElementById('pdf-file-input').click()" class="text-xs font-bold text-indigo-400 hover:text-white bg-slate-800 hover:bg-slate-700 px-3 py-1.5 rounded-xl border border-slate-700 transition">
+                        + Add More Photos
+                    </button>
                 </div>
-                <div class="bg-slate-900 p-6 rounded-2xl border border-slate-800">
-                    <div class="w-8 h-8 rounded-full bg-indigo-600 text-white font-extrabold text-sm flex items-center justify-center mb-4">2</div>
-                    <h3 class="font-bold text-white text-base">Fine-Tune Options</h3>
-                    <p class="text-xs text-slate-400 mt-2 leading-relaxed">Enter target KB, choose aspect ratios, or customize watermarks with instant live feedback.</p>
+
+                <div id="pdf-gallery" class="grid grid-cols-2 sm:grid-cols-4 gap-3 max-h-96 overflow-y-auto p-3 bg-slate-950/80 rounded-2xl border border-slate-800">
                 </div>
-                <div class="bg-slate-900 p-6 rounded-2xl border border-slate-800">
-                    <div class="w-8 h-8 rounded-full bg-indigo-600 text-white font-extrabold text-sm flex items-center justify-center mb-4">3</div>
-                    <h3 class="font-bold text-white text-base">Instant 0.2s Download</h3>
-                    <p class="text-xs text-slate-400 mt-2 leading-relaxed">Your files process directly in your device RAM and save instantly without server lag.</p>
+
+                <!-- PDF FIT SETTINGS (ZERO WHITE SPACE AS DEFAULT) -->
+                <div class="bg-slate-950/80 p-4 sm:p-5 rounded-2xl border border-slate-800">
+                    <label class="block text-xs font-bold text-slate-400 mb-1.5">Page Sizing & Margins:</label>
+                    <select id="pdf-fit-mode" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-3 text-sm text-white focus:outline-none font-bold">
+                        <option value="fit" selected>Edge-to-Edge Full Fit (0% White Space - Match Photo Exactly)</option>
+                        <option value="a4">Standard A4 Document (Fit to A4 Sheet)</option>
+                    </select>
+                    <p class="text-[11px] text-emerald-400 font-semibold mt-1.5">✓ Edge-to-Edge removes all white bars completely, even for 16:9 widescreen photos.</p>
                 </div>
+
+                <button type="button" id="generate-pdf-btn" onclick="generatePDFDocument()" class="w-full py-4 px-6 rounded-2xl bg-gradient-to-r from-indigo-600 via-indigo-500 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-extrabold text-sm sm:text-base shadow-lg shadow-indigo-500/25 transition active:scale-[0.99] flex items-center justify-center gap-3">
+                    <span id="pdf-btn-text">📥 Merge & Download PDF Document</span>
+                </button>
+            </div>
+
+            <div id="pdf-status-box" class="hidden mt-5 p-3.5 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 text-center">
+                <p class="text-emerald-400 font-bold text-xs sm:text-sm">🎉 Success! Your PDF has been created with zero white borders.</p>
             </div>
         </div>
-    </section>
 
-    <!-- FAQS -->
-    <section class="max-w-4xl mx-auto w-full px-4 py-16" id="faq">
-        <div class="text-center mb-10">
-            <h2 class="text-2xl sm:text-3xl font-extrabold text-white">Frequently Asked Questions</h2>
-            <p class="text-slate-400 text-xs sm:text-sm mt-2">Everything you need to know about SmartPicTools features and security.</p>
-        </div>
+        <section class="mt-14 border-t border-slate-800 pt-10">
+            <h2 class="text-xl sm:text-2xl font-bold text-white text-center mb-6">How to Merge Photos to PDF in 3 Easy Steps</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs sm:text-sm">
+                <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800">
+                    <span class="w-7 h-7 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center mb-2.5 text-xs">1</span>
+                    <h3 class="font-bold text-white text-sm mb-1">Select Photos</h3>
+                    <p class="text-slate-400">Choose single or multiple JPG, PNG, WEBP, or HEIC pictures.</p>
+                </div>
+                <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800">
+                    <span class="w-7 h-7 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center mb-2.5 text-xs">2</span>
+                    <h3 class="font-bold text-white text-sm mb-1">Review Order</h3>
+                    <p class="text-slate-400">Check page numbers and remove unwanted images with ✕.</p>
+                </div>
+                <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800">
+                    <span class="w-7 h-7 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center mb-2.5 text-xs">3</span>
+                    <h3 class="font-bold text-white text-sm mb-1">Instant Download</h3>
+                    <p class="text-slate-400">Click download to compile all pages into a crisp PDF file in 0.5s.</p>
+                </div>
+            </div>
+        </section>
 
-        <div class="space-y-4 text-sm">
-            <details class="group bg-slate-900 p-5 rounded-2xl border border-slate-800 cursor-pointer">
+        <section class="mt-12 space-y-3">
+            <h2 class="text-xl font-bold text-white mb-4">Frequently Asked Questions</h2>
+            <details class="bg-slate-900 p-4 rounded-xl border border-slate-800 text-xs sm:text-sm cursor-pointer">
                 <summary class="font-bold text-white flex justify-between items-center">
-                    Is SmartPicTools really 100% free with unlimited usage?
-                    <span class="text-indigo-400 group-open:rotate-180 transition ml-2">▼</span>
+                    Why were there white borders before, and how is it fixed now?
+                    <span class="text-indigo-400">▼</span>
                 </summary>
-                <p class="text-slate-400 mt-3 leading-relaxed text-xs sm:text-sm">Yes! SmartPicTools is completely free to use for both personal and commercial projects. There are no subscriptions, watermark restrictions, or daily upload caps.</p>
+                <p class="text-slate-400 mt-2 leading-relaxed">Previously, photos were placed inside fixed vertical A4 dimensions. With Edge-to-Edge mode, our engine matches the PDF page dimensions to the exact width and height of each photo, eliminating white bars 100%.</p>
             </details>
-
-            <details class="group bg-slate-900 p-5 rounded-2xl border border-slate-800 cursor-pointer">
+            <details class="bg-slate-900 p-4 rounded-xl border border-slate-800 text-xs sm:text-sm cursor-pointer">
                 <summary class="font-bold text-white flex justify-between items-center">
-                    Are my uploaded images safe and private?
-                    <span class="text-indigo-400 group-open:rotate-180 transition ml-2">▼</span>
+                    Can I combine different image formats (JPG, PNG, HEIC) into one PDF?
+                    <span class="text-indigo-400">▼</span>
                 </summary>
-                <p class="text-slate-400 mt-3 leading-relaxed text-xs sm:text-sm">100%. We practice strict in-memory execution. Files are processed directly inside your browser RAM and are never uploaded, stored, or indexed on any remote server.</p>
+                <p class="text-slate-400 mt-2 leading-relaxed">Yes! You can mix JPG, PNG, WEBP, and Apple iPhone HEIC pictures together into a clean, uniform PDF document.</p>
             </details>
+        </section>
+    </main>
 
-            <details class="group bg-slate-900 p-5 rounded-2xl border border-slate-800 cursor-pointer">
-                <summary class="font-bold text-white flex justify-between items-center">
-                    How does exact KB target compression work?
-                    <span class="text-indigo-400 group-open:rotate-180 transition ml-2">▼</span>
-                </summary>
-                <p class="text-slate-400 mt-3 leading-relaxed text-xs sm:text-sm">Our precision binary search algorithm dynamically calculates compression in memory to match your exact requested KB value (e.g. 20KB, 50KB) while maintaining maximum visual sharpness.</p>
-            </details>
-        </div>
-    </section>
-
-    <!-- FOOTER -->
-    <footer class="border-t border-slate-800 bg-slate-950 py-10 px-4 text-xs text-slate-400">
-        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
-            <p>© 2026 SmartPicTools. 100% Free & Private in-browser suite.</p>
-            <div class="flex flex-wrap justify-center gap-6 font-semibold">
-                <a href="/about" class="hover:text-indigo-400 transition">About Us</a>
-                <a href="/privacy" class="hover:text-indigo-400 transition">Privacy Policy</a>
-                <a href="/terms" class="hover:text-indigo-400 transition">Terms of Service</a>
-                <a href="/contact" class="hover:text-indigo-400 transition">Contact Us</a>
-            </div>
-        </div>
+    <footer class="border-t border-slate-800 bg-slate-950 py-8 px-4 text-xs text-slate-400 text-center">
+        <p>© 2026 SmartPicTools. 100% Free & Private in-browser suite. <a href="/" class="text-indigo-400 hover:underline">Explore All Tools</a></p>
     </footer>
 
-    <!-- SUGGESTIONS & FEEDBACK MODAL -->
-    <div id="feedback-modal" class="hidden fixed inset-0 z-50 bg-black/70 backdrop-blur-md flex items-center justify-center p-4">
-        <div class="bg-slate-900 border border-slate-800 rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-2xl relative">
-            <button onclick="closeFeedbackModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-lg font-bold">✕</button>
-            <div class="flex items-center gap-2 mb-2">
-                <span class="text-2xl">💡</span>
-                <h3 class="text-lg font-black text-white">Suggestions & Feedback</h3>
-            </div>
-            <p class="text-xs text-slate-400 mb-5">Tell us what new tools or improvements you want to see!</p>
-
-            <form id="feedback-form" class="space-y-4">
-                <div>
-                    <label class="block text-xs font-bold text-slate-400 mb-1">Feedback Category</label>
-                    <select id="fb-category" required class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2.5 text-xs text-white focus:outline-none">
-                        <option value="" disabled selected>-- Select a Category --</option>
-                        <option value="New Tool Request">New Tool Request</option>
-                        <option value="Improve Existing Tool">Improve Existing Tool</option>
-                        <option value="Report Bug/Issue">Report a Bug / Issue</option>
-                        <option value="General Suggestion">General Suggestion</option>
-                    </select>
-                </div>
-
-                <div>
-                    <label class="block text-xs font-bold text-slate-400 mb-1">Your Suggestion / Message</label>
-                    <textarea id="fb-message" rows="3" required placeholder="What tool or feature do you need?" class="w-full bg-slate-950 border border-slate-700 rounded-xl p-3 text-xs text-white focus:outline-none"></textarea>
-                </div>
-
-                <div>
-                    <label class="block text-xs font-bold text-slate-400 mb-1">Email Address (Optional)</label>
-                    <input type="email" id="fb-email" placeholder="In case you want a reply" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white focus:outline-none">
-                </div>
-
-                <button type="submit" id="fb-submit-btn" class="w-full py-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 active:scale-95 text-white font-bold text-xs shadow-lg shadow-indigo-600/30 transition">
-                    Send Suggestion
-                </button>
-            </form>
-
-            <div id="fb-success" class="hidden mt-4 p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs text-center font-bold">
-                🎉 Thank you! Your feedback has been saved!
-            </div>
-        </div>
-    </div>
-
-    <!-- JS ENGINE -->
+    <!-- ⚡ ZERO WHITE SPACE PDF ENGINE -->
     <script>
-        function openFeedbackModal() {
-            document.getElementById('feedback-form').reset();
-            document.getElementById('fb-category').selectedIndex = 0;
-            document.getElementById('feedback-modal').classList.remove('hidden');
+        let pdfImages = [];
+
+        const dropArea = document.getElementById('drop-area');
+        const fileInput = document.getElementById('pdf-file-input');
+
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(ev => {
+            window.addEventListener(ev, (e) => { e.preventDefault(); e.stopPropagation(); }, false);
+            dropArea.addEventListener(ev, (e) => { e.preventDefault(); e.stopPropagation(); }, false);
+        });
+
+        ['dragenter', 'dragover'].forEach(ev => dropArea.classList.add('border-indigo-500', 'bg-indigo-950/40'));
+        ['dragleave', 'drop'].forEach(ev => dropArea.classList.remove('border-indigo-500', 'bg-indigo-950/40'));
+
+        dropArea.addEventListener('drop', (e) => {
+            if (e.dataTransfer && e.dataTransfer.files.length > 0) handleIncomingFiles(e.dataTransfer.files);
+        });
+        dropArea.addEventListener('click', () => fileInput.click());
+        fileInput.addEventListener('change', (e) => {
+            if (e.target.files && e.target.files.length > 0) handleIncomingFiles(e.target.files);
+        });
+
+        async function handleIncomingFiles(files) {
+            const rawFiles = Array.from(files);
+            document.getElementById('pdf-status-box').classList.add('hidden');
+
+            for (let f of rawFiles) {
+                let processedBlob = f;
+                const isHeic = f.name.toLowerCase().endsWith('.heic') || f.name.toLowerCase().endsWith('.heif');
+                
+                if (isHeic) {
+                    try {
+                        const converted = await heic2any({ blob: f, toType: 'image/jpeg', quality: 0.92 });
+                        processedBlob = Array.isArray(converted) ? converted[0] : converted;
+                    } catch(err) {}
+                }
+
+                const dataUrl = await new Promise(res => {
+                    const r = new FileReader();
+                    r.onload = (e) => res(e.target.result);
+                    r.readAsDataURL(processedBlob);
+                });
+
+                const dimensions = await new Promise(res => {
+                    const img = new Image();
+                    img.onload = () => res({ w: img.naturalWidth, h: img.naturalHeight });
+                    img.src = dataUrl;
+                });
+
+                pdfImages.push({
+                    name: f.name,
+                    dataUrl: dataUrl,
+                    width: dimensions.w,
+                    height: dimensions.h
+                });
+            }
+
+            renderGallery();
         }
 
-        function closeFeedbackModal() {
-            document.getElementById('feedback-modal').classList.add('hidden');
-            document.getElementById('fb-success').classList.add('hidden');
+        function renderGallery() {
+            const gallery = document.getElementById('pdf-gallery');
+            const workspace = document.getElementById('pdf-workspace');
+            const pageCount = document.getElementById('page-count');
+
+            if (pdfImages.length === 0) {
+                workspace.classList.add('hidden');
+                dropArea.classList.remove('hidden');
+                return;
+            }
+
+            workspace.classList.remove('hidden');
+            pageCount.innerText = pdfImages.length;
+            gallery.innerHTML = '';
+
+            pdfImages.forEach((item, index) => {
+                const card = document.createElement('div');
+                card.className = "relative bg-slate-900 p-2 rounded-xl border border-slate-800 text-center";
+                
+                const badge = document.createElement('span');
+                badge.className = "absolute top-1 left-1 bg-indigo-600 text-white text-[9px] font-black px-1.5 py-0.5 rounded shadow";
+                badge.innerText = `P.${index + 1}`;
+
+                const delBtn = document.createElement('button');
+                delBtn.type = "button";
+                delBtn.className = "absolute top-1 right-1 w-5 h-5 rounded-full bg-rose-600 text-white text-[10px] font-black flex items-center justify-center";
+                delBtn.innerHTML = "✕";
+                delBtn.onclick = () => {
+                    pdfImages.splice(index, 1);
+                    renderGallery();
+                };
+
+                const thumb = document.createElement('img');
+                thumb.className = "w-full h-20 object-cover rounded-lg mb-1";
+                thumb.src = item.dataUrl;
+
+                const nameText = document.createElement('p');
+                nameText.className = "text-[10px] font-bold text-white truncate";
+                nameText.innerText = item.name;
+
+                card.appendChild(badge);
+                card.appendChild(delBtn);
+                card.appendChild(thumb);
+                card.appendChild(nameText);
+                gallery.appendChild(card);
+            });
         }
 
-        document.getElementById('feedback-form').addEventListener('submit', async function(e) {
-            e.preventDefault();
-            const btn = document.getElementById('fb-submit-btn');
+        // ⚡ COMPILE PDF WITH 0% WHITE BORDERS
+        async function generatePDFDocument() {
+            if (pdfImages.length === 0) return;
+            const btn = document.getElementById('generate-pdf-btn');
             btn.disabled = true;
-            btn.innerText = 'Sending...';
-
-            const cat = document.getElementById('fb-category').value;
-            const msg = document.getElementById('fb-message').value;
-            const email = document.getElementById('fb-email').value || "Not provided";
-
-            const formData = new FormData();
-            formData.append("Category", cat);
-            formData.append("Suggestion", msg);
-            formData.append("User Email", email);
-            formData.append("_captcha", "false");
-            formData.append("_subject", "💡 New Suggestion from SmartPicTools User!");
-
-            fetch('/submit-feedback', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ category: cat, message: msg, email: email })
-            }).catch(() => {});
-
-            const timer = setTimeout(() => {
-                document.getElementById('fb-success').classList.remove('hidden');
-                document.getElementById('feedback-form').reset();
-                setTimeout(() => { closeFeedbackModal(); btn.disabled = false; btn.innerText = 'Send Suggestion'; }, 1500);
-            }, 3000);
+            document.getElementById('pdf-btn-text').innerText = "⏳ Compiling PDF...";
 
             try {
-                const res = await fetch('https://formsubmit.co/ajax/pranjalrajput243@gmail.com', {
-                    method: 'POST',
-                    headers: { 'Accept': 'application/json' },
-                    body: formData
-                });
-                clearTimeout(timer);
-                document.getElementById('fb-success').classList.remove('hidden');
-                document.getElementById('feedback-form').reset();
-                setTimeout(() => { closeFeedbackModal(); btn.disabled = false; btn.innerText = 'Send Suggestion'; }, 1500);
-            } catch (err) {
-                clearTimeout(timer);
-                document.getElementById('fb-success').classList.remove('hidden');
-                document.getElementById('feedback-form').reset();
-                setTimeout(() => { closeFeedbackModal(); btn.disabled = false; btn.innerText = 'Send Suggestion'; }, 1500);
+                const { jsPDF } = window.jspdf;
+                const fitMode = document.getElementById('pdf-fit-mode').value;
+                let doc = null;
+
+                for (let i = 0; i < pdfImages.length; i++) {
+                    const item = pdfImages[i];
+
+                    if (fitMode === 'fit') {
+                        // ⚡ EDGE-TO-EDGE: Exact image aspect ratio = 0% WHITE SPACE!
+                        const orient = item.width >= item.height ? 'l' : 'p';
+                        if (i === 0) {
+                            doc = new jsPDF(orient, 'pt', [item.width, item.height]);
+                        } else {
+                            doc.addPage([item.width, item.height], orient);
+                        }
+                        doc.addImage(item.dataUrl, 'JPEG', 0, 0, item.width, item.height);
+                    } else {
+                        // A4 Sheet Mode
+                        const orient = item.width >= item.height ? 'l' : 'p';
+                        if (i === 0) {
+                            doc = new jsPDF(orient, 'pt', 'a4');
+                        } else {
+                            doc.addPage('a4', orient);
+                        }
+                        const pW = doc.internal.pageSize.getWidth();
+                        const pH = doc.internal.pageSize.getHeight();
+                        const scale = Math.min(pW / item.width, pH / item.height);
+                        const dW = item.width * scale;
+                        const dH = item.height * scale;
+                        const x = (pW - dW) / 2;
+                        const y = (pH - dH) / 2;
+                        doc.addImage(item.dataUrl, 'JPEG', x, y, dW, dH);
+                    }
+                }
+
+                doc.save(`smartpic_merged_${Date.now()}.pdf`);
+                document.getElementById('pdf-status-box').classList.remove('hidden');
+            } catch(e) {
+                alert('PDF error: ' + e.message);
+            } finally {
+                btn.disabled = false;
+                document.getElementById('pdf-btn-text').innerText = "📥 Merge & Download PDF Document";
             }
-        });
+        }
     </script>
 </body>
 </html>
