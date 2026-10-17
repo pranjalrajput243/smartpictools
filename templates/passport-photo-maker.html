@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    
+    <!-- ⚡ HIGH-RANKING KEYWORDS FOR PASSPORT PHOTO -->
+    <title>Passport Size Photo Maker Online Free - 3.5 x 4.5 cm & Print Sheet | SmartPicTools</title>
+    <meta name="description" content="Free online passport size photo maker. Crop to exact 3.5cm x 4.5cm for SSC, UPSC, Police, and government exam forms. Create 8-photo print sheet for 4x6 paper. 100% private.">
+    <meta name="keywords" content="passport size photo maker, 3.5 x 4.5 cm photo maker, ssc passport photo, upsc photo resizer, passport photo print sheet 4x6, free online passport photo generator">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <meta name="author" content="SmartPicTools">
+    <link rel="canonical" href="https://smartpictools.in/passport-photo-maker">
+    
+    <!-- ⚡ PERMANENT GOOGLE SEARCH CONSOLE VERIFICATION TAG -->
+    <meta name="google-site-verification" content="uUq17UUsROyHMRQ8jkqKqrjZmsJnkuxZMKKoJLw_X3E" />
+
+    <!-- OPEN GRAPH -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://smartpictools.in/passport-photo-maker">
+    <meta property="og:title" content="Passport Size Photo Maker Online Free - SmartPicTools">
+    <meta property="og:description" content="Make 3.5x4.5cm passport photos and 8-photo print sheets in 0.1s directly on your device.">
+
+    <!-- FAVICON -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' stop-color='%236366f1'/><stop offset='50%25' stop-color='%23a855f7'/><stop offset='100%25' stop-color='%23ec4899'/></linearGradient></defs><rect width='100' height='100' rx='28' fill='url(%23g)'/><path d='M52 16 L24 54 L46 54 L42 84 L76 44 L54 44 Z' fill='%23fbbf24'/></svg>">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/heic2any/0.0.4/heic2any.min.js"></script>
+
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; -webkit-tap-highlight-color: transparent; }
+        .cropper-view-box, .cropper-face { border-radius: 4px; }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col justify-between selection:bg-indigo-500 selection:text-white">
+
+    <!-- HEADER -->
+    <header class="border-b border-slate-800 bg-slate-900/80 backdrop-blur-xl sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 h-18 sm:h-20 flex items-center justify-between">
+            <a href="/" class="flex items-center gap-2.5 sm:gap-3 group">
+                <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-2xl bg-gradient-to-tr from-indigo-500 via-purple-500 to-pink-500 flex items-center justify-center text-white text-lg sm:text-xl shadow-lg shadow-indigo-500/30 group-hover:scale-105 transition">
+                    ⚡
+                </div>
+                <div>
+                    <span class="text-xl sm:text-2xl font-black tracking-tight text-white">SmartPic<span class="text-indigo-400">Tools</span></span>
+                    <span class="block text-[9px] sm:text-[10px] uppercase font-bold tracking-widest text-slate-400 -mt-1">Passport Studio</span>
+                </div>
+            </a>
+            <a href="/" class="py-2 px-3.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-bold text-indigo-400 hover:text-white border border-slate-700 transition flex items-center gap-1.5 shadow-md">
+                <span>← All Tools</span>
+            </a>
+        </div>
+    </header>
+
+    <!-- MAIN WORKSPACE -->
+    <main class="max-w-4xl mx-auto w-full px-4 py-8 sm:py-12 flex-1">
+        <div class="text-center max-w-2xl mx-auto mb-8 sm:mb-10">
+            <h1 class="text-3xl sm:text-5xl font-black text-white tracking-tight">Passport Size Photo Maker</h1>
+            <p class="mt-2.5 text-slate-400 text-xs sm:text-sm">Create official 3.5cm × 4.5cm passport photos for government forms (SSC, UPSC, Police) or generate an 8-photo print sheet for 4×6 inch paper.</p>
+        </div>
+
+        <div class="bg-slate-900 rounded-3xl p-5 sm:p-10 border border-slate-800 shadow-2xl relative">
+            
+            <!-- UPLOAD DROP AREA -->
+            <div id="drop-area" class="border-2 border-dashed border-slate-700 hover:border-indigo-500 bg-slate-950/60 hover:bg-indigo-950/20 rounded-2xl p-8 sm:p-14 text-center cursor-pointer transition-all duration-300">
+                <input type="file" id="file-input" accept="image/*, .heic, .HEIC, .heif, .HEIF" class="hidden">
+                <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-3xl bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-3xl sm:text-4xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition duration-300 shadow-inner">
+                    👤
+                </div>
+                <h3 class="text-base sm:text-xl font-bold text-white mb-1.5">Select Photo to Make Passport Size</h3>
+                <p class="text-xs sm:text-sm text-slate-400">Choose any clear photo taken from mobile or camera (Supports JPG, PNG, WEBP, HEIC)</p>
+            </div>
+
+            <!-- WORKSPACE -->
+            <div id="workspace" class="hidden mt-6 space-y-6">
+                <div class="flex items-center justify-between">
+                    <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Crop & Center Face</span>
+                    <button type="button" onclick="document.getElementById('file-input').click()" class="text-xs font-bold text-indigo-400 hover:text-white bg-slate-800 hover:bg-slate-700 px-3 py-1.5 rounded-xl border border-slate-700 transition">
+                        🔄 Change Photo
+                    </button>
+                </div>
+
+                <!-- CROPPER CONTAINER -->
+                <div class="bg-slate-950/80 p-3 sm:p-4 rounded-2xl border border-slate-800 flex items-center justify-center max-h-[420px] overflow-hidden">
+                    <img id="crop-image" src="#" alt="Crop Preview" class="max-h-[380px] w-auto rounded-xl object-contain block">
+                </div>
+
+                <!-- PASSPORT SETTINGS -->
+                <div class="bg-slate-950/80 p-4 sm:p-5 rounded-2xl border border-slate-800 space-y-4">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-400 mb-1">Passport Standard Size:</label>
+                            <select id="size-preset" onchange="changeRatio()" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-white font-bold focus:outline-none">
+                                <option value="india" selected>3.5 × 4.5 cm (India Standard / SSC / UPSC)</option>
+                                <option value="visa">2 × 2 Inch / 5 × 5 cm (US / International Visa)</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold text-slate-400 mb-1">Download Format:</label>
+                            <select id="output-type" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-white font-bold focus:outline-none">
+                                <option value="single" selected>Single Photo (For Online Form Upload - 30 to 50 KB)</option>
+                                <option value="sheet">8-Photo Print Sheet (4×6 Inch Photo Paper for Studio Print)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-between p-2.5 bg-slate-900 rounded-xl border border-slate-800">
+                        <label for="add-border" class="flex items-center gap-2 cursor-pointer text-xs font-bold text-slate-300">
+                            <input type="checkbox" id="add-border" checked class="w-4 h-4 rounded accent-indigo-600 cursor-pointer">
+                            <span>Add Thin Cutting Border (For Clean Scissor Cut)</span>
+                        </label>
+                    </div>
+                </div>
+
+                <button type="button" id="download-btn" onclick="executePassportDownload()" class="w-full py-4 px-6 rounded-2xl bg-gradient-to-r from-indigo-600 via-indigo-500 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-extrabold text-sm sm:text-base shadow-lg shadow-indigo-500/25 transition active:scale-[0.99] flex items-center justify-center gap-3">
+                    <span>📥 Download Passport Photo</span>
+                </button>
+            </div>
+
+            <div id="status-box" class="hidden mt-5 p-3.5 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 text-center">
+                <p class="text-emerald-400 font-bold text-xs sm:text-sm">🎉 Success! Passport photo downloaded directly to your device.</p>
+            </div>
+        </div>
+
+        <!-- HOW TO USE -->
+        <section class="mt-14 border-t border-slate-800 pt-10">
+            <h2 class="text-xl sm:text-2xl font-bold text-white text-center mb-6">How to Make Passport Photos in 3 Easy Steps</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs sm:text-sm">
+                <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800">
+                    <span class="w-7 h-7 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center mb-2.5 text-xs">1</span>
+                    <h3 class="font-bold text-white text-sm mb-1">Select Photo</h3>
+                    <p class="text-slate-400">Choose a clear photo where your face is looking straight forward.</p>
+                </div>
+                <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800">
+                    <span class="w-7 h-7 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center mb-2.5 text-xs">2</span>
+                    <h3 class="font-bold text-white text-sm mb-1">Center Your Face</h3>
+                    <p class="text-slate-400">Move the crop box so your head and shoulders fit nicely inside the frame.</p>
+                </div>
+                <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800">
+                    <span class="w-7 h-7 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center mb-2.5 text-xs">3</span>
+                    <h3 class="font-bold text-white text-sm mb-1">Instant Download</h3>
+                    <p class="text-slate-400">Choose Single photo for exam forms or 8-photo print sheet for physical prints.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQS -->
+        <section class="mt-12 space-y-3">
+            <h2 class="text-xl font-bold text-white mb-4">Frequently Asked Questions</h2>
+            <details class="bg-slate-900 p-4 rounded-xl border border-slate-800 text-xs sm:text-sm cursor-pointer">
+                <summary class="font-bold text-white flex justify-between items-center">
+                    What is the standard passport photo size for Indian government exam forms?
+                    <span class="text-indigo-400">▼</span>
+                </summary>
+                <p class="text-slate-400 mt-2 leading-relaxed">The official standard for SSC, UPSC, Railway, Police, and bank exams is 3.5 cm width × 4.5 cm height (approx 413 × 531 pixels at 300 DPI) with file size between 20 KB and 50 KB.</p>
+            </details>
+            <details class="bg-slate-900 p-4 rounded-xl border border-slate-800 text-xs sm:text-sm cursor-pointer">
+                <summary class="font-bold text-white flex justify-between items-center">
+                    How much does it cost to print the 8-photo sheet at a local studio?
+                    <span class="text-indigo-400">▼</span>
+                </summary>
+                <p class="text-slate-400 mt-2 leading-relaxed">Taking the 8-photo sheet on a pen drive or WhatsApp to any photo lab to print on standard 4×6 inch paper typically costs only ₹5 to ₹10, saving you over ₹50 compared to studio shooting charges.</p>
+            </details>
+        </section>
+    </main>
+
+    <footer class="border-t border-slate-800 bg-slate-950 py-8 px-4 text-xs text-slate-400 text-center">
+        <p>© 2026 SmartPicTools. 100% Free & Private in-browser suite. <a href="/" class="text-indigo-400 hover:underline">Explore All Tools</a></p>
+    </footer>
+
+    <!-- JS ENGINE -->
+    <script>
+        let cropper = null;
+        let currentFile = null;
+
+        const dropArea = document.getElementById('drop-area');
+        const fileInput = document.getElementById('file-input');
+
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(ev => {
+            window.addEventListener(ev, (e) => { e.preventDefault(); e.stopPropagation(); }, false);
+            dropArea.addEventListener(ev, (e) => { e.preventDefault(); e.stopPropagation(); }, false);
+        });
+
+        ['dragenter', 'dragover'].forEach(ev => dropArea.classList.add
