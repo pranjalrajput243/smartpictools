@@ -20,50 +20,110 @@ app = Flask(__name__)
 app.config['MAX_CONTENT_LENGTH'] = 100 * 1024 * 1024  # 100MB limit
 
 # ==========================================
-# ⚡ ALL 9 DEDICATED TOOL ROUTES
+# ⚡ DEDICATED SEO DATABASE FOR ALL 9 TOOLS
+# ==========================================
+TOOL_SEO = {
+    'compress': {
+        'slug': 'compress-image',
+        'title': 'Compress Image to 20KB, 50KB, 100KB Online Free | SmartPicTools',
+        'desc': 'Free online tool to compress image to exact 20KB, 50KB, or any target size with high clarity. Perfect for government exam forms (SSC, UPSC).',
+        'keywords': 'compress image to 20kb, compress image to 50kb, compress photo for online exam, exact kb compressor, ssc photo compressor'
+    },
+    'crop': {
+        'slug': 'crop-image',
+        'title': 'Crop Image Online Free - Instagram 1:1, YouTube 16:9, Reels | SmartPicTools',
+        'desc': 'Crop photos visually with exact aspect ratio presets for Instagram (1:1), YouTube (16:9), and Reels/Shorts (9:16).',
+        'keywords': 'crop image online, crop photo 1:1 instagram, crop image 16:9 youtube thumbnail, crop 9:16 reels shorts, aspect ratio cropper'
+    },
+    'resize': {
+        'slug': 'resize-image',
+        'title': 'Resize Image Dimensions Online Free - Change Pixel Width & Height | SmartPicTools',
+        'desc': 'Resize image dimensions in pixels with live visual transform and aspect ratio lock. Fast, accurate, and private.',
+        'keywords': 'resize image online, resize image dimensions, change photo pixel width height, passport size photo resizer, image resolution changer'
+    },
+    'convert': {
+        'slug': 'convert-image',
+        'title': 'Convert Image Format Online Free - JPG, PNG, WEBP, AVIF | SmartPicTools',
+        'desc': 'Convert single or batch images to JPG, PNG, WEBP, or AVIF with 1-click ZIP download. 100% private in-browser.',
+        'keywords': 'convert image format, image converter online, png to jpg, jpg to png, convert image to webp, avif to jpg, batch image converter'
+    },
+    'pdf': {
+        'slug': 'image-to-pdf',
+        'title': 'PDF Maker - Merge Images to PDF Online Free (Zero Border) | SmartPicTools',
+        'desc': 'Merge multiple JPG, PNG, WEBP, and HEIC photos into one PDF with 0% white borders. Fast 0.5s in-browser generation.',
+        'keywords': 'pdf maker, merge pdf, image to pdf, convert jpg to pdf, merge images to pdf, photo to pdf maker, free online pdf merger'
+    },
+    'heic': {
+        'slug': 'heic-to-jpg',
+        'title': 'Convert iPhone HEIC to JPG Online Free | SmartPicTools',
+        'desc': 'Convert Apple iPhone HEIC and HEIF photos to standard JPG or PNG in 0.5s without uploading to any server.',
+        'keywords': 'convert heic to jpg, heic to jpg online, iphone photo to jpg, apple heic converter, heif to jpg, convert heic to png free'
+    },
+    'watermark': {
+        'slug': 'add-watermark',
+        'title': 'Add Watermark to Photo Online Free - Grid & Stamp | SmartPicTools',
+        'desc': 'Add text watermarks to images online. Protect pictures with diagonal repeated security grids or corner stamps.',
+        'keywords': 'add watermark to photo, watermark image online, diagonal grid watermark, copyright photo watermark, free online watermark maker'
+    },
+    'rotate': {
+        'slug': 'rotate-image',
+        'title': 'Rotate & Flip Image Online Free - 90 Degree & Mirror | SmartPicTools',
+        'desc': 'Rotate images 90 degrees clockwise or anti-clockwise and mirror flip horizontally or vertically in 0.05s.',
+        'keywords': 'rotate image online, flip image horizontally, mirror photo online, rotate picture 90 degrees, flip photo vertical'
+    },
+    'barcode': {
+        'slug': 'qr-code-generator',
+        'title': 'Free QR Code & Barcode Generator Online with Live Preview | SmartPicTools',
+        'desc': 'Generate custom QR codes and standard barcodes online for free with instant live preview. Supports URLs, text, and UPI payments.',
+        'keywords': 'free qr code generator, online barcode maker, generate upi qr code, code128 barcode generator, custom qr maker'
+    }
+}
+
+# ==========================================
+# ⚡ DEDICATED TOOL ROUTES
 # ==========================================
 @app.route('/')
 def home():
-    return render_template('index.html')
+    return render_template('index.html', active_tool='compress', is_home=True, seo=None)
 
 @app.route('/compress-image')
-def compress_page():
-    return render_template('compress-image.html')
+def compress_route():
+    return render_template('index.html', active_tool='compress', is_home=False, seo=TOOL_SEO['compress'])
 
 @app.route('/crop-image')
-def crop_page():
-    return render_template('crop-image.html')
+def crop_route():
+    return render_template('index.html', active_tool='crop', is_home=False, seo=TOOL_SEO['crop'])
 
 @app.route('/resize-image')
-def resize_page():
-    return render_template('resize-image.html')
+def resize_route():
+    return render_template('index.html', active_tool='resize', is_home=False, seo=TOOL_SEO['resize'])
 
 @app.route('/convert-image')
-def convert_page():
-    return render_template('convert-image.html')
-
-@app.route('/heic-to-jpg')
-def heic_page():
-    return render_template('heic-to-jpg.html')
-
-@app.route('/add-watermark')
-def watermark_page():
-    return render_template('add-watermark.html')
-
-@app.route('/rotate-image')
-def rotate_page():
-    return render_template('rotate-image.html')
-
-@app.route('/qr-code-generator')
-def qr_page():
-    return render_template('qr-code-generator.html')
+def convert_route():
+    return render_template('index.html', active_tool='convert', is_home=False, seo=TOOL_SEO['convert'])
 
 @app.route('/image-to-pdf')
-def image_to_pdf():
-    return render_template('image-to-pdf.html')
+def pdf_route():
+    return render_template('index.html', active_tool='pdf', is_home=False, seo=TOOL_SEO['pdf'])
+
+@app.route('/heic-to-jpg')
+def heic_route():
+    return render_template('index.html', active_tool='heic', is_home=False, seo=TOOL_SEO['heic'])
+
+@app.route('/add-watermark')
+def watermark_route():
+    return render_template('index.html', active_tool='watermark', is_home=False, seo=TOOL_SEO['watermark'])
+
+@app.route('/rotate-image')
+def rotate_route():
+    return render_template('index.html', active_tool='rotate', is_home=False, seo=TOOL_SEO['rotate'])
+
+@app.route('/qr-code-generator')
+def qr_route():
+    return render_template('index.html', active_tool='barcode', is_home=False, seo=TOOL_SEO['barcode'])
 
 # ==========================================
-# LEGAL & INFO ROUTES
+# LEGAL ROUTES
 # ==========================================
 @app.route('/privacy')
 def privacy():
@@ -82,7 +142,7 @@ def contact():
     return render_template('contact.html')
 
 # ==========================================
-# ⚡ MASTER SITEMAP (ALL 9 TOOLS FOR GOOGLE RANKING)
+# ⚡ MASTER SITEMAP (ALL 9 TOOLS FOR GOOGLE #1 RANKING)
 # ==========================================
 @app.route('/sitemap.xml')
 def sitemap():
@@ -90,10 +150,10 @@ def sitemap():
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://smartpictools.in/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
   <url><loc>https://smartpictools.in/compress-image</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://smartpictools.in/image-to-pdf</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
   <url><loc>https://smartpictools.in/crop-image</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
   <url><loc>https://smartpictools.in/resize-image</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
   <url><loc>https://smartpictools.in/convert-image</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://smartpictools.in/image-to-pdf</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
   <url><loc>https://smartpictools.in/heic-to-jpg</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
   <url><loc>https://smartpictools.in/add-watermark</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
   <url><loc>https://smartpictools.in/rotate-image</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
