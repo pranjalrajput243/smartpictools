@@ -1522,13 +1522,51 @@
                     }
                 }
 
-                // OUTPUT FORMAT & DOWNLOAD
+                // OUTPUT FORMAT & DOWNLOAD (ALL 7 FORMATS SUPPORTED)
                 let targetMime = 'image/jpeg';
                 let targetExt = 'jpg';
 
                 if (currentTool === 'convert') {
                     const fmt = document.getElementById('convert-format').value;
                     targetExt = fmt.toLowerCase();
+
+                    // 1. PDF CONVERT
+                    if (fmt === 'PDF') {
+                        const { jsPDF } = window.jspdf;
+                        const wPt = canvas.width * 0.75;
+                        const hPt = canvas.height * 0.75;
+                        const orient = wPt >= hPt ? 'l' : 'p';
+                        const doc = new jsPDF({ orientation: orient, unit: 'pt', format: [wPt, hPt] });
+                        const pW = doc.internal.pageSize.getWidth();
+                        const pH = doc.internal.pageSize.getHeight();
+                        doc.addImage(canvas.toDataURL('image/jpeg', 0.92), 'JPEG', 0, 0, pW, pH);
+                        doc.save(`smartpic_${rawName}.pdf`);
+                        finishSuccess();
+                        return;
+                    }
+
+                    // 2. ICO (FAVICON 64x64)
+                    if (fmt === 'ICO') {
+                        const icoCanvas = document.createElement('canvas');
+                        icoCanvas.width = 64;
+                        icoCanvas.height = 64;
+                        icoCanvas.getContext('2d').drawImage(canvas, 0, 0, 64, 64);
+                        icoCanvas.toBlob((blob) => {
+                            triggerDownload(blob, `smartpic_${rawName}.ico`);
+                            finishSuccess();
+                        }, 'image/png');
+                        return;
+                    }
+
+                    // 3. BMP CONVERT
+                    if (fmt === 'BMP') {
+                        canvas.toBlob((blob) => {
+                            triggerDownload(blob, `smartpic_${rawName}.bmp`);
+                            finishSuccess();
+                        }, 'image/png');
+                        return;
+                    }
+
                     targetMime = fmt === 'PNG' ? 'image/png' : (fmt === 'WEBP' ? 'image/webp' : (fmt === 'AVIF' ? 'image/avif' : 'image/jpeg'));
                 }
 
