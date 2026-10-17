@@ -1308,8 +1308,8 @@
         }
 
         // ==========================================
-        // ⚡ ACTION BUTTON EXECUTION (0.2s TURBO)
-        // ==========================================
+// ⚡ ACTION BUTTON EXECUTION (0.2s TURBO)
+// ==========================================
         document.getElementById('action-btn').addEventListener('click', async function() {
             if (uploadedFiles.length === 0) return;
             const btn = document.getElementById('action-btn');
@@ -1317,10 +1317,12 @@
             document.getElementById('btn-text').innerText = "⏳ Processing...";
 
             try {
-                // 1. ⚡ PDF MAKER (EXACT ZERO WHITE BORDER GUARANTEED)
-                if (currentTool === 'pdf') {
+                // ⚡ 1. REAL PDF MAKER (SINGLE & MULTI-IMAGE 100% GENUINE PDF - ZERO BORDER)
+                const targetFmt = document.getElementById('convert-format') ? document.getElementById('convert-format').value : '';
+                const isPdfRequest = (currentTool === 'pdf') || (currentTool === 'convert' && targetFmt === 'PDF');
+
+                if (isPdfRequest) {
                     const { jsPDF } = window.jspdf;
-                    const fitMode = document.getElementById('pdf-fit-mode').value;
                     let doc = null;
 
                     for (let i = 0; i < uploadedFiles.length; i++) {
@@ -1335,58 +1337,36 @@
                         }
 
                         const bmp = await createImageBitmap(processedBlob);
-
-                        if (fitMode === 'fit') {
-                            // ⚡ EXACT SUB-MILLIMETER PT RATIO = ZERO BORDER!
-                            const wPt = bmp.width * 0.75;
-                            const hPt = bmp.height * 0.75;
-                            const orient = wPt >= hPt ? 'l' : 'p';
-                            
-                            if (i === 0) {
-                                doc = new jsPDF({ orientation: orient, unit: 'pt', format: [wPt, hPt] });
-                            } else {
-                                doc.addPage([wPt, hPt], orient);
-                            }
-                            const pW = doc.internal.pageSize.getWidth();
-                            const pH = doc.internal.pageSize.getHeight();
-                            
-                            const tc = document.createElement('canvas');
-                            tc.width = bmp.width;
-                            tc.height = bmp.height;
-                            tc.getContext('2d').drawImage(bmp, 0, 0);
-                            const imgData = tc.toDataURL('image/jpeg', 0.92);
-                            doc.addImage(imgData, 'JPEG', 0, 0, pW, pH);
-
+                        const wPt = bmp.width * 0.75;
+                        const hPt = bmp.height * 0.75;
+                        const orient = wPt >= hPt ? 'l' : 'p';
+                        
+                        if (i === 0) {
+                            doc = new jsPDF({ orientation: orient, unit: 'pt', format: [wPt, hPt] });
                         } else {
-                            // Standard A4 Mode
-                            const orient = bmp.width >= bmp.height ? 'l' : 'p';
-                            if (i === 0) doc = new jsPDF(orient, 'pt', 'a4');
-                            else doc.addPage('a4', orient);
-                            
-                            const pW = doc.internal.pageSize.getWidth();
-                            const pH = doc.internal.pageSize.getHeight();
-                            const scale = Math.min(pW / bmp.width, pH / bmp.height);
-                            const dW = bmp.width * scale;
-                            const dH = bmp.height * scale;
-                            const x = (pW - dW) / 2;
-                            const y = (pH - dH) / 2;
-
-                            const tc = document.createElement('canvas');
-                            tc.width = bmp.width;
-                            tc.height = bmp.height;
-                            tc.getContext('2d').drawImage(bmp, 0, 0);
-                            doc.addImage(tc.toDataURL('image/jpeg', 0.90), 'JPEG', x, y, dW, dH);
+                            doc.addPage([wPt, hPt], orient);
                         }
+
+                        const pW = doc.internal.pageSize.getWidth();
+                        const pH = doc.internal.pageSize.getHeight();
+                        
+                        const tc = document.createElement('canvas');
+                        tc.width = bmp.width;
+                        tc.height = bmp.height;
+                        tc.getContext('2d').drawImage(bmp, 0, 0);
+                        const imgData = tc.toDataURL('image/jpeg', 0.92);
+                        doc.addImage(imgData, 'JPEG', 0, 0, pW, pH);
                     }
 
-                    doc.save(`smartpic_merged_${Date.now()}.pdf`);
+                    // Export 100% genuine binary PDF Blob
+                    const pdfBlob = doc.output('blob');
+                    triggerDownload(pdfBlob, `smartpic_document_${Date.now()}.pdf`);
                     finishSuccess();
                     return;
                 }
 
-                // 2. BATCH ZIP CONVERTER
+                // 2. BATCH ZIP CONVERTER (FOR NON-PDF FORMATS)
                 if (currentTool === 'convert' && uploadedFiles.length > 1) {
-                    const targetFormat = document.getElementById('convert-format').value;
                     const zip = new JSZip();
 
                     for (let file of uploadedFiles) {
@@ -1398,9 +1378,9 @@
                         const ctx = canvas.getContext('2d');
                         ctx.drawImage(bmp, 0, 0);
 
-                        const mime = targetFormat === 'PNG' ? 'image/png' : (targetFormat === 'WEBP' ? 'image/webp' : 'image/jpeg');
+                        const mime = targetFmt === 'PNG' ? 'image/png' : (targetFmt === 'WEBP' ? 'image/webp' : 'image/jpeg');
                         const blob = await new Promise(res => canvas.toBlob(res, mime, 0.88));
-                        zip.file(`${rawName}.${targetFormat.toLowerCase()}`, blob);
+                        zip.file(`${rawName}.${targetFmt.toLowerCase()}`, blob);
                     }
 
                     const zipContent = await zip.generateAsync({ type: "blob" });
@@ -1414,7 +1394,7 @@
                 const rawName = file.name.substring(0, file.name.lastIndexOf('.')) || file.name;
 
                 // TURBO AVIF FALLBACK
-                if (currentTool === 'convert' && document.getElementById('convert-format').value === 'AVIF' && !canEncodeAvif()) {
+                if (currentTool === 'convert' && targetFmt === 'AVIF' && !canEncodeAvif()) {
                     btn.disabled = true;
                     document.getElementById('btn-text').innerText = "⏳ Converting...";
 
