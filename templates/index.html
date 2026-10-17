@@ -1269,10 +1269,11 @@
             }
         }
 
-        // ROTATE & FLIP
+        // ⚡ ROTATE & FLIP (CONTINUOUS SMOOTH ROTATION - NO WEIRD SPINS!)
+        let displayRotation = 0;
+
         function applyLiveRotate(deg) {
-            currentRotation = (currentRotation + deg) % 360;
-            if (currentRotation < 0) currentRotation += 360;
+            displayRotation += deg; // Keeps rotating forward smoothly without jumping back to 0!
             updateOrientationTransform();
         }
 
@@ -1285,11 +1286,12 @@
         function updateOrientationTransform() {
             const scaleX = isFlippedH ? -1 : 1;
             const scaleY = isFlippedV ? -1 : 1;
-            document.getElementById('image-preview').style.transform = `rotate(${currentRotation}deg) scale(${scaleX}, ${scaleY})`;
+            document.getElementById('image-preview').style.transform = `rotate(${displayRotation}deg) scale(${scaleX}, ${scaleY})`;
             document.getElementById('flip-h-btn').className = isFlippedH ? "py-2.5 px-2 rounded-xl bg-indigo-600 text-white text-xs font-bold border border-indigo-500 transition" : "py-2.5 px-2 rounded-xl bg-slate-900 text-white text-xs font-bold border border-slate-700 transition";
             document.getElementById('flip-v-btn').className = isFlippedV ? "py-2.5 px-2 rounded-xl bg-indigo-600 text-white text-xs font-bold border border-indigo-500 transition" : "py-2.5 px-2 rounded-xl bg-slate-900 text-white text-xs font-bold border border-slate-700 transition";
         }
 
+        
         // CROPPER
         function initCropper() {
             const imgElement = document.getElementById('image-preview');
