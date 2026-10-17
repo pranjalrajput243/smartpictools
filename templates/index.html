@@ -1454,7 +1454,8 @@
                         h = parseInt(document.getElementById('resize-height').value) || h;
                     }
 
-                    if (currentTool === 'rotate' && (currentRotation === 90 || currentRotation === 270)) {
+                   const effectiveAngle = ((displayRotation % 360) + 360) % 360;
+                    if (currentTool === 'rotate' && (effectiveAngle === 90 || effectiveAngle === 270)) {
                         canvas.width = h;
                         canvas.height = w;
                     } else {
@@ -1465,7 +1466,7 @@
                     ctx.save();
                     if (currentTool === 'rotate') {
                         ctx.translate(canvas.width / 2, canvas.height / 2);
-                        ctx.rotate((currentRotation * Math.PI) / 180);
+                        ctx.rotate((effectiveAngle * Math.PI) / 180);
                         const sX = isFlippedH ? -1 : 1;
                         const sY = isFlippedV ? -1 : 1;
                         ctx.scale(sX, sY);
