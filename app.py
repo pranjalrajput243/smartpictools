@@ -122,6 +122,11 @@ def rotate_route():
 def qr_route():
     return render_template('index.html', active_tool='barcode', is_home=False, seo=TOOL_SEO['barcode'])
 
+# ⚡ PASSPORT PHOTO MAKER ROUTE
+@app.route('/passport-photo-maker')
+def passport_photo_page():
+    return render_template('passport-photo-maker.html')
+
 # ==========================================
 # LEGAL ROUTES
 # ==========================================
