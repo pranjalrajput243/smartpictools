@@ -185,4 +185,122 @@
             dropArea.addEventListener(ev, (e) => { e.preventDefault(); e.stopPropagation(); }, false);
         });
 
-        ['dragenter', 'dragover'].forEach(ev => dropArea.classList.add
+        ['dragenter', 'dragover'].forEach(ev => dropArea.classList.add('border-indigo-500', 'bg-indigo-950/40'));
+        ['dragleave', 'drop'].forEach(ev => dropArea.classList.remove('border-indigo-500', 'bg-indigo-950/40'));
+
+        dropArea.addEventListener('drop', (e) => {
+            if (e.dataTransfer && e.dataTransfer.files.length > 0) handleFile(e.dataTransfer.files[0]);
+        });
+        dropArea.addEventListener('click', () => fileInput.click());
+        fileInput.addEventListener('change', (e) => {
+            if (e.target.files && e.target.files.length > 0) handleFile(e.target.files[0]);
+        });
+
+        async function handleFile(file) {
+            currentFile = file;
+            let displayBlob = file;
+
+            if (file.name.toLowerCase().endsWith('.heic') || file.name.toLowerCase().endsWith('.heif')) {
+                try {
+                    const conv = await heic2any({ blob: file, toType: 'image/jpeg', quality: 0.92 });
+                    displayBlob = Array.isArray(conv) ? conv[0] : conv;
+                } catch(e) {}
+            }
+
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                const img = document.getElementById('crop-image');
+                img.src = e.target.result;
+
+                document.getElementById('drop-area').classList.add('hidden');
+                document.getElementById('workspace').classList.remove('hidden');
+                document.getElementById('status-box').classList.add('hidden');
+
+                if (cropper) cropper.destroy();
+                // 3.5cm x 4.5cm ratio = 7 / 9
+                cropper = new Cropper(img, {
+                    aspectRatio: 7 / 9,
+                    viewMode: 1,
+                    autoCropArea: 0.85,
+                    responsive: true
+                });
+            };
+            reader.readAsDataURL(displayBlob);
+        }
+
+        function changeRatio() {
+            if (!cropper) return;
+            const preset = document.getElementById('size-preset').value;
+            cropper.setAspectRatio(preset === 'india' ? 7 / 9 : 1);
+        }
+
+        function executePassportDownload() {
+            if (!cropper) return;
+            const outputType = document.getElementById('output-type').value;
+            const hasBorder = document.getElementById('add-border').checked;
+            const isVisa = document.getElementById('size-preset').value === 'visa';
+
+            // Base photo size: 413x531 px for 3.5x4.5cm (300 DPI)
+            const targetW = isVisa ? 600 : 413;
+            const targetH = isVisa ? 600 : 531;
+
+            const singleCanvas = cropper.getCroppedCanvas({
+                width: targetW,
+                height: targetH,
+                imageSmoothingQuality: 'high'
+            });
+
+            // Add thin cutting border if checked
+            if (hasBorder) {
+                const ctx = singleCanvas.getContext('2d');
+                ctx.strokeStyle = '#cccccc';
+                ctx.lineWidth = 2;
+                ctx.strokeRect(0, 0, singleCanvas.width, singleCanvas.height);
+            }
+
+            if (outputType === 'single') {
+                // Download single photo ready for form upload (~30-50 KB)
+                singleCanvas.toBlob((blob) => {
+                    triggerDownload(blob, `smartpic_passport_photo_${Date.now()}.jpg`);
+                }, 'image/jpeg', 0.88);
+            } else {
+                // 8-PHOTO PRINT SHEET (4x6 inch paper at 300 DPI = 1800 x 1200 px)
+                const sheetCanvas = document.createElement('canvas');
+                sheetCanvas.width = 1800;
+                sheetCanvas.height = 1200;
+                const sheetCtx = sheetCanvas.getContext('2d');
+
+                // White paper background
+                sheetCtx.fillStyle = '#ffffff';
+                sheetCtx.fillRect(0, 0, sheetCanvas.width, sheetCanvas.height);
+
+                // Draw 8 photos (2 rows of 4 columns)
+                const cols = 4;
+                const rows = 2;
+                const gapX = (sheetCanvas.width - (cols * targetW)) / (cols + 1);
+                const gapY = (sheetCanvas.height - (rows * targetH)) / (rows + 1);
+
+                for (let r = 0; r < rows; r++) {
+                    for (let c = 0; c < cols; c++) {
+                        const x = gapX + c * (targetW + gapX);
+                        const y = gapY + r * (targetH + gapY);
+                        sheetCtx.drawImage(singleCanvas, x, y, targetW, targetH);
+                    }
+                }
+
+                sheetCanvas.toBlob((blob) => {
+                    triggerDownload(blob, `smartpic_passport_8photo_sheet_${Date.now()}.jpg`);
+                }, 'image/jpeg', 0.95);
+            }
+        }
+
+        function triggerDownload(blob, filename) {
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = filename;
+            a.click();
+            document.getElementById('status-box').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
