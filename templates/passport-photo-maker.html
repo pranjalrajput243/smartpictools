@@ -274,16 +274,23 @@
                 sheetCtx.fillStyle = '#ffffff';
                 sheetCtx.fillRect(0, 0, sheetCanvas.width, sheetCanvas.height);
 
-                // Draw 8 photos (2 rows of 4 columns)
                 const cols = 4;
                 const rows = 2;
-                const gapX = (sheetCanvas.width - (cols * targetW)) / (cols + 1);
-                const gapY = (sheetCanvas.height - (rows * targetH)) / (rows + 1);
+                
+                // ⚡ PERFECT STUDIO SPACING (TIGHT & EQUAL GAP ON X AND Y)
+                const photoGap = 20; // Perfect 20px cutting gap between photos
+                
+                const totalW = (cols * targetW) + ((cols - 1) * photoGap);
+                const totalH = (rows * targetH) + ((rows - 1) * photoGap);
+                
+                // Perfectly centered on 4x6 paper
+                const startX = (sheetCanvas.width - totalW) / 2;
+                const startY = (sheetCanvas.height - totalH) / 2;
 
                 for (let r = 0; r < rows; r++) {
                     for (let c = 0; c < cols; c++) {
-                        const x = gapX + c * (targetW + gapX);
-                        const y = gapY + r * (targetH + gapY);
+                        const x = startX + c * (targetW + photoGap);
+                        const y = startY + r * (targetH + photoGap);
                         sheetCtx.drawImage(singleCanvas, x, y, targetW, targetH);
                     }
                 }
