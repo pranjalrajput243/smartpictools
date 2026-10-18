@@ -83,12 +83,13 @@
                     <span class="text-xs font-semibold text-slate-400 block text-center">How your Favicon looks in Google Chrome:</span>
                     
                     <div class="bg-slate-900 p-2.5 rounded-xl border border-slate-800 max-w-sm mx-auto shadow-inner">
-                        <div class="bg-slate-800 px-3 py-2.5 rounded-lg flex items-center gap-2.5 shadow">
+                       <div class="bg-slate-800 px-3 py-2.5 rounded-lg flex items-center gap-2.5 shadow">
                             <div class="w-7 h-7 flex items-center justify-center">
-                                <img id="tab-favicon-preview" src="#" alt="Favicon" class="w-5 h-5 object-contain rounded-sm pixelated">
+                                <img id="tab-favicon-preview" src="#" alt="Favicon" class="w-5 h-5 object-contain rounded-sm transition-transform duration-150">
                             </div>
-                            <span class="text-xs font-bold text-slate-200 truncate">My Awesome Website</span>
-                            <span class="text-slate-400 text-xs ml-auto font-black">✕</span>
+                            <span class="text-xs font-bold text-slate-200 truncate">My Website</span>
+                            <span id="tab-badge" class="text-[10px] font-black text-indigo-400 bg-indigo-500/10 px-2 py-0.5 rounded border border-indigo-500/20 ml-auto">128×128 px</span>
+                            <span class="text-slate-400 text-xs ml-1 font-black">✕</span>
                         </div>
                     </div>
 
@@ -233,19 +234,43 @@
             reader.readAsDataURL(file);
         }
 
-        function selectFaviconSize(size) {
+       // ⚡ REAL-TIME LIVE TRANSFORM ON TAB & BROWSER
+        async function selectFaviconSize(size) {
             currentSelectedSize = size;
             const dropdown = document.getElementById('download-mode');
+            const previewIcon = document.getElementById('tab-favicon-preview');
+            const tabBadge = document.getElementById('tab-badge');
 
             if (size === 64) dropdown.value = 'ico64';
             else if (size === 128) dropdown.value = 'ico128';
             else if (size === 256) dropdown.value = 'ico256';
 
+            // 1. ⚡ Live Scale Animation & Icon Refresh in Tab
+            if (loadedImg.src) {
+                const pngBlob = await renderCanvasPng(size);
+                const url = URL.createObjectURL(pngBlob);
+                previewIcon.src = url;
+
+                // Live Pop/Scale Animation on click!
+                previewIcon.style.transform = 'scale(1.4)';
+                setTimeout(() => { previewIcon.style.transform = 'scale(1)'; }, 150);
+
+                // Live change the real Chrome browser tab icon too!
+                const realFavicon = document.querySelector("link[rel*='icon']");
+                if (realFavicon) realFavicon.href = url;
+            }
+
+            // 2. ⚡ Live Update Badge in Tab
+            if (tabBadge) {
+                tabBadge.innerText = `${size}×${size} px`;
+            }
+
+            // 3. Highlight selected card
             [64, 128, 256].forEach(s => {
                 const btn = document.getElementById('btn-size-' + s);
                 if (btn) {
                     if (s === size) {
-                        btn.className = "size-btn p-3 bg-slate-900 rounded-2xl border-2 border-indigo-500 shadow-lg shadow-indigo-500/20 text-center transition flex flex-col items-center scale-105";
+                        btn.className = "size-btn p-3 bg-slate-900 rounded-2xl border-2 border-indigo-500 shadow-lg shadow-indigo-500/30 text-center transition flex flex-col items-center scale-105";
                     } else {
                         btn.className = "size-btn p-3 bg-slate-900 hover:bg-slate-800 rounded-2xl border-2 border-slate-800 text-center transition flex flex-col items-center";
                     }
