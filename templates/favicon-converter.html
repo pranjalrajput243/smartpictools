@@ -19,7 +19,7 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://smartpictools.in/favicon-converter">
     <meta property="og:title" content="Image to Favicon Converter Online Free - SmartPicTools">
-    <meta property="og:description" content="Convert any image to standard favicon.ico or complete favicon pack in 0.1s directly on your device.">
+    <meta property="og:description" content="Convert any image to standard favicon.ico or individual PNG sizes in 0.1s directly on your device.">
 
     <!-- FAVICON -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' stop-color='%236366f1'/><stop offset='50%25' stop-color='%23a855f7'/><stop offset='100%25' stop-color='%23ec4899'/></linearGradient></defs><rect width='100' height='100' rx='28' fill='url(%23g)'/><path d='M52 16 L24 54 L46 54 L42 84 L76 44 L54 44 Z' fill='%23fbbf24'/></svg>">
@@ -54,7 +54,7 @@
     <main class="max-w-4xl mx-auto w-full px-4 py-8 sm:py-12 flex-1">
         <div class="text-center max-w-2xl mx-auto mb-8 sm:mb-10">
             <h1 class="text-3xl sm:text-5xl font-black text-white tracking-tight">Image to Favicon Converter</h1>
-            <p class="mt-2.5 text-slate-400 text-xs sm:text-sm">Convert PNG, JPG, or SVG into standard .ICO and multi-size web app icon packs with instant live browser tab preview.</p>
+            <p class="mt-2.5 text-slate-400 text-xs sm:text-sm">Convert PNG, JPG, or SVG into standard .ICO or individual icon sizes (16px, 32px, 48px) with live interactive tab preview.</p>
         </div>
 
         <div class="bg-slate-900 rounded-3xl p-5 sm:p-10 border border-slate-800 shadow-2xl relative">
@@ -78,37 +78,50 @@
                     </button>
                 </div>
 
-                <!-- ⚡ REAL BROWSER TAB PREVIEW -->
-                <div class="bg-slate-950/80 p-5 rounded-2xl border border-slate-800 space-y-4">
+                <!-- ⚡ REAL BROWSER TAB PREVIEW WITH DYNAMIC LIVE SIZING -->
+                <div class="bg-slate-950/80 p-5 rounded-2xl border border-slate-800 space-y-5">
                     <span class="text-xs font-semibold text-slate-400 block text-center">How your Favicon looks in Google Chrome:</span>
                     
                     <div class="bg-slate-900 p-2.5 rounded-xl border border-slate-800 max-w-sm mx-auto shadow-inner">
-                        <div class="bg-slate-800 px-3 py-2 rounded-lg flex items-center gap-2.5 shadow">
-                            <img id="tab-favicon-preview" src="#" alt="Favicon" class="w-4 h-4 object-contain rounded-sm">
+                        <div class="bg-slate-800 px-3 py-2.5 rounded-lg flex items-center gap-2.5 shadow">
+                            <div class="w-7 h-7 flex items-center justify-center">
+                                <img id="tab-favicon-preview" src="#" alt="Favicon" class="w-4 h-4 object-contain rounded-sm transition-all duration-200">
+                            </div>
                             <span class="text-xs font-bold text-slate-200 truncate">My Awesome Website</span>
                             <span class="text-slate-400 text-xs ml-auto font-black">✕</span>
                         </div>
                     </div>
 
-                    <!-- MULTI-SIZE ICONS PREVIEW -->
-                    <div class="flex items-center justify-center gap-6 pt-3 border-t border-slate-800/80">
-                        <div class="text-center">
-                            <div class="w-8 h-8 mx-auto flex items-center justify-center bg-slate-900 rounded p-1 border border-slate-800">
-                                <img id="icon-16" src="#" class="w-4 h-4 object-contain">
-                            </div>
-                            <span class="text-[10px] text-slate-400 mt-1 block">16×16 px</span>
-                        </div>
-                        <div class="text-center">
-                            <div class="w-10 h-10 mx-auto flex items-center justify-center bg-slate-900 rounded p-1 border border-slate-800">
-                                <img id="icon-32" src="#" class="w-8 h-8 object-contain">
-                            </div>
-                            <span class="text-[10px] text-slate-400 mt-1 block">32×32 px</span>
-                        </div>
-                        <div class="text-center">
-                            <div class="w-14 h-14 mx-auto flex items-center justify-center bg-slate-900 rounded p-1 border border-slate-800">
-                                <img id="icon-48" src="#" class="w-12 h-12 object-contain">
-                            </div>
-                            <span class="text-[10px] text-slate-400 mt-1 block">48×48 px</span>
+                    <!-- ⚡ CLICKABLE MULTI-SIZE ICONS -->
+                    <div>
+                        <span class="text-[11px] font-bold text-indigo-400 block text-center mb-2.5">👇 Click any size below to test live in tab:</span>
+                        <div class="flex items-center justify-center gap-4 sm:gap-6">
+                            <!-- 16px BUTTON -->
+                            <button type="button" onclick="selectFaviconSize(16)" id="btn-size-16" class="size-btn p-3 bg-slate-900 hover:bg-slate-800 rounded-2xl border-2 border-slate-800 text-center transition flex flex-col items-center">
+                                <div class="w-8 h-8 flex items-center justify-center mb-1">
+                                    <img id="icon-16" src="#" class="w-4 h-4 object-contain">
+                                </div>
+                                <span class="text-[11px] font-bold text-white block">16×16 px</span>
+                                <span class="text-[9px] text-slate-400">Bookmark</span>
+                            </button>
+
+                            <!-- 32px BUTTON (DEFAULT SELECTED) -->
+                            <button type="button" onclick="selectFaviconSize(32)" id="btn-size-32" class="size-btn p-3 bg-slate-900 rounded-2xl border-2 border-indigo-500 shadow-lg shadow-indigo-500/20 text-center transition flex flex-col items-center">
+                                <div class="w-10 h-10 flex items-center justify-center mb-1">
+                                    <img id="icon-32" src="#" class="w-8 h-8 object-contain">
+                                </div>
+                                <span class="text-[11px] font-bold text-indigo-400 block">32×32 px</span>
+                                <span class="text-[9px] text-emerald-400 font-bold">Standard</span>
+                            </button>
+
+                            <!-- 48px BUTTON -->
+                            <button type="button" onclick="selectFaviconSize(48)" id="btn-size-48" class="size-btn p-3 bg-slate-900 hover:bg-slate-800 rounded-2xl border-2 border-slate-800 text-center transition flex flex-col items-center">
+                                <div class="w-12 h-12 flex items-center justify-center mb-1">
+                                    <img id="icon-48" src="#" class="w-10 h-10 object-contain">
+                                </div>
+                                <span class="text-[11px] font-bold text-white block">48×48 px</span>
+                                <span class="text-[9px] text-slate-400">Desktop</span>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -117,8 +130,11 @@
                 <div class="bg-slate-950/80 p-4 sm:p-5 rounded-2xl border border-slate-800 space-y-4">
                     <div>
                         <label class="block text-xs font-bold text-slate-400 mb-1">Download Format:</label>
-                        <select id="download-mode" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-white font-bold focus:outline-none">
-                            <option value="ico" selected>Standard favicon.ico (32×32 px for all websites)</option>
+                        <select id="download-mode" onchange="syncSelectedDropdown(this.value)" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-white font-bold focus:outline-none">
+                            <option value="ico" selected>Standard favicon.ico (Universal for all websites)</option>
+                            <option value="png16">16×16 px Favicon (.PNG)</option>
+                            <option value="png32">32×32 px Favicon (.PNG - High Quality)</option>
+                            <option value="png48">48×48 px Desktop Icon (.PNG)</option>
                             <option value="zip">Complete Favicon Pack (.ZIP with 16, 32, 48, 180px & HTML tag)</option>
                         </select>
                     </div>
@@ -126,14 +142,14 @@
                     <!-- READY TO USE HTML SNIPPET -->
                     <div class="bg-slate-900 p-3 rounded-xl border border-slate-800">
                         <span class="text-[11px] font-bold text-indigo-400 block mb-1">HTML Code to paste in your website &lt;head&gt;:</span>
-                        <code class="text-[11px] text-slate-300 font-mono block select-all bg-slate-950 p-2 rounded border border-slate-800/80 overflow-x-auto">
+                        <code id="html-snippet" class="text-[11px] text-slate-300 font-mono block select-all bg-slate-950 p-2 rounded border border-slate-800/80 overflow-x-auto">
                             &lt;link rel="icon" type="image/x-icon" href="/favicon.ico"&gt;
                         </code>
                     </div>
                 </div>
 
                 <button type="button" id="download-btn" onclick="executeFaviconDownload()" class="w-full py-4 px-6 rounded-2xl bg-gradient-to-r from-indigo-600 via-indigo-500 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-extrabold text-sm sm:text-base shadow-lg shadow-indigo-500/25 transition active:scale-[0.99] flex items-center justify-center gap-3">
-                    <span id="btn-text">⭐ Download Favicon (.ICO)</span>
+                    <span id="btn-text">⭐ Download Favicon</span>
                 </button>
             </div>
 
@@ -153,13 +169,13 @@
                 </div>
                 <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800">
                     <span class="w-7 h-7 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center mb-2.5 text-xs">2</span>
-                    <h3 class="font-bold text-white text-sm mb-1">Check Live Preview</h3>
-                    <p class="text-slate-400">See how it looks in an actual browser tab and across icon resolutions.</p>
+                    <h3 class="font-bold text-white text-sm mb-1">Click to Test Sizes</h3>
+                    <p class="text-slate-400">Click 16px, 32px or 48px to see it dynamically scale inside the live Chrome tab.</p>
                 </div>
                 <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800">
                     <span class="w-7 h-7 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center mb-2.5 text-xs">3</span>
                     <h3 class="font-bold text-white text-sm mb-1">Instant Download</h3>
-                    <p class="text-slate-400">Download ready-to-use favicon.ico or a full developer pack in 0.1s.</p>
+                    <p class="text-slate-400">Download single .ICO, specific PNG resolution, or full developer ZIP pack in 0.1s.</p>
                 </div>
             </div>
         </section>
@@ -176,10 +192,10 @@
             </details>
             <details class="bg-slate-900 p-4 rounded-xl border border-slate-800 text-xs sm:text-sm cursor-pointer">
                 <summary class="font-bold text-white flex justify-between items-center">
-                    What is the difference between .ICO and .PNG favicons?
+                    Which size should I use for WordPress and modern websites?
                     <span class="text-indigo-400">▼</span>
                 </summary>
-                <p class="text-slate-400 mt-2 leading-relaxed">Standard .ICO is the universal format supported by 100% of desktop browsers, WordPress, and older systems. PNG favicons are commonly used for modern mobile web apps and Apple home screens.</p>
+                <p class="text-slate-400 mt-2 leading-relaxed">32×32 px (.ico or .png) is the official recommended standard for all modern desktop browsers, WordPress, Shopify, and HTML websites.</p>
             </details>
         </section>
     </main>
@@ -188,10 +204,11 @@
         <p>© 2026 SmartPicTools. 100% Free & Private in-browser suite. <a href="/" class="text-indigo-400 hover:underline">Explore All Tools</a></p>
     </footer>
 
-    <!-- JS ENGINE (REAL IN-BROWSER .ICO GENERATOR) -->
+    <!-- JS ENGINE -->
     <script>
         let loadedImg = new Image();
         let fileName = 'favicon';
+        let currentSelectedSize = 32;
 
         const dropArea = document.getElementById('drop-area');
         const fileInput = document.getElementById('file-input');
@@ -220,17 +237,74 @@
             reader.onload = (e) => {
                 loadedImg.src = e.target.result;
                 loadedImg.onload = () => {
-                    document.getElementById('tab-favicon-preview').src = e.target.result;
                     document.getElementById('icon-16').src = e.target.result;
                     document.getElementById('icon-32').src = e.target.result;
                     document.getElementById('icon-48').src = e.target.result;
+                    document.getElementById('tab-favicon-preview').src = e.target.result;
 
                     document.getElementById('drop-area').classList.add('hidden');
                     document.getElementById('workspace').classList.remove('hidden');
                     document.getElementById('status-box').classList.add('hidden');
+                    selectFaviconSize(32);
                 };
             };
             reader.readAsDataURL(file);
+        }
+
+        // ⚡ INTERACTIVE CLICKABLE SIZE SELECTOR
+        function selectFaviconSize(size) {
+            currentSelectedSize = size;
+            const previewIcon = document.getElementById('tab-favicon-preview');
+            const dropdown = document.getElementById('download-mode');
+
+            // 1. Live change the size inside the simulated Chrome Tab
+            if (size === 16) {
+                previewIcon.style.width = '14px';
+                previewIcon.style.height = '14px';
+                dropdown.value = 'png16';
+            } else if (size === 32) {
+                previewIcon.style.width = '18px';
+                previewIcon.style.height = '18px';
+                dropdown.value = 'png32';
+            } else if (size === 48) {
+                previewIcon.style.width = '24px';
+                previewIcon.style.height = '24px';
+                dropdown.value = 'png48';
+            }
+
+            // 2. Highlight selected button with glowing border
+            [16, 32, 48].forEach(s => {
+                const btn = document.getElementById('btn-size-' + s);
+                if (s === size) {
+                    btn.className = "size-btn p-3 bg-slate-900 rounded-2xl border-2 border-indigo-500 shadow-lg shadow-indigo-500/20 text-center transition flex flex-col items-center scale-105";
+                } else {
+                    btn.className = "size-btn p-3 bg-slate-900 hover:bg-slate-800 rounded-2xl border-2 border-slate-800 text-center transition flex flex-col items-center";
+                }
+            });
+
+            updateHtmlSnippet(dropdown.value);
+        }
+
+        function syncSelectedDropdown(val) {
+            if (val === 'png16') selectFaviconSize(16);
+            else if (val === 'png32') selectFaviconSize(32);
+            else if (val === 'png48') selectFaviconSize(48);
+            else updateHtmlSnippet(val);
+        }
+
+        function updateHtmlSnippet(val) {
+            const snippet = document.getElementById('html-snippet');
+            if (val === 'png16') {
+                snippet.innerText = '<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">';
+            } else if (val === 'png32') {
+                snippet.innerText = '<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">';
+            } else if (val === 'png48') {
+                snippet.innerText = '<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">';
+            } else if (val === 'ico') {
+                snippet.innerText = '<link rel="icon" type="image/x-icon" href="/favicon.ico">';
+            } else {
+                snippet.innerText = '<link rel="icon" type="image/x-icon" href="/favicon.ico">\n<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">\n<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">';
+            }
         }
 
         // ⚡ REAL IN-BROWSER BINARY ICO PACKER
@@ -241,21 +315,20 @@
             const view = new DataView(buffer);
 
             // ICO Header
-            view.setUint16(0, 0, true);      // Reserved
-            view.setUint16(2, 1, true);      // Type 1 = ICO
-            view.setUint16(4, 1, true);      // 1 image
+            view.setUint16(0, 0, true);
+            view.setUint16(2, 1, true);
+            view.setUint16(4, 1, true);
 
             // Directory entry (16 bytes)
             view.setUint8(6, size >= 256 ? 0 : size);
             view.setUint8(7, size >= 256 ? 0 : size);
-            view.setUint8(8, 0);             // Color palette
-            view.setUint8(9, 0);             // Reserved
-            view.setUint16(10, 1, true);     // Color planes
-            view.setUint16(12, 32, true);    // Bits per pixel
-            view.setUint32(14, pngBytes.length, true); // Image data size
-            view.setUint32(18, 22, true);    // Data offset (6 + 16 = 22)
+            view.setUint8(8, 0);
+            view.setUint8(9, 0);
+            view.setUint16(10, 1, true);
+            view.setUint16(12, 32, true);
+            view.setUint32(14, pngBytes.length, true);
+            view.setUint32(18, 22, true);
 
-            // Append PNG bytes directly
             new Uint8Array(buffer, 22).set(pngBytes);
             return new Blob([buffer], { type: 'image/x-icon' });
         }
@@ -278,12 +351,19 @@
 
             try {
                 if (mode === 'ico') {
-                    // Standard 32x32 genuine .ico
                     const pngBlob = await renderCanvasPng(32);
                     const arrayBuf = await pngBlob.arrayBuffer();
                     const icoBlob = makeIcoBlobFromPngBuffer(arrayBuf, 32);
-
                     triggerDownload(icoBlob, 'favicon.ico');
+                } else if (mode === 'png16') {
+                    const blob = await renderCanvasPng(16);
+                    triggerDownload(blob, `favicon-16x16.png`);
+                } else if (mode === 'png32') {
+                    const blob = await renderCanvasPng(32);
+                    triggerDownload(blob, `favicon-32x32.png`);
+                } else if (mode === 'png48') {
+                    const blob = await renderCanvasPng(48);
+                    triggerDownload(blob, `favicon-48x48.png`);
                 } else {
                     // Complete Zip Pack
                     const zip = new JSZip();
@@ -294,13 +374,11 @@
                         zip.file(s === 180 ? 'apple-touch-icon.png' : `favicon-${s}x${s}.png`, blob);
                     }
 
-                    // Include standard .ico in zip too
                     const png32 = await renderCanvasPng(32);
                     const buf32 = await png32.arrayBuffer();
                     const icoBlob = makeIcoBlobFromPngBuffer(buf32, 32);
                     zip.file('favicon.ico', icoBlob);
 
-                    // Include readymade HTML code file
                     const htmlCode = `<!-- Paste this in your <head> -->\n<link rel="icon" type="image/x-icon" href="/favicon.ico">\n<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">\n<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">\n<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">`;
                     zip.file('install-code.html', htmlCode);
 
