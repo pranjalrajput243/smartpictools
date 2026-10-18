@@ -131,11 +131,11 @@
                     <div>
                         <label class="block text-xs font-bold text-slate-400 mb-1">Download Format:</label>
                         <select id="download-mode" onchange="syncSelectedDropdown(this.value)" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-white font-bold focus:outline-none">
-                            <option value="ico" selected>Standard favicon.ico (Universal for all websites)</option>
-                            <option value="png16">16×16 px Favicon (.PNG)</option>
-                            <option value="png32">32×32 px Favicon (.PNG - High Quality)</option>
-                            <option value="png48">48×48 px Desktop Icon (.PNG)</option>
-                            <option value="zip">Complete Favicon Pack (.ZIP with 16, 32, 48, 180px & HTML tag)</option>
+                            <option value="ico32" selected>32×32 px Standard Favicon (.ICO - Universal)</option>
+                            <option value="ico16">16×16 px Bookmark Favicon (.ICO)</option>
+                            <option value="ico48">48×48 px Desktop Favicon (.ICO)</option>
+                            <option value="png32">32×32 px High Quality (.PNG)</option>
+                            <option value="zip">Complete Favicon Pack (.ZIP with all .ICO & .PNG sizes)</option>
                         </select>
                     </div>
 
@@ -251,28 +251,26 @@
             reader.readAsDataURL(file);
         }
 
-        // ⚡ INTERACTIVE CLICKABLE SIZE SELECTOR
+       // ⚡ INTERACTIVE CLICKABLE SIZE SELECTOR (.ICO FOR ALL SIZES)
         function selectFaviconSize(size) {
             currentSelectedSize = size;
             const previewIcon = document.getElementById('tab-favicon-preview');
             const dropdown = document.getElementById('download-mode');
 
-            // 1. Live change the size inside the simulated Chrome Tab
             if (size === 16) {
                 previewIcon.style.width = '14px';
                 previewIcon.style.height = '14px';
-                dropdown.value = 'png16';
+                dropdown.value = 'ico16';
             } else if (size === 32) {
                 previewIcon.style.width = '18px';
                 previewIcon.style.height = '18px';
-                dropdown.value = 'png32';
+                dropdown.value = 'ico32';
             } else if (size === 48) {
                 previewIcon.style.width = '24px';
                 previewIcon.style.height = '24px';
-                dropdown.value = 'png48';
+                dropdown.value = 'ico48';
             }
 
-            // 2. Highlight selected button with glowing border
             [16, 32, 48].forEach(s => {
                 const btn = document.getElementById('btn-size-' + s);
                 if (s === size) {
@@ -286,21 +284,21 @@
         }
 
         function syncSelectedDropdown(val) {
-            if (val === 'png16') selectFaviconSize(16);
-            else if (val === 'png32') selectFaviconSize(32);
-            else if (val === 'png48') selectFaviconSize(48);
+            if (val === 'ico16') selectFaviconSize(16);
+            else if (val === 'ico32') selectFaviconSize(32);
+            else if (val === 'ico48') selectFaviconSize(48);
             else updateHtmlSnippet(val);
         }
 
         function updateHtmlSnippet(val) {
             const snippet = document.getElementById('html-snippet');
-            if (val === 'png16') {
-                snippet.innerText = '<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">';
-            } else if (val === 'png32') {
+            if (val === 'png32') {
                 snippet.innerText = '<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">';
-            } else if (val === 'png48') {
-                snippet.innerText = '<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">';
-            } else if (val === 'ico') {
+            } else if (val === 'ico16') {
+                snippet.innerText = '<link rel="icon" type="image/x-icon" href="/favicon-16x16.ico">';
+            } else if (val === 'ico48') {
+                snippet.innerText = '<link rel="icon" type="image/x-icon" href="/favicon-48x48.ico">';
+            } else if (val === 'ico32') {
                 snippet.innerText = '<link rel="icon" type="image/x-icon" href="/favicon.ico">';
             } else {
                 snippet.innerText = '<link rel="icon" type="image/x-icon" href="/favicon.ico">\n<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">\n<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">';
@@ -350,22 +348,26 @@
             btn.disabled = true;
 
             try {
-                if (mode === 'ico') {
+                if (mode === 'ico32') {
                     const pngBlob = await renderCanvasPng(32);
                     const arrayBuf = await pngBlob.arrayBuffer();
                     const icoBlob = makeIcoBlobFromPngBuffer(arrayBuf, 32);
                     triggerDownload(icoBlob, 'favicon.ico');
-                } else if (mode === 'png16') {
-                    const blob = await renderCanvasPng(16);
-                    triggerDownload(blob, `favicon-16x16.png`);
+                } else if (mode === 'ico16') {
+                    const pngBlob = await renderCanvasPng(16);
+                    const arrayBuf = await pngBlob.arrayBuffer();
+                    const icoBlob = makeIcoBlobFromPngBuffer(arrayBuf, 16);
+                    triggerDownload(icoBlob, 'favicon-16x16.ico');
+                } else if (mode === 'ico48') {
+                    const pngBlob = await renderCanvasPng(48);
+                    const arrayBuf = await pngBlob.arrayBuffer();
+                    const icoBlob = makeIcoBlobFromPngBuffer(arrayBuf, 48);
+                    triggerDownload(icoBlob, 'favicon-48x48.ico');
                 } else if (mode === 'png32') {
                     const blob = await renderCanvasPng(32);
                     triggerDownload(blob, `favicon-32x32.png`);
-                } else if (mode === 'png48') {
-                    const blob = await renderCanvasPng(48);
-                    triggerDownload(blob, `favicon-48x48.png`);
                 } else {
-                    // Complete Zip Pack
+                    // Complete Zip Pack with real .ICO and .PNG files
                     const zip = new JSZip();
                     const sizes = [16, 32, 48, 180];
 
@@ -374,12 +376,15 @@
                         zip.file(s === 180 ? 'apple-touch-icon.png' : `favicon-${s}x${s}.png`, blob);
                     }
 
-                    const png32 = await renderCanvasPng(32);
-                    const buf32 = await png32.arrayBuffer();
-                    const icoBlob = makeIcoBlobFromPngBuffer(buf32, 32);
-                    zip.file('favicon.ico', icoBlob);
+                    // Include all .ico sizes in zip
+                    for (let s of [16, 32, 48]) {
+                        const pBlob = await renderCanvasPng(s);
+                        const aBuf = await pBlob.arrayBuffer();
+                        const iBlob = makeIcoBlobFromPngBuffer(aBuf, s);
+                        zip.file(s === 32 ? 'favicon.ico' : `favicon-${s}x${s}.ico`, iBlob);
+                    }
 
-                    const htmlCode = `<!-- Paste this in your <head> -->\n<link rel="icon" type="image/x-icon" href="/favicon.ico">\n<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">\n<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">\n<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">`;
+                    const htmlCode = `<!-- Paste this in your website <head> -->\n<link rel="icon" type="image/x-icon" href="/favicon.ico">\n<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">\n<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">\n<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">`;
                     zip.file('install-code.html', htmlCode);
 
                     const zipBlob = await zip.generateAsync({ type: 'blob' });
@@ -393,7 +398,6 @@
                 btn.disabled = false;
             }
         }
-
         function triggerDownload(blob, filename) {
             const a = document.createElement('a');
             a.href = URL.createObjectURL(blob);
