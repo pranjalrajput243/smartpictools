@@ -67,6 +67,11 @@ def qr_route():
 def passport_photo_page():
     return render_template('passport-photo-maker.html')
 
+# ⚡ PDF CONVERTER ROUTE
+@app.route('/pdf-converter')
+def pdf_converter_page():
+    return render_template('pdf-converter.html')
+
 # ==========================================
 # LEGAL & INFO ROUTES
 # ==========================================
@@ -108,6 +113,7 @@ def sitemap():
   <url><loc>https://smartpictools.in/privacy</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://smartpictools.in/terms</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://smartpictools.in/contact</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://smartpictools.in/pdf-converter</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
 </urlset>"""
     return Response(xml, mimetype='application/xml')
 
