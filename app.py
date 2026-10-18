@@ -72,6 +72,11 @@ def passport_photo_page():
 def pdf_converter_page():
     return render_template('pdf-converter.html')
 
+# ⚡ FAVICON CONVERTER ROUTE
+@app.route('/favicon-converter')
+def favicon_converter_page():
+    return render_template('favicon-converter.html')
+    
 # ==========================================
 # LEGAL & INFO ROUTES
 # ==========================================
@@ -114,6 +119,7 @@ def sitemap():
   <url><loc>https://smartpictools.in/terms</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://smartpictools.in/contact</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://smartpictools.in/pdf-converter</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://smartpictools.in/favicon-converter</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
 </urlset>"""
     return Response(xml, mimetype='application/xml')
 
