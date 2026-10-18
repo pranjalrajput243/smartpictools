@@ -72,7 +72,7 @@ def passport_photo_page():
 def pdf_converter_page():
     return render_template('pdf-converter.html')
 
-# ⚡ FAVICON CONVERTER ROUTE
+# ⚡ IMAGE TO FAVICON ROUTE
 @app.route('/favicon-converter')
 def favicon_converter_page():
     return render_template('favicon-converter.html')
@@ -114,12 +114,13 @@ def sitemap():
   <url><loc>https://smartpictools.in/rotate-image</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
   <url><loc>https://smartpictools.in/qr-code-generator</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
   <url><loc>https://smartpictools.in/passport-photo-maker</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://smartpictools.in/pdf-converter</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://smartpictools.in/favicon-converter</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
   <url><loc>https://smartpictools.in/about</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://smartpictools.in/privacy</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://smartpictools.in/terms</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://smartpictools.in/contact</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://smartpictools.in/pdf-converter</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://smartpictools.in/favicon-converter</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  
 </urlset>"""
     return Response(xml, mimetype='application/xml')
 
