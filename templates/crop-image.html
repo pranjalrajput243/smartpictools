@@ -31,8 +31,15 @@
     <style>
         body { font-family: 'Plus Jakarta Sans', sans-serif; -webkit-tap-highlight-color: transparent; }
         .cropper-view-box, .cropper-face { border-radius: 8px; }
-        .cropper-drag-box.cropper-move { cursor: grab !important; }
-        .cropper-drag-box.cropper-move:active { cursor: grabbing !important; }
+        
+        /* ⚡ TRUE PHOTOSHOP HAND TOOL (When hand mode is active, crop box becomes click-through!) */
+        .hand-mode-active .cropper-crop-box { pointer-events: none !important; opacity: 0.65; }
+        .hand-mode-active .cropper-container,
+        .hand-mode-active .cropper-drag-box,
+        .hand-mode-active .cropper-wrap-box { cursor: grab !important; }
+        .hand-mode-active .cropper-container:active,
+        .hand-mode-active .cropper-drag-box:active,
+        .hand-mode-active .cropper-wrap-box:active { cursor: grabbing !important; }
     </style>
 </head>
 <body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col justify-between selection:bg-indigo-500 selection:text-white">
@@ -59,7 +66,7 @@
     <main class="max-w-4xl mx-auto w-full px-4 py-8 sm:py-12 flex-1">
         <div class="text-center max-w-2xl mx-auto mb-8 sm:mb-10">
             <h1 class="text-3xl sm:text-5xl font-black text-white tracking-tight">Crop Image with Aspect Ratios</h1>
-            <p class="mt-2.5 text-slate-400 text-xs sm:text-sm">Crop visually for Instagram (1:1), YouTube (16:9), and Reels (9:16) with interactive live Zoom and Spacebar Hand Tool.</p>
+            <p class="mt-2.5 text-slate-400 text-xs sm:text-sm">Crop visually for Instagram (1:1), YouTube (16:9), and Reels (9:16) with live Zoom and Spacebar Hand Tool.</p>
         </div>
 
         <div class="bg-slate-900 rounded-3xl p-5 sm:p-10 border border-slate-800 shadow-2xl relative">
@@ -80,7 +87,7 @@
                     </button>
                 </div>
 
-                <!-- ⚡ PRO INTERACTIVE TOOLBAR (ZOOM & HAND TOOL) -->
+                <!-- ⚡ PRO TOOLBAR (ZOOM & HAND TOOL) -->
                 <div class="flex flex-wrap items-center justify-between gap-2 p-2.5 bg-slate-950/90 rounded-2xl border border-slate-800">
                     <div class="flex items-center gap-2">
                         <button type="button" onclick="cropZoom(0.15)" title="Zoom In" class="py-1.5 px-3 rounded-xl bg-slate-900 hover:bg-indigo-600 text-xs font-bold text-white border border-slate-700 transition flex items-center gap-1 active:scale-95">
@@ -128,9 +135,8 @@
             </div>
         </div>
 
-        <!-- HOW TO USE -->
         <section class="mt-14 border-t border-slate-800 pt-10">
-            <h2 class="text-xl sm:text-2xl font-bold text-white text-center mb-6">How to Crop with Zoom & Hand Tool in 3 Steps</h2>
+            <h2 class="text-xl sm:text-2xl font-bold text-white text-center mb-6">How to Crop Images in 3 Easy Steps</h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs sm:text-sm">
                 <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800">
                     <span class="w-7 h-7 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center mb-2.5 text-xs">1</span>
@@ -139,8 +145,8 @@
                 </div>
                 <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800">
                     <span class="w-7 h-7 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center mb-2.5 text-xs">2</span>
-                    <h3 class="font-bold text-white text-sm mb-1">Zoom & Pan (Spacebar)</h3>
-                    <p class="text-slate-400">Use 🔍+ to zoom into details and hold Spacebar (or tap Hand Tool) to drag the image smoothly.</p>
+                    <h3 class="font-bold text-white text-sm mb-1">Adjust, Zoom & Pan</h3>
+                    <p class="text-slate-400">Hold Spacebar to pan the photo smoothly, or use 🔍+ to zoom into details.</p>
                 </div>
                 <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800">
                     <span class="w-7 h-7 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center mb-2.5 text-xs">3</span>
@@ -148,25 +154,6 @@
                     <p class="text-slate-400">Click Crop & Download to save your cropped image directly in 0.1s.</p>
                 </div>
             </div>
-        </section>
-
-        <!-- FAQS -->
-        <section class="mt-12 space-y-3">
-            <h2 class="text-xl font-bold text-white mb-4">Frequently Asked Questions</h2>
-            <details class="bg-slate-900 p-4 rounded-xl border border-slate-800 text-xs sm:text-sm cursor-pointer">
-                <summary class="font-bold text-white flex justify-between items-center">
-                    How does the Spacebar Hand Tool work?
-                    <span class="text-indigo-400">▼</span>
-                </summary>
-                <p class="text-slate-400 mt-2 leading-relaxed">Just like in Adobe Photoshop or Canva, pressing and holding the Spacebar turns your mouse cursor into a hand, allowing you to pan and move the zoomed image freely inside the frame.</p>
-            </details>
-            <details class="bg-slate-900 p-4 rounded-xl border border-slate-800 text-xs sm:text-sm cursor-pointer">
-                <summary class="font-bold text-white flex justify-between items-center">
-                    Does zooming in before cropping reduce the downloaded photo quality?
-                    <span class="text-indigo-400">▼</span>
-                </summary>
-                <p class="text-slate-400 mt-2 leading-relaxed">No. Cropper calculates the crop mathematics directly against the full-resolution original image pixels, ensuring 100% maximum clarity.</p>
-            </details>
         </section>
     </main>
 
@@ -179,6 +166,7 @@
         let cropper = null;
         let currentFile = null;
         let isHandMode = false;
+        let isSpacePressed = false;
 
         const dropArea = document.getElementById('drop-area');
         const fileInput = document.getElementById('file-input');
@@ -223,7 +211,8 @@
                 cropper = new Cropper(img, {
                     aspectRatio: NaN,
                     viewMode: 1,
-                    autoCropArea: 0.9,
+                    // ⚡ COMFORTABLE 70% CENTERED SIZE (NOT OVERWHELMING EDGES!)
+                    autoCropArea: 0.50,
                     responsive: true,
                     zoomable: true,
                     zoomOnWheel: true,
@@ -253,11 +242,23 @@
             }
         }
 
-        // ⚡ HAND TOOL TOGGLE
+        // ⚡ PHOTOSHOP HAND / PAN SYSTEM (CLICK-THROUGH CROP BOX)
+        function updatePanMode(active) {
+            if (!cropper) return;
+            const container = document.querySelector('.cropper-container');
+            if (active) {
+                cropper.setDragMode('move');
+                if (container) container.classList.add('hand-mode-active');
+            } else {
+                cropper.setDragMode('crop');
+                if (container) container.classList.remove('hand-mode-active');
+            }
+        }
+
         function toggleHandTool() {
             if (!cropper) return;
             isHandMode = !isHandMode;
-            cropper.setDragMode(isHandMode ? 'move' : 'crop');
+            updatePanMode(isHandMode);
             const btn = document.getElementById('btn-hand-tool');
             if (btn) {
                 btn.className = isHandMode 
@@ -266,14 +267,13 @@
             }
         }
 
-        // ⚡ PHOTOSHOP SPACEBAR PAN LISTENER
-        let isSpacePressed = false;
+        // ⚡ SPACEBAR KEY LISTENERS
         window.addEventListener('keydown', function(e) {
             if (e.code === 'Space' && !isSpacePressed && cropper) {
                 if (document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA') {
                     e.preventDefault();
                     isSpacePressed = true;
-                    cropper.setDragMode('move');
+                    updatePanMode(true);
                 }
             }
         });
@@ -281,7 +281,7 @@
         window.addEventListener('keyup', function(e) {
             if (e.code === 'Space' && cropper) {
                 isSpacePressed = false;
-                cropper.setDragMode(isHandMode ? 'move' : 'crop');
+                updatePanMode(isHandMode);
             }
         });
 
