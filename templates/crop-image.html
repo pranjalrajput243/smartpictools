@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     
     <!-- ⚡ HIGH-RANKING KEYWORDS FOR CROPPING -->
-    <title>Crop Image Online Free - Instagram 1:1, YouTube 16:9, Reels 9:16 | SmartPicTools</title>
-    <meta name="description" content="Free online tool to crop images with exact aspect ratios: 1:1 Square (Instagram), 16:9 (YouTube), 9:16 (Reels/Shorts), and 4:5 Portrait. 100% private in-browser tool.">
-    <meta name="keywords" content="crop image online, crop photo 1:1 instagram, crop image 16:9 youtube thumbnail, crop 9:16 reels shorts, aspect ratio image cropper, free online photo cropper">
+    <title>Crop Image Online Free - Zoom, Hand Tool & Aspect Ratios | SmartPicTools</title>
+    <meta name="description" content="Free online tool to crop images with live Zoom, Hand Pan Tool (Spacebar), and aspect ratios: 1:1 Instagram, 16:9 YouTube, and 9:16 Reels. 100% private in-browser.">
+    <meta name="keywords" content="crop image online, crop photo with zoom, hand pan tool crop, crop photo 1:1 instagram, crop image 16:9 youtube, aspect ratio cropper">
     <meta name="robots" content="index, follow, max-image-preview:large">
     <meta name="author" content="SmartPicTools">
     <link rel="canonical" href="https://smartpictools.in/crop-image">
@@ -16,8 +16,8 @@
     <!-- OPEN GRAPH -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://smartpictools.in/crop-image">
-    <meta property="og:title" content="Crop Image Online Free - Aspect Ratio Templates | SmartPicTools">
-    <meta property="og:description" content="Crop photos visually for Instagram, YouTube, and Reels in 0.1s directly on your device.">
+    <meta property="og:title" content="Crop Image Online Free - Zoom & Hand Tool | SmartPicTools">
+    <meta property="og:description" content="Crop photos with live Zoom and Spacebar Hand Tool directly in your browser in 0.1s.">
 
     <!-- FAVICON -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' stop-color='%236366f1'/><stop offset='50%25' stop-color='%23a855f7'/><stop offset='100%25' stop-color='%23ec4899'/></linearGradient></defs><rect width='100' height='100' rx='28' fill='url(%23g)'/><path d='M52 16 L24 54 L46 54 L42 84 L76 44 L54 44 Z' fill='%23fbbf24'/></svg>">
@@ -31,6 +31,8 @@
     <style>
         body { font-family: 'Plus Jakarta Sans', sans-serif; -webkit-tap-highlight-color: transparent; }
         .cropper-view-box, .cropper-face { border-radius: 8px; }
+        .cropper-drag-box.cropper-move { cursor: grab !important; }
+        .cropper-drag-box.cropper-move:active { cursor: grabbing !important; }
     </style>
 </head>
 <body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col justify-between selection:bg-indigo-500 selection:text-white">
@@ -57,7 +59,7 @@
     <main class="max-w-4xl mx-auto w-full px-4 py-8 sm:py-12 flex-1">
         <div class="text-center max-w-2xl mx-auto mb-8 sm:mb-10">
             <h1 class="text-3xl sm:text-5xl font-black text-white tracking-tight">Crop Image with Aspect Ratios</h1>
-            <p class="mt-2.5 text-slate-400 text-xs sm:text-sm">Crop visually for Instagram posts (1:1), YouTube thumbnails (16:9), and Shorts/Reels (9:16) with 1 tap.</p>
+            <p class="mt-2.5 text-slate-400 text-xs sm:text-sm">Crop visually for Instagram (1:1), YouTube (16:9), and Reels (9:16) with interactive live Zoom and Spacebar Hand Tool.</p>
         </div>
 
         <div class="bg-slate-900 rounded-3xl p-5 sm:p-10 border border-slate-800 shadow-2xl relative">
@@ -70,17 +72,38 @@
                 <p class="text-xs sm:text-sm text-slate-400">Supports JPG, PNG, WEBP, and iPhone HEIC</p>
             </div>
 
-            <div id="workspace" class="hidden mt-6 space-y-6">
+            <div id="workspace" class="hidden mt-6 space-y-5">
                 <div class="flex items-center justify-between">
-                    <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Crop Workspace</span>
+                    <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Crop Studio Preview</span>
                     <button type="button" onclick="document.getElementById('file-input').click()" class="text-xs font-bold text-indigo-400 hover:text-white bg-slate-800 hover:bg-slate-700 px-3 py-1.5 rounded-xl border border-slate-700 transition">
                         🔄 Change Photo
                     </button>
                 </div>
 
+                <!-- ⚡ PRO INTERACTIVE TOOLBAR (ZOOM & HAND TOOL) -->
+                <div class="flex flex-wrap items-center justify-between gap-2 p-2.5 bg-slate-950/90 rounded-2xl border border-slate-800">
+                    <div class="flex items-center gap-2">
+                        <button type="button" onclick="cropZoom(0.15)" title="Zoom In" class="py-1.5 px-3 rounded-xl bg-slate-900 hover:bg-indigo-600 text-xs font-bold text-white border border-slate-700 transition flex items-center gap-1 active:scale-95">
+                            <span>🔍+ Zoom In</span>
+                        </button>
+                        <button type="button" onclick="cropZoom(-0.15)" title="Zoom Out" class="py-1.5 px-3 rounded-xl bg-slate-900 hover:bg-indigo-600 text-xs font-bold text-white border border-slate-700 transition flex items-center gap-1 active:scale-95">
+                            <span>🔍- Zoom Out</span>
+                        </button>
+                        <button type="button" onclick="toggleHandTool()" id="btn-hand-tool" title="Pan Photo" class="py-1.5 px-3 rounded-xl bg-slate-900 hover:bg-indigo-600 text-xs font-bold text-slate-300 hover:text-white border border-slate-700 transition flex items-center gap-1 active:scale-95">
+                            <span>✋ Hand Tool</span>
+                        </button>
+                        <button type="button" onclick="cropReset()" title="Reset Zoom" class="py-1.5 px-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-xs font-bold text-slate-400 hover:text-white border border-slate-700 transition">
+                            ↺ Reset
+                        </button>
+                    </div>
+                    <span class="hidden sm:inline text-[11px] font-semibold text-slate-400">
+                        ⌨️ Hold <b class="text-indigo-400 font-mono bg-slate-900 px-1.5 py-0.5 rounded border border-slate-800">Spacebar</b> to Pan | Scroll to Zoom
+                    </span>
+                </div>
+
                 <!-- CROPPER CONTAINER -->
-                <div class="bg-slate-950/80 p-3 sm:p-4 rounded-2xl border border-slate-800 flex items-center justify-center max-h-[420px] overflow-hidden">
-                    <img id="crop-image" src="#" alt="Crop Preview" class="max-h-[380px] w-auto rounded-xl object-contain block">
+                <div class="bg-slate-950/80 p-3 sm:p-4 rounded-2xl border border-slate-800 flex items-center justify-center max-h-[440px] overflow-hidden">
+                    <img id="crop-image" src="#" alt="Crop Preview" class="max-h-[400px] w-auto rounded-xl object-contain block">
                 </div>
 
                 <!-- ASPECT RATIO BUTTONS -->
@@ -107,7 +130,7 @@
 
         <!-- HOW TO USE -->
         <section class="mt-14 border-t border-slate-800 pt-10">
-            <h2 class="text-xl sm:text-2xl font-bold text-white text-center mb-6">How to Crop Images in 3 Easy Steps</h2>
+            <h2 class="text-xl sm:text-2xl font-bold text-white text-center mb-6">How to Crop with Zoom & Hand Tool in 3 Steps</h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs sm:text-sm">
                 <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800">
                     <span class="w-7 h-7 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center mb-2.5 text-xs">1</span>
@@ -116,8 +139,8 @@
                 </div>
                 <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800">
                     <span class="w-7 h-7 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center mb-2.5 text-xs">2</span>
-                    <h3 class="font-bold text-white text-sm mb-1">Pick Ratio Preset</h3>
-                    <p class="text-slate-400">Choose 1:1 for Instagram, 16:9 for YouTube, 9:16 for Reels, or drag Freeform.</p>
+                    <h3 class="font-bold text-white text-sm mb-1">Zoom & Pan (Spacebar)</h3>
+                    <p class="text-slate-400">Use 🔍+ to zoom into details and hold Spacebar (or tap Hand Tool) to drag the image smoothly.</p>
                 </div>
                 <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800">
                     <span class="w-7 h-7 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center mb-2.5 text-xs">3</span>
@@ -132,17 +155,17 @@
             <h2 class="text-xl font-bold text-white mb-4">Frequently Asked Questions</h2>
             <details class="bg-slate-900 p-4 rounded-xl border border-slate-800 text-xs sm:text-sm cursor-pointer">
                 <summary class="font-bold text-white flex justify-between items-center">
-                    Does cropping reduce the resolution or quality of my photo?
+                    How does the Spacebar Hand Tool work?
                     <span class="text-indigo-400">▼</span>
                 </summary>
-                <p class="text-slate-400 mt-2 leading-relaxed">No. The tool preserves 100% of the original pixel quality inside your selected crop frame without adding compression artifacts.</p>
+                <p class="text-slate-400 mt-2 leading-relaxed">Just like in Adobe Photoshop or Canva, pressing and holding the Spacebar turns your mouse cursor into a hand, allowing you to pan and move the zoomed image freely inside the frame.</p>
             </details>
             <details class="bg-slate-900 p-4 rounded-xl border border-slate-800 text-xs sm:text-sm cursor-pointer">
                 <summary class="font-bold text-white flex justify-between items-center">
-                    Can I crop photos on my smartphone screen using touch?
+                    Does zooming in before cropping reduce the downloaded photo quality?
                     <span class="text-indigo-400">▼</span>
                 </summary>
-                <p class="text-slate-400 mt-2 leading-relaxed">Yes! You can easily drag and pinch-to-zoom using your fingers directly on any mobile device.</p>
+                <p class="text-slate-400 mt-2 leading-relaxed">No. Cropper calculates the crop mathematics directly against the full-resolution original image pixels, ensuring 100% maximum clarity.</p>
             </details>
         </section>
     </main>
@@ -155,6 +178,7 @@
     <script>
         let cropper = null;
         let currentFile = null;
+        let isHandMode = false;
 
         const dropArea = document.getElementById('drop-area');
         const fileInput = document.getElementById('file-input');
@@ -200,7 +224,10 @@
                     aspectRatio: NaN,
                     viewMode: 1,
                     autoCropArea: 0.9,
-                    responsive: true
+                    responsive: true,
+                    zoomable: true,
+                    zoomOnWheel: true,
+                    wheelZoomRatio: 0.1
                 });
             };
             reader.readAsDataURL(displayBlob);
@@ -213,6 +240,50 @@
             });
             btn.className = "ratio-btn py-2.5 px-3 rounded-xl bg-indigo-600 text-white text-xs font-bold transition";
         }
+
+        // ⚡ ZOOM CONTROLS
+        function cropZoom(val) {
+            if (cropper) cropper.zoom(val);
+        }
+
+        function cropReset() {
+            if (cropper) {
+                cropper.reset();
+                if (isHandMode) toggleHandTool();
+            }
+        }
+
+        // ⚡ HAND TOOL TOGGLE
+        function toggleHandTool() {
+            if (!cropper) return;
+            isHandMode = !isHandMode;
+            cropper.setDragMode(isHandMode ? 'move' : 'crop');
+            const btn = document.getElementById('btn-hand-tool');
+            if (btn) {
+                btn.className = isHandMode 
+                    ? "py-1.5 px-3 rounded-xl bg-indigo-600 text-xs font-bold text-white border border-indigo-500 shadow-lg shadow-indigo-600/30 transition flex items-center gap-1 active:scale-95"
+                    : "py-1.5 px-3 rounded-xl bg-slate-900 hover:bg-indigo-600 text-xs font-bold text-slate-300 hover:text-white border border-slate-700 transition flex items-center gap-1 active:scale-95";
+            }
+        }
+
+        // ⚡ PHOTOSHOP SPACEBAR PAN LISTENER
+        let isSpacePressed = false;
+        window.addEventListener('keydown', function(e) {
+            if (e.code === 'Space' && !isSpacePressed && cropper) {
+                if (document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA') {
+                    e.preventDefault();
+                    isSpacePressed = true;
+                    cropper.setDragMode('move');
+                }
+            }
+        });
+
+        window.addEventListener('keyup', function(e) {
+            if (e.code === 'Space' && cropper) {
+                isSpacePressed = false;
+                cropper.setDragMode(isHandMode ? 'move' : 'crop');
+            }
+        });
 
         function executeCrop() {
             if (!cropper) return;
