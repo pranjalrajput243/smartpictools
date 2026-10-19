@@ -273,9 +273,20 @@
                         </div>
                     </div>
 
-                    <!-- 2. CROP -->
-                    <div id="ctrl-crop" class="tool-ctrl hidden">
-                        <label class="block text-xs font-bold text-slate-400 mb-2.5">Select Aspect Ratio Template:</label>
+                    <!-- 2. CROP (WITH ZOOM & HAND TOOL) -->
+                    <div id="ctrl-crop" class="tool-ctrl hidden space-y-3">
+                        <!-- ⚡ ZOOM & HAND TOOLBAR -->
+                        <div class="flex flex-wrap items-center justify-between gap-2 p-2 bg-slate-900 rounded-xl border border-slate-800">
+                            <div class="flex items-center gap-1.5">
+                                <button type="button" onclick="cropZoom(0.15)" class="py-1 px-2.5 rounded-lg bg-slate-800 hover:bg-indigo-600 text-xs font-bold text-white transition">🔍+ In</button>
+                                <button type="button" onclick="cropZoom(-0.15)" class="py-1 px-2.5 rounded-lg bg-slate-800 hover:bg-indigo-600 text-xs font-bold text-white transition">🔍- Out</button>
+                                <button type="button" onclick="toggleHandTool()" id="home-btn-hand" class="py-1 px-2.5 rounded-lg bg-slate-800 hover:bg-indigo-600 text-xs font-bold text-slate-300 hover:text-white transition">✋ Hand</button>
+                                <button type="button" onclick="cropReset()" class="py-1 px-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs font-bold text-slate-400 hover:text-white transition">↺</button>
+                            </div>
+                            <span class="hidden sm:inline text-[10px] text-slate-400">Hold <b class="text-indigo-400 font-mono">Space</b> to Pan</span>
+                        </div>
+
+                        <label class="block text-xs font-bold text-slate-400">Select Aspect Ratio Template:</label>
                         <div class="grid grid-cols-2 sm:grid-cols-5 gap-2">
                             <button type="button" onclick="setCropRatio(NaN)" class="ratio-btn py-2 px-3 rounded-xl bg-indigo-600 text-white text-xs font-bold transition">Freeform</button>
                             <button type="button" onclick="setCropRatio(1)" class="ratio-btn py-2 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 text-xs font-bold transition">1:1 (Square)</button>
@@ -1310,11 +1321,20 @@
         }
 
         
-        // CROPPER
+     // ⚡ CROPPER ENGINE (WITH ZOOM & SPACEBAR HAND TOOL)
+        let isHomeHandMode = false;
         function initCropper() {
             const imgElement = document.getElementById('image-preview');
             if (cropper) cropper.destroy();
-            cropper = new Cropper(imgElement, { aspectRatio: NaN, viewMode: 1, autoCropArea: 0.9, responsive: true });
+            cropper = new Cropper(imgElement, { 
+                aspectRatio: NaN, 
+                viewMode: 1, 
+                autoCropArea: 0.9, 
+                responsive: true,
+                zoomable: true,
+                zoomOnWheel: true,
+                wheelZoomRatio: 0.1
+            });
         }
 
         function setCropRatio(ratio) {
@@ -1326,15 +1346,47 @@
             eventTarget.className = "ratio-btn py-2 px-3 rounded-xl bg-indigo-600 text-white text-xs font-bold transition";
         }
 
-        function canEncodeAvif() {
-            try {
-                const c = document.createElement('canvas');
-                c.width = 1; c.height = 1;
-                return c.toDataURL('image/avif').startsWith('data:image/avif');
-            } catch (e) {
-                return false;
+        function cropZoom(val) {
+            if (cropper) cropper.zoom(val);
+        }
+
+        function cropReset() {
+            if (cropper) {
+                cropper.reset();
+                if (isHomeHandMode) toggleHandTool();
             }
         }
+
+        function toggleHandTool() {
+            if (!cropper) return;
+            isHomeHandMode = !isHomeHandMode;
+            cropper.setDragMode(isHomeHandMode ? 'move' : 'crop');
+            const btn = document.getElementById('home-btn-hand');
+            if (btn) {
+                btn.className = isHomeHandMode 
+                    ? "py-1 px-2.5 rounded-lg bg-indigo-600 text-xs font-bold text-white transition"
+                    : "py-1 px-2.5 rounded-lg bg-slate-800 hover:bg-indigo-600 text-xs font-bold text-slate-300 hover:text-white transition";
+            }
+        }
+
+        // Spacebar Hand Tool Listener
+        let isHomeSpacePressed = false;
+        window.addEventListener('keydown', function(e) {
+            if (e.code === 'Space' && !isHomeSpacePressed && cropper && currentTool === 'crop') {
+                if (document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA') {
+                    e.preventDefault();
+                    isHomeSpacePressed = true;
+                    cropper.setDragMode('move');
+                }
+            }
+        });
+
+        window.addEventListener('keyup', function(e) {
+            if (e.code === 'Space' && cropper && currentTool === 'crop') {
+                isHomeSpacePressed = false;
+                cropper.setDragMode(isHomeHandMode ? 'move' : 'crop');
+            }
+        });
 
         // ==========================================
 // ⚡ ACTION BUTTON EXECUTION (0.2s TURBO)
