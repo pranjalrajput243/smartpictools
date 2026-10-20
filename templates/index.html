@@ -1329,7 +1329,7 @@
             cropper = new Cropper(imgElement, { 
                 aspectRatio: NaN, 
                 viewMode: 1, 
-                autoCropArea: 0.9, 
+                autoCrop: false, 
                 responsive: true,
                 zoomable: true,
                 zoomOnWheel: true,
@@ -1338,7 +1338,10 @@
         }
 
         function setCropRatio(ratio) {
-            if (cropper) cropper.setAspectRatio(ratio);
+            if (cropper) {
+                cropper.crop();
+                cropper.setAspectRatio(ratio);
+            }
             const eventTarget = event.currentTarget;
             document.querySelectorAll('.ratio-btn').forEach(b => {
                 b.className = "ratio-btn py-2 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 text-xs font-bold transition";
