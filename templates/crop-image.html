@@ -32,7 +32,7 @@
         body { font-family: 'Plus Jakarta Sans', sans-serif; -webkit-tap-highlight-color: transparent; }
         .cropper-view-box, .cropper-face { border-radius: 8px; }
         
-        /* ⚡ TRUE PHOTOSHOP HAND TOOL (When hand mode is active, crop box becomes click-through!) */
+        /* ⚡ TRUE PHOTOSHOP HAND TOOL (Click-through crop box on Spacebar/Hand mode) */
         .hand-mode-active .cropper-crop-box { pointer-events: none !important; opacity: 0.65; }
         .hand-mode-active .cropper-container,
         .hand-mode-active .cropper-drag-box,
@@ -87,7 +87,7 @@
                     </button>
                 </div>
 
-                <!-- ⚡ PRO TOOLBAR (ZOOM & HAND TOOL) -->
+                <!-- ⚡ PRO TOOLBAR -->
                 <div class="flex flex-wrap items-center justify-between gap-2 p-2.5 bg-slate-950/90 rounded-2xl border border-slate-800">
                     <div class="flex items-center gap-2">
                         <button type="button" onclick="cropZoom(0.15)" title="Zoom In" class="py-1.5 px-3 rounded-xl bg-slate-900 hover:bg-indigo-600 text-xs font-bold text-white border border-slate-700 transition flex items-center gap-1 active:scale-95">
@@ -141,11 +141,11 @@
                 <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800">
                     <span class="w-7 h-7 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center mb-2.5 text-xs">1</span>
                     <h3 class="font-bold text-white text-sm mb-1">Select Photo</h3>
-                    <p class="text-slate-400">Choose your picture. The visual crop frame appears on screen immediately.</p>
+                    <p class="text-slate-400">Choose your picture to load into the workspace.</p>
                 </div>
                 <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800">
                     <span class="w-7 h-7 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center mb-2.5 text-xs">2</span>
-                    <h3 class="font-bold text-white text-sm mb-1">Adjust, Zoom & Pan</h3>
+                    <h3 class="font-bold text-white text-sm mb-1">Zoom & Pan</h3>
                     <p class="text-slate-400">Hold Spacebar to pan the photo smoothly, or use 🔍+ to zoom into details.</p>
                 </div>
                 <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800">
@@ -167,6 +167,7 @@
         let currentFile = null;
         let isHandMode = false;
         let isSpacePressed = false;
+        let minZoomRatio = 0; // ⚡ Minimum zoom boundary (Cannot shrink smaller than frame!)
 
         const dropArea = document.getElementById('drop-area');
         const fileInput = document.getElementById('file-input');
@@ -211,12 +212,22 @@
                 cropper = new Cropper(img, {
                     aspectRatio: NaN,
                     viewMode: 1,
-                    // ⚡ COMFORTABLE 70% CENTERED SIZE (NOT OVERWHELMING EDGES!)
-                    autoCrop: false,
+                    autoCrop: false, // ⚡ Opens clean without automatic covering frame
                     responsive: true,
                     zoomable: true,
                     zoomOnWheel: true,
-                    wheelZoomRatio: 0.1
+                    wheelZoomRatio: 0.08,
+                    ready: function () {
+                        // ⚡ Store initial fitted ratio so image CANNOT shrink smaller than frame!
+                        const canvasData = cropper.getCanvasData();
+                        minZoomRatio = canvasData.width / canvasData.naturalWidth;
+                    },
+                    zoom: function (e) {
+                        // ⚡ Clamps zoom out: Never lets photo detach or shrink smaller than container!
+                        if (minZoomRatio > 0 && e.detail.ratio < minZoomRatio) {
+                            e.preventDefault();
+                        }
+                    }
                 });
             };
             reader.readAsDataURL(displayBlob);
@@ -224,7 +235,7 @@
 
         function setRatio(ratio, btn) {
             if (cropper) {
-                cropper.crop(); // अगर बॉक्स छुपा है तो तुरंत ले आएगा
+                cropper.crop(); // Show crop frame when ratio is clicked
                 cropper.setAspectRatio(ratio);
             }
             document.querySelectorAll('.ratio-btn').forEach(b => {
@@ -233,9 +244,17 @@
             btn.className = "ratio-btn py-2.5 px-3 rounded-xl bg-indigo-600 text-white text-xs font-bold transition";
         }
 
-        // ⚡ ZOOM CONTROLS
+        // ⚡ ZOOM CONTROLS (RESPECTS MINIMUM FRAME BOUNDARY)
         function cropZoom(val) {
-            if (cropper) cropper.zoom(val);
+            if (!cropper) return;
+            if (val < 0 && minZoomRatio > 0) {
+                const canvasData = cropper.getCanvasData();
+                const currentRatio = canvasData.width / canvasData.naturalWidth;
+                if (currentRatio <= minZoomRatio + 0.01) {
+                    return; // Cannot zoom out smaller than frame!
+                }
+            }
+            cropper.zoom(val);
         }
 
         function cropReset() {
@@ -245,7 +264,7 @@
             }
         }
 
-        // ⚡ PHOTOSHOP HAND / PAN SYSTEM (CLICK-THROUGH CROP BOX)
+        // ⚡ PAN & HAND TOOL (CLICK-THROUGH CROP BOX)
         function updatePanMode(active) {
             if (!cropper) return;
             const container = document.querySelector('.cropper-container');
@@ -270,27 +289,39 @@
             }
         }
 
-        // ⚡ SPACEBAR KEY LISTENERS
+        // ⚡ 100% BULLETPROOF SPACEBAR LISTENER (NEVER SCROLLS PAGE!)
         window.addEventListener('keydown', function(e) {
-            if (e.code === 'Space' && !isSpacePressed && cropper) {
+            if (e.code === 'Space' || e.key === ' ' || e.keyCode === 32) {
+                // If focus is not inside an input field, prevent browser scroll EVERY time!
                 if (document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA') {
                     e.preventDefault();
-                    isSpacePressed = true;
-                    updatePanMode(true);
+                    if (!isSpacePressed && cropper) {
+                        isSpacePressed = true;
+                        updatePanMode(true);
+                    }
                 }
             }
         });
 
         window.addEventListener('keyup', function(e) {
-            if (e.code === 'Space' && cropper) {
-                isSpacePressed = false;
-                updatePanMode(isHandMode);
+            if (e.code === 'Space' || e.key === ' ' || e.keyCode === 32) {
+                if (document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA') {
+                    e.preventDefault();
+                }
+                if (cropper) {
+                    isSpacePressed = false;
+                    updatePanMode(isHandMode);
+                }
             }
         });
 
         function executeCrop() {
             if (!cropper) return;
             const canvas = cropper.getCroppedCanvas();
+            if (!canvas) {
+                alert('Please select an area on the photo to crop!');
+                return;
+            }
             const rawName = currentFile ? (currentFile.name.substring(0, currentFile.name.lastIndexOf('.')) || currentFile.name) : 'image';
 
             canvas.toBlob((blob) => {
