@@ -212,7 +212,7 @@
                     aspectRatio: NaN,
                     viewMode: 1,
                     // ⚡ COMFORTABLE 70% CENTERED SIZE (NOT OVERWHELMING EDGES!)
-                    autoCropArea: 0.50,
+                    autoCrop: false,
                     responsive: true,
                     zoomable: true,
                     zoomOnWheel: true,
@@ -223,7 +223,10 @@
         }
 
         function setRatio(ratio, btn) {
-            if (cropper) cropper.setAspectRatio(ratio);
+            if (cropper) {
+                cropper.crop(); // अगर बॉक्स छुपा है तो तुरंत ले आएगा
+                cropper.setAspectRatio(ratio);
+            }
             document.querySelectorAll('.ratio-btn').forEach(b => {
                 b.className = "ratio-btn py-2.5 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 text-xs font-bold transition";
             });
