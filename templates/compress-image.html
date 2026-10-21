@@ -54,7 +54,7 @@
     <main class="max-w-4xl mx-auto w-full px-4 py-8 sm:py-12 flex-1">
         <div class="text-center max-w-2xl mx-auto mb-8 sm:mb-10">
             <h1 class="text-3xl sm:text-5xl font-black text-white tracking-tight">Compress Image to Exact KB</h1>
-            <p class="mt-2.5 text-slate-400 text-xs sm:text-sm">Move the slider to watch real-time quality and live file size before downloading. Zero guesswork.</p>
+            <p class="mt-2.5 text-slate-400 text-xs sm:text-sm">Move the slider to watch real-time clarity and live file size before downloading. Zero guesswork.</p>
         </div>
 
         <div class="bg-slate-900 rounded-3xl p-5 sm:p-10 border border-slate-800 shadow-2xl relative">
@@ -84,10 +84,10 @@
                     </div>
                 </div>
 
-                <!-- ⚡ SLIDER & LIVE SIZE TOGETHER IN ONE BOX -->
+                <!-- ⚡ SLIDER & LIVE SIZE IN ONE COMPACT BOX -->
                 <div class="bg-slate-950/80 p-4 sm:p-5 rounded-2xl border border-slate-800 space-y-4">
                     
-                    <!-- 1. SLIDER -->
+                    <!-- 1. QUALITY SLIDER -->
                     <div>
                         <div class="flex justify-between items-center text-xs font-semibold mb-2">
                             <span class="text-slate-300 font-bold">Compression Level (Quality):</span>
@@ -96,22 +96,28 @@
                         <input type="range" id="quality-slider" min="5" max="95" value="65" oninput="handleSliderChange(this.value)" class="w-full h-2.5 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-indigo-500">
                     </div>
 
-                    <!-- 2. ⚡ LIVE COMPRESSED SIZE (PLACED RIGHT BELOW SLIDER) -->
-                    <div class="grid grid-cols-2 gap-3 p-3 bg-slate-900 rounded-xl border border-slate-800 text-center">
-                        <div class="p-1 border-r border-slate-800">
-                            <span class="text-[10px] sm:text-[11px] font-bold text-slate-400 uppercase tracking-wider block">Original Size</span>
-                            <span id="original-size-display" class="text-sm sm:text-base font-extrabold text-slate-300 mt-0.5 block">0 KB</span>
-                        </div>
-                        <div class="p-1">
-                            <span class="text-[10px] sm:text-[11px] font-bold text-emerald-400 uppercase tracking-wider block">⚡ Live Compressed Size</span>
-                            <div class="flex items-center justify-center gap-1.5 mt-0.5">
-                                <span id="live-size-display" class="text-sm sm:text-base font-extrabold text-emerald-400">0 KB</span>
-                                <span id="saved-pct-display" class="text-[10px] sm:text-[11px] font-black text-emerald-300 bg-emerald-500/10 px-2 py-0.5 rounded-full border border-emerald-500/20">0%</span>
+                    <!-- 2. ⚡ LIVE COMPRESSED SIZE (DIRECTLY BELOW SLIDER) -->
+                    <div class="p-3 bg-slate-900 rounded-xl border border-slate-800 text-center space-y-1.5">
+                        <div class="grid grid-cols-2 gap-3">
+                            <div class="p-1 border-r border-slate-800">
+                                <span class="text-[10px] sm:text-[11px] font-bold text-slate-400 uppercase tracking-wider block">Original Size</span>
+                                <span id="original-size-display" class="text-sm sm:text-base font-extrabold text-slate-300 mt-0.5 block">0 KB</span>
                             </div>
+                            <div class="p-1">
+                                <span class="text-[10px] sm:text-[11px] font-bold text-emerald-400 uppercase tracking-wider block">⚡ Live Compressed Size</span>
+                                <div class="flex items-center justify-center gap-1.5 mt-0.5">
+                                    <span id="live-size-display" class="text-sm sm:text-base font-extrabold text-emerald-400">0 KB</span>
+                                    <span id="saved-pct-display" class="text-[10px] sm:text-[11px] font-black text-emerald-300 bg-emerald-500/10 px-2 py-0.5 rounded-full border border-emerald-500/20">0%</span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- SMART ADVICE TIP IF OVER 100% -->
+                        <div id="size-warning-tip" class="text-[11px] font-semibold text-center pt-1 border-t border-slate-800/60 hidden">
+                            <span class="text-amber-400">💡 Tip: This photo is already compressed. Drag slider left (below 70%) to reduce KB further!</span>
                         </div>
                     </div>
 
-                    <!-- 3. EXAM PRESETS -->
+                    <!-- 3. EXAM FORM PRESETS -->
                     <div>
                         <span class="text-xs font-bold text-slate-400 block mb-2">Quick Snap to Exam Target KB:</span>
                         <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
@@ -130,7 +136,7 @@
                         </div>
                     </div>
 
-                    <!-- 4. FILTERS -->
+                    <!-- 4. DOCUMENT FILTERS -->
                     <div class="pt-2 border-t border-slate-800/80">
                         <span class="text-xs font-bold text-slate-400 block mb-2">Color Mode & Filter:</span>
                         <div class="grid grid-cols-3 gap-2">
@@ -247,15 +253,16 @@
                     document.getElementById('workspace').classList.remove('hidden');
                     document.getElementById('status-box').classList.add('hidden');
 
-                    // Run initial live calculation
-                    runLiveCompression(document.getElementById('quality-slider').value);
+                    // Run initial live calculation at 65%
+                    document.getElementById('quality-slider').value = 65;
+                    document.getElementById('quality-val-badge').innerText = '65%';
+                    runLiveCompression(65);
                 };
                 loadedImg.src = e.target.result;
             };
             reader.readAsDataURL(displayBlob);
         }
 
-        // Draw once to offscreen canvas (capped to 2560px for buttery smooth 60fps sliding)
         function prepareOffscreenCanvas() {
             let w = loadedImg.naturalWidth;
             let h = loadedImg.naturalHeight;
@@ -301,7 +308,7 @@
             clearTimeout(calcTimeout);
             calcTimeout = setTimeout(() => {
                 runLiveCompression(val);
-            }, 30); // 30ms responsive debounce
+            }, 30);
         }
 
         // ⚡ REAL-TIME COMPRESSION & LIVE KB CALCULATOR
@@ -316,21 +323,27 @@
                 // 1. Live Visual Preview
                 document.getElementById('preview-img').src = URL.createObjectURL(blob);
 
-                // 2. Live Size Calculator
+                // 2. Live Size Display
                 const compBytes = blob.size;
                 document.getElementById('live-size-display').innerText = formatSize(compBytes);
 
                 // 3. Smart Saved Percentage & Over-size Warning
                 const savedBadge = document.getElementById('saved-pct-display');
+                const warningTip = document.getElementById('size-warning-tip');
+
                 if (compBytes < originalBytes) {
                     let saved = Math.round((1 - (compBytes / originalBytes)) * 100);
                     savedBadge.innerText = `-${saved}%`;
                     savedBadge.className = "text-[10px] sm:text-[11px] font-black text-emerald-300 bg-emerald-500/10 px-2 py-0.5 rounded-full border border-emerald-500/20";
+                    warningTip.classList.add('hidden');
                 } else {
                     let extra = Math.round(((compBytes - originalBytes) / originalBytes) * 100);
                     savedBadge.innerText = `+${extra}% (Bigger)`;
                     savedBadge.className = "text-[10px] sm:text-[11px] font-black text-rose-300 bg-rose-500/10 px-2 py-0.5 rounded-full border border-rose-500/20";
+                    warningTip.classList.remove('hidden');
                 }
+            }, 'image/jpeg', q);
+        }
 
         // ⚡ SNAP TO EXACT TARGET KB (20KB, 50KB, 100KB)
         async function snapToExactTarget(targetKb) {
@@ -340,7 +353,6 @@
 
             let minQ = 0.05, maxQ = 0.95, bestQ = 0.5;
 
-            // Fast 5-step binary search to find exact slider match
             for (let i = 0; i < 5; i++) {
                 bestQ = (minQ + maxQ) / 2;
                 const b = await new Promise(res => offscreenCanvas.toBlob(res, 'image/jpeg', bestQ));
