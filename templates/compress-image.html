@@ -320,18 +320,17 @@
                 const compBytes = blob.size;
                 document.getElementById('live-size-display').innerText = formatSize(compBytes);
 
-                // 3. Saved Percentage
-                let saved = Math.round((1 - (compBytes / originalBytes)) * 100);
+                // 3. Smart Saved Percentage & Over-size Warning
                 const savedBadge = document.getElementById('saved-pct-display');
-                if (saved > 0) {
+                if (compBytes < originalBytes) {
+                    let saved = Math.round((1 - (compBytes / originalBytes)) * 100);
                     savedBadge.innerText = `-${saved}%`;
-                    savedBadge.className = "text-[11px] font-black text-emerald-300 bg-emerald-500/10 px-2 py-0.5 rounded-full border border-emerald-500/20";
+                    savedBadge.className = "text-[10px] sm:text-[11px] font-black text-emerald-300 bg-emerald-500/10 px-2 py-0.5 rounded-full border border-emerald-500/20";
                 } else {
-                    savedBadge.innerText = `0%`;
-                    savedBadge.className = "text-[11px] font-black text-slate-400 bg-slate-800 px-2 py-0.5 rounded-full border border-slate-700";
+                    let extra = Math.round(((compBytes - originalBytes) / originalBytes) * 100);
+                    savedBadge.innerText = `+${extra}% (Bigger)`;
+                    savedBadge.className = "text-[10px] sm:text-[11px] font-black text-rose-300 bg-rose-500/10 px-2 py-0.5 rounded-full border border-rose-500/20";
                 }
-            }, 'image/jpeg', q);
-        }
 
         // ⚡ SNAP TO EXACT TARGET KB (20KB, 50KB, 100KB)
         async function snapToExactTarget(targetKb) {
