@@ -68,7 +68,7 @@
             </div>
 
             <!-- COMPRESS WORKSPACE -->
-            <div id="workspace" class="hidden mt-6 space-y-6">
+            <div id="workspace" class="hidden mt-6 space-y-4">
                 <div class="flex items-center justify-between">
                     <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Live Compressed Preview</span>
                     <button type="button" onclick="document.getElementById('file-input').click()" class="text-xs font-bold text-indigo-400 hover:text-white bg-slate-800 hover:bg-slate-700 px-3 py-1.5 rounded-xl border border-slate-700 transition">
@@ -76,31 +76,18 @@
                     </button>
                 </div>
 
-                <!-- ⚡ LIVE VISUAL PREVIEW BOX -->
-                <div class="bg-slate-950/80 p-4 rounded-2xl border border-slate-800 flex items-center justify-center max-h-[380px] overflow-hidden relative">
-                    <img id="preview-img" src="#" alt="Live Preview" class="max-h-[340px] w-auto rounded-xl object-contain transition-all duration-75">
+                <!-- ⚡ COMPACT PREVIEW (PHOTO STAYS ON SCREEN) -->
+                <div class="bg-slate-950/80 p-3 sm:p-4 rounded-2xl border border-slate-800 flex items-center justify-center max-h-[300px] sm:max-h-[340px] overflow-hidden relative">
+                    <img id="preview-img" src="#" alt="Live Preview" class="max-h-[280px] sm:max-h-[320px] w-auto rounded-xl object-contain transition-all duration-75">
                     <div id="live-loading-indicator" class="hidden absolute top-3 right-3 bg-slate-900/90 text-indigo-400 text-[10px] font-bold px-2 py-1 rounded-lg border border-indigo-500/30 animate-pulse">
                         Calculating...
                     </div>
                 </div>
 
-                <!-- ⚡ LIVE FILE SIZE COMPARISON BAR -->
-                <div class="grid grid-cols-2 gap-3 p-3.5 bg-slate-950 rounded-2xl border border-slate-800 text-center">
-                    <div class="p-2 border-r border-slate-800">
-                        <span class="text-[11px] font-bold text-slate-400 uppercase tracking-wider block">Original File Size</span>
-                        <span id="original-size-display" class="text-base sm:text-lg font-extrabold text-slate-300 mt-0.5 block">0 KB</span>
-                    </div>
-                    <div class="p-2">
-                        <span class="text-[11px] font-bold text-emerald-400 uppercase tracking-wider block">⚡ Live Compressed Size</span>
-                        <div class="flex items-center justify-center gap-1.5 mt-0.5">
-                            <span id="live-size-display" class="text-base sm:text-lg font-extrabold text-emerald-400">0 KB</span>
-                            <span id="saved-pct-display" class="text-[11px] font-black text-emerald-300 bg-emerald-500/10 px-2 py-0.5 rounded-full border border-emerald-500/20">0%</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- ⚡ LIVE SLIDER & CONTROLS -->
-                <div class="bg-slate-950/80 p-5 rounded-2xl border border-slate-800 space-y-4">
+                <!-- ⚡ SLIDER & LIVE SIZE TOGETHER IN ONE BOX -->
+                <div class="bg-slate-950/80 p-4 sm:p-5 rounded-2xl border border-slate-800 space-y-4">
+                    
+                    <!-- 1. SLIDER -->
                     <div>
                         <div class="flex justify-between items-center text-xs font-semibold mb-2">
                             <span class="text-slate-300 font-bold">Compression Level (Quality):</span>
@@ -109,7 +96,22 @@
                         <input type="range" id="quality-slider" min="5" max="95" value="65" oninput="handleSliderChange(this.value)" class="w-full h-2.5 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-indigo-500">
                     </div>
 
-                    <!-- ⚡ 1-TAP EXAM PRESETS -->
+                    <!-- 2. ⚡ LIVE COMPRESSED SIZE (PLACED RIGHT BELOW SLIDER) -->
+                    <div class="grid grid-cols-2 gap-3 p-3 bg-slate-900 rounded-xl border border-slate-800 text-center">
+                        <div class="p-1 border-r border-slate-800">
+                            <span class="text-[10px] sm:text-[11px] font-bold text-slate-400 uppercase tracking-wider block">Original Size</span>
+                            <span id="original-size-display" class="text-sm sm:text-base font-extrabold text-slate-300 mt-0.5 block">0 KB</span>
+                        </div>
+                        <div class="p-1">
+                            <span class="text-[10px] sm:text-[11px] font-bold text-emerald-400 uppercase tracking-wider block">⚡ Live Compressed Size</span>
+                            <div class="flex items-center justify-center gap-1.5 mt-0.5">
+                                <span id="live-size-display" class="text-sm sm:text-base font-extrabold text-emerald-400">0 KB</span>
+                                <span id="saved-pct-display" class="text-[10px] sm:text-[11px] font-black text-emerald-300 bg-emerald-500/10 px-2 py-0.5 rounded-full border border-emerald-500/20">0%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 3. EXAM PRESETS -->
                     <div>
                         <span class="text-xs font-bold text-slate-400 block mb-2">Quick Snap to Exam Target KB:</span>
                         <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
@@ -128,7 +130,7 @@
                         </div>
                     </div>
 
-                    <!-- ⚡ OPTIONAL DOCUMENT FILTERS -->
+                    <!-- 4. FILTERS -->
                     <div class="pt-2 border-t border-slate-800/80">
                         <span class="text-xs font-bold text-slate-400 block mb-2">Color Mode & Filter:</span>
                         <div class="grid grid-cols-3 gap-2">
