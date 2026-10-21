@@ -32,7 +32,11 @@
         body { font-family: 'Plus Jakarta Sans', sans-serif; -webkit-tap-highlight-color: transparent; }
         .cropper-view-box, .cropper-face { border-radius: 8px; }
         
-        /* ⚡ TRUE PHOTOSHOP HAND TOOL (Click-through crop box on Spacebar/Hand mode) */
+        /* ⚡ NO UGLY CHECKERBOARD: Sleek dark theme matching background */
+        .cropper-bg { background: #020617 !important; background-image: none !important; }
+        .cropper-modal { opacity: 0.6 !important; background-color: #020617 !important; }
+
+        /* ⚡ TRUE PHOTOSHOP HAND TOOL */
         .hand-mode-active .cropper-crop-box { pointer-events: none !important; opacity: 0.65; }
         .hand-mode-active .cropper-container,
         .hand-mode-active .cropper-drag-box,
@@ -90,10 +94,10 @@
                 <!-- ⚡ PRO TOOLBAR -->
                 <div class="flex flex-wrap items-center justify-between gap-2 p-2.5 bg-slate-950/90 rounded-2xl border border-slate-800">
                     <div class="flex items-center gap-2">
-                        <button type="button" onclick="cropZoom(0.15)" title="Zoom In" class="py-1.5 px-3 rounded-xl bg-slate-900 hover:bg-indigo-600 text-xs font-bold text-white border border-slate-700 transition flex items-center gap-1 active:scale-95">
+                        <button type="button" onclick="cropZoom(0.12)" title="Zoom In" class="py-1.5 px-3 rounded-xl bg-slate-900 hover:bg-indigo-600 text-xs font-bold text-white border border-slate-700 transition flex items-center gap-1 active:scale-95">
                             <span>🔍+ Zoom In</span>
                         </button>
-                        <button type="button" onclick="cropZoom(-0.15)" title="Zoom Out" class="py-1.5 px-3 rounded-xl bg-slate-900 hover:bg-indigo-600 text-xs font-bold text-white border border-slate-700 transition flex items-center gap-1 active:scale-95">
+                        <button type="button" onclick="cropZoom(-0.12)" title="Zoom Out" class="py-1.5 px-3 rounded-xl bg-slate-900 hover:bg-indigo-600 text-xs font-bold text-white border border-slate-700 transition flex items-center gap-1 active:scale-95">
                             <span>🔍- Zoom Out</span>
                         </button>
                         <button type="button" onclick="toggleHandTool()" id="btn-hand-tool" title="Pan Photo" class="py-1.5 px-3 rounded-xl bg-slate-900 hover:bg-indigo-600 text-xs font-bold text-slate-300 hover:text-white border border-slate-700 transition flex items-center gap-1 active:scale-95">
@@ -109,7 +113,7 @@
                 </div>
 
                 <!-- CROPPER CONTAINER -->
-                <div class="bg-slate-950/80 p-3 sm:p-4 rounded-2xl border border-slate-800 flex items-center justify-center max-h-[440px] overflow-hidden">
+                <div class="bg-slate-950 p-2 sm:p-3 rounded-2xl border border-slate-800 flex items-center justify-center max-h-[440px] overflow-hidden select-none">
                     <img id="crop-image" src="#" alt="Crop Preview" class="max-h-[400px] w-auto rounded-xl object-contain block">
                 </div>
 
@@ -167,7 +171,6 @@
         let currentFile = null;
         let isHandMode = false;
         let isSpacePressed = false;
-        let minZoomRatio = 0; // ⚡ Minimum zoom boundary (Cannot shrink smaller than frame!)
 
         const dropArea = document.getElementById('drop-area');
         const fileInput = document.getElementById('file-input');
@@ -209,25 +212,17 @@
                 document.getElementById('status-box').classList.add('hidden');
 
                 if (cropper) cropper.destroy();
+
+                // ⚡ VIEWMODE 2: IMAGE CANNOT SHRINK SMALLER THAN FRAME!
                 cropper = new Cropper(img, {
                     aspectRatio: NaN,
-                    viewMode: 1,
-                    autoCrop: false, // ⚡ Opens clean without automatic covering frame
+                    viewMode: 2,          // Hard boundary lock against frame edges
+                    background: false,    // Zero ugly grey checkerboards!
                     responsive: true,
                     zoomable: true,
                     zoomOnWheel: true,
-                    wheelZoomRatio: 0.08,
-                    ready: function () {
-                        // ⚡ Store initial fitted ratio so image CANNOT shrink smaller than frame!
-                        const canvasData = cropper.getCanvasData();
-                        minZoomRatio = canvasData.width / canvasData.naturalWidth;
-                    },
-                    zoom: function (e) {
-                        // ⚡ Clamps zoom out: Never lets photo detach or shrink smaller than container!
-                        if (minZoomRatio > 0 && e.detail.ratio < minZoomRatio) {
-                            e.preventDefault();
-                        }
-                    }
+                    wheelZoomRatio: 0.05, // Smooth controlled wheel zoom
+                    autoCropArea: 0.75
                 });
             };
             reader.readAsDataURL(displayBlob);
@@ -235,7 +230,6 @@
 
         function setRatio(ratio, btn) {
             if (cropper) {
-                cropper.crop(); // Show crop frame when ratio is clicked
                 cropper.setAspectRatio(ratio);
             }
             document.querySelectorAll('.ratio-btn').forEach(b => {
@@ -244,17 +238,8 @@
             btn.className = "ratio-btn py-2.5 px-3 rounded-xl bg-indigo-600 text-white text-xs font-bold transition";
         }
 
-        // ⚡ ZOOM CONTROLS (RESPECTS MINIMUM FRAME BOUNDARY)
         function cropZoom(val) {
-            if (!cropper) return;
-            if (val < 0 && minZoomRatio > 0) {
-                const canvasData = cropper.getCanvasData();
-                const currentRatio = canvasData.width / canvasData.naturalWidth;
-                if (currentRatio <= minZoomRatio + 0.01) {
-                    return; // Cannot zoom out smaller than frame!
-                }
-            }
-            cropper.zoom(val);
+            if (cropper) cropper.zoom(val);
         }
 
         function cropReset() {
@@ -264,7 +249,6 @@
             }
         }
 
-        // ⚡ PAN & HAND TOOL (CLICK-THROUGH CROP BOX)
         function updatePanMode(active) {
             if (!cropper) return;
             const container = document.querySelector('.cropper-container');
@@ -289,10 +273,9 @@
             }
         }
 
-        // ⚡ 100% BULLETPROOF SPACEBAR LISTENER (NEVER SCROLLS PAGE!)
+        // ⚡ BULLETPROOF SPACEBAR PAN LISTENER
         window.addEventListener('keydown', function(e) {
             if (e.code === 'Space' || e.key === ' ' || e.keyCode === 32) {
-                // If focus is not inside an input field, prevent browser scroll EVERY time!
                 if (document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA') {
                     e.preventDefault();
                     if (!isSpacePressed && cropper) {
