@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     
     <!-- ⚡ HIGH-RANKING KEYWORDS FOR CROPPING -->
-    <title>Crop Image Online Free - Zoom, Aspect Ratios & Templates | SmartPicTools</title>
-    <meta name="description" content="Free online tool to crop images with exact aspect ratios: 1:1 Instagram, 16:9 YouTube, and 9:16 Reels with zoom controls. 100% private in-browser.">
-    <meta name="keywords" content="crop image online, crop photo with zoom, crop photo 1:1 instagram, crop image 16:9 youtube, 9:16 reels cropper, aspect ratio cropper">
+    <title>Crop Image Online Free - Instagram 1:1, YouTube 16:9, Reels 9:16 | SmartPicTools</title>
+    <meta name="description" content="Free online tool to crop images visually with Freeform drag or exact aspect ratios: 1:1 Instagram, 16:9 YouTube, and 9:16 Reels. No watermark, 100% private in-browser.">
+    <meta name="keywords" content="crop image online, freeform photo crop, crop photo 1:1 instagram, crop image 16:9 youtube, 9:16 reels cropper, aspect ratio cropper, online photo cropper no watermark">
     <meta name="robots" content="index, follow, max-image-preview:large">
     <meta name="author" content="SmartPicTools">
     <link rel="canonical" href="https://smartpictools.in/crop-image">
@@ -16,8 +16,8 @@
     <!-- OPEN GRAPH -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://smartpictools.in/crop-image">
-    <meta property="og:title" content="Crop Image Online Free - Aspect Ratio Templates | SmartPicTools">
-    <meta property="og:description" content="Crop photos visually for Instagram, YouTube, and Reels with live Zoom controls.">
+    <meta property="og:title" content="Crop Image Online Free - Instagram, YouTube & Reels | SmartPicTools">
+    <meta property="og:description" content="Crop photos freely with mouse drag or 1-tap social media aspect ratio presets. Free, fast and private.">
 
     <!-- FAVICON -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' stop-color='%236366f1'/><stop offset='50%25' stop-color='%23a855f7'/><stop offset='100%25' stop-color='%23ec4899'/></linearGradient></defs><rect width='100' height='100' rx='28' fill='url(%23g)'/><path d='M52 16 L24 54 L46 54 L42 84 L76 44 L54 44 Z' fill='%23fbbf24'/></svg>">
@@ -30,9 +30,9 @@
 
     <style>
         body { font-family: 'Plus Jakarta Sans', sans-serif; -webkit-tap-highlight-color: transparent; }
-        .cropper-view-box, .cropper-face { border-radius: 6px; }
+        .cropper-view-box, .cropper-face { border-radius: 4px; }
         
-        /* ⚡ KILL CHECKERBOARD PATTERN ENTIRELY */
+        /* ⚡ ZERO CHECKERBOARD */
         .cropper-bg, .cropper-container, .cropper-wrap-box {
             background: #020617 !important;
             background-image: none !important;
@@ -42,8 +42,7 @@
             opacity: 0.65 !important;
         }
 
-        /* ⚡ SPACEBAR HAND TOOL */
-        .hand-mode-active .cropper-crop-box { pointer-events: none !important; opacity: 0.55; }
+        .hand-mode-active .cropper-crop-box { pointer-events: none !important; opacity: 0.5; }
         .hand-mode-active .cropper-container,
         .hand-mode-active .cropper-drag-box,
         .hand-mode-active .cropper-wrap-box { cursor: grab !important; }
@@ -76,7 +75,7 @@
     <main class="max-w-4xl mx-auto w-full px-4 py-8 sm:py-12 flex-1">
         <div class="text-center max-w-2xl mx-auto mb-8 sm:mb-10">
             <h1 class="text-3xl sm:text-5xl font-black text-white tracking-tight">Crop Image with Aspect Ratios</h1>
-            <p class="mt-2.5 text-slate-400 text-xs sm:text-sm">Crop visually for Instagram (1:1), YouTube (16:9), and Reels (9:16) with edge-to-edge frame coverage and Zoom controls.</p>
+            <p class="mt-2.5 text-slate-400 text-xs sm:text-sm">Click & drag freely on the photo, or use 1-tap presets for Instagram (1:1), YouTube (16:9), and Reels (9:16).</p>
         </div>
 
         <div class="bg-slate-900 rounded-3xl p-5 sm:p-10 border border-slate-800 shadow-2xl relative">
@@ -97,7 +96,7 @@
                     </button>
                 </div>
 
-                <!-- ⚡ CONTROL TOOLBAR (ZOOM CONTROLS) -->
+                <!-- ⚡ PRO TOOLBAR -->
                 <div class="flex flex-wrap items-center justify-between gap-2 p-2.5 bg-slate-950/90 rounded-2xl border border-slate-800">
                     <div class="flex items-center gap-2">
                         <button type="button" onclick="cropZoom(0.15)" title="Zoom In" class="py-1.5 px-3 rounded-xl bg-slate-900 hover:bg-indigo-600 text-xs font-bold text-white border border-slate-700 transition flex items-center gap-1 active:scale-95">
@@ -109,16 +108,16 @@
                         <button type="button" onclick="toggleHandTool()" id="btn-hand-tool" title="Pan Photo" class="py-1.5 px-3 rounded-xl bg-slate-900 hover:bg-indigo-600 text-xs font-bold text-slate-300 hover:text-white border border-slate-700 transition flex items-center gap-1 active:scale-95">
                             <span>✋ Hand Tool</span>
                         </button>
-                        <button type="button" onclick="cropReset()" title="Reset to Original" class="py-1.5 px-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-bold text-slate-300 hover:text-white border border-slate-700 transition">
+                        <button type="button" onclick="cropReset()" title="Reset" class="py-1.5 px-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-bold text-slate-300 hover:text-white border border-slate-700 transition">
                             ↺ Reset
                         </button>
                     </div>
-                    <span class="hidden sm:inline text-[11px] font-semibold text-slate-400">
-                        ⌨️ Hold <b class="text-indigo-400 font-mono bg-slate-900 px-1.5 py-0.5 rounded border border-slate-800">Spacebar</b> to Pan
+                    <span class="text-[11px] font-semibold text-emerald-400 flex items-center gap-1">
+                        <span>💡 Drag anywhere on the photo to draw your crop area</span>
                     </span>
                 </div>
 
-               <!-- CROPPER CONTAINER (EXACT FIT - ZERO BLACK SPACE) -->
+                <!-- ⚡ CROPPER CONTAINER (EXACT FIT - ZERO BLACK SPACE) -->
                 <div class="flex items-center justify-center select-none overflow-hidden">
                     <div class="inline-block max-w-full rounded-2xl border border-slate-800 overflow-hidden leading-none shadow-xl bg-slate-950">
                         <img id="crop-image" src="#" alt="Crop Preview" class="max-h-[460px] max-w-full block">
@@ -129,10 +128,10 @@
                 <div class="bg-slate-950/80 p-4 sm:p-5 rounded-2xl border border-slate-800 space-y-3">
                     <label class="block text-xs font-bold text-slate-400">Select Aspect Ratio Template:</label>
                     <div class="grid grid-cols-2 sm:grid-cols-5 gap-2">
-                        <button type="button" onclick="applyFullCoverageRatio(NaN, this)" id="btn-free" class="ratio-btn py-2.5 px-3 rounded-xl bg-indigo-600 text-white text-xs font-bold transition">Freeform</button>
-                        <button type="button" onclick="applyFullCoverageRatio(1, this)" class="ratio-btn py-2.5 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 text-xs font-bold transition">1:1 (Square)</button>
+                        <button type="button" onclick="applyFullCoverageRatio(NaN, this)" id="btn-free" class="ratio-btn py-2.5 px-3 rounded-xl bg-indigo-600 text-white text-xs font-bold transition">Freeform (Drag Anywhere)</button>
+                        <button type="button" onclick="applyFullCoverageRatio(1, this)" class="ratio-btn py-2.5 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 text-xs font-bold transition">1:1 (Instagram)</button>
                         <button type="button" onclick="applyFullCoverageRatio(16/9, this)" class="ratio-btn py-2.5 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 text-xs font-bold transition">16:9 (YouTube)</button>
-                        <button type="button" onclick="applyFullCoverageRatio(9/16, this)" class="ratio-btn py-2.5 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 text-xs font-bold transition">9:16 (Reels)</button>
+                        <button type="button" onclick="applyFullCoverageRatio(9/16, this)" class="ratio-btn py-2.5 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 text-xs font-bold transition">9:16 (Reels/Shorts)</button>
                         <button type="button" onclick="applyFullCoverageRatio(4/5, this)" class="ratio-btn py-2.5 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 text-xs font-bold transition">4:5 (Portrait)</button>
                     </div>
                 </div>
@@ -147,42 +146,84 @@
             </div>
         </div>
 
-        <!-- ⚡ DETAILED FAQS -->
+        <!-- HOW TO USE -->
         <section class="mt-14 border-t border-slate-800 pt-10">
-            <h2 class="text-xl sm:text-2xl font-bold text-white text-center mb-6">Frequently Asked Questions</h2>
-            <div class="space-y-3.5 text-xs sm:text-sm">
-                <details class="group bg-slate-900 p-4 sm:p-5 rounded-2xl border border-slate-800 cursor-pointer">
-                    <summary class="font-bold text-white flex justify-between items-center">
-                        How does edge-to-edge aspect ratio coverage work?
-                        <span class="text-indigo-400 group-open:rotate-180 transition ml-2">▼</span>
-                    </summary>
-                    <p class="text-slate-400 mt-2.5 leading-relaxed">When you choose any ratio preset (like 1:1, 16:9, or 9:16), our algorithm calculates the maximum available dimension across the photo. It expands the crop box to cover 100% of the photo from top to bottom (or left to right), avoiding awkward tiny centered boxes.</p>
-                </details>
-
-                <details class="group bg-slate-900 p-4 sm:p-5 rounded-2xl border border-slate-800 cursor-pointer">
-                    <summary class="font-bold text-white flex justify-between items-center">
-                        Why does Zoom Out stop at 100% original size?
-                        <span class="text-indigo-400 group-open:rotate-180 transition ml-2">▼</span>
-                    </summary>
-                    <p class="text-slate-400 mt-2.5 leading-relaxed">Unlike basic tools where zooming out shrinks the photo into an unusable tiny rectangle, our boundary lock clamps the zoom. You can zoom in as much as you like, but zooming out stops precisely at the original photo scale so your photo never detaches or breaks its frame.</p>
-                </details>
-
-                <details class="group bg-slate-900 p-4 sm:p-5 rounded-2xl border border-slate-800 cursor-pointer">
-                    <summary class="font-bold text-white flex justify-between items-center">
-                        How do I pan the photo using the Spacebar Hand tool?
-                        <span class="text-indigo-400 group-open:rotate-180 transition ml-2">▼</span>
-                    </summary>
-                    <p class="text-slate-400 mt-2.5 leading-relaxed">Just like in Adobe Photoshop, hold down the Spacebar key on your keyboard to instantly turn your cursor into a hand. Click and drag the photo anywhere to frame your shot, then release Spacebar to continue resizing the crop box.</p>
-                </details>
-
-                <details class="group bg-slate-900 p-4 sm:p-5 rounded-2xl border border-slate-800 cursor-pointer">
-                    <summary class="font-bold text-white flex justify-between items-center">
-                        Does cropping reduce the resolution or clarity of my picture?
-                        <span class="text-indigo-400 group-open:rotate-180 transition ml-2">▼</span>
-                    </summary>
-                    <p class="text-slate-400 mt-2.5 leading-relaxed">Zero quality loss. The crop calculations execute directly against the original high-resolution pixel matrix of your photo in temporary browser memory, downloading at maximum sharpness.</p>
-                </details>
+            <h2 class="text-xl sm:text-2xl font-bold text-white text-center mb-6">How to Crop Images in 3 Easy Steps</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs sm:text-sm">
+                <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800">
+                    <span class="w-7 h-7 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center mb-2.5 text-xs">1</span>
+                    <h3 class="font-bold text-white text-sm mb-1">Select Photo</h3>
+                    <p class="text-slate-400">Choose any JPG, PNG, WEBP, or iPhone HEIC picture.</p>
+                </div>
+                <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800">
+                    <span class="w-7 h-7 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center mb-2.5 text-xs">2</span>
+                    <h3 class="font-bold text-white text-sm mb-1">Draw or Pick Preset</h3>
+                    <p class="text-slate-400">Click and drag freely on the photo, or pick 1:1, 16:9, or 9:16 templates.</p>
+                </div>
+                <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800">
+                    <span class="w-7 h-7 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center mb-2.5 text-xs">3</span>
+                    <h3 class="font-bold text-white text-sm mb-1">Instant Download</h3>
+                    <p class="text-slate-400">Click Crop & Download to save your photo with zero quality loss.</p>
+                </div>
             </div>
+        </section>
+
+        <!-- ⚡ 100% USER-CENTRIC PRACTICAL FAQS -->
+        <section class="mt-12 space-y-3">
+            <h2 class="text-xl font-bold text-white mb-4">Frequently Asked Questions</h2>
+            
+            <details class="group bg-slate-900 p-4 sm:p-5 rounded-2xl border border-slate-800 cursor-pointer">
+                <summary class="font-bold text-white flex justify-between items-center text-sm">
+                    Does cropping reduce the resolution or clarity of my photo?
+                    <span class="text-indigo-400 group-open:rotate-180 transition ml-2">▼</span>
+                </summary>
+                <p class="text-slate-400 mt-2.5 leading-relaxed text-xs sm:text-sm">No. Cropping only removes the unselected outer areas. The cropped portion keeps 100% of its original pixel clarity and sharp details without adding any compression blur.</p>
+            </details>
+
+            <details class="group bg-slate-900 p-4 sm:p-5 rounded-2xl border border-slate-800 cursor-pointer">
+                <summary class="font-bold text-white flex justify-between items-center text-sm">
+                    Which aspect ratio preset should I choose for Instagram, YouTube, and Reels?
+                    <span class="text-indigo-400 group-open:rotate-180 transition ml-2">▼</span>
+                </summary>
+                <div class="text-slate-400 mt-2.5 leading-relaxed text-xs sm:text-sm space-y-1">
+                    <p>• <strong>1:1 (Square):</strong> Best for standard Instagram feed posts and profile pictures.</p>
+                    <p>• <strong>16:9 (Widescreen):</strong> Official size for YouTube video thumbnails and banners.</p>
+                    <p>• <strong>9:16 (Vertical):</strong> Full-screen format for Instagram Reels, YouTube Shorts, and Stories.</p>
+                    <p>• <strong>4:5 (Portrait):</strong> Tall Instagram feed posts that cover more mobile screen space.</p>
+                </div>
+            </details>
+
+            <details class="group bg-slate-900 p-4 sm:p-5 rounded-2xl border border-slate-800 cursor-pointer">
+                <summary class="font-bold text-white flex justify-between items-center text-sm">
+                    How do I crop a custom area with Freeform mode?
+                    <span class="text-indigo-400 group-open:rotate-180 transition ml-2">▼</span>
+                </summary>
+                <p class="text-slate-400 mt-2.5 leading-relaxed text-xs sm:text-sm">In Freeform mode, simply click and drag your mouse (or drag your finger on mobile) anywhere over the photo to draw a crop box of any custom shape. You can also drag the corners to resize it freely.</p>
+            </details>
+
+            <details class="group bg-slate-900 p-4 sm:p-5 rounded-2xl border border-slate-800 cursor-pointer">
+                <summary class="font-bold text-white flex justify-between items-center text-sm">
+                    Is there any watermark added to the cropped image?
+                    <span class="text-indigo-400 group-open:rotate-180 transition ml-2">▼</span>
+                </summary>
+                <p class="text-slate-400 mt-2.5 leading-relaxed text-xs sm:text-sm">Never! SmartPicTools is 100% free and we never place any branding, logos, or watermarks on your downloaded images.</p>
+            </details>
+
+            <details class="group bg-slate-900 p-4 sm:p-5 rounded-2xl border border-slate-800 cursor-pointer">
+                <summary class="font-bold text-white flex justify-between items-center text-sm">
+                    Can I crop photos on my smartphone using touch?
+                    <span class="text-indigo-400 group-open:rotate-180 transition ml-2">▼</span>
+                </summary>
+                <p class="text-slate-400 mt-2.5 leading-relaxed text-xs sm:text-sm">Yes! The tool is fully optimized for mobile touchscreens. You can draw, pinch-to-zoom, and move the crop frame smoothly using your fingers on any smartphone.</p>
+            </details>
+
+            <details class="group bg-slate-900 p-4 sm:p-5 rounded-2xl border border-slate-800 cursor-pointer">
+                <summary class="font-bold text-white flex justify-between items-center text-sm">
+                    Are my uploaded images safe and private?
+                    <span class="text-indigo-400 group-open:rotate-180 transition ml-2">▼</span>
+                </summary>
+                <p class="text-slate-400 mt-2.5 leading-relaxed text-xs sm:text-sm">100%. Cropping executes directly inside your browser's local memory. Your photos never get uploaded, saved, or indexed on any server, ensuring complete privacy.</p>
+            </details>
         </section>
     </main>
 
@@ -190,13 +231,13 @@
         <p>© 2026 SmartPicTools. 100% Free & Private in-browser suite. <a href="/" class="text-indigo-400 hover:underline">Explore All Tools</a></p>
     </footer>
 
-    <!-- ⚡ MASTER CROPPING & ZOOM ENGINE -->
+    <!-- ⚡ JS ENGINE -->
     <script>
         let cropper = null;
         let currentFile = null;
         let isHandMode = false;
         let isSpacePressed = false;
-        let baseCanvasData = null; // ⚡ Hard Boundary: Screenshot 1 Original Fit Dimensions!
+        let baseCanvasData = null;
 
         const dropArea = document.getElementById('drop-area');
         const fileInput = document.getElementById('file-input');
@@ -241,14 +282,14 @@
 
                     cropper = new Cropper(img, {
                         aspectRatio: NaN,
-                        viewMode: 1,           // Restricts crop box inside canvas
-                        background: false,     // Eliminates ugly checkerboards
+                        viewMode: 1,
+                        background: false,
                         responsive: true,
                         zoomable: true,
-                        zoomOnWheel: false,    // Prevents accidental mouse scroll shrinking!
-                        autoCropArea: 1.0,     // ⚡ 100% FULL PHOTO COVERAGE FROM START!
+                        zoomOnWheel: false,
+                        // ⚡ NO AUTO-CROP BOX: Photo opens 100% clean, user drags with mouse to crop!
+                        autoCrop: false,
                         ready: function () {
-                            // ⚡ Memorize initial fit boundary
                             const c = cropper.getCanvasData();
                             baseCanvasData = {
                                 width: c.width,
@@ -256,7 +297,7 @@
                                 left: c.left,
                                 top: c.top
                             };
-                            maximizeCropBoxToFit(NaN);
+                            // Default is Freeform with no pre-drawn box
                         }
                     });
                 };
@@ -266,11 +307,19 @@
             reader.readAsDataURL(displayBlob);
         }
 
-        // ⚡ FULL TOP-TO-BOTTOM & LEFT-TO-RIGHT COVERAGE ENGINE
+        // ⚡ RATIO TEMPLATES (Draws full-coverage box ONLY when clicked)
         function applyFullCoverageRatio(ratio, btn) {
             if (!cropper) return;
-            cropper.setAspectRatio(ratio);
-            maximizeCropBoxToFit(ratio);
+
+            if (isNaN(ratio) || !ratio) {
+                // Freeform: allow free drawing
+                cropper.setAspectRatio(NaN);
+            } else {
+                // Ratio preset clicked: show crop box and cover full dimension
+                cropper.crop();
+                cropper.setAspectRatio(ratio);
+                maximizeCropBoxToFit(ratio);
+            }
 
             document.querySelectorAll('.ratio-btn').forEach(b => {
                 b.className = "ratio-btn py-2.5 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 text-xs font-bold transition";
@@ -284,23 +333,10 @@
             const canvasW = cData.width;
             const canvasH = cData.height;
 
-            if (isNaN(ratio) || !ratio) {
-                // Freeform: cover entire photo edge-to-edge!
-                cropper.setCropBoxData({
-                    left: cData.left,
-                    top: cData.top,
-                    width: canvasW,
-                    height: canvasH
-                });
-                return;
-            }
-
-            // Ratio: Calculate maximum possible box that touches top & bottom (or left & right)
             let boxW = canvasW;
             let boxH = boxW / ratio;
 
             if (boxH > canvasH) {
-                // Touch top & bottom completely!
                 boxH = canvasH;
                 boxW = boxH * ratio;
             }
@@ -316,12 +352,11 @@
             });
         }
 
-        // ⚡ BULLETPROOF CONTROLLED ZOOM (CANNOT SHRINK SMALLER THAN ORIGINAL!)
+        // ⚡ ZOOM CONTROLS (LOCKED TO MINIMUM INITIAL SCALE)
         function cropZoom(val) {
             if (!cropper || !baseCanvasData) return;
             const cData = cropper.getCanvasData();
 
-            // Zoom In: Enlarge smoothly
             if (val > 0) {
                 const newW = cData.width * 1.15;
                 const newH = cData.height * 1.15;
@@ -334,18 +369,12 @@
                     left: cData.left - (diffW / 2),
                     top: cData.top - (diffH / 2)
                 });
-            } 
-            // Zoom Out: Shrink back, BUT STOP EXACTLY AT ORIGINAL 100% BOUNDARY!
-            else {
-                // If already at or smaller than original fit, DO NOT SHRINK!
-                if (cData.width <= baseCanvasData.width + 1) {
-                    return;
-                }
+            } else {
+                if (cData.width <= baseCanvasData.width + 1) return;
 
                 let newW = cData.width * 0.88;
                 let newH = cData.height * 0.88;
 
-                // Lock to original boundary: Never shrink smaller than initial image!
                 if (newW <= baseCanvasData.width) {
                     cropper.setCanvasData({
                         width: baseCanvasData.width,
@@ -376,21 +405,19 @@
                     left: baseCanvasData.left,
                     top: baseCanvasData.top
                 });
-                const activeBtn = document.querySelector('.ratio-btn.bg-indigo-600') || document.getElementById('btn-free');
-                let activeRatio = NaN;
-                if (activeBtn) {
-                    const txt = activeBtn.innerText;
-                    if (txt.includes('1:1')) activeRatio = 1;
-                    else if (txt.includes('16:9')) activeRatio = 16/9;
-                    else if (txt.includes('9:16')) activeRatio = 9/16;
-                    else if (txt.includes('4:5')) activeRatio = 4/5;
-                }
-                maximizeCropBoxToFit(activeRatio);
+                cropper.clear(); // Clears any drawn box
+                cropper.setAspectRatio(NaN);
+
+                document.querySelectorAll('.ratio-btn').forEach(b => {
+                    b.className = "ratio-btn py-2.5 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 text-xs font-bold transition";
+                });
+                const freeBtn = document.getElementById('btn-free');
+                if (freeBtn) freeBtn.className = "ratio-btn py-2.5 px-3 rounded-xl bg-indigo-600 text-white text-xs font-bold transition";
                 if (isHandMode) toggleHandTool();
             }
         }
 
-        // ⚡ SPACEBAR & HAND TOOL SYSTEM
+        // ⚡ SPACEBAR & HAND TOOL
         function updatePanMode(active) {
             if (!cropper) return;
             const container = document.querySelector('.cropper-container');
@@ -444,7 +471,7 @@
             if (!cropper) return;
             const canvas = cropper.getCroppedCanvas();
             if (!canvas) {
-                alert('Please select an area on the photo to crop!');
+                alert('Please click and drag on the photo with your mouse/touch to select the area you want to crop!');
                 return;
             }
             const rawName = currentFile ? (currentFile.name.substring(0, currentFile.name.lastIndexOf('.')) || currentFile.name) : 'image';
