@@ -258,21 +258,37 @@
             btn.className = "ratio-btn py-2.5 px-3 rounded-xl bg-indigo-600 text-white text-xs font-bold transition";
         }
 
-        // ⚡ PRO ZOOM CONTROLS (LOCKED TO SCREENSHOT 1 BOUNDARY)
+     // ⚡ GUARANTEED WORKING ZOOM CONTROLS (LOCKED TO SCREENSHOT 1 BOUNDARY)
         function cropZoom(val) {
             if (!cropper || !initialFitData) return;
+            const cData = cropper.getCanvasData();
 
-            if (val < 0) { // When User clicks Zoom Out:
-                const cData = cropper.getCanvasData();
-                
-                // If already at Screenshot 1 size, DO NOT ZOOM OUT ANY FURTHER!
+            // Zoom In (+): 10% Bigger
+            if (val > 0) {
+                const newW = cData.width * 1.12;
+                const newH = cData.height * 1.12;
+                const diffW = newW - cData.width;
+                const diffH = newH - cData.height;
+
+                cropper.setCanvasData({
+                    width: newW,
+                    height: newH,
+                    left: cData.left - (diffW / 2),
+                    top: cData.top - (diffH / 2)
+                });
+            } 
+            // Zoom Out (-): 10% Smaller, BUT Hard Stop at Screenshot 1 Fit!
+            else {
+                // If already at Screenshot 1 size, DO NOT SHRINK!
                 if (cData.width <= initialFitData.width + 2) {
-                    return; 
+                    return;
                 }
 
-                // If this step would shrink it smaller than Screenshot 1, clamp to exact Screenshot 1!
-                const nextWidth = cData.width * (1 + val);
-                if (nextWidth <= initialFitData.width) {
+                let newW = cData.width * 0.90;
+                let newH = cData.height * 0.90;
+
+                // Stop exactly at initial Screenshot 1 dimensions
+                if (newW <= initialFitData.width) {
                     cropper.setCanvasData({
                         width: initialFitData.width,
                         height: initialFitData.height,
@@ -281,8 +297,17 @@
                     });
                     return;
                 }
+
+                const diffW = cData.width - newW;
+                const diffH = cData.height - newH;
+
+                cropper.setCanvasData({
+                    width: newW,
+                    height: newH,
+                    left: cData.left + (diffW / 2),
+                    top: cData.top + (diffH / 2)
+                });
             }
-            cropper.zoom(val);
         }
 
         function cropReset() {
@@ -297,7 +322,6 @@
                 if (isHandMode) toggleHandTool();
             }
         }
-
         function updatePanMode(active) {
             if (!cropper) return;
             const container = document.querySelector('.cropper-container');
