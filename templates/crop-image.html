@@ -118,9 +118,11 @@
                     </span>
                 </div>
 
-                <!-- CROPPER CONTAINER -->
-                <div class="w-full h-[360px] sm:h-[460px] bg-slate-950 rounded-2xl border border-slate-800 overflow-hidden relative select-none">
-                    <img id="crop-image" src="#" alt="Crop Preview" style="display:block; max-width:100%;">
+               <!-- CROPPER CONTAINER (EXACT FIT - ZERO BLACK SPACE) -->
+                <div class="flex items-center justify-center select-none overflow-hidden">
+                    <div class="inline-block max-w-full rounded-2xl border border-slate-800 overflow-hidden leading-none shadow-xl bg-slate-950">
+                        <img id="crop-image" src="#" alt="Crop Preview" class="max-h-[460px] max-w-full block">
+                    </div>
                 </div>
 
                 <!-- ASPECT RATIO BUTTONS -->
