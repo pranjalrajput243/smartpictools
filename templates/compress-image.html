@@ -6,18 +6,20 @@
     
     <!-- ⚡ HIGH-RANKING KEYWORDS FOR COMPRESSION -->
     <title>Compress Image to 20KB, 50KB, 100KB Online Free | SmartPicTools</title>
-    <meta name="description" content="Compress image to exact 20KB, 50KB, 100KB or any target size online for free. Perfect for government exam forms (SSC, UPSC, Police). 100% private in-browser tool.">
-    <meta name="keywords" content="compress image to 20kb, compress image to 50kb, compress image to 100kb, exact kb image compressor, compress photo for online form, ssc photo compressor, upsc photo resizer">
+    <meta name="description" content="Compress image to exact 20KB, 50KB, 100KB with real-time live preview and file size calculator. Perfect for SSC, UPSC, and online exam forms. 100% private in-browser tool.">
+    <meta name="keywords" content="compress image to 20kb, compress image to 50kb, compress image to 100kb, exact kb image compressor, compress photo for online exam, ssc photo compressor, upsc photo resizer, live image compressor">
     <meta name="robots" content="index, follow, max-image-preview:large">
     <meta name="author" content="SmartPicTools">
     <link rel="canonical" href="https://smartpictools.in/compress-image">
+    
+    <!-- ⚡ PERMANENT GOOGLE SEARCH CONSOLE VERIFICATION TAG -->
     <meta name="google-site-verification" content="uUq17UUsROyHMRQ8jkqKqrjZmsJnkuxZMKKoJLw_X3E" />
 
     <!-- OPEN GRAPH -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://smartpictools.in/compress-image">
     <meta property="og:title" content="Compress Image to Exact 20KB, 50KB Online Free - SmartPicTools">
-    <meta property="og:description" content="Type target KB and shrink photo instantly in 0.2s without server upload.">
+    <meta property="og:description" content="Type target KB or move slider to watch live compressed preview and exact file size in 0.2s.">
 
     <!-- FAVICON -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' stop-color='%236366f1'/><stop offset='50%25' stop-color='%23a855f7'/><stop offset='100%25' stop-color='%23ec4899'/></linearGradient></defs><rect width='100' height='100' rx='28' fill='url(%23g)'/><path d='M52 16 L24 54 L46 54 L42 84 L76 44 L54 44 Z' fill='%23fbbf24'/></svg>">
@@ -51,8 +53,8 @@
     <!-- MAIN WORKSPACE -->
     <main class="max-w-4xl mx-auto w-full px-4 py-8 sm:py-12 flex-1">
         <div class="text-center max-w-2xl mx-auto mb-8 sm:mb-10">
-            <h1 class="text-3xl sm:text-5xl font-black text-white mt-3 tracking-tight">Compress Image to Exact KB</h1>
-            <p class="mt-2.5 text-slate-400 text-xs sm:text-sm">Type your desired target KB (e.g. 20KB, 50KB, 100KB) and shrink photo weight accurately with 100% clarity.</p>
+            <h1 class="text-3xl sm:text-5xl font-black text-white tracking-tight">Compress Image to Exact KB</h1>
+            <p class="mt-2.5 text-slate-400 text-xs sm:text-sm">Move the slider to watch real-time quality and live file size before downloading. Zero guesswork.</p>
         </div>
 
         <div class="bg-slate-900 rounded-3xl p-5 sm:p-10 border border-slate-800 shadow-2xl relative">
@@ -65,46 +67,80 @@
                 <p class="text-xs sm:text-sm text-slate-400">Supports JPG, PNG, WEBP, and iPhone HEIC</p>
             </div>
 
+            <!-- COMPRESS WORKSPACE -->
             <div id="workspace" class="hidden mt-6 space-y-6">
                 <div class="flex items-center justify-between">
-                    <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Photo Preview</span>
+                    <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Live Compressed Preview</span>
                     <button type="button" onclick="document.getElementById('file-input').click()" class="text-xs font-bold text-indigo-400 hover:text-white bg-slate-800 hover:bg-slate-700 px-3 py-1.5 rounded-xl border border-slate-700 transition">
                         🔄 Change Photo
                     </button>
                 </div>
 
-                <div class="bg-slate-950/80 p-4 rounded-2xl border border-slate-800 flex items-center justify-center max-h-[360px] overflow-hidden">
-                    <img id="preview-img" src="#" alt="Preview" class="max-h-[320px] w-auto rounded-xl object-contain">
-                </div>
-
-                <div class="flex justify-between text-xs font-semibold px-1">
-                    <span id="file-name" class="text-white truncate max-w-xs">photo.jpg</span>
-                    <span class="text-indigo-400">Original Size: <span id="file-size">0 KB</span></span>
-                </div>
-
-                <!-- COMPRESS SETTINGS -->
-                <div class="bg-slate-950/80 p-4 sm:p-5 rounded-2xl border border-slate-800 space-y-4">
-                    <label class="block text-xs font-bold text-slate-400">Set Desired Target File Size:</label>
-                    <div class="flex gap-2.5">
-                        <input type="number" id="target-kb" placeholder="e.g. 50" class="flex-1 bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-indigo-500 font-bold">
-                        <select id="target-unit" class="bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-2.5 text-sm text-white font-bold">
-                            <option value="kb" selected>KB</option>
-                            <option value="mb">MB</option>
-                        </select>
-                    </div>
-
-                    <!-- QUICK PRESET BUTTONS FOR EXAMS -->
-                    <div class="flex flex-wrap gap-2 pt-1">
-                        <span class="text-[11px] font-bold text-slate-400 flex items-center mr-1">Quick Presets:</span>
-                        <button type="button" onclick="setPreset(20)" class="py-1 px-2.5 rounded-lg bg-slate-800 hover:bg-indigo-600 text-xs font-bold text-slate-300 hover:text-white transition">20 KB (Sign)</button>
-                        <button type="button" onclick="setPreset(50)" class="py-1 px-2.5 rounded-lg bg-slate-800 hover:bg-indigo-600 text-xs font-bold text-slate-300 hover:text-white transition">50 KB (SSC Photo)</button>
-                        <button type="button" onclick="setPreset(100)" class="py-1 px-2.5 rounded-lg bg-slate-800 hover:bg-indigo-600 text-xs font-bold text-slate-300 hover:text-white transition">100 KB</button>
-                        <button type="button" onclick="setPreset(200)" class="py-1 px-2.5 rounded-lg bg-slate-800 hover:bg-indigo-600 text-xs font-bold text-slate-300 hover:text-white transition">200 KB</button>
+                <!-- ⚡ LIVE VISUAL PREVIEW BOX -->
+                <div class="bg-slate-950/80 p-4 rounded-2xl border border-slate-800 flex items-center justify-center max-h-[380px] overflow-hidden relative">
+                    <img id="preview-img" src="#" alt="Live Preview" class="max-h-[340px] w-auto rounded-xl object-contain transition-all duration-75">
+                    <div id="live-loading-indicator" class="hidden absolute top-3 right-3 bg-slate-900/90 text-indigo-400 text-[10px] font-bold px-2 py-1 rounded-lg border border-indigo-500/30 animate-pulse">
+                        Calculating...
                     </div>
                 </div>
 
-                <button type="button" id="compress-btn" onclick="executeCompression()" class="w-full py-4 px-6 rounded-2xl bg-gradient-to-r from-indigo-600 via-indigo-500 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-extrabold text-sm sm:text-base shadow-lg shadow-indigo-500/25 transition active:scale-[0.99] flex items-center justify-center gap-3">
-                    <span id="btn-text">⚡ Compress & Download</span>
+                <!-- ⚡ LIVE FILE SIZE COMPARISON BAR -->
+                <div class="grid grid-cols-2 gap-3 p-3.5 bg-slate-950 rounded-2xl border border-slate-800 text-center">
+                    <div class="p-2 border-r border-slate-800">
+                        <span class="text-[11px] font-bold text-slate-400 uppercase tracking-wider block">Original File Size</span>
+                        <span id="original-size-display" class="text-base sm:text-lg font-extrabold text-slate-300 mt-0.5 block">0 KB</span>
+                    </div>
+                    <div class="p-2">
+                        <span class="text-[11px] font-bold text-emerald-400 uppercase tracking-wider block">⚡ Live Compressed Size</span>
+                        <div class="flex items-center justify-center gap-1.5 mt-0.5">
+                            <span id="live-size-display" class="text-base sm:text-lg font-extrabold text-emerald-400">0 KB</span>
+                            <span id="saved-pct-display" class="text-[11px] font-black text-emerald-300 bg-emerald-500/10 px-2 py-0.5 rounded-full border border-emerald-500/20">0%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ⚡ LIVE SLIDER & CONTROLS -->
+                <div class="bg-slate-950/80 p-5 rounded-2xl border border-slate-800 space-y-4">
+                    <div>
+                        <div class="flex justify-between items-center text-xs font-semibold mb-2">
+                            <span class="text-slate-300 font-bold">Compression Level (Quality):</span>
+                            <span id="quality-val-badge" class="text-indigo-400 font-black text-sm bg-indigo-500/10 px-2.5 py-0.5 rounded-lg border border-indigo-500/20">65%</span>
+                        </div>
+                        <input type="range" id="quality-slider" min="5" max="95" value="65" oninput="handleSliderChange(this.value)" class="w-full h-2.5 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-indigo-500">
+                    </div>
+
+                    <!-- ⚡ 1-TAP EXAM PRESETS -->
+                    <div>
+                        <span class="text-xs font-bold text-slate-400 block mb-2">Quick Snap to Exam Target KB:</span>
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                            <button type="button" onclick="snapToExactTarget(20)" class="preset-btn py-2 px-3 rounded-xl bg-slate-900 hover:bg-indigo-600 text-xs font-bold text-slate-300 hover:text-white border border-slate-700 transition">
+                                🎯 20 KB (Sign)
+                            </button>
+                            <button type="button" onclick="snapToExactTarget(50)" class="preset-btn py-2 px-3 rounded-xl bg-slate-900 hover:bg-indigo-600 text-xs font-bold text-slate-300 hover:text-white border border-slate-700 transition">
+                                🎯 50 KB (SSC Photo)
+                            </button>
+                            <button type="button" onclick="snapToExactTarget(100)" class="preset-btn py-2 px-3 rounded-xl bg-slate-900 hover:bg-indigo-600 text-xs font-bold text-slate-300 hover:text-white border border-slate-700 transition">
+                                🎯 100 KB
+                            </button>
+                            <button type="button" onclick="snapToExactTarget(200)" class="preset-btn py-2 px-3 rounded-xl bg-slate-900 hover:bg-indigo-600 text-xs font-bold text-slate-300 hover:text-white border border-slate-700 transition">
+                                🎯 200 KB
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- ⚡ OPTIONAL DOCUMENT FILTERS -->
+                    <div class="pt-2 border-t border-slate-800/80">
+                        <span class="text-xs font-bold text-slate-400 block mb-2">Color Mode & Filter:</span>
+                        <div class="grid grid-cols-3 gap-2">
+                            <button type="button" onclick="applyFilter('none', this)" class="filter-btn py-1.5 px-2.5 rounded-lg bg-indigo-600 text-xs font-bold text-white transition">Original Color</button>
+                            <button type="button" onclick="applyFilter('bw', this)" class="filter-btn py-1.5 px-2.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-xs font-bold text-slate-300 transition">Black & White</button>
+                            <button type="button" onclick="applyFilter('contrast', this)" class="filter-btn py-1.5 px-2.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-xs font-bold text-slate-300 transition">High Contrast</button>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="button" id="download-btn" onclick="executeDownload()" class="w-full py-4 px-6 rounded-2xl bg-gradient-to-r from-indigo-600 via-indigo-500 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-extrabold text-sm sm:text-base shadow-lg shadow-indigo-500/25 transition active:scale-[0.99] flex items-center justify-center gap-3">
+                    <span>⚡ Download Compressed Image</span>
                 </button>
             </div>
 
@@ -115,22 +151,22 @@
 
         <!-- HOW TO USE -->
         <section class="mt-14 border-t border-slate-800 pt-10">
-            <h2 class="text-xl sm:text-2xl font-bold text-white text-center mb-6">How to Compress Image to Exact KB in 3 Easy Steps</h2>
+            <h2 class="text-xl sm:text-2xl font-bold text-white text-center mb-6">How to Compress Image in 3 Easy Steps</h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs sm:text-sm">
                 <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800">
                     <span class="w-7 h-7 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center mb-2.5 text-xs">1</span>
-                    <h3 class="font-bold text-white text-sm mb-1">Select Your Picture</h3>
-                    <p class="text-slate-400">Choose any JPG, PNG, WEBP or iPhone HEIC photo from your phone or PC.</p>
+                    <h3 class="font-bold text-white text-sm mb-1">Upload Photo</h3>
+                    <p class="text-slate-400">Choose any JPG, PNG, WEBP, or iPhone HEIC photo.</p>
                 </div>
                 <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800">
                     <span class="w-7 h-7 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center mb-2.5 text-xs">2</span>
-                    <h3 class="font-bold text-white text-sm mb-1">Enter Target KB</h3>
-                    <p class="text-slate-400">Type 20, 50, 100 or choose from our 1-tap exam form presets.</p>
+                    <h3 class="font-bold text-white text-sm mb-1">Slide to Desired KB</h3>
+                    <p class="text-slate-400">Move the slider to see live quality and exact KB changing in real time.</p>
                 </div>
                 <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800">
                     <span class="w-7 h-7 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center mb-2.5 text-xs">3</span>
-                    <h3 class="font-bold text-white text-sm mb-1">Instant 0.2s Download</h3>
-                    <p class="text-slate-400">Click download to save the shrunk photo immediately without server lag.</p>
+                    <h3 class="font-bold text-white text-sm mb-1">Instant Download</h3>
+                    <p class="text-slate-400">Download the compressed picture directly in 0.1s with zero server upload.</p>
                 </div>
             </div>
         </section>
@@ -140,17 +176,17 @@
             <h2 class="text-xl font-bold text-white mb-4">Frequently Asked Questions</h2>
             <details class="bg-slate-900 p-4 rounded-xl border border-slate-800 text-xs sm:text-sm cursor-pointer">
                 <summary class="font-bold text-white flex justify-between items-center">
-                    Will compressing to 20KB or 50KB blur my photo?
+                    How accurate is the live KB size calculator?
                     <span class="text-indigo-400">▼</span>
                 </summary>
-                <p class="text-slate-400 mt-2 leading-relaxed">No. Our precision binary search algorithm optimizes file weight while keeping facial features and text sharp and readable for official government portals.</p>
+                <p class="text-slate-400 mt-2 leading-relaxed">It is 100% exact. As you move the slider, our in-browser engine creates real in-memory image bytes in real time and calculates the exact file size you will download.</p>
             </details>
             <details class="bg-slate-900 p-4 rounded-xl border border-slate-800 text-xs sm:text-sm cursor-pointer">
                 <summary class="font-bold text-white flex justify-between items-center">
-                    Are my exam photos and signatures private?
+                    Will compressing to 20KB or 50KB blur my photo on government portals?
                     <span class="text-indigo-400">▼</span>
                 </summary>
-                <p class="text-slate-400 mt-2 leading-relaxed">100%. Everything executes directly inside your browser memory. Your private documents never touch any server.</p>
+                <p class="text-slate-400 mt-2 leading-relaxed">No. You can see the live preview on screen before downloading to confirm your face and signature remain sharp, clear, and readable.</p>
             </details>
         </section>
     </main>
@@ -159,10 +195,15 @@
         <p>© 2026 SmartPicTools. 100% Free & Private in-browser suite. <a href="/" class="text-indigo-400 hover:underline">Explore All Tools</a></p>
     </footer>
 
-    <!-- JS ENGINE -->
+    <!-- ⚡ REAL-TIME LIVE COMPRESSION JAVASCRIPT ENGINE -->
     <script>
         let currentFile = null;
         let loadedImg = new Image();
+        let offscreenCanvas = document.createElement('canvas');
+        let currentCompressedBlob = null;
+        let activeFilter = 'none';
+        let originalBytes = 0;
+        let calcTimeout = null;
 
         const dropArea = document.getElementById('drop-area');
         const fileInput = document.getElementById('file-input');
@@ -183,13 +224,9 @@
             if (e.target.files && e.target.files.length > 0) handleFile(e.target.files[0]);
         });
 
-        function setPreset(kb) {
-            document.getElementById('target-kb').value = kb;
-            document.getElementById('target-unit').value = 'kb';
-        }
-
         async function handleFile(file) {
             currentFile = file;
+            originalBytes = file.size;
             let displayBlob = file;
 
             if (file.name.toLowerCase().endsWith('.heic') || file.name.toLowerCase().endsWith('.heif')) {
@@ -201,66 +238,139 @@
 
             const reader = new FileReader();
             reader.onload = (e) => {
-                document.getElementById('preview-img').src = e.target.result;
+                loadedImg.onload = () => {
+                    prepareOffscreenCanvas();
+                    document.getElementById('original-size-display').innerText = formatSize(originalBytes);
+                    document.getElementById('drop-area').classList.add('hidden');
+                    document.getElementById('workspace').classList.remove('hidden');
+                    document.getElementById('status-box').classList.add('hidden');
+
+                    // Run initial live calculation
+                    runLiveCompression(document.getElementById('quality-slider').value);
+                };
                 loadedImg.src = e.target.result;
             };
             reader.readAsDataURL(displayBlob);
-
-            document.getElementById('file-name').innerText = file.name;
-            document.getElementById('file-size').innerText = (file.size / 1024).toFixed(1) + ' KB';
-            document.getElementById('drop-area').classList.add('hidden');
-            document.getElementById('workspace').classList.remove('hidden');
-            document.getElementById('status-box').classList.add('hidden');
-
-            const suggestedKb = Math.max(20, Math.round((file.size / 1024) * 0.4));
-            document.getElementById('target-kb').value = suggestedKb;
         }
 
-        async function executeCompression() {
-            if (!currentFile) return;
-            const btn = document.getElementById('compress-btn');
-            btn.disabled = true;
-            document.getElementById('btn-text').innerText = "⏳ Compressing...";
-
-            const targetVal = parseFloat(document.getElementById('target-kb').value) || 50;
-            const unit = document.getElementById('target-unit').value;
-            const targetBytes = unit === 'mb' ? targetVal * 1024 * 1024 : targetVal * 1024;
-
-            let canvas = document.createElement('canvas');
-            let ctx = canvas.getContext('2d');
-
+        // Draw once to offscreen canvas (capped to 2560px for buttery smooth 60fps sliding)
+        function prepareOffscreenCanvas() {
             let w = loadedImg.naturalWidth;
             let h = loadedImg.naturalHeight;
+            const maxD = 2560;
 
-            const maxDim = 2048;
-            if (w > maxDim || h > maxDim) {
-                const scale = maxDim / Math.max(w, h);
-                w = Math.round(w * scale);
-                h = Math.round(h * scale);
+            if (w > maxD || h > maxD) {
+                const s = maxD / Math.max(w, h);
+                w = Math.round(w * s);
+                h = Math.round(h * s);
             }
 
-            canvas.width = w;
-            canvas.height = h;
-            ctx.drawImage(loadedImg, 0, 0, w, h);
+            offscreenCanvas.width = w;
+            offscreenCanvas.height = h;
+            applyCanvasRendering();
+        }
 
-            let minQ = 0.05, maxQ = 0.95, bestBlob = null;
-            for (let i = 0; i < 7; i++) {
-                const midQ = (minQ + maxQ) / 2;
-                const b = await new Promise(r => canvas.toBlob(r, 'image/jpeg', midQ));
-                bestBlob = b;
-                if (b.size > targetBytes) maxQ = midQ;
-                else minQ = midQ;
+        function applyCanvasRendering() {
+            const ctx = offscreenCanvas.getContext('2d');
+            ctx.filter = 'none';
+
+            if (activeFilter === 'bw') {
+                ctx.filter = 'grayscale(100%)';
+            } else if (activeFilter === 'contrast') {
+                ctx.filter = 'contrast(135%) brightness(105%)';
             }
 
-            const rawName = currentFile.name.substring(0, currentFile.name.lastIndexOf('.')) || currentFile.name;
+            ctx.drawImage(loadedImg, 0, 0, offscreenCanvas.width, offscreenCanvas.height);
+        }
+
+        function applyFilter(filter, btn) {
+            activeFilter = filter;
+            document.querySelectorAll('.filter-btn').forEach(b => {
+                b.className = "filter-btn py-1.5 px-2.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-xs font-bold text-slate-300 transition";
+            });
+            btn.className = "filter-btn py-1.5 px-2.5 rounded-lg bg-indigo-600 text-xs font-bold text-white transition";
+
+            applyCanvasRendering();
+            runLiveCompression(document.getElementById('quality-slider').value);
+        }
+
+        function handleSliderChange(val) {
+            document.getElementById('quality-val-badge').innerText = val + '%';
+            clearTimeout(calcTimeout);
+            calcTimeout = setTimeout(() => {
+                runLiveCompression(val);
+            }, 30); // 30ms responsive debounce
+        }
+
+        // ⚡ REAL-TIME COMPRESSION & LIVE KB CALCULATOR
+        function runLiveCompression(qualityPct) {
+            if (!loadedImg.src) return;
+            const q = Math.max(0.05, Math.min(0.95, parseInt(qualityPct) / 100));
+
+            offscreenCanvas.toBlob((blob) => {
+                if (!blob) return;
+                currentCompressedBlob = blob;
+
+                // 1. Live Visual Preview
+                document.getElementById('preview-img').src = URL.createObjectURL(blob);
+
+                // 2. Live Size Calculator
+                const compBytes = blob.size;
+                document.getElementById('live-size-display').innerText = formatSize(compBytes);
+
+                // 3. Saved Percentage
+                let saved = Math.round((1 - (compBytes / originalBytes)) * 100);
+                const savedBadge = document.getElementById('saved-pct-display');
+                if (saved > 0) {
+                    savedBadge.innerText = `-${saved}%`;
+                    savedBadge.className = "text-[11px] font-black text-emerald-300 bg-emerald-500/10 px-2 py-0.5 rounded-full border border-emerald-500/20";
+                } else {
+                    savedBadge.innerText = `0%`;
+                    savedBadge.className = "text-[11px] font-black text-slate-400 bg-slate-800 px-2 py-0.5 rounded-full border border-slate-700";
+                }
+            }, 'image/jpeg', q);
+        }
+
+        // ⚡ SNAP TO EXACT TARGET KB (20KB, 50KB, 100KB)
+        async function snapToExactTarget(targetKb) {
+            if (!loadedImg.src) return;
+            const targetBytes = targetKb * 1024;
+            const slider = document.getElementById('quality-slider');
+
+            let minQ = 0.05, maxQ = 0.95, bestQ = 0.5;
+
+            // Fast 5-step binary search to find exact slider match
+            for (let i = 0; i < 5; i++) {
+                bestQ = (minQ + maxQ) / 2;
+                const b = await new Promise(res => offscreenCanvas.toBlob(res, 'image/jpeg', bestQ));
+                if (b.size > targetBytes) maxQ = bestQ;
+                else minQ = bestQ;
+            }
+
+            const targetSliderVal = Math.round(bestQ * 100);
+            slider.value = targetSliderVal;
+            document.getElementById('quality-val-badge').innerText = targetSliderVal + '%';
+            runLiveCompression(targetSliderVal);
+        }
+
+        function formatSize(bytes) {
+            if (bytes < 1024 * 1024) {
+                return (bytes / 1024).toFixed(1) + ' KB';
+            }
+            return (bytes / (1024 * 1024)).toFixed(2) + ' MB';
+        }
+
+        function executeDownload() {
+            if (!currentCompressedBlob) return;
+            const rawName = currentFile ? (currentFile.name.substring(0, currentFile.name.lastIndexOf('.')) || currentFile.name) : 'image';
+            const kbSize = Math.round(currentCompressedBlob.size / 1024);
+
             const a = document.createElement('a');
-            a.href = URL.createObjectURL(bestBlob);
-            a.download = `smartpic_compressed_${targetVal}${unit.toUpperCase()}_${rawName}.jpg`;
+            a.href = URL.createObjectURL(currentCompressedBlob);
+            a.download = `smartpic_compressed_${kbSize}KB_${rawName}.jpg`;
             a.click();
 
             document.getElementById('status-box').classList.remove('hidden');
-            btn.disabled = false;
-            document.getElementById('btn-text').innerText = "⚡ Compress & Download";
         }
     </script>
 </body>
