@@ -3,21 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    
-    <!-- ⚡ HIGH-RANKING KEYWORDS FOR CROPPING -->
     <title>Crop Image Online Free - Instagram 1:1, YouTube 16:9, Reels 9:16 | SmartPicTools</title>
-    <meta name="description" content="Free online tool to crop images with exact aspect ratios: 1:1 Instagram, 16:9 YouTube, and 9:16 Reels. 100% private in-browser tool with fixed frame lock.">
-    <meta name="keywords" content="crop image online, crop photo 1:1 instagram, crop image 16:9 youtube, crop 9:16 reels shorts, aspect ratio cropper, free online photo cropper">
-    <meta name="robots" content="index, follow, max-image-preview:large">
-    <meta name="author" content="SmartPicTools">
+    <meta name="description" content="Free online tool to crop images with exact aspect ratios: 1:1 Instagram, 16:9 YouTube, and 9:16 Reels. 100% private in-browser tool.">
     <link rel="canonical" href="https://smartpictools.in/crop-image">
     <meta name="google-site-verification" content="uUq17UUsROyHMRQ8jkqKqrjZmsJnkuxZMKKoJLw_X3E" />
-
-    <!-- OPEN GRAPH -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://smartpictools.in/crop-image">
-    <meta property="og:title" content="Crop Image Online Free - Aspect Ratio Templates | SmartPicTools">
-    <meta property="og:description" content="Crop photos visually for Instagram, YouTube, and Reels with rock-solid fixed framing.">
 
     <!-- FAVICON -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' stop-color='%236366f1'/><stop offset='50%25' stop-color='%23a855f7'/><stop offset='100%25' stop-color='%23ec4899'/></linearGradient></defs><rect width='100' height='100' rx='28' fill='url(%23g)'/><path d='M52 16 L24 54 L46 54 L42 84 L76 44 L54 44 Z' fill='%23fbbf24'/></svg>">
@@ -32,10 +21,8 @@
         body { font-family: 'Plus Jakarta Sans', sans-serif; -webkit-tap-highlight-color: transparent; }
         .cropper-view-box, .cropper-face { border-radius: 8px; }
         
-        /* ⚡ KILL CHECKERBOARD PATTERN COMPLETELY */
-        .cropper-bg,
-        .cropper-container,
-        .cropper-wrap-box {
+        /* ⚡ NO CHECKERBOARD */
+        .cropper-bg, .cropper-container {
             background: #020617 !important;
             background-image: none !important;
         }
@@ -43,11 +30,18 @@
             background-color: #020617 !important;
             opacity: 0.65 !important;
         }
+
+        .hand-mode-active .cropper-crop-box { pointer-events: none !important; opacity: 0.5; }
+        .hand-mode-active .cropper-container,
+        .hand-mode-active .cropper-drag-box,
+        .hand-mode-active .cropper-wrap-box { cursor: grab !important; }
+        .hand-mode-active .cropper-container:active,
+        .hand-mode-active .cropper-drag-box:active,
+        .hand-mode-active .cropper-wrap-box:active { cursor: grabbing !important; }
     </style>
 </head>
 <body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col justify-between selection:bg-indigo-500 selection:text-white">
 
-    <!-- HEADER -->
     <header class="border-b border-slate-800 bg-slate-900/80 backdrop-blur-xl sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 h-18 sm:h-20 flex items-center justify-between">
             <a href="/" class="flex items-center gap-2.5 sm:gap-3 group">
@@ -65,11 +59,10 @@
         </div>
     </header>
 
-    <!-- MAIN WORKSPACE -->
     <main class="max-w-4xl mx-auto w-full px-4 py-8 sm:py-12 flex-1">
         <div class="text-center max-w-2xl mx-auto mb-8 sm:mb-10">
             <h1 class="text-3xl sm:text-5xl font-black text-white tracking-tight">Crop Image with Aspect Ratios</h1>
-            <p class="mt-2.5 text-slate-400 text-xs sm:text-sm">Crop visually for Instagram (1:1), YouTube (16:9), and Reels (9:16) with fixed stable framing.</p>
+            <p class="mt-2.5 text-slate-400 text-xs sm:text-sm">Crop visually for Instagram (1:1), YouTube (16:9), and Reels (9:16) with live Zoom and Spacebar Hand Tool.</p>
         </div>
 
         <div class="bg-slate-900 rounded-3xl p-5 sm:p-10 border border-slate-800 shadow-2xl relative">
@@ -85,18 +78,34 @@
             <div id="workspace" class="hidden mt-6 space-y-5">
                 <div class="flex items-center justify-between">
                     <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Crop Studio Preview</span>
-                    <div class="flex items-center gap-2">
-                        <button type="button" onclick="cropReset()" class="text-xs font-bold text-slate-300 hover:text-white bg-slate-800 hover:bg-slate-700 px-3 py-1.5 rounded-xl border border-slate-700 transition">
-                            ↺ Reset Frame
-                        </button>
-                        <button type="button" onclick="document.getElementById('file-input').click()" class="text-xs font-bold text-indigo-400 hover:text-white bg-slate-800 hover:bg-slate-700 px-3 py-1.5 rounded-xl border border-slate-700 transition">
-                            🔄 Change Photo
-                        </button>
-                    </div>
+                    <button type="button" onclick="document.getElementById('file-input').click()" class="text-xs font-bold text-indigo-400 hover:text-white bg-slate-800 hover:bg-slate-700 px-3 py-1.5 rounded-xl border border-slate-700 transition">
+                        🔄 Change Photo
+                    </button>
                 </div>
 
-                <!-- CROPPER CONTAINER (ROCK SOLID FIXED FRAME) -->
-                <div class="bg-slate-950 p-2 rounded-2xl border border-slate-800 flex items-center justify-center max-h-[440px] overflow-hidden select-none">
+                <!-- ⚡ PRO TOOLBAR (ZOOM & HAND TOOL ACTIVE) -->
+                <div class="flex flex-wrap items-center justify-between gap-2 p-2.5 bg-slate-950/90 rounded-2xl border border-slate-800">
+                    <div class="flex items-center gap-2">
+                        <button type="button" onclick="cropZoom(0.15)" title="Zoom In" class="py-1.5 px-3 rounded-xl bg-slate-900 hover:bg-indigo-600 text-xs font-bold text-white border border-slate-700 transition flex items-center gap-1 active:scale-95">
+                            <span>🔍+ Zoom In</span>
+                        </button>
+                        <button type="button" onclick="cropZoom(-0.15)" title="Zoom Out" class="py-1.5 px-3 rounded-xl bg-slate-900 hover:bg-indigo-600 text-xs font-bold text-white border border-slate-700 transition flex items-center gap-1 active:scale-95">
+                            <span>🔍- Zoom Out</span>
+                        </button>
+                        <button type="button" onclick="toggleHandTool()" id="btn-hand-tool" title="Pan Photo" class="py-1.5 px-3 rounded-xl bg-slate-900 hover:bg-indigo-600 text-xs font-bold text-slate-300 hover:text-white border border-slate-700 transition flex items-center gap-1 active:scale-95">
+                            <span>✋ Hand Tool</span>
+                        </button>
+                        <button type="button" onclick="cropReset()" title="Reset" class="py-1.5 px-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-xs font-bold text-slate-400 hover:text-white border border-slate-700 transition">
+                            ↺ Reset
+                        </button>
+                    </div>
+                    <span class="hidden sm:inline text-[11px] font-semibold text-slate-400">
+                        ⌨️ Hold <b class="text-indigo-400 font-mono bg-slate-900 px-1.5 py-0.5 rounded border border-slate-800">Spacebar</b> to Pan
+                    </span>
+                </div>
+
+                <!-- CROPPER CONTAINER -->
+                <div class="bg-slate-950 p-2 sm:p-3 rounded-2xl border border-slate-800 flex items-center justify-center max-h-[440px] overflow-hidden select-none">
                     <img id="crop-image" src="#" alt="Crop Preview" class="max-h-[400px] w-auto block">
                 </div>
 
@@ -121,37 +130,18 @@
                 <p class="text-emerald-400 font-bold text-xs sm:text-sm">🎉 Success! Cropped image downloaded directly to your device.</p>
             </div>
         </div>
-
-        <section class="mt-14 border-t border-slate-800 pt-10">
-            <h2 class="text-xl sm:text-2xl font-bold text-white text-center mb-6">How to Crop Images in 3 Easy Steps</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs sm:text-sm">
-                <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800">
-                    <span class="w-7 h-7 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center mb-2.5 text-xs">1</span>
-                    <h3 class="font-bold text-white text-sm mb-1">Select Photo</h3>
-                    <p class="text-slate-400">Choose your picture to load directly into the crop workspace.</p>
-                </div>
-                <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800">
-                    <span class="w-7 h-7 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center mb-2.5 text-xs">2</span>
-                    <h3 class="font-bold text-white text-sm mb-1">Adjust Crop Box</h3>
-                    <p class="text-slate-400">Choose 1:1, 16:9, 9:16 or drag handles to customize your selection.</p>
-                </div>
-                <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800">
-                    <span class="w-7 h-7 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center mb-2.5 text-xs">3</span>
-                    <h3 class="font-bold text-white text-sm mb-1">Instant Download</h3>
-                    <p class="text-slate-400">Click Crop & Download to save your cropped image directly in 0.1s.</p>
-                </div>
-            </div>
-        </section>
     </main>
 
     <footer class="border-t border-slate-800 bg-slate-950 py-8 px-4 text-xs text-slate-400 text-center">
         <p>© 2026 SmartPicTools. 100% Free & Private in-browser suite. <a href="/" class="text-indigo-400 hover:underline">Explore All Tools</a></p>
     </footer>
 
-    <!-- ⚡ 100% STABLE JAVASCRIPT ENGINE (NO ZOOM SENSITIVITY - FIXED RATIO) -->
+    <!-- JS ENGINE -->
     <script>
         let cropper = null;
         let currentFile = null;
+        let isHandMode = false;
+        let isSpacePressed = false;
 
         const dropArea = document.getElementById('drop-area');
         const fileInput = document.getElementById('file-input');
@@ -194,17 +184,14 @@
 
                 if (cropper) cropper.destroy();
 
-                // ⚡ ZERO DRIFT, LOCKED FRAME CROPPER
                 cropper = new Cropper(img, {
                     aspectRatio: NaN,
-                    viewMode: 1,           // Restricts crop box to stay strictly inside the image!
-                    background: false,     // No ugly checkerboard
+                    viewMode: 1,
+                    background: false,
                     responsive: true,
-                    zoomable: false,       // ⚡ COMPLETELY DISABLES ZOOMING (Photo stays 100% fixed to its frame!)
-                    zoomOnWheel: false,    // ⚡ Mouse wheel NEVER shrinks or zooms photo!
-                    zoomOnTouch: false,    // ⚡ Touch gestures NEVER shrink photo!
-                    autoCropArea: 0.85,
-                    toggleDragModeOnDblclick: false
+                    zoomable: true,         // Zoom buttons active!
+                    zoomOnWheel: false,     // Unwanted mouse scroll shrink permanently stopped!
+                    autoCropArea: 0.85
                 });
             };
             reader.readAsDataURL(displayBlob);
@@ -220,9 +207,67 @@
             btn.className = "ratio-btn py-2.5 px-3 rounded-xl bg-indigo-600 text-white text-xs font-bold transition";
         }
 
-        function cropReset() {
-            if (cropper) cropper.reset();
+        // ⚡ ACTIVE ZOOM CONTROLS
+        function cropZoom(val) {
+            if (cropper) cropper.zoom(val);
         }
+
+        function cropReset() {
+            if (cropper) {
+                cropper.reset();
+                if (isHandMode) toggleHandTool();
+            }
+        }
+
+        // ⚡ HAND TOOL TOGGLE
+        function updatePanMode(active) {
+            if (!cropper) return;
+            const container = document.querySelector('.cropper-container');
+            if (active) {
+                cropper.setDragMode('move');
+                if (container) container.classList.add('hand-mode-active');
+            } else {
+                cropper.setDragMode('crop');
+                if (container) container.classList.remove('hand-mode-active');
+            }
+        }
+
+        function toggleHandTool() {
+            if (!cropper) return;
+            isHandMode = !isHandMode;
+            updatePanMode(isHandMode);
+            const btn = document.getElementById('btn-hand-tool');
+            if (btn) {
+                btn.className = isHandMode 
+                    ? "py-1.5 px-3 rounded-xl bg-indigo-600 text-xs font-bold text-white border border-indigo-500 shadow-lg shadow-indigo-600/30 transition flex items-center gap-1 active:scale-95"
+                    : "py-1.5 px-3 rounded-xl bg-slate-900 hover:bg-indigo-600 text-xs font-bold text-slate-300 hover:text-white border border-slate-700 transition flex items-center gap-1 active:scale-95";
+            }
+        }
+
+        // ⚡ BULLETPROOF SPACEBAR LISTENER
+        window.addEventListener('keydown', function(e) {
+            if (e.code === 'Space' || e.key === ' ' || e.keyCode === 32) {
+                if (document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA') {
+                    e.preventDefault();
+                    if (!isSpacePressed && cropper) {
+                        isSpacePressed = true;
+                        updatePanMode(true);
+                    }
+                }
+            }
+        }, { passive: false });
+
+        window.addEventListener('keyup', function(e) {
+            if (e.code === 'Space' || e.key === ' ' || e.keyCode === 32) {
+                if (document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA') {
+                    e.preventDefault();
+                }
+                if (cropper) {
+                    isSpacePressed = false;
+                    updatePanMode(isHandMode);
+                }
+            }
+        });
 
         function executeCrop() {
             if (!cropper) return;
