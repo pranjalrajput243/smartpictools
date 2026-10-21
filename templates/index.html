@@ -4,78 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     
-    <!-- ⚡ DYNAMIC GOOGLE SEO TAGS FOR EVERY DEDICATED URL -->
-    <title>{{ seo.title if seo else 'SmartPicTools - All-in-One Image Suite, PDF Maker & QR Generator Free' }}</title>
-    <meta name="description" content="{{ seo.desc if seo else 'Free 100% private in-browser image suite: Compress to exact 20KB/50KB for online forms, crop for Instagram/YouTube, resize dimensions, create QR codes & barcodes, convert HEIC, and merge PDF in 0.2s.' }}">
-    <meta name="keywords" content="{{ seo.keywords if seo else 'image compressor, compress image to 20kb, compress image to 50kb, compress photo for online exam, crop image for instagram, image resizer online, convert heic to jpg, apple photo converter, avif to jpg converter, online watermark photo, free qr code generator, online barcode generator, pdf maker, merge pdf, image to pdf, convert jpg to pdf' }}">
+    <title>SmartPicTools - All-in-One Image Suite, PDF Maker & QR Generator Free</title>
+    <meta name="description" content="Free 100% private in-browser image suite: Compress to exact 20KB/50KB, crop for Instagram/YouTube, resize dimensions, create QR codes & barcodes, and merge PDF in 0.2s.">
+    <meta name="keywords" content="image compressor, compress image to 20kb, compress image to 50kb, crop image for instagram, image resizer online, convert heic to jpg, free qr code generator, pdf maker, merge pdf">
     <meta name="robots" content="index, follow, max-image-preview:large">
     <meta name="author" content="SmartPicTools">
-    <link rel="canonical" href="https://smartpictools.in/{{ seo.slug if seo else '' }}">
-    
-    <!-- ⚡ PERMANENT GOOGLE SEARCH CONSOLE VERIFICATION TAG -->
+    <link rel="canonical" href="https://smartpictools.in/">
     <meta name="google-site-verification" content="uUq17UUsROyHMRQ8jkqKqrjZmsJnkuxZMKKoJLw_X3E" />
-
-    <!-- OPEN GRAPH -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://smartpictools.in/{{ seo.slug if seo else '' }}">
-    <meta property="og:title" content="{{ seo.title if seo else 'SmartPicTools - All-in-One Image Suite, PDF Maker & QR Generator Free' }}">
-    <meta property="og:description" content="{{ seo.desc if seo else 'Instant in-browser image tools: Compress to 20KB/50KB, Crop, Resize, QR Generator, and PDF Maker without server uploads.' }}">
-    <meta property="og:site_name" content="SmartPicTools">
-
-    <!-- SCHEMA -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebApplication",
-      "name": "SmartPicTools",
-      "url": "https://smartpictools.in/",
-      "description": "Free private in-browser image tools to compress to exact KB, crop, resize, generate QR/barcodes, and merge images to PDF.",
-      "applicationCategory": "MultimediaApplication",
-      "operatingSystem": "All",
-      "offers": {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "USD"
-      }
-    }
-    </script>
 
     <!-- FAVICON -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' stop-color='%236366f1'/><stop offset='50%25' stop-color='%23a855f7'/><stop offset='100%25' stop-color='%23ec4899'/></linearGradient></defs><rect width='100' height='100' rx='28' fill='url(%23g)'/><path d='M52 16 L24 54 L46 54 L42 84 L76 44 L54 44 Z' fill='%23fbbf24'/></svg>">
 
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    
-    <!-- LIBRARIES (0.2s In-Browser Engine) -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css"/>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/heic2any/0.0.4/heic2any.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/JsBarcode.all.min.js"></script>
-
-    <style>
-        body { font-family: 'Plus Jakarta Sans', sans-serif; -webkit-tap-highlight-color: transparent; }
-        .cropper-view-box, .cropper-face { border-radius: 8px; }
-        /* ⚡ KILL CHECKERBOARD PATTERN ON HOMEPAGE */
-        .cropper-bg,
-        .cropper-container,
-        .cropper-wrap-box {
-            background: #020617 !important;
-            background-image: none !important;
-        }
-        .cropper-modal {
-            background-color: #020617 !important;
-            opacity: 0.65 !important;
-        }
-        .tiled-watermark-overlay {
-            background-repeat: repeat;
-            transform: rotate(-25deg) scale(1.4);
-            pointer-events: none;
-        }
-        #image-preview { transition: transform 0.2s ease-out; }
-    </style>
+    <style>body { font-family: 'Plus Jakarta Sans', sans-serif; -webkit-tap-highlight-color: transparent; }</style>
 </head>
 <body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col justify-between selection:bg-indigo-500 selection:text-white overflow-x-hidden">
 
@@ -88,7 +30,7 @@
                 </div>
                 <div>
                     <span class="text-xl sm:text-2xl font-black tracking-tight text-white">SmartPic<span class="text-indigo-400">Tools</span></span>
-                    <span class="block text-[9px] sm:text-[10px] uppercase font-bold tracking-widest text-slate-400 -mt-1">Pro Suite</span>
+                    <span class="block text-[9px] sm:text-[10px] uppercase font-bold tracking-widest text-slate-400 -mt-1">Pro Image Suite</span>
                 </div>
             </a>
             
@@ -103,14 +45,46 @@
                     <span>💡 Suggestions</span>
                 </button>
                 <span class="hidden sm:inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-bold bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">
-                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Free & Private
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> 100% Free & Private
                 </span>
             </div>
         </div>
     </header>
 
+    <!-- HERO SECTION -->
+    <section class="max-w-5xl mx-auto w-full px-4 pt-10 pb-6 text-center">
+        <h1 class="text-3xl sm:text-6xl font-black text-white tracking-tight leading-tight">
+            Every Tool You Need to Edit & Optimize Images
+        </h1>
+        <p class="mt-4 text-slate-400 text-sm sm:text-lg max-w-2xl mx-auto leading-relaxed">
+            100% free, private, and instant in-browser image tools. Compress to exact KB, crop, resize, generate QR codes, and merge to PDF without server uploads.
+        </p>
+
+        <!-- TOP QUICK-ACCESS BUTTONS (DIRECT LINKS) -->
+        <div class="grid grid-cols-3 sm:grid-cols-6 gap-2 mt-8 bg-slate-900 p-2 rounded-2xl border border-slate-800 max-w-4xl mx-auto">
+            <a href="/compress-image" class="py-2.5 sm:py-3 px-2 rounded-xl text-xs font-bold transition flex items-center justify-center gap-1.5 bg-indigo-600 text-white shadow-lg shadow-indigo-600/30 hover:scale-105">
+                ⚡ Compress
+            </a>
+            <a href="/crop-image" class="py-2.5 sm:py-3 px-2 rounded-xl text-xs font-bold transition flex items-center justify-center gap-1.5 text-slate-300 hover:text-white hover:bg-slate-800">
+                ✂️ Crop
+            </a>
+            <a href="/resize-image" class="py-2.5 sm:py-3 px-2 rounded-xl text-xs font-bold transition flex items-center justify-center gap-1.5 text-slate-300 hover:text-white hover:bg-slate-800">
+                📐 Resize
+            </a>
+            <a href="/convert-image" class="py-2.5 sm:py-3 px-2 rounded-xl text-xs font-bold transition flex items-center justify-center gap-1.5 text-slate-300 hover:text-white hover:bg-slate-800">
+                🔄 Convert
+            </a>
+            <a href="/image-to-pdf" class="py-2.5 sm:py-3 px-2 rounded-xl text-xs font-bold transition flex items-center justify-center gap-1.5 text-slate-300 hover:text-white hover:bg-slate-800">
+                📄 Merge PDF
+            </a>
+            <a href="/qr-code-generator" class="py-2.5 sm:py-3 px-2 rounded-xl text-xs font-bold transition flex items-center justify-center gap-1.5 text-slate-300 hover:text-white hover:bg-slate-800">
+                📊 QR Code
+            </a>
+        </div>
+    </section>
+
     <!-- LIVE STATS STRIP -->
-    <section class="max-w-5xl mx-auto w-full px-4 mt-6 sm:mt-8">
+    <section class="max-w-5xl mx-auto w-full px-4 mb-10">
         <div class="grid grid-cols-2 md:grid-cols-4 gap-2.5 sm:gap-3 bg-slate-900/60 p-3.5 sm:p-4 rounded-2xl border border-slate-800/80 text-center">
             <div class="p-1.5 sm:p-2">
                 <div class="text-lg sm:text-2xl font-extrabold text-white">⚡ 0.2s Instant</div>
@@ -131,514 +105,159 @@
         </div>
     </section>
 
-    <!-- MAIN WORKSPACE -->
-    <main class="max-w-5xl mx-auto w-full px-3 sm:px-4 py-6 sm:py-8 flex-1" id="tool-workspace">
-        
-        <!-- TOP TOOL SELECTOR TABS -->
-        <div class="grid grid-cols-3 sm:grid-cols-6 gap-1.5 sm:gap-2 mb-6 sm:mb-8 bg-slate-900 p-1.5 sm:p-2 rounded-2xl border border-slate-800 max-w-4xl mx-auto">
-            <button onclick="switchTool('compress')" id="tab-compress" class="tool-tab py-2.5 sm:py-3 px-2 rounded-xl text-xs font-bold transition flex items-center justify-center gap-1.5 bg-indigo-600 text-white shadow-lg shadow-indigo-600/30">
-                ⚡ Compress
-            </button>
-            <button onclick="switchTool('crop')" id="tab-crop" class="tool-tab py-2.5 sm:py-3 px-2 rounded-xl text-xs font-bold transition flex items-center justify-center gap-1.5 text-slate-400 hover:text-white hover:bg-slate-800">
-                ✂️ Crop
-            </button>
-            <button onclick="switchTool('resize')" id="tab-resize" class="tool-tab py-2.5 sm:py-3 px-2 rounded-xl text-xs font-bold transition flex items-center justify-center gap-1.5 text-slate-400 hover:text-white hover:bg-slate-800">
-                📐 Resize
-            </button>
-            <button onclick="switchTool('convert')" id="tab-convert" class="tool-tab py-2.5 sm:py-3 px-2 rounded-xl text-xs font-bold transition flex items-center justify-center gap-1.5 text-slate-400 hover:text-white hover:bg-slate-800">
-                🔄 Convert
-            </button>
-            <button onclick="switchTool('pdf')" id="tab-pdf" class="tool-tab py-2.5 sm:py-3 px-2 rounded-xl text-xs font-bold transition flex items-center justify-center gap-1.5 text-slate-400 hover:text-white hover:bg-slate-800">
-                📄 Merge PDF
-            </button>
-            <button onclick="switchTool('barcode')" id="tab-barcode" class="tool-tab py-2.5 sm:py-3 px-2 rounded-xl text-xs font-bold transition flex items-center justify-center gap-1.5 text-slate-400 hover:text-white hover:bg-slate-800">
-                📊 QR/Barcode
-            </button>
-        </div>
-
-        <!-- ACTIVE TOOL HEADLINE -->
-        <div class="text-center max-w-2xl mx-auto mb-6 sm:mb-8">
-            <h1 id="tool-title" class="text-2xl sm:text-5xl font-extrabold text-white tracking-tight">
-                Compress Image to Exact Size
-            </h1>
-            <p id="tool-desc" class="mt-2 sm:mt-3 text-slate-400 text-xs sm:text-base px-2">
-                Type your desired KB or MB value for precise file size reduction right inside your device.
-            </p>
-        </div>
-
-        <div class="bg-slate-900 rounded-3xl p-4 sm:p-10 border border-slate-800 shadow-2xl relative">
-            
-            <!-- UPLOAD DROP AREA -->
-            <div id="drop-area" class="group border-2 border-dashed border-slate-700 hover:border-indigo-500 bg-slate-950/60 hover:bg-indigo-950/20 rounded-2xl p-6 sm:p-14 text-center cursor-pointer transition-all duration-300 block">
-                <input type="file" id="image-upload" accept="image/*, .heic, .HEIC, .heif, .HEIF" class="hidden">
-                <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-3xl bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-3xl sm:text-4xl flex items-center justify-center mx-auto mb-4 sm:mb-5 group-hover:scale-110 transition duration-300 shadow-inner">
-                    📁
-                </div>
-                <h3 class="text-base sm:text-xl font-bold text-white mb-1.5" id="drop-title">
-                    Tap to choose photo, or drag & drop here
-                </h3>
-                <p id="upload-subtext" class="text-xs sm:text-sm text-slate-400 font-medium">
-                    Supports JPG, PNG, WEBP, AVIF, iPhone HEIC/HEIF
-                </p>
-            </div>
-
-            <!-- WORKSPACE PANEL -->
-            <div id="settings-panel" class="hidden mt-6 pt-6 sm:mt-8 sm:pt-8 border-t border-slate-800">
-                
-                <div class="flex items-center justify-between mb-4" id="preview-header-bar">
-                    <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Workspace Preview</span>
-                    <button type="button" onclick="resetWorkspace()" class="py-1.5 px-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-bold text-indigo-400 hover:text-white transition flex items-center gap-1.5">
-                        <span>🔄 Change Photo</span>
-                    </button>
-                </div>
-
-                <!-- 1. SINGLE IMAGE PREVIEW BOX -->
-                <div id="single-preview-box" class="bg-slate-950/80 p-3 sm:p-5 rounded-2xl border border-slate-800 mb-6">
-                    <div id="resize-badge-container" class="hidden flex justify-end mb-2">
-                        <span id="resize-live-badge" class="text-[11px] font-bold text-indigo-400 bg-indigo-500/10 border border-indigo-500/20 px-3 py-1 rounded-lg">
-                            📐 Live Scale: 0 × 0 px
-                        </span>
-                    </div>
-
-                    <div class="max-h-[380px] sm:max-h-[440px] overflow-hidden flex items-center justify-center bg-slate-900/50 rounded-xl p-2 select-none">
-                        <div id="preview-wrapper" class="relative inline-block max-h-[360px] sm:max-h-[400px] max-w-full rounded-xl overflow-hidden leading-none shadow-xl border border-slate-800/60">
-                            <img id="image-preview" src="#" alt="Preview" class="max-h-[340px] sm:max-h-[380px] w-auto max-w-full block rounded-xl object-contain">
-
-                            <!-- Live Single Watermark -->
-                            <div id="live-wm-single" class="hidden absolute pointer-events-none font-bold tracking-wider px-3 py-1.5 rounded transition-all shadow-sm">
-                                © SmartPicTools
-                            </div>
-
-                            <!-- Live Diagonal Grid Watermark -->
-                            <div id="live-wm-grid" class="hidden absolute inset-0 overflow-hidden pointer-events-none flex items-center justify-center">
-                                <div id="live-wm-pattern" class="w-[200%] h-[200%] flex flex-wrap content-center justify-around gap-14 font-bold tracking-widest select-none tiled-watermark-overlay opacity-30">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="flex items-center justify-between mt-3 text-xs font-semibold px-1">
-                        <span id="file-name" class="text-white truncate max-w-[180px] sm:max-w-xs">photo.jpg</span>
-                        <span class="text-indigo-400">Size: <span id="file-size">0 KB</span></span>
-                    </div>
-                </div>
-
-                <!-- 2. MULTI-IMAGE GALLERY (FOR BATCH CONVERT & PDF MAKER) -->
-                <div id="multi-preview-box" class="hidden mb-6">
-                    <div class="text-xs font-bold text-slate-300 mb-2 flex items-center justify-between">
-                        <span>Selected Items (<span id="multi-count">0</span>):</span>
-                        <span class="text-slate-400">Click ✕ to remove any photo</span>
-                    </div>
-                    <div id="multi-grid" class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 max-h-80 overflow-y-auto p-2 bg-slate-950/80 rounded-2xl border border-slate-800">
-                    </div>
-                </div>
-
-                <!-- 3. LIVE QR & BARCODE DISPLAY -->
-                <div id="barcode-preview-box" class="hidden bg-slate-950/80 p-5 rounded-2xl border border-slate-800 mb-6 text-center">
-                    <span class="text-xs font-bold text-slate-400 uppercase tracking-wider block mb-3">Live Graphic Display</span>
-                    <div class="inline-flex items-center justify-center p-6 bg-white rounded-2xl shadow-2xl min-w-[200px] min-h-[200px] max-w-full overflow-hidden">
-                        <div id="qrcode-render" class="flex items-center justify-center"></div>
-                        <svg id="barcode-render" class="hidden"></svg>
-                    </div>
-                    <p class="text-xs text-indigo-400 font-semibold mt-3">⚡ Live Generated in Real-Time</p>
-                </div>
-
-                <!-- STRICT SEPARATED CONTROL PANELS -->
-                <div class="bg-slate-950/80 p-4 sm:p-5 rounded-2xl border border-slate-800">
-                    
-                    <!-- 1. COMPRESS -->
-                    <div id="ctrl-compress" class="tool-ctrl space-y-4">
-                        <div class="flex gap-2 p-1 bg-slate-900 rounded-xl border border-slate-800 max-w-xs mx-auto">
-                            <button type="button" onclick="setCompressMode('target')" id="mode-target-btn" class="flex-1 py-1.5 px-3 rounded-lg text-xs font-bold bg-indigo-600 text-white transition">
-                                Exact Size (KB/MB)
-                            </button>
-                            <button type="button" onclick="setCompressMode('slider')" id="mode-slider-btn" class="flex-1 py-1.5 px-3 rounded-lg text-xs font-bold text-slate-400 hover:text-white transition">
-                                Percentage (%)
-                            </button>
-                        </div>
-
-                        <div id="target-box" class="space-y-2.5">
-                            <label class="block text-xs font-bold text-slate-400">Set Desired File Size:</label>
-                            <div class="flex gap-2.5">
-                                <input type="number" id="target-val" placeholder="e.g. 50" class="flex-1 bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-indigo-500 font-bold">
-                                <select id="target-unit" class="bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none font-bold">
-                                    <option value="kb" selected>KB</option>
-                                    <option value="mb">MB</option>
-                                </select>
-                            </div>
-                            <div class="flex flex-wrap gap-2 pt-1">
-                                <span class="text-[11px] font-bold text-slate-400 flex items-center mr-1">Exam Presets:</span>
-                                <button type="button" onclick="document.getElementById('target-val').value=20; validateTargetSize();" class="py-1 px-2.5 rounded-lg bg-slate-800 hover:bg-indigo-600 text-xs font-bold text-slate-300 hover:text-white transition">20 KB</button>
-                                <button type="button" onclick="document.getElementById('target-val').value=50; validateTargetSize();" class="py-1 px-2.5 rounded-lg bg-slate-800 hover:bg-indigo-600 text-xs font-bold text-slate-300 hover:text-white transition">50 KB</button>
-                                <button type="button" onclick="document.getElementById('target-val').value=100; validateTargetSize();" class="py-1 px-2.5 rounded-lg bg-slate-800 hover:bg-indigo-600 text-xs font-bold text-slate-300 hover:text-white transition">100 KB</button>
-                            </div>
-                            <div id="target-guidance" class="text-xs font-semibold text-slate-400"></div>
-                        </div>
-
-                        <div id="slider-box" class="hidden">
-                            <div class="flex justify-between text-xs font-semibold text-slate-300 mb-2">
-                                <span>Compression Level</span>
-                                <span id="quality-display" class="text-indigo-400 font-bold">65% (Balanced)</span>
-                            </div>
-                            <input type="range" id="quality-slider" min="10" max="95" value="65" class="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-indigo-500">
-                        </div>
-                    </div>
-
-                    <!-- 2. CROP (WITH ZOOM & HAND TOOL) -->
-                    <div id="ctrl-crop" class="tool-ctrl hidden space-y-3">
-                        <!-- ⚡ ZOOM & HAND TOOLBAR -->
-                        <div class="flex flex-wrap items-center justify-between gap-2 p-2 bg-slate-900 rounded-xl border border-slate-800">
-                            <div class="flex items-center gap-1.5">
-                                <button type="button" onclick="cropZoom(0.15)" class="py-1 px-2.5 rounded-lg bg-slate-800 hover:bg-indigo-600 text-xs font-bold text-white transition">🔍+ In</button>
-                                <button type="button" onclick="cropZoom(-0.15)" class="py-1 px-2.5 rounded-lg bg-slate-800 hover:bg-indigo-600 text-xs font-bold text-white transition">🔍- Out</button>
-                                <button type="button" onclick="toggleHandTool()" id="home-btn-hand" class="py-1 px-2.5 rounded-lg bg-slate-800 hover:bg-indigo-600 text-xs font-bold text-slate-300 hover:text-white transition">✋ Hand</button>
-                                <button type="button" onclick="cropReset()" class="py-1 px-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs font-bold text-slate-400 hover:text-white transition">↺</button>
-                            </div>
-                            <span class="hidden sm:inline text-[10px] text-slate-400">Hold <b class="text-indigo-400 font-mono">Space</b> to Pan</span>
-                        </div>
-
-                        <label class="block text-xs font-bold text-slate-400">Select Aspect Ratio Template:</label>
-                        <div class="grid grid-cols-2 sm:grid-cols-5 gap-2">
-                            <button type="button" onclick="setCropRatio(NaN)" class="ratio-btn py-2 px-3 rounded-xl bg-indigo-600 text-white text-xs font-bold transition">Freeform</button>
-                            <button type="button" onclick="setCropRatio(1)" class="ratio-btn py-2 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 text-xs font-bold transition">1:1 (Square)</button>
-                            <button type="button" onclick="setCropRatio(16/9)" class="ratio-btn py-2 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 text-xs font-bold transition">16:9 (YouTube)</button>
-                            <button type="button" onclick="setCropRatio(9/16)" class="ratio-btn py-2 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 text-xs font-bold transition">9:16 (Reels)</button>
-                            <button type="button" onclick="setCropRatio(4/5)" class="ratio-btn py-2 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 text-xs font-bold transition">4:5 (Portrait)</button>
-                        </div>
-                    </div>
-
-                    <!-- 3. RESIZE (⚡ REAL LIVE TRANSFORM ENABLED) -->
-                    <div id="ctrl-resize" class="tool-ctrl hidden space-y-3.5">
-                        <div class="grid grid-cols-2 gap-3">
-                            <div>
-                                <label class="block text-xs font-bold text-slate-400 mb-1">Width (px)</label>
-                                <input type="number" id="resize-width" oninput="handleResizeInputChange('width')" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-indigo-500 font-bold">
-                            </div>
-                            <div>
-                                <label class="block text-xs font-bold text-slate-400 mb-1">Height (px)</label>
-                                <input type="number" id="resize-height" oninput="handleResizeInputChange('height')" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-indigo-500 font-bold">
-                            </div>
-                        </div>
-
-                        <div class="flex items-center justify-between p-2.5 bg-slate-900 rounded-xl border border-slate-800">
-                            <label for="resize-lock-ratio" class="flex items-center gap-2 cursor-pointer text-xs font-bold text-slate-300">
-                                <input type="checkbox" id="resize-lock-ratio" checked class="w-4 h-4 rounded accent-indigo-600 cursor-pointer">
-                                <span>🔒 Lock Proportions</span>
-                            </label>
-                            <button type="button" onclick="resetToOriginalDimensions()" class="text-[11px] font-bold text-indigo-400 hover:underline">
-                                Reset Original
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- 4. CONVERT (ALL 7 FORMATS) -->
-                    <div id="ctrl-convert" class="tool-ctrl hidden space-y-3">
-                        <label class="block text-xs font-bold text-slate-400">Convert Image To:</label>
-                        <select id="convert-format" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-3 text-sm text-white focus:outline-none font-bold">
-                            <option value="JPG" selected>Convert to JPG (Universal Photo)</option>
-                            <option value="PNG">Convert to PNG (Lossless & Transparent)</option>
-                            <option value="WEBP">Convert to WEBP (Super Fast Web)</option>
-                            <option value="AVIF">Convert to AVIF (Next-Gen Ultra Compact)</option>
-                            <option value="PDF">Convert to PDF Document</option>
-                            <option value="BMP">Convert to BMP (Windows Bitmap)</option>
-                            <option value="ICO">Convert to ICO (Favicon Icon 64x64)</option>
-                        </select>
-                    </div>
-
-                    <!-- 5. ⚡ PDF MAKER (ZERO WHITE SPACE AS DEFAULT) -->
-                    <div id="ctrl-pdf" class="tool-ctrl hidden space-y-3">
-                        <label class="block text-xs font-bold text-slate-400">Page Sizing (0% White Border):</label>
-                        <select id="pdf-fit-mode" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-3 text-sm text-white focus:outline-none font-bold">
-                            <option value="fit" selected>Edge-to-Edge Full Fit (0% White Space - Match Photo Exactly)</option>
-                            <option value="a4">Standard A4 Document Sheet</option>
-                        </select>
-                        <p class="text-[11px] text-emerald-400 font-semibold">✓ Edge-to-Edge fits 16:9, square, or vertical photos with zero white margins.</p>
-                    </div>
-
-                    <!-- 6. WATERMARK -->
-                    <div id="ctrl-watermark" class="tool-ctrl hidden space-y-3.5">
-                        <div>
-                            <label class="block text-xs font-bold text-slate-400 mb-1.5">Style:</label>
-                            <div class="grid grid-cols-2 gap-2">
-                                <button type="button" onclick="setWatermarkMode('single')" id="wm-single-btn" class="py-2 px-3 rounded-xl bg-indigo-600 text-white text-xs font-bold transition">
-                                    📍 Single Stamp
-                                </button>
-                                <button type="button" onclick="setWatermarkMode('repeat')" id="wm-repeat-btn" class="py-2 px-3 rounded-xl bg-slate-900 text-slate-300 text-xs font-bold border border-slate-700 transition">
-                                    🌐 Diagonal Grid
-                                </button>
-                            </div>
-                        </div>
-
-                        <div>
-                            <label class="block text-xs font-bold text-slate-400 mb-1">Watermark Text</label>
-                            <input type="text" id="watermark-text" value="© SmartPicTools" oninput="updateLiveWatermarkPreview()" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none font-semibold">
-                        </div>
-
-                        <div class="grid grid-cols-3 gap-2">
-                            <div id="wm-pos-container">
-                                <label class="block text-[11px] font-bold text-slate-400 mb-1">Position</label>
-                                <select id="watermark-pos" onchange="updateLiveWatermarkPreview()" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-2 py-2 text-xs text-white">
-                                    <option value="bottom-right">Bottom-Right</option>
-                                    <option value="center">Center</option>
-                                    <option value="bottom-left">Bottom-Left</option>
-                                    <option value="top-right">Top-Right</option>
-                                    <option value="top-left">Top-Left</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label class="block text-[11px] font-bold text-slate-400 mb-1">Color</label>
-                                <select id="watermark-color" onchange="updateLiveWatermarkPreview()" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-2 py-2 text-xs text-white">
-                                    <option value="white">White</option>
-                                    <option value="black">Black</option>
-                                    <option value="gold">Gold</option>
-                                    <option value="red">Red</option>
-                                    <option value="cyan">Cyan</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label class="block text-[11px] font-bold text-slate-400 mb-1">Size</label>
-                                <select id="watermark-size" onchange="updateLiveWatermarkPreview()" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-2 py-2 text-xs text-white">
-                                    <option value="16">Small</option>
-                                    <option value="22" selected>Medium</option>
-                                    <option value="32">Large</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div>
-                            <div class="flex justify-between text-xs font-semibold text-slate-400 mb-1">
-                                <span>Opacity</span>
-                                <span id="wm-opacity-display" class="text-indigo-400 font-bold">25% (Clean)</span>
-                            </div>
-                            <input type="range" id="watermark-opacity" min="0.1" max="0.9" step="0.05" value="0.25" oninput="updateLiveWatermarkPreview()" class="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-indigo-500">
-                        </div>
-                    </div>
-
-                    <!-- 7. ROTATE & FLIP -->
-                    <div id="ctrl-rotate" class="tool-ctrl hidden space-y-3">
-                        <label class="block text-xs font-bold text-slate-400">Orientation & Flip:</label>
-                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
-                            <button type="button" onclick="applyLiveRotate(90)" class="py-2.5 px-2 rounded-xl bg-slate-900 hover:bg-indigo-600 text-white text-xs font-bold border border-slate-700 transition">
-                                ↻ 90° Right
-                            </button>
-                            <button type="button" onclick="applyLiveRotate(-90)" class="py-2.5 px-2 rounded-xl bg-slate-900 hover:bg-indigo-600 text-white text-xs font-bold border border-slate-700 transition">
-                                ↺ 90° Left
-                            </button>
-                            <button type="button" onclick="applyLiveFlip('horizontal')" id="flip-h-btn" class="py-2.5 px-2 rounded-xl bg-slate-900 hover:bg-indigo-600 text-white text-xs font-bold border border-slate-700 transition">
-                                ⇄ Flip Horiz
-                            </button>
-                            <button type="button" onclick="applyLiveFlip('vertical')" id="flip-v-btn" class="py-2.5 px-2 rounded-xl bg-slate-900 hover:bg-indigo-600 text-white text-xs font-bold border border-slate-700 transition">
-                                ⇅ Flip Vert
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- 8. ⚡ QR & BARCODE (BARCODE LEFT, QR RIGHT) -->
-                    <div id="ctrl-barcode" class="tool-ctrl hidden space-y-4">
-                        <div class="flex gap-2 p-1 bg-slate-900 rounded-xl border border-slate-800 max-w-xs mx-auto">
-                            <button type="button" onclick="setBarcodeType('barcode')" id="btn-mode-bc" class="flex-1 py-1.5 px-3 rounded-lg text-xs font-bold bg-indigo-600 text-white transition">
-                                📊 Barcode
-                            </button>
-                            <button type="button" onclick="setBarcodeType('qr')" id="btn-mode-qr" class="flex-1 py-1.5 px-3 rounded-lg text-xs font-bold text-slate-400 hover:text-white transition">
-                                📱 QR Code
-                            </button>
-                        </div>
-
-                        <div>
-                            <label class="block text-xs font-bold text-slate-400 mb-1">Enter Text, Link (URL), or Code Number:</label>
-                            <input type="text" id="barcode-input-text" value="https://smartpictools.in" oninput="renderLiveGraphic()" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-3 text-sm text-white focus:outline-none font-semibold">
-                        </div>
-
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                            <div>
-                                <label class="block text-xs font-bold text-slate-400 mb-1">Color Theme</label>
-                                <select id="barcode-color" onchange="renderLiveGraphic()" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white">
-                                    <option value="#000000" selected>Classic Black</option>
-                                    <option value="#4f46e5">Indigo Purple</option>
-                                    <option value="#0284c7">Sky Blue</option>
-                                    <option value="#059669">Emerald Green</option>
-                                </select>
-                            </div>
-                            <div id="barcode-format-container">
-                                <label class="block text-xs font-bold text-slate-400 mb-1">Barcode Standard</label>
-                                <select id="barcode-format-select" onchange="renderLiveGraphic()" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white">
-                                    <option value="CODE128" selected>CODE128 (Standard)</option>
-                                    <option value="EAN13">EAN13 (Products)</option>
-                                    <option value="UPC">UPC (Retail)</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <button type="button" onclick="downloadGraphicPNG()" class="w-full py-3.5 px-6 rounded-2xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-extrabold text-sm shadow-lg transition active:scale-[0.99] flex items-center justify-center gap-2">
-                            <span>📥 Download Graphic (High-Res PNG)</span>
-                        </button>
-                    </div>
-
-                </div>
-
-                <!-- DOWNLOAD ACTION BUTTON -->
-                <button id="action-btn" class="w-full mt-5 py-3.5 sm:py-4 px-6 rounded-2xl bg-gradient-to-r from-indigo-600 via-indigo-500 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-extrabold text-sm sm:text-base shadow-lg shadow-indigo-500/25 transition active:scale-[0.99] flex items-center justify-center gap-3">
-                    <span id="btn-text">⚡ Compress & Download</span>
-                </button>
-            </div>
-
-            <!-- SUCCESS NOTIFICATION -->
-            <div id="status-box" class="hidden mt-5 p-3.5 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 text-center">
-                <p class="text-emerald-400 font-bold text-xs sm:text-sm">🎉 Success! File downloaded directly to your device.</p>
-            </div>
-        </div>
-    </main>
-
-    <!-- ⚡ ALL TOOLS CATALOG (NO NUMBERS IN HEADINGS) -->
+    <!-- ⚡ ALL TOOLS CATALOG (EVERY CARD DIRECTLY OPENS DEDICATED PAGE) -->
     <section class="max-w-5xl mx-auto w-full px-4 mb-20" id="all-tools-grid">
         <div class="text-center mb-10">
             <h2 class="text-2xl sm:text-4xl font-extrabold text-white">Explore All Image & Document Tools</h2>
-            <p class="text-slate-400 text-xs sm:text-sm mt-2">Select any tool to activate its dedicated studio.</p>
+            <p class="text-slate-400 text-xs sm:text-sm mt-2">Click any tool to open its dedicated studio.</p>
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
             <!-- 1. COMPRESS -->
-            <div onclick="switchTool('compress'); window.scrollTo({top: 0, behavior: 'smooth'});" class="bg-slate-900/80 hover:bg-slate-900 border border-slate-800 hover:border-indigo-500/60 p-6 rounded-3xl transition duration-200 cursor-pointer group shadow-lg flex flex-col justify-between">
+            <a href="/compress-image" class="bg-slate-900/80 hover:bg-slate-900 border border-slate-800 hover:border-indigo-500/60 p-6 rounded-3xl transition duration-200 group shadow-lg flex flex-col justify-between">
                 <div>
                     <div class="w-12 h-12 rounded-2xl bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition">⚡</div>
                     <h3 class="text-lg font-bold text-white group-hover:text-indigo-400 transition">Compress Image to Exact KB</h3>
                     <p class="text-xs text-slate-400 mt-2 leading-relaxed">Shrink file weight accurately to 20KB, 50KB, or 100KB for government exam forms with maximum clarity.</p>
                 </div>
-                <span class="text-xs font-bold text-indigo-400 mt-5 flex items-center gap-1 group-hover:translate-x-1 transition">Open Tool →</span>
-            </div>
+                <span class="text-xs font-bold text-indigo-400 mt-5 flex items-center gap-1 group-hover:translate-x-1 transition">Open Dedicated Tool →</span>
+            </a>
 
-            <!-- 2. CROP -->
-            <div onclick="switchTool('crop'); window.scrollTo({top: 0, behavior: 'smooth'});" class="bg-slate-900/80 hover:bg-slate-900 border border-slate-800 hover:border-purple-500/60 p-6 rounded-3xl transition duration-200 cursor-pointer group shadow-lg flex flex-col justify-between">
+            <!-- 2. CROP (DIRECT LINK TO /crop-image) -->
+            <a href="/crop-image" class="bg-slate-900/80 hover:bg-slate-900 border border-slate-800 hover:border-purple-500/60 p-6 rounded-3xl transition duration-200 group shadow-lg flex flex-col justify-between">
                 <div>
                     <div class="w-12 h-12 rounded-2xl bg-purple-500/10 text-purple-400 border border-purple-500/20 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition">✂️</div>
                     <h3 class="text-lg font-bold text-white group-hover:text-purple-400 transition">Crop Image with Aspect Ratios</h3>
                     <p class="text-xs text-slate-400 mt-2 leading-relaxed">Crop visually with exact aspect ratio presets for Instagram (1:1), YouTube (16:9), and Reels (9:16).</p>
                 </div>
-                <span class="text-xs font-bold text-purple-400 mt-5 flex items-center gap-1 group-hover:translate-x-1 transition">Open Tool →</span>
-            </div>
+                <span class="text-xs font-bold text-purple-400 mt-5 flex items-center gap-1 group-hover:translate-x-1 transition">Open Dedicated Tool →</span>
+            </a>
 
             <!-- 3. RESIZE -->
-            <div onclick="switchTool('resize'); window.scrollTo({top: 0, behavior: 'smooth'});" class="bg-slate-900/80 hover:bg-slate-900 border border-slate-800 hover:border-blue-500/60 p-6 rounded-3xl transition duration-200 cursor-pointer group shadow-lg flex flex-col justify-between">
+            <a href="/resize-image" class="bg-slate-900/80 hover:bg-slate-900 border border-slate-800 hover:border-blue-500/60 p-6 rounded-3xl transition duration-200 group shadow-lg flex flex-col justify-between">
                 <div>
                     <div class="w-12 h-12 rounded-2xl bg-blue-500/10 text-blue-400 border border-blue-500/20 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition">📐</div>
                     <h3 class="text-lg font-bold text-white group-hover:text-blue-400 transition">Resize Image Dimensions</h3>
                     <p class="text-xs text-slate-400 mt-2 leading-relaxed">Change exact pixel width and height with live scaling preview and proportion lock to prevent distortion.</p>
                 </div>
-                <span class="text-xs font-bold text-blue-400 mt-5 flex items-center gap-1 group-hover:translate-x-1 transition">Open Tool →</span>
-            </div>
+                <span class="text-xs font-bold text-blue-400 mt-5 flex items-center gap-1 group-hover:translate-x-1 transition">Open Dedicated Tool →</span>
+            </a>
 
             <!-- 4. CONVERT -->
-            <div onclick="switchTool('convert'); window.scrollTo({top: 0, behavior: 'smooth'});" class="bg-slate-900/80 hover:bg-slate-900 border border-slate-800 hover:border-pink-500/60 p-6 rounded-3xl transition duration-200 cursor-pointer group shadow-lg flex flex-col justify-between">
+            <a href="/convert-image" class="bg-slate-900/80 hover:bg-slate-900 border border-slate-800 hover:border-pink-500/60 p-6 rounded-3xl transition duration-200 group shadow-lg flex flex-col justify-between">
                 <div>
                     <div class="w-12 h-12 rounded-2xl bg-pink-500/10 text-pink-400 border border-pink-500/20 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition">🔄</div>
                     <h3 class="text-lg font-bold text-white group-hover:text-pink-400 transition">Image Format Converter</h3>
                     <p class="text-xs text-slate-400 mt-2 leading-relaxed">Convert single or batch photos to JPG, PNG, WEBP, or AVIF with instant 1-click ZIP downloads.</p>
                 </div>
-                <span class="text-xs font-bold text-pink-400 mt-5 flex items-center gap-1 group-hover:translate-x-1 transition">Open Tool →</span>
-            </div>
+                <span class="text-xs font-bold text-pink-400 mt-5 flex items-center gap-1 group-hover:translate-x-1 transition">Open Dedicated Tool →</span>
+            </a>
 
             <!-- 5. PDF MAKER -->
-            <div onclick="switchTool('pdf'); window.scrollTo({top: 0, behavior: 'smooth'});" class="bg-slate-900/80 hover:bg-slate-900 border border-slate-800 hover:border-amber-500/60 p-6 rounded-3xl transition duration-200 cursor-pointer group shadow-lg flex flex-col justify-between">
+            <a href="/image-to-pdf" class="bg-slate-900/80 hover:bg-slate-900 border border-slate-800 hover:border-amber-500/60 p-6 rounded-3xl transition duration-200 group shadow-lg flex flex-col justify-between">
                 <div>
                     <div class="w-12 h-12 rounded-2xl bg-amber-500/10 text-amber-400 border border-amber-500/20 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition">📄</div>
                     <h3 class="text-lg font-bold text-white group-hover:text-amber-400 transition">PDF Maker (Merge Images to PDF)</h3>
                     <p class="text-xs text-slate-400 mt-2 leading-relaxed">Merge multiple JPG, PNG, or HEIC photos into a single clean PDF document with 0% white borders.</p>
                 </div>
-                <span class="text-xs font-bold text-amber-400 mt-5 flex items-center gap-1 group-hover:translate-x-1 transition">Open Tool →</span>
-            </div>
+                <span class="text-xs font-bold text-amber-400 mt-5 flex items-center gap-1 group-hover:translate-x-1 transition">Open Dedicated Tool →</span>
+            </a>
 
             <!-- 6. IPHONE HEIC -->
-            <div onclick="switchTool('heic'); window.scrollTo({top: 0, behavior: 'smooth'});" class="bg-slate-900/80 hover:bg-slate-900 border border-slate-800 hover:border-emerald-500/60 p-6 rounded-3xl transition duration-200 cursor-pointer group shadow-lg flex flex-col justify-between">
+            <a href="/heic-to-jpg" class="bg-slate-900/80 hover:bg-slate-900 border border-slate-800 hover:border-emerald-500/60 p-6 rounded-3xl transition duration-200 group shadow-lg flex flex-col justify-between">
                 <div>
                     <div class="w-12 h-12 rounded-2xl bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition">📱</div>
                     <h3 class="text-lg font-bold text-white group-hover:text-emerald-400 transition">iPhone HEIC to JPG Converter</h3>
                     <p class="text-xs text-slate-400 mt-2 leading-relaxed">Instantly convert Apple iPhone HEIC/HEIF photos into universal JPG images viewable on all devices.</p>
                 </div>
-                <span class="text-xs font-bold text-emerald-400 mt-5 flex items-center gap-1 group-hover:translate-x-1 transition">Open Tool →</span>
-            </div>
+                <span class="text-xs font-bold text-emerald-400 mt-5 flex items-center gap-1 group-hover:translate-x-1 transition">Open Dedicated Tool →</span>
+            </a>
 
             <!-- 7. WATERMARK -->
-            <div onclick="switchTool('watermark'); window.scrollTo({top: 0, behavior: 'smooth'});" class="bg-slate-900/80 hover:bg-slate-900 border border-slate-800 hover:border-yellow-500/60 p-6 rounded-3xl transition duration-200 cursor-pointer group shadow-lg flex flex-col justify-between">
+            <a href="/add-watermark" class="bg-slate-900/80 hover:bg-slate-900 border border-slate-800 hover:border-yellow-500/60 p-6 rounded-3xl transition duration-200 group shadow-lg flex flex-col justify-between">
                 <div>
                     <div class="w-12 h-12 rounded-2xl bg-yellow-500/10 text-yellow-400 border border-yellow-500/20 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition">🏷️</div>
                     <h3 class="text-lg font-bold text-white group-hover:text-yellow-400 transition">Add Watermark to Photo</h3>
                     <p class="text-xs text-slate-400 mt-2 leading-relaxed">Protect your pictures with custom copyright corner stamps or elegant diagonal repeated security grids.</p>
                 </div>
-                <span class="text-xs font-bold text-yellow-400 mt-5 flex items-center gap-1 group-hover:translate-x-1 transition">Open Tool →</span>
-            </div>
+                <span class="text-xs font-bold text-yellow-400 mt-5 flex items-center gap-1 group-hover:translate-x-1 transition">Open Dedicated Tool →</span>
+            </a>
 
             <!-- 8. ROTATE & FLIP -->
-            <div onclick="switchTool('rotate'); window.scrollTo({top: 0, behavior: 'smooth'});" class="bg-slate-900/80 hover:bg-slate-900 border border-slate-800 hover:border-cyan-500/60 p-6 rounded-3xl transition duration-200 cursor-pointer group shadow-lg flex flex-col justify-between">
+            <a href="/rotate-image" class="bg-slate-900/80 hover:bg-slate-900 border border-slate-800 hover:border-cyan-500/60 p-6 rounded-3xl transition duration-200 group shadow-lg flex flex-col justify-between">
                 <div>
                     <div class="w-12 h-12 rounded-2xl bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition">🔁</div>
                     <h3 class="text-lg font-bold text-white group-hover:text-cyan-400 transition">Rotate & Mirror Flip Image</h3>
                     <p class="text-xs text-slate-400 mt-2 leading-relaxed">Rotate pictures 90 degrees clockwise or anti-clockwise and mirror flip horizontally or vertically.</p>
                 </div>
-                <span class="text-xs font-bold text-cyan-400 mt-5 flex items-center gap-1 group-hover:translate-x-1 transition">Open Tool →</span>
-            </div>
+                <span class="text-xs font-bold text-cyan-400 mt-5 flex items-center gap-1 group-hover:translate-x-1 transition">Open Dedicated Tool →</span>
+            </a>
 
             <!-- 9. QR & BARCODE -->
-            <div onclick="switchTool('barcode'); window.scrollTo({top: 0, behavior: 'smooth'});" class="bg-slate-900/80 hover:bg-slate-900 border border-slate-800 hover:border-teal-500/60 p-6 rounded-3xl transition duration-200 cursor-pointer group shadow-lg flex flex-col justify-between">
+            <a href="/qr-code-generator" class="bg-slate-900/80 hover:bg-slate-900 border border-slate-800 hover:border-teal-500/60 p-6 rounded-3xl transition duration-200 group shadow-lg flex flex-col justify-between">
                 <div>
                     <div class="w-12 h-12 rounded-2xl bg-teal-500/10 text-teal-400 border border-teal-500/20 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition">📊</div>
                     <h3 class="text-lg font-bold text-white group-hover:text-teal-400 transition">QR Code & Barcode Generator</h3>
                     <p class="text-xs text-slate-400 mt-2 leading-relaxed">Create custom QR codes for websites and UPI payments, or generate product barcodes with live preview.</p>
                 </div>
-                <span class="text-xs font-bold text-teal-400 mt-5 flex items-center gap-1 group-hover:translate-x-1 transition">Open Tool →</span>
-            </div>
-            <!-- 10. PASSPORT PHOTO MAKER -->
+                <span class="text-xs font-bold text-teal-400 mt-5 flex items-center gap-1 group-hover:translate-x-1 transition">Open Dedicated Tool →</span>
+            </a>
+
+            <!-- 10. PASSPORT PHOTO -->
             <a href="/passport-photo-maker" class="bg-slate-900/80 hover:bg-slate-900 border border-slate-800 hover:border-indigo-500/60 p-6 rounded-3xl transition duration-200 group shadow-lg flex flex-col justify-between">
                 <div>
                     <div class="w-12 h-12 rounded-2xl bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition">👤</div>
                     <h3 class="text-lg font-bold text-white group-hover:text-indigo-400 transition">Passport Size Photo Maker</h3>
                     <p class="text-xs text-slate-400 mt-2 leading-relaxed">Crop to exact 3.5cm x 4.5cm for SSC, UPSC, and online exam forms or create 8-photo studio print sheets.</p>
                 </div>
-                <span class="text-xs font-bold text-indigo-400 mt-5 flex items-center gap-1 group-hover:translate-x-1 transition">Open Tool →</span>
+                <span class="text-xs font-bold text-indigo-400 mt-5 flex items-center gap-1 group-hover:translate-x-1 transition">Open Dedicated Tool →</span>
             </a>
-            <!-- 11. PDF TO IMAGE & WORD CONVERTER -->
-            <a href="/pdf-converter" class="bg-slate-900/80 hover:bg-slate-900 border border-slate-800 hover:border-indigo-500/60 p-6 rounded-3xl transition duration-200 group shadow-lg flex flex-col justify-between">
+
+            <!-- 11. PDF TO IMAGE/WORD -->
+            <a href="/pdf-converter" class="bg-slate-900/80 hover:bg-slate-900 border border-slate-800 hover:border-pink-500/60 p-6 rounded-3xl transition duration-200 group shadow-lg flex flex-col justify-between">
                 <div>
-                    <div class="w-12 h-12 rounded-2xl bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition">📑</div>
-                    <h3 class="text-lg font-bold text-white group-hover:text-indigo-400 transition">Convert PDF to Image & Word</h3>
+                    <div class="w-12 h-12 rounded-2xl bg-pink-500/10 text-pink-400 border border-pink-500/20 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition">📑</div>
+                    <h3 class="text-lg font-bold text-white group-hover:text-pink-400 transition">Convert PDF to Image & Word</h3>
                     <p class="text-xs text-slate-400 mt-2 leading-relaxed">Turn PDF documents into high-quality JPG, PNG, WEBP images or editable Word text in seconds.</p>
                 </div>
-                <span class="text-xs font-bold text-indigo-400 mt-5 flex items-center gap-1 group-hover:translate-x-1 transition">Open Tool →</span>
+                <span class="text-xs font-bold text-pink-400 mt-5 flex items-center gap-1 group-hover:translate-x-1 transition">Open Dedicated Tool →</span>
             </a>
-            <!-- 12. IMAGE TO FAVICON CONVERTER -->
+
+            <!-- 12. IMAGE TO FAVICON -->
             <a href="/favicon-converter" class="bg-slate-900/80 hover:bg-slate-900 border border-slate-800 hover:border-yellow-500/60 p-6 rounded-3xl transition duration-200 group shadow-lg flex flex-col justify-between">
                 <div>
                     <div class="w-12 h-12 rounded-2xl bg-yellow-500/10 text-yellow-400 border border-yellow-500/20 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition">⭐</div>
                     <h3 class="text-lg font-bold text-white group-hover:text-yellow-400 transition">Image to Favicon Converter</h3>
                     <p class="text-xs text-slate-400 mt-2 leading-relaxed">Convert PNG, JPG, or SVG to standard .ICO and multi-size web app icons with live browser tab preview.</p>
                 </div>
-                <span class="text-xs font-bold text-yellow-400 mt-5 flex items-center gap-1 group-hover:translate-x-1 transition">Open Tool →</span>
+                <span class="text-xs font-bold text-yellow-400 mt-5 flex items-center gap-1 group-hover:translate-x-1 transition">Open Dedicated Tool →</span>
             </a>
         </div>
     </section>
 
-    <!-- ⚡ DYNAMIC HOW IT WORKS -->
+    <!-- HOW IT WORKS -->
     <section class="bg-slate-900/50 border-t border-slate-800 py-16 px-4" id="how-it-works">
         <div class="max-w-5xl mx-auto">
             <div class="text-center mb-12">
-                <h2 id="how-to-title" class="text-2xl sm:text-3xl font-extrabold text-white">How to Compress Image in 3 Easy Steps</h2>
-                <p id="how-to-desc" class="text-slate-400 text-xs sm:text-sm mt-2">Zero complex software. 100% private in-browser automation.</p>
+                <h2 class="text-2xl sm:text-3xl font-extrabold text-white">How SmartPicTools Works in 3 Steps</h2>
+                <p class="text-slate-400 text-xs sm:text-sm mt-2">Zero complex software. 100% private in-browser automation.</p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div class="bg-slate-900 p-6 rounded-2xl border border-slate-800">
                     <div class="w-8 h-8 rounded-full bg-indigo-600 text-white font-extrabold text-sm flex items-center justify-center mb-4">1</div>
-                    <h3 id="step1-title" class="font-bold text-white text-base">Select Your Photo</h3>
-                    <p id="step1-desc" class="text-xs text-slate-400 mt-2 leading-relaxed">Choose your image from device storage. Works with JPG, PNG, WEBP, AVIF, and iPhone HEIC.</p>
+                    <h3 class="font-bold text-white text-base">Select Your Tool</h3>
+                    <p class="text-xs text-slate-400 mt-2 leading-relaxed">Click any dedicated studio above to optimize or format your pictures.</p>
                 </div>
                 <div class="bg-slate-900 p-6 rounded-2xl border border-slate-800">
                     <div class="w-8 h-8 rounded-full bg-indigo-600 text-white font-extrabold text-sm flex items-center justify-center mb-4">2</div>
-                    <h3 id="step2-title" class="font-bold text-white text-base">Set Target Size (KB/MB)</h3>
-                    <p id="step2-desc" class="text-xs text-slate-400 mt-2 leading-relaxed">Type your desired target KB (e.g. 20KB, 50KB) or pick from 1-tap exam form presets.</p>
+                    <h3 class="font-bold text-white text-base">Fine-Tune Settings</h3>
+                    <p class="text-xs text-slate-400 mt-2 leading-relaxed">Enter target KB, choose aspect ratios, or customize watermarks with live feedback.</p>
                 </div>
                 <div class="bg-slate-900 p-6 rounded-2xl border border-slate-800">
                     <div class="w-8 h-8 rounded-full bg-indigo-600 text-white font-extrabold text-sm flex items-center justify-center mb-4">3</div>
-                    <h3 id="step3-title" class="font-bold text-white text-base">Instant 0.2s Download</h3>
-                    <p id="step3-desc" class="text-xs text-slate-400 mt-2 leading-relaxed">Your files process directly in your device RAM and save instantly without server lag.</p>
+                    <h3 class="font-bold text-white text-base">Instant 0.2s Download</h3>
+                    <p class="text-xs text-slate-400 mt-2 leading-relaxed">Files process directly inside your device RAM and save instantly without server lag.</p>
                 </div>
             </div>
         </div>
@@ -766,933 +385,7 @@
         </div>
     </div>
 
-    <!-- ⚡ MASTER JAVASCRIPT ENGINE -->
     <script>
-        let currentTool = "{{ active_tool if active_tool else 'compress' }}";
-        let compressMode = 'target';
-        let watermarkMode = 'single';
-        let barcodeType = 'barcode';
-        let uploadedFiles = [];
-        let cropper = null;
-        let loadedImageElement = new Image();
-
-        let currentRotation = 0;
-        let isFlippedH = false;
-        let isFlippedV = false;
-
-        let naturalImgWidth = 0;
-        let naturalImgHeight = 0;
-        let originalAspectRatio = 1;
-
-        const toolConfig = {
-            compress: { title: "Compress Image to Exact Size", desc: "Type your desired KB or MB value for precise file size reduction right inside your device.", btn: "⚡ Compress & Download" },
-            crop: { title: "Crop Image with Aspect Ratios", desc: "Crop visually with custom ratios for Instagram (1:1), YouTube (16:9), and Shorts (9:16).", btn: "✂️ Crop & Download" },
-            resize: { title: "Resize Dimensions with Live Transform", desc: "Change exact pixel dimensions with instant proportion lock and live scaling.", btn: "📐 Resize & Download" },
-            convert: { title: "Image Format Converter", desc: "Convert single or multiple images to JPG, PNG, WEBP, or AVIF in 0.2s.", btn: "🔄 Convert & Download" },
-            pdf: { title: "PDF Maker & Merge Photos", desc: "Merge multiple JPG, PNG, WEBP, or iPhone HEIC photos into one PDF with 0% white borders.", btn: "📄 Merge & Download PDF" },
-            heic: { title: "iPhone HEIC to JPG Converter", desc: "Instantly turn Apple HEIC/HEIF photos into universal JPG images.", btn: "📱 Convert & Download" },
-            watermark: { title: "Pro Watermark Studio", desc: "Stamp copyright text in corner or repeat diagonal security grid with live preview.", btn: "🏷️ Watermark & Download" },
-            rotate: { title: "Rotate & Mirror Flip Image", desc: "Rotate orientation 90 degrees or mirror flip horizontally / vertically in 0.05s.", btn: "🔁 Rotate & Download" },
-            barcode: { title: "Live QR Code & Barcode Studio", desc: "Generate custom QR codes and barcodes with live preview and instant 1-click download.", btn: "📥 Download Graphic (PNG)" }
-        };
-
-        const howToConfig = {
-            compress: {
-                title: "How to Compress Image in 3 Easy Steps",
-                desc: "Shrink file size accurately to exact target KB or MB in seconds.",
-                s1_t: "Select Your Photo", s1_d: "Choose your picture from mobile or PC storage. Supports JPG, PNG, WEBP, and HEIC.",
-                s2_t: "Set Target Size (KB/MB)", s2_d: "Type your desired KB (e.g. 20KB, 50KB) or pick from 1-tap exam form presets.",
-                s3_t: "Instant Download", s3_d: "Click compress to process in 0.2s and download directly onto your device."
-            },
-            crop: {
-                title: "How to Crop Images with Aspect Ratios in 3 Steps",
-                desc: "Crop visually for Instagram, YouTube, and Reels with live box handles.",
-                s1_t: "Select Photo to Crop", s1_d: "Choose any image. The visual crop frame appears on screen immediately.",
-                s2_t: "Pick Ratio Preset", s2_d: "Choose 1:1 (Square), 16:9 (YouTube), 9:16 (Story/Reels), 4:5 (Portrait) or Freeform.",
-                s3_t: "Instant Download", s3_d: "Click Crop & Download to save your cropped image directly in 0.1s."
-            },
-            resize: {
-                title: "How to Resize Pixel Dimensions in 3 Steps",
-                desc: "Scale width and height dimensions with live proportion lock.",
-                s1_t: "Select Picture", s1_d: "Choose your photo to view its current width and height in pixels.",
-                s2_t: "Set Width or Height", s2_d: "Enter new pixel dimensions. Keep lock proportions checked to prevent distortion.",
-                s3_t: "Instant Download", s3_d: "Click download to save the scaled picture directly in 0.05s."
-            },
-            convert: {
-                title: "How to Convert Image Format in 3 Steps",
-                desc: "Convert single or multiple images to JPG, PNG, WEBP, or AVIF.",
-                s1_t: "Select Photos", s1_d: "Choose single or multiple photos from your device.",
-                s2_t: "Choose Format", s2_d: "Select JPG, PNG, WEBP, or AVIF from the dropdown menu.",
-                s3_t: "Instant Download", s3_d: "Click download to save files (multiple files download as a clean ZIP)."
-            },
-            pdf: {
-                title: "How to Merge Photos to PDF in 3 Easy Steps",
-                desc: "Combine multiple pictures into one clean PDF document with 0% white borders.",
-                s1_t: "Select Photos", s1_d: "Choose single or multiple JPG, PNG, WEBP, or HEIC pictures.",
-                s2_t: "Review Order", s2_d: "Check thumbnails and remove unwanted images with ✕.",
-                s3_t: "Instant Download", s3_d: "Click download to compile all pages into a crisp PDF file in 0.5s."
-            },
-            heic: {
-                title: "How to Convert HEIC to JPG in 3 Easy Steps",
-                desc: "Turn Apple HEIC/HEIF photos into universal JPG, PNG, or PDF files.",
-                s1_t: "Select Apple Photo", s1_d: "Choose .heic or .heif photo taken on iPhone or iPad.",
-                s2_t: "Automatic Decoding", s2_d: "Our in-browser engine decodes the photo into standard pixels in 0.5s.",
-                s3_t: "Download JPG", s3_d: "Click download to save a universal photo viewable on Windows & Android."
-            },
-            watermark: {
-                title: "How to Add Watermarks in 3 Easy Steps",
-                desc: "Protect pictures with diagonal repeated grids or corner stamps.",
-                s1_t: "Select Photo", s1_d: "Choose the photo you want to copyright protect.",
-                s2_t: "Type Text & Style", s2_d: "Type text, select color, and pick Single Stamp or Diagonal Grid.",
-                s3_t: "Instant Download", s3_d: "Click download to embed the watermark permanently in 0.1s."
-            },
-            rotate: {
-                title: "How to Rotate Photos in 3 Easy Steps",
-                desc: "Fix camera orientation or create mirror effects in 0.05 seconds.",
-                s1_t: "Select Photo", s1_d: "Choose any photo needing orientation fix.",
-                s2_t: "Rotate or Flip", s2_d: "Click 90° buttons or mirror flip horizontally/vertically.",
-                s3_t: "Instant Download", s3_d: "Click download to save your properly oriented image in 0.05s."
-            },
-            barcode: {
-                title: "How to Generate QR Code & Barcode in 3 Steps",
-                desc: "Create free custom QR codes or product barcodes with instant live preview.",
-                s1_t: "Choose Barcode or QR", s1_d: "Select whether you need a QR Code or product Barcode.",
-                s2_t: "Type Content", s2_d: "Enter your link or number. It renders live on screen immediately.",
-                s3_t: "Download PNG", s3_d: "Click download to save a crisp, high-resolution PNG file."
-            }
-        };
-
-        function updateDynamicHowToUse(key) {
-            const cfg = howToConfig[key] || howToConfig['compress'];
-            document.getElementById('how-to-title').innerText = cfg.title;
-            document.getElementById('how-to-desc').innerText = cfg.desc;
-            document.getElementById('step1-title').innerText = cfg.s1_t;
-            document.getElementById('step1-desc').innerText = cfg.s1_d;
-            document.getElementById('step2-title').innerText = cfg.s2_t;
-            document.getElementById('step2-desc').innerText = cfg.s2_d;
-            document.getElementById('step3-title').innerText = cfg.s3_t;
-            document.getElementById('step3-desc').innerText = cfg.s3_d;
-        }
-
-        // RESET WORKSPACE
-        function resetWorkspace() {
-            uploadedFiles = [];
-            document.getElementById('image-upload').value = '';
-            document.getElementById('settings-panel').classList.add('hidden');
-            document.getElementById('drop-area').classList.remove('hidden');
-            document.getElementById('status-box').classList.add('hidden');
-            document.getElementById('multi-preview-box').classList.add('hidden');
-            document.getElementById('single-preview-box').classList.remove('hidden');
-            document.getElementById('barcode-preview-box').classList.add('hidden');
-            document.getElementById('action-btn').classList.remove('hidden');
-            document.getElementById('action-btn').disabled = false;
-            document.getElementById('preview-header-bar').classList.remove('hidden');
-            
-            if (cropper) {
-                cropper.destroy();
-                cropper = null;
-            }
-            
-            currentRotation = 0;
-            isFlippedH = false;
-            isFlippedV = false;
-            resetResizePreviewStyle();
-
-            document.getElementById('live-wm-single').classList.add('hidden');
-            document.getElementById('live-wm-grid').classList.add('hidden');
-        }
-
-        // ⚡ TAB SWITCHER (SUPPORTS ALL 9 TOOLS CLEANLY)
-        function switchTool(tool) {
-            resetWorkspace();
-            currentTool = tool;
-
-            document.querySelectorAll('.tool-tab').forEach(btn => {
-                btn.className = "tool-tab py-2.5 sm:py-3 px-2 rounded-xl text-xs font-bold transition flex items-center justify-center gap-1.5 text-slate-400 hover:text-white hover:bg-slate-800";
-            });
-            const activeTab = document.getElementById('tab-' + tool);
-            if (activeTab) {
-                activeTab.className = "tool-tab py-2.5 sm:py-3 px-2 rounded-xl text-xs font-bold transition flex items-center justify-center gap-1.5 bg-indigo-600 text-white shadow-lg shadow-indigo-600/30";
-            }
-
-            if (toolConfig[tool]) {
-                document.getElementById('tool-title').innerText = toolConfig[tool].title;
-                document.getElementById('tool-desc').innerText = toolConfig[tool].desc;
-                document.getElementById('btn-text').innerText = toolConfig[tool].btn;
-            }
-
-            document.querySelectorAll('.tool-ctrl').forEach(ctrl => ctrl.classList.add('hidden'));
-            const targetCtrl = document.getElementById('ctrl-' + (tool === 'heic' ? 'convert' : tool));
-            if (targetCtrl) {
-                targetCtrl.classList.remove('hidden');
-            }
-
-            // QR & BARCODE DOES NOT REQUIRE UPLOAD
-            if (tool === 'barcode') {
-                document.getElementById('drop-area').classList.add('hidden');
-                document.getElementById('single-preview-box').classList.add('hidden');
-                document.getElementById('multi-preview-box').classList.add('hidden');
-                document.getElementById('preview-header-bar').classList.add('hidden');
-                document.getElementById('barcode-preview-box').classList.remove('hidden');
-                document.getElementById('settings-panel').classList.remove('hidden');
-                document.getElementById('action-btn').classList.add('hidden');
-                renderLiveGraphic();
-            } else {
-                document.getElementById('barcode-preview-box').classList.add('hidden');
-                document.getElementById('action-btn').classList.remove('hidden');
-                document.getElementById('preview-header-bar').classList.remove('hidden');
-            }
-
-            const fileInput = document.getElementById('image-upload');
-            if (tool === 'convert' || tool === 'pdf') {
-                fileInput.setAttribute('multiple', 'multiple');
-                document.getElementById('upload-subtext').innerText = "Select single or up to 20 photos (Supports HEIC, AVIF, JPG, PNG)";
-            } else {
-                fileInput.removeAttribute('multiple');
-                document.getElementById('upload-subtext').innerText = "Supports JPG, PNG, WEBP, AVIF, iPhone HEIC";
-            }
-
-            updateDynamicHowToUse(tool);
-        }
-
-        // ==========================================
-        // ⚡ QR & BARCODE GENERATOR (BARCODE LEFT, QR RIGHT)
-        // ==========================================
-        function setBarcodeType(type) {
-            barcodeType = type;
-            document.getElementById('btn-mode-bc').className = type === 'barcode' ? "flex-1 py-1.5 px-3 rounded-lg text-xs font-bold bg-indigo-600 text-white transition" : "flex-1 py-1.5 px-3 rounded-lg text-xs font-bold text-slate-400 hover:text-white transition";
-            document.getElementById('btn-mode-qr').className = type === 'qr' ? "flex-1 py-1.5 px-3 rounded-lg text-xs font-bold bg-indigo-600 text-white transition" : "flex-1 py-1.5 px-3 rounded-lg text-xs font-bold text-slate-400 hover:text-white transition";
-            document.getElementById('barcode-format-container').classList.toggle('hidden', type === 'qr');
-            renderLiveGraphic();
-        }
-
-        function renderLiveGraphic() {
-            if (currentTool !== 'barcode') return;
-            const text = document.getElementById('barcode-input-text').value.trim() || 'SmartPicTools';
-            const color = document.getElementById('barcode-color').value;
-            const qrBox = document.getElementById('qrcode-render');
-            const bcBox = document.getElementById('barcode-render');
-
-            if (barcodeType === 'qr') {
-                bcBox.classList.add('hidden');
-                qrBox.classList.remove('hidden');
-                qrBox.innerHTML = '';
-                try {
-                    new QRCode(qrBox, {
-                        text: text,
-                        width: 200,
-                        height: 200,
-                        colorDark: color,
-                        colorLight: "#ffffff",
-                        correctLevel: QRCode.CorrectLevel.H
-                    });
-                } catch(e) {}
-            } else {
-                qrBox.classList.add('hidden');
-                bcBox.classList.remove('hidden');
-                const fmt = document.getElementById('barcode-format-select').value;
-                try {
-                    JsBarcode("#barcode-render", text, {
-                        format: fmt,
-                        lineColor: color,
-                        width: 2,
-                        height: 80,
-                        displayValue: true
-                    });
-                } catch(e) {
-                    JsBarcode("#barcode-render", text, {
-                        format: "CODE128",
-                        lineColor: color,
-                        width: 2,
-                        height: 80,
-                        displayValue: true
-                    });
-                }
-            }
-        }
-
-        function downloadGraphicPNG() {
-            if (barcodeType === 'qr') {
-                const img = document.querySelector('#qrcode-render img');
-                if (img && img.src) {
-                    triggerDownloadDataUrl(img.src, `smartpic_qr_${Date.now()}.png`);
-                } else {
-                    const canvas = document.querySelector('#qrcode-render canvas');
-                    if (canvas) triggerDownloadDataUrl(canvas.toDataURL('image/png'), `smartpic_qr_${Date.now()}.png`);
-                }
-            } else {
-                const svg = document.getElementById('barcode-render');
-                const xml = new XMLSerializer().serializeToString(svg);
-                const svg64 = btoa(xml);
-                const img = new Image();
-                img.onload = function() {
-                    const canvas = document.createElement('canvas');
-                    canvas.width = img.width + 40;
-                    canvas.height = img.height + 40;
-                    const ctx = canvas.getContext('2d');
-                    ctx.fillStyle = '#ffffff';
-                    ctx.fillRect(0, 0, canvas.width, canvas.height);
-                    ctx.drawImage(img, 20, 20);
-                    triggerDownloadDataUrl(canvas.toDataURL('image/png'), `smartpic_barcode_${Date.now()}.png`);
-                };
-                img.src = 'data:image/svg+xml;base64,' + svg64;
-            }
-        }
-
-        function triggerDownloadDataUrl(url, filename) {
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = filename;
-            a.click();
-            document.getElementById('status-box').classList.remove('hidden');
-        }
-
-        // DRAG & DROP + UPLOAD
-        const dropArea = document.getElementById('drop-area');
-        const fileInput = document.getElementById('image-upload');
-
-        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(ev => {
-            window.addEventListener(ev, (e) => { e.preventDefault(); e.stopPropagation(); }, false);
-            dropArea.addEventListener(ev, (e) => { e.preventDefault(); e.stopPropagation(); }, false);
-        });
-
-        ['dragenter', 'dragover'].forEach(ev => dropArea.classList.add('border-indigo-500', 'bg-indigo-950/40'));
-        ['dragleave', 'drop'].forEach(ev => dropArea.classList.remove('border-indigo-500', 'bg-indigo-950/40'));
-
-        dropArea.addEventListener('drop', (e) => {
-            if (e.dataTransfer && e.dataTransfer.files.length > 0) handleFiles(e.dataTransfer.files);
-        });
-        dropArea.addEventListener('click', () => fileInput.click());
-        fileInput.addEventListener('change', (e) => {
-            if (e.target.files && e.target.files.length > 0) handleFiles(e.target.files);
-        });
-
-        async function handleFiles(files) {
-            uploadedFiles = Array.from(files).slice(0, 20);
-            if (uploadedFiles.length === 0) return;
-
-            document.getElementById('settings-panel').classList.remove('hidden');
-            document.getElementById('drop-area').classList.add('hidden');
-            document.getElementById('status-box').classList.add('hidden');
-
-            if ((currentTool === 'convert' || currentTool === 'pdf') && uploadedFiles.length > 1) {
-                renderMultiGallery();
-            } else {
-                await renderSinglePreview(uploadedFiles[0]);
-            }
-        }
-
-        async function renderSinglePreview(file) {
-            document.getElementById('single-preview-box').classList.remove('hidden');
-            document.getElementById('multi-preview-box').classList.add('hidden');
-            document.getElementById('file-name').innerText = file.name;
-            document.getElementById('file-size').innerText = (file.size / 1024).toFixed(1) + ' KB';
-
-            let displayBlob = file;
-            const isHeic = file.name.toLowerCase().endsWith('.heic') || file.name.toLowerCase().endsWith('.heif');
-            
-            if (isHeic) {
-                document.getElementById('btn-text').innerText = "⏳ Reading photo...";
-                try {
-                    const convertedBlob = await heic2any({ blob: file, toType: "image/jpeg", quality: 0.92 });
-                    displayBlob = Array.isArray(convertedBlob) ? convertedBlob[0] : convertedBlob;
-                    uploadedFiles[0] = new File([displayBlob], file.name.replace(/\.[^/.]+$/, ".jpg"), { type: "image/jpeg" });
-                } catch (err) {
-                    console.warn(err);
-                } finally {
-                    document.getElementById('btn-text').innerText = toolConfig[currentTool].btn;
-                }
-            }
-
-            const reader = new FileReader();
-            reader.onload = function(event) {
-                const img = document.getElementById('image-preview');
-                img.src = event.target.result;
-                loadedImageElement.src = event.target.result;
-
-                loadedImageElement.onload = function() {
-                    naturalImgWidth = loadedImageElement.naturalWidth || 1920;
-                    naturalImgHeight = loadedImageElement.naturalHeight || 1080;
-                    originalAspectRatio = naturalImgWidth / naturalImgHeight;
-
-                    document.getElementById('resize-width').value = naturalImgWidth;
-                    document.getElementById('resize-height').value = naturalImgHeight;
-
-                    if (currentTool === 'resize') updateResizeLiveVisual(naturalImgWidth, naturalImgHeight);
-                    if (currentTool === 'crop') initCropper();
-                    if (currentTool === 'watermark') updateLiveWatermarkPreview();
-                    if (currentTool === 'compress') validateTargetSize();
-                };
-            };
-            reader.readAsDataURL(displayBlob);
-        }
-
-        function renderMultiGallery() {
-            document.getElementById('single-preview-box').classList.add('hidden');
-            document.getElementById('multi-preview-box').classList.remove('hidden');
-            document.getElementById('multi-count').innerText = uploadedFiles.length;
-
-            const grid = document.getElementById('multi-grid');
-            grid.innerHTML = '';
-
-            uploadedFiles.forEach((file, index) => {
-                const card = document.createElement('div');
-                card.className = "relative bg-slate-900 p-2 rounded-xl border border-slate-800 text-center";
-                
-                const badge = document.createElement('span');
-                badge.className = "absolute top-1 left-1 bg-indigo-600 text-white text-[9px] font-black px-1.5 py-0.5 rounded";
-                badge.innerText = currentTool === 'pdf' ? `P.${index + 1}` : `#${index + 1}`;
-
-                const deleteBtn = document.createElement('button');
-                deleteBtn.type = "button";
-                deleteBtn.className = "absolute top-1 right-1 w-5 h-5 rounded-full bg-rose-600 text-white text-[10px] font-black flex items-center justify-center";
-                deleteBtn.innerHTML = "✕";
-                deleteBtn.onclick = () => {
-                    uploadedFiles.splice(index, 1);
-                    if (uploadedFiles.length === 0) resetWorkspace();
-                    else if (uploadedFiles.length === 1) renderSinglePreview(uploadedFiles[0]);
-                    else renderMultiGallery();
-                };
-
-                const thumb = document.createElement('img');
-                thumb.className = "w-full h-16 object-cover rounded-lg mb-1";
-                const reader = new FileReader();
-                reader.onload = (e) => thumb.src = e.target.result;
-                reader.readAsDataURL(file);
-
-                const nameText = document.createElement('p');
-                nameText.className = "text-[10px] font-bold text-white truncate";
-                nameText.innerText = file.name;
-
-                card.appendChild(badge);
-                card.appendChild(deleteBtn);
-                card.appendChild(thumb);
-                card.appendChild(nameText);
-                grid.appendChild(card);
-            });
-        }
-
-        // ==========================================
-        // 📐 RESIZE ENGINE (⚡ LIVE VISUAL TRANSFORM)
-        // ==========================================
-        function handleResizeInputChange(source) {
-            const wInput = document.getElementById('resize-width');
-            const hInput = document.getElementById('resize-height');
-            const lockRatio = document.getElementById('resize-lock-ratio').checked;
-            let w = parseInt(wInput.value) || 0;
-            let h = parseInt(hInput.value) || 0;
-
-            if (lockRatio && originalAspectRatio > 0) {
-                if (source === 'width' && w > 0) {
-                    h = Math.round(w / originalAspectRatio);
-                    hInput.value = h;
-                } else if (source === 'height' && h > 0) {
-                    w = Math.round(h * originalAspectRatio);
-                    wInput.value = w;
-                }
-            }
-            updateResizeLiveVisual(w, h);
-        }
-
-        function updateResizeLiveVisual(targetW, targetH) {
-            if (currentTool !== 'resize' || targetW <= 0 || targetH <= 0) return;
-            const badgeContainer = document.getElementById('resize-badge-container');
-            badgeContainer.classList.remove('hidden');
-            document.getElementById('resize-live-badge').innerText = `📐 Live Scale: ${targetW} × ${targetH} px`;
-            const img = document.getElementById('image-preview');
-            // Squish or stretch visually in real time!
-            img.style.aspectRatio = `${targetW} / ${targetH}`;
-            img.style.objectFit = 'fill';
-        }
-
-        function resetResizePreviewStyle() {
-            const img = document.getElementById('image-preview');
-            img.style.aspectRatio = 'auto';
-            img.style.objectFit = 'contain';
-            document.getElementById('resize-badge-container').classList.add('hidden');
-        }
-
-        function resetToOriginalDimensions() {
-            if (naturalImgWidth > 0 && naturalImgHeight > 0) {
-                document.getElementById('resize-width').value = naturalImgWidth;
-                document.getElementById('resize-height').value = naturalImgHeight;
-                updateResizeLiveVisual(naturalImgWidth, naturalImgHeight);
-            }
-        }
-
-        // COMPRESS LOGIC
-        function setCompressMode(mode) {
-            compressMode = mode;
-            document.getElementById('mode-target-btn').className = mode === 'target' ? "flex-1 py-1.5 px-3 rounded-lg text-xs font-bold bg-indigo-600 text-white transition" : "flex-1 py-1.5 px-3 rounded-lg text-xs font-bold text-slate-400 hover:text-white transition";
-            document.getElementById('mode-slider-btn').className = mode === 'slider' ? "flex-1 py-1.5 px-3 rounded-lg text-xs font-bold bg-indigo-600 text-white transition" : "flex-1 py-1.5 px-3 rounded-lg text-xs font-bold text-slate-400 hover:text-white transition";
-            document.getElementById('target-box').classList.toggle('hidden', mode !== 'target');
-            document.getElementById('slider-box').classList.toggle('hidden', mode === 'target');
-            if (mode === 'target') validateTargetSize();
-            else document.getElementById('action-btn').disabled = false;
-        }
-
-        function validateTargetSize() {
-            if (uploadedFiles.length === 0 || compressMode !== 'target' || currentTool !== 'compress') return;
-            const origBytes = uploadedFiles[0].size;
-            const targetVal = parseFloat(document.getElementById('target-val').value);
-            const unit = document.getElementById('target-unit').value;
-            const guidance = document.getElementById('target-guidance');
-            const btn = document.getElementById('action-btn');
-
-            if (!targetVal || targetVal <= 0) {
-                guidance.innerHTML = `<span class="text-amber-400">⚠️ Enter desired size (e.g. 50 KB).</span>`;
-                return;
-            }
-            const targetBytes = unit === 'mb' ? targetVal * 1024 * 1024 : targetVal * 1024;
-            if (targetBytes >= origBytes) {
-                guidance.innerHTML = `<span class="text-rose-400">⚠️ Enter value smaller than original (${(origBytes / 1024).toFixed(0)} KB).</span>`;
-            } else {
-                guidance.innerHTML = `<span class="text-emerald-400 font-bold">✓ Target set! Will shrink to ~${targetVal} ${unit.toUpperCase()}.</span>`;
-                btn.disabled = false;
-            }
-        }
-
-        document.getElementById('target-val').addEventListener('input', validateTargetSize);
-        document.getElementById('target-unit').addEventListener('change', validateTargetSize);
-        document.getElementById('quality-slider').addEventListener('input', (e) => {
-            document.getElementById('quality-display').innerText = e.target.value + '%';
-        });
-
-        // WATERMARK LIVE PREVIEW
-        function setWatermarkMode(m) {
-            watermarkMode = m;
-            document.getElementById('wm-single-btn').className = m === 'single' ? "py-2 px-3 rounded-xl bg-indigo-600 text-white text-xs font-bold transition" : "py-2 px-3 rounded-xl bg-slate-900 text-slate-300 text-xs font-bold border border-slate-700 transition";
-            document.getElementById('wm-repeat-btn').className = m === 'repeat' ? "py-2 px-3 rounded-xl bg-indigo-600 text-white text-xs font-bold transition" : "py-2 px-3 rounded-xl bg-slate-900 text-slate-300 text-xs font-bold border border-slate-700 transition";
-            document.getElementById('wm-pos-container').classList.toggle('hidden', m === 'repeat');
-            updateLiveWatermarkPreview();
-        }
-
-        function updateLiveWatermarkPreview() {
-            if (currentTool !== 'watermark' || uploadedFiles.length === 0) return;
-            const text = document.getElementById('watermark-text').value || '© SmartPicTools';
-            const color = document.getElementById('watermark-color').value;
-            const size = document.getElementById('watermark-size').value;
-            const opacity = document.getElementById('watermark-opacity').value;
-            document.getElementById('wm-opacity-display').innerText = Math.round(opacity * 100) + '%';
-
-            const singleEl = document.getElementById('live-wm-single');
-            const gridEl = document.getElementById('live-wm-grid');
-            const patternEl = document.getElementById('live-wm-pattern');
-            const colorHex = { white: '#ffffff', black: '#000000', gold: '#fbbf24', red: '#ef4444', cyan: '#06b6d4' }[color] || '#ffffff';
-
-            if (watermarkMode === 'single') {
-                gridEl.classList.add('hidden');
-                singleEl.classList.remove('hidden');
-                singleEl.innerText = text;
-                singleEl.style.color = colorHex;
-                singleEl.style.opacity = opacity;
-                singleEl.style.fontSize = Math.max(12, Math.round(size * 0.7)) + 'px';
-                singleEl.className = "absolute pointer-events-none font-bold tracking-wider px-3 py-1.5 transition-all shadow-sm";
-                const pos = document.getElementById('watermark-pos').value;
-                if (pos === 'center') singleEl.classList.add('top-1/2', 'left-1/2', '-translate-x-1/2', '-translate-y-1/2');
-                else if (pos === 'top-left') singleEl.classList.add('top-2', 'left-2');
-                else if (pos === 'top-right') singleEl.classList.add('top-2', 'right-2');
-                else if (pos === 'bottom-left') singleEl.classList.add('bottom-2', 'left-2');
-                else singleEl.classList.add('bottom-2', 'right-2');
-            } else {
-                singleEl.classList.add('hidden');
-                gridEl.classList.remove('hidden');
-                patternEl.innerHTML = '';
-                for (let i = 0; i < 24; i++) {
-                    const span = document.createElement('span');
-                    span.innerText = text;
-                    span.style.color = colorHex;
-                    span.style.fontSize = Math.max(12, Math.round(size * 0.6)) + 'px';
-                    span.style.opacity = opacity;
-                    patternEl.appendChild(span);
-                }
-            }
-        }
-
-        // ⚡ ROTATE & FLIP (CONTINUOUS SMOOTH ROTATION - NO WEIRD SPINS!)
-        let displayRotation = 0;
-
-        function applyLiveRotate(deg) {
-            displayRotation += deg; // Keeps rotating forward smoothly without jumping back to 0!
-            updateOrientationTransform();
-        }
-
-        function applyLiveFlip(mode) {
-            if (mode === 'horizontal') isFlippedH = !isFlippedH;
-            if (mode === 'vertical') isFlippedV = !isFlippedV;
-            updateOrientationTransform();
-        }
-
-        function updateOrientationTransform() {
-            const scaleX = isFlippedH ? -1 : 1;
-            const scaleY = isFlippedV ? -1 : 1;
-            document.getElementById('image-preview').style.transform = `rotate(${displayRotation}deg) scale(${scaleX}, ${scaleY})`;
-            document.getElementById('flip-h-btn').className = isFlippedH ? "py-2.5 px-2 rounded-xl bg-indigo-600 text-white text-xs font-bold border border-indigo-500 transition" : "py-2.5 px-2 rounded-xl bg-slate-900 text-white text-xs font-bold border border-slate-700 transition";
-            document.getElementById('flip-v-btn').className = isFlippedV ? "py-2.5 px-2 rounded-xl bg-indigo-600 text-white text-xs font-bold border border-indigo-500 transition" : "py-2.5 px-2 rounded-xl bg-slate-900 text-white text-xs font-bold border border-slate-700 transition";
-        }
-
-        
-     // ⚡ LOCKED FRAME CROPPER (NEVER SHRINKS, NO DRIFT)
-        function initCropper() {
-            const imgElement = document.getElementById('image-preview');
-            if (cropper) cropper.destroy();
-            cropper = new Cropper(imgElement, { 
-                aspectRatio: NaN, 
-                viewMode: 1, 
-                background: false,      // No ugly checkerboard
-                autoCropArea: 0.85, 
-                responsive: true,
-                zoomable: false,        // ⚡ PHOTO STAYS 100% FIXED TO FRAME!
-                zoomOnWheel: false,     // ⚡ MOUSE WHEEL NEVER SHRINKS PHOTO!
-                zoomOnTouch: false,     // ⚡ TOUCH NEVER SHRINKS PHOTO!
-                toggleDragModeOnDblclick: false
-            });
-        }
-
-        function setCropRatio(ratio) {
-            if (cropper) {
-                cropper.setAspectRatio(ratio);
-            }
-            const eventTarget = event.currentTarget;
-            document.querySelectorAll('.ratio-btn').forEach(b => {
-                b.className = "ratio-btn py-2 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 text-xs font-bold transition";
-            });
-            eventTarget.className = "ratio-btn py-2 px-3 rounded-xl bg-indigo-600 text-white text-xs font-bold transition";
-        }
-
-        function cropZoom(val) {
-            if (cropper) cropper.zoom(val);
-        }
-
-        function cropReset() {
-            if (cropper) {
-                cropper.reset();
-                if (isHomeHandMode) toggleHandTool();
-            }
-        }
-
-        function toggleHandTool() {
-            if (!cropper) return;
-            isHomeHandMode = !isHomeHandMode;
-            cropper.setDragMode(isHomeHandMode ? 'move' : 'crop');
-            const btn = document.getElementById('home-btn-hand');
-            if (btn) {
-                btn.className = isHomeHandMode 
-                    ? "py-1 px-2.5 rounded-lg bg-indigo-600 text-xs font-bold text-white transition"
-                    : "py-1 px-2.5 rounded-lg bg-slate-800 hover:bg-indigo-600 text-xs font-bold text-slate-300 hover:text-white transition";
-            }
-        }
-
-        // Spacebar Hand Tool Listener
-        let isHomeSpacePressed = false;
-        window.addEventListener('keydown', function(e) {
-            if (e.code === 'Space' && !isHomeSpacePressed && cropper && currentTool === 'crop') {
-                if (document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA') {
-                    e.preventDefault();
-                    isHomeSpacePressed = true;
-                    cropper.setDragMode('move');
-                }
-            }
-        });
-
-        window.addEventListener('keyup', function(e) {
-            if (e.code === 'Space' && cropper && currentTool === 'crop') {
-                isHomeSpacePressed = false;
-                cropper.setDragMode(isHomeHandMode ? 'move' : 'crop');
-            }
-        });
-
-        // ==========================================
-// ⚡ ACTION BUTTON EXECUTION (0.2s TURBO)
-// ==========================================
-        document.getElementById('action-btn').addEventListener('click', async function() {
-            if (uploadedFiles.length === 0) return;
-            const btn = document.getElementById('action-btn');
-            btn.disabled = true;
-            document.getElementById('btn-text').innerText = "⏳ Processing...";
-
-            try {
-                // ⚡ 1. REAL PDF MAKER (SINGLE & MULTI-IMAGE 100% GENUINE PDF - ZERO BORDER)
-                const targetFmt = document.getElementById('convert-format') ? document.getElementById('convert-format').value : '';
-                const isPdfRequest = (currentTool === 'pdf') || (currentTool === 'convert' && targetFmt === 'PDF');
-
-                if (isPdfRequest) {
-                    const { jsPDF } = window.jspdf;
-                    let doc = null;
-
-                    for (let i = 0; i < uploadedFiles.length; i++) {
-                        const file = uploadedFiles[i];
-                        let processedBlob = file;
-
-                        if (file.name.toLowerCase().endsWith('.heic') || file.name.toLowerCase().endsWith('.heif')) {
-                            try {
-                                const c = await heic2any({ blob: file, toType: 'image/jpeg', quality: 0.92 });
-                                processedBlob = Array.isArray(c) ? c[0] : c;
-                            } catch(e) {}
-                        }
-
-                        const bmp = await createImageBitmap(processedBlob);
-                        const wPt = bmp.width * 0.75;
-                        const hPt = bmp.height * 0.75;
-                        const orient = wPt >= hPt ? 'l' : 'p';
-                        
-                        if (i === 0) {
-                            doc = new jsPDF({ orientation: orient, unit: 'pt', format: [wPt, hPt] });
-                        } else {
-                            doc.addPage([wPt, hPt], orient);
-                        }
-
-                        const pW = doc.internal.pageSize.getWidth();
-                        const pH = doc.internal.pageSize.getHeight();
-                        
-                        const tc = document.createElement('canvas');
-                        tc.width = bmp.width;
-                        tc.height = bmp.height;
-                        tc.getContext('2d').drawImage(bmp, 0, 0);
-                        const imgData = tc.toDataURL('image/jpeg', 0.92);
-                        doc.addImage(imgData, 'JPEG', 0, 0, pW, pH);
-                    }
-
-                    // Export 100% genuine binary PDF Blob
-                    const pdfBlob = doc.output('blob');
-                    triggerDownload(pdfBlob, `smartpic_document_${Date.now()}.pdf`);
-                    finishSuccess();
-                    return;
-                }
-
-                // 2. BATCH ZIP CONVERTER (FOR NON-PDF FORMATS)
-                if (currentTool === 'convert' && uploadedFiles.length > 1) {
-                    const zip = new JSZip();
-
-                    for (let file of uploadedFiles) {
-                        const rawName = file.name.substring(0, file.name.lastIndexOf('.')) || file.name;
-                        const bmp = await createImageBitmap(file);
-                        const canvas = document.createElement('canvas');
-                        canvas.width = bmp.width;
-                        canvas.height = bmp.height;
-                        const ctx = canvas.getContext('2d');
-                        ctx.drawImage(bmp, 0, 0);
-
-                        const mime = targetFmt === 'PNG' ? 'image/png' : (targetFmt === 'WEBP' ? 'image/webp' : 'image/jpeg');
-                        const blob = await new Promise(res => canvas.toBlob(res, mime, 0.88));
-                        zip.file(`${rawName}.${targetFmt.toLowerCase()}`, blob);
-                    }
-
-                    const zipContent = await zip.generateAsync({ type: "blob" });
-                    triggerDownload(zipContent, "smartpic_batch_converted.zip");
-                    finishSuccess();
-                    return;
-                }
-
-                // 3. SINGLE FILE ENGINE
-                const file = uploadedFiles[0];
-                const rawName = file.name.substring(0, file.name.lastIndexOf('.')) || file.name;
-
-                // TURBO AVIF FALLBACK
-                if (currentTool === 'convert' && targetFmt === 'AVIF' && !canEncodeAvif()) {
-                    btn.disabled = true;
-                    document.getElementById('btn-text').innerText = "⏳ Converting...";
-
-                    let sendBlob = file;
-                    const maxDim = 1280;
-                    if (loadedImageElement.naturalWidth > maxDim || loadedImageElement.naturalHeight > maxDim) {
-                        const scale = maxDim / Math.max(loadedImageElement.naturalWidth, loadedImageElement.naturalHeight);
-                        const tc = document.createElement('canvas');
-                        tc.width = Math.round(loadedImageElement.naturalWidth * scale);
-                        tc.height = Math.round(loadedImageElement.naturalHeight * scale);
-                        tc.getContext('2d').drawImage(loadedImageElement, 0, 0, tc.width, tc.height);
-                        sendBlob = await new Promise(r => tc.toBlob(r, 'image/jpeg', 0.85));
-                    }
-
-                    const fd = new FormData();
-                    fd.append('image', sendBlob);
-                    fd.append('format', 'AVIF');
-                    const resp = await fetch('/process', { method: 'POST', body: fd });
-                    if (resp.ok) {
-                        const b = await resp.blob();
-                        triggerDownload(b, `smartpic_${rawName}.avif`);
-                        finishSuccess();
-                        return;
-                    }
-                }
-
-                // HTML5 CANVAS PROCESSING
-                let canvas = document.createElement('canvas');
-                let ctx = canvas.getContext('2d');
-
-                if (currentTool === 'crop' && cropper) {
-                    canvas = cropper.getCroppedCanvas();
-                } else {
-                    let w = naturalImgWidth;
-                    let h = naturalImgHeight;
-
-                    const maxTurboDim = 2560;
-                    if (currentTool !== 'resize' && (w > maxTurboDim || h > maxTurboDim)) {
-                        const scale = maxTurboDim / Math.max(w, h);
-                        w = Math.round(w * scale);
-                        h = Math.round(h * scale);
-                    }
-
-                    if (currentTool === 'resize') {
-                        w = parseInt(document.getElementById('resize-width').value) || w;
-                        h = parseInt(document.getElementById('resize-height').value) || h;
-                    }
-
-                   const effectiveAngle = ((displayRotation % 360) + 360) % 360;
-                    if (currentTool === 'rotate' && (effectiveAngle === 90 || effectiveAngle === 270)) {
-                        canvas.width = h;
-                        canvas.height = w;
-                    } else {
-                        canvas.width = w;
-                        canvas.height = h;
-                    }
-
-                    ctx.save();
-                    if (currentTool === 'rotate') {
-                        ctx.translate(canvas.width / 2, canvas.height / 2);
-                        ctx.rotate((effectiveAngle * Math.PI) / 180);
-                        const sX = isFlippedH ? -1 : 1;
-                        const sY = isFlippedV ? -1 : 1;
-                        ctx.scale(sX, sY);
-                        ctx.drawImage(loadedImageElement, -w / 2, -h / 2, w, h);
-                    } else {
-                        ctx.drawImage(loadedImageElement, 0, 0, w, h);
-                    }
-                    ctx.restore();
-
-                    // WATERMARK
-                    if (currentTool === 'watermark') {
-                        const wmText = document.getElementById('watermark-text').value || '© SmartPicTools';
-                        const wmColor = document.getElementById('watermark-color').value;
-                        const basePx = parseInt(document.getElementById('watermark-size').value);
-                        const wmSize = Math.max(18, Math.round(basePx * (canvas.width / 1000)));
-                        const wmOpacity = parseFloat(document.getElementById('watermark-opacity').value);
-                        ctx.fillStyle = wmColor === 'gold' ? '#fbbf24' : (wmColor === 'black' ? '#000000' : (wmColor === 'red' ? '#ef4444' : (wmColor === 'cyan' ? '#06b6d4' : '#ffffff')));
-                        ctx.globalAlpha = wmOpacity;
-                        ctx.font = `bold ${wmSize}px Plus Jakarta Sans, sans-serif`;
-
-                        if (watermarkMode === 'single') {
-                            const pos = document.getElementById('watermark-pos').value;
-                            const textWidth = ctx.measureText(wmText).width;
-                            let tx = canvas.width - textWidth - 30, ty = canvas.height - 30;
-                            if (pos === 'center') { tx = (canvas.width - textWidth) / 2; ty = canvas.height / 2; }
-                            else if (pos === 'top-left') { tx = 30; ty = 50; }
-                            else if (pos === 'top-right') { tx = canvas.width - textWidth - 30; ty = 50; }
-                            else if (pos === 'bottom-left') { tx = 30; ty = canvas.height - 30; }
-                            ctx.fillText(wmText, tx, ty);
-                        } else {
-                            ctx.save();
-                            ctx.translate(canvas.width / 2, canvas.height / 2);
-                            ctx.rotate((-25 * Math.PI) / 180);
-                            const textMetrics = ctx.measureText(wmText);
-                            const stepX = Math.max(340, textMetrics.width + 120);
-                            const stepY = Math.max(160, wmSize * 5);
-
-                            for (let x = -canvas.width * 1.5; x < canvas.width * 1.5; x += stepX) {
-                                for (let y = -canvas.height * 1.5; y < canvas.height * 1.5; y += stepY) {
-                                    ctx.fillText(wmText, x, y);
-                                }
-                            }
-                            ctx.restore();
-                        }
-                    }
-                }
-
-                // OUTPUT FORMAT & DOWNLOAD (ALL 7 FORMATS SUPPORTED)
-                let targetMime = 'image/jpeg';
-                let targetExt = 'jpg';
-
-                if (currentTool === 'convert') {
-                    const fmt = document.getElementById('convert-format').value;
-                    targetExt = fmt.toLowerCase();
-
-                    // 1. PDF CONVERT
-                    if (fmt === 'PDF') {
-                        const { jsPDF } = window.jspdf;
-                        const wPt = canvas.width * 0.75;
-                        const hPt = canvas.height * 0.75;
-                        const orient = wPt >= hPt ? 'l' : 'p';
-                        const doc = new jsPDF({ orientation: orient, unit: 'pt', format: [wPt, hPt] });
-                        const pW = doc.internal.pageSize.getWidth();
-                        const pH = doc.internal.pageSize.getHeight();
-                        doc.addImage(canvas.toDataURL('image/jpeg', 0.92), 'JPEG', 0, 0, pW, pH);
-                        doc.save(`smartpic_${rawName}.pdf`);
-                        finishSuccess();
-                        return;
-                    }
-
-                    // 2. ICO (FAVICON 64x64)
-                    if (fmt === 'ICO') {
-                        const icoCanvas = document.createElement('canvas');
-                        icoCanvas.width = 64;
-                        icoCanvas.height = 64;
-                        icoCanvas.getContext('2d').drawImage(canvas, 0, 0, 64, 64);
-                        icoCanvas.toBlob((blob) => {
-                            triggerDownload(blob, `smartpic_${rawName}.ico`);
-                            finishSuccess();
-                        }, 'image/png');
-                        return;
-                    }
-
-                    // 3. BMP CONVERT
-                    if (fmt === 'BMP') {
-                        canvas.toBlob((blob) => {
-                            triggerDownload(blob, `smartpic_${rawName}.bmp`);
-                            finishSuccess();
-                        }, 'image/png');
-                        return;
-                    }
-
-                    targetMime = fmt === 'PNG' ? 'image/png' : (fmt === 'WEBP' ? 'image/webp' : (fmt === 'AVIF' ? 'image/avif' : 'image/jpeg'));
-                }
-
-                // COMPRESS (TARGET KB)
-                if (currentTool === 'compress' && compressMode === 'target') {
-                    const targetVal = parseFloat(document.getElementById('target-val').value) || 50;
-                    const targetBytes = document.getElementById('target-unit').value === 'mb' ? targetVal * 1024 * 1024 : targetVal * 1024;
-                    
-                    let minQ = 0.05, maxQ = 0.95, bestBlob = null;
-                    for (let i = 0; i < 7; i++) {
-                        const midQ = (minQ + maxQ) / 2;
-                        const b = await new Promise(r => canvas.toBlob(r, 'image/jpeg', midQ));
-                        bestBlob = b;
-                        if (b.size > targetBytes) maxQ = midQ;
-                        else minQ = midQ;
-                    }
-                    triggerDownload(bestBlob, `smartpic_compressed_${rawName}.${targetExt}`);
-                    finishSuccess();
-                    return;
-                }
-
-                const quality = currentTool === 'compress' ? parseInt(document.getElementById('quality-slider').value) / 100 : 0.88;
-                canvas.toBlob((blob) => {
-                    triggerDownload(blob, `smartpic_${currentTool}_${rawName}.${targetExt}`);
-                    finishSuccess();
-                }, targetMime, quality);
-
-            } catch (err) {
-                alert('Device processing error: ' + err.message);
-                btn.disabled = false;
-                document.getElementById('btn-text').innerText = toolConfig[currentTool].btn;
-            }
-        });
-
-        function triggerDownload(blob, filename) {
-            const a = document.createElement('a');
-            a.href = URL.createObjectURL(blob);
-            a.download = filename;
-            document.body.appendChild(a);
-            a.click();
-            a.remove();
-        }
-
-        function finishSuccess() {
-            document.getElementById('action-btn').disabled = false;
-            document.getElementById('btn-text').innerText = toolConfig[currentTool].btn;
-            document.getElementById('status-box').classList.remove('hidden');
-        }
-
-        // FEEDBACK MODAL
         function openFeedbackModal() {
             document.getElementById('feedback-form').reset();
             document.getElementById('fb-category').selectedIndex = 0;
@@ -1749,11 +442,6 @@
                 document.getElementById('feedback-form').reset();
                 setTimeout(() => { closeFeedbackModal(); btn.disabled = false; btn.innerText = 'Send Suggestion'; }, 1500);
             }
-        });
-
-        // ⚡ AUTO-ACTIVATE TOOL BASED ON URL (E.G. /resize-image, /image-to-pdf)
-        window.addEventListener('DOMContentLoaded', () => {
-            switchTool(currentTool);
         });
     </script>
 </body>
