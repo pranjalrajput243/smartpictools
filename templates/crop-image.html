@@ -32,11 +32,18 @@
         body { font-family: 'Plus Jakarta Sans', sans-serif; -webkit-tap-highlight-color: transparent; }
         .cropper-view-box, .cropper-face { border-radius: 8px; }
         
-        /* ⚡ NO UGLY CHECKERBOARD: Sleek dark theme matching background */
-        .cropper-bg { background: #020617 !important; background-image: none !important; }
-        .cropper-modal { opacity: 0.6 !important; background-color: #020617 !important; }
+        /* ⚡ KILL CHECKERBOARD PATTERN FOREVER: Sleek slate background */
+        .cropper-bg,
+        .cropper-container {
+            background: #020617 !important;
+            background-image: none !important;
+        }
+        .cropper-modal {
+            background-color: #020617 !important;
+            opacity: 0.65 !important;
+        }
 
-        /* ⚡ TRUE PHOTOSHOP HAND TOOL */
+        /* ⚡ PHOTOSHOP HAND / PAN CURSOR */
         .hand-mode-active .cropper-crop-box { pointer-events: none !important; opacity: 0.65; }
         .hand-mode-active .cropper-container,
         .hand-mode-active .cropper-drag-box,
@@ -171,6 +178,7 @@
         let currentFile = null;
         let isHandMode = false;
         let isSpacePressed = false;
+        let baseCanvasWidth = 0; // ⚡ Absolute minimum width lock
 
         const dropArea = document.getElementById('drop-area');
         const fileInput = document.getElementById('file-input');
@@ -213,16 +221,29 @@
 
                 if (cropper) cropper.destroy();
 
-                // ⚡ VIEWMODE 2: IMAGE CANNOT SHRINK SMALLER THAN FRAME!
                 cropper = new Cropper(img, {
                     aspectRatio: NaN,
-                    viewMode: 2,          // Hard boundary lock against frame edges
-                    background: false,    // Zero ugly grey checkerboards!
+                    viewMode: 1,
+                    background: false,    // No checkerboard!
                     responsive: true,
                     zoomable: true,
                     zoomOnWheel: true,
-                    wheelZoomRatio: 0.05, // Smooth controlled wheel zoom
-                    autoCropArea: 0.75
+                    wheelZoomRatio: 0.05,
+                    autoCropArea: 0.75,
+                    ready: function () {
+                        // ⚡ Store exact initial fit width
+                        const cData = cropper.getCanvasData();
+                        baseCanvasWidth = cData.width;
+                    },
+                    zoom: function (e) {
+                        // ⚡ HARD STOP: If zooming out (ratio < 1) and already at initial size, STOP IMMEDIATELY!
+                        if (e.detail.ratio < 1) {
+                            const cData = cropper.getCanvasData();
+                            if (cData.width <= baseCanvasWidth + 2) {
+                                e.preventDefault();
+                            }
+                        }
+                    }
                 });
             };
             reader.readAsDataURL(displayBlob);
@@ -238,8 +259,16 @@
             btn.className = "ratio-btn py-2.5 px-3 rounded-xl bg-indigo-600 text-white text-xs font-bold transition";
         }
 
+        // ⚡ ZOOM CONTROLS (WITH HARD STOP)
         function cropZoom(val) {
-            if (cropper) cropper.zoom(val);
+            if (!cropper) return;
+            if (val < 0) {
+                const cData = cropper.getCanvasData();
+                if (cData.width <= baseCanvasWidth + 5) {
+                    return; // Cannot zoom out smaller than initial fit!
+                }
+            }
+            cropper.zoom(val);
         }
 
         function cropReset() {
@@ -284,7 +313,7 @@
                     }
                 }
             }
-        });
+        }, { passive: false });
 
         window.addEventListener('keyup', function(e) {
             if (e.code === 'Space' || e.key === ' ' || e.keyCode === 32) {
