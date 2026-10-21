@@ -58,6 +58,17 @@
     <style>
         body { font-family: 'Plus Jakarta Sans', sans-serif; -webkit-tap-highlight-color: transparent; }
         .cropper-view-box, .cropper-face { border-radius: 8px; }
+        /* ⚡ KILL CHECKERBOARD PATTERN ON HOMEPAGE */
+        .cropper-bg,
+        .cropper-container,
+        .cropper-wrap-box {
+            background: #020617 !important;
+            background-image: none !important;
+        }
+        .cropper-modal {
+            background-color: #020617 !important;
+            opacity: 0.65 !important;
+        }
         .tiled-watermark-overlay {
             background-repeat: repeat;
             transform: rotate(-25deg) scale(1.4);
@@ -1321,25 +1332,25 @@
         }
 
         
-     // ⚡ CROPPER ENGINE (WITH ZOOM & SPACEBAR HAND TOOL)
-        let isHomeHandMode = false;
+     // ⚡ LOCKED FRAME CROPPER (NEVER SHRINKS, NO DRIFT)
         function initCropper() {
             const imgElement = document.getElementById('image-preview');
             if (cropper) cropper.destroy();
             cropper = new Cropper(imgElement, { 
                 aspectRatio: NaN, 
                 viewMode: 1, 
-                autoCrop: false, 
+                background: false,      // No ugly checkerboard
+                autoCropArea: 0.85, 
                 responsive: true,
-                zoomable: true,
-                zoomOnWheel: true,
-                wheelZoomRatio: 0.1
+                zoomable: false,        // ⚡ PHOTO STAYS 100% FIXED TO FRAME!
+                zoomOnWheel: false,     // ⚡ MOUSE WHEEL NEVER SHRINKS PHOTO!
+                zoomOnTouch: false,     // ⚡ TOUCH NEVER SHRINKS PHOTO!
+                toggleDragModeOnDblclick: false
             });
         }
 
         function setCropRatio(ratio) {
             if (cropper) {
-                cropper.crop();
                 cropper.setAspectRatio(ratio);
             }
             const eventTarget = event.currentTarget;
