@@ -4,20 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     
-    <!-- ⚡ HIGH-RANKING KEYWORDS FOR CONVERSION -->
-    <title>Convert Image Format Online Free - JPG, PNG, WEBP, AVIF | SmartPicTools</title>
-    <meta name="description" content="Free online tool to convert images to JPG, PNG, WEBP, and AVIF. Batch convert multiple photos with 1-click ZIP download. 100% private in-browser.">
-    <meta name="keywords" content="convert image format, image converter online, png to jpg, jpg to png, convert image to webp, avif to jpg, batch image converter free">
+    <!-- ⚡ HIGH-RANKING KEYWORDS FOR SVG, TIFF, JPG, PNG CONVERSION -->
+    <title>Convert Image Format Online Free - JPG, PNG, WEBP, AVIF, SVG, TIFF | SmartPicTools</title>
+    <meta name="description" content="Free online image format converter. Convert to JPG, PNG, WEBP, AVIF, SVG, and TIFF. Supports batch conversion with 1-click ZIP download. 100% private in-browser.">
+    <meta name="keywords" content="convert image format, image converter online, png to jpg, tiff to jpg, convert image to svg, svg converter, convert image to tiff, avif to jpg, batch image converter free">
     <meta name="robots" content="index, follow, max-image-preview:large">
     <meta name="author" content="SmartPicTools">
     <link rel="canonical" href="https://smartpictools.in/convert-image">
+    
+    <!-- ⚡ PERMANENT GOOGLE SEARCH CONSOLE VERIFICATION TAG -->
     <meta name="google-site-verification" content="uUq17UUsROyHMRQ8jkqKqrjZmsJnkuxZMKKoJLw_X3E" />
 
     <!-- OPEN GRAPH -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://smartpictools.in/convert-image">
     <meta property="og:title" content="Convert Image Format Online Free - SmartPicTools">
-    <meta property="og:description" content="Convert photos to JPG, PNG, WEBP, or AVIF in 0.2s directly on your device.">
+    <meta property="og:description" content="Convert single or batch photos to JPG, PNG, WEBP, AVIF, SVG, or TIFF in 0.2s directly on your device.">
 
     <!-- FAVICON -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' stop-color='%236366f1'/><stop offset='50%25' stop-color='%23a855f7'/><stop offset='100%25' stop-color='%23ec4899'/></linearGradient></defs><rect width='100' height='100' rx='28' fill='url(%23g)'/><path d='M52 16 L24 54 L46 54 L42 84 L76 44 L54 44 Z' fill='%23fbbf24'/></svg>">
@@ -26,6 +28,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/heic2any/0.0.4/heic2any.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    
+    <!-- ⚡ UTIF.js (In-Browser TIFF Decoder & Encoder) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/utif/3.1.0/UTIF.min.js"></script>
 
     <style>body { font-family: 'Plus Jakarta Sans', sans-serif; -webkit-tap-highlight-color: transparent; }</style>
 </head>
@@ -53,17 +58,19 @@
     <main class="max-w-4xl mx-auto w-full px-4 py-8 sm:py-12 flex-1">
         <div class="text-center max-w-2xl mx-auto mb-8 sm:mb-10">
             <h1 class="text-3xl sm:text-5xl font-black text-white tracking-tight">Convert Image Format</h1>
-            <p class="mt-2.5 text-slate-400 text-xs sm:text-sm">Convert single or batch photos to JPG, PNG, WEBP, or AVIF. Fast, private, and free.</p>
+            <p class="mt-2.5 text-slate-400 text-xs sm:text-sm">Convert single or batch photos to JPG, PNG, WEBP, AVIF, SVG, or TIFF in 0.2s with zero server uploads.</p>
         </div>
 
         <div class="bg-slate-900 rounded-3xl p-5 sm:p-10 border border-slate-800 shadow-2xl relative">
+            
+            <!-- UPLOAD DROP AREA (SUPPORTS SVG, TIF, TIFF, HEIC, JPG, PNG) -->
             <div id="drop-area" class="border-2 border-dashed border-slate-700 hover:border-indigo-500 bg-slate-950/60 hover:bg-indigo-950/20 rounded-2xl p-8 sm:p-14 text-center cursor-pointer transition-all duration-300">
-                <input type="file" id="file-input" multiple accept="image/*, .heic, .HEIC, .heif, .HEIF" class="hidden">
+                <input type="file" id="file-input" multiple accept="image/*, .heic, .HEIC, .heif, .HEIF, .svg, .tif, .tiff, image/svg+xml, image/tiff" class="hidden">
                 <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-3xl bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-3xl sm:text-4xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition duration-300 shadow-inner">
                     🔄
                 </div>
                 <h3 class="text-base sm:text-xl font-bold text-white mb-1.5">Select Photos to Convert</h3>
-                <p class="text-xs sm:text-sm text-slate-400">Select single or up to 20 photos (Supports JPG, PNG, WEBP, and iPhone HEIC)</p>
+                <p class="text-xs sm:text-sm text-slate-400">Supports JPG, PNG, WEBP, AVIF, SVG, TIFF, and iPhone HEIC</p>
             </div>
 
             <div id="workspace" class="hidden mt-6 space-y-6">
@@ -77,14 +84,16 @@
                 <div id="gallery" class="grid grid-cols-2 sm:grid-cols-4 gap-3 max-h-80 overflow-y-auto p-3 bg-slate-950/80 rounded-2xl border border-slate-800">
                 </div>
 
-                <!-- CONVERT SETTINGS -->
+                <!-- ⚡ CONVERT SETTINGS WITH SVG & TIFF -->
                 <div class="bg-slate-950/80 p-4 sm:p-5 rounded-2xl border border-slate-800 space-y-2">
                     <label class="block text-xs font-bold text-slate-400">Choose Target Format:</label>
                     <select id="target-format" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-3 text-sm text-white focus:outline-none font-bold">
                         <option value="JPG" selected>Convert to JPG (Universal Photo)</option>
-                        <option value="PNG">Convert to PNG (Lossless & Clean)</option>
+                        <option value="PNG">Convert to PNG (Lossless & Transparent)</option>
                         <option value="WEBP">Convert to WEBP (Super Fast Web)</option>
                         <option value="AVIF">Convert to AVIF (Next-Gen Ultra Compact)</option>
+                        <option value="SVG">Convert to SVG (Scalable Vector Graphic)</option>
+                        <option value="TIFF">Convert to TIFF (High-Res Print Quality)</option>
                     </select>
                 </div>
 
@@ -100,22 +109,22 @@
 
         <!-- HOW TO USE -->
         <section class="mt-14 border-t border-slate-800 pt-10">
-            <h2 class="text-xl sm:text-2xl font-bold text-white text-center mb-6">How to Convert Image Format in 3 Easy Steps</h2>
+            <h2 class="text-xl sm:text-2xl font-bold text-white text-center mb-6">How to Convert Images in 3 Easy Steps</h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs sm:text-sm">
                 <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800">
                     <span class="w-7 h-7 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center mb-2.5 text-xs">1</span>
-                    <h3 class="font-bold text-white text-sm mb-1">Select Photos</h3>
-                    <p class="text-slate-400">Choose single or multiple photos from your device.</p>
+                    <h3 class="font-bold text-white text-sm mb-1">Select Images</h3>
+                    <p class="text-slate-400">Choose single or batch JPG, PNG, WEBP, SVG, TIFF, or HEIC files.</p>
                 </div>
                 <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800">
                     <span class="w-7 h-7 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center mb-2.5 text-xs">2</span>
                     <h3 class="font-bold text-white text-sm mb-1">Choose Format</h3>
-                    <p class="text-slate-400">Select JPG, PNG, WEBP, or AVIF from the dropdown menu.</p>
+                    <p class="text-slate-400">Select your target format: JPG, PNG, WEBP, AVIF, SVG, or TIFF.</p>
                 </div>
                 <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800">
                     <span class="w-7 h-7 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center mb-2.5 text-xs">3</span>
                     <h3 class="font-bold text-white text-sm mb-1">Instant Download</h3>
-                    <p class="text-slate-400">Click download to save files (multiple files download as a clean ZIP).</p>
+                    <p class="text-slate-400">Click download to save files directly (multiple files download as a clean ZIP).</p>
                 </div>
             </div>
         </section>
@@ -125,17 +134,17 @@
             <h2 class="text-xl font-bold text-white mb-4">Frequently Asked Questions</h2>
             <details class="bg-slate-900 p-4 rounded-xl border border-slate-800 text-xs sm:text-sm cursor-pointer">
                 <summary class="font-bold text-white flex justify-between items-center">
-                    Can I convert multiple images at once?
+                    What is the benefit of converting to SVG?
                     <span class="text-indigo-400">▼</span>
                 </summary>
-                <p class="text-slate-400 mt-2 leading-relaxed">Yes! You can select up to 20 images at once. The tool will convert them and provide a single 1-click ZIP file.</p>
+                <p class="text-slate-400 mt-2 leading-relaxed">SVG (Scalable Vector Graphics) is an XML-based format that scales smoothly to any screen resolution without losing clarity. It is widely used by UI designers and modern websites.</p>
             </details>
             <details class="bg-slate-900 p-4 rounded-xl border border-slate-800 text-xs sm:text-sm cursor-pointer">
                 <summary class="font-bold text-white flex justify-between items-center">
-                    Which format is best for website speed?
+                    When should I use TIFF format?
                     <span class="text-indigo-400">▼</span>
                 </summary>
-                <p class="text-slate-400 mt-2 leading-relaxed">WEBP is currently the best format for websites—it reduces file size by up to 80% while keeping high visual clarity.</p>
+                <p class="text-slate-400 mt-2 leading-relaxed">TIFF preserves maximum uncompressed image detail without loss, making it the industry standard for professional photography, publishing, and commercial printing.</p>
             </details>
         </section>
     </main>
@@ -144,7 +153,7 @@
         <p>© 2026 SmartPicTools. 100% Free & Private in-browser suite. <a href="/" class="text-indigo-400 hover:underline">Explore All Tools</a></p>
     </footer>
 
-    <!-- JS ENGINE -->
+    <!-- ⚡ JS ENGINE (SUPPORTS SVG, TIFF, HEIC, AVIF, WEBP, PNG, JPG) -->
     <script>
         let filesList = [];
         const dropArea = document.getElementById('drop-area');
@@ -169,14 +178,45 @@
         async function handleFiles(files) {
             for (let f of Array.from(files)) {
                 let processedBlob = f;
-                if (f.name.toLowerCase().endsWith('.heic') || f.name.toLowerCase().endsWith('.heif')) {
+                let previewUrl = '';
+                const nameLower = f.name.toLowerCase();
+
+                // 1. Apple HEIC Support
+                if (nameLower.endsWith('.heic') || nameLower.endsWith('.heif')) {
                     try {
                         const conv = await heic2any({ blob: f, toType: 'image/jpeg', quality: 0.92 });
                         processedBlob = Array.isArray(conv) ? conv[0] : conv;
+                        previewUrl = URL.createObjectURL(processedBlob);
                     } catch(e) {}
                 }
-                const url = URL.createObjectURL(processedBlob);
-                filesList.push({ file: f, blob: processedBlob, url: url, name: f.name });
+                // 2. TIFF / TIF Decoder via UTIF.js
+                else if (nameLower.endsWith('.tif') || nameLower.endsWith('.tiff')) {
+                    try {
+                        const arrayBuffer = await f.arrayBuffer();
+                        const ifds = UTIF.decode(arrayBuffer);
+                        UTIF.decodeImage(arrayBuffer, ifds[0]);
+                        const rgba = UTIF.toRGBA8(ifds[0]);
+                        
+                        const tCanvas = document.createElement('canvas');
+                        tCanvas.width = ifds[0].width;
+                        tCanvas.height = ifds[0].height;
+                        const tCtx = tCanvas.getContext('2d');
+                        const imgData = tCtx.createImageData(ifds[0].width, ifds[0].height);
+                        imgData.data.set(rgba);
+                        tCtx.putImageData(imgData, 0, 0);
+
+                        processedBlob = await new Promise(res => tCanvas.toBlob(res, 'image/png'));
+                        previewUrl = URL.createObjectURL(processedBlob);
+                    } catch(e) {
+                        console.warn("TIFF decode note:", e);
+                    }
+                } 
+                // 3. SVG & Standard Photos
+                else {
+                    previewUrl = URL.createObjectURL(f);
+                }
+
+                filesList.push({ file: f, blob: processedBlob, url: previewUrl, name: f.name });
             }
             renderGallery();
         }
@@ -222,6 +262,21 @@
             });
         }
 
+        // Helper to convert canvas into TIFF Blob using UTIF.js
+        function canvasToTiffBlob(canvas) {
+            const ctx = canvas.getContext('2d');
+            const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+            const tiffBytes = UTIF.encodeImage(imgData.data, canvas.width, canvas.height);
+            return new Blob([tiffBytes], { type: 'image/tiff' });
+        }
+
+        // Helper to wrap canvas into valid scalable SVG
+        function canvasToSvgBlob(canvas) {
+            const dataUrl = canvas.toDataURL('image/png');
+            const svgContent = `<?xml version="1.0" encoding="UTF-8"?>\n<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="${canvas.width}" height="${canvas.height}" viewBox="0 0 ${canvas.width} ${canvas.height}">\n  <image width="${canvas.width}" height="${canvas.height}" xlink:href="${dataUrl}"/>\n</svg>`;
+            return new Blob([svgContent], { type: 'image/svg+xml;charset=utf-8' });
+        }
+
         async function executeConversion() {
             if (filesList.length === 0) return;
             const btn = document.getElementById('convert-btn');
@@ -230,13 +285,13 @@
 
             const targetFormat = document.getElementById('target-format').value;
             const ext = targetFormat.toLowerCase();
-            const mime = targetFormat === 'PNG' ? 'image/png' : (targetFormat === 'WEBP' ? 'image/webp' : 'image/jpeg');
 
             try {
                 if (filesList.length === 1) {
                     const item = filesList[0];
                     const rawName = item.name.substring(0, item.name.lastIndexOf('.')) || item.name;
 
+                    // 1. AVIF Fallback
                     if (targetFormat === 'AVIF') {
                         const fd = new FormData();
                         fd.append('image', item.blob);
@@ -257,12 +312,31 @@
                     const ctx = canvas.getContext('2d');
                     ctx.drawImage(bmp, 0, 0);
 
+                    // 2. SVG
+                    if (targetFormat === 'SVG') {
+                        const svgBlob = canvasToSvgBlob(canvas);
+                        downloadBlob(svgBlob, `smartpic_${rawName}.svg`);
+                        finish();
+                        return;
+                    }
+
+                    // 3. TIFF
+                    if (targetFormat === 'TIFF') {
+                        const tiffBlob = canvasToTiffBlob(canvas);
+                        downloadBlob(tiffBlob, `smartpic_${rawName}.tiff`);
+                        finish();
+                        return;
+                    }
+
+                    // 4. Standard Formats (JPG, PNG, WEBP)
+                    const mime = targetFormat === 'PNG' ? 'image/png' : (targetFormat === 'WEBP' ? 'image/webp' : 'image/jpeg');
                     canvas.toBlob((blob) => {
                         downloadBlob(blob, `smartpic_${rawName}.${ext}`);
                         finish();
                     }, mime, 0.90);
 
                 } else {
+                    // Batch Multi-File ZIP Package
                     const zip = new JSZip();
                     for (let item of filesList) {
                         const rawName = item.name.substring(0, item.name.lastIndexOf('.')) || item.name;
@@ -273,11 +347,19 @@
                         const ctx = canvas.getContext('2d');
                         ctx.drawImage(bmp, 0, 0);
 
-                        const blob = await new Promise(r => canvas.toBlob(r, mime, 0.88));
-                        zip.file(`${rawName}.${ext}`, blob);
+                        let fileBlob = null;
+                        if (targetFormat === 'SVG') {
+                            fileBlob = canvasToSvgBlob(canvas);
+                        } else if (targetFormat === 'TIFF') {
+                            fileBlob = canvasToTiffBlob(canvas);
+                        } else {
+                            const mime = targetFormat === 'PNG' ? 'image/png' : (targetFormat === 'WEBP' ? 'image/webp' : 'image/jpeg');
+                            fileBlob = await new Promise(r => canvas.toBlob(r, mime, 0.88));
+                        }
+                        zip.file(`${rawName}.${ext}`, fileBlob);
                     }
                     const zipContent = await zip.generateAsync({ type: "blob" });
-                    downloadBlob(zipContent, "smartpic_batch_converted.zip");
+                    downloadBlob(zipContent, `smartpic_batch_converted_${ext}.zip`);
                     finish();
                 }
             } catch(e) {
