@@ -328,21 +328,23 @@
             }
         }
 
+       // ⚡ PRO STUDIO BORDER: WIDE WHITE MARGIN (14px) + OUTER BLACK CUTTING LINE
         function applyStudioCuttingBorder(canvas) {
             const ctx = canvas.getContext('2d');
             const w = canvas.width;
             const h = canvas.height;
 
-            // 1. Clean White Margin (4px)
-            ctx.lineWidth = 4;
+            // 1. ⚡ Wide Professional White Margin (14px - 3.5x wider!)
+            const whiteThickness = 14;
+            ctx.lineWidth = whiteThickness;
             ctx.strokeStyle = '#ffffff';
-            ctx.strokeRect(2, 2, w - 4, h - 4);
+            ctx.strokeRect(whiteThickness / 2, whiteThickness / 2, w - whiteThickness, h - whiteThickness);
 
-            // 2. Crisp Jet Black Cutting Stroke (1px)
-            ctx.lineWidth = 1;
+            // 2. ⚡ Crisp Outer Black Cutting Line (1.5px on exact boundary)
+            ctx.lineWidth = 1.5;
             ctx.strokeStyle = '#000000';
-            ctx.strokeRect(0.5, 0.5, w - 1, h - 1);
-        }
+            ctx.strokeRect(0.75, 0.75, w - 1.5, h - 1.5);
+        }}
 
         // ⚡ DYNAMIC PRINT SHEET GENERATOR (A4 OR 4X6 WITH EXACT MANUAL COUNT)
         function executePassportDownload() {
