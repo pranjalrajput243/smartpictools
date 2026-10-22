@@ -96,7 +96,7 @@
                     </button>
                 </div>
 
-                <!-- ⚡ PRO TOOLBAR -->
+                <!-- ⚡ CONTROL TOOLBAR -->
                 <div class="flex flex-wrap items-center justify-between gap-2 p-2.5 bg-slate-950/90 rounded-2xl border border-slate-800">
                     <div class="flex items-center gap-2">
                         <button type="button" onclick="cropZoom(0.15)" title="Zoom In" class="py-1.5 px-3 rounded-xl bg-slate-900 hover:bg-indigo-600 text-xs font-bold text-white border border-slate-700 transition flex items-center gap-1 active:scale-95">
@@ -113,11 +113,11 @@
                         </button>
                     </div>
                     <span class="text-[11px] font-semibold text-emerald-400 flex items-center gap-1">
-                        <span>💡 Drag anywhere on the photo to draw your crop area</span>
+                        <span>💡 Drag to draw crop area | Zoom in to Pan</span>
                     </span>
                 </div>
 
-                <!-- ⚡ CROPPER CONTAINER (EXACT FIT - ZERO BLACK SPACE) -->
+                <!-- ⚡ EXACT FIT CONTAINER (ZERO BLACK SPACE) -->
                 <div class="flex items-center justify-center select-none overflow-hidden">
                     <div class="inline-block max-w-full rounded-2xl border border-slate-800 overflow-hidden leading-none shadow-xl bg-slate-950">
                         <img id="crop-image" src="#" alt="Crop Preview" class="max-h-[460px] max-w-full block">
@@ -168,7 +168,7 @@
             </div>
         </section>
 
-        <!-- ⚡ 100% USER-CENTRIC PRACTICAL FAQS -->
+        <!-- FAQS -->
         <section class="mt-12 space-y-3">
             <h2 class="text-xl font-bold text-white mb-4">Frequently Asked Questions</h2>
             
@@ -208,22 +208,6 @@
                 </summary>
                 <p class="text-slate-400 mt-2.5 leading-relaxed text-xs sm:text-sm">Never! SmartPicTools is 100% free and we never place any branding, logos, or watermarks on your downloaded images.</p>
             </details>
-
-            <details class="group bg-slate-900 p-4 sm:p-5 rounded-2xl border border-slate-800 cursor-pointer">
-                <summary class="font-bold text-white flex justify-between items-center text-sm">
-                    Can I crop photos on my smartphone using touch?
-                    <span class="text-indigo-400 group-open:rotate-180 transition ml-2">▼</span>
-                </summary>
-                <p class="text-slate-400 mt-2.5 leading-relaxed text-xs sm:text-sm">Yes! The tool is fully optimized for mobile touchscreens. You can draw, pinch-to-zoom, and move the crop frame smoothly using your fingers on any smartphone.</p>
-            </details>
-
-            <details class="group bg-slate-900 p-4 sm:p-5 rounded-2xl border border-slate-800 cursor-pointer">
-                <summary class="font-bold text-white flex justify-between items-center text-sm">
-                    Are my uploaded images safe and private?
-                    <span class="text-indigo-400 group-open:rotate-180 transition ml-2">▼</span>
-                </summary>
-                <p class="text-slate-400 mt-2.5 leading-relaxed text-xs sm:text-sm">100%. Cropping executes directly inside your browser's local memory. Your photos never get uploaded, saved, or indexed on any server, ensuring complete privacy.</p>
-            </details>
         </section>
     </main>
 
@@ -231,13 +215,13 @@
         <p>© 2026 SmartPicTools. 100% Free & Private in-browser suite. <a href="/" class="text-indigo-400 hover:underline">Explore All Tools</a></p>
     </footer>
 
-    <!-- ⚡ JS ENGINE -->
+    <!-- ⚡ JS ENGINE WITH HARD BOUNDARY CLAMP -->
     <script>
         let cropper = null;
         let currentFile = null;
         let isHandMode = false;
         let isSpacePressed = false;
-        let baseCanvasData = null;
+        let baseCanvasData = null; // ⚡ Minimum Fit Boundary
 
         const dropArea = document.getElementById('drop-area');
         const fileInput = document.getElementById('file-input');
@@ -287,8 +271,7 @@
                         responsive: true,
                         zoomable: true,
                         zoomOnWheel: false,
-                        // ⚡ NO AUTO-CROP BOX: Photo opens 100% clean, user drags with mouse to crop!
-                        autoCrop: false,
+                        autoCrop: false, // ⚡ Clean view on load
                         ready: function () {
                             const c = cropper.getCanvasData();
                             baseCanvasData = {
@@ -297,7 +280,19 @@
                                 left: c.left,
                                 top: c.top
                             };
-                            // Default is Freeform with no pre-drawn box
+                        },
+                        // ⚡ PREVENTS MOVING PHOTO OFF-SCREEN WHEN NOT ZOOMED IN!
+                        cropmove: function (e) {
+                            if (e.detail.action === 'move' && baseCanvasData) {
+                                const c = cropper.getCanvasData();
+                                // If not zoomed in, LOCK in place so edges never detach!
+                                if (c.width <= baseCanvasData.width + 2) {
+                                    e.preventDefault();
+                                }
+                            }
+                        },
+                        cropend: function () {
+                            clampCanvasBounds();
                         }
                     });
                 };
@@ -307,15 +302,45 @@
             reader.readAsDataURL(displayBlob);
         }
 
-        // ⚡ RATIO TEMPLATES (Draws full-coverage box ONLY when clicked)
+        // ⚡ ENSURES PHOTO EDGES NEVER DRIFT OFF THE FRAME
+        function clampCanvasBounds() {
+            if (!cropper || !baseCanvasData) return;
+            const c = cropper.getCanvasData();
+
+            // If photo is at normal scale, snap firmly to initial fit!
+            if (c.width <= baseCanvasData.width + 2) {
+                cropper.setCanvasData(baseCanvasData);
+                return;
+            }
+
+            // If zoomed in, ensure edges stay pinned to boundaries
+            let newLeft = c.left;
+            let newTop = c.top;
+
+            const maxLeft = baseCanvasData.left;
+            const minLeft = baseCanvasData.left + baseCanvasData.width - c.width;
+            const maxTop = baseCanvasData.top;
+            const minTop = baseCanvasData.top + baseCanvasData.height - c.height;
+
+            if (newLeft > maxLeft) newLeft = maxLeft;
+            if (newLeft < minLeft) newLeft = minLeft;
+            if (newTop > maxTop) newTop = maxTop;
+            if (newTop < minTop) newTop = minTop;
+
+            cropper.setCanvasData({
+                left: newLeft,
+                top: newTop,
+                width: c.width,
+                height: c.height
+            });
+        }
+
         function applyFullCoverageRatio(ratio, btn) {
             if (!cropper) return;
 
             if (isNaN(ratio) || !ratio) {
-                // Freeform: allow free drawing
                 cropper.setAspectRatio(NaN);
             } else {
-                // Ratio preset clicked: show crop box and cover full dimension
                 cropper.crop();
                 cropper.setAspectRatio(ratio);
                 maximizeCropBoxToFit(ratio);
@@ -352,60 +377,51 @@
             });
         }
 
-        // ⚡ ZOOM CONTROLS (LOCKED TO MINIMUM INITIAL SCALE)
+        // ⚡ ZOOM CONTROLS
         function cropZoom(val) {
             if (!cropper || !baseCanvasData) return;
-            const cData = cropper.getCanvasData();
+            const c = cropper.getCanvasData();
 
             if (val > 0) {
-                const newW = cData.width * 1.15;
-                const newH = cData.height * 1.15;
-                const diffW = newW - cData.width;
-                const diffH = newH - cData.height;
+                const newW = c.width * 1.15;
+                const newH = c.height * 1.15;
+                const diffW = newW - c.width;
+                const diffH = newH - c.height;
 
                 cropper.setCanvasData({
                     width: newW,
                     height: newH,
-                    left: cData.left - (diffW / 2),
-                    top: cData.top - (diffH / 2)
+                    left: c.left - (diffW / 2),
+                    top: c.top - (diffH / 2)
                 });
             } else {
-                if (cData.width <= baseCanvasData.width + 1) return;
+                if (c.width <= baseCanvasData.width + 1) return;
 
-                let newW = cData.width * 0.88;
-                let newH = cData.height * 0.88;
+                let newW = c.width * 0.88;
+                let newH = c.height * 0.88;
 
                 if (newW <= baseCanvasData.width) {
-                    cropper.setCanvasData({
-                        width: baseCanvasData.width,
-                        height: baseCanvasData.height,
-                        left: baseCanvasData.left,
-                        top: baseCanvasData.top
-                    });
+                    cropper.setCanvasData(baseCanvasData);
                     return;
                 }
 
-                const diffW = cData.width - newW;
-                const diffH = cData.height - newH;
+                const diffW = c.width - newW;
+                const diffH = c.height - newH;
 
                 cropper.setCanvasData({
                     width: newW,
                     height: newH,
-                    left: cData.left + (diffW / 2),
-                    top: cData.top + (diffH / 2)
+                    left: c.left + (diffW / 2),
+                    top: c.top + (diffH / 2)
                 });
             }
+            clampCanvasBounds();
         }
 
         function cropReset() {
             if (cropper && baseCanvasData) {
-                cropper.setCanvasData({
-                    width: baseCanvasData.width,
-                    height: baseCanvasData.height,
-                    left: baseCanvasData.left,
-                    top: baseCanvasData.top
-                });
-                cropper.clear(); // Clears any drawn box
+                cropper.setCanvasData(baseCanvasData);
+                cropper.clear();
                 cropper.setAspectRatio(NaN);
 
                 document.querySelectorAll('.ratio-btn').forEach(b => {
@@ -417,7 +433,7 @@
             }
         }
 
-        // ⚡ SPACEBAR & HAND TOOL
+        // ⚡ PAN & HAND TOOL (ONLY ACTIVATES WHEN PHOTO IS ZOOMED IN!)
         function updatePanMode(active) {
             if (!cropper) return;
             const container = document.querySelector('.cropper-container');
