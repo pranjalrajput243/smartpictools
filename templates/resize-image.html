@@ -6,11 +6,13 @@
     
     <!-- ⚡ HIGH-RANKING KEYWORDS FOR RESIZING -->
     <title>Resize Image Dimensions Online Free - Change Pixel Width & Height | SmartPicTools</title>
-    <meta name="description" content="Free online tool to resize image dimensions in pixels. Change width and height with aspect ratio lock. Perfect for passport photos and exam forms. 100% private in-browser.">
-    <meta name="keywords" content="resize image online, resize image dimensions, change photo pixel width height, passport size photo resizer, image resolution changer, free online photo resizer">
+    <meta name="description" content="Free online tool to resize image dimensions in pixels with live visual transform. Change width and height with aspect ratio lock. 100% private in-browser tool.">
+    <meta name="keywords" content="resize image online, resize image dimensions, change photo pixel width height, passport size photo resizer, image resolution changer, free online photo resizer, live image resizer">
     <meta name="robots" content="index, follow, max-image-preview:large">
     <meta name="author" content="SmartPicTools">
     <link rel="canonical" href="https://smartpictools.in/resize-image">
+    
+    <!-- ⚡ PERMANENT GOOGLE SEARCH CONSOLE VERIFICATION TAG -->
     <meta name="google-site-verification" content="uUq17UUsROyHMRQ8jkqKqrjZmsJnkuxZMKKoJLw_X3E" />
 
     <!-- OPEN GRAPH -->
@@ -26,7 +28,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/heic2any/0.0.4/heic2any.min.js"></script>
 
-    <style>body { font-family: 'Plus Jakarta Sans', sans-serif; -webkit-tap-highlight-color: transparent; }</style>
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; -webkit-tap-highlight-color: transparent; }
+        #preview-img { transition: aspect-ratio 0.15s ease-out; }
+    </style>
 </head>
 <body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col justify-between selection:bg-indigo-500 selection:text-white">
 
@@ -52,10 +57,12 @@
     <main class="max-w-4xl mx-auto w-full px-4 py-8 sm:py-12 flex-1">
         <div class="text-center max-w-2xl mx-auto mb-8 sm:mb-10">
             <h1 class="text-3xl sm:text-5xl font-black text-white tracking-tight">Resize Image Dimensions</h1>
-            <p class="mt-2.5 text-slate-400 text-xs sm:text-sm">Change exact pixel width and height with live scaling preview and proportion lock.</p>
+            <p class="mt-2.5 text-slate-400 text-xs sm:text-sm">Change exact pixel width and height with real-time live scaling preview and proportion lock.</p>
         </div>
 
         <div class="bg-slate-900 rounded-3xl p-5 sm:p-10 border border-slate-800 shadow-2xl relative">
+            
+            <!-- UPLOAD DROP AREA -->
             <div id="drop-area" class="border-2 border-dashed border-slate-700 hover:border-indigo-500 bg-slate-950/60 hover:bg-indigo-950/20 rounded-2xl p-8 sm:p-14 text-center cursor-pointer transition-all duration-300">
                 <input type="file" id="file-input" accept="image/*, .heic, .HEIC, .heif, .HEIF" class="hidden">
                 <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-3xl bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-3xl sm:text-4xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition duration-300 shadow-inner">
@@ -65,7 +72,8 @@
                 <p class="text-xs sm:text-sm text-slate-400">Supports JPG, PNG, WEBP, and iPhone HEIC</p>
             </div>
 
-            <div id="workspace" class="hidden mt-6 space-y-6">
+            <!-- WORKSPACE -->
+            <div id="workspace" class="hidden mt-6 space-y-5">
                 <div class="flex items-center justify-between">
                     <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Live Scale Preview</span>
                     <button type="button" onclick="document.getElementById('file-input').click()" class="text-xs font-bold text-indigo-400 hover:text-white bg-slate-800 hover:bg-slate-700 px-3 py-1.5 rounded-xl border border-slate-700 transition">
@@ -73,36 +81,65 @@
                     </button>
                 </div>
 
-                <div class="bg-slate-950/80 p-4 rounded-2xl border border-slate-800 flex items-center justify-center max-h-[380px] overflow-hidden">
-                    <img id="preview-img" src="#" alt="Preview" class="max-h-[340px] w-auto rounded-xl object-contain">
+                <!-- ⚡ LIVE VISUAL PREVIEW CONTAINER -->
+                <div class="bg-slate-950/80 p-4 rounded-2xl border border-slate-800 space-y-3">
+                    <div id="resize-badge-container" class="hidden flex justify-end">
+                        <span id="resize-live-badge" class="text-[11px] font-bold text-indigo-400 bg-indigo-500/10 border border-indigo-500/20 px-3 py-1 rounded-lg">
+                            📐 Live Scale: 0 × 0 px (100%)
+                        </span>
+                    </div>
+
+                    <div class="flex items-center justify-center max-h-[380px] overflow-hidden select-none p-1">
+                        <img id="preview-img" src="#" alt="Live Preview" class="max-h-[340px] w-auto rounded-xl object-contain">
+                    </div>
+
+                    <div class="flex justify-between text-xs font-semibold px-2 pt-2 border-t border-slate-800/80">
+                        <span id="file-name" class="text-white truncate max-w-xs">photo.jpg</span>
+                        <span class="text-slate-400">Original: <span id="orig-dim" class="text-indigo-400 font-extrabold">0 × 0 px</span></span>
+                    </div>
                 </div>
 
-                <div class="flex justify-between text-xs font-semibold px-1">
-                    <span id="file-name" class="text-white truncate max-w-xs">photo.jpg</span>
-                    <span class="text-indigo-400">Original Dimensions: <span id="orig-dim">0 × 0 px</span></span>
-                </div>
-
-                <!-- RESIZE INPUTS -->
+                <!-- ⚡ RESIZE INPUTS & LIVE CONTROLS -->
                 <div class="bg-slate-950/80 p-4 sm:p-5 rounded-2xl border border-slate-800 space-y-4">
                     <div class="grid grid-cols-2 gap-3">
                         <div>
-                            <label class="block text-xs font-bold text-slate-400 mb-1">Target Width (Pixels)</label>
+                            <label class="block text-xs font-bold text-slate-400 mb-1">Target Width (px)</label>
                             <input type="number" id="target-w" oninput="handleDimensionChange('width')" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-indigo-500 font-bold">
                         </div>
                         <div>
-                            <label class="block text-xs font-bold text-slate-400 mb-1">Target Height (Pixels)</label>
+                            <label class="block text-xs font-bold text-slate-400 mb-1">Target Height (px)</label>
                             <input type="number" id="target-h" oninput="handleDimensionChange('height')" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-indigo-500 font-bold">
                         </div>
                     </div>
 
+                    <!-- PROPORTION LOCK & RESET -->
                     <div class="flex items-center justify-between p-2.5 bg-slate-900 rounded-xl border border-slate-800">
                         <label for="lock-ratio" class="flex items-center gap-2 cursor-pointer text-xs font-bold text-slate-300">
-                            <input type="checkbox" id="lock-ratio" checked class="w-4 h-4 rounded accent-indigo-600 cursor-pointer">
+                            <input type="checkbox" id="lock-ratio" checked onchange="handleRatioLockToggle()" class="w-4 h-4 rounded accent-indigo-600 cursor-pointer">
                             <span>🔒 Lock Proportions (Keep Natural Shape)</span>
                         </label>
                         <button type="button" onclick="resetOriginal()" class="text-xs font-bold text-indigo-400 hover:underline">
                             Reset Original
                         </button>
+                    </div>
+
+                    <!-- ⚡ 1-CLICK POPULAR DIMENSION PRESETS -->
+                    <div>
+                        <span class="text-xs font-bold text-slate-400 block mb-2">Popular Size Presets:</span>
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                            <button type="button" onclick="applyPreset(350, 450)" class="py-2 px-2.5 rounded-xl bg-slate-900 hover:bg-indigo-600 text-xs font-bold text-slate-300 hover:text-white border border-slate-700 transition">
+                                👤 350×450 (Passport)
+                            </button>
+                            <button type="button" onclick="applyPreset(1080, 1080)" class="py-2 px-2.5 rounded-xl bg-slate-900 hover:bg-indigo-600 text-xs font-bold text-slate-300 hover:text-white border border-slate-700 transition">
+                                📷 1080×1080 (Insta)
+                            </button>
+                            <button type="button" onclick="applyPreset(1280, 720)" class="py-2 px-2.5 rounded-xl bg-slate-900 hover:bg-indigo-600 text-xs font-bold text-slate-300 hover:text-white border border-slate-700 transition">
+                                📺 1280×720 (YouTube)
+                            </button>
+                            <button type="button" onclick="applyPreset(1920, 1080)" class="py-2 px-2.5 rounded-xl bg-slate-900 hover:bg-indigo-600 text-xs font-bold text-slate-300 hover:text-white border border-slate-700 transition">
+                                🖥️ 1920×1080 (Full HD)
+                            </button>
+                        </div>
                     </div>
                 </div>
 
@@ -123,12 +160,12 @@
                 <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800">
                     <span class="w-7 h-7 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center mb-2.5 text-xs">1</span>
                     <h3 class="font-bold text-white text-sm mb-1">Select Picture</h3>
-                    <p class="text-slate-400">Choose your photo to view its current width and height in pixels.</p>
+                    <p class="text-slate-400">Upload your photo to view its exact width and height in pixels.</p>
                 </div>
                 <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800">
                     <span class="w-7 h-7 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center mb-2.5 text-xs">2</span>
-                    <h3 class="font-bold text-white text-sm mb-1">Set Width or Height</h3>
-                    <p class="text-slate-400">Enter new pixel dimensions. Keep lock proportions checked to prevent distortion.</p>
+                    <h3 class="font-bold text-white text-sm mb-1">Set Dimensions</h3>
+                    <p class="text-slate-400">Type new width or height. Watch the live preview stretch or scale instantly.</p>
                 </div>
                 <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800">
                     <span class="w-7 h-7 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center mb-2.5 text-xs">3</span>
@@ -150,10 +187,10 @@
             </details>
             <details class="bg-slate-900 p-4 rounded-xl border border-slate-800 text-xs sm:text-sm cursor-pointer">
                 <summary class="font-bold text-white flex justify-between items-center">
-                    Can I resize photos for online exam requirements (like 200x230 px)?
+                    Can I set custom dimensions for online exam requirements (like 200×230 px)?
                     <span class="text-indigo-400">▼</span>
                 </summary>
-                <p class="text-slate-400 mt-2 leading-relaxed">Yes! Simply uncheck 'Lock Proportions' and enter exact required pixels (e.g. 200 width and 230 height) to meet official portal specifications.</p>
+                <p class="text-slate-400 mt-2 leading-relaxed">Yes! Simply uncheck 'Lock Proportions' and enter the exact required pixels (e.g. 200 width and 230 height) to meet official portal specifications.</p>
             </details>
         </section>
     </main>
@@ -162,7 +199,7 @@
         <p>© 2026 SmartPicTools. 100% Free & Private in-browser suite. <a href="/" class="text-indigo-400 hover:underline">Explore All Tools</a></p>
     </footer>
 
-    <!-- JS ENGINE -->
+    <!-- ⚡ REAL-TIME LIVE VISUAL RESIZING JAVASCRIPT ENGINE -->
     <script>
         let currentFile = null;
         let loadedImg = new Image();
@@ -213,6 +250,8 @@
                     document.getElementById('orig-dim').innerText = `${naturalW} × ${naturalH} px`;
                     document.getElementById('target-w').value = naturalW;
                     document.getElementById('target-h').value = naturalH;
+
+                    updateResizeLiveVisual(naturalW, naturalH);
                 };
             };
             reader.readAsDataURL(displayBlob);
@@ -223,6 +262,7 @@
             document.getElementById('status-box').classList.add('hidden');
         }
 
+        // ⚡ LIVE DIMENSION INPUT CHANGE HANDLER
         function handleDimensionChange(source) {
             const wInput = document.getElementById('target-w');
             const hInput = document.getElementById('target-h');
@@ -240,12 +280,53 @@
                     wInput.value = w;
                 }
             }
+
+            updateResizeLiveVisual(w, h);
+        }
+
+        function handleRatioLockToggle() {
+            const isLocked = document.getElementById('lock-ratio').checked;
+            if (isLocked && naturalW > 0 && naturalH > 0) {
+                ratio = naturalW / naturalH;
+                handleDimensionChange('width');
+            }
+        }
+
+        // ⚡ REAL-TIME VISUAL STRETCH / SQUISH / SCALE
+        function updateResizeLiveVisual(targetW, targetH) {
+            if (targetW <= 0 || targetH <= 0 || naturalW <= 0 || naturalH <= 0) return;
+
+            const badgeContainer = document.getElementById('resize-badge-container');
+            const badge = document.getElementById('resize-live-badge');
+            const scalePct = Math.round((targetW / naturalW) * 100);
+
+            badgeContainer.classList.remove('hidden');
+            badge.innerText = `📐 Live Scale: ${targetW} × ${targetH} px (${scalePct}%)`;
+
+            // ⚡ VISUALLY TRANSFORMS IMAGE ASPECT RATIO LIVE ON SCREEN!
+            const img = document.getElementById('preview-img');
+            img.style.aspectRatio = `${targetW} / ${targetH}`;
+            img.style.objectFit = 'fill';
+        }
+
+        function applyPreset(w, h) {
+            document.getElementById('lock-ratio').checked = false; // Disable lock so exact preset dimensions apply
+            document.getElementById('target-w').value = w;
+            document.getElementById('target-h').value = h;
+            updateResizeLiveVisual(w, h);
         }
 
         function resetOriginal() {
             if (naturalW > 0 && naturalH > 0) {
+                document.getElementById('lock-ratio').checked = true;
                 document.getElementById('target-w').value = naturalW;
                 document.getElementById('target-h').value = naturalH;
+                
+                const img = document.getElementById('preview-img');
+                img.style.aspectRatio = 'auto';
+                img.style.objectFit = 'contain';
+                
+                updateResizeLiveVisual(naturalW, naturalH);
             }
         }
 
@@ -258,6 +339,7 @@
             canvas.width = targetW;
             canvas.height = targetH;
             const ctx = canvas.getContext('2d');
+            ctx.imageSmoothingQuality = 'high';
             ctx.drawImage(loadedImg, 0, 0, targetW, targetH);
 
             const rawName = currentFile.name.substring(0, currentFile.name.lastIndexOf('.')) || currentFile.name;
