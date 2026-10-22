@@ -4,21 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     
-    <!-- ⚡ HIGH-RANKING GOOGLE SEO TAGS FOR IMAGE TO PDF -->
-    <title>Convert Images to PDF Online Free - JPG, PNG, HEIC to PDF | SmartPicTools</title>
-    <meta name="description" content="Free 100% private in-browser tool to convert multiple images to a single PDF document in 0.5s. Supports JPG, PNG, WEBP, and iPhone HEIC. No file upload to servers.">
-    <meta name="keywords" content="image to pdf, convert jpg to pdf, png to pdf, heic to pdf, merge images to pdf, photo to pdf maker, free online image to pdf converter, jpeg to pdf, combine photos into one pdf">
+    <!-- ⚡ HIGH-RANKING KEYWORDS FOR PDF MAKER (NOW WITH SVG & TIFF) -->
+    <title>PDF Maker - Merge Images, SVG & TIFF to PDF Online Free | SmartPicTools</title>
+    <meta name="description" content="Free 100% private in-browser PDF maker to merge JPG, PNG, WEBP, SVG, TIFF, and iPhone HEIC photos into one PDF document with zero white borders. Fast 0.5s generation.">
+    <meta name="keywords" content="pdf maker, merge pdf, image to pdf, svg to pdf, tiff to pdf, convert jpg to pdf, merge images to pdf, photo to pdf maker, free online pdf merger">
     <meta name="robots" content="index, follow, max-image-preview:large">
     <meta name="author" content="SmartPicTools">
     <link rel="canonical" href="https://smartpictools.in/image-to-pdf">
+    
+    <!-- ⚡ PERMANENT GOOGLE SEARCH CONSOLE VERIFICATION TAG -->
     <meta name="google-site-verification" content="uUq17UUsROyHMRQ8jkqKqrjZmsJnkuxZMKKoJLw_X3E" />
 
-    <!-- OPEN GRAPH PREVIEW -->
+    <!-- OPEN GRAPH -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://smartpictools.in/image-to-pdf">
-    <meta property="og:title" content="Convert Images to PDF Online Free - SmartPicTools">
-    <meta property="og:description" content="Combine multiple photos into one clean PDF document in 0.5s directly on your device.">
-    <meta property="og:site_name" content="SmartPicTools">
+    <meta property="og:title" content="PDF Maker - Merge Images, SVG & TIFF to PDF Free - SmartPicTools">
+    <meta property="og:description" content="Merge multiple JPG, PNG, SVG, TIFF, and HEIC photos into one clean PDF document with 0% white borders in 0.5s.">
 
     <!-- FAVICON -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' stop-color='%236366f1'/><stop offset='50%25' stop-color='%23a855f7'/><stop offset='100%25' stop-color='%23ec4899'/></linearGradient></defs><rect width='100' height='100' rx='28' fill='url(%23g)'/><path d='M52 16 L24 54 L46 54 L42 84 L76 44 L54 44 Z' fill='%23fbbf24'/></svg>">
@@ -26,9 +27,10 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
-    <!-- LIBRARIES (Client-side PDF & HEIC) -->
+    <!-- LIBRARIES (jsPDF + heic2any + UTIF for TIFF support) -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/heic2any/0.0.4/heic2any.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/utif@3.1.0/UTIF.min.js"></script>
 
     <style>body { font-family: 'Plus Jakarta Sans', sans-serif; -webkit-tap-highlight-color: transparent; }</style>
 </head>
@@ -43,45 +45,34 @@
                 </div>
                 <div>
                     <span class="text-xl sm:text-2xl font-black tracking-tight text-white">SmartPic<span class="text-indigo-400">Tools</span></span>
-                    <span class="block text-[9px] sm:text-[10px] uppercase font-bold tracking-widest text-slate-400 -mt-1">Pro Image Suite</span>
+                    <span class="block text-[9px] sm:text-[10px] uppercase font-bold tracking-widest text-slate-400 -mt-1">PDF Studio</span>
                 </div>
             </a>
-            
             <a href="/" class="py-2 px-3.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-bold text-indigo-400 hover:text-white border border-slate-700 transition flex items-center gap-1.5 shadow-md">
-                <span>← All Image Tools</span>
+                <span>← All Tools</span>
             </a>
         </div>
     </header>
 
-    <!-- MAIN CONVERTER WORKSPACE -->
+    <!-- MAIN WORKSPACE -->
     <main class="max-w-4xl mx-auto w-full px-4 py-8 sm:py-12 flex-1">
-        
-        <!-- TITLE -->
         <div class="text-center max-w-2xl mx-auto mb-8 sm:mb-10">
-            <span class="text-[11px] font-extrabold uppercase tracking-widest text-indigo-400 bg-indigo-500/10 px-3 py-1 rounded-full border border-indigo-500/20">Dedicated PDF Studio</span>
-            <h1 class="text-3xl sm:text-5xl font-black text-white mt-3 tracking-tight">Convert Images to PDF</h1>
-            <p class="mt-2.5 text-slate-400 text-xs sm:text-sm">Merge multiple JPG, PNG, WEBP, or iPhone HEIC photos into one single PDF document in 0.5s.</p>
+            <h1 class="text-3xl sm:text-5xl font-black text-white tracking-tight">PDF Maker & Merge Photos</h1>
+            <p class="mt-2.5 text-slate-400 text-xs sm:text-sm">Merge JPG, PNG, WEBP, SVG, TIFF, or iPhone HEIC photos into one single PDF document with edge-to-edge fit and zero white borders.</p>
         </div>
 
         <div class="bg-slate-900 rounded-3xl p-5 sm:p-10 border border-slate-800 shadow-2xl relative">
-            
-            <!-- UPLOAD DROP AREA -->
+            <!-- ⚡ UPLOAD DROP AREA (NOW EXPLICITLY ACCEPTS SVG, TIF, TIFF, HEIC, JPG, PNG) -->
             <div id="drop-area" class="border-2 border-dashed border-slate-700 hover:border-indigo-500 bg-slate-950/60 hover:bg-indigo-950/20 rounded-2xl p-8 sm:p-14 text-center cursor-pointer transition-all duration-300">
-                <input type="file" id="pdf-file-input" multiple accept="image/*, .heic, .HEIC, .heif, .HEIF" class="hidden">
+                <input type="file" id="pdf-file-input" multiple accept="image/*, .heic, .HEIC, .heif, .HEIF, .svg, .tif, .tiff, image/svg+xml, image/tiff" class="hidden">
                 <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-3xl bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-3xl sm:text-4xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition duration-300 shadow-inner">
                     📄
                 </div>
-                <h3 class="text-base sm:text-xl font-bold text-white mb-1.5">
-                    Select Images to Convert into PDF
-                </h3>
-                <p class="text-xs sm:text-sm text-slate-400">
-                    Select single or multiple photos. Supports JPG, PNG, WEBP, and iPhone HEIC.
-                </p>
+                <h3 class="text-base sm:text-xl font-bold text-white mb-1.5">Select Photos to Merge into PDF</h3>
+                <p class="text-xs sm:text-sm text-slate-400">Supports JPG, PNG, WEBP, SVG, TIFF, and iPhone HEIC</p>
             </div>
 
-            <!-- CONTROLS & GALLERY (HIDDEN INITIALLY) -->
             <div id="pdf-workspace" class="hidden mt-6 space-y-6">
-                
                 <div class="flex items-center justify-between">
                     <span class="text-xs font-bold text-slate-300">Selected Pages (<span id="page-count" class="text-indigo-400 font-extrabold">0</span>):</span>
                     <button type="button" onclick="document.getElementById('pdf-file-input').click()" class="text-xs font-bold text-indigo-400 hover:text-white bg-slate-800 hover:bg-slate-700 px-3 py-1.5 rounded-xl border border-slate-700 transition">
@@ -89,92 +80,74 @@
                     </button>
                 </div>
 
-                <!-- GALLERY OF PAGES -->
                 <div id="pdf-gallery" class="grid grid-cols-2 sm:grid-cols-4 gap-3 max-h-96 overflow-y-auto p-3 bg-slate-950/80 rounded-2xl border border-slate-800">
                 </div>
 
-                <!-- PDF SETTINGS -->
-                <div class="bg-slate-950/80 p-4 sm:p-5 rounded-2xl border border-slate-800 grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                        <label class="block text-xs font-bold text-slate-400 mb-1">Page Orientation</label>
-                        <select id="pdf-orientation" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2.5 text-xs text-white focus:outline-none">
-                            <option value="portrait" selected>Portrait (Standard Vertical)</option>
-                            <option value="landscape">Landscape (Horizontal)</option>
-                            <option value="auto">Auto (Match Image Aspect)</option>
-                        </select>
-                    </div>
-
-                    <div>
-                        <label class="block text-xs font-bold text-slate-400 mb-1">Page Margins</label>
-                        <select id="pdf-margin" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2.5 text-xs text-white focus:outline-none">
-                            <option value="none" selected>No Margin (Full Page Edge-to-Edge)</option>
-                            <option value="small">Small Clean Margin (White Border)</option>
-                        </select>
-                    </div>
+                <!-- PDF FIT SETTINGS (ZERO WHITE SPACE AS DEFAULT) -->
+                <div class="bg-slate-950/80 p-4 sm:p-5 rounded-2xl border border-slate-800">
+                    <label class="block text-xs font-bold text-slate-400 mb-1.5">Page Sizing & Margins:</label>
+                    <select id="pdf-fit-mode" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-3 text-sm text-white focus:outline-none font-bold">
+                        <option value="fit" selected>Edge-to-Edge Full Fit (0% White Space - Match Photo Exactly)</option>
+                        <option value="a4">Standard A4 Document Sheet</option>
+                    </select>
+                    <p class="text-[11px] text-emerald-400 font-semibold mt-1.5">✓ Edge-to-Edge removes all white bars completely, matching each photo/graphic's exact dimensions.</p>
                 </div>
 
-                <!-- DOWNLOAD BUTTON -->
                 <button type="button" id="generate-pdf-btn" onclick="generatePDFDocument()" class="w-full py-4 px-6 rounded-2xl bg-gradient-to-r from-indigo-600 via-indigo-500 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-extrabold text-sm sm:text-base shadow-lg shadow-indigo-500/25 transition active:scale-[0.99] flex items-center justify-center gap-3">
                     <span id="pdf-btn-text">📥 Merge & Download PDF Document</span>
                 </button>
             </div>
 
-            <!-- SUCCESS NOTIFICATION -->
             <div id="pdf-status-box" class="hidden mt-5 p-3.5 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 text-center">
-                <p class="text-emerald-400 font-bold text-xs sm:text-sm">🎉 Success! Your PDF has been created and saved directly to your device.</p>
+                <p class="text-emerald-400 font-bold text-xs sm:text-sm">🎉 Success! Your PDF has been created with zero white borders.</p>
             </div>
         </div>
 
-        <!-- HOW TO USE -->
         <section class="mt-14 border-t border-slate-800 pt-10">
-            <h2 class="text-xl sm:text-2xl font-bold text-white text-center mb-6">How to Convert Images to PDF in 3 Easy Steps</h2>
+            <h2 class="text-xl sm:text-2xl font-bold text-white text-center mb-6">How to Merge Photos to PDF in 3 Easy Steps</h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs sm:text-sm">
                 <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800">
                     <span class="w-7 h-7 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center mb-2.5 text-xs">1</span>
-                    <h3 class="font-bold text-white text-sm mb-1">Upload Your Photos</h3>
-                    <p class="text-slate-400">Select single or multiple JPG, PNG, WEBP, or iPhone HEIC photos.</p>
+                    <h3 class="font-bold text-white text-sm mb-1">Select Files</h3>
+                    <p class="text-slate-400">Choose JPG, PNG, WEBP, SVG, TIFF, or iPhone HEIC pictures.</p>
                 </div>
                 <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800">
                     <span class="w-7 h-7 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center mb-2.5 text-xs">2</span>
-                    <h3 class="font-bold text-white text-sm mb-1">Organize & Customize</h3>
-                    <p class="text-slate-400">Review page order, delete any unwanted images, and set orientation.</p>
+                    <h3 class="font-bold text-white text-sm mb-1">Review Order</h3>
+                    <p class="text-slate-400">Check page thumbnails and delete unwanted items with ✕.</p>
                 </div>
                 <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800">
                     <span class="w-7 h-7 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center mb-2.5 text-xs">3</span>
-                    <h3 class="font-bold text-white text-sm mb-1">Instant PDF Download</h3>
-                    <p class="text-slate-400">Click download to compile all pages into a crisp PDF file in 0.5s.</p>
+                    <h3 class="font-bold text-white text-sm mb-1">Instant Download</h3>
+                    <p class="text-slate-400">Click download to compile all pages into a crisp PDF in 0.5s.</p>
                 </div>
             </div>
         </section>
 
-        <!-- DEDICATED FAQS -->
         <section class="mt-12 space-y-3">
             <h2 class="text-xl font-bold text-white mb-4">Frequently Asked Questions</h2>
-            
             <details class="bg-slate-900 p-4 rounded-xl border border-slate-800 text-xs sm:text-sm cursor-pointer">
                 <summary class="font-bold text-white flex justify-between items-center">
-                    Can I combine different image formats (JPG, PNG, HEIC) into one PDF?
+                    Can I combine SVG vectors and TIFF images with JPG/PNG into one PDF?
                     <span class="text-indigo-400">▼</span>
                 </summary>
-                <p class="text-slate-400 mt-2 leading-relaxed">Yes! You can mix JPG, PNG, WEBP, and Apple iPhone HEIC pictures together. Our in-browser engine normalizes all formats and merges them into a clean, uniform PDF document.</p>
+                <p class="text-slate-400 mt-2 leading-relaxed">Yes! SmartPicTools seamlessly decodes SVG and high-resolution TIFF files and merges them alongside standard JPG, PNG, and iPhone HEIC files into a single, uniform PDF.</p>
             </details>
-
             <details class="bg-slate-900 p-4 rounded-xl border border-slate-800 text-xs sm:text-sm cursor-pointer">
                 <summary class="font-bold text-white flex justify-between items-center">
-                    Are my personal documents or certificates uploaded to a server?
+                    How does Edge-to-Edge mode prevent white borders?
                     <span class="text-indigo-400">▼</span>
                 </summary>
-                <p class="text-slate-400 mt-2 leading-relaxed">Zero server uploads. Your Aadhaar, certificates, and personal pictures are merged directly in your device's RAM memory using client-side JavaScript. Total privacy guaranteed.</p>
+                <p class="text-slate-400 mt-2 leading-relaxed">Instead of forcing photos onto a rigid A4 sheet, our engine dynamically sizes each PDF page to match the exact proportions of each photo, eliminating white sidebars 100%.</p>
             </details>
         </section>
     </main>
 
-    <!-- FOOTER -->
     <footer class="border-t border-slate-800 bg-slate-950 py-8 px-4 text-xs text-slate-400 text-center">
         <p>© 2026 SmartPicTools. 100% Free & Private in-browser suite. <a href="/" class="text-indigo-400 hover:underline">Explore All Tools</a></p>
     </footer>
 
-    <!-- JAVASCRIPT ENGINE -->
+    <!-- ⚡ ZERO BORDER ENGINE (NOW SUPPORTS SVG, TIFF, HEIC, WEBP, PNG, JPG) -->
     <script>
         let pdfImages = [];
 
@@ -202,36 +175,95 @@
             document.getElementById('pdf-status-box').classList.add('hidden');
 
             for (let f of rawFiles) {
-                let processedBlob = f;
-                const isHeic = f.name.toLowerCase().endsWith('.heic') || f.name.toLowerCase().endsWith('.heif');
-                
-                if (isHeic) {
+                let dataUrl = '';
+                let dimensions = { w: 1000, h: 1000 };
+                const nameLower = f.name.toLowerCase();
+
+                // 1. Apple iPhone HEIC / HEIF
+                if (nameLower.endsWith('.heic') || nameLower.endsWith('.heif')) {
                     try {
-                        const converted = await heic2any({ blob: f, toType: 'image/jpeg', quality: 0.9 });
-                        processedBlob = Array.isArray(converted) ? converted[0] : converted;
+                        const conv = await heic2any({ blob: f, toType: 'image/jpeg', quality: 0.92 });
+                        const b = Array.isArray(conv) ? conv[0] : conv;
+                        dataUrl = await new Promise(r => {
+                            const reader = new FileReader();
+                            reader.onload = e => r(e.target.result);
+                            reader.readAsDataURL(b);
+                        });
                     } catch(err) {
                         console.warn(err);
                     }
                 }
+                // 2. TIF / TIFF Decoder via UTIF.js
+                else if (nameLower.endsWith('.tif') || nameLower.endsWith('.tiff')) {
+                    try {
+                        const buf = await f.arrayBuffer();
+                        const ifds = UTIF.decode(buf);
+                        UTIF.decodeImage(buf, ifds[0]);
+                        const rgba = UTIF.toRGBA8(ifds[0]);
+                        
+                        const tCanvas = document.createElement('canvas');
+                        tCanvas.width = ifds[0].width;
+                        tCanvas.height = ifds[0].height;
+                        const tCtx = tCanvas.getContext('2d');
+                        const imgData = tCtx.createImageData(ifds[0].width, ifds[0].height);
+                        imgData.data.set(rgba);
+                        tCtx.putImageData(imgData, 0, 0);
 
-                const dataUrl = await new Promise(res => {
-                    const r = new FileReader();
-                    r.onload = (e) => res(e.target.result);
-                    r.readAsDataURL(processedBlob);
-                });
+                        dataUrl = tCanvas.toDataURL('image/png');
+                        dimensions = { w: ifds[0].width, h: ifds[0].height };
+                    } catch(err) {
+                        console.warn("TIFF load error:", err);
+                    }
+                }
+                // 3. SVG Vector Graphic
+                else if (nameLower.endsWith('.svg')) {
+                    try {
+                        const text = await f.text();
+                        const svgBlob = new Blob([text], { type: 'image/svg+xml;charset=utf-8' });
+                        const blobUrl = URL.createObjectURL(svgBlob);
+                        
+                        const sImg = new Image();
+                        await new Promise(r => { sImg.onload = r; sImg.src = blobUrl; });
+                        
+                        const sCanvas = document.createElement('canvas');
+                        sCanvas.width = sImg.naturalWidth || 1200;
+                        sCanvas.height = sImg.naturalHeight || 1200;
+                        const sCtx = sCanvas.getContext('2d');
+                        sCtx.drawImage(sImg, 0, 0, sCanvas.width, sCanvas.height);
+                        
+                        dataUrl = sCanvas.toDataURL('image/png');
+                        dimensions = { w: sCanvas.width, h: sCanvas.height };
+                        URL.revokeObjectURL(blobUrl);
+                    } catch(err) {
+                        console.warn("SVG load error:", err);
+                    }
+                }
+                // 4. Standard Images (JPG, PNG, WEBP)
+                else {
+                    dataUrl = await new Promise(r => {
+                        const reader = new FileReader();
+                        reader.onload = e => r(e.target.result);
+                        reader.readAsDataURL(f);
+                    });
+                }
 
-                const dimensions = await new Promise(res => {
-                    const img = new Image();
-                    img.onload = () => res({ w: img.naturalWidth, h: img.naturalHeight });
-                    img.src = dataUrl;
-                });
+                // Ensure exact pixel dimensions
+                if (dataUrl && (dimensions.w === 1000 && dimensions.h === 1000)) {
+                    dimensions = await new Promise(res => {
+                        const img = new Image();
+                        img.onload = () => res({ w: img.naturalWidth || 1000, h: img.naturalHeight || 1000 });
+                        img.src = dataUrl;
+                    });
+                }
 
-                pdfImages.push({
-                    name: f.name,
-                    dataUrl: dataUrl,
-                    width: dimensions.w,
-                    height: dimensions.h
-                });
+                if (dataUrl) {
+                    pdfImages.push({
+                        name: f.name,
+                        dataUrl: dataUrl,
+                        width: dimensions.w,
+                        height: dimensions.h
+                    });
+                }
             }
 
             renderGallery();
@@ -249,6 +281,7 @@
             }
 
             workspace.classList.remove('hidden');
+            dropArea.classList.add('hidden');
             pageCount.innerText = pdfImages.length;
             gallery.innerHTML = '';
 
@@ -285,55 +318,57 @@
             });
         }
 
+        // ⚡ EXACT ZERO BORDER GENERATOR (SUPPORTS MIXED SVG, TIFF, HEIC, JPG, PNG)
         async function generatePDFDocument() {
             if (pdfImages.length === 0) return;
             const btn = document.getElementById('generate-pdf-btn');
             btn.disabled = true;
-            document.getElementById('pdf-btn-text').innerText = "⏳ Compiling PDF Document...";
+            document.getElementById('pdf-btn-text').innerText = "⏳ Merging PDF...";
 
             try {
                 const { jsPDF } = window.jspdf;
-                const orientationMode = document.getElementById('pdf-orientation').value;
-                const marginMode = document.getElementById('pdf-margin').value;
-
+                const fitMode = document.getElementById('pdf-fit-mode').value;
                 let doc = null;
 
                 for (let i = 0; i < pdfImages.length; i++) {
                     const item = pdfImages[i];
-                    let isLandscape = item.width > item.height;
-                    
-                    let pageOrient = 'p';
-                    if (orientationMode === 'landscape') pageOrient = 'l';
-                    else if (orientationMode === 'portrait') pageOrient = 'p';
-                    else pageOrient = isLandscape ? 'l' : 'p';
 
-                    if (i === 0) {
-                        doc = new jsPDF(pageOrient, 'pt', 'a4');
+                    if (fitMode === 'fit') {
+                        // ⚡ SUB-MILLIMETER EXACT PT CALCULATION (0% WHITE BORDERS)
+                        const wPt = item.width * 0.75;
+                        const hPt = item.height * 0.75;
+                        const orient = wPt >= hPt ? 'l' : 'p';
+                        
+                        if (i === 0) {
+                            doc = new jsPDF({ orientation: orient, unit: 'pt', format: [wPt, hPt] });
+                        } else {
+                            doc.addPage([wPt, hPt], orient);
+                        }
+
+                        const pW = doc.internal.pageSize.getWidth();
+                        const pH = doc.internal.pageSize.getHeight();
+                        doc.addImage(item.dataUrl, 'JPEG', 0, 0, pW, pH);
                     } else {
-                        doc.addPage('a4', pageOrient);
+                        // Standard A4 Mode
+                        const orient = item.width >= item.height ? 'l' : 'p';
+                        if (i === 0) doc = new jsPDF(orient, 'pt', 'a4');
+                        else doc.addPage('a4', orient);
+
+                        const pW = doc.internal.pageSize.getWidth();
+                        const pH = doc.internal.pageSize.getHeight();
+                        const scale = Math.min(pW / item.width, pH / item.height);
+                        const dW = item.width * scale;
+                        const dH = item.height * scale;
+                        const x = (pW - dW) / 2;
+                        const y = (pH - dH) / 2;
+                        doc.addImage(item.dataUrl, 'JPEG', x, y, dW, dH);
                     }
-
-                    const pageWidth = doc.internal.pageSize.getWidth();
-                    const pageHeight = doc.internal.pageSize.getHeight();
-
-                    const margin = marginMode === 'small' ? 30 : 0;
-                    const availWidth = pageWidth - (margin * 2);
-                    const availHeight = pageHeight - (margin * 2);
-
-                    const scale = Math.min(availWidth / item.width, availHeight / item.height);
-                    const drawWidth = item.width * scale;
-                    const drawHeight = item.height * scale;
-
-                    const posX = margin + (availWidth - drawWidth) / 2;
-                    const posY = margin + (availHeight - drawHeight) / 2;
-
-                    doc.addImage(item.dataUrl, 'JPEG', posX, posY, drawWidth, drawHeight);
                 }
 
-                doc.save(`smartpic_document_${Date.now()}.pdf`);
+                doc.save(`smartpic_merged_${Date.now()}.pdf`);
                 document.getElementById('pdf-status-box').classList.remove('hidden');
             } catch(e) {
-                alert('PDF generation error: ' + e.message);
+                alert('PDF error: ' + e.message);
             } finally {
                 btn.disabled = false;
                 document.getElementById('pdf-btn-text').innerText = "📥 Merge & Download PDF Document";
