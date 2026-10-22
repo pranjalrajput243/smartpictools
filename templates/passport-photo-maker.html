@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     
     <!-- ⚡ HIGH-RANKING KEYWORDS FOR PASSPORT PHOTO -->
-    <title>Passport Size Photo Maker Online Free - 3.5 x 4.5 cm & Print Sheet | SmartPicTools</title>
-    <meta name="description" content="Free online passport size photo maker. Crop to exact 3.5cm x 4.5cm for SSC, UPSC, Police, and government exam forms. Create 8-photo print sheet for 4x6 paper. 100% private.">
-    <meta name="keywords" content="passport size photo maker, 3.5 x 4.5 cm photo maker, ssc passport photo, upsc photo resizer, passport photo print sheet 4x6, free online passport photo generator">
+    <title>Passport Size Photo Maker Online Free - 3.5 x 4.5 cm & A4 Print Sheet | SmartPicTools</title>
+    <meta name="description" content="Free online passport size photo maker. Crop to exact 3.5cm x 4.5cm for SSC, UPSC, and print custom number of photos on A4 or 4x6 sheet. 100% private in-browser.">
+    <meta name="keywords" content="passport size photo maker, 3.5 x 4.5 cm photo maker, passport photo print sheet a4, ssc passport photo, custom passport photo sheet maker">
     <meta name="robots" content="index, follow, max-image-preview:large">
     <meta name="author" content="SmartPicTools">
     <link rel="canonical" href="https://smartpictools.in/passport-photo-maker">
@@ -19,7 +19,7 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://smartpictools.in/passport-photo-maker">
     <meta property="og:title" content="Passport Size Photo Maker Online Free - SmartPicTools">
-    <meta property="og:description" content="Make 3.5x4.5cm passport photos and 8-photo print sheets in 0.1s directly on your device.">
+    <meta property="og:description" content="Make 3.5x4.5cm passport photos and custom print sheets (A4 or 4x6) with cutting borders in 0.1s.">
 
     <!-- FAVICON -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' stop-color='%236366f1'/><stop offset='50%25' stop-color='%23a855f7'/><stop offset='100%25' stop-color='%23ec4899'/></linearGradient></defs><rect width='100' height='100' rx='28' fill='url(%23g)'/><path d='M52 16 L24 54 L46 54 L42 84 L76 44 L54 44 Z' fill='%23fbbf24'/></svg>">
@@ -33,6 +33,21 @@
     <style>
         body { font-family: 'Plus Jakarta Sans', sans-serif; -webkit-tap-highlight-color: transparent; }
         .cropper-view-box, .cropper-face { border-radius: 4px; }
+        
+        .cropper-bg,
+        .cropper-container,
+        .cropper-wrap-box {
+            background: #020617 !important;
+            background-image: none !important;
+        }
+        .cropper-modal {
+            background-color: #020617 !important;
+            opacity: 0.65 !important;
+        }
+        #crop-image {
+            display: block;
+            max-width: 100%;
+        }
     </style>
 </head>
 <body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col justify-between selection:bg-indigo-500 selection:text-white">
@@ -59,7 +74,7 @@
     <main class="max-w-4xl mx-auto w-full px-4 py-8 sm:py-12 flex-1">
         <div class="text-center max-w-2xl mx-auto mb-8 sm:mb-10">
             <h1 class="text-3xl sm:text-5xl font-black text-white tracking-tight">Passport Size Photo Maker</h1>
-            <p class="mt-2.5 text-slate-400 text-xs sm:text-sm">Create official 3.5cm × 4.5cm passport photos for government forms (SSC, UPSC, Police) or generate an 8-photo print sheet for 4×6 inch paper.</p>
+            <p class="mt-2.5 text-slate-400 text-xs sm:text-sm">Create official 3.5cm × 4.5cm photos or generate custom print sheets (A4 / 4×6) with exact number of photos.</p>
         </div>
 
         <div class="bg-slate-900 rounded-3xl p-5 sm:p-10 border border-slate-800 shadow-2xl relative">
@@ -77,15 +92,17 @@
             <!-- WORKSPACE -->
             <div id="workspace" class="hidden mt-6 space-y-6">
                 <div class="flex items-center justify-between">
-                    <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Crop & Center Face</span>
+                    <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Center Face Inside Frame</span>
                     <button type="button" onclick="document.getElementById('file-input').click()" class="text-xs font-bold text-indigo-400 hover:text-white bg-slate-800 hover:bg-slate-700 px-3 py-1.5 rounded-xl border border-slate-700 transition">
                         🔄 Change Photo
                     </button>
                 </div>
 
                 <!-- CROPPER CONTAINER -->
-                <div class="bg-slate-950/80 p-3 sm:p-4 rounded-2xl border border-slate-800 flex items-center justify-center max-h-[420px] overflow-hidden">
-                    <img id="crop-image" src="#" alt="Crop Preview" class="max-h-[380px] w-auto rounded-xl object-contain block">
+                <div class="flex items-center justify-center select-none overflow-hidden">
+                    <div class="inline-block max-w-full rounded-2xl border border-slate-800 overflow-hidden leading-none shadow-xl bg-slate-950">
+                        <img id="crop-image" src="#" alt="Crop Preview" class="max-h-[460px] max-w-full block">
+                    </div>
                 </div>
 
                 <!-- PASSPORT SETTINGS -->
@@ -101,23 +118,47 @@
 
                         <div>
                             <label class="block text-xs font-bold text-slate-400 mb-1">Download Format:</label>
-                            <select id="output-type" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-white font-bold focus:outline-none">
-                                <option value="single" selected>Single Photo (For Online Form Upload - 30 to 50 KB)</option>
-                                <option value="sheet">8-Photo Print Sheet (4×6 Inch Photo Paper for Studio Print)</option>
+                            <select id="output-type" onchange="toggleSheetOptions()" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-white font-bold focus:outline-none">
+                                <option value="single">Single Photo (For Online Form Upload - 30 to 50 KB)</option>
+                                <option value="sheet" selected>Print Sheet (Custom Number of Photos on Paper)</option>
                             </select>
                         </div>
                     </div>
 
-                    <div class="flex items-center justify-between p-2.5 bg-slate-900 rounded-xl border border-slate-800">
-                        <label for="add-border" class="flex items-center gap-2 cursor-pointer text-xs font-bold text-slate-300">
+                    <!-- ⚡ CUSTOM SHEET SETTINGS (PAPER TYPE & MANUAL COUNT) -->
+                    <div id="sheet-settings-box" class="p-3.5 bg-slate-900 rounded-xl border border-slate-800 space-y-3">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <div>
+                                <label class="block text-xs font-bold text-slate-400 mb-1">Paper Sheet Size:</label>
+                                <select id="paper-type" onchange="validatePhotoCount()" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white font-bold focus:outline-none">
+                                    <option value="a4" selected>A4 Paper Sheet (Max: 30 Photos)</option>
+                                    <option value="4x6">4×6 Inch Photo Paper (Max: 8 Photos)</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-bold text-slate-400 mb-1">How Many Photos Needed (Count)?</label>
+                                <input type="number" id="photo-count" value="8" min="1" max="30" oninput="validatePhotoCount()" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white font-bold focus:outline-none focus:border-indigo-500">
+                            </div>
+                        </div>
+
+                        <!-- ⚡ REAL-TIME ERROR / GUIDANCE MESSAGE -->
+                        <div id="count-error-msg" class="text-xs font-semibold">
+                            <span class="text-emerald-400 font-bold">✓ 8 Photos will be neatly arranged on your selected sheet.</span>
+                        </div>
+                    </div>
+
+                    <!-- CUTTING BORDER -->
+                    <div class="p-3 bg-slate-900 rounded-xl border border-slate-800">
+                        <label for="add-border" class="flex items-center gap-2.5 cursor-pointer text-xs font-bold text-slate-300">
                             <input type="checkbox" id="add-border" checked class="w-4 h-4 rounded accent-indigo-600 cursor-pointer">
-                            <span>Add Thin Cutting Border (For Clean Scissor Cut)</span>
+                            <span>White Margin + Outer Black Cutting Stroke (साफ़ कटिंग गाइड लाइन)</span>
                         </label>
                     </div>
                 </div>
 
                 <button type="button" id="download-btn" onclick="executePassportDownload()" class="w-full py-4 px-6 rounded-2xl bg-gradient-to-r from-indigo-600 via-indigo-500 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-extrabold text-sm sm:text-base shadow-lg shadow-indigo-500/25 transition active:scale-[0.99] flex items-center justify-center gap-3">
-                    <span>📥 Download Passport Photo</span>
+                    <span id="btn-text">📥 Download Passport Photo</span>
                 </button>
             </div>
 
@@ -137,13 +178,13 @@
                 </div>
                 <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800">
                     <span class="w-7 h-7 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center mb-2.5 text-xs">2</span>
-                    <h3 class="font-bold text-white text-sm mb-1">Center Your Face</h3>
-                    <p class="text-slate-400">Move the crop box so your head and shoulders fit nicely inside the frame.</p>
+                    <h3 class="font-bold text-white text-sm mb-1">Set Count & Paper</h3>
+                    <p class="text-slate-400">Choose Single photo, or select A4 / 4×6 paper and type exact count (e.g. 4, 12, 20 photos).</p>
                 </div>
                 <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800">
                     <span class="w-7 h-7 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center mb-2.5 text-xs">3</span>
                     <h3 class="font-bold text-white text-sm mb-1">Instant Download</h3>
-                    <p class="text-slate-400">Choose Single photo for exam forms or 8-photo print sheet for physical prints.</p>
+                    <p class="text-slate-400">Download single photo for online portals or custom print sheet ready to print.</p>
                 </div>
             </div>
         </section>
@@ -153,17 +194,17 @@
             <h2 class="text-xl font-bold text-white mb-4">Frequently Asked Questions</h2>
             <details class="bg-slate-900 p-4 rounded-xl border border-slate-800 text-xs sm:text-sm cursor-pointer">
                 <summary class="font-bold text-white flex justify-between items-center">
-                    What is the standard passport photo size for Indian government exam forms?
+                    How many passport photos fit on one A4 paper sheet?
                     <span class="text-indigo-400">▼</span>
                 </summary>
-                <p class="text-slate-400 mt-2 leading-relaxed">The official standard for SSC, UPSC, Railway, Police, and bank exams is 3.5 cm width × 4.5 cm height (approx 413 × 531 pixels at 300 DPI) with file size between 20 KB and 50 KB.</p>
+                <p class="text-slate-400 mt-2 leading-relaxed">A standard A4 sheet can hold up to 30 passport photos (5 columns × 6 rows) at official 3.5 × 4.5 cm dimensions with neat cutting margins.</p>
             </details>
             <details class="bg-slate-900 p-4 rounded-xl border border-slate-800 text-xs sm:text-sm cursor-pointer">
                 <summary class="font-bold text-white flex justify-between items-center">
-                    How much does it cost to print the 8-photo sheet at a local studio?
+                    Can I print just 4 or 6 photos on an A4 sheet?
                     <span class="text-indigo-400">▼</span>
                 </summary>
-                <p class="text-slate-400 mt-2 leading-relaxed">Taking the 8-photo sheet on a pen drive or WhatsApp to any photo lab to print on standard 4×6 inch paper typically costs only ₹5 to ₹10, saving you over ₹50 compared to studio shooting charges.</p>
+                <p class="text-slate-400 mt-2 leading-relaxed">Yes! You can enter any custom number (like 4, 6, 8, 12). The tool prints only that exact number of photos at the top of the A4 page, leaving the rest of the sheet blank so you can reuse the photo paper later.</p>
             </details>
         </section>
     </main>
@@ -210,20 +251,33 @@
             const reader = new FileReader();
             reader.onload = (e) => {
                 const img = document.getElementById('crop-image');
+
+                img.onload = function() {
+                    document.getElementById('drop-area').classList.add('hidden');
+                    document.getElementById('workspace').classList.remove('hidden');
+                    document.getElementById('status-box').classList.add('hidden');
+
+                    if (cropper) cropper.destroy();
+
+                    const preset = document.getElementById('size-preset').value;
+                    const initialRatio = preset === 'india' ? (7 / 9) : 1;
+
+                    cropper = new Cropper(img, {
+                        aspectRatio: initialRatio,
+                        viewMode: 1,
+                        background: false,
+                        responsive: true,
+                        zoomable: false,
+                        zoomOnWheel: false,
+                        zoomOnTouch: false,
+                        autoCropArea: 0.88,
+                        toggleDragModeOnDblclick: false
+                    });
+
+                    validatePhotoCount();
+                };
+
                 img.src = e.target.result;
-
-                document.getElementById('drop-area').classList.add('hidden');
-                document.getElementById('workspace').classList.remove('hidden');
-                document.getElementById('status-box').classList.add('hidden');
-
-                if (cropper) cropper.destroy();
-                // 3.5cm x 4.5cm ratio = 7 / 9
-                cropper = new Cropper(img, {
-                    aspectRatio: 7 / 9,
-                    viewMode: 1,
-                    autoCropArea: 0.85,
-                    responsive: true
-                });
             };
             reader.readAsDataURL(displayBlob);
         }
@@ -231,16 +285,73 @@
         function changeRatio() {
             if (!cropper) return;
             const preset = document.getElementById('size-preset').value;
-            cropper.setAspectRatio(preset === 'india' ? 7 / 9 : 1);
+            cropper.setAspectRatio(preset === 'india' ? (7 / 9) : 1);
+            validatePhotoCount();
         }
 
+        function toggleSheetOptions() {
+            const outType = document.getElementById('output-type').value;
+            const sheetBox = document.getElementById('sheet-settings-box');
+            sheetBox.classList.toggle('hidden', outType === 'single');
+            validatePhotoCount();
+        }
+
+        // ⚡ REAL-TIME MANUAL COUNT VALIDATION WITH AUTO-LOCK
+        function validatePhotoCount() {
+            const outType = document.getElementById('output-type').value;
+            const btn = document.getElementById('download-btn');
+            const errorMsg = document.getElementById('count-error-msg');
+
+            if (outType === 'single') {
+                btn.disabled = false;
+                btn.classList.remove('opacity-50', 'cursor-not-allowed');
+                return;
+            }
+
+            const paper = document.getElementById('paper-type').value;
+            const countInput = document.getElementById('photo-count');
+            const count = parseInt(countInput.value) || 0;
+            const maxAllowed = paper === 'a4' ? 30 : 8;
+
+            if (count <= 0) {
+                errorMsg.innerHTML = `<span class="text-rose-400">⚠️ Please enter at least 1 photo count.</span>`;
+                btn.disabled = true;
+                btn.classList.add('opacity-50', 'cursor-not-allowed');
+            } else if (count > maxAllowed) {
+                errorMsg.innerHTML = `<span class="text-rose-400 font-bold">⚠️ Maximum ${maxAllowed} photos can fit on ${paper.toUpperCase()} sheet! (You entered ${count}). Please enter ${maxAllowed} or less.</span>`;
+                btn.disabled = true;
+                btn.classList.add('opacity-50', 'cursor-not-allowed');
+            } else {
+                errorMsg.innerHTML = `<span class="text-emerald-400 font-bold">✓ Valid! ${count} photo(s) will be printed on ${paper.toUpperCase()} paper sheet.</span>`;
+                btn.disabled = false;
+                btn.classList.remove('opacity-50', 'cursor-not-allowed');
+            }
+        }
+
+        function applyStudioCuttingBorder(canvas) {
+            const ctx = canvas.getContext('2d');
+            const w = canvas.width;
+            const h = canvas.height;
+
+            // 1. Clean White Margin (4px)
+            ctx.lineWidth = 4;
+            ctx.strokeStyle = '#ffffff';
+            ctx.strokeRect(2, 2, w - 4, h - 4);
+
+            // 2. Crisp Jet Black Cutting Stroke (1px)
+            ctx.lineWidth = 1;
+            ctx.strokeStyle = '#000000';
+            ctx.strokeRect(0.5, 0.5, w - 1, h - 1);
+        }
+
+        // ⚡ DYNAMIC PRINT SHEET GENERATOR (A4 OR 4X6 WITH EXACT MANUAL COUNT)
         function executePassportDownload() {
             if (!cropper) return;
             const outputType = document.getElementById('output-type').value;
             const hasBorder = document.getElementById('add-border').checked;
             const isVisa = document.getElementById('size-preset').value === 'visa';
 
-            // Base photo size: 413x531 px for 3.5x4.5cm (300 DPI)
+            // 300 DPI Official Dimensions: 413 × 531 px for 3.5 × 4.5 cm
             const targetW = isVisa ? 600 : 413;
             const targetH = isVisa ? 600 : 531;
 
@@ -250,53 +361,57 @@
                 imageSmoothingQuality: 'high'
             });
 
-            // Add thin cutting border if checked
             if (hasBorder) {
-                const ctx = singleCanvas.getContext('2d');
-                ctx.strokeStyle = '#cccccc';
-                ctx.lineWidth = 2;
-                ctx.strokeRect(0, 0, singleCanvas.width, singleCanvas.height);
+                applyStudioCuttingBorder(singleCanvas);
             }
 
             if (outputType === 'single') {
-                // Download single photo ready for form upload (~30-50 KB)
                 singleCanvas.toBlob((blob) => {
                     triggerDownload(blob, `smartpic_passport_photo_${Date.now()}.jpg`);
                 }, 'image/jpeg', 0.88);
             } else {
-                // 8-PHOTO PRINT SHEET (4x6 inch paper at 300 DPI = 1800 x 1200 px)
+                const paper = document.getElementById('paper-type').value;
+                const requestedCount = parseInt(document.getElementById('photo-count').value) || (paper === 'a4' ? 12 : 8);
+
+                let sheetW = 1800, sheetH = 1200; // Default 4x6 (300 DPI)
+                let cols = 4;
+                let photoGap = 20;
+
+                if (paper === 'a4') {
+                    // Standard A4 at 300 DPI: 2480 × 3508 px
+                    sheetW = 2480;
+                    sheetH = 3508;
+                    cols = 5; // 5 photos per row on A4
+                    photoGap = 35;
+                }
+
                 const sheetCanvas = document.createElement('canvas');
-                sheetCanvas.width = 1800;
-                sheetCanvas.height = 1200;
+                sheetCanvas.width = sheetW;
+                sheetCanvas.height = sheetH;
                 const sheetCtx = sheetCanvas.getContext('2d');
 
-                // White paper background
+                // White Paper Sheet Background
                 sheetCtx.fillStyle = '#ffffff';
-                sheetCtx.fillRect(0, 0, sheetCanvas.width, sheetCanvas.height);
+                sheetCtx.fillRect(0, 0, sheetW, sheetH);
 
-                const cols = 4;
-                const rows = 2;
-                
-                // ⚡ PERFECT STUDIO SPACING (TIGHT & EQUAL GAP ON X AND Y)
-                const photoGap = 20; // Perfect 20px cutting gap between photos
-                
-                const totalW = (cols * targetW) + ((cols - 1) * photoGap);
-                const totalH = (rows * targetH) + ((rows - 1) * photoGap);
-                
-                // Perfectly centered on 4x6 paper
-                const startX = (sheetCanvas.width - totalW) / 2;
-                const startY = (sheetCanvas.height - totalH) / 2;
+                // Top & Left Margins
+                const totalRowWidth = (cols * targetW) + ((cols - 1) * photoGap);
+                const startX = (sheetW - totalRowWidth) / 2;
+                const startY = paper === 'a4' ? 100 : ((sheetH - (2 * targetH + photoGap)) / 2);
 
-                for (let r = 0; r < rows; r++) {
-                    for (let c = 0; c < cols; c++) {
-                        const x = startX + c * (targetW + photoGap);
-                        const y = startY + r * (targetH + photoGap);
-                        sheetCtx.drawImage(singleCanvas, x, y, targetW, targetH);
-                    }
+                // Draw ONLY the exact requested count!
+                for (let i = 0; i < requestedCount; i++) {
+                    const c = i % cols;
+                    const r = Math.floor(i / cols);
+
+                    const x = startX + c * (targetW + photoGap);
+                    const y = startY + r * (targetH + photoGap);
+
+                    sheetCtx.drawImage(singleCanvas, x, y, targetW, targetH);
                 }
 
                 sheetCanvas.toBlob((blob) => {
-                    triggerDownload(blob, `smartpic_passport_8photo_sheet_${Date.now()}.jpg`);
+                    triggerDownload(blob, `smartpic_passport_${requestedCount}photos_${paper}_sheet_${Date.now()}.jpg`);
                 }, 'image/jpeg', 0.95);
             }
         }
