@@ -4,22 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     
-    <!-- ⚡ HIGH-RANKING KEYWORDS FOR PDF CONVERTER -->
-    <title>Convert PDF to JPG, PNG, WEBP & Word Online Free | SmartPicTools</title>
-    <meta name="description" content="Free online tool to convert PDF to JPG, PNG, WEBP images or Word document. Extract all pages with 1-click ZIP download. 100% private in-browser tool.">
-    <meta name="keywords" content="pdf to jpg, convert pdf to image, pdf to png, pdf to webp, pdf to word, extract images from pdf, free online pdf converter">
+    <!-- ⚡ HIGH-RANKING KEYWORDS FOR PDF TO IMAGE (JPG, PNG, WEBP, SVG, TIFF, WORD) -->
+    <title>Convert PDF to JPG, PNG, WEBP, SVG, TIFF & Word Online Free | SmartPicTools</title>
+    <meta name="description" content="Free online tool to convert PDF to JPG, PNG, WEBP, SVG, and TIFF images or Word document. Extract all pages with 1-click ZIP download. 100% private in-browser.">
+    <meta name="keywords" content="pdf to jpg, convert pdf to image, pdf to png, pdf to svg, pdf to tiff, pdf to webp, pdf to word, extract images from pdf, free online pdf converter">
     <meta name="robots" content="index, follow, max-image-preview:large">
     <meta name="author" content="SmartPicTools">
     <link rel="canonical" href="https://smartpictools.in/pdf-converter">
     
-    <!-- ⚡ GOOGLE VERIFICATION TAG -->
+    <!-- ⚡ PERMANENT GOOGLE SEARCH CONSOLE VERIFICATION TAG -->
     <meta name="google-site-verification" content="uUq17UUsROyHMRQ8jkqKqrjZmsJnkuxZMKKoJLw_X3E" />
 
     <!-- OPEN GRAPH -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://smartpictools.in/pdf-converter">
-    <meta property="og:title" content="Convert PDF to JPG, PNG, WEBP & Word Online Free - SmartPicTools">
-    <meta property="og:description" content="Convert any PDF document into high-resolution JPG/PNG images or Word text in 0.5s directly on your device.">
+    <meta property="og:title" content="Convert PDF to JPG, PNG, WEBP, SVG, TIFF & Word - SmartPicTools">
+    <meta property="og:description" content="Convert any PDF into high-res JPG, PNG, SVG, TIFF images or Word text in 0.5s directly on your device.">
 
     <!-- FAVICON -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' stop-color='%236366f1'/><stop offset='50%25' stop-color='%23a855f7'/><stop offset='100%25' stop-color='%23ec4899'/></linearGradient></defs><rect width='100' height='100' rx='28' fill='url(%23g)'/><path d='M52 16 L24 54 L46 54 L42 84 L76 44 L54 44 Z' fill='%23fbbf24'/></svg>">
@@ -27,9 +27,10 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
-    <!-- LIBRARIES (Mozilla PDF.js Engine + JSZip) -->
+    <!-- LIBRARIES (Mozilla PDF.js, JSZip & UTIF for TIFF) -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/utif@3.1.0/UTIF.min.js"></script>
 
     <style>body { font-family: 'Plus Jakarta Sans', sans-serif; -webkit-tap-highlight-color: transparent; }</style>
 </head>
@@ -57,7 +58,7 @@
     <main class="max-w-4xl mx-auto w-full px-4 py-8 sm:py-12 flex-1">
         <div class="text-center max-w-2xl mx-auto mb-8 sm:mb-10">
             <h1 class="text-3xl sm:text-5xl font-black text-white tracking-tight">Convert PDF to Image & Word</h1>
-            <p class="mt-2.5 text-slate-400 text-xs sm:text-sm">Turn PDF documents into high-quality JPG, PNG, WEBP images or editable Word text in seconds.</p>
+            <p class="mt-2.5 text-slate-400 text-xs sm:text-sm">Turn PDF documents into high-quality JPG, PNG, WEBP, SVG, TIFF images or editable Word text in seconds.</p>
         </div>
 
         <div class="bg-slate-900 rounded-3xl p-5 sm:p-10 border border-slate-800 shadow-2xl relative">
@@ -69,7 +70,7 @@
                     📑
                 </div>
                 <h3 class="text-base sm:text-xl font-bold text-white mb-1.5">Select PDF Document</h3>
-                <p class="text-xs sm:text-sm text-slate-400">Choose any PDF file from your phone or PC (100% private, zero server uploads)</p>
+                <p class="text-xs sm:text-sm text-slate-400">Choose any PDF file from your phone or PC (100% private in-browser, zero server uploads)</p>
             </div>
 
             <!-- WORKSPACE -->
@@ -92,13 +93,15 @@
                     </div>
                 </div>
 
-                <!-- CONVERT OPTIONS -->
+                <!-- ⚡ CONVERT OPTIONS (NOW INCLUDES SVG & TIFF!) -->
                 <div class="bg-slate-950/80 p-4 sm:p-5 rounded-2xl border border-slate-800 space-y-2">
-                    <label class="block text-xs font-bold text-slate-400">Convert PDF To:</label>
+                    <label class="block text-xs font-bold text-slate-400">Convert PDF Pages To:</label>
                     <select id="target-format" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-3 text-sm text-white font-bold focus:outline-none">
                         <option value="JPG" selected>JPG Images (Standard Photos - ZIP for multi-page)</option>
                         <option value="PNG">PNG Images (High Quality Lossless - ZIP)</option>
                         <option value="WEBP">WEBP Images (Super Fast Web - ZIP)</option>
+                        <option value="SVG">SVG Vector Images (Scalable Vector - ZIP)</option>
+                        <option value="TIFF">TIFF Images (High-Res Print Quality - ZIP)</option>
                         <option value="DOC">Word Document (.doc editable text)</option>
                     </select>
                 </div>
@@ -109,7 +112,7 @@
             </div>
 
             <div id="status-box" class="hidden mt-5 p-3.5 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 text-center">
-                <p class="text-emerald-400 font-bold text-xs sm:text-sm">🎉 Success! File converted and downloaded directly to your device.</p>
+                <p class="text-emerald-400 font-bold text-xs sm:text-sm">🎉 Success! File(s) converted and downloaded directly to your device.</p>
             </div>
         </div>
 
@@ -125,7 +128,7 @@
                 <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800">
                     <span class="w-7 h-7 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center mb-2.5 text-xs">2</span>
                     <h3 class="font-bold text-white text-sm mb-1">Choose Format</h3>
-                    <p class="text-slate-400">Select JPG, PNG, WEBP image format or editable Word document.</p>
+                    <p class="text-slate-400">Select JPG, PNG, WEBP, SVG, TIFF, or Word format.</p>
                 </div>
                 <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800">
                     <span class="w-7 h-7 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center mb-2.5 text-xs">3</span>
@@ -140,10 +143,10 @@
             <h2 class="text-xl font-bold text-white mb-4">Frequently Asked Questions</h2>
             <details class="bg-slate-900 p-4 rounded-xl border border-slate-800 text-xs sm:text-sm cursor-pointer">
                 <summary class="font-bold text-white flex justify-between items-center">
-                    How do I get all pages if my PDF has multiple pages?
+                    Can I convert PDF pages directly to SVG or TIFF?
                     <span class="text-indigo-400">▼</span>
                 </summary>
-                <p class="text-slate-400 mt-2 leading-relaxed">If your PDF has multiple pages, our tool automatically extracts every single page into high-resolution images and bundles them into a single 1-click ZIP archive.</p>
+                <p class="text-slate-400 mt-2 leading-relaxed">Yes! You can choose SVG for crisp vector scaling or TIFF for uncompressed, studio-quality printing. Multi-page PDFs will be packaged neatly into a ZIP archive.</p>
             </details>
             <details class="bg-slate-900 p-4 rounded-xl border border-slate-800 text-xs sm:text-sm cursor-pointer">
                 <summary class="font-bold text-white flex justify-between items-center">
@@ -164,7 +167,6 @@
         pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
 
         let currentPdfDoc = null;
-        let pdfBytes = null;
         let pdfName = 'document';
 
         const dropArea = document.getElementById('drop-area');
@@ -196,7 +198,6 @@
             document.getElementById('pdf-file-name').innerText = file.name;
 
             const arrayBuffer = await file.arrayBuffer();
-            pdfBytes = arrayBuffer;
 
             try {
                 currentPdfDoc = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
@@ -217,6 +218,23 @@
             } catch(e) {
                 alert('Error loading PDF: ' + e.message);
             }
+        }
+
+        // ⚡ HELPERS FOR TIFF & SVG
+        function canvasToTiffBlob(canvas) {
+            if (typeof UTIF !== 'undefined') {
+                const ctx = canvas.getContext('2d');
+                const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+                const tiffBytes = UTIF.encodeImage(imgData.data, canvas.width, canvas.height);
+                return new Blob([tiffBytes], { type: 'image/tiff' });
+            }
+            return new Promise(r => canvas.toBlob(r, 'image/png'));
+        }
+
+        function canvasToSvgBlob(canvas) {
+            const dataUrl = canvas.toDataURL('image/png');
+            const svgContent = `<?xml version="1.0" encoding="UTF-8"?>\n<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="${canvas.width}" height="${canvas.height}" viewBox="0 0 ${canvas.width} ${canvas.height}">\n  <image width="${canvas.width}" height="${canvas.height}" xlink:href="${dataUrl}"/>\n</svg>`;
+            return new Blob([svgContent], { type: 'image/svg+xml;charset=utf-8' });
         }
 
         async function executePdfConversion() {
@@ -243,45 +261,61 @@
                     return;
                 }
 
-                // 2. PDF TO IMAGES (JPG, PNG, WEBP)
-                const ext = format.toLowerCase();
-                const mime = format === 'PNG' ? 'image/png' : (format === 'WEBP' ? 'image/webp' : 'image/jpeg');
-
-                // Single Page PDF -> Direct Image
+                // 2. SINGLE PAGE PDF CONVERSION
                 if (currentPdfDoc.numPages === 1) {
                     const page = await currentPdfDoc.getPage(1);
-                    const viewport = page.getViewport({ scale: 2.0 }); // High-Res 2x
+                    const viewport = page.getViewport({ scale: 2.0 }); // 2x Crisp High-Res
                     const canvas = document.createElement('canvas');
                     canvas.width = viewport.width;
                     canvas.height = viewport.height;
                     const ctx = canvas.getContext('2d');
                     await page.render({ canvasContext: ctx, viewport: viewport }).promise;
 
-                    canvas.toBlob((blob) => {
-                        triggerDownload(blob, `smartpic_${pdfName}_page1.${ext}`);
-                        finish();
-                    }, mime, 0.92);
-
-                } else {
-                    // Multi-page PDF -> ZIP file
-                    const zip = new JSZip();
-                    for (let p = 1; p <= currentPdfDoc.numPages; p++) {
-                        const page = await currentPdfDoc.getPage(p);
-                        const viewport = page.getViewport({ scale: 2.0 });
-                        const canvas = document.createElement('canvas');
-                        canvas.width = viewport.width;
-                        canvas.height = viewport.height;
-                        const ctx = canvas.getContext('2d');
-                        await page.render({ canvasContext: ctx, viewport: viewport }).promise;
-
-                        const blob = await new Promise(res => canvas.toBlob(res, mime, 0.90));
-                        zip.file(`page_${p}.${ext}`, blob);
+                    if (format === 'SVG') {
+                        const svgBlob = canvasToSvgBlob(canvas);
+                        triggerDownload(svgBlob, `smartpic_${pdfName}_page1.svg`);
+                    } else if (format === 'TIFF') {
+                        const tiffBlob = canvasToTiffBlob(canvas);
+                        triggerDownload(tiffBlob, `smartpic_${pdfName}_page1.tiff`);
+                    } else {
+                        const ext = format.toLowerCase();
+                        const mime = format === 'PNG' ? 'image/png' : (format === 'WEBP' ? 'image/webp' : 'image/jpeg');
+                        canvas.toBlob((blob) => {
+                            triggerDownload(blob, `smartpic_${pdfName}_page1.${ext}`);
+                        }, mime, 0.92);
                     }
-
-                    const zipContent = await zip.generateAsync({ type: 'blob' });
-                    triggerDownload(zipContent, `smartpic_${pdfName}_all_pages.zip`);
                     finish();
+                    return;
                 }
+
+                // 3. MULTI-PAGE PDF CONVERSION (1-CLICK ZIP ARCHIVE)
+                const zip = new JSZip();
+                const ext = format.toLowerCase();
+
+                for (let p = 1; p <= currentPdfDoc.numPages; p++) {
+                    const page = await currentPdfDoc.getPage(p);
+                    const viewport = page.getViewport({ scale: 2.0 });
+                    const canvas = document.createElement('canvas');
+                    canvas.width = viewport.width;
+                    canvas.height = viewport.height;
+                    const ctx = canvas.getContext('2d');
+                    await page.render({ canvasContext: ctx, viewport: viewport }).promise;
+
+                    let pageBlob = null;
+                    if (format === 'SVG') {
+                        pageBlob = canvasToSvgBlob(canvas);
+                    } else if (format === 'TIFF') {
+                        pageBlob = canvasToTiffBlob(canvas);
+                    } else {
+                        const mime = format === 'PNG' ? 'image/png' : (format === 'WEBP' ? 'image/webp' : 'image/jpeg');
+                        pageBlob = await new Promise(res => canvas.toBlob(res, mime, 0.90));
+                    }
+                    zip.file(`page_${p}.${ext}`, pageBlob);
+                }
+
+                const zipContent = await zip.generateAsync({ type: 'blob' });
+                triggerDownload(zipContent, `smartpic_${pdfName}_all_pages_${ext}.zip`);
+                finish();
 
             } catch(e) {
                 alert('Conversion error: ' + e.message);
