@@ -6,11 +6,13 @@
     
     <!-- ⚡ HIGH-RANKING KEYWORDS FOR ROTATE & FLIP -->
     <title>Rotate & Flip Image Online Free - 90 Degree & Mirror | SmartPicTools</title>
-    <meta name="description" content="Rotate images 90 degrees clockwise or anti-clockwise and mirror flip horizontally or vertically online for free. 100% private in-browser tool.">
+    <meta name="description" content="Rotate images 90 degrees clockwise or anti-clockwise and mirror flip horizontally or vertically online for free. 100% private in-browser tool with smooth continuous rotation.">
     <meta name="keywords" content="rotate image online, flip image horizontally, mirror photo online, rotate picture 90 degrees, flip photo vertical, free photo rotator">
     <meta name="robots" content="index, follow, max-image-preview:large">
     <meta name="author" content="SmartPicTools">
     <link rel="canonical" href="https://smartpictools.in/rotate-image">
+    
+    <!-- ⚡ PERMANENT GOOGLE SEARCH CONSOLE VERIFICATION TAG -->
     <meta name="google-site-verification" content="uUq17UUsROyHMRQ8jkqKqrjZmsJnkuxZMKKoJLw_X3E" />
 
     <!-- OPEN GRAPH -->
@@ -26,10 +28,15 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/heic2any/0.0.4/heic2any.min.js"></script>
 
-    <style>body { font-family: 'Plus Jakarta Sans', sans-serif; -webkit-tap-highlight-color: transparent; }</style>
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; -webkit-tap-highlight-color: transparent; }
+        /* ⚡ SMOOTH TRANSITION FOR ROTATION (NO JERKY REVERSE SPINS) */
+        #preview-img { transition: transform 0.22s ease-out; }
+    </style>
 </head>
 <body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col justify-between selection:bg-indigo-500 selection:text-white">
 
+    <!-- HEADER -->
     <header class="border-b border-slate-800 bg-slate-900/80 backdrop-blur-xl sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 h-18 sm:h-20 flex items-center justify-between">
             <a href="/" class="flex items-center gap-2.5 sm:gap-3 group">
@@ -47,13 +54,16 @@
         </div>
     </header>
 
+    <!-- MAIN WORKSPACE -->
     <main class="max-w-4xl mx-auto w-full px-4 py-8 sm:py-12 flex-1">
         <div class="text-center max-w-2xl mx-auto mb-8 sm:mb-10">
             <h1 class="text-3xl sm:text-5xl font-black text-white tracking-tight">Rotate & Mirror Flip Image</h1>
-            <p class="mt-2.5 text-slate-400 text-xs sm:text-sm">Rotate 90 degrees clockwise or anti-clockwise, and mirror flip horizontally or vertically in 0.05s.</p>
+            <p class="mt-2.5 text-slate-400 text-xs sm:text-sm">Rotate 90 degrees clockwise, anti-clockwise, or mirror flip horizontally and vertically in 0.05s.</p>
         </div>
 
         <div class="bg-slate-900 rounded-3xl p-5 sm:p-10 border border-slate-800 shadow-2xl relative">
+            
+            <!-- UPLOAD DROP AREA -->
             <div id="drop-area" class="border-2 border-dashed border-slate-700 hover:border-indigo-500 bg-slate-950/60 hover:bg-indigo-950/20 rounded-2xl p-8 sm:p-14 text-center cursor-pointer transition-all duration-300">
                 <input type="file" id="file-input" accept="image/*, .heic, .HEIC, .heif, .HEIF" class="hidden">
                 <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-3xl bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-3xl sm:text-4xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition duration-300 shadow-inner">
@@ -63,33 +73,35 @@
                 <p class="text-xs sm:text-sm text-slate-400">Supports JPG, PNG, WEBP, and iPhone HEIC</p>
             </div>
 
+            <!-- WORKSPACE -->
             <div id="workspace" class="hidden mt-6 space-y-6">
                 <div class="flex items-center justify-between">
-                    <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Live Preview</span>
+                    <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Live Orientation Preview</span>
                     <button type="button" onclick="document.getElementById('file-input').click()" class="text-xs font-bold text-indigo-400 hover:text-white bg-slate-800 hover:bg-slate-700 px-3 py-1.5 rounded-xl border border-slate-700 transition">
                         🔄 Change Photo
                     </button>
                 </div>
 
+                <!-- PREVIEW BOX -->
                 <div class="bg-slate-950/80 p-4 rounded-2xl border border-slate-800 flex items-center justify-center max-h-[380px] overflow-hidden">
-                    <img id="preview-img" src="#" alt="Preview" class="max-h-[340px] w-auto rounded-xl object-contain transition-transform duration-200">
+                    <img id="preview-img" src="#" alt="Preview" class="max-h-[340px] w-auto rounded-xl object-contain">
                 </div>
 
                 <!-- CONTROLS -->
                 <div class="bg-slate-950/80 p-4 sm:p-5 rounded-2xl border border-slate-800 space-y-3">
                     <label class="block text-xs font-bold text-slate-400">Click to Adjust Orientation:</label>
-                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
-                        <button type="button" onclick="rotate(90)" class="py-2.5 px-2 rounded-xl bg-slate-900 hover:bg-indigo-600 text-white text-xs font-bold border border-slate-700 transition">
-                            ↻ 90° Clockwise
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+                        <button type="button" onclick="rotate(90)" class="py-2.5 px-2 rounded-xl bg-slate-900 hover:bg-indigo-600 text-white text-xs font-bold border border-slate-700 transition active:scale-95 flex items-center justify-center gap-1">
+                            <span>↻ 90° Clockwise</span>
                         </button>
-                        <button type="button" onclick="rotate(-90)" class="py-2.5 px-2 rounded-xl bg-slate-900 hover:bg-indigo-600 text-white text-xs font-bold border border-slate-700 transition">
-                            ↺ 90° Anti-Clock
+                        <button type="button" onclick="rotate(-90)" class="py-2.5 px-2 rounded-xl bg-slate-900 hover:bg-indigo-600 text-white text-xs font-bold border border-slate-700 transition active:scale-95 flex items-center justify-center gap-1">
+                            <span>↺ 90° Anti-Clock</span>
                         </button>
-                        <button type="button" onclick="flip('h')" id="btn-fliph" class="py-2.5 px-2 rounded-xl bg-slate-900 hover:bg-indigo-600 text-white text-xs font-bold border border-slate-700 transition">
-                            ⇄ Flip Horizontal
+                        <button type="button" onclick="flip('h')" id="btn-fliph" class="py-2.5 px-2 rounded-xl bg-slate-900 hover:bg-indigo-600 text-white text-xs font-bold border border-slate-700 transition active:scale-95 flex items-center justify-center gap-1">
+                            <span>⇄ Flip Horizontal</span>
                         </button>
-                        <button type="button" onclick="flip('v')" id="btn-flipv" class="py-2.5 px-2 rounded-xl bg-slate-900 hover:bg-indigo-600 text-white text-xs font-bold border border-slate-700 transition">
-                            ⇅ Flip Vertical
+                        <button type="button" onclick="flip('v')" id="btn-flipv" class="py-2.5 px-2 rounded-xl bg-slate-900 hover:bg-indigo-600 text-white text-xs font-bold border border-slate-700 transition active:scale-95 flex items-center justify-center gap-1">
+                            <span>⇅ Flip Vertical</span>
                         </button>
                     </div>
                 </div>
@@ -104,18 +116,19 @@
             </div>
         </div>
 
+        <!-- HOW TO USE -->
         <section class="mt-14 border-t border-slate-800 pt-10">
             <h2 class="text-xl sm:text-2xl font-bold text-white text-center mb-6">How to Rotate Photos in 3 Easy Steps</h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs sm:text-sm">
                 <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800">
                     <span class="w-7 h-7 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center mb-2.5 text-xs">1</span>
                     <h3 class="font-bold text-white text-sm mb-1">Select Photo</h3>
-                    <p class="text-slate-400">Choose the photo needing orientation fix.</p>
+                    <p class="text-slate-400">Choose any photo taken sideways or needing orientation fix.</p>
                 </div>
                 <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800">
                     <span class="w-7 h-7 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center mb-2.5 text-xs">2</span>
                     <h3 class="font-bold text-white text-sm mb-1">Rotate or Flip</h3>
-                    <p class="text-slate-400">Click 90° buttons or mirror flip horizontally/vertically.</p>
+                    <p class="text-slate-400">Click 90° buttons or mirror flip horizontally/vertically with smooth feedback.</p>
                 </div>
                 <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800">
                     <span class="w-7 h-7 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center mb-2.5 text-xs">3</span>
@@ -124,16 +137,36 @@
                 </div>
             </div>
         </section>
+
+        <!-- FAQS -->
+        <section class="mt-12 space-y-3">
+            <h2 class="text-xl font-bold text-white mb-4">Frequently Asked Questions</h2>
+            <details class="bg-slate-900 p-4 rounded-xl border border-slate-800 text-xs sm:text-sm cursor-pointer">
+                <summary class="font-bold text-white flex justify-between items-center">
+                    Does rotating an image reduce its clarity or resolution?
+                    <span class="text-indigo-400">▼</span>
+                </summary>
+                <p class="text-slate-400 mt-2 leading-relaxed">No. The tool rotates the original pixel matrix directly inside temporary browser memory without re-compressing or degrading the image quality.</p>
+            </details>
+            <details class="bg-slate-900 p-4 rounded-xl border border-slate-800 text-xs sm:text-sm cursor-pointer">
+                <summary class="font-bold text-white flex justify-between items-center">
+                    What is the difference between Rotate and Mirror Flip?
+                    <span class="text-indigo-400">▼</span>
+                </summary>
+                <p class="text-slate-400 mt-2 leading-relaxed">Rotate turns the entire photo by 90 degrees around its center. Flip reflects the image like looking in a mirror (left becomes right, or top becomes bottom).</p>
+            </details>
+        </section>
     </main>
 
     <footer class="border-t border-slate-800 bg-slate-950 py-8 px-4 text-xs text-slate-400 text-center">
         <p>© 2026 SmartPicTools. 100% Free & Private in-browser suite. <a href="/" class="text-indigo-400 hover:underline">Explore All Tools</a></p>
     </footer>
 
+    <!-- ⚡ CONTINUOUS ROTATION ENGINE (NO REVERSE SPIN GLITCH) -->
     <script>
         let currentFile = null;
         let loadedImg = new Image();
-        let currentRot = 0;
+        let displayRotation = 0; // ⚡ Keeps moving forward continuously (0 -> 90 -> 180 -> 270 -> 360 -> 450...)
         let isH = false, isV = false;
 
         const dropArea = document.getElementById('drop-area');
@@ -173,7 +206,7 @@
             };
             reader.readAsDataURL(displayBlob);
 
-            currentRot = 0;
+            displayRotation = 0;
             isH = false;
             isV = false;
             updateTransform();
@@ -183,9 +216,9 @@
             document.getElementById('status-box').classList.add('hidden');
         }
 
+        // ⚡ CONTINUOUS FORWARD ROTATION
         function rotate(deg) {
-            currentRot = (currentRot + deg) % 360;
-            if (currentRot < 0) currentRot += 360;
+            displayRotation += deg; // Adds +90 or -90 smoothly without jumping back to 0!
             updateTransform();
         }
 
@@ -198,9 +231,16 @@
         function updateTransform() {
             const sX = isH ? -1 : 1;
             const sY = isV ? -1 : 1;
-            document.getElementById('preview-img').style.transform = `rotate(${currentRot}deg) scale(${sX}, ${sY})`;
-            document.getElementById('btn-fliph').className = isH ? "py-2.5 px-2 rounded-xl bg-indigo-600 text-white text-xs font-bold border border-indigo-500 transition" : "py-2.5 px-2 rounded-xl bg-slate-900 text-white text-xs font-bold border border-slate-700 transition";
-            document.getElementById('btn-flipv').className = isV ? "py-2.5 px-2 rounded-xl bg-indigo-600 text-white text-xs font-bold border border-indigo-500 transition" : "py-2.5 px-2 rounded-xl bg-slate-900 text-white text-xs font-bold border border-slate-700 transition";
+            document.getElementById('preview-img').style.transform = `rotate(${displayRotation}deg) scale(${sX}, ${sY})`;
+            
+            const hBtn = document.getElementById('btn-fliph');
+            const vBtn = document.getElementById('btn-flipv');
+            if (hBtn) hBtn.className = isH 
+                ? "py-2.5 px-2 rounded-xl bg-indigo-600 text-white text-xs font-bold border border-indigo-500 transition active:scale-95 flex items-center justify-center gap-1 shadow-lg shadow-indigo-600/30" 
+                : "py-2.5 px-2 rounded-xl bg-slate-900 hover:bg-indigo-600 text-white text-xs font-bold border border-slate-700 transition active:scale-95 flex items-center justify-center gap-1";
+            if (vBtn) vBtn.className = isV 
+                ? "py-2.5 px-2 rounded-xl bg-indigo-600 text-white text-xs font-bold border border-indigo-500 transition active:scale-95 flex items-center justify-center gap-1 shadow-lg shadow-indigo-600/30" 
+                : "py-2.5 px-2 rounded-xl bg-slate-900 hover:bg-indigo-600 text-white text-xs font-bold border border-slate-700 transition active:scale-95 flex items-center justify-center gap-1";
         }
 
         function executeDownload() {
@@ -209,7 +249,10 @@
             const w = loadedImg.naturalWidth;
             const h = loadedImg.naturalHeight;
 
-            if (currentRot === 90 || currentRot === 270) {
+            // Normalize angle to exact 0, 90, 180, or 270 for canvas
+            const effectiveAngle = ((displayRotation % 360) + 360) % 360;
+
+            if (effectiveAngle === 90 || effectiveAngle === 270) {
                 canvas.width = h;
                 canvas.height = w;
             } else {
@@ -219,8 +262,10 @@
 
             const ctx = canvas.getContext('2d');
             ctx.translate(canvas.width / 2, canvas.height / 2);
-            ctx.rotate((currentRot * Math.PI) / 180);
-            ctx.scale(isH ? -1 : 1, isV ? -1 : 1);
+            ctx.rotate((effectiveAngle * Math.PI) / 180);
+            const sX = isH ? -1 : 1;
+            const sY = isV ? -1 : 1;
+            ctx.scale(sX, sY);
             ctx.drawImage(loadedImg, -w / 2, -h / 2, w, h);
 
             const rawName = currentFile.name.substring(0, currentFile.name.lastIndexOf('.')) || currentFile.name;
