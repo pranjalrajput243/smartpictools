@@ -190,6 +190,9 @@ def process_fallback():
             img.save(buf, format='PNG')
         elif target_fmt == 'WEBP':
             img.save(buf, format='WEBP', quality=85)
+        elif target_fmt in ['TIFF', 'TIF']:
+            img.save(buf, format='TIFF')
+            mimetype = 'image/tiff'
 
         return send_file(io.BytesIO(buf.getvalue()), mimetype=mimetype, as_attachment=True, download_name=out_name)
     except Exception as e:
