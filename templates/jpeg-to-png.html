@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    
+    <!-- ⚡ HIGH-RANKING KEYWORDS FOR JPEG TO PNG -->
+    <title>Convert JPEG to PNG Online Free - Lossless & High Quality | SmartPicTools</title>
+    <meta name="description" content="Free online JPEG to PNG converter. Convert single or batch JPG images into high-quality, lossless PNG format in 0.1s. 100% private in-browser tool with zero server uploads.">
+    <meta name="keywords" content="jpeg to png, jpg to png, convert jpeg to png, convert jpg to png online free, image converter jpg to png, batch jpeg to png, lossless png converter">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <meta name="author" content="SmartPicTools">
+    <link rel="canonical" href="https://smartpictools.in/jpeg-to-png">
+    
+    <!-- ⚡ PERMANENT GOOGLE SEARCH CONSOLE VERIFICATION TAG -->
+    <meta name="google-site-verification" content="uUq17UUsROyHMRQ8jkqKqrjZmsJnkuxZMKKoJLw_X3E" />
+
+    <!-- OPEN GRAPH -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://smartpictools.in/jpeg-to-png">
+    <meta property="og:title" content="Convert JPEG to PNG Online Free - SmartPicTools">
+    <meta property="og:description" content="Convert JPG/JPEG images to lossless PNG in 0.1s directly on your device.">
+
+    <!-- FAVICON -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' stop-color='%236366f1'/><stop offset='50%25' stop-color='%23a855f7'/><stop offset='100%25' stop-color='%23ec4899'/></linearGradient></defs><rect width='100' height='100' rx='28' fill='url(%23g)'/><path d='M52 16 L24 54 L46 54 L42 84 L76 44 L54 44 Z' fill='%23fbbf24'/></svg>">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+
+    <style>body { font-family: 'Plus Jakarta Sans', sans-serif; -webkit-tap-highlight-color: transparent; }</style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col justify-between selection:bg-indigo-500 selection:text-white">
+
+    <!-- HEADER -->
+    <header class="border-b border-slate-800 bg-slate-900/80 backdrop-blur-xl sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 h-18 sm:h-20 flex items-center justify-between">
+            <a href="/" class="flex items-center gap-2.5 sm:gap-3 group">
+                <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-2xl bg-gradient-to-tr from-indigo-500 via-purple-500 to-pink-500 flex items-center justify-center text-white text-lg sm:text-xl shadow-lg shadow-indigo-500/30 group-hover:scale-105 transition">
+                    ⚡
+                </div>
+                <div>
+                    <span class="text-xl sm:text-2xl font-black tracking-tight text-white">SmartPic<span class="text-indigo-400">Tools</span></span>
+                    <span class="block text-[9px] sm:text-[10px] uppercase font-bold tracking-widest text-slate-400 -mt-1">PNG Studio</span>
+                </div>
+            </a>
+            <a href="/" class="py-2 px-3.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-bold text-indigo-400 hover:text-white border border-slate-700 transition flex items-center gap-1.5 shadow-md">
+                <span>← All Tools</span>
+            </a>
+        </div>
+    </header>
+
+    <!-- MAIN WORKSPACE -->
+    <main class="max-w-4xl mx-auto w-full px-4 py-8 sm:py-12 flex-1">
+        <div class="text-center max-w-2xl mx-auto mb-8 sm:mb-10">
+            <h1 class="text-3xl sm:text-5xl font-black text-white tracking-tight">Convert JPEG to PNG</h1>
+            <p class="mt-2.5 text-slate-400 text-xs sm:text-sm">Turn JPG/JPEG photos into lossless, high-quality PNG format in 0.1s. Single or batch conversion with 1-click download.</p>
+        </div>
+
+        <div class="bg-slate-900 rounded-3xl p-5 sm:p-10 border border-slate-800 shadow-2xl relative">
+            
+            <!-- UPLOAD DROP AREA -->
+            <div id="drop-area" class="border-2 border-dashed border-slate-700 hover:border-indigo-500 bg-slate-950/60 hover:bg-indigo-950/20 rounded-2xl p-8 sm:p-14 text-center cursor-pointer transition-all duration-300">
+                <input type="file" id="file-input" multiple accept="image/jpeg, image/jpg, .jpg, .jpeg" class="hidden">
+                <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-3xl bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-3xl sm:text-4xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition duration-300 shadow-inner">
+                    🖼️
+                </div>
+                <h3 class="text-base sm:text-xl font-bold text-white mb-1.5">Select JPEG/JPG Images</h3>
+                <p class="text-xs sm:text-sm text-slate-400">Choose single or multiple JPG photos (up to 20 files)</p>
+            </div>
+
+            <!-- WORKSPACE -->
+            <div id="workspace" class="hidden mt-6 space-y-6">
+                <div class="flex items-center justify-between">
+                    <span class="text-xs font-bold text-slate-300">Selected Photos (<span id="file-count" class="text-indigo-400 font-extrabold">0</span>):</span>
+                    <button type="button" onclick="document.getElementById('file-input').click()" class="text-xs font-bold text-indigo-400 hover:text-white bg-slate-800 hover:bg-slate-700 px-3 py-1.5 rounded-xl border border-slate-700 transition">
+                        + Add More
+                    </button>
+                </div>
+
+                <!-- GALLERY -->
+                <div id="gallery" class="grid grid-cols-2 sm:grid-cols-4 gap-3 max-h-80 overflow-y-auto p-3 bg-slate-950/80 rounded-2xl border border-slate-800">
+                </div>
+
+                <!-- INFO BADGE -->
+                <div class="p-3 bg-slate-950/80 rounded-xl border border-slate-800 flex items-center justify-between text-xs">
+                    <span class="text-slate-400 font-semibold">Output Quality: <strong class="text-emerald-400">100% Lossless PNG</strong></span>
+                    <span class="text-indigo-400 font-bold">⚡ Zero Compression Loss</span>
+                </div>
+
+                <button type="button" id="convert-btn" onclick="executeJpegToPng()" class="w-full py-4 px-6 rounded-2xl bg-gradient-to-r from-indigo-600 via-indigo-500 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-extrabold text-sm sm:text-base shadow-lg shadow-indigo-500/25 transition active:scale-[0.99] flex items-center justify-center gap-3">
+                    <span id="btn-text">🔄 Convert to PNG & Download</span>
+                </button>
+            </div>
+
+            <div id="status-box" class="hidden mt-5 p-3.5 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 text-center">
+                <p class="text-emerald-400 font-bold text-xs sm:text-sm">🎉 Success! PNG file(s) downloaded directly to your device.</p>
+            </div>
+        </div>
+
+        <!-- HOW TO USE -->
+        <section class="mt-14 border-t border-slate-800 pt-10">
+            <h2 class="text-xl sm:text-2xl font-bold text-white text-center mb-6">How to Convert JPEG to PNG in 3 Easy Steps</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs sm:text-sm">
+                <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800">
+                    <span class="w-7 h-7 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center mb-2.5 text-xs">1</span>
+                    <h3 class="font-bold text-white text-sm mb-1">Select JPEG Files</h3>
+                    <p class="text-slate-400">Choose single or multiple .jpg or .jpeg images from your phone or PC.</p>
+                </div>
+                <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800">
+                    <span class="w-7 h-7 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center mb-2.5 text-xs">2</span>
+                    <h3 class="font-bold text-white text-sm mb-1">Lossless Processing</h3>
+                    <p class="text-slate-400">Our in-browser engine decodes pixel data with 100% clarity in 0.1s.</p>
+                </div>
+                <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800">
+                    <span class="w-7 h-7 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center mb-2.5 text-xs">3</span>
+                    <h3 class="font-bold text-white text-sm mb-1">Instant Download</h3>
+                    <p class="text-slate-400">Single files download directly; multiple files download as a clean ZIP.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQS -->
+        <section class="mt-12 space-y-3">
+            <h2 class="text-xl font-bold text-white mb-4">Frequently Asked Questions</h2>
+            <details class="bg-slate-900 p-4 rounded-xl border border-slate-800 text-xs sm:text-sm cursor-pointer">
+                <summary class="font-bold text-white flex justify-between items-center">
+                    What is the advantage of converting JPEG to PNG?
+                    <span class="text-indigo-400">▼</span>
+                </summary>
+                <p class="text-slate-400 mt-2 leading-relaxed">JPEG is a lossy format that loses quality every time it is saved. PNG uses lossless compression, meaning no image data or sharpness is lost, making it ideal for graphics, text, and editing.</p>
+            </details>
+            <details class="bg-slate-900 p-4 rounded-xl border border-slate-800 text-xs sm:text-sm cursor-pointer">
+                <summary class="font-bold text-white flex justify-between items-center">
+                    Are my uploaded images stored on any server?
+                    <span class="text-indigo-400">▼</span>
+                </summary>
+                <p class="text-slate-400 mt-2 leading-relaxed">No. Everything executes 100% inside your browser's local RAM memory using HTML5 Canvas. Your photos never leave your device.</p>
+            </details>
+        </section>
+    </main>
+
+    <footer class="border-t border-slate-800 bg-slate-950 py-8 px-4 text-xs text-slate-400 text-center">
+        <p>© 2026 SmartPicTools. 100% Free & Private in-browser suite. <a href="/" class="text-indigo-400 hover:underline">Explore All Tools</a></p>
+    </footer>
+
+    <!-- JS ENGINE -->
+    <script>
+        let filesList = [];
+        const dropArea = document.getElementById('drop-area');
+        const fileInput = document.getElementById('file-input');
+
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(ev => {
+            window.addEventListener(ev, (e) => { e.preventDefault(); e.stopPropagation(); }, false);
+            dropArea.addEventListener(ev, (e) => { e.preventDefault(); e.stopPropagation(); }, false);
+        });
+
+        ['dragenter', 'dragover'].forEach(ev => dropArea.classList.add('border-indigo-500', 'bg-indigo-950/40'));
+        ['dragleave', 'drop'].forEach(ev => dropArea.classList.remove('border-indigo-500', 'bg-indigo-950/40'));
+
+        dropArea.addEventListener('drop', (e) => {
+            if (e.dataTransfer && e.dataTransfer.files.length > 0) handleFiles(e.dataTransfer.files);
+        });
+        dropArea.addEventListener('click', () => fileInput.click());
+        fileInput.addEventListener('change', (e) => {
+            if (e.target.files && e.target.files.length > 0) handleFiles(e.target.files);
+        });
+
+        async function handleFiles(files) {
+            for (let f of Array.from(files)) {
+                const url = URL.createObjectURL(f);
+                filesList.push({ file: f, url: url, name: f.name });
+            }
+            renderGallery();
+        }
+
+        function renderGallery() {
+            if (filesList.length === 0) {
+                document.getElementById('workspace').classList.add('hidden');
+                document.getElementById('drop-area').classList.remove('hidden');
+                return;
+            }
+            document.getElementById('workspace').classList.remove('hidden');
+            document.getElementById('drop-area').classList.add('hidden');
+            document.getElementById('file-count').innerText = filesList.length;
+
+            const gallery = document.getElementById('gallery');
+            gallery.innerHTML = '';
+
+            filesList.forEach((item, index) => {
+                const card = document.createElement('div');
+                card.className = "relative bg-slate-900 p-2 rounded-xl border border-slate-800 text-center";
+                
+                const delBtn = document.createElement('button');
+                delBtn.type = "button";
+                delBtn.className = "absolute top-1 right-1 w-5 h-5 rounded-full bg-rose-600 text-white text-[10px] font-black flex items-center justify-center";
+                delBtn.innerHTML = "✕";
+                delBtn.onclick = () => {
+                    filesList.splice(index, 1);
+                    renderGallery();
+                };
+
+                const thumb = document.createElement('img');
+                thumb.className = "w-full h-16 object-cover rounded-lg mb-1";
+                thumb.src = item.url;
+
+                const nameText = document.createElement('p');
+                nameText.className = "text-[10px] font-bold text-white truncate";
+                nameText.innerText = item.name;
+
+                card.appendChild(delBtn);
+                card.appendChild(thumb);
+                card.appendChild(nameText);
+                gallery.appendChild(card);
+            });
+        }
+
+        async function executeJpegToPng() {
+            if (filesList.length === 0) return;
+            const btn = document.getElementById('convert-btn');
+            btn.disabled = true;
+            document.getElementById('btn-text').innerText = "⏳ Converting to Lossless PNG...";
+
+            try {
+                if (filesList.length === 1) {
+                    const item = filesList[0];
+                    const rawName = item.name.substring(0, item.name.lastIndexOf('.')) || item.name;
+
+                    const bmp = await createImageBitmap(item.file);
+                    const canvas = document.createElement('canvas');
+                    canvas.width = bmp.width;
+                    canvas.height = bmp.height;
+                    const ctx = canvas.getContext('2d');
+                    ctx.drawImage(bmp, 0, 0);
+
+                    canvas.toBlob((blob) => {
+                        const a = document.createElement('a');
+                        a.href = URL.createObjectURL(blob);
+                        a.download = `smartpic_${rawName}.png`;
+                        a.click();
+                        finish();
+                    }, 'image/png');
+
+                } else {
+                    const zip = new JSZip();
+
+                    for (let item of filesList) {
+                        const rawName = item.name.substring(0, item.name.lastIndexOf('.')) || item.name;
+                        const bmp = await createImageBitmap(item.file);
+                        const canvas = document.createElement('canvas');
+                        canvas.width = bmp.width;
+                        canvas.height = bmp.height;
+                        const ctx = canvas.getContext('2d');
+                        ctx.drawImage(bmp, 0, 0);
+
+                        const blob = await new Promise(r => canvas.toBlob(r, 'image/png'));
+                        zip.file(`${rawName}.png`, blob);
+                    }
+
+                    const zipContent = await zip.generateAsync({ type: "blob" });
+                    const a = document.createElement('a');
+                    a.href = URL.createObjectURL(zipContent);
+                    a.download = `smartpic_converted_png_pack.zip`;
+                    a.click();
+                    finish();
+                }
+            } catch(e) {
+                alert('Conversion error: ' + e.message);
+                btn.disabled = false;
+                document.getElementById('btn-text').innerText = "🔄 Convert to PNG & Download";
+            }
+        }
+
+        function finish() {
+            document.getElementById('convert-btn').disabled = false;
+            document.getElementById('btn-text').innerText = "🔄 Convert to PNG & Download";
+            document.getElementById('status-box').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
