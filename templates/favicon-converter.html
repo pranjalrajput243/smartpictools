@@ -255,7 +255,6 @@
                 const pngBlob = await renderSquareCanvasPng(size);
                 const url = URL.createObjectURL(pngBlob);
                 const realFavicon = document.querySelector("link[rel*='icon']");
-                if (realFavicon) realFavicon.href = url;
             }
 
             [64, 128, 256].forEach(s => {
