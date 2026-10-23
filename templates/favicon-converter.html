@@ -6,12 +6,13 @@
     
     <!-- ⚡ HIGH-RANKING KEYWORDS FOR HD FAVICON -->
     <title>Image to Favicon Converter Online Free - High-Res ICO & PNG | SmartPicTools</title>
-    <meta name="description" content="Free online image to favicon converter. Convert PNG, JPG, or SVG to sharp 256px, 128px, 64px favicon.ico with zero blur. Live browser tab preview. 100% private in-browser.">
+    <meta name="description" content="Free online image to favicon converter. Convert PNG, JPG, or SVG to sharp 256px, 128px, 64px favicon.ico with zero blur. 100% private in-browser.">
     <meta name="keywords" content="image to favicon, favicon converter, convert png to ico, hd favicon generator, crisp favicon ico, create favicon 256x256">
     <meta name="robots" content="index, follow, max-image-preview:large">
     <meta name="author" content="SmartPicTools">
     <link rel="canonical" href="https://smartpictools.in/favicon-converter">
     
+    <!-- ⚡ PERMANENT GOOGLE SEARCH CONSOLE VERIFICATION TAG -->
     <meta name="google-site-verification" content="uUq17UUsROyHMRQ8jkqKqrjZmsJnkuxZMKKoJLw_X3E" />
 
     <!-- OPEN GRAPH -->
@@ -27,9 +28,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 
-    <style>
-        body { font-family: 'Plus Jakarta Sans', sans-serif; -webkit-tap-highlight-color: transparent; }
-    </style>
+    <style>body { font-family: 'Plus Jakarta Sans', sans-serif; -webkit-tap-highlight-color: transparent; }</style>
 </head>
 <body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col justify-between selection:bg-indigo-500 selection:text-white">
 
@@ -51,10 +50,11 @@
         </div>
     </header>
 
+    <!-- MAIN WORKSPACE -->
     <main class="max-w-4xl mx-auto w-full px-4 py-8 sm:py-12 flex-1">
         <div class="text-center max-w-2xl mx-auto mb-8 sm:mb-10">
             <h1 class="text-3xl sm:text-5xl font-black text-white tracking-tight">Image to Favicon Converter</h1>
-            <p class="mt-2.5 text-slate-400 text-xs sm:text-sm">Convert any PNG, JPG, or SVG into ultra-sharp .ICO favicons (64px, 128px, 256px HD) with automatic square centering and live tab preview.</p>
+            <p class="mt-2.5 text-slate-400 text-xs sm:text-sm">Convert PNG, JPG, or SVG into ultra-sharp .ICO favicons (64px, 128px, 256px HD) with zero blur and instant 1-click download.</p>
         </div>
 
         <div class="bg-slate-900 rounded-3xl p-5 sm:p-10 border border-slate-800 shadow-2xl relative">
@@ -72,58 +72,43 @@
             <!-- WORKSPACE -->
             <div id="workspace" class="hidden mt-6 space-y-6">
                 <div class="flex items-center justify-between">
-                    <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Live Tab Preview</span>
+                    <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Favicon Icon Sizes</span>
                     <button type="button" onclick="document.getElementById('file-input').click()" class="text-xs font-bold text-indigo-400 hover:text-white bg-slate-800 hover:bg-slate-700 px-3 py-1.5 rounded-xl border border-slate-700 transition">
                         🔄 Change Logo
                     </button>
                 </div>
 
-                <!-- LIVE CHROME TAB PREVIEW -->
-                <div class="bg-slate-950/80 p-5 rounded-2xl border border-slate-800 space-y-5">
-                    <span class="text-xs font-semibold text-slate-400 block text-center">How your Favicon looks in Google Chrome:</span>
+                <!-- ⚡ CLEAN RESOLUTION CARDS (NO FAKE BROWSER TAB!) -->
+                <div class="bg-slate-950/80 p-5 rounded-2xl border border-slate-800 space-y-4">
+                    <span class="text-xs font-semibold text-slate-400 block text-center">Select icon resolution to download:</span>
                     
-                    <div class="bg-slate-900 p-2.5 rounded-xl border border-slate-800 max-w-sm mx-auto shadow-inner">
-                        <div class="bg-slate-800 px-3 py-2.5 rounded-lg flex items-center gap-2.5 shadow">
-                            <div class="w-6 h-6 flex items-center justify-center flex-shrink-0">
-                                <img id="tab-favicon-preview" src="#" alt="Favicon" class="w-5 h-5 object-contain rounded-sm">
+                    <div class="grid grid-cols-3 gap-3 max-w-lg mx-auto">
+                        <!-- 64px -->
+                        <button type="button" onclick="selectFaviconSize(64)" id="btn-size-64" class="size-btn p-3 bg-slate-900 hover:bg-slate-800 rounded-2xl border-2 border-slate-800 text-center transition flex flex-col items-center">
+                            <div class="w-14 h-14 bg-slate-950 rounded-xl flex items-center justify-center p-2 mb-2 border border-slate-800/80">
+                                <img id="icon-64" src="#" class="max-w-full max-h-full object-contain">
                             </div>
-                            <span class="text-xs font-bold text-slate-200 truncate">My Website</span>
-                            <span id="tab-badge" class="text-[10px] font-black text-indigo-400 bg-indigo-500/10 px-2 py-0.5 rounded border border-indigo-500/20 ml-auto flex-shrink-0">128×128 px</span>
-                            <span class="text-slate-400 text-xs ml-1 font-black">✕</span>
-                        </div>
-                    </div>
+                            <span class="text-xs font-bold text-white block">64×64 px</span>
+                            <span class="text-[10px] text-slate-400">Crisp Web</span>
+                        </button>
 
-                    <!-- ⚡ HIGH-CLARITY CLICKABLE CARDS -->
-                    <div>
-                        <span class="text-[11px] font-bold text-indigo-400 block text-center mb-3">👇 Click any size below to inspect sharpness:</span>
-                        <div class="grid grid-cols-3 gap-3 max-w-lg mx-auto">
-                            <!-- 64px -->
-                            <button type="button" onclick="selectFaviconSize(64)" id="btn-size-64" class="size-btn p-3 bg-slate-900 hover:bg-slate-800 rounded-2xl border-2 border-slate-800 text-center transition flex flex-col items-center">
-                                <div class="w-14 h-14 bg-slate-950 rounded-xl flex items-center justify-center p-2 mb-2 border border-slate-800/80">
-                                    <img id="icon-64" src="#" class="max-w-full max-h-full object-contain">
-                                </div>
-                                <span class="text-xs font-bold text-white block">64×64 px</span>
-                                <span class="text-[10px] text-slate-400">Crisp Web</span>
-                            </button>
+                        <!-- 128px (DEFAULT) -->
+                        <button type="button" onclick="selectFaviconSize(128)" id="btn-size-128" class="size-btn p-3 bg-slate-900 rounded-2xl border-2 border-indigo-500 shadow-lg shadow-indigo-500/20 text-center transition flex flex-col items-center scale-105">
+                            <div class="w-14 h-14 bg-slate-950 rounded-xl flex items-center justify-center p-2 mb-2 border border-slate-800/80">
+                                <img id="icon-128" src="#" class="max-w-full max-h-full object-contain">
+                            </div>
+                            <span class="text-xs font-bold text-indigo-400 block">128×128 px</span>
+                            <span class="text-[10px] text-emerald-400 font-bold">Ultra Sharp</span>
+                        </button>
 
-                            <!-- 128px (DEFAULT) -->
-                            <button type="button" onclick="selectFaviconSize(128)" id="btn-size-128" class="size-btn p-3 bg-slate-900 rounded-2xl border-2 border-indigo-500 shadow-lg shadow-indigo-500/20 text-center transition flex flex-col items-center scale-105">
-                                <div class="w-14 h-14 bg-slate-950 rounded-xl flex items-center justify-center p-2 mb-2 border border-slate-800/80">
-                                    <img id="icon-128" src="#" class="max-w-full max-h-full object-contain">
-                                </div>
-                                <span class="text-xs font-bold text-indigo-400 block">128×128 px</span>
-                                <span class="text-[10px] text-emerald-400 font-bold">Ultra Sharp</span>
-                            </button>
-
-                            <!-- 256px -->
-                            <button type="button" onclick="selectFaviconSize(256)" id="btn-size-256" class="size-btn p-3 bg-slate-900 hover:bg-slate-800 rounded-2xl border-2 border-slate-800 text-center transition flex flex-col items-center">
-                                <div class="w-14 h-14 bg-slate-950 rounded-xl flex items-center justify-center p-2 mb-2 border border-slate-800/80">
-                                    <img id="icon-256" src="#" class="max-w-full max-h-full object-contain">
-                                </div>
-                                <span class="text-xs font-bold text-white block">256×256 px</span>
-                                <span class="text-[10px] text-amber-400 font-bold">4K Retina</span>
-                            </button>
-                        </div>
+                        <!-- 256px -->
+                        <button type="button" onclick="selectFaviconSize(256)" id="btn-size-256" class="size-btn p-3 bg-slate-900 hover:bg-slate-800 rounded-2xl border-2 border-slate-800 text-center transition flex flex-col items-center">
+                            <div class="w-14 h-14 bg-slate-950 rounded-xl flex items-center justify-center p-2 mb-2 border border-slate-800/80">
+                                <img id="icon-256" src="#" class="max-w-full max-h-full object-contain">
+                            </div>
+                            <span class="text-xs font-bold text-white block">256×256 px</span>
+                            <span class="text-[10px] text-amber-400 font-bold">4K Retina</span>
+                        </button>
                     </div>
                 </div>
 
@@ -139,7 +124,7 @@
                             <option value="png256">256×256 px High-Res Image (.PNG)</option>
                             <option value="zip">Complete High-Res Pack (.ZIP with 16, 32, 64, 128, 256, 512px + HTML code)</option>
                         </select>
-                        <p class="text-[11px] text-emerald-400 font-semibold mt-1.5">✓ Square proportions are maintained perfectly without stretching or distortion.</p>
+                        <p class="text-[11px] text-emerald-400 font-semibold mt-1.5">✓ 256px and 128px .ICO formats eliminate blur completely on all screens.</p>
                     </div>
 
                     <!-- READY TO USE HTML SNIPPET -->
@@ -171,8 +156,8 @@
                 </div>
                 <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800">
                     <span class="w-7 h-7 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center mb-2.5 text-xs">2</span>
-                    <h3 class="font-bold text-white text-sm mb-1">Click to Inspect</h3>
-                    <p class="text-slate-400">Click 64px, 128px, or 256px to see real-time sharpness in the Chrome tab.</p>
+                    <h3 class="font-bold text-white text-sm mb-1">Choose Icon Resolution</h3>
+                    <p class="text-slate-400">Select 64px, 128px, or 256px for ultra-sharp rendering on modern screens.</p>
                 </div>
                 <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800">
                     <span class="w-7 h-7 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center mb-2.5 text-xs">3</span>
@@ -187,7 +172,7 @@
         <p>© 2026 SmartPicTools. 100% Free & Private in-browser suite. <a href="/" class="text-indigo-400 hover:underline">Explore All Tools</a></p>
     </footer>
 
-    <!-- ⚡ JS ENGINE (AUTO-SQUARE FIT WITHOUT SQUISHING) -->
+    <!-- JS ENGINE -->
     <script>
         let loadedImg = new Image();
         let fileName = 'favicon';
@@ -220,7 +205,6 @@
             reader.onload = (e) => {
                 loadedImg.src = e.target.result;
                 loadedImg.onload = async () => {
-                    // Render crisp square previews for all cards without squishing!
                     const p64 = await renderSquareCanvasPng(64);
                     const p128 = await renderSquareCanvasPng(128);
                     const p256 = await renderSquareCanvasPng(256);
@@ -239,7 +223,7 @@
             reader.readAsDataURL(file);
         }
 
-        // ⚡ RENDER SQUARE WITHOUT SQUISHING OR STRETCHING
+        // Render square proportionally without stretching
         function renderSquareCanvasPng(targetSize) {
             const canvas = document.createElement('canvas');
             canvas.width = targetSize;
@@ -248,7 +232,6 @@
             ctx.imageSmoothingEnabled = true;
             ctx.imageSmoothingQuality = 'high';
 
-            // Calculate proportional fit (Preserves original aspect ratio!)
             const scale = Math.min(targetSize / loadedImg.naturalWidth, targetSize / loadedImg.naturalHeight);
             const drawW = loadedImg.naturalWidth * scale;
             const drawH = loadedImg.naturalHeight * scale;
@@ -262,30 +245,17 @@
         async function selectFaviconSize(size) {
             currentSelectedSize = size;
             const dropdown = document.getElementById('download-mode');
-            const previewIcon = document.getElementById('tab-favicon-preview');
-            const tabBadge = document.getElementById('tab-badge');
 
             if (size === 64) dropdown.value = 'ico64';
             else if (size === 128) dropdown.value = 'ico128';
             else if (size === 256) dropdown.value = 'ico256';
 
-            // ⚡ Live update Tab without stretching
+            // Update real browser tab icon live
             if (loadedImg.src) {
                 const pngBlob = await renderSquareCanvasPng(size);
                 const url = URL.createObjectURL(pngBlob);
-                previewIcon.src = url;
-
-                // Tab animation
-                previewIcon.style.transform = 'scale(1.25)';
-                setTimeout(() => { previewIcon.style.transform = 'scale(1)'; }, 150);
-
-                // Update real Chrome tab
                 const realFavicon = document.querySelector("link[rel*='icon']");
                 if (realFavicon) realFavicon.href = url;
-            }
-
-            if (tabBadge) {
-                tabBadge.innerText = `${size}×${size} px`;
             }
 
             [64, 128, 256].forEach(s => {
