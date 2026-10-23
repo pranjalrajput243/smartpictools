@@ -20,7 +20,7 @@ app = Flask(__name__)
 app.config['MAX_CONTENT_LENGTH'] = 100 * 1024 * 1024  # 100MB limit
 
 # ==========================================
-# ⚡ ALL DEDICATED TOOL ROUTES
+# ⚡ ALL 13 DEDICATED TOOL ROUTES
 # ==========================================
 @app.route('/')
 def home():
@@ -62,21 +62,24 @@ def rotate_route():
 def qr_route():
     return render_template('qr-code-generator.html')
 
-# ⚡ PASSPORT PHOTO MAKER ROUTE
 @app.route('/passport-photo-maker')
 def passport_photo_page():
     return render_template('passport-photo-maker.html')
 
-# ⚡ PDF CONVERTER ROUTE
 @app.route('/pdf-converter')
 def pdf_converter_page():
     return render_template('pdf-converter.html')
 
-# ⚡ IMAGE TO FAVICON ROUTE
 @app.route('/favicon-converter')
 def favicon_converter_page():
     return render_template('favicon-converter.html')
-    
+
+# ⚡ JPEG TO PNG CONVERTER ROUTE
+@app.route('/jpeg-to-png')
+@app.route('/jpg-to-png')
+def jpeg_to_png_page():
+    return render_template('jpeg-to-png.html')
+
 # ==========================================
 # LEGAL & INFO ROUTES
 # ==========================================
@@ -97,7 +100,7 @@ def contact():
     return render_template('contact.html')
 
 # ==========================================
-# ⚡ MASTER SITEMAP (ALL 15 URLS INCLUDED)
+# ⚡ MASTER SITEMAP (ALL URLS INCLUDED)
 # ==========================================
 @app.route('/sitemap.xml')
 def sitemap():
@@ -116,11 +119,11 @@ def sitemap():
   <url><loc>https://smartpictools.in/passport-photo-maker</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
   <url><loc>https://smartpictools.in/pdf-converter</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
   <url><loc>https://smartpictools.in/favicon-converter</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://smartpictools.in/jpeg-to-png</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
   <url><loc>https://smartpictools.in/about</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://smartpictools.in/privacy</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://smartpictools.in/terms</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://smartpictools.in/contact</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  
 </urlset>"""
     return Response(xml, mimetype='application/xml')
 
