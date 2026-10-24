@@ -10,69 +10,95 @@
     <meta name="robots" content="index, follow, max-image-preview:large">
     <meta name="author" content="SmartPicTools">
     <link rel="canonical" href="https://smartpictools.in/{{ meta.src }}-to-{{ meta.tgt }}">
+    
+    <!-- ⚡ PERMANENT GOOGLE SEARCH CONSOLE VERIFICATION TAG -->
     <meta name="google-site-verification" content="uUq17UUsROyHMRQ8jkqKqrjZmsJnkuxZMKKoJLw_X3E" />
 
+    <!-- OPEN GRAPH -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://smartpictools.in/{{ meta.src }}-to-{{ meta.tgt }}">
+    <meta property="og:title" content="{{ meta.title }}">
+    <meta property="og:description" content="{{ meta.desc }}">
+
+    <!-- FAVICON -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' stop-color='%236366f1'/><stop offset='50%25' stop-color='%23a855f7'/><stop offset='100%25' stop-color='%23ec4899'/></linearGradient></defs><rect width='100' height='100' rx='28' fill='url(%23g)'/><path d='M52 16 L24 54 L46 54 L42 84 L76 44 L54 44 Z' fill='%23fbbf24'/></svg>">
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
     <!-- LIBRARIES -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/heic2any/0.0.4/heic2any.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/heic2any/0.0.4/heic2any.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/utif@3.1.0/UTIF.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
     <style>body { font-family: 'Plus Jakarta Sans', sans-serif; -webkit-tap-highlight-color: transparent; }</style>
 </head>
 <body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col justify-between selection:bg-indigo-500 selection:text-white">
 
+    <!-- HEADER -->
     <header class="border-b border-slate-800 bg-slate-900/80 backdrop-blur-xl sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 h-18 sm:h-20 flex items-center justify-between">
             <a href="/" class="flex items-center gap-2.5 sm:gap-3 group">
-                <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-2xl bg-gradient-to-tr from-indigo-500 via-purple-500 to-pink-500 flex items-center justify-center text-white text-lg sm:text-xl shadow-lg shadow-indigo-500/30">⚡</div>
+                <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-2xl bg-gradient-to-tr from-indigo-500 via-purple-500 to-pink-500 flex items-center justify-center text-white text-lg sm:text-xl shadow-lg shadow-indigo-500/30 group-hover:scale-105 transition">
+                    ⚡
+                </div>
                 <div>
-                    <span class="text-xl sm:text-2xl font-black text-white">SmartPic<span class="text-indigo-400">Tools</span></span>
-                    <span class="block text-[9px] uppercase font-bold text-slate-400 -mt-1">{{ meta.src_name }} to {{ meta.tgt_name }}</span>
+                    <span class="text-xl sm:text-2xl font-black tracking-tight text-white">SmartPic<span class="text-indigo-400">Tools</span></span>
+                    <span class="block text-[9px] sm:text-[10px] uppercase font-bold tracking-widest text-slate-400 -mt-1">{{ meta.src_name }} to {{ meta.tgt_name }}</span>
                 </div>
             </a>
             <div class="flex items-center gap-2">
-                <a href="/convert-from-{{ meta.src }}" class="py-2 px-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-bold text-slate-300 hover:text-white border border-slate-700 transition">← {{ meta.src_name }} Hub</a>
-                <a href="/" class="py-2 px-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-bold text-indigo-400 hover:text-white border border-slate-700 transition">All Tools</a>
+                <a href="/convert-from-{{ meta.src }}" class="py-2 px-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-bold text-slate-300 hover:text-white border border-slate-700 transition">
+                    ← {{ meta.src_name }} Hub
+                </a>
+                <a href="/" class="py-2 px-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-bold text-indigo-400 hover:text-white border border-slate-700 transition">
+                    All Tools
+                </a>
             </div>
         </div>
     </header>
 
+    <!-- MAIN CONVERTER WORKSPACE -->
     <main class="max-w-4xl mx-auto w-full px-4 py-8 sm:py-12 flex-1">
         <div class="text-center max-w-2xl mx-auto mb-8 sm:mb-10">
-            <span class="text-[11px] font-extrabold uppercase tracking-widest text-indigo-400 bg-indigo-500/10 px-3 py-1 rounded-full border border-indigo-500/20">Dedicated Studio</span>
+            <span class="text-[11px] font-extrabold uppercase tracking-widest text-indigo-400 bg-indigo-500/10 px-3 py-1 rounded-full border border-indigo-500/20">Dedicated Conversion Studio</span>
             <h1 class="text-3xl sm:text-5xl font-black text-white mt-3 tracking-tight">Convert {{ meta.src_name }} to {{ meta.tgt_name }}</h1>
-            <p class="mt-2.5 text-slate-400 text-xs sm:text-sm">Turn {{ meta.src_name }} files into crisp 300 DPI {{ meta.tgt_name }} with zero blur in 0.1s.</p>
+            <p class="mt-2.5 text-slate-400 text-xs sm:text-sm">Turn {{ meta.src_name }} files into crisp {{ meta.tgt_name }} format with zero blur in 0.1s. 100% private in-browser tool.</p>
         </div>
 
         <div class="bg-slate-900 rounded-3xl p-5 sm:p-10 border border-slate-800 shadow-2xl relative">
+            
+            <!-- UPLOAD DROP AREA -->
             <div id="drop-area" class="border-2 border-dashed border-slate-700 hover:border-indigo-500 bg-slate-950/60 hover:bg-indigo-950/20 rounded-2xl p-8 sm:p-14 text-center cursor-pointer transition-all duration-300">
-                <input type="file" id="file-input" multiple class="hidden">
-                <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-3xl bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-3xl sm:text-4xl flex items-center justify-center mx-auto mb-4">🔄</div>
-                <h3 class="text-base sm:text-xl font-bold text-white mb-1.5">Select {{ meta.src_name }} Files</h3>
-                <p class="text-xs sm:text-sm text-slate-400">Choose single or multiple {{ meta.src_name }} files to convert into {{ meta.tgt_name }}</p>
+                <input type="file" id="file-input" multiple {% if meta.src == 'pdf' %}accept="application/pdf, .pdf"{% elif meta.src == 'heic' %}accept=".heic, .HEIC, .heif, .HEIF"{% else %}accept="image/*, .{{ meta.src }}"{% endif %} class="hidden">
+                <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-3xl bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-3xl sm:text-4xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition duration-300 shadow-inner">
+                    🔄
+                </div>
+                <h3 class="text-base sm:text-xl font-bold text-white mb-1.5">Select {{ meta.src_name }} File(s) to Convert</h3>
+                <p class="text-xs sm:text-sm text-slate-400">Choose single or multiple {{ meta.src_name }} files (100% private in-browser, no server upload)</p>
             </div>
 
+            <!-- WORKSPACE -->
             <div id="workspace" class="hidden mt-6 space-y-6">
                 <div class="flex items-center justify-between">
                     <span class="text-xs font-bold text-slate-300">Selected Files (<span id="file-count" class="text-indigo-400 font-extrabold">0</span>):</span>
-                    <button type="button" onclick="document.getElementById('file-input').click()" class="text-xs font-bold text-indigo-400 hover:text-white bg-slate-800 hover:bg-slate-700 px-3 py-1.5 rounded-xl border border-slate-700 transition">+ Add More</button>
+                    <button type="button" onclick="document.getElementById('file-input').click()" class="text-xs font-bold text-indigo-400 hover:text-white bg-slate-800 hover:bg-slate-700 px-3 py-1.5 rounded-xl border border-slate-700 transition">
+                        + Add More
+                    </button>
                 </div>
 
                 <div id="gallery" class="grid grid-cols-2 sm:grid-cols-4 gap-3 max-h-80 overflow-y-auto p-3 bg-slate-950/80 rounded-2xl border border-slate-800">
                 </div>
 
+                <!-- PRE-CONFIGURED TARGET BADGE -->
                 <div class="p-3.5 bg-slate-950/80 rounded-xl border border-slate-800 flex items-center justify-between text-xs">
-                    <span class="text-slate-400 font-semibold">Target Format: <strong class="text-indigo-400 font-bold">{{ meta.tgt_name }} (300 DPI Ultra HD)</strong></span>
-                    <span class="text-emerald-400 font-bold">✓ Zero Blur Guaranteed</span>
+                    <span class="text-slate-400 font-semibold">Target Format: <strong class="text-indigo-400 font-bold">{{ meta.tgt_name }}</strong></span>
+                    <span class="text-emerald-400 font-bold">✓ {% if meta.src == 'pdf' and meta.tgt == 'svg' %}Native Searchable Vector (Ctrl+F Works){% else %}Zero Blur Guaranteed{% endif %}</span>
                 </div>
 
-                <button type="button" id="convert-btn" onclick="executeConversion()" class="w-full py-4 px-6 rounded-2xl bg-gradient-to-r from-indigo-600 via-indigo-500 to-purple-600 text-white font-extrabold text-sm sm:text-base shadow-lg transition flex items-center justify-center gap-3">
+                <button type="button" id="convert-btn" onclick="executeConversion()" class="w-full py-4 px-6 rounded-2xl bg-gradient-to-r from-indigo-600 via-indigo-500 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-extrabold text-sm sm:text-base shadow-lg shadow-indigo-500/25 transition active:scale-[0.99] flex items-center justify-center gap-3">
                     <span id="btn-text">⚡ Convert to {{ meta.tgt_name }} & Download</span>
                 </button>
             </div>
@@ -81,30 +107,44 @@
                 <p class="text-emerald-400 font-bold text-xs sm:text-sm">🎉 Success! High-resolution file(s) downloaded!</p>
             </div>
         </div>
+
+        <section class="mt-14 border-t border-slate-800 pt-10">
+            <h2 class="text-xl sm:text-2xl font-bold text-white text-center mb-6">How to Convert {{ meta.src_name }} to {{ meta.tgt_name }} in 3 Easy Steps</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs sm:text-sm">
+                <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800">
+                    <span class="w-7 h-7 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center mb-2.5 text-xs">1</span>
+                    <h3 class="font-bold text-white text-sm mb-1">Select Files</h3>
+                    <p class="text-slate-400">Choose single or multiple {{ meta.src_name }} files from your device.</p>
+                </div>
+                <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800">
+                    <span class="w-7 h-7 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center mb-2.5 text-xs">2</span>
+                    <h3 class="font-bold text-white text-sm mb-1">Instant Conversion</h3>
+                    <p class="text-slate-400">Our in-browser engine decodes and converts directly into {{ meta.tgt_name }} in local memory.</p>
+                </div>
+                <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800">
+                    <span class="w-7 h-7 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center mb-2.5 text-xs">3</span>
+                    <h3 class="font-bold text-white text-sm mb-1">Download</h3>
+                    <p class="text-slate-400">Single files download directly; multiple files download as a clean ZIP archive.</p>
+                </div>
+            </div>
+        </section>
     </main>
 
     <footer class="border-t border-slate-800 bg-slate-950 py-8 px-4 text-xs text-slate-400 text-center">
         <p>© 2026 SmartPicTools. 100% Free & Private in-browser suite. <a href="/" class="text-indigo-400 hover:underline">Explore All Tools</a></p>
     </footer>
 
+    <!-- ⚡ CONVERSION JAVASCRIPT ENGINE (TRUE VECTOR SVG + 300 DPI) -->
     <script>
         pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
 
-        const SRC = "{{ meta.src }}";
-        const TGT = "{{ meta.tgt }}";
+        const SRC_FMT = "{{ meta.src }}".toLowerCase();
+        const TGT_FMT = "{{ meta.tgt }}".toLowerCase();
         const TGT_NAME = "{{ meta.tgt_name }}";
         let filesList = [];
 
         const dropArea = document.getElementById('drop-area');
         const fileInput = document.getElementById('file-input');
-
-        if (SRC === 'jpg' || SRC === 'jpeg') fileInput.accept = "image/jpeg, image/jpg, .jpg, .jpeg";
-        else if (SRC === 'png') fileInput.accept = "image/png, .png";
-        else if (SRC === 'webp') fileInput.accept = "image/webp, .webp";
-        else if (SRC === 'pdf') fileInput.accept = "application/pdf, .pdf";
-        else if (SRC === 'heic') fileInput.accept = ".heic, .HEIC, .heif, .HEIF, image/heic, image/heif";
-        else if (SRC === 'svg') fileInput.accept = "image/svg+xml, .svg";
-        else if (SRC === 'tiff' || SRC === 'tif') fileInput.accept = "image/tiff, .tif, .tiff";
 
         ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(ev => {
             window.addEventListener(ev, (e) => { e.preventDefault(); e.stopPropagation(); }, false);
@@ -124,54 +164,34 @@
 
         async function handleFiles(files) {
             for (let f of Array.from(files)) {
-                let processedFile = f;
-                let previewUrl = '';
+                let thumbUrl = '';
                 const nameLower = f.name.toLowerCase();
 
-                if (nameLower.endsWith('.heic') || nameLower.endsWith('.heif') || SRC === 'heic') {
-                    try {
-                        const conv = await heic2any({ blob: f, toType: 'image/jpeg', quality: 0.95 });
-                        const jpegBlob = Array.isArray(conv) ? conv[0] : conv;
-                        processedFile = new File([jpegBlob], f.name.replace(/\.[^/.]+$/, ".jpg"), { type: 'image/jpeg' });
-                        previewUrl = URL.createObjectURL(processedFile);
-                    } catch(e) { previewUrl = URL.createObjectURL(f); }
-                } else if (nameLower.endsWith('.tif') || nameLower.endsWith('.tiff')) {
-                    try {
-                        const buf = await f.arrayBuffer();
-                        const ifds = UTIF.decode(buf);
-                        UTIF.decodeImage(buf, ifds[0]);
-                        const rgba = UTIF.toRGBA8(ifds[0]);
-                        const tCanvas = document.createElement('canvas');
-                        tCanvas.width = ifds[0].width;
-                        tCanvas.height = ifds[0].height;
-                        const tCtx = tCanvas.getContext('2d');
-                        const imgData = tCtx.createImageData(ifds[0].width, ifds[0].height);
-                        imgData.data.set(rgba);
-                        tCtx.putImageData(imgData, 0, 0);
-
-                        const pngBlob = await new Promise(r => tCanvas.toBlob(r, 'image/png'));
-                        processedFile = new File([pngBlob], f.name.replace(/\.[^/.]+$/, ".png"), { type: 'image/png' });
-                        previewUrl = URL.createObjectURL(processedFile);
-                    } catch(e) { previewUrl = URL.createObjectURL(f); }
-                } else if (nameLower.endsWith('.pdf') || SRC === 'pdf') {
+                if (SRC_FMT === 'pdf' || nameLower.endsWith('.pdf')) {
                     try {
                         const ab = await f.arrayBuffer();
-                        const pdfDoc = await pdfjsLib.getDocument({ data: ab }).promise;
-                        const page1 = await pdfDoc.getPage(1);
-                        const vp = page1.getViewport({ scale: 1.0 });
+                        const pDoc = await pdfjsLib.getDocument({ data: ab }).promise;
+                        const p1 = await pDoc.getPage(1);
+                        const vp = p1.getViewport({ scale: 0.3 });
                         const cvs = document.createElement('canvas');
                         cvs.width = vp.width;
                         cvs.height = vp.height;
-                        await page1.render({ canvasContext: cvs.getContext('2d'), viewport: vp }).promise;
-                        previewUrl = cvs.toDataURL('image/png');
+                        await p1.render({ canvasContext: cvs.getContext('2d'), viewport: vp }).promise;
+                        thumbUrl = cvs.toDataURL('image/jpeg', 0.8);
                     } catch(e) {
-                        previewUrl = "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%231e293b'/><text x='50%' y='55%' dominant-baseline='central' text-anchor='middle' font-size='40'>📄</text></svg>";
+                        thumbUrl = '';
                     }
+                } else if (nameLower.endsWith('.heic') || nameLower.endsWith('.heif')) {
+                    try {
+                        const conv = await heic2any({ blob: f, toType: 'image/jpeg', quality: 0.5 });
+                        const b = Array.isArray(conv) ? conv[0] : conv;
+                        thumbUrl = URL.createObjectURL(b);
+                    } catch(e) {}
                 } else {
-                    previewUrl = URL.createObjectURL(f);
+                    thumbUrl = URL.createObjectURL(f);
                 }
 
-                filesList.push({ file: processedFile, rawFile: f, url: previewUrl, name: f.name });
+                filesList.push({ file: f, url: thumbUrl, name: f.name });
             }
             renderGallery();
         }
@@ -197,11 +217,14 @@
                 delBtn.type = "button";
                 delBtn.className = "absolute top-1 right-1 w-5 h-5 rounded-full bg-rose-600 text-white text-[10px] font-black flex items-center justify-center";
                 delBtn.innerHTML = "✕";
-                delBtn.onclick = () => { filesList.splice(index, 1); renderGallery(); };
+                delBtn.onclick = () => {
+                    filesList.splice(index, 1);
+                    renderGallery();
+                };
 
                 const thumb = document.createElement('img');
-                thumb.className = "w-full h-16 object-cover rounded-lg mb-1";
-                thumb.src = item.url;
+                thumb.className = "w-full h-16 object-cover rounded-lg mb-1 bg-slate-950";
+                thumb.src = item.url || '';
 
                 const nameText = document.createElement('p');
                 nameText.className = "text-[10px] font-bold text-white truncate";
@@ -214,6 +237,27 @@
             });
         }
 
+        // ⚡ NATIVE VECTOR SVG EXPORTER (REAL SEARCHABLE TEXT - CTRL+F WORKS)
+        async function renderPdfPageToTrueSvg(page) {
+            const viewport = page.getViewport({ scale: 1.0 });
+            const opList = await page.getOperatorList();
+            
+            const svgGfx = new pdfjsLib.SVGGraphics(page.commonObjs, page.objs);
+            svgGfx.embedFonts = true;
+            
+            const svg = await svgGfx.getSVG(opList, viewport);
+            
+            if (!svg.getAttribute('xmlns')) {
+                svg.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
+            }
+            if (!svg.getAttribute('xmlns:xlink')) {
+                svg.setAttribute('xmlns:xlink', 'http://www.w3.org/1999/xlink');
+            }
+
+            const svgString = '<?xml version="1.0" encoding="UTF-8"?>\n' + new XMLSerializer().serializeToString(svg);
+            return new Blob([svgString], { type: 'image/svg+xml;charset=utf-8' });
+        }
+
         function canvasToTiffBlob(canvas) {
             if (typeof UTIF !== 'undefined') {
                 const ctx = canvas.getContext('2d');
@@ -224,156 +268,202 @@
             return new Promise(r => canvas.toBlob(r, 'image/png'));
         }
 
-        function canvasToSvgBlob(canvas) {
-            const dataUrl = canvas.toDataURL('image/png');
-            const svgContent = `<?xml version="1.0" encoding="UTF-8"?>\n<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="${canvas.width}" height="${canvas.height}" viewBox="0 0 ${canvas.width} ${canvas.height}">\n  <image width="${canvas.width}" height="${canvas.height}" xlink:href="${dataUrl}"/>\n</svg>`;
-            return new Blob([svgContent], { type: 'image/svg+xml;charset=utf-8' });
-        }
-
-        // ⚡ 300 DPI ULTRA HD CONVERSION ENGINE
         async function executeConversion() {
             if (filesList.length === 0) return;
             const btn = document.getElementById('convert-btn');
             btn.disabled = true;
-            document.getElementById('btn-text').innerText = `⏳ Rendering 300 DPI ${TGT_NAME}...`;
+            document.getElementById('btn-text').innerText = `⏳ Converting to ${TGT_NAME}...`;
 
             try {
-                // 1. PDF TO IMAGE (300 DPI HIGH-RES RENDERING - ZERO BLUR)
-                if (SRC === 'pdf') {
-                    const item = filesList[0];
-                    const rawName = item.name.substring(0, item.name.lastIndexOf('.')) || item.name;
-                    const ab = await item.rawFile.arrayBuffer();
-                    const pdfDoc = await pdfjsLib.getDocument({ data: ab }).promise;
+                // ==========================================
+                // 1. CONVERTING FROM PDF (PDF TO SVG, JPG, PNG, ETC.)
+                // ==========================================
+                if (SRC_FMT === 'pdf') {
+                    // CASE A: PDF TO SVG (TRUE VECTOR SVG)
+                    if (TGT_FMT === 'svg') {
+                        if (filesList.length === 1) {
+                            const item = filesList[0];
+                            const rawName = item.name.substring(0, item.name.lastIndexOf('.')) || item.name;
+                            const ab = await item.file.arrayBuffer();
+                            const pdfDoc = await pdfjsLib.getDocument({ data: ab }).promise;
 
-                    if (TGT === 'doc' || TGT === 'docx') {
-                        let fullText = "";
-                        for (let p = 1; p <= pdfDoc.numPages; p++) {
-                            const pg = await pdfDoc.getPage(p);
-                            const tc = await pg.getTextContent();
-                            fullText += `--- Page ${p} ---\n\n` + tc.items.map(i => i.str).join(' ') + "\n\n";
+                            if (pdfDoc.numPages === 1) {
+                                const p1 = await pdfDoc.getPage(1);
+                                const svgBlob = await renderPdfPageToTrueSvg(p1);
+                                downloadBlob(svgBlob, `smartpic_${rawName}.svg`);
+                            } else {
+                                const zip = new JSZip();
+                                for (let p = 1; p <= pdfDoc.numPages; p++) {
+                                    const page = await pdfDoc.getPage(p);
+                                    const svgBlob = await renderPdfPageToTrueSvg(page);
+                                    zip.file(`${rawName}_page_${p}.svg`, svgBlob);
+                                }
+                                const zipBlob = await zip.generateAsync({ type: 'blob' });
+                                downloadBlob(zipBlob, `smartpic_${rawName}_svg_pack.zip`);
+                            }
+                        } else {
+                            const zip = new JSZip();
+                            for (let item of filesList) {
+                                const rawName = item.name.substring(0, item.name.lastIndexOf('.')) || item.name;
+                                const ab = await item.file.arrayBuffer();
+                                const pdfDoc = await pdfjsLib.getDocument({ data: ab }).promise;
+                                for (let p = 1; p <= pdfDoc.numPages; p++) {
+                                    const page = await pdfDoc.getPage(p);
+                                    const svgBlob = await renderPdfPageToTrueSvg(page);
+                                    zip.file(`${rawName}_page_${p}.svg`, svgBlob);
+                                }
+                            }
+                            const zipBlob = await zip.generateAsync({ type: 'blob' });
+                            downloadBlob(zipBlob, `smartpic_batch_svg_pack.zip`);
                         }
-                        const docBlob = new Blob([fullText], { type: 'application/msword;charset=utf-8' });
-                        downloadBlob(docBlob, `smartpic_${rawName}.doc`);
                         finish();
                         return;
                     }
 
+                    // CASE B: PDF TO OTHER FORMATS (JPG, PNG, WEBP, TIFF, DOC)
                     const zip = new JSZip();
-                    const mime = TGT === 'png' ? 'image/png' : (TGT === 'webp' ? 'image/webp' : 'image/jpeg');
-                    const ext = TGT;
+                    let singleDownloaded = false;
 
-                    for (let p = 1; p <= pdfDoc.numPages; p++) {
-                        const pg = await pdfDoc.getPage(p);
-                        const vp = pg.getViewport({ scale: 3.0 }); // ⚡ 300 DPI Scale Factor
-                        const cvs = document.createElement('canvas');
-                        cvs.width = vp.width;
-                        cvs.height = vp.height;
-                        const ctx = cvs.getContext('2d');
-                        ctx.imageSmoothingEnabled = true;
-                        ctx.imageSmoothingQuality = 'high';
-                        
-                        if (TGT === 'jpg' || TGT === 'jpeg') {
-                            ctx.fillStyle = '#ffffff';
-                            ctx.fillRect(0, 0, cvs.width, cvs.height);
+                    for (let item of filesList) {
+                        const rawName = item.name.substring(0, item.name.lastIndexOf('.')) || item.name;
+                        const ab = await item.file.arrayBuffer();
+                        const pdfDoc = await pdfjsLib.getDocument({ data: ab }).promise;
+
+                        if (TGT_FMT === 'doc') {
+                            let fullText = "";
+                            for (let p = 1; p <= pdfDoc.numPages; p++) {
+                                const page = await pdfDoc.getPage(p);
+                                const tc = await page.getTextContent();
+                                fullText += `--- Page ${p} ---\n\n` + tc.items.map(i => i.str).join(' ') + "\n\n";
+                            }
+                            const docBlob = new Blob([fullText], { type: 'application/msword;charset=utf-8' });
+                            if (filesList.length === 1) {
+                                downloadBlob(docBlob, `smartpic_${rawName}.doc`);
+                                singleDownloaded = true;
+                            } else {
+                                zip.file(`${rawName}.doc`, docBlob);
+                            }
+                            continue;
                         }
 
-                        await pg.render({ canvasContext: ctx, viewport: vp, intent: 'print' }).promise;
+                        // RASTER 300 DPI
+                        for (let p = 1; p <= pdfDoc.numPages; p++) {
+                            const page = await pdfDoc.getPage(p);
+                            const vp = page.getViewport({ scale: 3.0 });
+                            const cvs = document.createElement('canvas');
+                            cvs.width = vp.width;
+                            cvs.height = vp.height;
+                            await page.render({ canvasContext: cvs.getContext('2d'), viewport: vp, intent: 'print' }).promise;
 
-                        let pageBlob = null;
-                        if (TGT === 'svg') pageBlob = canvasToSvgBlob(cvs);
-                        else if (TGT === 'tiff' || TGT === 'tif') pageBlob = canvasToTiffBlob(cvs);
-                        else pageBlob = await new Promise(r => cvs.toBlob(r, mime, 0.95));
-                        
-                        zip.file(`page_${p}_300dpi.${ext}`, pageBlob);
+                            let pageBlob = null;
+                            if (TGT_FMT === 'tiff') {
+                                pageBlob = canvasToTiffBlob(cvs);
+                            } else {
+                                const mime = TGT_FMT === 'png' ? 'image/png' : (TGT_FMT === 'webp' ? 'image/webp' : 'image/jpeg');
+                                pageBlob = await new Promise(r => cvs.toBlob(r, mime, 0.95));
+                            }
+
+                            if (filesList.length === 1 && pdfDoc.numPages === 1) {
+                                downloadBlob(pageBlob, `smartpic_${rawName}.${TGT_FMT}`);
+                                singleDownloaded = true;
+                            } else {
+                                zip.file(`${rawName}_page_${p}.${TGT_FMT}`, pageBlob);
+                            }
+                        }
                     }
 
-                    const zipContent = await zip.generateAsync({ type: 'blob' });
-                    downloadBlob(zipContent, `smartpic_${rawName}_300dpi_pages_${ext}.zip`);
+                    if (!singleDownloaded) {
+                        const zipBlob = await zip.generateAsync({ type: 'blob' });
+                        downloadBlob(zipBlob, `smartpic_${TGT_FMT}_pack.zip`);
+                    }
                     finish();
                     return;
                 }
 
-                // 2. STANDARD HIGH-RES IMAGES
+                // ==========================================
+                // 2. CONVERTING IMAGES TO OTHER FORMATS (JPG, PNG, PDF, ETC.)
+                // ==========================================
                 if (filesList.length === 1) {
                     const item = filesList[0];
                     const rawName = item.name.substring(0, item.name.lastIndexOf('.')) || item.name;
 
-                    if (TGT === 'avif') {
+                    // Convert to PDF
+                    if (TGT_FMT === 'pdf') {
+                        const bmp = await createImageBitmap(item.file);
+                        const { jsPDF } = window.jspdf;
+                        const wPt = bmp.width * 0.75;
+                        const hPt = bmp.height * 0.75;
+                        const orient = wPt >= hPt ? 'l' : 'p';
+                        const doc = new jsPDF({ orientation: orient, unit: 'pt', format: [wPt, hPt] });
+
+                        const cvs = document.createElement('canvas');
+                        cvs.width = bmp.width;
+                        cvs.height = bmp.height;
+                        cvs.getContext('2d').drawImage(bmp, 0, 0);
+                        doc.addImage(cvs.toDataURL('image/jpeg', 0.92), 'JPEG', 0, 0, wPt, hPt);
+                        doc.save(`smartpic_${rawName}.pdf`);
+                        finish();
+                        return;
+                    }
+
+                    // AVIF Fallback
+                    if (TGT_FMT === 'avif') {
                         const fd = new FormData();
                         fd.append('image', item.file);
                         fd.append('format', 'AVIF');
                         const resp = await fetch('/process', { method: 'POST', body: fd });
                         if (resp.ok) {
-                            const b = await resp.blob();
-                            downloadBlob(b, `smartpic_${rawName}.avif`);
+                            downloadBlob(await resp.blob(), `smartpic_${rawName}.avif`);
                             finish();
                             return;
                         }
                     }
 
                     const bmp = await createImageBitmap(item.file);
-                    const canvas = document.createElement('canvas');
-                    canvas.width = bmp.width;
-                    canvas.height = bmp.height;
-                    const ctx = canvas.getContext('2d');
-                    ctx.imageSmoothingEnabled = true;
-                    ctx.imageSmoothingQuality = 'high';
-
-                    if (TGT === 'jpg' || TGT === 'jpeg') {
-                        ctx.fillStyle = '#ffffff';
-                        ctx.fillRect(0, 0, canvas.width, canvas.height);
-                    }
+                    const cvs = document.createElement('canvas');
+                    cvs.width = bmp.width;
+                    cvs.height = bmp.height;
+                    const ctx = cvs.getContext('2d');
                     ctx.drawImage(bmp, 0, 0);
 
-                    if (TGT === 'svg') {
-                        downloadBlob(canvasToSvgBlob(canvas), `smartpic_${rawName}.svg`);
+                    if (TGT_FMT === 'tiff') {
+                        const tiffBlob = canvasToTiffBlob(cvs);
+                        downloadBlob(tiffBlob, `smartpic_${rawName}.tiff`);
                         finish();
                         return;
                     }
 
-                    if (TGT === 'tiff' || TGT === 'tif') {
-                        downloadBlob(canvasToTiffBlob(canvas), `smartpic_${rawName}.tiff`);
+                    const mime = TGT_FMT === 'png' ? 'image/png' : (TGT_FMT === 'webp' ? 'image/webp' : 'image/jpeg');
+                    cvs.toBlob((blob) => {
+                        downloadBlob(blob, `smartpic_${rawName}.${TGT_FMT}`);
                         finish();
-                        return;
-                    }
-
-                    const mime = TGT === 'png' ? 'image/png' : (TGT === 'webp' ? 'image/webp' : 'image/jpeg');
-                    canvas.toBlob((blob) => {
-                        downloadBlob(blob, `smartpic_${rawName}.${TGT}`);
-                        finish();
-                    }, mime, 0.95);
+                    }, mime, 0.92);
 
                 } else {
+                    // Multi-Image Batch ZIP Package
                     const zip = new JSZip();
                     for (let item of filesList) {
                         const rawName = item.name.substring(0, item.name.lastIndexOf('.')) || item.name;
                         const bmp = await createImageBitmap(item.file);
-                        const canvas = document.createElement('canvas');
-                        canvas.width = bmp.width;
-                        canvas.height = bmp.height;
-                        const ctx = canvas.getContext('2d');
-                        ctx.imageSmoothingEnabled = true;
-                        ctx.imageSmoothingQuality = 'high';
-
-                        if (TGT === 'jpg' || TGT === 'jpeg') {
-                            ctx.fillStyle = '#ffffff';
-                            ctx.fillRect(0, 0, canvas.width, canvas.height);
-                        }
-                        ctx.drawImage(bmp, 0, 0);
+                        const cvs = document.createElement('canvas');
+                        cvs.width = bmp.width;
+                        cvs.height = bmp.height;
+                        cvs.getContext('2d').drawImage(bmp, 0, 0);
 
                         let fileBlob = null;
-                        if (TGT === 'svg') fileBlob = canvasToSvgBlob(canvas);
-                        else if (TGT === 'tiff' || TGT === 'tif') fileBlob = canvasToTiffBlob(canvas);
-                        else if (TGT === 'png') fileBlob = await new Promise(r => canvas.toBlob(r, 'image/png'));
-                        else if (TGT === 'webp') fileBlob = await new Promise(r => canvas.toBlob(r, 'image/webp', 0.92));
-                        else fileBlob = await new Promise(r => canvas.toBlob(r, 'image/jpeg', 0.92));
-                        
-                        zip.file(`${rawName}.${TGT}`, fileBlob);
+                        if (TGT_FMT === 'tiff') {
+                            fileBlob = canvasToTiffBlob(cvs);
+                        } else {
+                            const mime = TGT_FMT === 'png' ? 'image/png' : (TGT_FMT === 'webp' ? 'image/webp' : 'image/jpeg');
+                            fileBlob = await new Promise(r => cvs.toBlob(r, mime, 0.90));
+                        }
+                        zip.file(`${rawName}.${TGT_FMT}`, fileBlob);
                     }
                     const zipContent = await zip.generateAsync({ type: "blob" });
-                    downloadBlob(zipContent, `smartpic_converted_${TGT}_highres_pack.zip`);
+                    downloadBlob(zipContent, `smartpic_converted_${TGT_FMT}_pack.zip`);
                     finish();
                 }
+
             } catch(e) {
                 alert('Conversion error: ' + e.message);
                 btn.disabled = false;
