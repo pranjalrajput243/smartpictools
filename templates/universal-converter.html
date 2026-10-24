@@ -95,7 +95,7 @@
                 <!-- PRE-CONFIGURED TARGET BADGE -->
                 <div class="p-3.5 bg-slate-950/80 rounded-xl border border-slate-800 flex items-center justify-between text-xs">
                     <span class="text-slate-400 font-semibold">Target Format: <strong class="text-indigo-400 font-bold">{{ meta.tgt_name }}</strong></span>
-                    <span class="text-emerald-400 font-bold">✓ {% if meta.src == 'pdf' and meta.tgt == 'svg' %}Native Searchable Vector (Ctrl+F Works){% else %}Zero Blur Guaranteed{% endif %}</span>
+                    <span class="text-emerald-400 font-bold">✓ {% if meta.src == 'pdf' and meta.tgt == 'svg' %}100% Searchable Text (Ctrl+F Works) & Zero Blur{% else %}Zero Blur Guaranteed{% endif %}</span>
                 </div>
 
                 <button type="button" id="convert-btn" onclick="executeConversion()" class="w-full py-4 px-6 rounded-2xl bg-gradient-to-r from-indigo-600 via-indigo-500 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-extrabold text-sm sm:text-base shadow-lg shadow-indigo-500/25 transition active:scale-[0.99] flex items-center justify-center gap-3">
@@ -134,7 +134,7 @@
         <p>© 2026 SmartPicTools. 100% Free & Private in-browser suite. <a href="/" class="text-indigo-400 hover:underline">Explore All Tools</a></p>
     </footer>
 
-    <!-- ⚡ CONVERSION JAVASCRIPT ENGINE (TRUE VECTOR SVG + 300 DPI) -->
+    <!-- ⚡ HYBRID TRUE SEARCHABLE SVG & CONVERSION JAVASCRIPT ENGINE -->
     <script>
         pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
 
@@ -237,23 +237,53 @@
             });
         }
 
-        // ⚡ NATIVE VECTOR SVG EXPORTER (FIXED: fontExtraProperties + SMART FALLBACK)
+        // 2D Affine Matrix Multiplication Helper
+        function multiplyAffine(m1, m2) {
+            return [
+                m1[0] * m2[0] + m1[2] * m2[1],
+                m1[1] * m2[0] + m1[3] * m2[1],
+                m1[0] * m2[2] + m1[2] * m2[3],
+                m1[1] * m2[2] + m1[3] * m2[3],
+                m1[0] * m2[4] + m1[2] * m2[5] + m1[4],
+                m1[1] * m2[4] + m1[3] * m2[5] + m1[5]
+            ];
+        }
+
+        // ⚡ NATIVE VECTOR SVG EXPORTER WITH REAL CTRL+F SEARCHABLE TEXT LAYER
         async function renderPdfPageToTrueSvg(page) {
             const viewport = page.getViewport({ scale: 1.0 });
             const opList = await page.getOperatorList();
             
-            let svg;
-            try {
-                const svgGfx = new pdfjsLib.SVGGraphics(page.commonObjs, page.objs, true);
-                svgGfx.embedFonts = true;
-                svg = await svgGfx.getSVG(opList, viewport);
-            } catch(e) {
-                // Smart fallback: If embedded fonts throw, render pure vector glyph paths with zero blur
-                const svgGfx = new pdfjsLib.SVGGraphics(page.commonObjs, page.objs, true);
-                svgGfx.embedFonts = false;
-                svg = await svgGfx.getSVG(opList, viewport);
+            // 1. Render Visual Vector Elements (0% blur, crisp lines)
+            const svgGfx = new pdfjsLib.SVGGraphics(page.commonObjs, page.objs, true);
+            svgGfx.embedFonts = false; // Prevents font crashes, renders pure vector glyph paths
+            const svg = await svgGfx.getSVG(opList, viewport);
+
+            // 2. ⚡ INJECT GENUINE SEARCHABLE TEXT LAYER (FOR CTRL+F MATCHING & TEXT SELECTION)
+            const textContent = await page.getTextContent();
+            const textGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+            textGroup.setAttribute('id', 'searchable-text-layer');
+            textGroup.setAttribute('style', 'cursor: text; pointer-events: all;');
+
+            for (const item of textContent.items) {
+                if (!item.str || !item.str.trim()) continue;
+
+                const textEl = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                const tx = multiplyAffine(viewport.transform, item.transform);
+
+                textEl.setAttribute('transform', `matrix(${tx[0]} ${tx[1]} ${tx[2]} ${tx[3]} ${tx[4]} ${tx[5]})`);
+                textEl.setAttribute('font-size', '1px');
+                textEl.setAttribute('font-family', 'sans-serif');
+                // Transparent fill allows search highlight box while letting crisp vector glyphs show through!
+                textEl.setAttribute('fill', 'transparent');
+                textEl.setAttribute('fill-opacity', '0');
+                textEl.textContent = item.str;
+
+                textGroup.appendChild(textEl);
             }
-            
+
+            svg.appendChild(textGroup);
+
             if (!svg.getAttribute('xmlns')) {
                 svg.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
             }
@@ -286,18 +316,14 @@
                 // 1. CONVERTING FROM PDF (PDF TO SVG, JPG, PNG, ETC.)
                 // ==========================================
                 if (SRC_FMT === 'pdf') {
-                    // CASE A: PDF TO SVG (TRUE VECTOR SVG)
+                    // CASE A: PDF TO SVG (TRUE VECTOR SVG + SEARCHABLE TEXT)
                     if (TGT_FMT === 'svg') {
                         if (filesList.length === 1) {
                             const item = filesList[0];
                             const rawName = item.name.substring(0, item.name.lastIndexOf('.')) || item.name;
                             const ab = await item.file.arrayBuffer();
 
-                            // ⚡ FIX: Added fontExtraProperties: true
-                            const pdfDoc = await pdfjsLib.getDocument({
-                                data: ab,
-                                fontExtraProperties: true
-                            }).promise;
+                            const pdfDoc = await pdfjsLib.getDocument({ data: ab }).promise;
 
                             if (pdfDoc.numPages === 1) {
                                 const p1 = await pdfDoc.getPage(1);
@@ -319,11 +345,7 @@
                                 const rawName = item.name.substring(0, item.name.lastIndexOf('.')) || item.name;
                                 const ab = await item.file.arrayBuffer();
                                 
-                                // ⚡ FIX: Added fontExtraProperties: true
-                                const pdfDoc = await pdfjsLib.getDocument({
-                                    data: ab,
-                                    fontExtraProperties: true
-                                }).promise;
+                                const pdfDoc = await pdfjsLib.getDocument({ data: ab }).promise;
 
                                 for (let p = 1; p <= pdfDoc.numPages; p++) {
                                     const page = await pdfDoc.getPage(p);
@@ -405,7 +427,6 @@
                     const item = filesList[0];
                     const rawName = item.name.substring(0, item.name.lastIndexOf('.')) || item.name;
 
-                    // Convert to PDF
                     if (TGT_FMT === 'pdf') {
                         const bmp = await createImageBitmap(item.file);
                         const { jsPDF } = window.jspdf;
@@ -424,7 +445,6 @@
                         return;
                     }
 
-                    // AVIF Fallback
                     if (TGT_FMT === 'avif') {
                         const fd = new FormData();
                         fd.append('image', item.file);
@@ -458,7 +478,6 @@
                     }, mime, 0.92);
 
                 } else {
-                    // Multi-Image Batch ZIP Package
                     const zip = new JSZip();
                     for (let item of filesList) {
                         const rawName = item.name.substring(0, item.name.lastIndexOf('.')) || item.name;
