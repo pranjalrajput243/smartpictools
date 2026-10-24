@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    
+    <!-- ⚡ HIGH-RANKING KEYWORDS FOR PDF CROPPER -->
+    <title>Crop PDF Online Free - Trim PDF Pages & Margins | SmartPicTools</title>
+    <meta name="description" content="Free online tool to crop PDF pages and trim margins. Visually select and cut PDF areas directly in your browser. 100% private with zero server uploads.">
+    <meta name="keywords" content="crop pdf online, trim pdf pages, crop pdf margins, pdf page cropper free, online pdf cutter">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <meta name="author" content="SmartPicTools">
+    <link rel="canonical" href="https://smartpictools.in/crop-pdf">
+    
+    <!-- ⚡ GOOGLE VERIFICATION TAG -->
+    <meta name="google-site-verification" content="uUq17UUsROyHMRQ8jkqKqrjZmsJnkuxZMKKoJLw_X3E" />
+
+    <!-- OPEN GRAPH -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://smartpictools.in/crop-pdf">
+    <meta property="og:title" content="Crop PDF Online Free - Trim PDF Pages & Margins | SmartPicTools">
+    <meta property="og:description" content="Crop PDF documents visually with custom selection boxes directly in your browser.">
+
+    <!-- FAVICON -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' stop-color='%236366f1'/><stop offset='50%25' stop-color='%23a855f7'/><stop offset='100%25' stop-color='%23ec4899'/></linearGradient></defs><rect width='100' height='100' rx='28' fill='url(%23g)'/><path d='M52 16 L24 54 L46 54 L42 84 L76 44 L54 44 Z' fill='%23fbbf24'/></svg>">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- LIBRARIES (Cropper.js + PDF.js + jsPDF) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; -webkit-tap-highlight-color: transparent; }
+        .cropper-view-box, .cropper-face { border-radius: 4px; }
+        .cropper-bg, .cropper-container, .cropper-wrap-box {
+            background: #020617 !important;
+            background-image: none !important;
+        }
+        .cropper-modal {
+            background-color: #020617 !important;
+            opacity: 0.65 !important;
+        }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col justify-between selection:bg-indigo-500 selection:text-white">
+
+    <!-- HEADER -->
+    <header class="border-b border-slate-800 bg-slate-900/80 backdrop-blur-xl sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 h-18 sm:h-20 flex items-center justify-between">
+            <a href="/" class="flex items-center gap-2.5 sm:gap-3 group">
+                <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-2xl bg-gradient-to-tr from-indigo-500 via-purple-500 to-pink-500 flex items-center justify-center text-white text-lg sm:text-xl shadow-lg shadow-indigo-500/30 group-hover:scale-105 transition">⚡</div>
+                <div>
+                    <span class="text-xl sm:text-2xl font-black tracking-tight text-white">SmartPic<span class="text-indigo-400">Tools</span></span>
+                    <span class="block text-[9px] uppercase font-bold tracking-widest text-slate-400 -mt-1">PDF Cropper Studio</span>
+                </div>
+            </a>
+            <a href="/" class="py-2 px-3.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-bold text-indigo-400 hover:text-white border border-slate-700 transition">
+                ← All Tools
+            </a>
+        </div>
+    </header>
+
+    <!-- MAIN WORKSPACE -->
+    <main class="max-w-4xl mx-auto w-full px-4 py-8 sm:py-12 flex-1">
+        <div class="text-center max-w-2xl mx-auto mb-8 sm:mb-10">
+            <span class="text-[11px] font-extrabold uppercase tracking-widest text-indigo-400 bg-indigo-500/10 px-3 py-1 rounded-full border border-indigo-500/20">Dedicated PDF Studio</span>
+            <h1 class="text-3xl sm:text-5xl font-black text-white mt-3 tracking-tight">Crop PDF Document Online</h1>
+            <p class="mt-2.5 text-slate-400 text-xs sm:text-sm">Visually select and trim margins or unwanted areas from PDF pages directly in your browser. 100% private and secure.</p>
+        </div>
+
+        <div class="bg-slate-900 rounded-3xl p-5 sm:p-10 border border-slate-800 shadow-2xl relative">
+            
+            <!-- UPLOAD DROP AREA -->
+            <div id="drop-area" class="border-2 border-dashed border-slate-700 hover:border-indigo-500 bg-slate-950/60 hover:bg-indigo-950/20 rounded-2xl p-8 sm:p-14 text-center cursor-pointer transition-all duration-300">
+                <input type="file" id="file-input" accept="application/pdf, .pdf" class="hidden">
+                <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-3xl bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-3xl sm:text-4xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition duration-300 shadow-inner">
+                    ✂️
+                </div>
+                <h3 class="text-base sm:text-xl font-bold text-white mb-1.5">Select PDF File to Crop</h3>
+                <p class="text-xs sm:text-sm text-slate-400">Choose any PDF document from your phone or PC</p>
+            </div>
+
+            <!-- WORKSPACE -->
+            <div id="workspace" class="hidden mt-6 space-y-6">
+                <div class="flex items-center justify-between flex-wrap gap-2">
+                    <span class="text-xs font-bold text-slate-300">Editing Page <span id="current-page-num" class="text-indigo-400 font-extrabold">1</span> of <span id="total-pages-num" class="font-extrabold">1</span></span>
+                    
+                    <div class="flex items-center gap-2">
+                        <button type="button" onclick="changePage(-1)" class="py-1 px-3 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs font-bold text-white transition">Previous</button>
+                        <button type="button" onclick="changePage(1)" class="py-1 px-3 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs font-bold text-white transition">Next</button>
+                        <button type="button" onclick="document.getElementById('file-input').click()" class="text-xs font-bold text-indigo-400 hover:text-white bg-slate-800 hover:bg-slate-700 px-3 py-1.5 rounded-xl border border-slate-700 transition ml-2">
+                            🔄 Change PDF
+                        </button>
+                    </div>
+                </div>
+
+                <!-- CROPPER CONTAINER -->
+                <div class="bg-slate-950 p-3 rounded-2xl border border-slate-800 flex items-center justify-center max-h-[460px] overflow-hidden select-none">
+                    <img id="crop-image" src="#" alt="PDF Page Preview" class="max-h-[420px] w-auto block">
+                </div>
+
+                <!-- OPTIONS -->
+                <div class="bg-slate-950/80 p-4 sm:p-5 rounded-2xl border border-slate-800 flex items-center justify-between flex-wrap gap-3">
+                    <label for="apply-all" class="flex items-center gap-2.5 cursor-pointer text-xs font-bold text-slate-300">
+                        <input type="checkbox" id="apply-all" checked class="w-4 h-4 rounded accent-indigo-600 cursor-pointer">
+                        <span>Apply this crop box to ALL pages of the PDF</span>
+                    </label>
+                    <span class="text-[11px] text-slate-400">⚡ Fast Client-Side Rendering</span>
+                </div>
+
+                <button type="button" id="download-btn" onclick="executePdfCrop()" class="w-full py-4 px-6 rounded-2xl bg-gradient-to-r from-indigo-600 via-indigo-500 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-extrabold text-sm sm:text-base shadow-lg shadow-indigo-500/25 transition active:scale-[0.99] flex items-center justify-center gap-3">
+                    <span>✂️ Crop & Download PDF</span>
+                </button>
+            </div>
+
+            <div id="status-box" class="hidden mt-5 p-3.5 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 text-center">
+                <p class="text-emerald-400 font-bold text-xs sm:text-sm">🎉 Success! Cropped PDF downloaded directly to your device.</p>
+            </div>
+        </div>
+
+        <!-- HOW TO USE -->
+        <section class="mt-14 border-t border-slate-800 pt-10">
+            <h2 class="text-xl sm:text-2xl font-bold text-white text-center mb-6">How to Crop PDF Online in 3 Easy Steps</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs sm:text-sm">
+                <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800">
+                    <span class="w-7 h-7 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center mb-2.5 text-xs">1</span>
+                    <h3 class="font-bold text-white text-sm mb-1">Upload PDF</h3>
+                    <p class="text-slate-400">Choose your PDF document. Pages will load instantly on screen.</p>
+                </div>
+                <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800">
+                    <span class="w-7 h-7 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center mb-2.5 text-xs">2</span>
+                    <h3 class="font-bold text-white text-sm mb-1">Select Crop Area</h3>
+                    <p class="text-slate-400">Drag the crop box to trim margins or unwanted borders.</p>
+                </div>
+                <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800">
+                    <span class="w-7 h-7 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center mb-2.5 text-xs">3</span>
+                    <h3 class="font-bold text-white text-sm mb-1">Download Cropped PDF</h3>
+                    <p class="text-slate-400">Click download to generate the finalized PDF document instantly.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="border-t border-slate-800 bg-slate-950 py-8 px-4 text-xs text-slate-400 text-center">
+        <p>© 2026 SmartPicTools. 100% Free & Private in-browser suite. <a href="/" class="text-indigo-400 hover:underline">Explore All Tools</a></p>
+    </footer>
+
+    <!-- ⚡ PDF CROPPER JS ENGINE -->
+    <script>
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+
+        let pdfDoc = null;
+        let pageNum = 1;
+        let cropper = null;
+        let pdfFileArrayBuffer = null;
+        let pdfFileName = 'document';
+
+        const dropArea = document.getElementById('drop-area');
+        const fileInput = document.getElementById('file-input');
+
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(ev => {
+            window.addEventListener(ev, (e) => { e.preventDefault(); e.stopPropagation(); }, false);
+            dropArea.addEventListener(ev, (e) => { e.preventDefault(); e.stopPropagation(); }, false);
+        });
+
+        ['dragenter', 'dragover'].forEach(ev => dropArea.classList.add('border-indigo-500', 'bg-indigo-950/40'));
+        ['dragleave', 'drop'].forEach(ev => dropArea.classList.remove('border-indigo-500', 'bg-indigo-950/40'));
+
+        dropArea.addEventListener('drop', (e) => {
+            if (e.dataTransfer && e.dataTransfer.files.length > 0) loadPdfFile(e.dataTransfer.files[0]);
+        });
+        dropArea.addEventListener('click', () => fileInput.click());
+        fileInput.addEventListener('change', (e) => {
+            if (e.target.files && e.target.files.length > 0) loadPdfFile(e.target.files[0]);
+        });
+
+        async function loadPdfFile(file) {
+            if (!file || (!file.type.includes('pdf') && !file.name.toLowerCase().endsWith('.pdf'))) {
+                alert('Please select a valid PDF file.');
+                return;
+            }
+
+            pdfFileName = file.name.substring(0, file.name.lastIndexOf('.')) || 'document';
+            pdfFileArrayBuffer = await file.arrayBuffer();
+
+            try {
+                pdfDoc = await pdfjsLib.getDocument({ data: pdfFileArrayBuffer }).promise;
+                document.getElementById('total-pages-num').innerText = pdfDoc.numPages;
+                pageNum = 1;
+
+                document.getElementById('drop-area').classList.add('hidden');
+                document.getElementById('workspace').classList.remove('hidden');
+                document.getElementById('status-box').classList.add('hidden');
+
+                renderPdfPage(pageNum);
+            } catch(e) {
+                alert('Error loading PDF: ' + e.message);
+            }
+        }
+
+        async function renderPdfPage(num) {
+            const page = await pdfDoc.getPage(num);
+            const viewport = page.getViewport({ scale: 2.0 }); // High-Res rendering
+            const canvas = document.createElement('canvas');
+            canvas.width = viewport.width;
+            canvas.height = viewport.height;
+            const ctx = canvas.getContext('2d');
+            
+            await page.render({ canvasContext: ctx, viewport: viewport, intent: 'print' }).promise;
+            
+            const imgEl = document.getElementById('crop-image');
+            imgEl.src = canvas.toDataURL('image/jpeg', 0.95);
+
+            document.getElementById('current-page-num').innerText = num;
+
+            imgEl.onload = function() {
+                if (cropper) cropper.destroy();
+                cropper = new Cropper(imgEl, {
+                    aspectRatio: NaN,
+                    viewMode: 1,
+                    background: false,
+                    autoCropArea: 0.9,
+                    responsive: true
+                });
+            };
+        }
+
+        async function changePage(offset) {
+            if (!pdfDoc) return;
+            const newPage = pageNum + offset;
+            if (newPage >= 1 && newPage <= pdfDoc.numPages) {
+                pageNum = newPage;
+                await renderPdfPage(pageNum);
+            }
+        }
+
+        // ⚡ EXECUTE PDF CROP & RE-GENERATE
+        async function executePdfCrop() {
+            if (!cropper || !pdfDoc) return;
+            const btn = document.getElementById('download-btn');
+            btn.disabled = true;
+            document.getElementById('btn-text').innerText = "⏳ Generating Cropped PDF...";
+
+            try {
+                const data = cropper.getData(true); // Exact crop coordinates
+                const applyAll = document.getElementById('apply-all').checked;
+                const { jsPDF } = window.jspdf;
+                let doc = null;
+
+                const startP = applyAll ? 1 : pageNum;
+                const endP = applyAll ? pdfDoc.numPages : pageNum;
+
+                for (let p = startP; p <= endP; p++) {
+                    const page = await pdfDoc.getPage(p);
+                    const viewport = page.getViewport({ scale: 2.0 });
+                    const canvas = document.createElement('canvas');
+                    canvas.width = viewport.width;
+                    canvas.height = viewport.height;
+                    const ctx = canvas.getContext('2d');
+                    await page.render({ canvasContext: ctx, viewport: viewport, intent: 'print' }).promise;
+
+                    // Calculate scaled crop coordinates based on 2.0 scale viewport
+                    const scaleFactor = viewport.width / cropper.getImageData().naturalWidth;
+                    const cX = Math.max(0, data.x * scaleFactor);
+                    const cY = Math.max(0, data.y * scaleFactor);
+                    const cW = Math.min(canvas.width - cX, data.width * scaleFactor);
+                    const cH = Math.min(canvas.height - cY, data.height * scaleFactor);
+
+                    // Draw cropped portion to separate canvas
+                    const cropCanvas = document.createElement('canvas');
+                    cropCanvas.width = cW;
+                    cropCanvas.height = cH;
+                    const cropCtx = cropCanvas.getContext('2d');
+                    cropCtx.fillStyle = '#ffffff';
+                    cropCtx.fillRect(0, 0, cW, cH);
+                    cropCtx.drawImage(canvas, cX, cY, cW, cH, 0, 0, cW, cH);
+
+                    const imgData = cropCanvas.toDataURL('image/jpeg', 0.92);
+                    const wPt = cW * 0.75;
+                    const hPt = cH * 0.75;
+                    const orient = wPt >= hPt ? 'l' : 'p';
+
+                    if (p === startP) {
+                        doc = new jsPDF({ orientation: orient, unit: 'pt', format: [wPt, hPt] });
+                    } else {
+                        doc.addPage([wPt, hPt], orient);
+                    }
+
+                    const pW = doc.internal.pageSize.getWidth();
+                    const pH = doc.internal.pageSize.getHeight();
+                    doc.addImage(imgData, 'JPEG', 0, 0, pW, pH);
+                }
+
+                doc.save(`smartpic_cropped_${pdfFileName}.pdf`);
+                document.getElementById('status-box').classList.remove('hidden');
+            } catch(e) {
+                alert('PDF cropping error: ' + e.message);
+            } finally {
+                btn.disabled = false;
+                document.getElementById('btn-text').innerText = "✂️ Crop & Download PDF";
+            }
+        }
+    </script>
+</body>
+</html>
