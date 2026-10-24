@@ -2,448 +2,303 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SmartPicTools - 100% Free & Private Online Image, PDF & Utility Suite</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     
-    <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
-    <link rel="shortcut icon" href="/static/favicon.ico">
-    
-    <!-- Google Search Console Verification -->
-    <meta name="google-site-verification" content="uUq17UUsROyHMRQ8jkqKqrjZmsJnkuxZMKKoJLw_X3E" />
-    
-    <!-- High-Ranking SEO Meta Tags -->
-    <meta name="description" content="Free 100% private in-browser image compressor, passport photo maker, PDF editor, cropper, watermark tool, and format converters. 0.2s instant speed, no server uploads.">
-    <meta name="keywords" content="smartpictools, compress image to 20kb, compress image to 50kb, passport size photo maker online, ssc photo maker, merge images to pdf, crop pdf online, convert pdf to jpg 300 dpi, convert heic to jpg, image format converter, free client side photo tools">
-    <meta name="robots" content="index, follow">
+    <title>SmartPicTools - All-in-One Image Suite, PDF Maker, QR & Converters Free</title>
+    <meta name="description" content="Free 100% private in-browser image tools: Compress to exact 20KB/50KB, Passport photo maker, Crop, Resize, Convert from JPG/PNG/WEBP/PDF, QR codes & Barcodes in 0.2s.">
+    <meta name="keywords" content="smartpictools, image compressor to 20kb, compress image to 50kb, passport size photo maker online, ssc photo resizer, crop image online, image resizer online, convert jpg to pdf, merge images to pdf, crop pdf online, convert pdf to jpg 300 dpi, convert heic to jpg, image format converter, qr code generator, add watermark online, rotate image online">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <meta name="author" content="SmartPicTools">
     <link rel="canonical" href="https://smartpictools.in/">
+    
+    <!-- ⚡ PERMANENT GOOGLE SEARCH CONSOLE VERIFICATION TAG -->
+    <meta name="google-site-verification" content="uUq17UUsROyHMRQ8jkqKqrjZmsJnkuxZMKKoJLw_X3E" />
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- OPEN GRAPH -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://smartpictools.in/">
+    <meta property="og:title" content="SmartPicTools - All-in-One Image & Utility Suite Free">
+    <meta property="og:description" content="Instant in-browser image tools: Compress to 20KB/50KB, Passport Photo, Format Converters, and PDF Maker without server uploads.">
+    <meta property="og:site_name" content="SmartPicTools">
+
+    <!-- SCHEMA -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "SmartPicTools",
+      "url": "https://smartpictools.in/",
+      "description": "Free private in-browser image tools to compress to exact KB, crop, resize, convert formats, and merge images to PDF.",
+      "applicationCategory": "MultimediaApplication",
+      "operatingSystem": "All",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      }
+    }
+    </script>
+
+    <!-- FAVICON -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' stop-color='%236366f1'/><stop offset='50%25' stop-color='%23a855f7'/><stop offset='100%25' stop-color='%23ec4899'/></linearGradient></defs><rect width='100' height='100' rx='28' fill='url(%23g)'/><path d='M52 16 L24 54 L46 54 L42 84 L76 44 L54 44 Z' fill='%23fbbf24'/></svg>">
+
+    <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
-    <style>
-        :root {
-            --bg-color: #0b0f19;
-            --card-bg: #111827;
-            --card-hover: #172033;
-            --text-main: #f3f4f6;
-            --text-muted: #9ca3af;
-            --border: #1e293b;
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-        }
-
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 20px;
-        }
-
-        .container {
-            max-width: 1200px;
-            width: 100%;
-            margin: 0 auto;
-        }
-
-        header {
-            text-align: center;
-            padding: 50px 20px 30px;
-        }
-
-        .badge {
-            background: rgba(59, 130, 246, 0.12);
-            color: #60a5fa;
-            padding: 6px 16px;
-            border-radius: 20px;
-            font-size: 13px;
-            font-weight: 700;
-            border: 1px solid rgba(59, 130, 246, 0.25);
-            display: inline-block;
-            margin-bottom: 20px;
-            letter-spacing: 0.5px;
-        }
-
-        header h1 {
-            font-size: clamp(2.2rem, 4.5vw, 3.4rem);
-            font-weight: 800;
-            margin-bottom: 16px;
-            letter-spacing: -1px;
-            color: #ffffff;
-            line-height: 1.2;
-        }
-
-        header p {
-            color: var(--text-muted);
-            font-size: 1.05rem;
-            max-width: 720px;
-            margin: 0 auto 35px;
-            line-height: 1.6;
-        }
-
-        .stats-bar {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 16px;
-            margin-bottom: 50px;
-        }
-
-        .stat-item {
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            padding: 22px 20px;
-            border-radius: 14px;
-            text-align: center;
-        }
-
-        .stat-item h3 {
-            font-size: 1.45rem;
-            margin-bottom: 6px;
-            font-weight: 700;
-        }
-
-        .stat-item p {
-            font-size: 0.82rem;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-weight: 600;
-        }
-
-        /* All-in-One Grid without Categories */
-        .tools-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 24px;
-            margin-bottom: 60px;
-        }
-
-        .tool-card {
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 30px;
-            transition: all 0.25s ease;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .tool-card:hover {
-            transform: translateY(-4px);
-            border-color: rgba(99, 102, 241, 0.4);
-            background: var(--card-hover);
-            box-shadow: 0 12px 28px -10px rgba(0,0,0,0.5);
-        }
-
-        .icon-box {
-            width: 48px;
-            height: 48px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-            margin-bottom: 22px;
-        }
-
-        .tool-card h3 {
-            font-size: 1.25rem;
-            margin-bottom: 12px;
-            color: #ffffff;
-            font-weight: 700;
-        }
-
-        .tool-card p {
-            color: var(--text-muted);
-            font-size: 0.92rem;
-            line-height: 1.55;
-            margin-bottom: 24px;
-            flex-grow: 1;
-        }
-
-        .tool-link {
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.95rem;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            transition: gap 0.2s;
-        }
-
-        .tool-link:hover {
-            gap: 12px;
-        }
-
-        footer {
-            width: 100%;
-            border-top: 1px solid var(--border);
-            padding: 30px 0;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            align-items: center;
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            margin-top: auto;
-            gap: 15px;
-        }
-
-        .footer-links {
-            display: flex;
-            gap: 22px;
-        }
-
-        .footer-links a {
-            color: var(--text-muted);
-            text-decoration: none;
-            transition: color 0.2s;
-        }
-
-        .footer-links:hover a {
-            color: #ffffff;
-        }
-
-        @media(max-width: 1024px) {
-            .tools-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media(max-width: 680px) {
-            .tools-grid {
-                grid-template-columns: 1fr;
-            }
-            footer {
-                flex-direction: column;
-                text-align: center;
-            }
-        }
-    </style>
+    <style>body { font-family: 'Plus Jakarta Sans', sans-serif; -webkit-tap-highlight-color: transparent; }</style>
 </head>
-<body>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col justify-between selection:bg-indigo-500 selection:text-white overflow-x-hidden">
 
-    <div class="container">
-        <header>
-            <div class="badge">ALL-IN-ONE ONLINE SUITE</div>
-            <h1>Every Tool You Need to Edit & Optimize Images</h1>
-            <p>100% free, private, and instant in-browser image tools. Compress to exact KB, make passport photos, convert any format, or merge PDF without server uploads.</p>
-        </header>
+    <!-- HEADER -->
+    <header class="border-b border-slate-800 bg-slate-900/80 backdrop-blur-xl sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 h-18 sm:h-20 flex items-center justify-between">
+            <a href="/" class="flex items-center gap-2.5 sm:gap-3 group">
+                <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-2xl bg-gradient-to-tr from-indigo-500 via-purple-500 to-pink-500 flex items-center justify-center text-white text-lg sm:text-xl shadow-lg shadow-indigo-500/30 group-hover:scale-105 transition">
+                    ⚡
+                </div>
+                <div>
+                    <span class="text-xl sm:text-2xl font-black tracking-tight text-white">SmartPic<span class="text-indigo-400">Tools</span></span>
+                    <span class="block text-[9px] sm:text-[10px] uppercase font-bold tracking-widest text-slate-400 -mt-1">Pro Suite</span>
+                </div>
+            </a>
+            
+            <nav class="hidden md:flex items-center gap-7 text-sm font-semibold text-slate-300">
+                <a href="#all-tools-grid" class="hover:text-indigo-400 transition">All Tools</a>
+                <a href="/about" class="hover:text-indigo-400 transition">About</a>
+                <a href="/contact" class="hover:text-indigo-400 transition">Contact</a>
+            </nav>
 
-        <!-- Stats Bar with True Colors -->
-        <div class="stats-bar">
-            <div class="stat-item">
-                <h3 style="color: #60a5fa;"><i class="fa-solid fa-bolt"></i> 0.2s Instant</h3>
-                <p>Device Speed</p>
-            </div>
-            <div class="stat-item">
-                <h3 style="color: #818cf8;">Exact KB</h3>
-                <p>Target Shrunk</p>
-            </div>
-            <div class="stat-item">
-                <h3 style="color: #34d399;"><i class="fa-solid fa-lock"></i> 100% Client-Side</h3>
-                <p>Never Leaves Phone</p>
-            </div>
-            <div class="stat-item">
-                <h3 style="color: #fbbf24;"><i class="fa-solid fa-star"></i> 4.9/5</h3>
-                <p>Free Forever</p>
+            <div class="flex items-center gap-2.5">
+                <a href="/contact" class="py-2 px-3 sm:px-3.5 rounded-xl bg-slate-800 hover:bg-slate-700 active:scale-95 text-xs font-bold text-amber-300 border border-slate-700 transition flex items-center gap-1.5 shadow-md">
+                    <span>💡 Suggestions</span>
+                </a>
+                <span class="hidden sm:inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-bold bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> 100% Free & Private
+                </span>
             </div>
         </div>
+    </header>
 
-        <!-- 17 Unified Tools with Their Original Vibrant Colors -->
-        <div class="tools-grid">
+    <!-- HERO SECTION -->
+    <section class="max-w-5xl mx-auto w-full px-4 pt-12 pb-6 text-center">
+        <span class="text-xs font-extrabold uppercase tracking-widest text-indigo-400 bg-indigo-500/10 px-3 py-1 rounded-full border border-indigo-500/20">All-in-One Online Suite</span>
+        <h1 class="text-3xl sm:text-6xl font-black text-white tracking-tight leading-tight mt-4">
+            Every Tool You Need to Edit & Optimize Images
+        </h1>
+        <p class="mt-4 text-slate-400 text-sm sm:text-lg max-w-2xl mx-auto leading-relaxed">
+            100% free, private, and instant in-browser image tools. Compress to exact KB, make passport photos, convert any format, or merge PDF without server uploads.
+        </p>
+    </section>
+
+    <!-- LIVE STATS STRIP -->
+    <section class="max-w-5xl mx-auto w-full px-4 mb-12">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-2.5 sm:gap-3 bg-slate-900/60 p-3.5 sm:p-4 rounded-2xl border border-slate-800/80 text-center">
+            <div class="p-1.5 sm:p-2">
+                <div class="text-lg sm:text-2xl font-extrabold text-white">⚡ 0.2s Instant</div>
+                <div class="text-[10px] sm:text-[11px] text-slate-400 font-semibold uppercase tracking-wider mt-0.5">Device Speed</div>
+            </div>
+            <div class="p-1.5 sm:p-2 border-l border-slate-800">
+                <div class="text-lg sm:text-2xl font-extrabold text-indigo-400">Exact KB</div>
+                <div class="text-[10px] sm:text-[11px] text-slate-400 font-semibold uppercase tracking-wider mt-0.5">Target Shrunk</div>
+            </div>
+            <div class="p-1.5 sm:p-2 border-l border-slate-800">
+                <div class="text-lg sm:text-2xl font-extrabold text-emerald-400">🔒 100% Client-Side</div>
+                <div class="text-[10px] sm:text-[11px] text-slate-400 font-semibold uppercase tracking-wider mt-0.5">Never Leaves Phone</div>
+            </div>
+            <div class="p-1.5 sm:p-2 border-l border-slate-800">
+                <div class="text-lg sm:text-2xl font-extrabold text-white">⭐ 4.9/5</div>
+                <div class="text-[10px] sm:text-[11px] text-slate-400 font-semibold uppercase tracking-wider mt-0.5">Free Forever</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ALL TOOLS CATALOG (SINGLE UNIFIED GRID - ZERO CATEGORIES) -->
+    <section class="max-w-5xl mx-auto w-full px-4 mb-20" id="all-tools-grid">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
             
             <!-- 1. Compress Image -->
-            <div class="tool-card">
-                <div class="icon-box" style="background: rgba(99, 102, 241, 0.15); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.25);">
-                    <i class="fa-solid fa-bolt"></i>
+            <a href="/compress-image" class="bg-slate-900/80 hover:bg-slate-900 border border-slate-800 hover:border-indigo-500/60 p-6 rounded-3xl transition duration-200 group shadow-lg flex flex-col justify-between">
+                <div>
+                    <div class="w-12 h-12 rounded-2xl bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition">⚡</div>
+                    <h3 class="text-lg font-bold text-white group-hover:text-indigo-400 transition">Compress Image to Exact KB</h3>
+                    <p class="text-xs text-slate-400 mt-2 leading-relaxed">Shrink file weight accurately to 20KB, 50KB, or 100KB for government exam forms with live preview.</p>
                 </div>
-                <h3>Compress Image to Exact KB</h3>
-                <p>Shrink file weight accurately to 20KB, 50KB, or 100KB for government exam forms with live preview.</p>
-                <a href="/compress-image" class="tool-link" style="color: #818cf8;">Open Tool &rarr;</a>
-            </div>
+                <span class="text-xs font-bold text-indigo-400 mt-5 flex items-center gap-1 group-hover:translate-x-1 transition">Open Tool →</span>
+            </a>
 
-            <!-- 2. Passport Size Photo Maker (Now Clean Standard Card) -->
-            <div class="tool-card">
-                <div class="icon-box" style="background: rgba(168, 85, 247, 0.15); color: #c084fc; border: 1px solid rgba(168, 85, 247, 0.25);">
-                    <i class="fa-solid fa-user"></i>
+            <!-- 2. Passport Size Photo Maker (NOW STANDARD SIZE) -->
+            <a href="/passport-photo-maker" class="bg-slate-900/80 hover:bg-slate-900 border border-slate-800 hover:border-indigo-500/60 p-6 rounded-3xl transition duration-200 group shadow-lg flex flex-col justify-between">
+                <div>
+                    <div class="w-12 h-12 rounded-2xl bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition">👤</div>
+                    <h3 class="text-lg font-bold text-white group-hover:text-indigo-400 transition">Passport Size Photo Maker</h3>
+                    <p class="text-xs text-slate-400 mt-2 leading-relaxed">Crop to official 3.5cm x 4.5cm for SSC/UPSC, set custom photo counts on A4/4x6 sheet with cutting borders.</p>
                 </div>
-                <h3>Passport Size Photo Maker</h3>
-                <p>Crop to official 3.5cm x 4.5cm for SSC/UPSC, set custom photo counts on A4/4x6 sheet with cutting borders.</p>
-                <a href="/passport-size-photo-maker" class="tool-link" style="color: #c084fc;">Open Tool &rarr;</a>
-            </div>
+                <span class="text-xs font-bold text-indigo-400 mt-5 flex items-center gap-1 group-hover:translate-x-1 transition">Open Tool →</span>
+            </a>
 
             <!-- 3. Crop Image -->
-            <div class="tool-card">
-                <div class="icon-box" style="background: rgba(236, 72, 153, 0.15); color: #f472b6; border: 1px solid rgba(236, 72, 153, 0.25);">
-                    <i class="fa-solid fa-scissors"></i>
+            <a href="/crop-image" class="bg-slate-900/80 hover:bg-slate-900 border border-slate-800 hover:border-purple-500/60 p-6 rounded-3xl transition duration-200 group shadow-lg flex flex-col justify-between">
+                <div>
+                    <div class="w-12 h-12 rounded-2xl bg-purple-500/10 text-purple-400 border border-purple-500/20 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition">✂️</div>
+                    <h3 class="text-lg font-bold text-white group-hover:text-purple-400 transition">Crop Image with Aspect Ratios</h3>
+                    <p class="text-xs text-slate-400 mt-2 leading-relaxed">Crop visually with exact aspect ratio presets for Instagram (1:1), YouTube (16:9), and Reels (9:16).</p>
                 </div>
-                <h3>Crop Image with Aspect Ratios</h3>
-                <p>Crop visually with exact aspect ratio presets for Instagram (1:1), YouTube (16:9), and Reels (9:16).</p>
-                <a href="/crop-image" class="tool-link" style="color: #f472b6;">Open Tool &rarr;</a>
-            </div>
+                <span class="text-xs font-bold text-purple-400 mt-5 flex items-center gap-1 group-hover:translate-x-1 transition">Open Tool →</span>
+            </a>
 
             <!-- 4. Resize Image -->
-            <div class="tool-card">
-                <div class="icon-box" style="background: rgba(14, 165, 233, 0.15); color: #38bdf8; border: 1px solid rgba(14, 165, 233, 0.25);">
-                    <i class="fa-solid fa-ruler-combined"></i>
+            <a href="/resize-image" class="bg-slate-900/80 hover:bg-slate-900 border border-slate-800 hover:border-blue-500/60 p-6 rounded-3xl transition duration-200 group shadow-lg flex flex-col justify-between">
+                <div>
+                    <div class="w-12 h-12 rounded-2xl bg-blue-500/10 text-blue-400 border border-blue-500/20 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition">📐</div>
+                    <h3 class="text-lg font-bold text-white group-hover:text-blue-400 transition">Resize Image Dimensions</h3>
+                    <p class="text-xs text-slate-400 mt-2 leading-relaxed">Change exact pixel width and height with live scaling preview and proportion lock to prevent distortion.</p>
                 </div>
-                <h3>Resize Image Dimensions</h3>
-                <p>Change exact pixel width and height with live scaling preview and proportion lock to prevent distortion.</p>
-                <a href="/resize-image" class="tool-link" style="color: #38bdf8;">Open Tool &rarr;</a>
-            </div>
+                <span class="text-xs font-bold text-blue-400 mt-5 flex items-center gap-1 group-hover:translate-x-1 transition">Open Tool →</span>
+            </a>
 
             <!-- 5. PDF Maker -->
-            <div class="tool-card">
-                <div class="icon-box" style="background: rgba(249, 115, 22, 0.15); color: #fb923c; border: 1px solid rgba(249, 115, 22, 0.25);">
-                    <i class="fa-solid fa-file-pdf"></i>
+            <a href="/image-to-pdf" class="bg-slate-900/80 hover:bg-slate-900 border border-slate-800 hover:border-amber-500/60 p-6 rounded-3xl transition duration-200 group shadow-lg flex flex-col justify-between">
+                <div>
+                    <div class="w-12 h-12 rounded-2xl bg-amber-500/10 text-amber-400 border border-amber-500/20 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition">📄</div>
+                    <h3 class="text-lg font-bold text-white group-hover:text-amber-400 transition">PDF Maker (Merge Images to PDF)</h3>
+                    <p class="text-xs text-slate-400 mt-2 leading-relaxed">Merge multiple JPG, PNG, SVG, or HEIC photos into a single clean PDF document with 0% white borders.</p>
                 </div>
-                <h3>PDF Maker (Merge Images to PDF)</h3>
-                <p>Merge multiple JPG, PNG, SVG, or HEIC photos into a single clean PDF document with 0% white borders.</p>
-                <a href="/pdf-maker" class="tool-link" style="color: #fb923c;">Open Tool &rarr;</a>
-            </div>
+                <span class="text-xs font-bold text-amber-400 mt-5 flex items-center gap-1 group-hover:translate-x-1 transition">Open Tool →</span>
+            </a>
 
             <!-- 6. Convert PDF to Image & Word -->
-            <div class="tool-card">
-                <div class="icon-box" style="background: rgba(244, 63, 94, 0.15); color: #fb7185; border: 1px solid rgba(244, 63, 94, 0.25);">
-                    <i class="fa-solid fa-file-lines"></i>
+            <a href="/pdf-converter" class="bg-slate-900/80 hover:bg-slate-900 border border-slate-800 hover:border-rose-500/60 p-6 rounded-3xl transition duration-200 group shadow-lg flex flex-col justify-between">
+                <div>
+                    <div class="w-12 h-12 rounded-2xl bg-rose-500/10 text-rose-400 border border-rose-500/20 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition">📑</div>
+                    <h3 class="text-lg font-bold text-white group-hover:text-rose-400 transition">Convert PDF to Image & Word</h3>
+                    <p class="text-xs text-slate-400 mt-2 leading-relaxed">Extract PDF pages into crystal-clear 300 DPI Ultra HD images or searchable text.</p>
                 </div>
-                <h3>Convert PDF to Image & Word</h3>
-                <p>Extract PDF pages into crystal-clear 300 DPI Ultra HD images or searchable text.</p>
-                <a href="/convert-pdf" class="tool-link" style="color: #fb7185;">Open Tool &rarr;</a>
-            </div>
+                <span class="text-xs font-bold text-rose-400 mt-5 flex items-center gap-1 group-hover:translate-x-1 transition">Open Tool →</span>
+            </a>
 
             <!-- 7. Crop PDF Online -->
-            <div class="tool-card">
-                <div class="icon-box" style="background: rgba(192, 132, 252, 0.15); color: #e879f9; border: 1px solid rgba(192, 132, 252, 0.25);">
-                    <i class="fa-solid fa-crop-simple"></i>
+            <a href="/crop-pdf" class="bg-slate-900/80 hover:bg-slate-900 border border-slate-800 hover:border-purple-500/60 p-6 rounded-3xl transition duration-200 group shadow-lg flex flex-col justify-between">
+                <div>
+                    <div class="w-12 h-12 rounded-2xl bg-purple-500/10 text-purple-400 border border-purple-500/20 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition">✂️</div>
+                    <h3 class="text-lg font-bold text-white group-hover:text-purple-400 transition">Crop PDF Online</h3>
+                    <p class="text-xs text-slate-400 mt-2 leading-relaxed">Trim margins and unwanted areas from multi-page PDFs while keeping text fully searchable (Ctrl+F).</p>
                 </div>
-                <h3>Crop PDF Online</h3>
-                <p>Trim margins and unwanted areas from multi-page PDFs while keeping text fully searchable (Ctrl+F).</p>
-                <a href="/crop-pdf" class="tool-link" style="color: #e879f9;">Open Tool &rarr;</a>
-            </div>
+                <span class="text-xs font-bold text-purple-400 mt-5 flex items-center gap-1 group-hover:translate-x-1 transition">Open Tool →</span>
+            </a>
 
-            <!-- 8. QR Code & Barcode Studio -->
-            <div class="tool-card">
-                <div class="icon-box" style="background: rgba(20, 184, 166, 0.15); color: #2dd4bf; border: 1px solid rgba(20, 184, 166, 0.25);">
-                    <i class="fa-solid fa-qrcode"></i>
+            <!-- 8. QR Code & Barcode -->
+            <a href="/qr-code-generator" class="bg-slate-900/80 hover:bg-slate-900 border border-slate-800 hover:border-teal-500/60 p-6 rounded-3xl transition duration-200 group shadow-lg flex flex-col justify-between">
+                <div>
+                    <div class="w-12 h-12 rounded-2xl bg-teal-500/10 text-teal-400 border border-teal-500/20 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition">📊</div>
+                    <h3 class="text-lg font-bold text-white group-hover:text-teal-400 transition">QR & Barcode</h3>
+                    <p class="text-xs text-slate-400 mt-2 leading-relaxed">Create custom QR codes (URLs, UPI) and product barcodes with live preview.</p>
                 </div>
-                <h3>QR & Barcode</h3>
-                <p>Create custom QR codes (URLs, UPI) and product barcodes with live preview.</p>
-                <a href="/qr-code-studio" class="tool-link" style="color: #2dd4bf;">Open Tool &rarr;</a>
-            </div>
+                <span class="text-xs font-bold text-teal-400 mt-5 flex items-center gap-1 group-hover:translate-x-1 transition">Open Tool →</span>
+            </a>
 
-            <!-- 9. Add Watermark Studio -->
-            <div class="tool-card">
-                <div class="icon-box" style="background: rgba(245, 158, 11, 0.15); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.25);">
-                    <i class="fa-solid fa-stamp"></i>
+            <!-- 9. Add Watermark -->
+            <a href="/add-watermark" class="bg-slate-900/80 hover:bg-slate-900 border border-slate-800 hover:border-yellow-500/60 p-6 rounded-3xl transition duration-200 group shadow-lg flex flex-col justify-between">
+                <div>
+                    <div class="w-12 h-12 rounded-2xl bg-yellow-500/10 text-yellow-400 border border-yellow-500/20 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition">🏷️</div>
+                    <h3 class="text-lg font-bold text-white group-hover:text-yellow-400 transition">Add Watermark</h3>
+                    <p class="text-xs text-slate-400 mt-2 leading-relaxed">Protect pictures with diagonal repeated security grids or corner stamps.</p>
                 </div>
-                <h3>Add Watermark</h3>
-                <p>Protect pictures with diagonal repeated security grids or corner stamps.</p>
-                <a href="/watermark-studio" class="tool-link" style="color: #fbbf24;">Open Tool &rarr;</a>
-            </div>
+                <span class="text-xs font-bold text-yellow-400 mt-5 flex items-center gap-1 group-hover:translate-x-1 transition">Open Tool →</span>
+            </a>
 
             <!-- 10. Rotate & Flip -->
-            <div class="tool-card">
-                <div class="icon-box" style="background: rgba(59, 130, 246, 0.15); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.25);">
-                    <i class="fa-solid fa-rotate"></i>
+            <a href="/rotate-image" class="bg-slate-900/80 hover:bg-slate-900 border border-slate-800 hover:border-cyan-500/60 p-6 rounded-3xl transition duration-200 group shadow-lg flex flex-col justify-between">
+                <div>
+                    <div class="w-12 h-12 rounded-2xl bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition">🔁</div>
+                    <h3 class="text-lg font-bold text-white group-hover:text-cyan-400 transition">Rotate & Flip</h3>
+                    <p class="text-xs text-slate-400 mt-2 leading-relaxed">Rotate 90 degrees or mirror flip horizontally/vertically in 0.05s.</p>
                 </div>
-                <h3>Rotate & Flip</h3>
-                <p>Rotate 90 degrees or mirror flip horizontally/vertically in 0.05s.</p>
-                <a href="/rotate-flip" class="tool-link" style="color: #60a5fa;">Open Tool &rarr;</a>
-            </div>
+                <span class="text-xs font-bold text-cyan-400 mt-5 flex items-center gap-1 group-hover:translate-x-1 transition">Open Tool →</span>
+            </a>
 
-            <!-- 11. Image to Favicon Converter -->
-            <div class="tool-card">
-                <div class="icon-box" style="background: rgba(234, 179, 8, 0.15); color: #facc15; border: 1px solid rgba(234, 179, 8, 0.25);">
-                    <i class="fa-solid fa-star"></i>
+            <!-- 11. Image to Favicon -->
+            <a href="/favicon-converter" class="bg-slate-900/80 hover:bg-slate-900 border border-slate-800 hover:border-yellow-500/60 p-6 rounded-3xl transition duration-200 group shadow-lg flex flex-col justify-between">
+                <div>
+                    <div class="w-12 h-12 rounded-2xl bg-yellow-500/10 text-yellow-400 border border-yellow-500/20 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition">⭐</div>
+                    <h3 class="text-lg font-bold text-white group-hover:text-yellow-400 transition">Image to Favicon</h3>
+                    <p class="text-xs text-slate-400 mt-2 leading-relaxed">Convert logo to ultra-sharp 256px .ICO favicons with zero blur.</p>
                 </div>
-                <h3>Image to Favicon</h3>
-                <p>Convert logo to ultra-sharp 256px .ICO favicons with zero blur.</p>
-                <a href="/image-to-favicon" class="tool-link" style="color: #facc15;">Open Tool &rarr;</a>
-            </div>
+                <span class="text-xs font-bold text-yellow-400 mt-5 flex items-center gap-1 group-hover:translate-x-1 transition">Open Tool →</span>
+            </a>
 
             <!-- 12. Convert from JPG / JPEG -->
-            <div class="tool-card">
-                <div class="icon-box" style="background: rgba(245, 158, 11, 0.15); color: #f59e0b; border: 1px solid rgba(245, 158, 11, 0.25);">
-                    <i class="fa-solid fa-folder"></i>
+            <a href="/convert-from-jpg" class="bg-slate-900/80 hover:bg-slate-900 border border-slate-800 hover:border-amber-500/60 p-6 rounded-3xl transition duration-200 group shadow-lg flex flex-col justify-between">
+                <div>
+                    <div class="w-12 h-12 rounded-2xl bg-amber-500/10 text-amber-400 border border-amber-500/20 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition">📂</div>
+                    <h3 class="text-lg font-bold text-white group-hover:text-amber-400 transition">Convert from JPG / JPEG</h3>
+                    <p class="text-xs text-slate-400 mt-2 leading-relaxed">Dedicated tools to convert JPG into PNG, WEBP, AVIF, SVG, TIFF, or PDF in 0.1s with batch download.</p>
                 </div>
-                <h3>Convert from JPG / JPEG</h3>
-                <p>Dedicated tools to convert JPG into PNG, WEBP, AVIF, SVG, TIFF, or PDF in 0.1s with batch download.</p>
-                <a href="/convert-from-jpg" class="tool-link" style="color: #f59e0b;">Explore JPG Tools &rarr;</a>
-            </div>
+                <span class="text-xs font-bold text-amber-400 mt-5 flex items-center gap-1 group-hover:translate-x-1 transition">Explore JPG Tools →</span>
+            </a>
 
             <!-- 13. Convert from PNG -->
-            <div class="tool-card">
-                <div class="icon-box" style="background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.25);">
-                    <i class="fa-solid fa-image"></i>
+            <a href="/convert-from-png" class="bg-slate-900/80 hover:bg-slate-900 border border-slate-800 hover:border-purple-500/60 p-6 rounded-3xl transition duration-200 group shadow-lg flex flex-col justify-between">
+                <div>
+                    <div class="w-12 h-12 rounded-2xl bg-purple-500/10 text-purple-400 border border-purple-500/20 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition">🖼️</div>
+                    <h3 class="text-lg font-bold text-white group-hover:text-purple-400 transition">Convert from PNG</h3>
+                    <p class="text-xs text-slate-400 mt-2 leading-relaxed">Turn PNG into JPG (white background), WEBP, SVG, TIFF, AVIF, or PDF in 0.1s directly on device.</p>
                 </div>
-                <h3>Convert from PNG</h3>
-                <p>Turn PNG into JPG (white background), WEBP, SVG, TIFF, AVIF, or PDF in 0.1s directly on device.</p>
-                <a href="/convert-from-png" class="tool-link" style="color: #c084fc;">Explore PNG Tools &rarr;</a>
-            </div>
+                <span class="text-xs font-bold text-purple-400 mt-5 flex items-center gap-1 group-hover:translate-x-1 transition">Explore PNG Tools →</span>
+            </a>
 
             <!-- 14. Convert from WEBP -->
-            <div class="tool-card">
-                <div class="icon-box" style="background: rgba(236, 72, 153, 0.15); color: #f472b6; border: 1px solid rgba(236, 72, 153, 0.25);">
-                    <i class="fa-solid fa-rocket"></i>
+            <a href="/convert-from-webp" class="bg-slate-900/80 hover:bg-slate-900 border border-slate-800 hover:border-emerald-500/60 p-6 rounded-3xl transition duration-200 group shadow-lg flex flex-col justify-between">
+                <div>
+                    <div class="w-12 h-12 rounded-2xl bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition">🚀</div>
+                    <h3 class="text-lg font-bold text-white group-hover:text-emerald-400 transition">Convert from WEBP</h3>
+                    <p class="text-xs text-slate-400 mt-2 leading-relaxed">Convert Google WEBP images into JPG, PNG, AVIF, SVG, TIFF, or PDF for full software compatibility.</p>
                 </div>
-                <h3>Convert from WEBP</h3>
-                <p>Convert Google WEBP images into JPG, PNG, AVIF, SVG, TIFF, or PDF for full software compatibility.</p>
-                <a href="/convert-from-webp" class="tool-link" style="color: #34d399;">Explore WEBP Tools &rarr;</a>
-            </div>
+                <span class="text-xs font-bold text-emerald-400 mt-5 flex items-center gap-1 group-hover:translate-x-1 transition">Explore WEBP Tools →</span>
+            </a>
 
             <!-- 15. Convert from HEIC (iPhone) -->
-            <div class="tool-card">
-                <div class="icon-box" style="background: rgba(59, 130, 246, 0.15); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.25);">
-                    <i class="fa-solid fa-mobile-screen"></i>
+            <a href="/convert-from-heic" class="bg-slate-900/80 hover:bg-slate-900 border border-slate-800 hover:border-indigo-500/60 p-6 rounded-3xl transition duration-200 group shadow-lg flex flex-col justify-between">
+                <div>
+                    <div class="w-12 h-12 rounded-2xl bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition">📱</div>
+                    <h3 class="text-lg font-bold text-white group-hover:text-indigo-400 transition">Convert from HEIC (iPhone)</h3>
+                    <p class="text-xs text-slate-400 mt-2 leading-relaxed">Decode Apple iPhone photos and turn them into universal JPG, PNG, WEBP, or PDF files.</p>
                 </div>
-                <h3>Convert from HEIC (iPhone)</h3>
-                <p>Decode Apple iPhone photos and turn them into universal JPG, PNG, WEBP, or PDF files.</p>
-                <a href="/convert-from-heic" class="tool-link" style="color: #818cf8;">Explore iPhone Tools &rarr;</a>
-            </div>
+                <span class="text-xs font-bold text-indigo-400 mt-5 flex items-center gap-1 group-hover:translate-x-1 transition">Explore iPhone Tools →</span>
+            </a>
 
             <!-- 16. Convert from PDF -->
-            <div class="tool-card">
-                <div class="icon-box" style="background: rgba(239, 68, 68, 0.15); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.25);">
-                    <i class="fa-solid fa-file-pdf"></i>
+            <a href="/convert-from-pdf" class="bg-slate-900/80 hover:bg-slate-900 border border-slate-800 hover:border-rose-500/60 p-6 rounded-3xl transition duration-200 group shadow-lg flex flex-col justify-between">
+                <div>
+                    <div class="w-12 h-12 rounded-2xl bg-rose-500/10 text-rose-400 border border-rose-500/20 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition">📑</div>
+                    <h3 class="text-lg font-bold text-white group-hover:text-rose-400 transition">Convert from PDF</h3>
+                    <p class="text-xs text-slate-400 mt-2 leading-relaxed">Convert PDF documents into JPG, PNG, WEBP, SVG, TIFF, or Word text in 300 DPI high resolution.</p>
                 </div>
-                <h3>Convert from PDF</h3>
-                <p>Convert PDF documents into JPG, PNG, WEBP, SVG, TIFF, or Word text in 300 DPI high resolution.</p>
-                <a href="/convert-from-pdf" class="tool-link" style="color: #f87171;">Explore PDF Tools &rarr;</a>
-            </div>
+                <span class="text-xs font-bold text-rose-400 mt-5 flex items-center gap-1 group-hover:translate-x-1 transition">Explore PDF Tools →</span>
+            </a>
 
             <!-- 17. Image Format Converter -->
-            <div class="tool-card">
-                <div class="icon-box" style="background: rgba(168, 85, 247, 0.15); color: #c084fc; border: 1px solid rgba(168, 85, 247, 0.25);">
-                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+            <a href="/convert-image" class="bg-slate-900/80 hover:bg-slate-900 border border-slate-800 hover:border-pink-500/60 p-6 rounded-3xl transition duration-200 group shadow-lg flex flex-col justify-between">
+                <div>
+                    <div class="w-12 h-12 rounded-2xl bg-pink-500/10 text-pink-400 border border-pink-500/20 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition">🔄</div>
+                    <h3 class="text-lg font-bold text-white group-hover:text-pink-400 transition">Image Format Converter</h3>
+                    <p class="text-xs text-slate-400 mt-2 leading-relaxed">All-in-one converter: Convert any photo to JPG, PNG, WEBP, AVIF, SVG, or TIFF in 0.1s.</p>
                 </div>
-                <h3>Image Format Converter</h3>
-                <p>All-in-one converter: Convert any photo to JPG, PNG, WEBP, AVIF, SVG, or TIFF in 0.1s.</p>
-                <a href="/image-format-converter" class="tool-link" style="color: #f472b6;">Open Tool &rarr;</a>
-            </div>
+                <span class="text-xs font-bold text-pink-400 mt-5 flex items-center gap-1 group-hover:translate-x-1 transition">Open Tool →</span>
+            </a>
 
         </div>
+    </section>
 
-        <footer>
-            <p>&copy; 2026 SmartPicTools. 100% Free & Private in-browser suite.</p>
-            <div class="footer-links">
-                <a href="/about">About Us</a>
-                <a href="/privacy">Privacy Policy</a>
-                <a href="/terms">Terms of Service</a>
-                <a href="/contact">Contact Us</a>
+    <!-- FOOTER -->
+    <footer class="border-t border-slate-800 bg-slate-950 py-10 px-4 text-xs text-slate-400">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+            <p>© 2026 SmartPicTools. 100% Free & Private in-browser suite.</p>
+            <div class="flex flex-wrap justify-center gap-6 font-semibold">
+                <a href="/about" class="hover:text-indigo-400 transition">About Us</a>
+                <a href="/privacy" class="hover:text-indigo-400 transition">Privacy Policy</a>
+                <a href="/terms" class="hover:text-indigo-400 transition">Terms of Service</a>
+                <a href="/contact" class="hover:text-indigo-400 transition">Contact Us</a>
             </div>
-        </footer>
-    </div>
-
+        </div>
+    </footer>
 </body>
 </html>
