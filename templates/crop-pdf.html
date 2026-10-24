@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     
-    <title>Bulk PDF Label Cropper Online Free - Visual Drag & Crop | SmartPicTools</title>
-    <meta name="description" content="Visually crop 500+ bulk e-commerce shipping labels with live zoom and drag. Preserves 100% searchable text (Ctrl+F) and sharp barcodes for Amazon, Flipkart & Meesho.">
-    <meta name="keywords" content="bulk pdf cropper, visual pdf cropper, crop shipping labels pdf, amazon label cropper 4x6, flipkart label cropper, crop pdf keep text searchable, e-commerce label trimmer">
+    <title>Crop PDF Document Online Free - Bulk Margin Trimmer | SmartPicTools</title>
+    <meta name="description" content="Visually crop multi-page and bulk PDFs online for free. Drag crop box or type exact mm margins. 100% preserves searchable text (Ctrl+F) and vector quality.">
+    <meta name="keywords" content="crop pdf online, bulk pdf cropper, trim pdf margins, pdf margin trimmer, crop pdf document, crop pdf keep text searchable, online pdf cutter">
     <meta name="robots" content="index, follow, max-image-preview:large">
     <meta name="author" content="SmartPicTools">
     <link rel="canonical" href="https://smartpictools.in/crop-pdf">
@@ -17,8 +17,8 @@
     <!-- OPEN GRAPH -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://smartpictools.in/crop-pdf">
-    <meta property="og:title" content="Bulk PDF Label Cropper Online Free - SmartPicTools">
-    <meta property="og:description" content="Drag to crop margins of 500+ labels visually with zoom controls while keeping selectable Ctrl+F text 100% intact.">
+    <meta property="og:title" content="Crop PDF Document Online Free - SmartPicTools">
+    <meta property="og:description" content="Drag to crop margins of 500+ PDF pages visually with zoom controls while keeping selectable Ctrl+F text 100% intact.">
 
     <!-- FAVICON -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' stop-color='%236366f1'/><stop offset='50%25' stop-color='%23a855f7'/><stop offset='100%25' stop-color='%23ec4899'/></linearGradient></defs><rect width='100' height='100' rx='28' fill='url(%23g)'/><path d='M52 16 L24 54 L46 54 L42 84 L76 44 L54 44 Z' fill='%23fbbf24'/></svg>">
@@ -36,7 +36,6 @@
     <!-- ⚡ VERIFIED WORKING PDF-LIB (v1.17.1 ON CDNs) -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
     <script>
-        // Triple-redundant auto-fallback if cdnjs fails
         if (typeof PDFLib === 'undefined' && typeof window.PDFLib === 'undefined') {
             document.write('<script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"><\/script>');
         }
@@ -61,7 +60,7 @@
                 <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-2xl bg-gradient-to-tr from-indigo-500 via-purple-500 to-pink-500 flex items-center justify-center text-white text-lg sm:text-xl shadow-lg shadow-indigo-500/30 group-hover:scale-105 transition">⚡</div>
                 <div>
                     <span class="text-xl sm:text-2xl font-black text-white">SmartPic<span class="text-indigo-400">Tools</span></span>
-                    <span class="block text-[9px] uppercase font-bold text-slate-400 -mt-1 tracking-widest">Label Cropper</span>
+                    <span class="block text-[9px] uppercase font-bold text-slate-400 -mt-1 tracking-widest">PDF Cropper</span>
                 </div>
             </a>
             <a href="/" class="py-2 px-3.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-bold text-indigo-400 hover:text-white border border-slate-700 transition">← All Tools</a>
@@ -72,8 +71,8 @@
     <main class="max-w-4xl mx-auto w-full px-4 py-8 sm:py-12 flex-1">
         <div class="text-center max-w-2xl mx-auto mb-8 sm:mb-10">
             <span class="text-[11px] font-extrabold uppercase tracking-widest text-indigo-400 bg-indigo-500/10 px-3 py-1 rounded-full border border-indigo-500/20">Visual Drag & Crop Engine</span>
-            <h1 class="text-3xl sm:text-5xl font-black text-white mt-3 tracking-tight">E-commerce Bulk PDF Label Cropper</h1>
-            <p class="mt-2.5 text-slate-400 text-xs sm:text-sm">Click and drag directly on the label to crop unwanted margins. 100% preserves selectable text (<strong class="text-indigo-400">Ctrl+F works</strong>) and barcode sharpness.</p>
+            <h1 class="text-3xl sm:text-5xl font-black text-white mt-3 tracking-tight">Crop PDF Document Online</h1>
+            <p class="mt-2.5 text-slate-400 text-xs sm:text-sm">Click and drag directly on the page or fine-tune exact margins below. 100% preserves selectable text (<strong class="text-indigo-400">Ctrl+F works</strong>) and vector sharpness.</p>
         </div>
 
         <div class="bg-slate-900 rounded-3xl p-5 sm:p-10 border border-slate-800 shadow-2xl relative">
@@ -82,8 +81,8 @@
             <div id="drop-area" class="border-2 border-dashed border-slate-700 hover:border-indigo-500 bg-slate-950/60 hover:bg-indigo-950/20 rounded-2xl p-8 sm:p-14 text-center cursor-pointer transition-all duration-300">
                 <input type="file" id="file-input" accept="application/pdf, .pdf" class="hidden">
                 <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-3xl bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-3xl sm:text-4xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition">✂️</div>
-                <h3 class="text-base sm:text-xl font-bold text-white mb-1.5">Select PDF Shipping Labels</h3>
-                <p class="text-xs sm:text-sm text-slate-400">Supports massive files with 500–600+ pages (100% In-Browser Private)</p>
+                <h3 class="text-base sm:text-xl font-bold text-white mb-1.5">Select PDF Document to Crop</h3>
+                <p class="text-xs sm:text-sm text-slate-400">Supports single and multi-page PDFs with 500+ pages (100% In-Browser Private)</p>
             </div>
 
             <!-- WORKSPACE -->
@@ -94,7 +93,7 @@
                     <div class="flex items-center gap-3">
                         <div class="w-10 h-10 rounded-xl bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 flex items-center justify-center font-bold text-lg">📄</div>
                         <div>
-                            <span id="file-name-display" class="text-sm font-bold text-white block truncate max-w-xs sm:max-w-md">labels.pdf</span>
+                            <span id="file-name-display" class="text-sm font-bold text-white block truncate max-w-xs sm:max-w-md">document.pdf</span>
                             <div class="flex items-center gap-2 mt-0.5 text-xs text-slate-400">
                                 <span>Total Pages: <strong id="total-pages-badge" class="text-indigo-400 font-extrabold">0</strong></span>
                                 <span>•</span>
@@ -109,25 +108,63 @@
                     </button>
                 </div>
 
-                <!-- 1-CLICK MARKETPLACE PRESET BUTTONS -->
+                <!-- QUICK PRESET BUTTONS -->
                 <div class="bg-slate-950/80 p-3.5 sm:p-4 rounded-2xl border border-slate-800 space-y-2">
                     <div class="flex items-center justify-between">
-                        <span class="text-xs font-bold text-slate-400">Quick Snap Presets (Or Drag Manually on Image):</span>
-                        <span class="text-[11px] text-emerald-400 font-semibold">💡 Click & drag corners freely</span>
+                        <span class="text-xs font-bold text-slate-400">Quick Crop Presets:</span>
+                        <span class="text-[11px] text-emerald-400 font-semibold">💡 Click & drag box freely</span>
                     </div>
                     <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
                         <button type="button" onclick="applyPresetCrop('full')" class="py-2 px-2.5 rounded-xl bg-slate-900 hover:bg-indigo-600 text-xs font-bold text-slate-300 hover:text-white border border-slate-700 transition">
                             ↺ Full Page / Reset
                         </button>
-                        <button type="button" onclick="applyPresetCrop('amazon')" class="py-2 px-2.5 rounded-xl bg-slate-900 hover:bg-indigo-600 text-xs font-bold text-slate-300 hover:text-white border border-slate-700 transition">
-                            📦 Amazon 4×6 Label
+                        <button type="button" onclick="applyPresetCrop('standard-label')" class="py-2 px-2.5 rounded-xl bg-slate-900 hover:bg-indigo-600 text-xs font-bold text-slate-300 hover:text-white border border-slate-700 transition">
+                            📦 4×6 Standard Label
                         </button>
-                        <button type="button" onclick="applyPresetCrop('flipkart')" class="py-2 px-2.5 rounded-xl bg-slate-900 hover:bg-indigo-600 text-xs font-bold text-slate-300 hover:text-white border border-slate-700 transition">
-                            ⚡ Flipkart Top-Half
+                        <button type="button" onclick="applyPresetCrop('top-half')" class="py-2 px-2.5 rounded-xl bg-slate-900 hover:bg-indigo-600 text-xs font-bold text-slate-300 hover:text-white border border-slate-700 transition">
+                            ⚡ Top-Half (A4)
                         </button>
-                        <button type="button" onclick="applyPresetCrop('meesho')" class="py-2 px-2.5 rounded-xl bg-slate-900 hover:bg-indigo-600 text-xs font-bold text-slate-300 hover:text-white border border-slate-700 transition">
-                            🛍️ Meesho Label
+                        <button type="button" onclick="applyPresetCrop('bottom-half')" class="py-2 px-2.5 rounded-xl bg-slate-900 hover:bg-indigo-600 text-xs font-bold text-slate-300 hover:text-white border border-slate-700 transition">
+                            📄 Bottom-Half (A4)
                         </button>
+                    </div>
+                </div>
+
+                <!-- ⚡ TWO-WAY LIVE MARGIN VALUES (IN MM) -->
+                <div class="bg-slate-950/80 p-3.5 sm:p-4 rounded-2xl border border-slate-800 space-y-2">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-bold text-slate-400">Crop Margins to Cut Off (in mm):</span>
+                        <span class="text-[10px] text-slate-400 uppercase tracking-wider">Updates Live With Drag</span>
+                    </div>
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+                        <div class="bg-slate-900 p-2.5 rounded-xl border border-slate-800">
+                            <label class="block text-[11px] font-bold text-slate-400 mb-1">Top Margin</label>
+                            <div class="flex items-center gap-1.5">
+                                <input type="number" id="margin-top" value="0" min="0" oninput="updateCropperFromInputs()" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-2.5 py-1 text-xs text-white font-bold focus:outline-none focus:border-indigo-500">
+                                <span class="text-[11px] text-slate-400 font-semibold">mm</span>
+                            </div>
+                        </div>
+                        <div class="bg-slate-900 p-2.5 rounded-xl border border-slate-800">
+                            <label class="block text-[11px] font-bold text-slate-400 mb-1">Bottom Margin</label>
+                            <div class="flex items-center gap-1.5">
+                                <input type="number" id="margin-bottom" value="0" min="0" oninput="updateCropperFromInputs()" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-2.5 py-1 text-xs text-white font-bold focus:outline-none focus:border-indigo-500">
+                                <span class="text-[11px] text-slate-400 font-semibold">mm</span>
+                            </div>
+                        </div>
+                        <div class="bg-slate-900 p-2.5 rounded-xl border border-slate-800">
+                            <label class="block text-[11px] font-bold text-slate-400 mb-1">Left Margin</label>
+                            <div class="flex items-center gap-1.5">
+                                <input type="number" id="margin-left" value="0" min="0" oninput="updateCropperFromInputs()" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-2.5 py-1 text-xs text-white font-bold focus:outline-none focus:border-indigo-500">
+                                <span class="text-[11px] text-slate-400 font-semibold">mm</span>
+                            </div>
+                        </div>
+                        <div class="bg-slate-900 p-2.5 rounded-xl border border-slate-800">
+                            <label class="block text-[11px] font-bold text-slate-400 mb-1">Right Margin</label>
+                            <div class="flex items-center gap-1.5">
+                                <input type="number" id="margin-right" value="0" min="0" oninput="updateCropperFromInputs()" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-2.5 py-1 text-xs text-white font-bold focus:outline-none focus:border-indigo-500">
+                                <span class="text-[11px] text-slate-400 font-semibold">mm</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -144,7 +181,7 @@
                             <button type="button" onclick="changePreviewPage(1)" class="py-1 px-2.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs font-bold text-white transition">Next →</button>
                         </div>
 
-                        <!-- Right: ⚡ ZOOM CONTROLS TOOLBAR -->
+                        <!-- Right: Zoom Controls Toolbar -->
                         <div class="flex items-center gap-1.5 bg-slate-950/80 p-1.5 rounded-xl border border-slate-800">
                             <button type="button" onclick="cropZoom(0.15)" title="Zoom In" class="py-1 px-2.5 rounded-lg bg-slate-900 hover:bg-indigo-600 text-xs font-bold text-white border border-slate-700 transition active:scale-95 flex items-center gap-1">
                                 <span>🔍+ Zoom In</span>
@@ -174,7 +211,7 @@
                             <input type="radio" name="page-mode" value="all" checked onchange="handlePageModeToggle('all')" class="w-4 h-4 accent-indigo-600">
                             <div>
                                 <span class="text-xs font-bold text-white block">All Pages (Bulk Mode)</span>
-                                <span class="text-[11px] text-slate-400">Applies this visual crop box to all 500+ pages</span>
+                                <span class="text-[11px] text-slate-400">Applies this visual crop box to all pages</span>
                             </div>
                         </label>
                         <label class="flex items-center gap-3 p-3 bg-slate-900 rounded-xl border border-slate-800 cursor-pointer hover:border-indigo-500/50 transition">
@@ -221,22 +258,22 @@
         </div>
 
         <section class="mt-14 border-t border-slate-800 pt-10">
-            <h2 class="text-xl sm:text-2xl font-bold text-white text-center mb-6">Why E-commerce Sellers Choose SmartPicTools</h2>
+            <h2 class="text-xl sm:text-2xl font-bold text-white text-center mb-6">How to Crop PDF Documents Online in 3 Steps</h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs sm:text-sm">
                 <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800">
                     <span class="w-7 h-7 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center mb-2.5 text-xs">1</span>
-                    <h3 class="font-bold text-white text-sm mb-1">Visual Drag & Zoom</h3>
-                    <p class="text-slate-400">Zoom in on barcode edges and drag the crop box directly over the label with your mouse.</p>
+                    <h3 class="font-bold text-white text-sm mb-1">Upload Document</h3>
+                    <p class="text-slate-400">Upload any single or multi-page PDF up to 500+ pages.</p>
                 </div>
                 <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800">
                     <span class="w-7 h-7 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center mb-2.5 text-xs">2</span>
-                    <h3 class="font-bold text-white text-sm mb-1">Ctrl+F Search Works</h3>
-                    <p class="text-slate-400">We do not flatten to images. Your original vector text and barcode layers stay 100% intact.</p>
+                    <h3 class="font-bold text-white text-sm mb-1">Drag or Enter mm</h3>
+                    <p class="text-slate-400">Drag corners on screen or type exact margin numbers in millimeters.</p>
                 </div>
                 <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800">
                     <span class="w-7 h-7 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center mb-2.5 text-xs">3</span>
-                    <h3 class="font-bold text-white text-sm mb-1">Handles 500+ Pages</h3>
-                    <p class="text-slate-400">Engineered with async memory chunking to process massive label batches without crashing.</p>
+                    <h3 class="font-bold text-white text-sm mb-1">Download Real PDF</h3>
+                    <p class="text-slate-400">Export trimmed PDF with full Ctrl+F searchable text and vector sharpness.</p>
                 </div>
             </div>
         </section>
@@ -252,10 +289,12 @@
 
         let originalPdfBytes = null;
         let pdfjsDoc = null;
-        let originalFileName = 'labels';
+        let originalFileName = 'document';
         let totalPages = 0;
         let currentPage = 1;
         let cropper = null;
+        let currentPageDimensionsPt = { width: 595, height: 842 };
+        let isSyncing = false;
 
         const dropArea = document.getElementById('drop-area');
         const fileInput = document.getElementById('file-input');
@@ -282,7 +321,7 @@
                 return;
             }
 
-            originalFileName = file.name.substring(0, file.name.lastIndexOf('.')) || 'labels';
+            originalFileName = file.name.substring(0, file.name.lastIndexOf('.')) || 'document';
             document.getElementById('file-name-display').innerText = file.name;
             document.getElementById('file-size-badge').innerText = (file.size / (1024 * 1024)).toFixed(2) + ' MB';
 
@@ -312,8 +351,9 @@
             const page = await pdfjsDoc.getPage(pageNum);
             document.getElementById('current-page-num').innerText = pageNum;
 
-            // Render crisp snapshot for visual dragging
             const unscaledViewport = page.getViewport({ scale: 1.0 });
+            currentPageDimensionsPt = { width: unscaledViewport.width, height: unscaledViewport.height };
+
             const renderScale = Math.min(1800 / unscaledViewport.height, 1400 / unscaledViewport.width, 2.0);
             const currentRenderViewport = page.getViewport({ scale: renderScale });
 
@@ -327,20 +367,80 @@
             img.onload = () => {
                 if (cropper) cropper.destroy();
                 cropper = new Cropper(img, {
-                    aspectRatio: NaN, // Freeform drag
+                    aspectRatio: NaN,
                     viewMode: 1,
                     background: false,
                     responsive: true,
-                    autoCropArea: 0.92,
-                    zoomable: true,       // ⚡ ZOOM ACTIVATED
-                    zoomOnWheel: false,    // Prevents accidental scroll-zoom
-                    toggleDragModeOnDblclick: false
+                    autoCropArea: 0.95,
+                    zoomable: true,
+                    zoomOnWheel: false,
+                    toggleDragModeOnDblclick: false,
+                    crop() {
+                        updateInputsFromCropper();
+                    }
                 });
             };
             img.src = canvas.toDataURL('image/jpeg', 0.95);
         }
 
-        // ⚡ ZOOM CONTROLS
+        // ⚡ SYNC: CROPPER DRAG ➔ MARGIN INPUTS (MM)
+        function updateInputsFromCropper() {
+            if (isSyncing || !cropper) return;
+            isSyncing = true;
+
+            const cData = cropper.getData(true);
+            const imgData = cropper.getImageData();
+
+            // 1 mm = 2.83465 PDF points
+            const totalW_mm = currentPageDimensionsPt.width / 2.83465;
+            const totalH_mm = currentPageDimensionsPt.height / 2.83465;
+
+            const topMm = Math.max(0, Math.round((cData.y / imgData.naturalHeight) * totalH_mm));
+            const leftMm = Math.max(0, Math.round((cData.x / imgData.naturalWidth) * totalW_mm));
+            const rightMm = Math.max(0, Math.round(((imgData.naturalWidth - (cData.x + cData.width)) / imgData.naturalWidth) * totalW_mm));
+            const bottomMm = Math.max(0, Math.round(((imgData.naturalHeight - (cData.y + cData.height)) / imgData.naturalHeight) * totalH_mm));
+
+            document.getElementById('margin-top').value = topMm;
+            document.getElementById('margin-bottom').value = bottomMm;
+            document.getElementById('margin-left').value = leftMm;
+            document.getElementById('margin-right').value = rightMm;
+
+            isSyncing = false;
+        }
+
+        // ⚡ SYNC: MARGIN INPUTS (MM) ➔ CROPPER BOX
+        function updateCropperFromInputs() {
+            if (isSyncing || !cropper) return;
+            isSyncing = true;
+
+            const totalW_mm = currentPageDimensionsPt.width / 2.83465;
+            const totalH_mm = currentPageDimensionsPt.height / 2.83465;
+
+            const topMm = parseFloat(document.getElementById('margin-top').value) || 0;
+            const bottomMm = parseFloat(document.getElementById('margin-bottom').value) || 0;
+            const leftMm = parseFloat(document.getElementById('margin-left').value) || 0;
+            const rightMm = parseFloat(document.getElementById('margin-right').value) || 0;
+
+            const cData = cropper.getCanvasData();
+            const w = cData.width;
+            const h = cData.height;
+
+            const cropLeft = cData.left + (leftMm / totalW_mm) * w;
+            const cropTop = cData.top + (topMm / totalH_mm) * h;
+            const cropW = Math.max(25, w - ((leftMm + rightMm) / totalW_mm) * w);
+            const cropH = Math.max(25, h - ((topMm + bottomMm) / totalH_mm) * h);
+
+            cropper.setCropBoxData({
+                left: cropLeft,
+                top: cropTop,
+                width: cropW,
+                height: cropH
+            });
+
+            isSyncing = false;
+        }
+
+        // ZOOM CONTROLS
         function cropZoom(delta) {
             if (cropper) cropper.zoom(delta);
         }
@@ -361,7 +461,7 @@
             }
         }
 
-        // QUICK SNAP PRESET BUTTONS (MOVES THE VISUAL BOX DIRECTLY)
+        // QUICK SNAP PRESET BUTTONS
         function applyPresetCrop(preset) {
             if (!cropper) return;
             const cData = cropper.getCanvasData();
@@ -370,8 +470,7 @@
 
             if (preset === 'full') {
                 cropper.setCropBoxData({ left: cData.left, top: cData.top, width: w, height: h });
-            } else if (preset === 'amazon') {
-                // Centered 4x6 label with small margin
+            } else if (preset === 'standard-label') {
                 const cropW = w * 0.88;
                 const cropH = cropW * 1.5 > h ? h * 0.9 : cropW * 1.5;
                 cropper.setCropBoxData({
@@ -380,12 +479,18 @@
                     width: cropW,
                     height: cropH
                 });
-            } else if (preset === 'flipkart' || preset === 'meesho') {
-                // Cuts the upper half of A4 where shipping label is situated
+            } else if (preset === 'top-half') {
                 cropper.setCropBoxData({
-                    left: cData.left + (w * 0.04),
+                    left: cData.left + (w * 0.03),
                     top: cData.top + (h * 0.02),
-                    width: w * 0.92,
+                    width: w * 0.94,
+                    height: h * 0.48
+                });
+            } else if (preset === 'bottom-half') {
+                cropper.setCropBoxData({
+                    left: cData.left + (w * 0.03),
+                    top: cData.top + (h * 0.50),
+                    width: w * 0.94,
                     height: h * 0.48
                 });
             }
@@ -465,7 +570,6 @@
             }
         }
 
-        // ⚡ MULTI-CDN ASYNC LOADER GUARANTEE
         async function getPDFLibInstance() {
             if (window.PDFLib) return window.PDFLib;
             if (typeof PDFLib !== 'undefined') return PDFLib;
@@ -500,7 +604,6 @@
             btn.disabled = true;
             document.getElementById('btn-text').innerText = "⏳ Loading PDF Engine...";
 
-            // Guaranteed PDFLib Instance Fetch
             const Lib = await getPDFLibInstance();
             if (!Lib) {
                 alert('Could not connect to PDF engine CDN. Please check your internet connection.');
@@ -526,7 +629,6 @@
                 targetPagesList = parsed.list;
             }
 
-            // Get exact coordinates from Cropper.js
             const cropData = cropper.getData(true);
             const imgData = cropper.getImageData();
 
@@ -538,11 +640,10 @@
 
                 for (let i = 0; i < totalTarget; i++) {
                     const pageNum = targetPagesList[i];
-                    const page = pages[pageNum - 1]; // 0-based
+                    const page = pages[pageNum - 1];
 
                     const mediaBox = page.getMediaBox();
                     
-                    // Ratio between visual snapshot and real PDF page points
                     const scaleX = mediaBox.width / imgData.naturalWidth;
                     const scaleY = mediaBox.height / imgData.naturalHeight;
 
@@ -551,7 +652,7 @@
                     const cropWidthPt = cropData.width * scaleX;
                     const cropHeightPt = cropData.height * scaleY;
 
-                    // ⚡ PDF Coordinate Math: (0, 0) is at Bottom-Left!
+                    // PDF Coordinate Math: (0, 0) is at Bottom-Left
                     const newX = mediaBox.x + cropLeftPt;
                     const newY = mediaBox.y + (mediaBox.height - cropTopPt - cropHeightPt);
                     const newWidth = cropWidthPt;
@@ -562,7 +663,6 @@
                         page.setMediaBox(newX, newY, newWidth, newHeight);
                     }
 
-                    // Async chunking every 25 pages to prevent browser freeze on 500+ pages
                     if (i % 25 === 0 || i === totalTarget - 1) {
                         const pct = Math.round(((i + 1) / totalTarget) * 100);
                         progressBar.style.width = `${pct}%`;
@@ -584,9 +684,7 @@
                 downloadLink.download = `${originalFileName}-cropped.pdf`;
                 downloadLink.click();
 
-                // Memory leak prevention
                 setTimeout(() => URL.revokeObjectURL(blobUrl), 3000);
-
                 document.getElementById('status-box').classList.remove('hidden');
             } catch(e) {
                 alert('PDF Cropping error: ' + e.message);
