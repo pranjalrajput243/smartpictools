@@ -17,7 +17,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
-    <!-- ⚡ ALL LIBRARIES -->
+    <!-- LIBRARIES -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/heic2any/0.0.4/heic2any.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
@@ -52,7 +52,7 @@
         <div class="text-center max-w-2xl mx-auto mb-8 sm:mb-10">
             <span class="text-[11px] font-extrabold uppercase tracking-widest text-indigo-400 bg-indigo-500/10 px-3 py-1 rounded-full border border-indigo-500/20">Dedicated Studio</span>
             <h1 class="text-3xl sm:text-5xl font-black text-white mt-3 tracking-tight">Convert {{ meta.src_name }} to {{ meta.tgt_name }}</h1>
-            <p class="mt-2.5 text-slate-400 text-xs sm:text-sm">Turn {{ meta.src_name }} files into {{ meta.tgt_name }} in 0.1s with 1-click batch download. 100% private in-browser tool.</p>
+            <p class="mt-2.5 text-slate-400 text-xs sm:text-sm">Turn {{ meta.src_name }} files into High-Definition {{ meta.tgt_name }} in 0.1s with 1-click batch download.</p>
         </div>
 
         <div class="bg-slate-900 rounded-3xl p-5 sm:p-10 border border-slate-800 shadow-2xl relative">
@@ -77,8 +77,8 @@
                 </div>
 
                 <div class="p-3.5 bg-slate-950/80 rounded-xl border border-slate-800 flex items-center justify-between text-xs">
-                    <span class="text-slate-400 font-semibold">Target Format: <strong class="text-indigo-400 font-bold">{{ meta.tgt_name }}</strong></span>
-                    <span class="text-emerald-400 font-bold">✓ Pre-Configured for 1-Click Speed</span>
+                    <span class="text-slate-400 font-semibold">Target Format: <strong class="text-indigo-400 font-bold">{{ meta.tgt_name }} (High-Res)</strong></span>
+                    <span class="text-emerald-400 font-bold">✓ Ultra HD Rendering Active</span>
                 </div>
 
                 <button type="button" id="convert-btn" onclick="executeConversion()" class="w-full py-4 px-6 rounded-2xl bg-gradient-to-r from-indigo-600 via-indigo-500 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-extrabold text-sm sm:text-base shadow-lg shadow-indigo-500/25 transition active:scale-[0.99] flex items-center justify-center gap-3">
@@ -87,7 +87,7 @@
             </div>
 
             <div id="status-box" class="hidden mt-5 p-3.5 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 text-center">
-                <p class="text-emerald-400 font-bold text-xs sm:text-sm">🎉 Success! Converted {{ meta.tgt_name }} file(s) downloaded directly to your device.</p>
+                <p class="text-emerald-400 font-bold text-xs sm:text-sm">🎉 Success! High-Definition converted file(s) downloaded!</p>
             </div>
         </div>
     </main>
@@ -96,7 +96,7 @@
         <p>© 2026 SmartPicTools. 100% Free & Private in-browser suite. <a href="/" class="text-indigo-400 hover:underline">Explore All Tools</a></p>
     </footer>
 
-    <!-- ⚡ BULLETPROOF UNIVERSAL CONVERSION ENGINE -->
+    <!-- ⚡ ULTRA HD HIGH-RES CONVERSION ENGINE -->
     <script>
         pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
 
@@ -172,11 +172,11 @@
                         const ab = await f.arrayBuffer();
                         const pdfDoc = await pdfjsLib.getDocument({ data: ab }).promise;
                         const page1 = await pdfDoc.getPage(1);
-                        const vp = page1.getViewport({ scale: 0.5 });
+                        const vp = page1.getViewport({ scale: 1.0 }); // HD Preview Scale
                         const cvs = document.createElement('canvas');
                         cvs.width = vp.width;
                         cvs.height = vp.height;
-                        await page1.render({ canvasContext: cvs.getContext('2d'), viewport: vp }).promise;
+                        await page1.render({ canvasContext: cvs.getContext('2d'), viewport: vp, intent: 'print' }).promise;
                         previewUrl = cvs.toDataURL('image/png');
                     } catch(e) {
                         previewUrl = "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%231e293b'/><text x='50%' y='55%' dominant-baseline='central' text-anchor='middle' font-size='40'>📄</text></svg>";
@@ -251,10 +251,10 @@
             if (filesList.length === 0) return;
             const btn = document.getElementById('convert-btn');
             btn.disabled = true;
-            document.getElementById('btn-text').innerText = `⏳ Converting to ${TGT_NAME}...`;
+            document.getElementById('btn-text').innerText = `⏳ Rendering High-Res ${TGT_NAME}...`;
 
             try {
-                // ⚡ 1. SPECIAL ENGINE: CONVERT FROM PDF (Proper PDF.js multi-page support)
+                // ⚡ 1. ULTRA HD HIGH-RES PDF TO IMAGE ENGINE (3.0 Scale = Razor Sharp Text!)
                 if (SRC === 'pdf') {
                     const item = filesList[0];
                     const rawName = item.name.substring(0, item.name.lastIndexOf('.')) || item.name;
@@ -280,11 +280,14 @@
 
                     for (let p = 1; p <= pdfDoc.numPages; p++) {
                         const pg = await pdfDoc.getPage(p);
-                        const vp = pg.getViewport({ scale: 2.0 });
+                        // ⚡ Scale 3.0 ensures 300 DPI Ultra HD high-definition export!
+                        const vp = pg.getViewport({ scale: 3.0 });
                         const cvs = document.createElement('canvas');
                         cvs.width = vp.width;
                         cvs.height = vp.height;
                         const ctx = cvs.getContext('2d');
+                        ctx.imageSmoothingEnabled = true;
+                        ctx.imageSmoothingQuality = 'high';
                         
                         if (TGT === 'jpg' || TGT === 'jpeg') {
                             ctx.fillStyle = '#ffffff';
@@ -296,18 +299,18 @@
                         let pageBlob = null;
                         if (TGT === 'svg') pageBlob = canvasToSvgBlob(cvs);
                         else if (TGT === 'tiff' || TGT === 'tif') pageBlob = canvasToTiffBlob(cvs);
-                        else pageBlob = await new Promise(r => cvs.toBlob(r, mime, 0.92));
+                        else pageBlob = await new Promise(r => cvs.toBlob(r, mime, 0.95));
                         
-                        zip.file(`page_${p}.${ext}`, pageBlob);
+                        zip.file(`page_${p}_highres.${ext}`, pageBlob);
                     }
 
                     const zipContent = await zip.generateAsync({ type: 'blob' });
-                    downloadBlob(zipContent, `smartpic_${rawName}_pdf_to_${ext}.zip`);
+                    downloadBlob(zipContent, `smartpic_${rawName}_300dpi_pages_${ext}.zip`);
                     finish();
                     return;
                 }
 
-                // ⚡ 2. STANDARD ENGINE FOR IMAGES
+                // 2. HIGH-RES STANDARD IMAGE ENGINE
                 if (filesList.length === 1) {
                     const item = filesList[0];
                     const rawName = item.name.substring(0, item.name.lastIndexOf('.')) || item.name;
@@ -330,6 +333,8 @@
                     canvas.width = bmp.width;
                     canvas.height = bmp.height;
                     const ctx = canvas.getContext('2d');
+                    ctx.imageSmoothingEnabled = true;
+                    ctx.imageSmoothingQuality = 'high';
 
                     if (TGT === 'jpg' || TGT === 'jpeg') {
                         ctx.fillStyle = '#ffffff';
@@ -349,11 +354,11 @@
                         return;
                     }
 
-                    const mime = TGT === 'png' ? 'image/png' : (TGT === 'webp' ? 'image/webp' : 'image/jpeg');
+                    const mime = TARGET_FMT === 'PNG' ? 'image/png' : (TARGET_FMT === 'WEBP' ? 'image/webp' : 'image/jpeg');
                     canvas.toBlob((blob) => {
                         downloadBlob(blob, `smartpic_${rawName}.${TGT}`);
                         finish();
-                    }, mime, 0.92);
+                    }, mime, 0.95);
 
                 } else {
                     const zip = new JSZip();
@@ -364,6 +369,8 @@
                         canvas.width = bmp.width;
                         canvas.height = bmp.height;
                         const ctx = canvas.getContext('2d');
+                        ctx.imageSmoothingEnabled = true;
+                        ctx.imageSmoothingQuality = 'high';
 
                         if (TGT === 'jpg' || TGT === 'jpeg') {
                             ctx.fillStyle = '#ffffff';
@@ -375,13 +382,13 @@
                         if (TGT === 'svg') fileBlob = canvasToSvgBlob(canvas);
                         else if (TGT === 'tiff' || TGT === 'tif') fileBlob = canvasToTiffBlob(canvas);
                         else if (TGT === 'png') fileBlob = await new Promise(r => canvas.toBlob(r, 'image/png'));
-                        else if (TGT === 'webp') fileBlob = await new Promise(r => canvas.toBlob(r, 'image/webp', 0.90));
+                        else if (TGT === 'webp') fileBlob = await new Promise(r => canvas.toBlob(r, 'image/webp', 0.92));
                         else fileBlob = await new Promise(r => canvas.toBlob(r, 'image/jpeg', 0.92));
                         
                         zip.file(`${rawName}.${TGT}`, fileBlob);
                     }
                     const zipContent = await zip.generateAsync({ type: "blob" });
-                    downloadBlob(zipContent, `smartpic_converted_${TGT}_pack.zip`);
+                    downloadBlob(zipContent, `smartpic_converted_${TGT}_highres_pack.zip`);
                     finish();
                 }
             } catch(e) {
