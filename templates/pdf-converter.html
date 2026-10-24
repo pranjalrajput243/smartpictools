@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     
-    <!-- ⚡ HIGH-RANKING KEYWORDS FOR 300 DPI PDF CONVERTER -->
-    <title>Convert PDF to High-Res Images Online Free - 300 DPI JPG, PNG, WEBP, SVG, TIFF | SmartPicTools</title>
-    <meta name="description" content="Free online tool to convert PDF to 300 DPI ultra high-resolution JPG, PNG, WEBP, SVG, and TIFF images or Word document. 100% private in-browser tool with zero blur.">
-    <meta name="keywords" content="pdf to high resolution image, convert pdf to 300 dpi jpg, pdf to image ultra hd, pdf to png 300 dpi, pdf to tiff, pdf to svg, high quality pdf converter">
+    <!-- ⚡ HIGH-RANKING KEYWORDS FOR 300 DPI & NATIVE SEARCHABLE SVG -->
+    <title>Convert PDF to High-Res Images & Searchable SVG Online Free | SmartPicTools</title>
+    <meta name="description" content="Free online tool to convert PDF to 300 DPI ultra high-resolution JPG, PNG, WEBP, TIFF, or true searchable SVG with 0% blur (Ctrl+F works). 100% private in-browser tool.">
+    <meta name="keywords" content="pdf to svg searchable, convert pdf to svg text, pdf to high resolution image, convert pdf to 300 dpi jpg, pdf to image ultra hd, pdf to svg vector, pdf to tiff, high quality pdf converter">
     <meta name="robots" content="index, follow, max-image-preview:large">
     <meta name="author" content="SmartPicTools">
     <link rel="canonical" href="https://smartpictools.in/pdf-converter">
@@ -18,8 +18,8 @@
     <!-- OPEN GRAPH -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://smartpictools.in/pdf-converter">
-    <meta property="og:title" content="Convert PDF to 300 DPI High-Res Images Online Free - SmartPicTools">
-    <meta property="og:description" content="Convert PDF pages into ultra high-resolution 300 DPI JPG, PNG, SVG, or TIFF images with zero blur.">
+    <meta property="og:title" content="Convert PDF to 300 DPI High-Res Images & Searchable SVG - SmartPicTools">
+    <meta property="og:description" content="Convert PDF pages into ultra high-resolution 300 DPI JPG, PNG, or true searchable SVG with Ctrl+F support and zero blur.">
 
     <!-- FAVICON -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' stop-color='%236366f1'/><stop offset='50%25' stop-color='%23a855f7'/><stop offset='100%25' stop-color='%23ec4899'/></linearGradient></defs><rect width='100' height='100' rx='28' fill='url(%23g)'/><path d='M52 16 L24 54 L46 54 L42 84 L76 44 L54 44 Z' fill='%23fbbf24'/></svg>">
@@ -57,8 +57,8 @@
     <!-- MAIN WORKSPACE -->
     <main class="max-w-4xl mx-auto w-full px-4 py-8 sm:py-12 flex-1">
         <div class="text-center max-w-2xl mx-auto mb-8 sm:mb-10">
-            <h1 class="text-3xl sm:text-5xl font-black text-white tracking-tight">Convert PDF to High-Res Images</h1>
-            <p class="mt-2.5 text-slate-400 text-xs sm:text-sm">Extract every PDF page into crystal-clear 300 DPI Ultra HD images (JPG, PNG, WEBP, SVG, TIFF) or Word text with zero blur.</p>
+            <h1 class="text-3xl sm:text-5xl font-black text-white tracking-tight">Convert PDF to High-Res Images & SVG</h1>
+            <p class="mt-2.5 text-slate-400 text-xs sm:text-sm">Extract PDF pages into 300 DPI Ultra HD images (JPG, PNG, WEBP, TIFF), Word text, or true vector SVG where text is 100% searchable (<strong class="text-indigo-400">Ctrl+F works</strong>).</p>
         </div>
 
         <div class="bg-slate-900 rounded-3xl p-5 sm:p-10 border border-slate-800 shadow-2xl relative">
@@ -93,23 +93,23 @@
                     </div>
                 </div>
 
-                <!-- ⚡ CONVERT & HIGH-RES DPI OPTIONS -->
+                <!-- ⚡ CONVERT OPTIONS -->
                 <div class="bg-slate-950/80 p-4 sm:p-5 rounded-2xl border border-slate-800 space-y-4">
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
                             <label class="block text-xs font-bold text-slate-400 mb-1">Convert PDF Pages To:</label>
-                            <select id="target-format" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-3 text-sm text-white font-bold focus:outline-none">
-                                <option value="JPG" selected>JPG Images (Standard Photos - ZIP for multi-page)</option>
+                            <select id="target-format" onchange="handleFormatChange(this.value)" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-3 text-sm text-white font-bold focus:outline-none">
+                                <option value="SVG" selected>⚡ Vector SVG (100% Searchable Text & 0% Blur - Ctrl+F)</option>
+                                <option value="JPG">JPG Images (Standard Photos - ZIP for multi-page)</option>
                                 <option value="PNG">PNG Images (High Quality Lossless - ZIP)</option>
                                 <option value="WEBP">WEBP Images (Super Fast Web - ZIP)</option>
-                                <option value="SVG">SVG Vector Images (Scalable Vector - ZIP)</option>
                                 <option value="TIFF">TIFF Images (High-Res Print Quality - ZIP)</option>
                                 <option value="DOC">Word Document (.doc editable text)</option>
                             </select>
                         </div>
 
-                        <div>
-                            <label class="block text-xs font-bold text-slate-400 mb-1">Output Resolution & Clarity:</label>
+                        <div id="dpi-container" class="opacity-50 pointer-events-none">
+                            <label class="block text-xs font-bold text-slate-400 mb-1">Raster Resolution & Clarity:</label>
                             <select id="target-dpi" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-3 text-sm text-white font-bold focus:outline-none">
                                 <option value="3.0" selected>⚡ Ultra HD (300 DPI - Razor Sharp Print Quality)</option>
                                 <option value="2.0">✨ High Definition (150 DPI - Balanced)</option>
@@ -117,16 +117,16 @@
                             </select>
                         </div>
                     </div>
-                    <p class="text-[11px] text-emerald-400 font-semibold">✓ 300 DPI renders all small text, signatures, and detailed graphics with zero pixelation.</p>
+                    <p id="format-tip" class="text-[11px] text-emerald-400 font-semibold">✓ True Vector SVG preserves original text layers. Pressing Ctrl+F in your browser will find and highlight every word!</p>
                 </div>
 
                 <button type="button" id="convert-btn" onclick="executePdfConversion()" class="w-full py-4 px-6 rounded-2xl bg-gradient-to-r from-indigo-600 via-indigo-500 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-extrabold text-sm sm:text-base shadow-lg shadow-indigo-500/25 transition active:scale-[0.99] flex items-center justify-center gap-3">
-                    <span id="btn-text">⚡ Convert to High-Res Image(s)</span>
+                    <span id="btn-text">⚡ Convert to Searchable SVG</span>
                 </button>
             </div>
 
             <div id="status-box" class="hidden mt-5 p-3.5 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 text-center">
-                <p class="text-emerald-400 font-bold text-xs sm:text-sm">🎉 Success! High-resolution images downloaded directly to your device.</p>
+                <p class="text-emerald-400 font-bold text-xs sm:text-sm">🎉 Success! File(s) downloaded directly to your device.</p>
             </div>
         </div>
 
@@ -141,8 +141,8 @@
                 </div>
                 <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800">
                     <span class="w-7 h-7 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center mb-2.5 text-xs">2</span>
-                    <h3 class="font-bold text-white text-sm mb-1">Choose Format & 300 DPI</h3>
-                    <p class="text-slate-400">Select JPG, PNG, WEBP, SVG, or TIFF with 300 DPI Ultra HD clarity.</p>
+                    <h3 class="font-bold text-white text-sm mb-1">Choose SVG or 300 DPI</h3>
+                    <p class="text-slate-400">Select Vector SVG for searchable Ctrl+F text, or JPG/PNG for photo use.</p>
                 </div>
                 <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800">
                     <span class="w-7 h-7 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center mb-2.5 text-xs">3</span>
@@ -157,17 +157,17 @@
             <h2 class="text-xl font-bold text-white mb-4">Frequently Asked Questions</h2>
             <details class="bg-slate-900 p-4 rounded-xl border border-slate-800 text-xs sm:text-sm cursor-pointer">
                 <summary class="font-bold text-white flex justify-between items-center">
-                    What does 300 DPI resolution mean when converting PDF to image?
+                    Does the converted SVG support Ctrl+F searching?
                     <span class="text-indigo-400">▼</span>
                 </summary>
-                <p class="text-slate-400 mt-2 leading-relaxed">300 DPI (Dots Per Inch) is the gold standard for high-definition publishing and printing. When converting PDF text and vector graphics to images, 300 DPI ensures text edges stay crisp and readable even when zoomed in, with zero pixelation.</p>
+                <p class="text-slate-400 mt-2 leading-relaxed">Yes! Our engine exports genuine vector SVG with embedded fonts and selectable text elements. When you open the SVG in Chrome, Edge, or Illustrator, you can press Ctrl+F to search for any text or select words with your mouse.</p>
             </details>
             <details class="bg-slate-900 p-4 rounded-xl border border-slate-800 text-xs sm:text-sm cursor-pointer">
                 <summary class="font-bold text-white flex justify-between items-center">
-                    Are my uploaded PDF documents private and secure?
+                    What does 300 DPI resolution mean for JPG/PNG?
                     <span class="text-indigo-400">▼</span>
                 </summary>
-                <p class="text-slate-400 mt-2 leading-relaxed">100%. We use Mozilla's client-side PDF.js engine. The PDF renders directly inside your device's browser memory and is never uploaded to any remote server.</p>
+                <p class="text-slate-400 mt-2 leading-relaxed">300 DPI (Dots Per Inch) is the gold standard for high-definition publishing and printing. When converting PDF to raster images, 300 DPI ensures text edges stay crisp and readable even when zoomed in.</p>
             </details>
         </section>
     </main>
@@ -176,7 +176,7 @@
         <p>© 2026 SmartPicTools. 100% Free & Private in-browser suite. <a href="/" class="text-indigo-400 hover:underline">Explore All Tools</a></p>
     </footer>
 
-    <!-- ⚡ ULTRA HD 300 DPI JS ENGINE -->
+    <!-- ⚡ REAL VECTOR SVG & 300 DPI JS ENGINE -->
     <script>
         pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
 
@@ -234,6 +234,48 @@
             }
         }
 
+        function handleFormatChange(val) {
+            const dpiContainer = document.getElementById('dpi-container');
+            const formatTip = document.getElementById('format-tip');
+            const btnText = document.getElementById('btn-text');
+
+            if (val === 'SVG') {
+                dpiContainer.className = "opacity-50 pointer-events-none";
+                formatTip.innerText = "✓ True Vector SVG preserves original text layers. Pressing Ctrl+F in your browser will find and highlight every word!";
+                btnText.innerText = "⚡ Convert to Searchable SVG";
+            } else if (val === 'DOC') {
+                dpiContainer.className = "opacity-50 pointer-events-none";
+                formatTip.innerText = "✓ Extracts all text from PDF into an editable Word document (.doc).";
+                btnText.innerText = "⚡ Convert to Word Document";
+            } else {
+                dpiContainer.className = "opacity-100";
+                formatTip.innerText = "✓ 300 DPI renders all small text, signatures, and detailed graphics with zero pixelation.";
+                btnText.innerText = `⚡ Convert to High-Res ${val}`;
+            }
+        }
+
+        // ⚡ NATIVE VECTOR SVG EXPORTER (REAL SEARCHABLE TEXT & 0% BLUR)
+        async function renderPageToTrueSvgBlob(page) {
+            const viewport = page.getViewport({ scale: 1.0 });
+            const opList = await page.getOperatorList();
+            
+            // Mozilla PDF.js Native Vector SVG Graphics Engine
+            const svgGfx = new pdfjsLib.SVGGraphics(page.commonObjs, page.objs);
+            svgGfx.embedFonts = true;
+            
+            const svg = await svgGfx.getSVG(opList, viewport);
+            
+            if (!svg.getAttribute('xmlns')) {
+                svg.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
+            }
+            if (!svg.getAttribute('xmlns:xlink')) {
+                svg.setAttribute('xmlns:xlink', 'http://www.w3.org/1999/xlink');
+            }
+
+            const svgString = '<?xml version="1.0" encoding="UTF-8"?>\n' + new XMLSerializer().serializeToString(svg);
+            return new Blob([svgString], { type: 'image/svg+xml;charset=utf-8' });
+        }
+
         function canvasToTiffBlob(canvas) {
             if (typeof UTIF !== 'undefined') {
                 const ctx = canvas.getContext('2d');
@@ -244,22 +286,16 @@
             return new Promise(r => canvas.toBlob(r, 'image/png'));
         }
 
-        function canvasToSvgBlob(canvas) {
-            const dataUrl = canvas.toDataURL('image/png');
-            const svgContent = `<?xml version="1.0" encoding="UTF-8"?>\n<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="${canvas.width}" height="${canvas.height}" viewBox="0 0 ${canvas.width} ${canvas.height}">\n  <image width="${canvas.width}" height="${canvas.height}" xlink:href="${dataUrl}"/>\n</svg>`;
-            return new Blob([svgContent], { type: 'image/svg+xml;charset=utf-8' });
-        }
-
-        // ⚡ EXECUTES HIGH-RES 300 DPI CONVERSION
+        // ⚡ EXECUTES HIGH-RES OR TRUE VECTOR SVG CONVERSION
         async function executePdfConversion() {
             if (!currentPdfDoc) return;
             const btn = document.getElementById('convert-btn');
             btn.disabled = true;
-            document.getElementById('btn-text').innerText = "⏳ Rendering 300 DPI Images...";
 
             const format = document.getElementById('target-format').value;
-            // ⚡ 3.0 scale = 300 DPI print-ready razor sharpness!
             const renderScale = parseFloat(document.getElementById('target-dpi').value) || 3.0;
+
+            document.getElementById('btn-text').innerText = format === 'SVG' ? "⏳ Exporting True Vector SVG..." : "⏳ Rendering 300 DPI Images...";
 
             try {
                 // 1. PDF TO WORD (.DOC)
@@ -273,11 +309,31 @@
                     }
                     const docBlob = new Blob([fullText], { type: 'application/msword;charset=utf-8' });
                     triggerDownload(docBlob, `smartpic_${pdfName}.doc`);
-                    finish();
+                    finish(format);
                     return;
                 }
 
-                // 2. SINGLE PAGE HIGH-RES PDF CONVERSION
+                // 2. TRUE VECTOR SVG EXPORT (SEARCHABLE TEXT INTACT)
+                if (format === 'SVG') {
+                    if (currentPdfDoc.numPages === 1) {
+                        const page = await currentPdfDoc.getPage(1);
+                        const svgBlob = await renderPageToTrueSvgBlob(page);
+                        triggerDownload(svgBlob, `smartpic_${pdfName}_page1_searchable.svg`);
+                    } else {
+                        const zip = new JSZip();
+                        for (let p = 1; p <= currentPdfDoc.numPages; p++) {
+                            const page = await currentPdfDoc.getPage(p);
+                            const svgBlob = await renderPageToTrueSvgBlob(page);
+                            zip.file(`page_${p}_searchable.svg`, svgBlob);
+                        }
+                        const zipContent = await zip.generateAsync({ type: 'blob' });
+                        triggerDownload(zipContent, `smartpic_${pdfName}_vector_svg_pack.zip`);
+                    }
+                    finish(format);
+                    return;
+                }
+
+                // 3. RASTER 300 DPI CONVERSION (JPG, PNG, WEBP, TIFF)
                 if (currentPdfDoc.numPages === 1) {
                     const page = await currentPdfDoc.getPage(1);
                     const viewport = page.getViewport({ scale: renderScale });
@@ -288,13 +344,9 @@
                     ctx.imageSmoothingEnabled = true;
                     ctx.imageSmoothingQuality = 'high';
 
-                    // ⚡ intent: 'print' triggers maximum vector glyph clarity!
                     await page.render({ canvasContext: ctx, viewport: viewport, intent: 'print' }).promise;
 
-                    if (format === 'SVG') {
-                        const svgBlob = canvasToSvgBlob(canvas);
-                        triggerDownload(svgBlob, `smartpic_${pdfName}_page1.svg`);
-                    } else if (format === 'TIFF') {
+                    if (format === 'TIFF') {
                         const tiffBlob = canvasToTiffBlob(canvas);
                         triggerDownload(tiffBlob, `smartpic_${pdfName}_page1.tiff`);
                     } else {
@@ -302,13 +354,13 @@
                         const mime = format === 'PNG' ? 'image/png' : (format === 'WEBP' ? 'image/webp' : 'image/jpeg');
                         canvas.toBlob((blob) => {
                             triggerDownload(blob, `smartpic_${pdfName}_page1_300dpi.${ext}`);
-                        }, mime, 0.96); // 96% near-lossless clarity
+                        }, mime, 0.96);
                     }
-                    finish();
+                    finish(format);
                     return;
                 }
 
-                // 3. MULTI-PAGE 300 DPI ZIP ARCHIVE
+                // MULTI-PAGE RASTER 300 DPI ZIP
                 const zip = new JSZip();
                 const ext = format.toLowerCase();
 
@@ -325,9 +377,7 @@
                     await page.render({ canvasContext: ctx, viewport: viewport, intent: 'print' }).promise;
 
                     let pageBlob = null;
-                    if (format === 'SVG') {
-                        pageBlob = canvasToSvgBlob(canvas);
-                    } else if (format === 'TIFF') {
+                    if (format === 'TIFF') {
                         pageBlob = canvasToTiffBlob(canvas);
                     } else {
                         const mime = format === 'PNG' ? 'image/png' : (format === 'WEBP' ? 'image/webp' : 'image/jpeg');
@@ -338,12 +388,12 @@
 
                 const zipContent = await zip.generateAsync({ type: 'blob' });
                 triggerDownload(zipContent, `smartpic_${pdfName}_300dpi_pages_${ext}.zip`);
-                finish();
+                finish(format);
 
             } catch(e) {
-                alert('High-Res conversion error: ' + e.message);
+                alert('Conversion error: ' + e.message);
                 btn.disabled = false;
-                document.getElementById('btn-text').innerText = "⚡ Convert to High-Res Image(s)";
+                handleFormatChange(format);
             }
         }
 
@@ -354,9 +404,9 @@
             a.click();
         }
 
-        function finish() {
+        function finish(format) {
             document.getElementById('convert-btn').disabled = false;
-            document.getElementById('btn-text').innerText = "⚡ Convert to High-Res Image(s)";
+            handleFormatChange(format);
             document.getElementById('status-box').classList.remove('hidden');
         }
     </script>
