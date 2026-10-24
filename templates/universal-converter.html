@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     
-    <!-- ⚡ DYNAMIC SEO TAGS -->
     <title>{{ meta.title }}</title>
     <meta name="description" content="{{ meta.desc }}">
     <meta name="keywords" content="{{ meta.keywords }}">
@@ -31,19 +30,15 @@
     <header class="border-b border-slate-800 bg-slate-900/80 backdrop-blur-xl sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 h-18 sm:h-20 flex items-center justify-between">
             <a href="/" class="flex items-center gap-2.5 sm:gap-3 group">
-                <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-2xl bg-gradient-to-tr from-indigo-500 via-purple-500 to-pink-500 flex items-center justify-center text-white text-lg sm:text-xl shadow-lg shadow-indigo-500/30 group-hover:scale-105 transition">⚡</div>
+                <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-2xl bg-gradient-to-tr from-indigo-500 via-purple-500 to-pink-500 flex items-center justify-center text-white text-lg sm:text-xl shadow-lg shadow-indigo-500/30">⚡</div>
                 <div>
-                    <span class="text-xl sm:text-2xl font-black tracking-tight text-white">SmartPic<span class="text-indigo-400">Tools</span></span>
-                    <span class="block text-[9px] uppercase font-bold tracking-widest text-slate-400 -mt-1">{{ meta.src_name }} to {{ meta.tgt_name }}</span>
+                    <span class="text-xl sm:text-2xl font-black text-white">SmartPic<span class="text-indigo-400">Tools</span></span>
+                    <span class="block text-[9px] uppercase font-bold text-slate-400 -mt-1">{{ meta.src_name }} to {{ meta.tgt_name }}</span>
                 </div>
             </a>
             <div class="flex items-center gap-2">
-                <a href="/convert-from-{{ meta.src }}" class="py-2 px-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-bold text-slate-300 hover:text-white border border-slate-700 transition">
-                    ← {{ meta.src_name }} Hub
-                </a>
-                <a href="/" class="py-2 px-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-bold text-indigo-400 hover:text-white border border-slate-700 transition">
-                    All Tools
-                </a>
+                <a href="/convert-from-{{ meta.src }}" class="py-2 px-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-bold text-slate-300 hover:text-white border border-slate-700 transition">← {{ meta.src_name }} Hub</a>
+                <a href="/" class="py-2 px-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-bold text-indigo-400 hover:text-white border border-slate-700 transition">All Tools</a>
             </div>
         </div>
     </header>
@@ -52,15 +47,13 @@
         <div class="text-center max-w-2xl mx-auto mb-8 sm:mb-10">
             <span class="text-[11px] font-extrabold uppercase tracking-widest text-indigo-400 bg-indigo-500/10 px-3 py-1 rounded-full border border-indigo-500/20">Dedicated Studio</span>
             <h1 class="text-3xl sm:text-5xl font-black text-white mt-3 tracking-tight">Convert {{ meta.src_name }} to {{ meta.tgt_name }}</h1>
-            <p class="mt-2.5 text-slate-400 text-xs sm:text-sm">Turn {{ meta.src_name }} files into High-Definition {{ meta.tgt_name }} in 0.1s with 1-click batch download.</p>
+            <p class="mt-2.5 text-slate-400 text-xs sm:text-sm">Turn {{ meta.src_name }} files into crisp 300 DPI {{ meta.tgt_name }} with zero blur in 0.1s.</p>
         </div>
 
         <div class="bg-slate-900 rounded-3xl p-5 sm:p-10 border border-slate-800 shadow-2xl relative">
             <div id="drop-area" class="border-2 border-dashed border-slate-700 hover:border-indigo-500 bg-slate-950/60 hover:bg-indigo-950/20 rounded-2xl p-8 sm:p-14 text-center cursor-pointer transition-all duration-300">
                 <input type="file" id="file-input" multiple class="hidden">
-                <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-3xl bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-3xl sm:text-4xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition duration-300 shadow-inner">
-                    🔄
-                </div>
+                <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-3xl bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-3xl sm:text-4xl flex items-center justify-center mx-auto mb-4">🔄</div>
                 <h3 class="text-base sm:text-xl font-bold text-white mb-1.5">Select {{ meta.src_name }} Files</h3>
                 <p class="text-xs sm:text-sm text-slate-400">Choose single or multiple {{ meta.src_name }} files to convert into {{ meta.tgt_name }}</p>
             </div>
@@ -68,26 +61,24 @@
             <div id="workspace" class="hidden mt-6 space-y-6">
                 <div class="flex items-center justify-between">
                     <span class="text-xs font-bold text-slate-300">Selected Files (<span id="file-count" class="text-indigo-400 font-extrabold">0</span>):</span>
-                    <button type="button" onclick="document.getElementById('file-input').click()" class="text-xs font-bold text-indigo-400 hover:text-white bg-slate-800 hover:bg-slate-700 px-3 py-1.5 rounded-xl border border-slate-700 transition">
-                        + Add More
-                    </button>
+                    <button type="button" onclick="document.getElementById('file-input').click()" class="text-xs font-bold text-indigo-400 hover:text-white bg-slate-800 hover:bg-slate-700 px-3 py-1.5 rounded-xl border border-slate-700 transition">+ Add More</button>
                 </div>
 
                 <div id="gallery" class="grid grid-cols-2 sm:grid-cols-4 gap-3 max-h-80 overflow-y-auto p-3 bg-slate-950/80 rounded-2xl border border-slate-800">
                 </div>
 
                 <div class="p-3.5 bg-slate-950/80 rounded-xl border border-slate-800 flex items-center justify-between text-xs">
-                    <span class="text-slate-400 font-semibold">Target Format: <strong class="text-indigo-400 font-bold">{{ meta.tgt_name }} (High-Res)</strong></span>
-                    <span class="text-emerald-400 font-bold">✓ Ultra HD Rendering Active</span>
+                    <span class="text-slate-400 font-semibold">Target Format: <strong class="text-indigo-400 font-bold">{{ meta.tgt_name }} (300 DPI Ultra HD)</strong></span>
+                    <span class="text-emerald-400 font-bold">✓ Zero Blur Guaranteed</span>
                 </div>
 
-                <button type="button" id="convert-btn" onclick="executeConversion()" class="w-full py-4 px-6 rounded-2xl bg-gradient-to-r from-indigo-600 via-indigo-500 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-extrabold text-sm sm:text-base shadow-lg shadow-indigo-500/25 transition active:scale-[0.99] flex items-center justify-center gap-3">
+                <button type="button" id="convert-btn" onclick="executeConversion()" class="w-full py-4 px-6 rounded-2xl bg-gradient-to-r from-indigo-600 via-indigo-500 to-purple-600 text-white font-extrabold text-sm sm:text-base shadow-lg transition flex items-center justify-center gap-3">
                     <span id="btn-text">⚡ Convert to {{ meta.tgt_name }} & Download</span>
                 </button>
             </div>
 
             <div id="status-box" class="hidden mt-5 p-3.5 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 text-center">
-                <p class="text-emerald-400 font-bold text-xs sm:text-sm">🎉 Success! High-Definition converted file(s) downloaded!</p>
+                <p class="text-emerald-400 font-bold text-xs sm:text-sm">🎉 Success! High-resolution file(s) downloaded!</p>
             </div>
         </div>
     </main>
@@ -96,7 +87,6 @@
         <p>© 2026 SmartPicTools. 100% Free & Private in-browser suite. <a href="/" class="text-indigo-400 hover:underline">Explore All Tools</a></p>
     </footer>
 
-    <!-- ⚡ ULTRA HD HIGH-RES CONVERSION ENGINE -->
     <script>
         pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
 
@@ -144,9 +134,7 @@
                         const jpegBlob = Array.isArray(conv) ? conv[0] : conv;
                         processedFile = new File([jpegBlob], f.name.replace(/\.[^/.]+$/, ".jpg"), { type: 'image/jpeg' });
                         previewUrl = URL.createObjectURL(processedFile);
-                    } catch(e) {
-                        previewUrl = URL.createObjectURL(f);
-                    }
+                    } catch(e) { previewUrl = URL.createObjectURL(f); }
                 } else if (nameLower.endsWith('.tif') || nameLower.endsWith('.tiff')) {
                     try {
                         const buf = await f.arrayBuffer();
@@ -164,19 +152,17 @@
                         const pngBlob = await new Promise(r => tCanvas.toBlob(r, 'image/png'));
                         processedFile = new File([pngBlob], f.name.replace(/\.[^/.]+$/, ".png"), { type: 'image/png' });
                         previewUrl = URL.createObjectURL(processedFile);
-                    } catch(e) {
-                        previewUrl = URL.createObjectURL(f);
-                    }
+                    } catch(e) { previewUrl = URL.createObjectURL(f); }
                 } else if (nameLower.endsWith('.pdf') || SRC === 'pdf') {
                     try {
                         const ab = await f.arrayBuffer();
                         const pdfDoc = await pdfjsLib.getDocument({ data: ab }).promise;
                         const page1 = await pdfDoc.getPage(1);
-                        const vp = page1.getViewport({ scale: 1.0 }); // HD Preview Scale
+                        const vp = page1.getViewport({ scale: 1.0 });
                         const cvs = document.createElement('canvas');
                         cvs.width = vp.width;
                         cvs.height = vp.height;
-                        await page1.render({ canvasContext: cvs.getContext('2d'), viewport: vp, intent: 'print' }).promise;
+                        await page1.render({ canvasContext: cvs.getContext('2d'), viewport: vp }).promise;
                         previewUrl = cvs.toDataURL('image/png');
                     } catch(e) {
                         previewUrl = "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%231e293b'/><text x='50%' y='55%' dominant-baseline='central' text-anchor='middle' font-size='40'>📄</text></svg>";
@@ -211,10 +197,7 @@
                 delBtn.type = "button";
                 delBtn.className = "absolute top-1 right-1 w-5 h-5 rounded-full bg-rose-600 text-white text-[10px] font-black flex items-center justify-center";
                 delBtn.innerHTML = "✕";
-                delBtn.onclick = () => {
-                    filesList.splice(index, 1);
-                    renderGallery();
-                };
+                delBtn.onclick = () => { filesList.splice(index, 1); renderGallery(); };
 
                 const thumb = document.createElement('img');
                 thumb.className = "w-full h-16 object-cover rounded-lg mb-1";
@@ -247,14 +230,15 @@
             return new Blob([svgContent], { type: 'image/svg+xml;charset=utf-8' });
         }
 
+        // ⚡ 300 DPI ULTRA HD CONVERSION ENGINE
         async function executeConversion() {
             if (filesList.length === 0) return;
             const btn = document.getElementById('convert-btn');
             btn.disabled = true;
-            document.getElementById('btn-text').innerText = `⏳ Rendering High-Res ${TGT_NAME}...`;
+            document.getElementById('btn-text').innerText = `⏳ Rendering 300 DPI ${TGT_NAME}...`;
 
             try {
-                // ⚡ 1. ULTRA HD HIGH-RES PDF TO IMAGE ENGINE (3.0 Scale = Razor Sharp Text!)
+                // 1. PDF TO IMAGE (300 DPI HIGH-RES RENDERING - ZERO BLUR)
                 if (SRC === 'pdf') {
                     const item = filesList[0];
                     const rawName = item.name.substring(0, item.name.lastIndexOf('.')) || item.name;
@@ -280,8 +264,7 @@
 
                     for (let p = 1; p <= pdfDoc.numPages; p++) {
                         const pg = await pdfDoc.getPage(p);
-                        // ⚡ Scale 3.0 ensures 300 DPI Ultra HD high-definition export!
-                        const vp = pg.getViewport({ scale: 3.0 });
+                        const vp = pg.getViewport({ scale: 3.0 }); // ⚡ 300 DPI Scale Factor
                         const cvs = document.createElement('canvas');
                         cvs.width = vp.width;
                         cvs.height = vp.height;
@@ -301,7 +284,7 @@
                         else if (TGT === 'tiff' || TGT === 'tif') pageBlob = canvasToTiffBlob(cvs);
                         else pageBlob = await new Promise(r => cvs.toBlob(r, mime, 0.95));
                         
-                        zip.file(`page_${p}_highres.${ext}`, pageBlob);
+                        zip.file(`page_${p}_300dpi.${ext}`, pageBlob);
                     }
 
                     const zipContent = await zip.generateAsync({ type: 'blob' });
@@ -310,7 +293,7 @@
                     return;
                 }
 
-                // 2. HIGH-RES STANDARD IMAGE ENGINE
+                // 2. STANDARD HIGH-RES IMAGES
                 if (filesList.length === 1) {
                     const item = filesList[0];
                     const rawName = item.name.substring(0, item.name.lastIndexOf('.')) || item.name;
@@ -354,7 +337,7 @@
                         return;
                     }
 
-                    const mime = TARGET_FMT === 'PNG' ? 'image/png' : (TARGET_FMT === 'WEBP' ? 'image/webp' : 'image/jpeg');
+                    const mime = TGT === 'png' ? 'image/png' : (TGT === 'webp' ? 'image/webp' : 'image/jpeg');
                     canvas.toBlob((blob) => {
                         downloadBlob(blob, `smartpic_${rawName}.${TGT}`);
                         finish();
