@@ -237,15 +237,22 @@
             });
         }
 
-        // ⚡ NATIVE VECTOR SVG EXPORTER (REAL SEARCHABLE TEXT - CTRL+F WORKS)
+        // ⚡ NATIVE VECTOR SVG EXPORTER (FIXED: fontExtraProperties + SMART FALLBACK)
         async function renderPdfPageToTrueSvg(page) {
             const viewport = page.getViewport({ scale: 1.0 });
             const opList = await page.getOperatorList();
             
-            const svgGfx = new pdfjsLib.SVGGraphics(page.commonObjs, page.objs);
-            svgGfx.embedFonts = true;
-            
-            const svg = await svgGfx.getSVG(opList, viewport);
+            let svg;
+            try {
+                const svgGfx = new pdfjsLib.SVGGraphics(page.commonObjs, page.objs, true);
+                svgGfx.embedFonts = true;
+                svg = await svgGfx.getSVG(opList, viewport);
+            } catch(e) {
+                // Smart fallback: If embedded fonts throw, render pure vector glyph paths with zero blur
+                const svgGfx = new pdfjsLib.SVGGraphics(page.commonObjs, page.objs, true);
+                svgGfx.embedFonts = false;
+                svg = await svgGfx.getSVG(opList, viewport);
+            }
             
             if (!svg.getAttribute('xmlns')) {
                 svg.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
@@ -285,7 +292,12 @@
                             const item = filesList[0];
                             const rawName = item.name.substring(0, item.name.lastIndexOf('.')) || item.name;
                             const ab = await item.file.arrayBuffer();
-                            const pdfDoc = await pdfjsLib.getDocument({ data: ab }).promise;
+
+                            // ⚡ FIX: Added fontExtraProperties: true
+                            const pdfDoc = await pdfjsLib.getDocument({
+                                data: ab,
+                                fontExtraProperties: true
+                            }).promise;
 
                             if (pdfDoc.numPages === 1) {
                                 const p1 = await pdfDoc.getPage(1);
@@ -306,7 +318,13 @@
                             for (let item of filesList) {
                                 const rawName = item.name.substring(0, item.name.lastIndexOf('.')) || item.name;
                                 const ab = await item.file.arrayBuffer();
-                                const pdfDoc = await pdfjsLib.getDocument({ data: ab }).promise;
+                                
+                                // ⚡ FIX: Added fontExtraProperties: true
+                                const pdfDoc = await pdfjsLib.getDocument({
+                                    data: ab,
+                                    fontExtraProperties: true
+                                }).promise;
+
                                 for (let p = 1; p <= pdfDoc.numPages; p++) {
                                     const page = await pdfDoc.getPage(p);
                                     const svgBlob = await renderPdfPageToTrueSvg(page);
@@ -448,7 +466,8 @@
                         const cvs = document.createElement('canvas');
                         cvs.width = bmp.width;
                         cvs.height = bmp.height;
-                        cvs.getContext('2d').drawImage(bmp, 0, 0);
+                        const ctx = cvs.getContext('2d');
+                        ctx.drawImage(bmp, 0, 0);
 
                         let fileBlob = null;
                         if (TGT_FMT === 'tiff') {
