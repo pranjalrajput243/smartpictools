@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     
     <title>Bulk PDF Label Cropper Online Free - Visual Drag & Crop | SmartPicTools</title>
-    <meta name="description" content="Visually crop 500+ bulk e-commerce shipping labels. Drag crop area on screen, preserves 100% searchable text (Ctrl+F) and sharp barcodes for Amazon, Flipkart & Meesho.">
+    <meta name="description" content="Visually crop 500+ bulk e-commerce shipping labels with live zoom and drag. Preserves 100% searchable text (Ctrl+F) and sharp barcodes for Amazon, Flipkart & Meesho.">
     <meta name="keywords" content="bulk pdf cropper, visual pdf cropper, crop shipping labels pdf, amazon label cropper 4x6, flipkart label cropper, crop pdf keep text searchable, e-commerce label trimmer">
     <meta name="robots" content="index, follow, max-image-preview:large">
     <meta name="author" content="SmartPicTools">
@@ -18,7 +18,7 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://smartpictools.in/crop-pdf">
     <meta property="og:title" content="Bulk PDF Label Cropper Online Free - SmartPicTools">
-    <meta property="og:description" content="Drag to crop margins of 500+ labels visually while keeping selectable Ctrl+F text 100% intact.">
+    <meta property="og:description" content="Drag to crop margins of 500+ labels visually with zoom controls while keeping selectable Ctrl+F text 100% intact.">
 
     <!-- FAVICON -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' stop-color='%236366f1'/><stop offset='50%25' stop-color='%23a855f7'/><stop offset='100%25' stop-color='%23ec4899'/></linearGradient></defs><rect width='100' height='100' rx='28' fill='url(%23g)'/><path d='M52 16 L24 54 L46 54 L42 84 L76 44 L54 44 Z' fill='%23fbbf24'/></svg>">
@@ -26,18 +26,19 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
-    <!-- ⚡ CROPPER.JS FOR INTUITIVE VISUAL DRAG -->
+    <!-- ⚡ CROPPER.JS FOR INTUITIVE VISUAL DRAG & ZOOM -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css"/>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
 
     <!-- ⚡ RELIABLE PDF.JS (PREVIEW ENGINE) -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 
-    <!-- ⚡ RELIABLE CLOUDFLARE CDN FOR PDF-LIB (WITH UNPKG DUAL AUTO-FALLBACK) -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.9/pdf-lib.min.js"></script>
+    <!-- ⚡ VERIFIED WORKING PDF-LIB (v1.17.1 ON CDNs) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
     <script>
+        // Triple-redundant auto-fallback if cdnjs fails
         if (typeof PDFLib === 'undefined' && typeof window.PDFLib === 'undefined') {
-            document.write('<script src="https://unpkg.com/pdf-lib@1.17.9/dist/pdf-lib.min.js"><\/script>');
+            document.write('<script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"><\/script>');
         }
     </script>
 
@@ -133,15 +134,27 @@
                 <!-- ⚡ INTERACTIVE VISUAL CROPPER WORKSPACE -->
                 <div class="space-y-3">
                     <div class="flex items-center justify-between flex-wrap gap-2">
+                        <!-- Left: Page Navigator -->
                         <div class="flex items-center gap-2">
                             <span class="text-xs font-bold text-slate-300">Previewing Page:</span>
                             <span class="text-xs font-black text-indigo-400 bg-indigo-500/10 px-2.5 py-0.5 rounded-lg border border-indigo-500/20">
                                 <span id="current-page-num">1</span> / <span id="max-page-num">1</span>
                             </span>
+                            <button type="button" onclick="changePreviewPage(-1)" class="py-1 px-2.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs font-bold text-white transition">← Prev</button>
+                            <button type="button" onclick="changePreviewPage(1)" class="py-1 px-2.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs font-bold text-white transition">Next →</button>
                         </div>
-                        <div class="flex items-center gap-2">
-                            <button type="button" onclick="changePreviewPage(-1)" class="py-1 px-3 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs font-bold text-white transition">← Prev Page</button>
-                            <button type="button" onclick="changePreviewPage(1)" class="py-1 px-3 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs font-bold text-white transition">Next Page →</button>
+
+                        <!-- Right: ⚡ ZOOM CONTROLS TOOLBAR -->
+                        <div class="flex items-center gap-1.5 bg-slate-950/80 p-1.5 rounded-xl border border-slate-800">
+                            <button type="button" onclick="cropZoom(0.15)" title="Zoom In" class="py-1 px-2.5 rounded-lg bg-slate-900 hover:bg-indigo-600 text-xs font-bold text-white border border-slate-700 transition active:scale-95 flex items-center gap-1">
+                                <span>🔍+ Zoom In</span>
+                            </button>
+                            <button type="button" onclick="cropZoom(-0.15)" title="Zoom Out" class="py-1 px-2.5 rounded-lg bg-slate-900 hover:bg-indigo-600 text-xs font-bold text-white border border-slate-700 transition active:scale-95 flex items-center gap-1">
+                                <span>🔍- Zoom Out</span>
+                            </button>
+                            <button type="button" onclick="cropResetZoom()" title="Reset Zoom" class="py-1 px-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs font-bold text-slate-300 hover:text-white border border-slate-700 transition">
+                                ↺ Reset
+                            </button>
                         </div>
                     </div>
 
@@ -212,8 +225,8 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs sm:text-sm">
                 <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800">
                     <span class="w-7 h-7 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center mb-2.5 text-xs">1</span>
-                    <h3 class="font-bold text-white text-sm mb-1">Visual Drag Selection</h3>
-                    <p class="text-slate-400">Simply drag the crop box directly over the label with your mouse or touch.</p>
+                    <h3 class="font-bold text-white text-sm mb-1">Visual Drag & Zoom</h3>
+                    <p class="text-slate-400">Zoom in on barcode edges and drag the crop box directly over the label with your mouse.</p>
                 </div>
                 <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800">
                     <span class="w-7 h-7 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center mb-2.5 text-xs">2</span>
@@ -243,7 +256,6 @@
         let totalPages = 0;
         let currentPage = 1;
         let cropper = null;
-        let currentRenderViewport = null;
 
         const dropArea = document.getElementById('drop-area');
         const fileInput = document.getElementById('file-input');
@@ -300,10 +312,10 @@
             const page = await pdfjsDoc.getPage(pageNum);
             document.getElementById('current-page-num').innerText = pageNum;
 
-            // Render high-res snapshot for clean visual dragging
+            // Render crisp snapshot for visual dragging
             const unscaledViewport = page.getViewport({ scale: 1.0 });
             const renderScale = Math.min(1800 / unscaledViewport.height, 1400 / unscaledViewport.width, 2.0);
-            currentRenderViewport = page.getViewport({ scale: renderScale });
+            const currentRenderViewport = page.getViewport({ scale: renderScale });
 
             const canvas = document.createElement('canvas');
             canvas.width = currentRenderViewport.width;
@@ -320,11 +332,24 @@
                     background: false,
                     responsive: true,
                     autoCropArea: 0.92,
-                    zoomable: false,
+                    zoomable: true,       // ⚡ ZOOM ACTIVATED
+                    zoomOnWheel: false,    // Prevents accidental scroll-zoom
                     toggleDragModeOnDblclick: false
                 });
             };
             img.src = canvas.toDataURL('image/jpeg', 0.95);
+        }
+
+        // ⚡ ZOOM CONTROLS
+        function cropZoom(delta) {
+            if (cropper) cropper.zoom(delta);
+        }
+
+        function cropResetZoom() {
+            if (cropper) {
+                cropper.reset();
+                cropper.crop();
+            }
         }
 
         async function changePreviewPage(offset) {
@@ -372,7 +397,6 @@
             validateRangeInput();
         }
 
-        // BULLETPROOF RANGE VALIDATION (e.g. 1-10, 15, 20-30)
         function parseRangeString(str, maxPages) {
             if (!str.trim()) return { valid: false, list: [], msg: 'Please enter at least one page number.' };
 
@@ -441,22 +465,51 @@
             }
         }
 
-        // ⚡ NATIVE VECTOR PDF CROP (PDF-LIB ENGINE) USING USER'S VISUAL SELECTION
+        // ⚡ MULTI-CDN ASYNC LOADER GUARANTEE
+        async function getPDFLibInstance() {
+            if (window.PDFLib) return window.PDFLib;
+            if (typeof PDFLib !== 'undefined') return PDFLib;
+
+            const fallbackUrls = [
+                'https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js',
+                'https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js',
+                'https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js'
+            ];
+
+            for (let url of fallbackUrls) {
+                try {
+                    await new Promise((resolve, reject) => {
+                        const s = document.createElement('script');
+                        s.src = url;
+                        s.onload = resolve;
+                        s.onerror = reject;
+                        document.head.appendChild(s);
+                    });
+                    if (window.PDFLib) return window.PDFLib;
+                } catch(e) {}
+            }
+            return window.PDFLib || null;
+        }
+
+        // ⚡ NATIVE VECTOR PDF CROP USING USER'S VISUAL SELECTION
         async function executeNativePdfCrop() {
             if (!originalPdfBytes || !cropper) return;
             if (!validateRangeInput()) return;
 
-            // Safe PDFLib Object Access
-            const Lib = window.PDFLib || (typeof PDFLib !== 'undefined' ? PDFLib : null);
+            const btn = document.getElementById('crop-download-btn');
+            btn.disabled = true;
+            document.getElementById('btn-text').innerText = "⏳ Loading PDF Engine...";
+
+            // Guaranteed PDFLib Instance Fetch
+            const Lib = await getPDFLibInstance();
             if (!Lib) {
-                alert('PDF engine is still loading. Please wait 3 seconds and click again.');
+                alert('Could not connect to PDF engine CDN. Please check your internet connection.');
+                btn.disabled = false;
+                document.getElementById('btn-text').innerText = "✂️ Crop & Download PDF (Searchable Text Intact)";
                 return;
             }
 
-            const btn = document.getElementById('crop-download-btn');
-            btn.disabled = true;
             document.getElementById('btn-text').innerText = "⏳ Processing Native PDF Bounds...";
-
             const progressContainer = document.getElementById('progress-container');
             const progressBar = document.getElementById('progress-bar-fill');
             const progressStatus = document.getElementById('progress-status-text');
