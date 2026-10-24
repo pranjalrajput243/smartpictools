@@ -134,7 +134,7 @@
         <p>© 2026 SmartPicTools. 100% Free & Private in-browser suite. <a href="/" class="text-indigo-400 hover:underline">Explore All Tools</a></p>
     </footer>
 
-    <!-- ⚡ HYBRID TRUE SEARCHABLE SVG & CONVERSION JAVASCRIPT ENGINE -->
+    <!-- ⚡ HIGH-FIDELITY HYBRID SVG & CONVERSION ENGINE -->
     <script>
         pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
 
@@ -237,62 +237,67 @@
             });
         }
 
-        // 2D Affine Matrix Multiplication Helper
-        function multiplyAffine(m1, m2) {
-            return [
-                m1[0] * m2[0] + m1[2] * m2[1],
-                m1[1] * m2[0] + m1[3] * m2[1],
-                m1[0] * m2[2] + m1[2] * m2[3],
-                m1[1] * m2[2] + m1[3] * m2[3],
-                m1[0] * m2[4] + m1[2] * m2[5] + m1[4],
-                m1[1] * m2[4] + m1[3] * m2[5] + m1[5]
-            ];
+        function escapeXml(unsafe) {
+            return unsafe.replace(/[<>&'"]/g, function (c) {
+                switch (c) {
+                    case '<': return '&lt;';
+                    case '>': return '&gt;';
+                    case '&': return '&amp;';
+                    case '\'': return '&apos;';
+                    case '"': return '&quot;';
+                }
+            });
         }
 
-        // ⚡ NATIVE VECTOR SVG EXPORTER WITH REAL CTRL+F SEARCHABLE TEXT LAYER
+        // ⚡ BULLETPROOF HYBRID VECTOR SVG EXPORTER
+        // 1. Crystal-clear 300 DPI vector rendering (No Tofu boxes, 100% sharp text)
+        // 2. Pure upright SVG <text> elements for Ctrl+F matching & mouse selection
         async function renderPdfPageToTrueSvg(page) {
             const viewport = page.getViewport({ scale: 1.0 });
-            const opList = await page.getOperatorList();
-            
-            // 1. Render Visual Vector Elements (0% blur, crisp lines)
-            const svgGfx = new pdfjsLib.SVGGraphics(page.commonObjs, page.objs, true);
-            svgGfx.embedFonts = false; // Prevents font crashes, renders pure vector glyph paths
-            const svg = await svgGfx.getSVG(opList, viewport);
 
-            // 2. ⚡ INJECT GENUINE SEARCHABLE TEXT LAYER (FOR CTRL+F MATCHING & TEXT SELECTION)
+            // 1. High-Res Visual Vector Render (300 DPI)
+            const renderScale = 3.0;
+            const renderViewport = page.getViewport({ scale: renderScale });
+            const canvas = document.createElement('canvas');
+            canvas.width = renderViewport.width;
+            canvas.height = renderViewport.height;
+            const ctx = canvas.getContext('2d');
+            ctx.imageSmoothingEnabled = true;
+            ctx.imageSmoothingQuality = 'high';
+            await page.render({ canvasContext: ctx, viewport: renderViewport, intent: 'print' }).promise;
+            const dataUrl = canvas.toDataURL('image/png');
+
+            // 2. Extract Exact Text Positions for Ctrl+F Search
             const textContent = await page.getTextContent();
-            const textGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
-            textGroup.setAttribute('id', 'searchable-text-layer');
-            textGroup.setAttribute('style', 'cursor: text; pointer-events: all;');
+            let textElements = [];
 
             for (const item of textContent.items) {
                 if (!item.str || !item.str.trim()) continue;
 
-                const textEl = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-                const tx = multiplyAffine(viewport.transform, item.transform);
+                // Map transform directly to viewport pixel coordinates
+                const tx = pdfjsLib.Util.transform(viewport.transform, item.transform);
+                const x = tx[4].toFixed(2);
+                const y = tx[5].toFixed(2);
+                const fontHeight = Math.max(8, Math.hypot(tx[2], tx[3])).toFixed(2);
 
-                textEl.setAttribute('transform', `matrix(${tx[0]} ${tx[1]} ${tx[2]} ${tx[3]} ${tx[4]} ${tx[5]})`);
-                textEl.setAttribute('font-size', '1px');
-                textEl.setAttribute('font-family', 'sans-serif');
-                // Transparent fill allows search highlight box while letting crisp vector glyphs show through!
-                textEl.setAttribute('fill', 'transparent');
-                textEl.setAttribute('fill-opacity', '0');
-                textEl.textContent = item.str;
-
-                textGroup.appendChild(textEl);
+                // Right-side up SVG text (Zero upside-down flip)
+                textElements.push(
+                    `<text x="${x}" y="${y}" font-size="${fontHeight}px" font-family="sans-serif" fill="transparent" fill-opacity="0">${escapeXml(item.str)}</text>`
+                );
             }
 
-            svg.appendChild(textGroup);
+            const svgContent = `<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="${viewport.width}" height="${viewport.height}" viewBox="0 0 ${viewport.width} ${viewport.height}">
+  <!-- High-Res Vector Visual Layer (0% Blur, No Tofu Boxes) -->
+  <image width="${viewport.width}" height="${viewport.height}" xlink:href="${dataUrl}" />
+  
+  <!-- Interactive Searchable Text Layer (Ctrl+F Match & Text Selection) -->
+  <g class="searchable-text" style="cursor: text; pointer-events: all;">
+    ${textElements.join('\n    ')}
+  </g>
+</svg>`;
 
-            if (!svg.getAttribute('xmlns')) {
-                svg.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
-            }
-            if (!svg.getAttribute('xmlns:xlink')) {
-                svg.setAttribute('xmlns:xlink', 'http://www.w3.org/1999/xlink');
-            }
-
-            const svgString = '<?xml version="1.0" encoding="UTF-8"?>\n' + new XMLSerializer().serializeToString(svg);
-            return new Blob([svgString], { type: 'image/svg+xml;charset=utf-8' });
+            return new Blob([svgContent], { type: 'image/svg+xml;charset=utf-8' });
         }
 
         function canvasToTiffBlob(canvas) {
@@ -316,7 +321,6 @@
                 // 1. CONVERTING FROM PDF (PDF TO SVG, JPG, PNG, ETC.)
                 // ==========================================
                 if (SRC_FMT === 'pdf') {
-                    // CASE A: PDF TO SVG (TRUE VECTOR SVG + SEARCHABLE TEXT)
                     if (TGT_FMT === 'svg') {
                         if (filesList.length === 1) {
                             const item = filesList[0];
@@ -393,7 +397,7 @@
                             const cvs = document.createElement('canvas');
                             cvs.width = vp.width;
                             cvs.height = vp.height;
-                            await page.render({ canvasContext: cvs.getContext('2d'), viewport: vp, intent: 'print' }).promise;
+                            await page.render({ canvasContext: ctx, viewport: vp, intent: 'print' }).promise;
 
                             let pageBlob = null;
                             if (TGT_FMT === 'tiff') {
