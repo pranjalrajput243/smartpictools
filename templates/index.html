@@ -3,32 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SmartPicTools - 100% Private In-Browser Image, PDF & Utility Suite</title>
-    <meta name="description" content="Free 100% private in-browser image compressor, passport photo maker, PDF tools, cropper, watermarker, and format converters. No server uploads.">
-    <meta name="keywords" content="smartpictools, image compressor to 20kb, passport photo maker online, convert jpg to pdf, crop image aspect ratio, add watermark online, image converter, free online photo tools">
+    <title>SmartPicTools - 100% Free & Private Online Image, PDF & Utility Suite</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+    <link rel="shortcut icon" href="/static/favicon.ico">
     
     <!-- Google Search Console Verification -->
     <meta name="google-site-verification" content="uUq17UUsROyHMRQ8jkqKqrjZmsJnkuxZMKKoJLw_X3E" />
     
+    <!-- High-Ranking SEO Meta Tags -->
+    <meta name="description" content="Free 100% private in-browser image compressor, passport photo maker, PDF editor, cropper, watermark tool, and format converters. 0.2s instant speed, no server uploads.">
+    <meta name="keywords" content="smartpictools, compress image to 20kb, compress image to 50kb, passport size photo maker online, ssc photo maker, merge images to pdf, crop pdf online, convert pdf to jpg 300 dpi, convert heic to jpg, image format converter, free client side photo tools">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://smartpictools.in/">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
     <style>
         :root {
             --bg-color: #0b0f19;
             --card-bg: #111827;
-            --card-hover: #1f2937;
+            --card-hover: #172033;
             --text-main: #f3f4f6;
             --text-muted: #9ca3af;
-            --accent: #3b82f6;
-            --accent-glow: rgba(59, 130, 246, 0.15);
             --border: #1e293b;
         }
+
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
             font-family: 'Plus Jakarta Sans', sans-serif;
         }
+
         body {
             background-color: var(--bg-color);
             color: var(--text-main);
@@ -38,118 +47,130 @@
             align-items: center;
             padding: 20px;
         }
+
         .container {
             max-width: 1200px;
             width: 100%;
             margin: 0 auto;
         }
+
         header {
             text-align: center;
             padding: 50px 20px 30px;
         }
+
         .badge {
-            background: var(--accent-glow);
-            color: var(--accent);
+            background: rgba(59, 130, 246, 0.12);
+            color: #60a5fa;
             padding: 6px 16px;
             border-radius: 20px;
             font-size: 13px;
-            font-weight: 600;
-            border: 1px solid rgba(59, 130, 246, 0.3);
+            font-weight: 700;
+            border: 1px solid rgba(59, 130, 246, 0.25);
             display: inline-block;
             margin-bottom: 20px;
             letter-spacing: 0.5px;
         }
+
         header h1 {
-            font-size: clamp(2rem, 4vw, 3.2rem);
-            font-weight: 700;
-            margin-bottom: 15px;
+            font-size: clamp(2.2rem, 4.5vw, 3.4rem);
+            font-weight: 800;
+            margin-bottom: 16px;
             letter-spacing: -1px;
             color: #ffffff;
+            line-height: 1.2;
         }
+
         header p {
             color: var(--text-muted);
             font-size: 1.05rem;
-            max-width: 700px;
-            margin: 0 auto 30px;
+            max-width: 720px;
+            margin: 0 auto 35px;
             line-height: 1.6;
         }
+
         .stats-bar {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 15px;
+            gap: 16px;
             margin-bottom: 50px;
         }
+
         .stat-item {
             background: var(--card-bg);
             border: 1px solid var(--border);
-            padding: 20px;
-            border-radius: 12px;
+            padding: 22px 20px;
+            border-radius: 14px;
             text-align: center;
         }
+
         .stat-item h3 {
-            font-size: 1.4rem;
-            color: var(--accent);
-            margin-bottom: 5px;
+            font-size: 1.45rem;
+            margin-bottom: 6px;
             font-weight: 700;
         }
+
         .stat-item p {
-            font-size: 0.85rem;
+            font-size: 0.82rem;
             color: var(--text-muted);
             text-transform: uppercase;
             letter-spacing: 1px;
+            font-weight: 600;
         }
+
+        /* All-in-One Grid without Categories */
         .tools-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            grid-template-columns: repeat(3, 1fr);
             gap: 24px;
             margin-bottom: 60px;
         }
+
         .tool-card {
             background: var(--card-bg);
             border: 1px solid var(--border);
             border-radius: 16px;
-            padding: 28px;
-            transition: all 0.3s ease;
+            padding: 30px;
+            transition: all 0.25s ease;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            position: relative;
-            overflow: hidden;
         }
+
         .tool-card:hover {
             transform: translateY(-4px);
-            border-color: rgba(59, 130, 246, 0.4);
+            border-color: rgba(99, 102, 241, 0.4);
             background: var(--card-hover);
-            box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);
+            box-shadow: 0 12px 28px -10px rgba(0,0,0,0.5);
         }
+
         .icon-box {
             width: 48px;
             height: 48px;
-            background: var(--accent-glow);
             border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--accent);
             font-size: 20px;
-            margin-bottom: 20px;
-            border: 1px solid rgba(59, 130, 246, 0.2);
+            margin-bottom: 22px;
         }
+
         .tool-card h3 {
             font-size: 1.25rem;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
             color: #ffffff;
-            font-weight: 600;
+            font-weight: 700;
         }
+
         .tool-card p {
             color: var(--text-muted);
             font-size: 0.92rem;
-            line-height: 1.5;
+            line-height: 1.55;
             margin-bottom: 24px;
             flex-grow: 1;
         }
+
         .tool-link {
-            color: var(--accent);
             text-decoration: none;
             font-weight: 600;
             font-size: 0.95rem;
@@ -158,12 +179,13 @@
             gap: 8px;
             transition: gap 0.2s;
         }
+
         .tool-link:hover {
             gap: 12px;
         }
+
         footer {
             width: 100%;
-            max-width: 1200px;
             border-top: 1px solid var(--border);
             padding: 30px 0;
             display: flex;
@@ -175,19 +197,29 @@
             margin-top: auto;
             gap: 15px;
         }
+
         .footer-links {
             display: flex;
-            gap: 20px;
+            gap: 22px;
         }
+
         .footer-links a {
             color: var(--text-muted);
             text-decoration: none;
             transition: color 0.2s;
         }
+
         .footer-links:hover a {
-            color: var(--text-main);
+            color: #ffffff;
         }
-        @media(max-width: 768px) {
+
+        @media(max-width: 1024px) {
+            .tools-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media(max-width: 680px) {
             .tools-grid {
                 grid-template-columns: 1fr;
             }
@@ -207,162 +239,197 @@
             <p>100% free, private, and instant in-browser image tools. Compress to exact KB, make passport photos, convert any format, or merge PDF without server uploads.</p>
         </header>
 
+        <!-- Stats Bar with True Colors -->
         <div class="stats-bar">
             <div class="stat-item">
-                <h3>0.2s Instant</h3>
+                <h3 style="color: #60a5fa;"><i class="fa-solid fa-bolt"></i> 0.2s Instant</h3>
                 <p>Device Speed</p>
             </div>
             <div class="stat-item">
-                <h3>Exact KB</h3>
+                <h3 style="color: #818cf8;">Exact KB</h3>
                 <p>Target Shrunk</p>
             </div>
             <div class="stat-item">
-                <h3>100% Client-Side</h3>
+                <h3 style="color: #34d399;"><i class="fa-solid fa-lock"></i> 100% Client-Side</h3>
                 <p>Never Leaves Phone</p>
             </div>
             <div class="stat-item">
-                <h3>4.9/5</h3>
+                <h3 style="color: #fbbf24;"><i class="fa-solid fa-star"></i> 4.9/5</h3>
                 <p>Free Forever</p>
             </div>
         </div>
 
-        <!-- Unified Tools Grid (No Categories, All Cards Cleanly Aligned) -->
+        <!-- 17 Unified Tools with Their Original Vibrant Colors -->
         <div class="tools-grid">
             
             <!-- 1. Compress Image -->
             <div class="tool-card">
-                <div class="icon-box"><i class="fa-solid fa-bolt"></i></div>
+                <div class="icon-box" style="background: rgba(99, 102, 241, 0.15); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.25);">
+                    <i class="fa-solid fa-bolt"></i>
+                </div>
                 <h3>Compress Image to Exact KB</h3>
                 <p>Shrink file weight accurately to 20KB, 50KB, or 100KB for government exam forms with live preview.</p>
-                <a href="/compress-image" class="tool-link">Open Tool <i class="fa-solid fa-arrow-right"></i></a>
+                <a href="/compress-image" class="tool-link" style="color: #818cf8;">Open Tool &rarr;</a>
             </div>
 
-            <!-- 2. Passport Size Photo -->
+            <!-- 2. Passport Size Photo Maker (Now Clean Standard Card) -->
             <div class="tool-card">
-                <div class="icon-box"><i class="fa-solid fa-user"></i></div>
+                <div class="icon-box" style="background: rgba(168, 85, 247, 0.15); color: #c084fc; border: 1px solid rgba(168, 85, 247, 0.25);">
+                    <i class="fa-solid fa-user"></i>
+                </div>
                 <h3>Passport Size Photo Maker</h3>
                 <p>Crop to official 3.5cm x 4.5cm for SSC/UPSC, set custom photo counts on A4/4x6 sheet with cutting borders.</p>
-                <a href="/passport-size-photo-maker" class="tool-link">Open Tool <i class="fa-solid fa-arrow-right"></i></a>
+                <a href="/passport-size-photo-maker" class="tool-link" style="color: #c084fc;">Open Tool &rarr;</a>
             </div>
 
             <!-- 3. Crop Image -->
             <div class="tool-card">
-                <div class="icon-box"><i class="fa-solid fa-crop"></i></div>
+                <div class="icon-box" style="background: rgba(236, 72, 153, 0.15); color: #f472b6; border: 1px solid rgba(236, 72, 153, 0.25);">
+                    <i class="fa-solid fa-scissors"></i>
+                </div>
                 <h3>Crop Image with Aspect Ratios</h3>
                 <p>Crop visually with exact aspect ratio presets for Instagram (1:1), YouTube (16:9), and Reels (9:16).</p>
-                <a href="/crop-image" class="tool-link">Open Tool <i class="fa-solid fa-arrow-right"></i></a>
+                <a href="/crop-image" class="tool-link" style="color: #f472b6;">Open Tool &rarr;</a>
             </div>
 
             <!-- 4. Resize Image -->
             <div class="tool-card">
-                <div class="icon-box"><i class="fa-solid fa-ruler-combined"></i></div>
+                <div class="icon-box" style="background: rgba(14, 165, 233, 0.15); color: #38bdf8; border: 1px solid rgba(14, 165, 233, 0.25);">
+                    <i class="fa-solid fa-ruler-combined"></i>
+                </div>
                 <h3>Resize Image Dimensions</h3>
                 <p>Change exact pixel width and height with live scaling preview and proportion lock to prevent distortion.</p>
-                <a href="/resize-image" class="tool-link">Open Tool <i class="fa-solid fa-arrow-right"></i></a>
+                <a href="/resize-image" class="tool-link" style="color: #38bdf8;">Open Tool &rarr;</a>
             </div>
 
             <!-- 5. PDF Maker -->
             <div class="tool-card">
-                <div class="icon-box"><i class="fa-solid fa-file-pdf"></i></div>
+                <div class="icon-box" style="background: rgba(249, 115, 22, 0.15); color: #fb923c; border: 1px solid rgba(249, 115, 22, 0.25);">
+                    <i class="fa-solid fa-file-pdf"></i>
+                </div>
                 <h3>PDF Maker (Merge Images to PDF)</h3>
                 <p>Merge multiple JPG, PNG, SVG, or HEIC photos into a single clean PDF document with 0% white borders.</p>
-                <a href="/pdf-maker" class="tool-link">Open Tool <i class="fa-solid fa-arrow-right"></i></a>
+                <a href="/pdf-maker" class="tool-link" style="color: #fb923c;">Open Tool &rarr;</a>
             </div>
 
             <!-- 6. Convert PDF to Image & Word -->
             <div class="tool-card">
-                <div class="icon-box"><i class="fa-solid fa-file-arrow-down"></i></div>
+                <div class="icon-box" style="background: rgba(244, 63, 94, 0.15); color: #fb7185; border: 1px solid rgba(244, 63, 94, 0.25);">
+                    <i class="fa-solid fa-file-lines"></i>
+                </div>
                 <h3>Convert PDF to Image & Word</h3>
                 <p>Extract PDF pages into crystal-clear 300 DPI Ultra HD images or searchable text.</p>
-                <a href="/convert-pdf" class="tool-link">Open Tool <i class="fa-solid fa-arrow-right"></i></a>
+                <a href="/convert-pdf" class="tool-link" style="color: #fb7185;">Open Tool &rarr;</a>
             </div>
 
             <!-- 7. Crop PDF Online -->
             <div class="tool-card">
-                <div class="icon-box"><i class="fa-solid fa-file-lines"></i></div>
+                <div class="icon-box" style="background: rgba(192, 132, 252, 0.15); color: #e879f9; border: 1px solid rgba(192, 132, 252, 0.25);">
+                    <i class="fa-solid fa-crop-simple"></i>
+                </div>
                 <h3>Crop PDF Online</h3>
                 <p>Trim margins and unwanted areas from multi-page PDFs while keeping text fully searchable (Ctrl+F).</p>
-                <a href="/crop-pdf" class="tool-link">Open Tool <i class="fa-solid fa-arrow-right"></i></a>
+                <a href="/crop-pdf" class="tool-link" style="color: #e879f9;">Open Tool &rarr;</a>
             </div>
 
-            <!-- 8. QR Code & Barcode -->
+            <!-- 8. QR Code & Barcode Studio -->
             <div class="tool-card">
-                <div class="icon-box"><i class="fa-solid fa-qrcode"></i></div>
-                <h3>QR Code & Barcode Studio</h3>
+                <div class="icon-box" style="background: rgba(20, 184, 166, 0.15); color: #2dd4bf; border: 1px solid rgba(20, 184, 166, 0.25);">
+                    <i class="fa-solid fa-qrcode"></i>
+                </div>
+                <h3>QR & Barcode</h3>
                 <p>Create custom QR codes (URLs, UPI) and product barcodes with live preview.</p>
-                <a href="/qr-code-studio" class="tool-link">Open Tool <i class="fa-solid fa-arrow-right"></i></a>
+                <a href="/qr-code-studio" class="tool-link" style="color: #2dd4bf;">Open Tool &rarr;</a>
             </div>
 
-            <!-- 9. Add Watermark -->
+            <!-- 9. Add Watermark Studio -->
             <div class="tool-card">
-                <div class="icon-box"><i class="fa-solid fa-stamp"></i></div>
-                <h3>Add Watermark Studio</h3>
+                <div class="icon-box" style="background: rgba(245, 158, 11, 0.15); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.25);">
+                    <i class="fa-solid fa-stamp"></i>
+                </div>
+                <h3>Add Watermark</h3>
                 <p>Protect pictures with diagonal repeated security grids or corner stamps.</p>
-                <a href="/watermark-studio" class="tool-link">Open Tool <i class="fa-solid fa-arrow-right"></i></a>
+                <a href="/watermark-studio" class="tool-link" style="color: #fbbf24;">Open Tool &rarr;</a>
             </div>
 
             <!-- 10. Rotate & Flip -->
             <div class="tool-card">
-                <div class="icon-box"><i class="fa-solid fa-rotate"></i></div>
-                <h3>Rotate & Mirror Flip</h3>
+                <div class="icon-box" style="background: rgba(59, 130, 246, 0.15); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.25);">
+                    <i class="fa-solid fa-rotate"></i>
+                </div>
+                <h3>Rotate & Flip</h3>
                 <p>Rotate 90 degrees or mirror flip horizontally/vertically in 0.05s.</p>
-                <a href="/rotate-flip" class="tool-link">Open Tool <i class="fa-solid fa-arrow-right"></i></a>
+                <a href="/rotate-flip" class="tool-link" style="color: #60a5fa;">Open Tool &rarr;</a>
             </div>
 
-            <!-- 11. Image to Favicon -->
+            <!-- 11. Image to Favicon Converter -->
             <div class="tool-card">
-                <div class="icon-box"><i class="fa-solid fa-star"></i></div>
-                <h3>Image to Favicon Converter</h3>
+                <div class="icon-box" style="background: rgba(234, 179, 8, 0.15); color: #facc15; border: 1px solid rgba(234, 179, 8, 0.25);">
+                    <i class="fa-solid fa-star"></i>
+                </div>
+                <h3>Image to Favicon</h3>
                 <p>Convert logo to ultra-sharp 256px .ICO favicons with zero blur.</p>
-                <a href="/image-to-favicon" class="tool-link">Open Tool <i class="fa-solid fa-arrow-right"></i></a>
+                <a href="/image-to-favicon" class="tool-link" style="color: #facc15;">Open Tool &rarr;</a>
             </div>
 
-            <!-- 12. Convert from JPG -->
+            <!-- 12. Convert from JPG / JPEG -->
             <div class="tool-card">
-                <div class="icon-box"><i class="fa-solid fa-folder-open"></i></div>
+                <div class="icon-box" style="background: rgba(245, 158, 11, 0.15); color: #f59e0b; border: 1px solid rgba(245, 158, 11, 0.25);">
+                    <i class="fa-solid fa-folder"></i>
+                </div>
                 <h3>Convert from JPG / JPEG</h3>
                 <p>Dedicated tools to convert JPG into PNG, WEBP, AVIF, SVG, TIFF, or PDF in 0.1s with batch download.</p>
-                <a href="/convert-from-jpg" class="tool-link">Explore JPG Tools <i class="fa-solid fa-arrow-right"></i></a>
+                <a href="/convert-from-jpg" class="tool-link" style="color: #f59e0b;">Explore JPG Tools &rarr;</a>
             </div>
 
             <!-- 13. Convert from PNG -->
             <div class="tool-card">
-                <div class="icon-box"><i class="fa-solid fa-image"></i></div>
+                <div class="icon-box" style="background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.25);">
+                    <i class="fa-solid fa-image"></i>
+                </div>
                 <h3>Convert from PNG</h3>
                 <p>Turn PNG into JPG (white background), WEBP, SVG, TIFF, AVIF, or PDF in 0.1s directly on device.</p>
-                <a href="/convert-from-png" class="tool-link">Explore PNG Tools <i class="fa-solid fa-arrow-right"></i></a>
+                <a href="/convert-from-png" class="tool-link" style="color: #c084fc;">Explore PNG Tools &rarr;</a>
             </div>
 
             <!-- 14. Convert from WEBP -->
             <div class="tool-card">
-                <div class="icon-box"><i class="fa-solid fa-rocket"></i></div>
+                <div class="icon-box" style="background: rgba(236, 72, 153, 0.15); color: #f472b6; border: 1px solid rgba(236, 72, 153, 0.25);">
+                    <i class="fa-solid fa-rocket"></i>
+                </div>
                 <h3>Convert from WEBP</h3>
                 <p>Convert Google WEBP images into JPG, PNG, AVIF, SVG, TIFF, or PDF for full software compatibility.</p>
-                <a href="/convert-from-webp" class="tool-link">Explore WEBP Tools <i class="fa-solid fa-arrow-right"></i></a>
+                <a href="/convert-from-webp" class="tool-link" style="color: #34d399;">Explore WEBP Tools &rarr;</a>
             </div>
 
-            <!-- 15. Convert from HEIC -->
+            <!-- 15. Convert from HEIC (iPhone) -->
             <div class="tool-card">
-                <div class="icon-box"><i class="fa-solid fa-mobile-screen"></i></div>
+                <div class="icon-box" style="background: rgba(59, 130, 246, 0.15); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.25);">
+                    <i class="fa-solid fa-mobile-screen"></i>
+                </div>
                 <h3>Convert from HEIC (iPhone)</h3>
                 <p>Decode Apple iPhone photos and turn them into universal JPG, PNG, WEBP, or PDF files.</p>
-                <a href="/convert-from-heic" class="tool-link">Explore iPhone Tools <i class="fa-solid fa-arrow-right"></i></a>
+                <a href="/convert-from-heic" class="tool-link" style="color: #818cf8;">Explore iPhone Tools &rarr;</a>
             </div>
 
             <!-- 16. Convert from PDF -->
             <div class="tool-card">
-                <div class="icon-box"><i class="fa-solid fa-file-pdf"></i></div>
+                <div class="icon-box" style="background: rgba(239, 68, 68, 0.15); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.25);">
+                    <i class="fa-solid fa-file-pdf"></i>
+                </div>
                 <h3>Convert from PDF</h3>
                 <p>Convert PDF documents into JPG, PNG, WEBP, SVG, TIFF, or Word text in 300 DPI high resolution.</p>
-                <a href="/convert-from-pdf" class="tool-link">Explore PDF Tools <i class="fa-solid fa-arrow-right"></i></a>
+                <a href="/convert-from-pdf" class="tool-link" style="color: #f87171;">Explore PDF Tools &rarr;</a>
             </div>
 
             <!-- 17. Image Format Converter -->
             <div class="tool-card">
-                <div class="icon-box"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+                <div class="icon-box" style="background: rgba(168, 85, 247, 0.15); color: #c084fc; border: 1px solid rgba(168, 85, 247, 0.25);">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                </div>
                 <h3>Image Format Converter</h3>
                 <p>All-in-one converter: Convert any photo to JPG, PNG, WEBP, AVIF, SVG, or TIFF in 0.1s.</p>
-                <a href="/image-format-converter" class="tool-link">Open Tool <i class="fa-solid fa-arrow-right"></i></a>
+                <a href="/image-format-converter" class="tool-link" style="color: #f472b6;">Open Tool &rarr;</a>
             </div>
 
         </div>
