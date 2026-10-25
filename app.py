@@ -130,7 +130,8 @@ def image_to_pdf_alias():
 
 @app.route('/pdf-converter')
 def pdf_converter_alias():
-    return render_template('pdf-converter.html')
+    from flask import redirect
+    return redirect('/convert-from-pdf', code=301)
 
 @app.route('/crop-pdf')
 def crop_pdf_page():
