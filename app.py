@@ -1,5 +1,6 @@
 import io
 import os
+import re
 import json
 import datetime
 from flask import Flask, render_template, request, send_file, jsonify, Response
@@ -135,7 +136,7 @@ def crop_pdf_page():
     return render_template('crop-pdf.html')
 
 # ==========================================
-# ⚡ CORELDRAW STYLE PDF-TO-SVG (TEXT TO CURVES / SHAPES)
+# ⚡ CORELDRAW STYLE PDF-TO-SVG (UNLOCKED VECTOR CURVES)
 # ==========================================
 @app.route('/convert-pdf-to-svg-curves', methods=['POST'])
 def convert_pdf_to_svg_curves():
@@ -151,6 +152,14 @@ def convert_pdf_to_svg_curves():
         if not uploaded_files:
             return jsonify({'error': 'No PDF file provided'}), 400
 
+        def get_clean_unlocked_svg(page):
+            # 1. Convert text to vector curve paths
+            svg = page.get_svg_image(text_as_path=True)
+            # 2. ⚡ Strip clip-paths so CorelDraw never locks objects!
+            svg = re.sub(r'\s+clip-path="url\(#[^"]+\)"', '', svg)
+            svg = re.sub(r'<clipPath[^>]*>.*?</clipPath>', '', svg, flags=re.DOTALL)
+            return svg
+
         # Case A: 1 PDF file
         if len(uploaded_files) == 1:
             f = uploaded_files[0]
@@ -160,13 +169,7 @@ def convert_pdf_to_svg_curves():
             
             # Single Page PDF -> Download as .SVG directly
             if len(doc) == 1:
-                page = doc[0]
-                # text_as_path=True converts all fonts into mathematical vector shapes (Curves)!
-                svg_data = page.get_svg_image(text_as_path=True)
-                import re
-# CorelDraw के ऑटो-लॉक को हटाने के लिए clip-path साफ़ करें
-svg_data = re.sub(r'\s+clip-path="url\(#[^"]+\)"', '', svg_data)
-svg_data = re.sub(r'<clipPath[^>]*>.*?</clipPath>', '', svg_data, flags=re.DOTALL)
+                svg_data = get_clean_unlocked_svg(doc[0])
                 doc.close()
                 buf = io.BytesIO(svg_data.encode('utf-8'))
                 return send_file(
@@ -180,8 +183,7 @@ svg_data = re.sub(r'<clipPath[^>]*>.*?</clipPath>', '', svg_data, flags=re.DOTAL
                 zip_buf = io.BytesIO()
                 with zipfile.ZipFile(zip_buf, 'w', zipfile.ZIP_DEFLATED) as zf:
                     for p in range(len(doc)):
-                        page = doc[p]
-                        svg_data = page.get_svg_image(text_as_path=True)
+                        svg_data = get_clean_unlocked_svg(doc[p])
                         zf.writestr(f"{raw_name}_page_{p+1}_curves.svg", svg_data.encode('utf-8'))
                 doc.close()
                 zip_buf.seek(0)
@@ -200,8 +202,7 @@ svg_data = re.sub(r'<clipPath[^>]*>.*?</clipPath>', '', svg_data, flags=re.DOTAL
                 pdf_bytes = f.read()
                 doc = fitz.open(stream=pdf_bytes, filetype="pdf")
                 for p in range(len(doc)):
-                    page = doc[p]
-                    svg_data = page.get_svg_image(text_as_path=True)
+                    svg_data = get_clean_unlocked_svg(doc[p])
                     zf.writestr(f"{raw_name}_page_{p+1}_curves.svg", svg_data.encode('utf-8'))
                 doc.close()
 
