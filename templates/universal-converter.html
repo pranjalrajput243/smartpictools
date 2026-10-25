@@ -65,7 +65,7 @@
         <div class="text-center max-w-2xl mx-auto mb-8 sm:mb-10">
             <span class="text-[11px] font-extrabold uppercase tracking-widest text-indigo-400 bg-indigo-500/10 px-3 py-1 rounded-full border border-indigo-500/20">Dedicated Conversion Studio</span>
             <h1 class="text-3xl sm:text-5xl font-black text-white mt-3 tracking-tight">Convert {{ meta.src_name }} to {{ meta.tgt_name }}</h1>
-            <p class="mt-2.5 text-slate-400 text-xs sm:text-sm">Turn {{ meta.src_name }} files into crisp {{ meta.tgt_name }} with zero blur in 0.1s. 100% private in-browser tool.</p>
+            <p class="mt-2.5 text-slate-400 text-xs sm:text-sm">Turn {{ meta.src_name }} files into crisp {{ meta.tgt_name }} with zero blur in 0.1s. 100% private tool.</p>
         </div>
 
         <div class="bg-slate-900 rounded-3xl p-5 sm:p-10 border border-slate-800 shadow-2xl relative">
@@ -77,7 +77,7 @@
                     🔄
                 </div>
                 <h3 class="text-base sm:text-xl font-bold text-white mb-1.5">Select {{ meta.src_name }} File(s) to Convert</h3>
-                <p class="text-xs sm:text-sm text-slate-400">Choose single or multiple {{ meta.src_name }} files (100% private in-browser, no server upload)</p>
+                <p class="text-xs sm:text-sm text-slate-400">Choose single or multiple {{ meta.src_name }} files</p>
             </div>
 
             <!-- WORKSPACE -->
@@ -95,7 +95,7 @@
                 <!-- PRE-CONFIGURED TARGET BADGE -->
                 <div class="p-3.5 bg-slate-950/80 rounded-xl border border-slate-800 flex items-center justify-between text-xs">
                     <span class="text-slate-400 font-semibold">Target Format: <strong class="text-indigo-400 font-bold">{{ meta.tgt_name }}</strong></span>
-                    <span class="text-emerald-400 font-bold">✓ Zero Blur & Crisp Outline Guaranteed</span>
+                    <span class="text-emerald-400 font-bold">✓ {% if meta.src == 'pdf' and meta.tgt == 'svg' %}CorelDraw-Style Vector Curves (0% Blur Guaranteed){% else %}Zero Blur Guaranteed{% endif %}</span>
                 </div>
 
                 <button type="button" id="convert-btn" onclick="executeConversion()" class="w-full py-4 px-6 rounded-2xl bg-gradient-to-r from-indigo-600 via-indigo-500 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-extrabold text-sm sm:text-base shadow-lg shadow-indigo-500/25 transition active:scale-[0.99] flex items-center justify-center gap-3">
@@ -104,7 +104,7 @@
             </div>
 
             <div id="status-box" class="hidden mt-5 p-3.5 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 text-center">
-                <p class="text-emerald-400 font-bold text-xs sm:text-sm">🎉 Success! File(s) converted and downloaded with razor-sharp quality!</p>
+                <p class="text-emerald-400 font-bold text-xs sm:text-sm">🎉 Success! Vector curves file(s) downloaded with 0% blur!</p>
             </div>
         </div>
 
@@ -118,8 +118,8 @@
                 </div>
                 <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800">
                     <span class="w-7 h-7 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center mb-2.5 text-xs">2</span>
-                    <h3 class="font-bold text-white text-sm mb-1">Ultra-Sharp Engine</h3>
-                    <p class="text-slate-400">Our engine renders exact letter curves and shapes with zero missing font bugs.</p>
+                    <h3 class="font-bold text-white text-sm mb-1">Convert to Curves</h3>
+                    <p class="text-slate-400">Our engine converts all fonts into mathematical vector curve paths.</p>
                 </div>
                 <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800">
                     <span class="w-7 h-7 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center mb-2.5 text-xs">3</span>
@@ -134,7 +134,7 @@
         <p>© 2026 SmartPicTools. 100% Free & Private in-browser suite. <a href="/" class="text-indigo-400 hover:underline">Explore All Tools</a></p>
     </footer>
 
-    <!-- ⚡ ULTRA HD RETINA SVG ENGINE (ZERO MISSING FONTS, ZERO BLUR) -->
+    <!-- ⚡ CONVERTER ENGINE -->
     <script>
         pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
 
@@ -237,34 +237,6 @@
             });
         }
 
-        // ⚡ ULTRA HD RETINA SVG ENGINE (4X SCALE - ZERO MISSING FONTS & CRISP EDGES)
-        async function renderPdfPageToUltraSvg(page) {
-            const origViewport = page.getViewport({ scale: 1.0 });
-            // 4.0 Scale delivers 4000+ pixels across for razor-sharp vector-grade clarity
-            const renderScale = Math.min(4.0, 4200 / Math.max(origViewport.width, origViewport.height));
-            const viewport = page.getViewport({ scale: renderScale });
-
-            const canvas = document.createElement('canvas');
-            canvas.width = viewport.width;
-            canvas.height = viewport.height;
-            const ctx = canvas.getContext('2d');
-            ctx.imageSmoothingEnabled = true;
-            ctx.imageSmoothingQuality = 'high';
-
-            await page.render({ canvasContext: ctx, viewport: viewport, intent: 'print' }).promise;
-
-            const dataUrl = canvas.toDataURL('image/png');
-            const w = origViewport.width;
-            const h = origViewport.height;
-
-            const svgContent = `<?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 ${w} ${h}" width="${w}" height="${h}">
-  <image width="${w}" height="${h}" xlink:href="${dataUrl}" style="image-rendering: -webkit-optimize-contrast; image-rendering: crisp-edges;" />
-</svg>`;
-
-            return new Blob([svgContent], { type: 'image/svg+xml;charset=utf-8' });
-        }
-
         function canvasToTiffBlob(canvas) {
             if (typeof UTIF !== 'undefined') {
                 const ctx = canvas.getContext('2d');
@@ -286,44 +258,33 @@
                 // 1. CONVERTING FROM PDF
                 // ==========================================
                 if (SRC_FMT === 'pdf') {
-                    // PDF TO SVG (ULTRA HD RETINA SVG)
+                    // ⚡ PDF TO SVG VIA COREL-DRAW STYLE VECTOR CURVES ENGINE
                     if (TGT_FMT === 'svg') {
-                        if (filesList.length === 1) {
-                            const item = filesList[0];
-                            const rawName = item.name.substring(0, item.name.lastIndexOf('.')) || item.name;
-                            const ab = await item.file.arrayBuffer();
-                            const pdfDoc = await pdfjsLib.getDocument({ data: ab }).promise;
-
-                            if (pdfDoc.numPages === 1) {
-                                const p1 = await pdfDoc.getPage(1);
-                                const svgBlob = await renderPdfPageToUltraSvg(p1);
-                                downloadBlob(svgBlob, `smartpic_${rawName}.svg`);
-                            } else {
-                                const zip = new JSZip();
-                                for (let p = 1; p <= pdfDoc.numPages; p++) {
-                                    const page = await pdfDoc.getPage(p);
-                                    const svgBlob = await renderPdfPageToUltraSvg(page);
-                                    zip.file(`${rawName}_page_${p}.svg`, svgBlob);
-                                }
-                                const zipBlob = await zip.generateAsync({ type: 'blob' });
-                                downloadBlob(zipBlob, `smartpic_${rawName}_svg_pack.zip`);
-                            }
-                        } else {
-                            const zip = new JSZip();
-                            for (let item of filesList) {
-                                const rawName = item.name.substring(0, item.name.lastIndexOf('.')) || item.name;
-                                const ab = await item.file.arrayBuffer();
-                                const pdfDoc = await pdfjsLib.getDocument({ data: ab }).promise;
-
-                                for (let p = 1; p <= pdfDoc.numPages; p++) {
-                                    const page = await pdfDoc.getPage(p);
-                                    const svgBlob = await renderPdfPageToUltraSvg(page);
-                                    zip.file(`${rawName}_page_${p}.svg`, svgBlob);
-                                }
-                            }
-                            const zipBlob = await zip.generateAsync({ type: 'blob' });
-                            downloadBlob(zipBlob, `smartpic_batch_svg_pack.zip`);
+                        const fd = new FormData();
+                        for (let item of filesList) {
+                            fd.append('files', item.file);
                         }
+
+                        const resp = await fetch('/convert-pdf-to-svg-curves', {
+                            method: 'POST',
+                            body: fd
+                        });
+
+                        if (!resp.ok) {
+                            const errData = await resp.json().catch(() => ({}));
+                            throw new Error(errData.error || 'Server vector conversion failed');
+                        }
+
+                        const blob = await resp.blob();
+                        let filename = `smartpic_converted_curves.svg`;
+                        if (blob.type.includes('zip')) {
+                            filename = `smartpic_converted_svg_pack.zip`;
+                        } else if (filesList.length === 1) {
+                            const rawName = filesList[0].name.substring(0, filesList[0].name.lastIndexOf('.')) || filesList[0].name;
+                            filename = `smartpic_${rawName}_curves.svg`;
+                        }
+
+                        downloadBlob(blob, filename);
                         finish();
                         return;
                     }
