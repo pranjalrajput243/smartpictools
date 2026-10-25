@@ -103,8 +103,24 @@
                 </button>
             </div>
 
-            <div id="status-box" class="hidden mt-5 p-3.5 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 text-center">
-                <p class="text-emerald-400 font-bold text-xs sm:text-sm">🎉 Success! Vector curves file(s) downloaded with 0% blur!</p>
+            <!-- SUCCESS STATUS WITH SMART CORELDRAW GUIDANCE -->
+            <div id="status-box" class="hidden mt-5 space-y-3">
+                <div class="p-3.5 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 text-center">
+                    <p class="text-emerald-400 font-bold text-xs sm:text-sm">🎉 Success! Vector curves file(s) downloaded with 0% blur!</p>
+                </div>
+
+                {% if meta.src == 'pdf' and meta.tgt == 'svg' %}
+                <!-- ⚡ PRO-TIP FOR CORELDRAW USERS -->
+                <div class="p-4 rounded-2xl bg-indigo-950/40 border border-indigo-500/30 flex items-start gap-3 text-left">
+                    <span class="text-xl">💡</span>
+                    <div class="text-xs space-y-1">
+                        <span class="font-bold text-white block text-sm">CorelDRAW User Tip:</span>
+                        <p class="text-slate-300 leading-relaxed">
+                            CorelDraw me SVG import karne par agar text par lock (🔒) dikhe, to bas keyboard par <strong class="text-amber-300 font-bold">Ctrl + Shift + U</strong> dabayein (ya <strong class="text-indigo-300">Object &rarr; Lock &rarr; Unlock All</strong> karein). Saare letters turant 1 second me unlock ho jayenge!
+                        </p>
+                    </div>
+                </div>
+                {% endif %}
             </div>
         </div>
 
@@ -134,7 +150,7 @@
         <p>© 2026 SmartPicTools. 100% Free & Private in-browser suite. <a href="/" class="text-indigo-400 hover:underline">Explore All Tools</a></p>
     </footer>
 
-    <!-- ⚡ CONVERTER ENGINE -->
+    <!-- CONVERTER JS ENGINE -->
     <script>
         pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
 
@@ -254,11 +270,8 @@
             document.getElementById('btn-text').innerText = `⏳ Converting to ${TGT_NAME}...`;
 
             try {
-                // ==========================================
-                // 1. CONVERTING FROM PDF
-                // ==========================================
+                // PDF TO SVG VIA VECTOR CURVES ENGINE
                 if (SRC_FMT === 'pdf') {
-                    // ⚡ PDF TO SVG VIA COREL-DRAW STYLE VECTOR CURVES ENGINE
                     if (TGT_FMT === 'svg') {
                         const fd = new FormData();
                         for (let item of filesList) {
@@ -349,9 +362,7 @@
                     return;
                 }
 
-                // ==========================================
-                // 2. CONVERTING IMAGES TO OTHER FORMATS
-                // ==========================================
+                // IMAGES TO OTHER FORMATS
                 if (filesList.length === 1) {
                     const item = filesList[0];
                     const rawName = item.name.substring(0, item.name.lastIndexOf('.')) || item.name;
