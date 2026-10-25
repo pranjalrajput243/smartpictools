@@ -3,3 +3,4 @@ pillow
 pillow-heif
 pillow-avif-plugin
 gunicorn
+pymupdf
