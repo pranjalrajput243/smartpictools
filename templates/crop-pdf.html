@@ -139,44 +139,6 @@
                     </div>
                 </div>
 
-                <!-- ⚡ TWO-WAY LIVE MARGIN VALUES (IN MM) -->
-                <div class="bg-slate-950/80 p-3.5 sm:p-4 rounded-2xl border border-slate-800 space-y-2">
-                    <div class="flex items-center justify-between">
-                        <span class="text-xs font-bold text-slate-400">Crop Margins to Cut Off (in mm):</span>
-                        <span class="text-[10px] text-slate-400 uppercase tracking-wider">Updates Live With Drag</span>
-                    </div>
-                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
-                        <div class="bg-slate-900 p-2.5 rounded-xl border border-slate-800">
-                            <label class="block text-[11px] font-bold text-slate-400 mb-1">Top Margin</label>
-                            <div class="flex items-center gap-1.5">
-                                <input type="number" id="margin-top" value="0" min="0" oninput="updateCropperFromInputs()" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-2.5 py-1 text-xs text-white font-bold focus:outline-none focus:border-indigo-500">
-                                <span class="text-[11px] text-slate-400 font-semibold">mm</span>
-                            </div>
-                        </div>
-                        <div class="bg-slate-900 p-2.5 rounded-xl border border-slate-800">
-                            <label class="block text-[11px] font-bold text-slate-400 mb-1">Bottom Margin</label>
-                            <div class="flex items-center gap-1.5">
-                                <input type="number" id="margin-bottom" value="0" min="0" oninput="updateCropperFromInputs()" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-2.5 py-1 text-xs text-white font-bold focus:outline-none focus:border-indigo-500">
-                                <span class="text-[11px] text-slate-400 font-semibold">mm</span>
-                            </div>
-                        </div>
-                        <div class="bg-slate-900 p-2.5 rounded-xl border border-slate-800">
-                            <label class="block text-[11px] font-bold text-slate-400 mb-1">Left Margin</label>
-                            <div class="flex items-center gap-1.5">
-                                <input type="number" id="margin-left" value="0" min="0" oninput="updateCropperFromInputs()" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-2.5 py-1 text-xs text-white font-bold focus:outline-none focus:border-indigo-500">
-                                <span class="text-[11px] text-slate-400 font-semibold">mm</span>
-                            </div>
-                        </div>
-                        <div class="bg-slate-900 p-2.5 rounded-xl border border-slate-800">
-                            <label class="block text-[11px] font-bold text-slate-400 mb-1">Right Margin</label>
-                            <div class="flex items-center gap-1.5">
-                                <input type="number" id="margin-right" value="0" min="0" oninput="updateCropperFromInputs()" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-2.5 py-1 text-xs text-white font-bold focus:outline-none focus:border-indigo-500">
-                                <span class="text-[11px] text-slate-400 font-semibold">mm</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
                 <!-- ⚡ INTERACTIVE VISUAL CROPPER WORKSPACE WITH HAND TOOL -->
                 <div class="space-y-3">
                     <div class="flex items-center justify-between flex-wrap gap-2">
@@ -245,6 +207,45 @@
                     </div>
                 </div>
 
+
+                <!-- ⚡ TWO-WAY LIVE MARGIN VALUES (IN MM) -->
+                <div class="bg-slate-950/80 p-3.5 sm:p-4 rounded-2xl border border-slate-800 space-y-2">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-bold text-slate-400">Crop Margins to Cut Off (in mm):</span>
+                        <span class="text-[10px] text-slate-400 uppercase tracking-wider">Updates Live With Drag</span>
+                    </div>
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+                        <div class="bg-slate-900 p-2.5 rounded-xl border border-slate-800">
+                            <label class="block text-[11px] font-bold text-slate-400 mb-1">Top Margin</label>
+                            <div class="flex items-center gap-1.5">
+                                <input type="number" id="margin-top" value="0" min="0" oninput="updateCropperFromInputs()" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-2.5 py-1 text-xs text-white font-bold focus:outline-none focus:border-indigo-500">
+                                <span class="text-[11px] text-slate-400 font-semibold">mm</span>
+                            </div>
+                        </div>
+                        <div class="bg-slate-900 p-2.5 rounded-xl border border-slate-800">
+                            <label class="block text-[11px] font-bold text-slate-400 mb-1">Bottom Margin</label>
+                            <div class="flex items-center gap-1.5">
+                                <input type="number" id="margin-bottom" value="0" min="0" oninput="updateCropperFromInputs()" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-2.5 py-1 text-xs text-white font-bold focus:outline-none focus:border-indigo-500">
+                                <span class="text-[11px] text-slate-400 font-semibold">mm</span>
+                            </div>
+                        </div>
+                        <div class="bg-slate-900 p-2.5 rounded-xl border border-slate-800">
+                            <label class="block text-[11px] font-bold text-slate-400 mb-1">Left Margin</label>
+                            <div class="flex items-center gap-1.5">
+                                <input type="number" id="margin-left" value="0" min="0" oninput="updateCropperFromInputs()" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-2.5 py-1 text-xs text-white font-bold focus:outline-none focus:border-indigo-500">
+                                <span class="text-[11px] text-slate-400 font-semibold">mm</span>
+                            </div>
+                        </div>
+                        <div class="bg-slate-900 p-2.5 rounded-xl border border-slate-800">
+                            <label class="block text-[11px] font-bold text-slate-400 mb-1">Right Margin</label>
+                            <div class="flex items-center gap-1.5">
+                                <input type="number" id="margin-right" value="0" min="0" oninput="updateCropperFromInputs()" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-2.5 py-1 text-xs text-white font-bold focus:outline-none focus:border-indigo-500">
+                                <span class="text-[11px] text-slate-400 font-semibold">mm</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
                 <!-- PROGRESS BAR -->
                 <div id="progress-container" class="hidden bg-slate-950/90 p-4 rounded-2xl border border-slate-800 space-y-2">
                     <div class="flex justify-between text-xs font-bold">
