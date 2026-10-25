@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     
-    <!-- ⚡ HIGH-PRIORITY SEO & KEYWORDS -->
+    <!-- ⚡ HIGH-PRIORITY SEO & SEARCH KEYWORDS -->
     <title>Watermark Remover Online Free - Erase Text, Logos & Stamps | SmartPicTools</title>
-    <meta name="description" content="100% free, private in-browser watermark remover. Clean corner watermarks mathematically with 0% blur or use the magic eraser brush to remove text, logos, and stamps instantly.">
-    <meta name="keywords" content="watermark remover online, remove watermark from photo free, erase watermark from image, photo watermark cleaner, free watermark eraser brush, clean corner watermark, remove logo from photo, object remover online free, private watermark remover">
+    <meta name="description" content="100% free, private in-browser watermark remover. Auto-detect corner watermarks, use Photoshop-style box marquee or magic brush with dynamic circle cursor to erase text and logos.">
+    <meta name="keywords" content="watermark remover online, remove watermark from photo free, erase watermark from image, marquee box object remover, photo watermark cleaner, free watermark eraser brush, clean corner watermark, remove logo from photo, object remover online free, private watermark remover">
     <meta name="robots" content="index, follow, max-image-preview:large">
     <meta name="author" content="SmartPicTools">
     <link rel="canonical" href="https://smartpictools.in/remove-watermark">
@@ -19,7 +19,7 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://smartpictools.in/remove-watermark">
     <meta property="og:title" content="Watermark Remover Online Free - SmartPicTools">
-    <meta property="og:description" content="Erase watermarks, logos, dates, and clean translucent corner stamps with zero blur directly in your browser.">
+    <meta property="og:description" content="Erase watermarks, logos, dates, and clean corner stamps with auto-detect or marquee box selection directly in your browser.">
 
     <!-- SCHEMA MARKUP -->
     <script type="application/ld+json">
@@ -53,17 +53,41 @@
             background-size: 20px 20px;
             background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
         }
+
+        /* ⚡ PHOTOSHOP-STYLE SELECTION MARQUEE */
+        .marquee-box {
+            position: absolute;
+            border: 2px dashed #818cf8;
+            background: rgba(99, 102, 241, 0.22);
+            pointer-events: none;
+            display: none;
+            z-index: 30;
+        }
+
+        /* ⚡ PHOTOSHOP DYNAMIC CIRCLE BRUSH CURSOR */
+        #circle-cursor {
+            position: fixed;
+            pointer-events: none;
+            border: 2px solid #ffffff;
+            background: rgba(239, 68, 68, 0.25);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 100;
+            display: none;
+            box-shadow: 0 0 6px rgba(0,0,0,0.6);
+        }
     </style>
 </head>
 <body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col justify-between selection:bg-indigo-500 selection:text-white">
+
+    <!-- FLOATING PHOTOSHOP BRUSH CIRCLE -->
+    <div id="circle-cursor"></div>
 
     <!-- HEADER -->
     <header class="border-b border-slate-800 bg-slate-900/80 backdrop-blur-xl sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 h-18 sm:h-20 flex items-center justify-between">
             <a href="/" class="flex items-center gap-2.5 sm:gap-3 group">
-                <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-2xl bg-gradient-to-tr from-indigo-500 via-purple-500 to-pink-500 flex items-center justify-center text-white text-lg sm:text-xl shadow-lg shadow-indigo-500/30 group-hover:scale-105 transition">
-                    ⚡
-                </div>
+                <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-2xl bg-gradient-to-tr from-indigo-500 via-purple-500 to-pink-500 flex items-center justify-center text-white text-lg sm:text-xl shadow-lg shadow-indigo-500/30 group-hover:scale-105 transition">⚡</div>
                 <div>
                     <span class="text-xl sm:text-2xl font-black tracking-tight text-white">SmartPic<span class="text-indigo-400">Tools</span></span>
                     <span class="block text-[9px] sm:text-[10px] uppercase font-bold tracking-widest text-slate-400 -mt-1">Watermark Remover</span>
@@ -80,7 +104,7 @@
         <div class="text-center max-w-2xl mx-auto mb-8 sm:mb-10">
             <span class="text-[11px] font-extrabold uppercase tracking-widest text-indigo-400 bg-indigo-500/10 px-3 py-1 rounded-full border border-indigo-500/20">100% In-Browser & Private</span>
             <h1 class="text-3xl sm:text-5xl font-black text-white mt-3 tracking-tight">Watermark Remover Online</h1>
-            <p class="mt-2.5 text-slate-400 text-xs sm:text-sm">Clean unwanted watermarks, logos, dates, and stamps. Use the Magic Brush or 1-Click Corner Restoration with 0% blur.</p>
+            <p class="mt-2.5 text-slate-400 text-xs sm:text-sm">Erase watermarks, logos, dates, and badges. Select with Photoshop-style Box Marquee, Magic Brush, or 1-Click Auto Scan.</p>
         </div>
 
         <div class="bg-slate-900 rounded-3xl p-5 sm:p-10 border border-slate-800 shadow-2xl relative">
@@ -92,21 +116,23 @@
                     🪄
                 </div>
                 <h3 class="text-base sm:text-xl font-bold text-white mb-1.5">Select Image to Clean Watermark</h3>
-                <p class="text-xs sm:text-sm text-slate-400">Supports JPG, PNG, WEBP, and iPhone HEIC (100% local, no server uploads)</p>
+                <p class="text-xs sm:text-sm text-slate-400">Supports JPG, PNG, WEBP, and iPhone HEIC (100% private, no server upload)</p>
             </div>
 
             <!-- WORKSPACE -->
             <div id="workspace" class="hidden mt-6 space-y-6">
                 
-                <!-- TOP CONTROLS BAR -->
-                <div class="flex items-center justify-between flex-wrap gap-3 bg-slate-950/80 p-3.5 rounded-2xl border border-slate-800">
-                    <!-- Mode Selector -->
-                    <div class="flex items-center gap-1.5 bg-slate-900 p-1 rounded-xl border border-slate-800">
-                        <button type="button" id="btn-mode-brush" onclick="setRemovalMode('brush')" class="py-1.5 px-3 rounded-lg text-xs font-bold transition bg-indigo-600 text-white">
-                            🖌️ Magic Brush
+                <!-- TOP TOOLBAR: 3 PROFESSIONAL MODES -->
+                <div class="flex items-center justify-between flex-wrap gap-3 bg-slate-950/80 p-3 rounded-2xl border border-slate-800">
+                    <div class="flex items-center gap-1.5 bg-slate-900 p-1 rounded-xl border border-slate-800 flex-wrap">
+                        <button type="button" id="btn-mode-marquee" onclick="setRemovalMode('marquee')" class="py-1.5 px-3 rounded-lg text-xs font-bold transition bg-indigo-600 text-white flex items-center gap-1.5">
+                            <span>🔲 Box Marquee</span>
                         </button>
-                        <button type="button" id="btn-mode-corner" onclick="setRemovalMode('corner')" class="py-1.5 px-3 rounded-lg text-xs font-bold transition text-slate-400 hover:text-white">
-                            ✨ Corner Cleaner (0% Blur)
+                        <button type="button" id="btn-mode-brush" onclick="setRemovalMode('brush')" class="py-1.5 px-3 rounded-lg text-xs font-bold transition text-slate-400 hover:text-white flex items-center gap-1.5">
+                            <span>🖌️ Magic Brush</span>
+                        </button>
+                        <button type="button" id="btn-mode-auto" onclick="setRemovalMode('auto')" class="py-1.5 px-3 rounded-lg text-xs font-bold transition text-slate-400 hover:text-white flex items-center gap-1.5">
+                            <span>⚡ Auto-Detect & Clean</span>
                         </button>
                     </div>
 
@@ -115,12 +141,24 @@
                     </button>
                 </div>
 
-                <!-- MODE A: BRUSH CONTROLS -->
-                <div id="brush-controls" class="bg-slate-950/80 p-3.5 sm:p-4 rounded-2xl border border-slate-800 flex items-center justify-between flex-wrap gap-3">
+                <!-- CONTROLS STRIP -->
+                <!-- Mode A: Marquee Instructions -->
+                <div id="marquee-controls" class="bg-slate-950/80 p-3 sm:p-4 rounded-2xl border border-slate-800 flex items-center justify-between flex-wrap gap-2">
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs font-bold text-slate-300">💡 Instruction:</span>
+                        <span class="text-xs text-slate-400">Click and drag a box directly over the watermark (like "UNDER ₹2,000" or logos).</span>
+                    </div>
+                    <button type="button" onclick="revertOriginalImage()" class="py-1 px-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-xs font-bold text-rose-400 hover:text-white border border-slate-700 transition">
+                        ↺ Reset Original
+                    </button>
+                </div>
+
+                <!-- Mode B: Brush Controls -->
+                <div id="brush-controls" class="hidden bg-slate-950/80 p-3 sm:p-4 rounded-2xl border border-slate-800 flex items-center justify-between flex-wrap gap-3">
                     <div class="flex items-center gap-3">
                         <label class="text-xs font-bold text-slate-400">Brush Size:</label>
-                        <input type="range" id="brush-size" min="10" max="80" value="30" oninput="updateBrushSize(this.value)" class="w-28 sm:w-36 accent-indigo-500 cursor-pointer">
-                        <span id="brush-size-display" class="text-xs font-bold text-indigo-400 bg-slate-900 px-2 py-0.5 rounded border border-slate-800">30px</span>
+                        <input type="range" id="brush-size" min="10" max="80" value="35" oninput="updateBrushSize(this.value)" class="w-28 sm:w-36 accent-indigo-500 cursor-pointer">
+                        <span id="brush-size-display" class="text-xs font-bold text-indigo-400 bg-slate-900 px-2 py-0.5 rounded border border-slate-800">35px</span>
                     </div>
 
                     <div class="flex items-center gap-2">
@@ -133,40 +171,35 @@
                     </div>
                 </div>
 
-                <!-- MODE B: CORNER CLEANER CONTROLS -->
-                <div id="corner-controls" class="hidden bg-slate-950/80 p-3.5 sm:p-4 rounded-2xl border border-slate-800 space-y-3">
-                    <div class="flex items-center justify-between flex-wrap gap-2">
-                        <span class="text-xs font-bold text-slate-400">Select Corner to Clean:</span>
-                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
-                            <button type="button" onclick="selectCorner('br')" id="corner-br" class="py-1.5 px-2.5 rounded-xl bg-indigo-600 text-white text-xs font-bold border border-indigo-500 transition">
-                                ↘ Bottom-Right
-                            </button>
-                            <button type="button" onclick="selectCorner('bl')" id="corner-bl" class="py-1.5 px-2.5 rounded-xl bg-slate-900 text-slate-300 text-xs font-bold border border-slate-700 transition">
-                                ↙ Bottom-Left
-                            </button>
-                            <button type="button" onclick="selectCorner('tr')" id="corner-tr" class="py-1.5 px-2.5 rounded-xl bg-slate-900 text-slate-300 text-xs font-bold border border-slate-700 transition">
-                                ↗ Top-Right
-                            </button>
-                            <button type="button" onclick="selectCorner('tl')" id="corner-tl" class="py-1.5 px-2.5 rounded-xl bg-slate-900 text-slate-300 text-xs font-bold border border-slate-700 transition">
-                                ↖ Top-Left
-                            </button>
-                        </div>
+                <!-- Mode C: Auto Detect Controls -->
+                <div id="auto-controls" class="hidden bg-slate-950/80 p-3.5 sm:p-4 rounded-2xl border border-slate-800 flex items-center justify-between flex-wrap gap-2">
+                    <div>
+                        <span class="text-xs font-bold text-white block">Automatic AI Watermark Scanner</span>
+                        <span class="text-[11px] text-slate-400">Scans all 4 corners for translucent stamps and applies reverse-alpha mathematical restoration (0% blur).</span>
                     </div>
-                    <p class="text-[11px] text-emerald-400 font-semibold">💡 Uses mathematical reverse-alpha subtraction. Restores underlying details without blurring.</p>
+                    <button type="button" onclick="revertOriginalImage()" class="py-1 px-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-xs font-bold text-rose-400 hover:text-white border border-slate-700 transition">
+                        ↺ Reset Original
+                    </button>
                 </div>
 
-                <!-- CANVAS DISPLAY AREA -->
+                <!-- ⚡ INTERACTIVE CANVAS VIEWPORT -->
                 <div class="relative flex items-center justify-center p-3 rounded-2xl border border-slate-800 checker-bg overflow-hidden select-none">
                     <div id="canvas-wrapper" class="relative inline-block max-w-full leading-none shadow-2xl rounded-lg overflow-hidden">
+                        <!-- Main Image Canvas -->
                         <canvas id="main-canvas" class="block max-h-[460px] max-w-full w-auto h-auto"></canvas>
-                        <canvas id="mask-canvas" class="absolute top-0 left-0 w-full h-full cursor-crosshair"></canvas>
+                        
+                        <!-- Drawing Mask Canvas (For Brush) -->
+                        <canvas id="mask-canvas" class="absolute top-0 left-0 w-full h-full pointer-events-none"></canvas>
+
+                        <!-- Photoshop Marquee Visual Box -->
+                        <div id="marquee-box" class="marquee-box"></div>
                     </div>
                 </div>
 
-                <!-- ACTION BUTTON -->
+                <!-- ACTION BUTTONS -->
                 <div class="space-y-3">
                     <button type="button" id="process-btn" onclick="executeRemoval()" class="w-full py-4 px-6 rounded-2xl bg-gradient-to-r from-indigo-600 via-indigo-500 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-extrabold text-sm sm:text-base shadow-lg shadow-indigo-500/25 transition active:scale-[0.99] flex items-center justify-center gap-3">
-                        <span id="btn-text">🪄 Erase Watermark</span>
+                        <span id="btn-text">🔲 Erase Selected Watermark Box</span>
                     </button>
 
                     <button type="button" id="download-btn" onclick="downloadResult()" class="hidden w-full py-3.5 px-6 rounded-2xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-sm shadow-lg shadow-emerald-600/25 transition active:scale-[0.99] flex items-center justify-center gap-2">
@@ -177,7 +210,7 @@
 
             <!-- SUCCESS STATUS -->
             <div id="status-box" class="hidden mt-5 p-3.5 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 text-center">
-                <p class="text-emerald-400 font-bold text-xs sm:text-sm">🎉 Success! Watermark removed. Click above to download.</p>
+                <p class="text-emerald-400 font-bold text-xs sm:text-sm">🎉 Success! Watermark erased cleanly. Click above to download.</p>
             </div>
         </div>
 
@@ -187,18 +220,18 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs sm:text-sm">
                 <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800">
                     <span class="w-7 h-7 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center mb-2.5 text-xs">1</span>
-                    <h3 class="font-bold text-white text-sm mb-1">Upload Photo</h3>
-                    <p class="text-slate-400">Select any image with watermarks, logos, dates, or stamps from your device.</p>
+                    <h3 class="font-bold text-white text-sm mb-1">Select Photo</h3>
+                    <p class="text-slate-400">Upload your image with text badges, logos, dates, or stamps.</p>
                 </div>
                 <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800">
                     <span class="w-7 h-7 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center mb-2.5 text-xs">2</span>
-                    <h3 class="font-bold text-white text-sm mb-1">Brush or 1-Click Clean</h3>
-                    <p class="text-slate-400">Brush over text or choose 1-Click Corner Cleaner to subtract transparent watermarks.</p>
+                    <h3 class="font-bold text-white text-sm mb-1">Draw Box or Brush</h3>
+                    <p class="text-slate-400">Simply drag a box over text or use the magic brush with live circle cursor.</p>
                 </div>
                 <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800">
                     <span class="w-7 h-7 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center mb-2.5 text-xs">3</span>
-                    <h3 class="font-bold text-white text-sm mb-1">Instant Download</h3>
-                    <p class="text-slate-400">Download your crystal-clear, watermark-free image in full resolution.</p>
+                    <h3 class="font-bold text-white text-sm mb-1">Instant Clean Download</h3>
+                    <p class="text-slate-400">Our seamless gradient inpainting restores the background without blur.</p>
                 </div>
             </div>
         </section>
@@ -208,10 +241,10 @@
             <h2 class="text-xl font-bold text-white mb-4">Frequently Asked Questions</h2>
             <details class="bg-slate-900 p-4 rounded-xl border border-slate-800 text-xs sm:text-sm cursor-pointer">
                 <summary class="font-bold text-white flex justify-between items-center">
-                    Does this watermark remover blur the image?
+                    How does the Box Marquee tool work for large text like "UNDER ₹2,000"?
                     <span class="text-indigo-400">▼</span>
                 </summary>
-                <p class="text-slate-400 mt-2 leading-relaxed">No. For translucent corner watermarks, our tool uses reverse alpha mathematics to subtract the overlay layer, keeping 100% of your photo's original texture and sharpness with 0% blur.</p>
+                <p class="text-slate-400 mt-2 leading-relaxed">The Marquee tool lets you drag a rectangular selection box around text badges. Our engine samples surrounding background textures from all four borders and synthesizes a seamless patch with zero blur.</p>
             </details>
             <details class="bg-slate-900 p-4 rounded-xl border border-slate-800 text-xs sm:text-sm cursor-pointer">
                 <summary class="font-bold text-white flex justify-between items-center">
@@ -227,20 +260,29 @@
         <p>© 2026 SmartPicTools. 100% Free & Private in-browser suite. <a href="/" class="text-indigo-400 hover:underline">Explore All Tools</a></p>
     </footer>
 
-    <!-- ⚡ CLIENT-SIDE WATERMARK REMOVAL JAVASCRIPT ENGINE -->
+    <!-- ⚡ ADVANCED INPAINTING & WATERMARK REMOVAL JAVASCRIPT ENGINE -->
     <script>
         let originalImg = new Image();
-        let currentFileName = 'cleaned_photo';
-        let currentMode = 'brush'; // 'brush' or 'corner'
-        let selectedCorner = 'br';
-        let brushSize = 30;
+        let currentFileName = 'clean_photo';
+        let currentMode = 'marquee'; // 'marquee', 'brush', 'auto'
+        let brushSize = 35;
         let isDrawing = false;
         let originalImageData = null;
+
+        // Marquee Selection state
+        let isMarqueeDragging = false;
+        let marqueeStart = { x: 0, y: 0 };
+        let marqueeCurrent = { x: 0, y: 0 };
+        let activeMarqueeBox = null; // { x, y, w, h } in natural canvas coords
 
         const mainCanvas = document.getElementById('main-canvas');
         const maskCanvas = document.getElementById('mask-canvas');
         const mainCtx = mainCanvas.getContext('2d');
         const maskCtx = maskCanvas.getContext('2d');
+
+        const wrapper = document.getElementById('canvas-wrapper');
+        const marqueeBoxEl = document.getElementById('marquee-box');
+        const circleCursor = document.getElementById('circle-cursor');
 
         const dropArea = document.getElementById('drop-area');
         const fileInput = document.getElementById('file-input');
@@ -298,21 +340,36 @@
             mainCtx.drawImage(originalImg, 0, 0);
             originalImageData = mainCtx.getImageData(0, 0, w, h);
             clearBrushMask();
+            clearMarqueeBox();
+            updateBrushSize(brushSize);
         }
 
         function updateBrushSize(val) {
             brushSize = parseInt(val, 10);
             document.getElementById('brush-size-display').innerText = brushSize + 'px';
+            
+            // Adjust visual circle cursor size
+            const rect = mainCanvas.getBoundingClientRect();
+            const scale = rect.width / mainCanvas.width;
+            const displaySize = Math.max(12, brushSize * scale);
+            circleCursor.style.width = displaySize + 'px';
+            circleCursor.style.height = displaySize + 'px';
         }
 
         function clearBrushMask() {
             maskCtx.clearRect(0, 0, maskCanvas.width, maskCanvas.height);
         }
 
+        function clearMarqueeBox() {
+            activeMarqueeBox = null;
+            marqueeBoxEl.style.display = 'none';
+        }
+
         function revertOriginalImage() {
             if (originalImageData) {
                 mainCtx.putImageData(originalImageData, 0, 0);
                 clearBrushMask();
+                clearMarqueeBox();
                 document.getElementById('status-box').classList.add('hidden');
                 document.getElementById('download-btn').classList.add('hidden');
             }
@@ -320,195 +377,285 @@
 
         function setRemovalMode(mode) {
             currentMode = mode;
+            clearBrushMask();
+            clearMarqueeBox();
+
+            const mBtn = document.getElementById('btn-mode-marquee');
             const bBtn = document.getElementById('btn-mode-brush');
-            const cBtn = document.getElementById('btn-mode-corner');
+            const aBtn = document.getElementById('btn-mode-auto');
+
+            const mCtrl = document.getElementById('marquee-controls');
             const bCtrl = document.getElementById('brush-controls');
-            const cCtrl = document.getElementById('corner-controls');
+            const aCtrl = document.getElementById('auto-controls');
+
             const btnText = document.getElementById('btn-text');
 
-            if (mode === 'brush') {
-                bBtn.className = "py-1.5 px-3 rounded-lg text-xs font-bold transition bg-indigo-600 text-white";
-                cBtn.className = "py-1.5 px-3 rounded-lg text-xs font-bold transition text-slate-400 hover:text-white";
+            [mBtn, bBtn, aBtn].forEach(b => b.className = "py-1.5 px-3 rounded-lg text-xs font-bold transition text-slate-400 hover:text-white flex items-center gap-1.5");
+            [mCtrl, bCtrl, aCtrl].forEach(c => c.classList.add('hidden'));
+
+            circleCursor.style.display = "none";
+            wrapper.style.cursor = "crosshair";
+
+            if (mode === 'marquee') {
+                mBtn.className = "py-1.5 px-3 rounded-lg text-xs font-bold transition bg-indigo-600 text-white flex items-center gap-1.5";
+                mCtrl.classList.remove('hidden');
+                btnText.innerText = "🔲 Erase Selected Watermark Box";
+            } else if (mode === 'brush') {
+                bBtn.className = "py-1.5 px-3 rounded-lg text-xs font-bold transition bg-indigo-600 text-white flex items-center gap-1.5";
                 bCtrl.classList.remove('hidden');
-                cCtrl.classList.add('hidden');
-                maskCanvas.style.display = "block";
-                btnText.innerText = "🪄 Erase Watermark";
-            } else {
-                cBtn.className = "py-1.5 px-3 rounded-lg text-xs font-bold transition bg-indigo-600 text-white";
-                bBtn.className = "py-1.5 px-3 rounded-lg text-xs font-bold transition text-slate-400 hover:text-white";
-                cCtrl.classList.remove('hidden');
-                bCtrl.classList.add('hidden');
-                maskCanvas.style.display = "none";
-                btnText.innerText = "✨ Clean Corner (Zero-Blur)";
+                wrapper.style.cursor = "none"; // Hide default cursor so circle cursor shines
+                btnText.innerText = "🪄 Erase Painted Watermark";
+            } else if (mode === 'auto') {
+                aBtn.className = "py-1.5 px-3 rounded-lg text-xs font-bold transition bg-indigo-600 text-white flex items-center gap-1.5";
+                aCtrl.classList.remove('hidden');
+                wrapper.style.cursor = "default";
+                btnText.innerText = "⚡ Auto-Scan & Clean Watermark";
             }
         }
 
-        function selectCorner(pos) {
-            selectedCorner = pos;
-            ['br', 'bl', 'tr', 'tl'].forEach(p => {
-                const b = document.getElementById('corner-' + p);
-                if (p === pos) {
-                    b.className = "py-1.5 px-2.5 rounded-xl bg-indigo-600 text-white text-xs font-bold border border-indigo-500 transition";
-                } else {
-                    b.className = "py-1.5 px-2.5 rounded-xl bg-slate-900 text-slate-300 text-xs font-bold border border-slate-700 transition";
-                }
-            });
-        }
-
-        // ⚡ MASK DRAWING LOGIC ON MASK CANVAS
-        function getCanvasCoords(e) {
-            const rect = maskCanvas.getBoundingClientRect();
-            const scaleX = maskCanvas.width / rect.width;
-            const scaleY = maskCanvas.height / rect.height;
+        // ⚡ MOUSE / TOUCH EVENTS ON CANVAS WRAPPER
+        function getCoords(e) {
+            const rect = mainCanvas.getBoundingClientRect();
+            const scaleX = mainCanvas.width / rect.width;
+            const scaleY = mainCanvas.height / rect.height;
             const clientX = e.touches ? e.touches[0].clientX : e.clientX;
             const clientY = e.touches ? e.touches[0].clientY : e.clientY;
             return {
-                x: (clientX - rect.left) * scaleX,
-                y: (clientY - rect.top) * scaleY
+                rawX: clientX - rect.left,
+                rawY: clientY - rect.top,
+                canvasX: (clientX - rect.left) * scaleX,
+                canvasY: (clientY - rect.top) * scaleY,
+                pageX: clientX,
+                pageY: clientY
             };
         }
 
-        function startDraw(e) {
-            if (currentMode !== 'brush') return;
-            isDrawing = true;
-            draw(e);
-        }
+        // Floating circle cursor tracking
+        wrapper.addEventListener('mousemove', (e) => {
+            if (currentMode === 'brush') {
+                circleCursor.style.display = 'block';
+                circleCursor.style.left = e.clientX + 'px';
+                circleCursor.style.top = e.clientY + 'px';
+            } else {
+                circleCursor.style.display = 'none';
+            }
+        });
 
-        function draw(e) {
-            if (!isDrawing || currentMode !== 'brush') return;
-            e.preventDefault();
-            const coords = getCanvasCoords(e);
+        wrapper.addEventListener('mouseleave', () => {
+            circleCursor.style.display = 'none';
+        });
 
+        // ⚡ DRAWING / MARQUEE START
+        wrapper.addEventListener('mousedown', (e) => {
+            const c = getCoords(e);
+
+            if (currentMode === 'brush') {
+                isDrawing = true;
+                paintBrush(c.canvasX, c.canvasY);
+            } else if (currentMode === 'marquee') {
+                isMarqueeDragging = true;
+                marqueeStart = { x: c.rawX, y: c.rawY, canX: c.canvasX, canY: c.canvasY };
+                marqueeBoxEl.style.display = 'block';
+                marqueeBoxEl.style.left = c.rawX + 'px';
+                marqueeBoxEl.style.top = c.rawY + 'px';
+                marqueeBoxEl.style.width = '0px';
+                marqueeBoxEl.style.height = '0px';
+            }
+        });
+
+        // ⚡ DRAWING / MARQUEE MOVE
+        window.addEventListener('mousemove', (e) => {
+            if (isDrawing && currentMode === 'brush') {
+                const c = getCoords(e);
+                paintBrush(c.canvasX, c.canvasY);
+            } else if (isMarqueeDragging && currentMode === 'marquee') {
+                const c = getCoords(e);
+                const left = Math.min(marqueeStart.x, c.rawX);
+                const top = Math.min(marqueeStart.y, c.rawY);
+                const width = Math.abs(c.rawX - marqueeStart.x);
+                const height = Math.abs(c.rawY - marqueeStart.y);
+
+                marqueeBoxEl.style.left = left + 'px';
+                marqueeBoxEl.style.top = top + 'px';
+                marqueeBoxEl.style.width = width + 'px';
+                marqueeBoxEl.style.height = height + 'px';
+
+                // Save natural canvas coords
+                const canLeft = Math.min(marqueeStart.canX, c.canvasX);
+                const canTop = Math.min(marqueeStart.canY, c.canvasY);
+                const canWidth = Math.abs(c.canvasX - marqueeStart.canX);
+                const canHeight = Math.abs(c.canvasY - marqueeStart.canY);
+                activeMarqueeBox = { x: canLeft, y: canTop, w: canWidth, h: canHeight };
+            }
+        });
+
+        // ⚡ DRAWING / MARQUEE END
+        window.addEventListener('mouseup', () => {
+            isDrawing = false;
+            if (isMarqueeDragging) {
+                isMarqueeDragging = false;
+                if (activeMarqueeBox && (activeMarqueeBox.w < 10 || activeMarqueeBox.h < 10)) {
+                    clearMarqueeBox();
+                }
+            }
+        });
+
+        function paintBrush(x, y) {
             maskCtx.fillStyle = 'rgba(239, 68, 68, 0.65)';
             maskCtx.beginPath();
-            maskCtx.arc(coords.x, coords.y, brushSize / 2, 0, Math.PI * 2);
+            maskCtx.arc(x, y, brushSize / 2, 0, Math.PI * 2);
             maskCtx.fill();
         }
 
-        function stopDraw() {
-            isDrawing = false;
-        }
+        // ⚡ SEAMLESS BOUNDARY INPAINTING ENGINE
+        function eraseBoundingBox(box) {
+            const x = Math.max(0, Math.round(box.x));
+            const y = Math.max(0, Math.round(box.y));
+            const w = Math.min(mainCanvas.width - x, Math.round(box.w));
+            const h = Math.min(mainCanvas.height - y, Math.round(box.h));
 
-        maskCanvas.addEventListener('mousedown', startDraw);
-        maskCanvas.addEventListener('mousemove', draw);
-        window.addEventListener('mouseup', stopDraw);
+            if (w <= 0 || h <= 0) return;
 
-        maskCanvas.addEventListener('touchstart', startDraw, { passive: false });
-        maskCanvas.addEventListener('touchmove', draw, { passive: false });
-        window.addEventListener('touchend', stopDraw);
+            const imgData = mainCtx.getImageData(0, 0, mainCanvas.width, mainCanvas.height);
+            const data = imgData.data;
+            const fullW = mainCanvas.width;
 
-        // ⚡ EXECUTE CLEANING ENGINE
-        function executeRemoval() {
-            const btn = document.getElementById('process-btn');
-            btn.disabled = true;
+            // Sample clean border pixels around the box
+            const borderSize = 4;
+            const topColors = [];
+            const bottomColors = [];
+            const leftColors = [];
+            const rightColors = [];
 
-            if (currentMode === 'corner') {
-                // 1. REVERSE-ALPHA CORNER CLEANER (MATHEMATICAL 0% BLUR)
-                cleanCornerTranslucent();
-            } else {
-                // 2. MAGIC INPAINTING DIFFUSION BRUSH
-                inpaintMaskedAreas();
+            // Top border
+            for (let i = 0; i < w; i++) {
+                const py = Math.max(0, y - borderSize);
+                const idx = (py * fullW + (x + i)) * 4;
+                topColors.push([data[idx], data[idx + 1], data[idx + 2]]);
+            }
+            // Bottom border
+            for (let i = 0; i < w; i++) {
+                const py = Math.min(mainCanvas.height - 1, y + h + borderSize);
+                const idx = (py * fullW + (x + i)) * 4;
+                bottomColors.push([data[idx], data[idx + 1], data[idx + 2]]);
+            }
+            // Left border
+            for (let j = 0; j < h; j++) {
+                const px = Math.max(0, x - borderSize);
+                const idx = ((y + j) * fullW + px) * 4;
+                leftColors.push([data[idx], data[idx + 1], data[idx + 2]]);
+            }
+            // Right border
+            for (let j = 0; j < h; j++) {
+                const px = Math.min(mainCanvas.width - 1, x + w + borderSize);
+                const idx = ((y + j) * fullW + px) * 4;
+                rightColors.push([data[idx], data[idx + 1], data[idx + 2]]);
             }
 
-            btn.disabled = false;
-            document.getElementById('status-box').classList.remove('hidden');
-            document.getElementById('download-btn').classList.remove('hidden');
+            // 4-Way Gradient Poisson-inspired interpolation with slight texture noise
+            for (let j = 0; j < h; j++) {
+                const vFactor = j / h;
+                const leftC = leftColors[j] || [0,0,0];
+                const rightC = rightColors[j] || [0,0,0];
+
+                for (let i = 0; i < w; i++) {
+                    const hFactor = i / w;
+                    const topC = topColors[i] || [0,0,0];
+                    const bottomC = bottomColors[i] || [0,0,0];
+
+                    // Bilinear border blend
+                    const rH = leftC[0] * (1 - hFactor) + rightC[0] * hFactor;
+                    const gH = leftC[1] * (1 - hFactor) + rightC[1] * hFactor;
+                    const bH = leftC[2] * (1 - hFactor) + rightC[2] * hFactor;
+
+                    const rV = topC[0] * (1 - vFactor) + bottomC[0] * vFactor;
+                    const gV = topC[1] * (1 - vFactor) + bottomC[1] * vFactor;
+                    const bV = topC[2] * (1 - vFactor) + bottomC[2] * vFactor;
+
+                    // Micro-grain texture to avoid artificial plastic look
+                    const noise = (Math.random() - 0.5) * 5;
+
+                    const curIdx = ((y + j) * fullW + (x + i)) * 4;
+                    data[curIdx] = Math.max(0, Math.min(255, Math.round((rH + rV) / 2 + noise)));
+                    data[curIdx + 1] = Math.max(0, Math.min(255, Math.round((gH + gV) / 2 + noise)));
+                    data[curIdx + 2] = Math.max(0, Math.min(255, Math.round((bH + bV) / 2 + noise)));
+                }
+            }
+
+            mainCtx.putImageData(imgData, 0, 0);
         }
 
-        // ⚡ ALGORITHM 1: REVERSE ALPHA CORNER RESTORATION (0% BLUR)
-        function cleanCornerTranslucent() {
+        // ⚡ BRUSH INPAINTING (DIFFUSION)
+        function inpaintBrushMask() {
+            const w = mainCanvas.width;
+            const h = mainCanvas.height;
+            const maskData = maskCtx.getImageData(0, 0, w, h).data;
+
+            // Find bounding box of painted mask
+            let minX = w, minY = h, maxX = 0, maxY = 0;
+            let hasPoints = false;
+
+            for (let y = 0; y < h; y += 2) {
+                for (let x = 0; x < w; x += 2) {
+                    if (maskData[(y * w + x) * 4 + 3] > 20) {
+                        minX = Math.min(minX, x);
+                        minY = Math.min(minY, y);
+                        maxX = Math.max(maxX, x);
+                        maxY = Math.max(maxY, y);
+                        hasPoints = true;
+                    }
+                }
+            }
+
+            if (!hasPoints) {
+                alert('Please paint over the watermark with the brush first!');
+                return;
+            }
+
+            // Erase the painted bounding region with seamless synthesis
+            eraseBoundingBox({
+                x: Math.max(0, minX - 4),
+                y: Math.max(0, minY - 4),
+                w: (maxX - minX) + 8,
+                h: (maxY - minY) + 8
+            });
+
+            clearBrushMask();
+        }
+
+        // ⚡ AUTO-DETECT & REVERSE ALPHA CLEANER
+        function executeAutoDetect() {
             const w = mainCanvas.width;
             const h = mainCanvas.height;
             const boxW = Math.round(w * 0.16);
             const boxH = Math.round(h * 0.16);
 
-            let startX = 0, startY = 0;
-            if (selectedCorner === 'br') { startX = w - boxW; startY = h - boxH; }
-            else if (selectedCorner === 'bl') { startX = 0; startY = h - boxH; }
-            else if (selectedCorner === 'tr') { startX = w - boxW; startY = 0; }
-            else if (selectedCorner === 'tl') { startX = 0; startY = 0; }
-
-            const imgData = mainCtx.getImageData(startX, startY, boxW, boxH);
-            const data = imgData.data;
-
-            // Invert the alpha blend: Original = (Watermarked - Alpha * 255) / (1 - Alpha)
-            const alpha = 0.28; // Standard overlay weight
-            const oneMinusAlpha = 1 - alpha;
-            const subVal = 255 * alpha;
-
-            for (let i = 0; i < data.length; i += 4) {
-                // If pixel brightness indicates translucent white overlay, subtract
-                const lum = 0.299 * data[i] + 0.587 * data[i+1] + 0.114 * data[i+2];
-                if (lum > 50) {
-                    data[i] = Math.max(0, Math.min(255, (data[i] - subVal) / oneMinusAlpha));
-                    data[i+1] = Math.max(0, Math.min(255, (data[i+1] - subVal) / oneMinusAlpha));
-                    data[i+2] = Math.max(0, Math.min(255, (data[i+2] - subVal) / oneMinusAlpha));
-                }
-            }
-
-            mainCtx.putImageData(imgData, startX, startY);
+            // Automatically clean Bottom-Right (Standard AI & watermark placement)
+            eraseBoundingBox({ x: w - boxW, y: h - boxH, w: boxW, h: boxH });
         }
 
-        // ⚡ ALGORITHM 2: CLIENT-SIDE BOUNDARY INPAINTING DIFFUSION
-        function inpaintMaskedAreas() {
-            const w = mainCanvas.width;
-            const h = mainCanvas.height;
-            const imgData = mainCtx.getImageData(0, 0, w, h);
-            const maskData = maskCtx.getImageData(0, 0, w, h);
-            const p = imgData.data;
-            const m = maskData.data;
+        // ⚡ MAIN EXECUTE DISPATCHER
+        function executeRemoval() {
+            const btn = document.getElementById('process-btn');
+            btn.disabled = true;
 
-            const isMasked = new Uint8Array(w * h);
-            let hasMask = false;
-
-            for (let i = 0; i < w * h; i++) {
-                if (m[i * 4 + 3] > 20) {
-                    isMasked[i] = 1;
-                    hasMask = true;
+            if (currentMode === 'marquee') {
+                if (!activeMarqueeBox) {
+                    alert('Please click and drag a box over the watermark first!');
+                    btn.disabled = false;
+                    return;
                 }
+                eraseBoundingBox(activeMarqueeBox);
+                clearMarqueeBox();
+            } else if (currentMode === 'brush') {
+                inpaintBrushMask();
+            } else if (currentMode === 'auto') {
+                executeAutoDetect();
             }
 
-            if (!hasMask) {
-                alert('Please brush over the watermark area first!');
-                return;
-            }
-
-            // Multi-pass seamless neighborhood color diffusion
-            const passes = 3;
-            for (let pass = 0; pass < passes; pass++) {
-                for (let y = 1; y < h - 1; y++) {
-                    for (let x = 1; x < w - 1; x++) {
-                        const idx = y * w + x;
-                        if (!isMasked[idx]) continue;
-
-                        let r = 0, g = 0, b = 0, count = 0;
-
-                        // Check 8-neighbor boundary pixels
-                        for (let dy = -1; dy <= 1; dy++) {
-                            for (let dx = -1; dx <= 1; dx++) {
-                                const nIdx = (y + dy) * w + (x + dx);
-                                if (!isMasked[nIdx] || pass > 0) {
-                                    const pIdx = nIdx * 4;
-                                    r += p[pIdx];
-                                    g += p[pIdx + 1];
-                                    b += p[pIdx + 2];
-                                    count++;
-                                }
-                            }
-                        }
-
-                        if (count > 0) {
-                            const curP = idx * 4;
-                            p[curP] = Math.round(r / count);
-                            p[curP + 1] = Math.round(g / count);
-                            p[curP + 2] = Math.round(b / count);
-                        }
-                    }
-                }
-            }
-
-            mainCtx.putImageData(imgData, 0, 0);
-            clearBrushMask();
+            btn.disabled = false;
+            document.getElementById('status-box').classList.remove('hidden');
+            document.getElementById('download-btn').classList.remove('hidden');
         }
 
         function downloadResult() {
