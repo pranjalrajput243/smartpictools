@@ -18,7 +18,7 @@ except Exception:
     pass
 
 try:
-    import fitz  # ⚡ PyMuPDF Engine (For CorelDraw-style Convert to Curves)
+    import fitz  # PyMuPDF Engine
 except Exception:
     pass
 
@@ -136,8 +136,35 @@ def crop_pdf_page():
     return render_template('crop-pdf.html')
 
 # ==========================================
-# ⚡ CORELDRAW STYLE PDF-TO-SVG (UNLOCKED VECTOR CURVES)
+# ⚡ FLATTENED VECTOR SVG (ELIMINATES CORELDRAW AUTO-LOCK)
 # ==========================================
+def flatten_svg_for_coreldraw(page):
+    svg = page.get_svg_image(text_as_path=True)
+    
+    # 1. Remove clip-paths and defs that trigger Corel's container lock
+    svg = re.sub(r'\s+clip-path="url\(#[^"]+\)"', '', svg)
+    svg = re.sub(r'<clipPath[^>]*>.*?</clipPath>', '', svg, flags=re.DOTALL)
+    svg = re.sub(r'<rect[^>]+fill="#ffffff"[^>]*/>', '', svg)  # Remove white background rect
+
+    # 2. Propagate parent group fill colors directly into each <path>
+    def prop_fill(m):
+        color = m.group(1)
+        body = m.group(2)
+        def add_color(pm):
+            tag = pm.group(0)
+            if 'fill=' not in tag:
+                return tag.replace('<path ', f'<path fill="{color}" ')
+            return tag
+        return re.sub(r'<path\s+[^>]+>', add_color, body)
+
+    svg = re.sub(r'<g\s+style="fill:\s*([^;"]+)[^"]*"[^>]*>(.*?)</g>', prop_fill, svg, flags=re.DOTALL)
+    svg = re.sub(r'<g\s+fill="([^"]+)"[^>]*>(.*?)</g>', prop_fill, svg, flags=re.DOTALL)
+
+    # 3. Strip all <g> and </g> tags so CorelDraw finds ZERO nested groups to lock!
+    svg = re.sub(r'</?g[^>]*>', '', svg)
+
+    return svg
+
 @app.route('/convert-pdf-to-svg-curves', methods=['POST'])
 def convert_pdf_to_svg_curves():
     try:
@@ -152,15 +179,6 @@ def convert_pdf_to_svg_curves():
         if not uploaded_files:
             return jsonify({'error': 'No PDF file provided'}), 400
 
-        def get_clean_unlocked_svg(page):
-            # 1. Convert text to pure vector curves
-            svg = page.get_svg_image(text_as_path=True)
-            # 2. Strip clip-paths & page-level group locks
-            svg = re.sub(r'\s+clip-path="url\(#[^"]+\)"', '', svg)
-            svg = re.sub(r'<clipPath[^>]*>.*?</clipPath>', '', svg, flags=re.DOTALL)
-            svg = re.sub(r'<rect[^>]+fill="#ffffff"[^>]*/>', '', svg) # White background box removed
-            return svg
-
         # Case A: 1 PDF file
         if len(uploaded_files) == 1:
             f = uploaded_files[0]
@@ -168,9 +186,8 @@ def convert_pdf_to_svg_curves():
             pdf_bytes = f.read()
             doc = fitz.open(stream=pdf_bytes, filetype="pdf")
             
-            # Single Page PDF -> Download as .SVG directly
             if len(doc) == 1:
-                svg_data = get_clean_unlocked_svg(doc[0])
+                svg_data = flatten_svg_for_coreldraw(doc[0])
                 doc.close()
                 buf = io.BytesIO(svg_data.encode('utf-8'))
                 return send_file(
@@ -180,11 +197,10 @@ def convert_pdf_to_svg_curves():
                     download_name=f"smartpic_{raw_name}_curves.svg"
                 )
             else:
-                # Multi-page PDF -> Download as ZIP containing .SVG of each page
                 zip_buf = io.BytesIO()
                 with zipfile.ZipFile(zip_buf, 'w', zipfile.ZIP_DEFLATED) as zf:
                     for p in range(len(doc)):
-                        svg_data = get_clean_unlocked_svg(doc[p])
+                        svg_data = flatten_svg_for_coreldraw(doc[p])
                         zf.writestr(f"{raw_name}_page_{p+1}_curves.svg", svg_data.encode('utf-8'))
                 doc.close()
                 zip_buf.seek(0)
@@ -203,7 +219,7 @@ def convert_pdf_to_svg_curves():
                 pdf_bytes = f.read()
                 doc = fitz.open(stream=pdf_bytes, filetype="pdf")
                 for p in range(len(doc)):
-                    svg_data = get_clean_unlocked_svg(doc[p])
+                    svg_data = flatten_svg_for_coreldraw(doc[p])
                     zf.writestr(f"{raw_name}_page_{p+1}_curves.svg", svg_data.encode('utf-8'))
                 doc.close()
 
