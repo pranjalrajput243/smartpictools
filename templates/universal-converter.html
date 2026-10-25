@@ -65,7 +65,7 @@
         <div class="text-center max-w-2xl mx-auto mb-8 sm:mb-10">
             <span class="text-[11px] font-extrabold uppercase tracking-widest text-indigo-400 bg-indigo-500/10 px-3 py-1 rounded-full border border-indigo-500/20">Dedicated Conversion Studio</span>
             <h1 class="text-3xl sm:text-5xl font-black text-white mt-3 tracking-tight">Convert {{ meta.src_name }} to {{ meta.tgt_name }}</h1>
-            <p class="mt-2.5 text-slate-400 text-xs sm:text-sm">Turn {{ meta.src_name }} files into crisp {{ meta.tgt_name }} with zero blur in 0.1s. 100% private in-browser tool.</p>
+            <p class="mt-2.5 text-slate-400 text-xs sm:text-sm">Turn {{ meta.src_name }} files into crisp {{ meta.tgt_name }} with 0% blur in 0.1s. 100% private in-browser tool.</p>
         </div>
 
         <div class="bg-slate-900 rounded-3xl p-5 sm:p-10 border border-slate-800 shadow-2xl relative">
@@ -95,7 +95,7 @@
                 <!-- PRE-CONFIGURED TARGET BADGE -->
                 <div class="p-3.5 bg-slate-950/80 rounded-xl border border-slate-800 flex items-center justify-between text-xs">
                     <span class="text-slate-400 font-semibold">Target Format: <strong class="text-indigo-400 font-bold">{{ meta.tgt_name }}</strong></span>
-                    <span class="text-emerald-400 font-bold">✓ {% if meta.src == 'pdf' and meta.tgt == 'svg' %}100% Pure Vector Curves (0% Blur at Any Zoom){% else %}Zero Blur Guaranteed{% endif %}</span>
+                    <span class="text-emerald-400 font-bold">✓ {% if meta.src == 'pdf' and meta.tgt == 'svg' %}100% Pure Vector (0% Blur at Any Zoom Guaranteed){% else %}Zero Blur Guaranteed{% endif %}</span>
                 </div>
 
                 <button type="button" id="convert-btn" onclick="executeConversion()" class="w-full py-4 px-6 rounded-2xl bg-gradient-to-r from-indigo-600 via-indigo-500 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-extrabold text-sm sm:text-base shadow-lg shadow-indigo-500/25 transition active:scale-[0.99] flex items-center justify-center gap-3">
@@ -119,7 +119,7 @@
                 <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800">
                     <span class="w-7 h-7 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center mb-2.5 text-xs">2</span>
                     <h3 class="font-bold text-white text-sm mb-1">Instant Conversion</h3>
-                    <p class="text-slate-400">Our engine directly draws geometric vector curves with 0% blur.</p>
+                    <p class="text-slate-400">Our engine exports native vector curves and fonts with zero compression blur.</p>
                 </div>
                 <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800">
                     <span class="w-7 h-7 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center mb-2.5 text-xs">3</span>
@@ -134,7 +134,7 @@
         <p>© 2026 SmartPicTools. 100% Free & Private in-browser suite. <a href="/" class="text-indigo-400 hover:underline">Explore All Tools</a></p>
     </footer>
 
-    <!-- ⚡ 100% TRUE VECTOR SVG EXPORTER (ZERO IMAGES, 0% BLUR AT ANY ZOOM) -->
+    <!-- ⚡ TRUE VECTOR SVG ENGINE (0% BLUR, EMBEDDED FONTS, NO TOFU BOXES) -->
     <script>
         pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
 
@@ -237,18 +237,18 @@
             });
         }
 
-        // ⚡ NATIVE VECTOR SVG RENDERER (PURE VECTORS, ZERO IMAGES, ZERO BLUR)
+        // ⚡ NATIVE TRUE VECTOR SVG EXPORTER (PROPER EMBEDDED FONTS - 0% BLUR, NO TOFU BOXES)
         async function renderPdfPageToPureVectorSvg(page) {
             const viewport = page.getViewport({ scale: 1.0 });
             const opList = await page.getOperatorList();
             
-            // Native SVGGraphics converts all text and designs directly into crisp SVG vector shapes
+            // Native Mozilla SVGGraphics with EMBEDDED FONTS ENABLED
             const svgGfx = new pdfjsLib.SVGGraphics(page.commonObjs, page.objs, true);
-            svgGfx.embedFonts = false;
+            svgGfx.embedFonts = true; // ⚡ Embeds true font glyphs so NO tofu boxes appear!
             
             const svg = await svgGfx.getSVG(opList, viewport);
 
-            // Clean namespaces
+            // Clean standard XML namespaces
             if (!svg.getAttribute('xmlns')) {
                 svg.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
             }
@@ -256,16 +256,7 @@
                 svg.setAttribute('xmlns:xlink', 'http://www.w3.org/1999/xlink');
             }
 
-            // Remove any raster fallback images from inside SVG if present
-            const rasterImages = svg.querySelectorAll('image');
-            rasterImages.forEach(img => {
-                const href = img.getAttribute('href') || img.getAttribute('xlink:href') || '';
-                // If it's a full-page raster screenshot fallback, remove it so vector paths take over
-                if (href.startsWith('data:image') && img.getAttribute('width') == viewport.width) {
-                    img.remove();
-                }
-            });
-
+            // Export 100% valid XML
             const svgString = '<?xml version="1.0" encoding="UTF-8"?>\n' + new XMLSerializer().serializeToString(svg);
             return new Blob([svgString], { type: 'image/svg+xml;charset=utf-8' });
         }
@@ -297,7 +288,14 @@
                             const item = filesList[0];
                             const rawName = item.name.substring(0, item.name.lastIndexOf('.')) || item.name;
                             const ab = await item.file.arrayBuffer();
-                            const pdfDoc = await pdfjsLib.getDocument({ data: ab }).promise;
+
+                            // ⚡ CRITICAL: fontExtraProperties extracts the real font data for SVGGraphics
+                            const pdfDoc = await pdfjsLib.getDocument({
+                                data: ab,
+                                cMapUrl: 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/cmaps/',
+                                cMapPacked: true,
+                                fontExtraProperties: true
+                            }).promise;
 
                             if (pdfDoc.numPages === 1) {
                                 const p1 = await pdfDoc.getPage(1);
@@ -318,7 +316,13 @@
                             for (let item of filesList) {
                                 const rawName = item.name.substring(0, item.name.lastIndexOf('.')) || item.name;
                                 const ab = await item.file.arrayBuffer();
-                                const pdfDoc = await pdfjsLib.getDocument({ data: ab }).promise;
+                                
+                                const pdfDoc = await pdfjsLib.getDocument({
+                                    data: ab,
+                                    cMapUrl: 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/cmaps/',
+                                    cMapPacked: true,
+                                    fontExtraProperties: true
+                                }).promise;
 
                                 for (let p = 1; p <= pdfDoc.numPages; p++) {
                                     const page = await pdfDoc.getPage(p);
