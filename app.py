@@ -18,7 +18,7 @@ except Exception:
     pass
 
 try:
-    import fitz  # PyMuPDF Engine
+    import fitz  # PyMuPDF
 except Exception:
     pass
 
@@ -136,41 +136,39 @@ def crop_pdf_page():
     return render_template('crop-pdf.html')
 
 # ==========================================
-# ⚡ FLATTENED VECTOR SVG (ELIMINATES CORELDRAW AUTO-LOCK)
+# ⚡ 100% UNLOCKED VECTOR SVG ENGINE (CLEAN STANDALONE)
 # ==========================================
-def flatten_svg_for_coreldraw(page):
-    svg = page.get_svg_image(text_as_path=True)
+def clean_svg_for_import(page):
+    # text_as_path=True se text sidha vector banega
+    raw_svg = page.get_svg_image(text_as_path=True)
     
-    # 1. Remove clip-paths and defs that trigger Corel's container lock
-    svg = re.sub(r'\s+clip-path="url\(#[^"]+\)"', '', svg)
-    svg = re.sub(r'<clipPath[^>]*>.*?</clipPath>', '', svg, flags=re.DOTALL)
-    svg = re.sub(r'<rect[^>]+fill="#ffffff"[^>]*/>', '', svg)  # Remove white background rect
+    # 1. Page-level clip-path aur masks hatayein (jo Corel me lock lagate hain)
+    raw_svg = re.sub(r'<clipPath[^>]*>.*?</clipPath>', '', raw_svg, flags=re.DOTALL)
+    raw_svg = re.sub(r'\s+clip-path="[^"]*"', '', raw_svg)
+    raw_svg = re.sub(r'<rect[^>]+fill="#ffffff"[^>]*/>', '', raw_svg)  # Background white box remove
 
-    # 2. Propagate parent group fill colors directly into each <path>
-    def prop_fill(m):
-        color = m.group(1)
-        body = m.group(2)
-        def add_color(pm):
-            tag = pm.group(0)
-            if 'fill=' not in tag:
-                return tag.replace('<path ', f'<path fill="{color}" ')
-            return tag
-        return re.sub(r'<path\s+[^>]+>', add_color, body)
+    # 2. Sare groups (<g>) se fill color ko sidhe <path> me daalna
+    def push_fill(match):
+        color = match.group(1)
+        content = match.group(2)
+        # Har path par fill lagao agar pehle se nahi hai
+        return re.sub(r'<path(?![^>]*\bfill=)', f'<path fill="{color}"', content)
 
-    svg = re.sub(r'<g\s+style="fill:\s*([^;"]+)[^"]*"[^>]*>(.*?)</g>', prop_fill, svg, flags=re.DOTALL)
-    svg = re.sub(r'<g\s+fill="([^"]+)"[^>]*>(.*?)</g>', prop_fill, svg, flags=re.DOTALL)
+    # Style ya fill attribute wale groups ko process karein
+    raw_svg = re.sub(r'<g\s+style="fill:\s*([^;"]+)[^"]*"[^>]*>(.*?)</g>', push_fill, raw_svg, flags=re.DOTALL)
+    raw_svg = re.sub(r'<g\s+fill="([^"]+)"[^>]*>(.*?)</g>', push_fill, raw_svg, flags=re.DOTALL)
 
-    # 3. Strip all <g> and </g> tags so CorelDraw finds ZERO nested groups to lock!
-    svg = re.sub(r'</?g[^>]*>', '', svg)
+    # 3. Sare <g> aur </g> tags ko mita kar file ko bilkul flat (unlocked) banayein
+    raw_svg = re.sub(r'</?g[^>]*>', '', raw_svg)
 
-    return svg
+    return raw_svg
 
 @app.route('/convert-pdf-to-svg-curves', methods=['POST'])
 def convert_pdf_to_svg_curves():
     try:
         import fitz
         import zipfile
-        
+
         uploaded_files = request.files.getlist('files')
         if not uploaded_files or not uploaded_files[0].filename:
             f = request.files.get('file')
@@ -179,29 +177,28 @@ def convert_pdf_to_svg_curves():
         if not uploaded_files:
             return jsonify({'error': 'No PDF file provided'}), 400
 
-        # Case A: 1 PDF file
+        # Case 1: 1 PDF file
         if len(uploaded_files) == 1:
             f = uploaded_files[0]
             raw_name = os.path.splitext(f.filename)[0] or 'document'
-            pdf_bytes = f.read()
-            doc = fitz.open(stream=pdf_bytes, filetype="pdf")
+            doc = fitz.open(stream=f.read(), filetype="pdf")
             
             if len(doc) == 1:
-                svg_data = flatten_svg_for_coreldraw(doc[0])
+                svg_data = clean_svg_for_import(doc[0])
                 doc.close()
                 buf = io.BytesIO(svg_data.encode('utf-8'))
                 return send_file(
                     buf,
                     mimetype='image/svg+xml',
                     as_attachment=True,
-                    download_name=f"smartpic_{raw_name}_curves.svg"
+                    download_name=f"smartpic_{raw_name}.svg"
                 )
             else:
                 zip_buf = io.BytesIO()
                 with zipfile.ZipFile(zip_buf, 'w', zipfile.ZIP_DEFLATED) as zf:
                     for p in range(len(doc)):
-                        svg_data = flatten_svg_for_coreldraw(doc[p])
-                        zf.writestr(f"{raw_name}_page_{p+1}_curves.svg", svg_data.encode('utf-8'))
+                        svg_data = clean_svg_for_import(doc[p])
+                        zf.writestr(f"{raw_name}_page_{p+1}.svg", svg_data.encode('utf-8'))
                 doc.close()
                 zip_buf.seek(0)
                 return send_file(
@@ -211,16 +208,15 @@ def convert_pdf_to_svg_curves():
                     download_name=f"smartpic_{raw_name}_svg_pack.zip"
                 )
 
-        # Case B: Multiple PDF files uploaded
+        # Case 2: Multiple PDF files
         zip_buf = io.BytesIO()
         with zipfile.ZipFile(zip_buf, 'w', zipfile.ZIP_DEFLATED) as zf:
             for f in uploaded_files:
                 raw_name = os.path.splitext(f.filename)[0] or 'document'
-                pdf_bytes = f.read()
-                doc = fitz.open(stream=pdf_bytes, filetype="pdf")
+                doc = fitz.open(stream=f.read(), filetype="pdf")
                 for p in range(len(doc)):
-                    svg_data = flatten_svg_for_coreldraw(doc[p])
-                    zf.writestr(f"{raw_name}_page_{p+1}_curves.svg", svg_data.encode('utf-8'))
+                    svg_data = clean_svg_for_import(doc[p])
+                    zf.writestr(f"{raw_name}_page_{p+1}.svg", svg_data.encode('utf-8'))
                 doc.close()
 
         zip_buf.seek(0)
