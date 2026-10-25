@@ -18,7 +18,7 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://smartpictools.in/crop-pdf">
     <meta property="og:title" content="Crop PDF Document Online Free - SmartPicTools">
-    <meta property="og:description" content="Drag to crop margins of 500+ PDF pages visually with zoom controls while keeping selectable Ctrl+F text 100% intact.">
+    <meta property="og:description" content="Drag to crop margins of 500+ PDF pages visually with zoom & hand tool controls while keeping selectable Ctrl+F text 100% intact.">
 
     <!-- FAVICON -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' stop-color='%236366f1'/><stop offset='50%25' stop-color='%23a855f7'/><stop offset='100%25' stop-color='%23ec4899'/></linearGradient></defs><rect width='100' height='100' rx='28' fill='url(%23g)'/><path d='M52 16 L24 54 L46 54 L42 84 L76 44 L54 44 Z' fill='%23fbbf24'/></svg>">
@@ -26,7 +26,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
-    <!-- ⚡ CROPPER.JS FOR INTUITIVE VISUAL DRAG & ZOOM -->
+    <!-- ⚡ CROPPER.JS FOR INTUITIVE VISUAL DRAG, ZOOM & PAN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css"/>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
 
@@ -49,6 +49,15 @@
             background-image: none !important;
         }
         .cropper-modal { background-color: #020617 !important; opacity: 0.65 !important; }
+
+        /* ⚡ HAND TOOL (PANNING) STYLING */
+        .hand-mode-active .cropper-crop-box { pointer-events: none !important; opacity: 0.55; }
+        .hand-mode-active .cropper-container,
+        .hand-mode-active .cropper-drag-box,
+        .hand-mode-active .cropper-wrap-box { cursor: grab !important; }
+        .hand-mode-active .cropper-container:active,
+        .hand-mode-active .cropper-drag-box:active,
+        .hand-mode-active .cropper-wrap-box:active { cursor: grabbing !important; }
     </style>
 </head>
 <body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col justify-between selection:bg-indigo-500 selection:text-white">
@@ -168,7 +177,7 @@
                     </div>
                 </div>
 
-                <!-- ⚡ INTERACTIVE VISUAL CROPPER WORKSPACE -->
+                <!-- ⚡ INTERACTIVE VISUAL CROPPER WORKSPACE WITH HAND TOOL -->
                 <div class="space-y-3">
                     <div class="flex items-center justify-between flex-wrap gap-2">
                         <!-- Left: Page Navigator -->
@@ -181,13 +190,16 @@
                             <button type="button" onclick="changePreviewPage(1)" class="py-1 px-2.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs font-bold text-white transition">Next →</button>
                         </div>
 
-                        <!-- Right: Zoom Controls Toolbar -->
+                        <!-- Right: ⚡ ZOOM & HAND TOOL CONTROLS -->
                         <div class="flex items-center gap-1.5 bg-slate-950/80 p-1.5 rounded-xl border border-slate-800">
                             <button type="button" onclick="cropZoom(0.15)" title="Zoom In" class="py-1 px-2.5 rounded-lg bg-slate-900 hover:bg-indigo-600 text-xs font-bold text-white border border-slate-700 transition active:scale-95 flex items-center gap-1">
                                 <span>🔍+ Zoom In</span>
                             </button>
                             <button type="button" onclick="cropZoom(-0.15)" title="Zoom Out" class="py-1 px-2.5 rounded-lg bg-slate-900 hover:bg-indigo-600 text-xs font-bold text-white border border-slate-700 transition active:scale-95 flex items-center gap-1">
                                 <span>🔍- Zoom Out</span>
+                            </button>
+                            <button type="button" onclick="toggleHandTool()" id="btn-hand-tool" title="Pan / Move Page" class="py-1 px-2.5 rounded-lg bg-slate-900 hover:bg-indigo-600 text-xs font-bold text-slate-300 hover:text-white border border-slate-700 transition active:scale-95 flex items-center gap-1">
+                                <span>✋ Hand Tool</span>
                             </button>
                             <button type="button" onclick="cropResetZoom()" title="Reset Zoom" class="py-1 px-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs font-bold text-slate-300 hover:text-white border border-slate-700 transition">
                                 ↺ Reset
@@ -295,6 +307,8 @@
         let cropper = null;
         let currentPageDimensionsPt = { width: 595, height: 842 };
         let isSyncing = false;
+        let isHandMode = false;
+        let isSpacePressed = false;
 
         const dropArea = document.getElementById('drop-area');
         const fileInput = document.getElementById('file-input');
@@ -379,6 +393,7 @@
                         updateInputsFromCropper();
                     }
                 });
+                if (isHandMode) toggleHandTool();
             };
             img.src = canvas.toDataURL('image/jpeg', 0.95);
         }
@@ -449,8 +464,59 @@
             if (cropper) {
                 cropper.reset();
                 cropper.crop();
+                if (isHandMode) toggleHandTool();
             }
         }
+
+        // ⚡ HAND TOOL (PAN / MOVE PAGE WITH MOUSE OR SPACEBAR)
+        function updatePanMode(active) {
+            if (!cropper) return;
+            const container = document.querySelector('.cropper-container');
+            if (active) {
+                cropper.setDragMode('move');
+                if (container) container.classList.add('hand-mode-active');
+            } else {
+                cropper.setDragMode('crop');
+                if (container) container.classList.remove('hand-mode-active');
+            }
+        }
+
+        function toggleHandTool() {
+            if (!cropper) return;
+            isHandMode = !isHandMode;
+            updatePanMode(isHandMode);
+            const btn = document.getElementById('btn-hand-tool');
+            if (btn) {
+                btn.className = isHandMode 
+                    ? "py-1 px-2.5 rounded-lg bg-indigo-600 text-xs font-bold text-white border border-indigo-500 shadow-lg shadow-indigo-600/30 transition flex items-center gap-1 active:scale-95" 
+                    : "py-1 px-2.5 rounded-lg bg-slate-900 hover:bg-indigo-600 text-xs font-bold text-slate-300 hover:text-white border border-slate-700 transition flex items-center gap-1 active:scale-95";
+            }
+        }
+
+        // Spacebar shortcut to temporarily pan
+        window.addEventListener('keydown', function(e) {
+            if (e.code === 'Space' || e.key === ' ' || e.keyCode === 32) {
+                if (document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA') {
+                    e.preventDefault();
+                    if (!isSpacePressed && cropper) {
+                        isSpacePressed = true;
+                        updatePanMode(true);
+                    }
+                }
+            }
+        }, { passive: false });
+
+        window.addEventListener('keyup', function(e) {
+            if (e.code === 'Space' || e.key === ' ' || e.keyCode === 32) {
+                if (document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA') {
+                    e.preventDefault();
+                }
+                if (cropper) {
+                    isSpacePressed = false;
+                    updatePanMode(isHandMode);
+                }
+            }
+        });
 
         async function changePreviewPage(offset) {
             if (!pdfjsDoc) return;
@@ -595,7 +661,7 @@
             return window.PDFLib || null;
         }
 
-        // ⚡ NATIVE VECTOR PDF CROP USING USER'S VISUAL SELECTION
+        // ⚡ NATIVE VECTOR PDF CROP USING USER'S VISUAL SELECTION (100% UNTOUCHED MATH)
         async function executeNativePdfCrop() {
             if (!originalPdfBytes || !cropper) return;
             if (!validateRangeInput()) return;
