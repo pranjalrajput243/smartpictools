@@ -138,6 +138,10 @@ def pdf_converter_alias():
 def crop_pdf_page():
     return render_template('crop-pdf.html')
 
+@app.route('/remove-watermark')
+def remove_watermark_route():
+    return render_template('remove-watermark.html')
+
 # ==========================================
 # ⚡ SYMBOL DEREFERENCER (ELIMINATES CORELDRAW <use> LOCKS)
 # ==========================================
@@ -320,6 +324,7 @@ def sitemap():
         ('https://smartpictools.in/privacy', '0.5'),
         ('https://smartpictools.in/terms', '0.5'),
         ('https://smartpictools.in/contact', '0.6'),
+        ('https://smartpictools.in/remove-watermark', '0.9'),
     ]
 
     for src, tgts in VALID_CONVERSIONS.items():
