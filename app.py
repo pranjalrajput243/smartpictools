@@ -16,6 +16,11 @@ try:
 except Exception:
     pass
 
+try:
+    import fitz  # ⚡ PyMuPDF Engine (For CorelDraw-style Convert to Curves)
+except Exception:
+    pass
+
 app = Flask(__name__)
 app.config['MAX_CONTENT_LENGTH'] = 100 * 1024 * 1024  # 100MB limit
 
@@ -46,7 +51,6 @@ VALID_CONVERSIONS = {
 def home():
     return render_template('index.html')
 
-# Universal Hub: e.g. /convert-from-jpg, /convert-from-png, /convert-from-pdf
 @app.route('/convert-from-<src>')
 def universal_hub(src):
     src = src.lower()
@@ -60,7 +64,6 @@ def universal_hub(src):
         return render_template('format-hub.html', src=src, src_name=src_name, targets=targets)
     return render_template('index.html')
 
-# Universal Dedicated Conversion Tool: e.g. /jpg-to-pdf, /png-to-jpg, /webp-to-png
 @app.route('/<src>-to-<tgt>')
 def universal_conversion_tool(src, tgt):
     src = src.lower()
@@ -127,10 +130,86 @@ def image_to_pdf_alias():
 def pdf_converter_alias():
     return render_template('pdf-converter.html')
 
-# ⚡ DEDICATED PDF CROPPER ROUTE
 @app.route('/crop-pdf')
 def crop_pdf_page():
     return render_template('crop-pdf.html')
+
+# ==========================================
+# ⚡ CORELDRAW STYLE PDF-TO-SVG (TEXT TO CURVES / SHAPES)
+# ==========================================
+@app.route('/convert-pdf-to-svg-curves', methods=['POST'])
+def convert_pdf_to_svg_curves():
+    try:
+        import fitz
+        import zipfile
+        
+        uploaded_files = request.files.getlist('files')
+        if not uploaded_files or not uploaded_files[0].filename:
+            f = request.files.get('file')
+            uploaded_files = [f] if f else []
+
+        if not uploaded_files:
+            return jsonify({'error': 'No PDF file provided'}), 400
+
+        # Case A: 1 PDF file
+        if len(uploaded_files) == 1:
+            f = uploaded_files[0]
+            raw_name = os.path.splitext(f.filename)[0] or 'document'
+            pdf_bytes = f.read()
+            doc = fitz.open(stream=pdf_bytes, filetype="pdf")
+            
+            # Single Page PDF -> Download as .SVG directly
+            if len(doc) == 1:
+                page = doc[0]
+                # text_as_path=True converts all fonts into mathematical vector shapes (Curves)!
+                svg_data = page.get_svg_image(text_as_path=True)
+                doc.close()
+                buf = io.BytesIO(svg_data.encode('utf-8'))
+                return send_file(
+                    buf,
+                    mimetype='image/svg+xml',
+                    as_attachment=True,
+                    download_name=f"smartpic_{raw_name}_curves.svg"
+                )
+            else:
+                # Multi-page PDF -> Download as ZIP containing .SVG of each page
+                zip_buf = io.BytesIO()
+                with zipfile.ZipFile(zip_buf, 'w', zipfile.ZIP_DEFLATED) as zf:
+                    for p in range(len(doc)):
+                        page = doc[p]
+                        svg_data = page.get_svg_image(text_as_path=True)
+                        zf.writestr(f"{raw_name}_page_{p+1}_curves.svg", svg_data.encode('utf-8'))
+                doc.close()
+                zip_buf.seek(0)
+                return send_file(
+                    zip_buf,
+                    mimetype='application/zip',
+                    as_attachment=True,
+                    download_name=f"smartpic_{raw_name}_svg_pack.zip"
+                )
+
+        # Case B: Multiple PDF files uploaded
+        zip_buf = io.BytesIO()
+        with zipfile.ZipFile(zip_buf, 'w', zipfile.ZIP_DEFLATED) as zf:
+            for f in uploaded_files:
+                raw_name = os.path.splitext(f.filename)[0] or 'document'
+                pdf_bytes = f.read()
+                doc = fitz.open(stream=pdf_bytes, filetype="pdf")
+                for p in range(len(doc)):
+                    page = doc[p]
+                    svg_data = page.get_svg_image(text_as_path=True)
+                    zf.writestr(f"{raw_name}_page_{p+1}_curves.svg", svg_data.encode('utf-8'))
+                doc.close()
+
+        zip_buf.seek(0)
+        return send_file(
+            zip_buf,
+            mimetype='application/zip',
+            as_attachment=True,
+            download_name="smartpic_batch_svg_pack.zip"
+        )
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
 
 # ==========================================
 # LEGAL & INFO
@@ -159,9 +238,7 @@ FAVICON_SVG_DATA = """<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 1
 def serve_favicon():
     return Response(FAVICON_SVG_DATA, mimetype='image/svg+xml')
 
-# ==========================================
-# ⚡ DYNAMIC MASTER SITEMAP (INCLUDES CROP-PDF)
-# ==========================================
+# SITEMAP & ROBOTS
 @app.route('/sitemap.xml')
 def sitemap():
     urls = [
@@ -182,7 +259,6 @@ def sitemap():
         ('https://smartpictools.in/contact', '0.6'),
     ]
 
-    # Automatically add all hubs & dedicated converter pairs!
     for src, tgts in VALID_CONVERSIONS.items():
         urls.append((f"https://smartpictools.in/convert-from-{src}", '0.9'))
         for t in tgts:
@@ -200,31 +276,7 @@ def robots():
     txt = "User-agent: *\nAllow: /\nSitemap: https://smartpictools.in/sitemap.xml\n"
     return Response(txt, mimetype='text/plain')
 
-@app.route('/submit-feedback', methods=['POST'])
-def submit_feedback():
-    try:
-        data = request.get_json() or {}
-        entry = {
-            'timestamp': datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-            'category': data.get('category', 'General'),
-            'message': data.get('message', '').strip(),
-            'email': data.get('email', 'Anonymous')
-        }
-        feedbacks = []
-        if os.path.exists('feedback.json'):
-            try:
-                with open('feedback.json', 'r', encoding='utf-8') as f:
-                    feedbacks = json.load(f)
-            except Exception:
-                feedbacks = []
-        feedbacks.append(entry)
-        with open('feedback.json', 'w', encoding='utf-8') as f:
-            json.dump(feedbacks, f, indent=4)
-        return jsonify({'success': True})
-    except Exception as e:
-        return jsonify({'error': str(e)}), 500
-
-# ⚡ TURBO AVIF FALLBACK ENGINE
+# TURBO AVIF FALLBACK ENGINE
 @app.route('/process', methods=['POST'])
 def process_fallback():
     try:
