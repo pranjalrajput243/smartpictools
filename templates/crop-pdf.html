@@ -4,21 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     
-    <title>Crop PDF Document Online Free - Bulk Margin Trimmer | SmartPicTools</title>
-    <meta name="description" content="Visually crop multi-page and bulk PDFs online for free. Drag crop box or type exact mm margins. 100% preserves searchable text (Ctrl+F) and vector quality.">
-    <meta name="keywords" content="crop pdf online, bulk pdf cropper, trim pdf margins, pdf margin trimmer, crop pdf document, crop pdf keep text searchable, online pdf cutter">
+    <title>{{ meta.title }}</title>
+    <meta name="description" content="{{ meta.desc }}">
+    <meta name="keywords" content="{{ meta.keywords }}">
     <meta name="robots" content="index, follow, max-image-preview:large">
     <meta name="author" content="SmartPicTools">
-    <link rel="canonical" href="https://smartpictools.in/crop-pdf">
+    <link rel="canonical" href="https://smartpictools.in/{{ meta.src }}-to-{{ meta.tgt }}">
     
     <!-- ⚡ PERMANENT GOOGLE SEARCH CONSOLE VERIFICATION TAG -->
     <meta name="google-site-verification" content="uUq17UUsROyHMRQ8jkqKqrjZmsJnkuxZMKKoJLw_X3E" />
 
     <!-- OPEN GRAPH -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://smartpictools.in/crop-pdf">
-    <meta property="og:title" content="Crop PDF Document Online Free - SmartPicTools">
-    <meta property="og:description" content="Drag to crop margins of 500+ PDF pages visually with zoom & hand tool controls while keeping selectable Ctrl+F text 100% intact.">
+    <meta property="og:url" content="https://smartpictools.in/{{ meta.src }}-to-{{ meta.tgt }}">
+    <meta property="og:title" content="{{ meta.title }}">
+    <meta property="og:description" content="{{ meta.desc }}">
 
     <!-- FAVICON -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' stop-color='%236366f1'/><stop offset='50%25' stop-color='%23a855f7'/><stop offset='100%25' stop-color='%23ec4899'/></linearGradient></defs><rect width='100' height='100' rx='28' fill='url(%23g)'/><path d='M52 16 L24 54 L46 54 L42 84 L76 44 L54 44 Z' fill='%23fbbf24'/></svg>">
@@ -26,39 +26,14 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
-    <!-- ⚡ CROPPER.JS FOR INTUITIVE VISUAL DRAG, ZOOM & PAN -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css"/>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
-
-    <!-- ⚡ RELIABLE PDF.JS (PREVIEW ENGINE) -->
+    <!-- LIBRARIES -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/heic2any/0.0.4/heic2any.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/utif@3.1.0/UTIF.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
-    <!-- ⚡ VERIFIED WORKING PDF-LIB (v1.17.1 ON CDNs) -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
-    <script>
-        if (typeof PDFLib === 'undefined' && typeof window.PDFLib === 'undefined') {
-            document.write('<script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"><\/script>');
-        }
-    </script>
-
-    <style>
-        body { font-family: 'Plus Jakarta Sans', sans-serif; -webkit-tap-highlight-color: transparent; }
-        .cropper-view-box, .cropper-face { border-radius: 4px; }
-        .cropper-bg, .cropper-container, .cropper-wrap-box {
-            background: #020617 !important;
-            background-image: none !important;
-        }
-        .cropper-modal { background-color: #020617 !important; opacity: 0.65 !important; }
-
-        /* ⚡ HAND TOOL (PANNING) STYLING */
-        .hand-mode-active .cropper-crop-box { pointer-events: none !important; opacity: 0.55; }
-        .hand-mode-active .cropper-container,
-        .hand-mode-active .cropper-drag-box,
-        .hand-mode-active .cropper-wrap-box { cursor: grab !important; }
-        .hand-mode-active .cropper-container:active,
-        .hand-mode-active .cropper-drag-box:active,
-        .hand-mode-active .cropper-wrap-box:active { cursor: grabbing !important; }
-    </style>
+    <style>body { font-family: 'Plus Jakarta Sans', sans-serif; -webkit-tap-highlight-color: transparent; }</style>
 </head>
 <body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col justify-between selection:bg-indigo-500 selection:text-white">
 
@@ -66,226 +41,93 @@
     <header class="border-b border-slate-800 bg-slate-900/80 backdrop-blur-xl sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 h-18 sm:h-20 flex items-center justify-between">
             <a href="/" class="flex items-center gap-2.5 sm:gap-3 group">
-                <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-2xl bg-gradient-to-tr from-indigo-500 via-purple-500 to-pink-500 flex items-center justify-center text-white text-lg sm:text-xl shadow-lg shadow-indigo-500/30 group-hover:scale-105 transition">⚡</div>
+                <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-2xl bg-gradient-to-tr from-indigo-500 via-purple-500 to-pink-500 flex items-center justify-center text-white text-lg sm:text-xl shadow-lg shadow-indigo-500/30 group-hover:scale-105 transition">
+                    ⚡
+                </div>
                 <div>
-                    <span class="text-xl sm:text-2xl font-black text-white">SmartPic<span class="text-indigo-400">Tools</span></span>
-                    <span class="block text-[9px] uppercase font-bold text-slate-400 -mt-1 tracking-widest">PDF Cropper</span>
+                    <span class="text-xl sm:text-2xl font-black tracking-tight text-white">SmartPic<span class="text-indigo-400">Tools</span></span>
+                    <span class="block text-[9px] sm:text-[10px] uppercase font-bold tracking-widest text-slate-400 -mt-1">{{ meta.src_name }} to {{ meta.tgt_name }}</span>
                 </div>
             </a>
-            <a href="/" class="py-2 px-3.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-bold text-indigo-400 hover:text-white border border-slate-700 transition">← All Tools</a>
+            <div class="flex items-center gap-2">
+                <a href="/convert-from-{{ meta.src }}" class="py-2 px-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-bold text-slate-300 hover:text-white border border-slate-700 transition">
+                    ← {{ meta.src_name }} Hub
+                </a>
+                <a href="/" class="py-2 px-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-bold text-indigo-400 hover:text-white border border-slate-700 transition">
+                    All Tools
+                </a>
+            </div>
         </div>
     </header>
 
-    <!-- MAIN WORKSPACE -->
+    <!-- MAIN CONVERTER WORKSPACE -->
     <main class="max-w-4xl mx-auto w-full px-4 py-8 sm:py-12 flex-1">
         <div class="text-center max-w-2xl mx-auto mb-8 sm:mb-10">
-            <span class="text-[11px] font-extrabold uppercase tracking-widest text-indigo-400 bg-indigo-500/10 px-3 py-1 rounded-full border border-indigo-500/20">Visual Drag & Crop Engine</span>
-            <h1 class="text-3xl sm:text-5xl font-black text-white mt-3 tracking-tight">Crop PDF Document Online</h1>
-            <p class="mt-2.5 text-slate-400 text-xs sm:text-sm">Click and drag directly on the page or fine-tune exact margins below. 100% preserves selectable text (<strong class="text-indigo-400">Ctrl+F works</strong>) and vector sharpness.</p>
+            <span class="text-[11px] font-extrabold uppercase tracking-widest text-indigo-400 bg-indigo-500/10 px-3 py-1 rounded-full border border-indigo-500/20">Dedicated Conversion Studio</span>
+            <h1 class="text-3xl sm:text-5xl font-black text-white mt-3 tracking-tight">Convert {{ meta.src_name }} to {{ meta.tgt_name }}</h1>
+            <p class="mt-2.5 text-slate-400 text-xs sm:text-sm">Turn {{ meta.src_name }} files into crisp {{ meta.tgt_name }} with zero blur in 0.1s. 100% private tool.</p>
         </div>
 
         <div class="bg-slate-900 rounded-3xl p-5 sm:p-10 border border-slate-800 shadow-2xl relative">
             
-            <!-- DROP AREA -->
+            <!-- UPLOAD DROP AREA -->
             <div id="drop-area" class="border-2 border-dashed border-slate-700 hover:border-indigo-500 bg-slate-950/60 hover:bg-indigo-950/20 rounded-2xl p-8 sm:p-14 text-center cursor-pointer transition-all duration-300">
-                <input type="file" id="file-input" accept="application/pdf, .pdf" class="hidden">
-                <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-3xl bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-3xl sm:text-4xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition">✂️</div>
-                <h3 class="text-base sm:text-xl font-bold text-white mb-1.5">Select PDF Document to Crop</h3>
-                <p class="text-xs sm:text-sm text-slate-400">Supports single and multi-page PDFs with 500+ pages (100% In-Browser Private)</p>
+                <input type="file" id="file-input" multiple {% if meta.src == 'pdf' %}accept="application/pdf, .pdf"{% elif meta.src == 'heic' %}accept=".heic, .HEIC, .heif, .HEIF"{% else %}accept="image/*, .{{ meta.src }}"{% endif %} class="hidden">
+                <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-3xl bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-3xl sm:text-4xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition duration-300 shadow-inner">
+                    🔄
+                </div>
+                <h3 class="text-base sm:text-xl font-bold text-white mb-1.5">Select {{ meta.src_name }} File(s) to Convert</h3>
+                <p class="text-xs sm:text-sm text-slate-400">Choose single or multiple {{ meta.src_name }} files</p>
             </div>
 
             <!-- WORKSPACE -->
             <div id="workspace" class="hidden mt-6 space-y-6">
-                
-                <!-- FILE STATS STRIP -->
-                <div class="bg-slate-950/90 p-4 rounded-2xl border border-slate-800 flex items-center justify-between flex-wrap gap-3">
-                    <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 rounded-xl bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 flex items-center justify-center font-bold text-lg">📄</div>
-                        <div>
-                            <span id="file-name-display" class="text-sm font-bold text-white block truncate max-w-xs sm:max-w-md">document.pdf</span>
-                            <div class="flex items-center gap-2 mt-0.5 text-xs text-slate-400">
-                                <span>Total Pages: <strong id="total-pages-badge" class="text-indigo-400 font-extrabold">0</strong></span>
-                                <span>•</span>
-                                <span>Size: <strong id="file-size-badge" class="text-slate-300 font-semibold">0 MB</strong></span>
-                                <span>•</span>
-                                <span class="text-emerald-400 font-bold">✓ Native Vector PDF</span>
-                            </div>
-                        </div>
-                    </div>
+                <div class="flex items-center justify-between">
+                    <span class="text-xs font-bold text-slate-300">Selected Files (<span id="file-count" class="text-indigo-400 font-extrabold">0</span>):</span>
                     <button type="button" onclick="document.getElementById('file-input').click()" class="text-xs font-bold text-indigo-400 hover:text-white bg-slate-800 hover:bg-slate-700 px-3 py-1.5 rounded-xl border border-slate-700 transition">
-                        🔄 Change PDF
+                        + Add More
                     </button>
                 </div>
 
-                <!-- QUICK PRESET BUTTONS -->
-                <div class="bg-slate-950/80 p-3.5 sm:p-4 rounded-2xl border border-slate-800 space-y-2">
-                    <div class="flex items-center justify-between">
-                        <span class="text-xs font-bold text-slate-400">Quick Crop Presets:</span>
-                        <span class="text-[11px] text-emerald-400 font-semibold">💡 Click & drag box freely</span>
-                    </div>
-                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
-                        <button type="button" onclick="applyPresetCrop('full')" class="py-2 px-2.5 rounded-xl bg-slate-900 hover:bg-indigo-600 text-xs font-bold text-slate-300 hover:text-white border border-slate-700 transition">
-                            ↺ Full Page / Reset
-                        </button>
-                        <button type="button" onclick="applyPresetCrop('standard-label')" class="py-2 px-2.5 rounded-xl bg-slate-900 hover:bg-indigo-600 text-xs font-bold text-slate-300 hover:text-white border border-slate-700 transition">
-                            📦 4×6 Standard Label
-                        </button>
-                        <button type="button" onclick="applyPresetCrop('top-half')" class="py-2 px-2.5 rounded-xl bg-slate-900 hover:bg-indigo-600 text-xs font-bold text-slate-300 hover:text-white border border-slate-700 transition">
-                            ⚡ Top-Half (A4)
-                        </button>
-                        <button type="button" onclick="applyPresetCrop('bottom-half')" class="py-2 px-2.5 rounded-xl bg-slate-900 hover:bg-indigo-600 text-xs font-bold text-slate-300 hover:text-white border border-slate-700 transition">
-                            📄 Bottom-Half (A4)
-                        </button>
-                    </div>
+                <div id="gallery" class="grid grid-cols-2 sm:grid-cols-4 gap-3 max-h-80 overflow-y-auto p-3 bg-slate-950/80 rounded-2xl border border-slate-800">
                 </div>
 
-                <!-- ⚡ INTERACTIVE VISUAL CROPPER WORKSPACE WITH HAND TOOL -->
-                <div class="space-y-3">
-                    <div class="flex items-center justify-between flex-wrap gap-2">
-                        <!-- Left: Page Navigator -->
-                        <div class="flex items-center gap-2">
-                            <span class="text-xs font-bold text-slate-300">Previewing Page:</span>
-                            <span class="text-xs font-black text-indigo-400 bg-indigo-500/10 px-2.5 py-0.5 rounded-lg border border-indigo-500/20">
-                                <span id="current-page-num">1</span> / <span id="max-page-num">1</span>
-                            </span>
-                            <button type="button" onclick="changePreviewPage(-1)" class="py-1 px-2.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs font-bold text-white transition">← Prev</button>
-                            <button type="button" onclick="changePreviewPage(1)" class="py-1 px-2.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs font-bold text-white transition">Next →</button>
-                        </div>
-
-                        <!-- Right: ⚡ ZOOM & HAND TOOL CONTROLS -->
-                        <div class="flex items-center gap-1.5 bg-slate-950/80 p-1.5 rounded-xl border border-slate-800">
-                            <button type="button" onclick="cropZoom(0.15)" title="Zoom In" class="py-1 px-2.5 rounded-lg bg-slate-900 hover:bg-indigo-600 text-xs font-bold text-white border border-slate-700 transition active:scale-95 flex items-center gap-1">
-                                <span>🔍+ Zoom In</span>
-                            </button>
-                            <button type="button" onclick="cropZoom(-0.15)" title="Zoom Out" class="py-1 px-2.5 rounded-lg bg-slate-900 hover:bg-indigo-600 text-xs font-bold text-white border border-slate-700 transition active:scale-95 flex items-center gap-1">
-                                <span>🔍- Zoom Out</span>
-                            </button>
-                            <button type="button" onclick="toggleHandTool()" id="btn-hand-tool" title="Pan / Move Page" class="py-1 px-2.5 rounded-lg bg-slate-900 hover:bg-indigo-600 text-xs font-bold text-slate-300 hover:text-white border border-slate-700 transition active:scale-95 flex items-center gap-1">
-                                <span>✋ Hand Tool</span>
-                            </button>
-                            <button type="button" onclick="cropResetZoom()" title="Reset Zoom" class="py-1 px-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs font-bold text-slate-300 hover:text-white border border-slate-700 transition">
-                                ↺ Reset
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- Cropper Canvas Container -->
-                    <div class="flex items-center justify-center p-3 bg-slate-950 rounded-2xl border border-slate-800 overflow-hidden select-none">
-                        <div class="inline-block max-w-full rounded-xl overflow-hidden leading-none shadow-xl bg-slate-950">
-                            <img id="crop-image" src="#" alt="PDF Preview" class="max-h-[460px] max-w-full block">
-                        </div>
-                    </div>
+                <!-- PRE-CONFIGURED TARGET BADGE -->
+                <div class="p-3.5 bg-slate-950/80 rounded-xl border border-slate-800 flex items-center justify-between text-xs">
+                    <span class="text-slate-400 font-semibold">Target Format: <strong class="text-indigo-400 font-bold">{{ meta.tgt_name }}</strong></span>
+                    <span class="text-emerald-400 font-bold">✓ High-Quality & Zero Blur Guaranteed</span>
                 </div>
 
-                 <!-- ⚡ TWO-WAY LIVE MARGIN VALUES (IN MM) -->
-                <div class="bg-slate-950/80 p-3.5 sm:p-4 rounded-2xl border border-slate-800 space-y-2">
-                    <div class="flex items-center justify-between">
-                        <span class="text-xs font-bold text-slate-400">Crop Margins to Cut Off (in mm):</span>
-                        <span class="text-[10px] text-slate-400 uppercase tracking-wider">Updates Live With Drag</span>
-                    </div>
-                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
-                        <div class="bg-slate-900 p-2.5 rounded-xl border border-slate-800">
-                            <label class="block text-[11px] font-bold text-slate-400 mb-1">Top Margin</label>
-                            <div class="flex items-center gap-1.5">
-                                <input type="number" id="margin-top" value="0" min="0" oninput="updateCropperFromInputs()" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-2.5 py-1 text-xs text-white font-bold focus:outline-none focus:border-indigo-500">
-                                <span class="text-[11px] text-slate-400 font-semibold">mm</span>
-                            </div>
-                        </div>
-                        <div class="bg-slate-900 p-2.5 rounded-xl border border-slate-800">
-                            <label class="block text-[11px] font-bold text-slate-400 mb-1">Bottom Margin</label>
-                            <div class="flex items-center gap-1.5">
-                                <input type="number" id="margin-bottom" value="0" min="0" oninput="updateCropperFromInputs()" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-2.5 py-1 text-xs text-white font-bold focus:outline-none focus:border-indigo-500">
-                                <span class="text-[11px] text-slate-400 font-semibold">mm</span>
-                            </div>
-                        </div>
-                        <div class="bg-slate-900 p-2.5 rounded-xl border border-slate-800">
-                            <label class="block text-[11px] font-bold text-slate-400 mb-1">Left Margin</label>
-                            <div class="flex items-center gap-1.5">
-                                <input type="number" id="margin-left" value="0" min="0" oninput="updateCropperFromInputs()" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-2.5 py-1 text-xs text-white font-bold focus:outline-none focus:border-indigo-500">
-                                <span class="text-[11px] text-slate-400 font-semibold">mm</span>
-                            </div>
-                        </div>
-                        <div class="bg-slate-900 p-2.5 rounded-xl border border-slate-800">
-                            <label class="block text-[11px] font-bold text-slate-400 mb-1">Right Margin</label>
-                            <div class="flex items-center gap-1.5">
-                                <input type="number" id="margin-right" value="0" min="0" oninput="updateCropperFromInputs()" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-2.5 py-1 text-xs text-white font-bold focus:outline-none focus:border-indigo-500">
-                                <span class="text-[11px] text-slate-400 font-semibold">mm</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- PAGE SELECTION SYSTEM -->
-                <div class="bg-slate-950/80 p-4 sm:p-5 rounded-2xl border border-slate-800 space-y-3">
-                    <label class="block text-xs font-bold text-slate-400">Which Pages to Crop:</label>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                        <label class="flex items-center gap-3 p-3 bg-slate-900 rounded-xl border border-slate-800 cursor-pointer hover:border-indigo-500/50 transition">
-                            <input type="radio" name="page-mode" value="all" checked onchange="handlePageModeToggle('all')" class="w-4 h-4 accent-indigo-600">
-                            <div>
-                                <span class="text-xs font-bold text-white block">All Pages (Bulk Mode)</span>
-                                <span class="text-[11px] text-slate-400">Applies this visual crop box to all pages</span>
-                            </div>
-                        </label>
-                        <label class="flex items-center gap-3 p-3 bg-slate-900 rounded-xl border border-slate-800 cursor-pointer hover:border-indigo-500/50 transition">
-                            <input type="radio" name="page-mode" value="custom" onchange="handlePageModeToggle('custom')" class="w-4 h-4 accent-indigo-600">
-                            <div>
-                                <span class="text-xs font-bold text-white block">Single Page / Custom Range</span>
-                                <span class="text-[11px] text-slate-400">Specific page numbers or ranges</span>
-                            </div>
-                        </label>
-                    </div>
-
-                    <div id="custom-range-container" class="hidden p-3 bg-slate-900 rounded-xl border border-slate-800 space-y-2">
-                        <div class="flex justify-between items-center">
-                            <label class="block text-xs font-bold text-slate-300">Enter Page Numbers or Ranges:</label>
-                            <span class="text-[11px] text-indigo-400 font-semibold">e.g. 1-15, 22, 50-80</span>
-                        </div>
-                        <input type="text" id="custom-range-input" value="1" placeholder="e.g. 1-10, 15, 20-35" oninput="validateRangeInput()" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-white font-bold focus:outline-none focus:border-indigo-500">
-                        <p id="range-validation-msg" class="text-xs font-bold text-emerald-400">✓ Ready to process pages.</p>
-                    </div>
-                </div>
-                
-                <!-- PROGRESS BAR -->
-                <div id="progress-container" class="hidden bg-slate-950/90 p-4 rounded-2xl border border-slate-800 space-y-2">
-                    <div class="flex justify-between text-xs font-bold">
-                        <span class="text-indigo-400" id="progress-status-text">Processing pages...</span>
-                        <span class="text-white" id="progress-percentage-text">0%</span>
-                    </div>
-                    <div class="w-full h-2.5 bg-slate-900 rounded-full overflow-hidden border border-slate-800">
-                        <div id="progress-bar-fill" class="h-full bg-gradient-to-r from-indigo-500 to-emerald-400 transition-all duration-75" style="width: 0%"></div>
-                    </div>
-                </div>
-
-                <!-- ACTION BUTTON -->
-                <button type="button" id="crop-download-btn" onclick="executeNativePdfCrop()" class="w-full py-4 px-6 rounded-2xl bg-gradient-to-r from-indigo-600 via-indigo-500 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-extrabold text-sm sm:text-base shadow-lg shadow-indigo-500/25 transition active:scale-[0.99] flex items-center justify-center gap-3">
-                    <span id="btn-text">✂️ Crop & Download PDF (Searchable Text Intact)</span>
+                <button type="button" id="convert-btn" onclick="executeConversion()" class="w-full py-4 px-6 rounded-2xl bg-gradient-to-r from-indigo-600 via-indigo-500 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-extrabold text-sm sm:text-base shadow-lg shadow-indigo-500/25 transition active:scale-[0.99] flex items-center justify-center gap-3">
+                    <span id="btn-text">⚡ Convert to {{ meta.tgt_name }} & Download</span>
                 </button>
             </div>
 
             <!-- SUCCESS STATUS -->
-            <div id="status-box" class="hidden mt-5 p-4 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 text-center space-y-1">
-                <p class="text-emerald-400 font-bold text-sm">🎉 Success! Cropped PDF has been downloaded directly to your device.</p>
-                <p class="text-[11px] text-slate-400">All barcodes remain sharp vector lines and text is 100% searchable with Ctrl+F.</p>
+            <div id="status-box" class="hidden mt-5 space-y-3">
+                <div class="p-3.5 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 text-center">
+                    <p class="text-emerald-400 font-bold text-xs sm:text-sm">🎉 Success! {{ meta.tgt_name }} file(s) downloaded successfully!</p>
+                </div>
             </div>
         </div>
 
         <section class="mt-14 border-t border-slate-800 pt-10">
-            <h2 class="text-xl sm:text-2xl font-bold text-white text-center mb-6">How to Crop PDF Documents Online in 3 Steps</h2>
+            <h2 class="text-xl sm:text-2xl font-bold text-white text-center mb-6">How to Convert {{ meta.src_name }} to {{ meta.tgt_name }} in 3 Easy Steps</h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs sm:text-sm">
                 <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800">
                     <span class="w-7 h-7 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center mb-2.5 text-xs">1</span>
-                    <h3 class="font-bold text-white text-sm mb-1">Upload Document</h3>
-                    <p class="text-slate-400">Upload any single or multi-page PDF up to 500+ pages.</p>
+                    <h3 class="font-bold text-white text-sm mb-1">Select Files</h3>
+                    <p class="text-slate-400">Choose single or multiple {{ meta.src_name }} files from your device.</p>
                 </div>
                 <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800">
                     <span class="w-7 h-7 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center mb-2.5 text-xs">2</span>
-                    <h3 class="font-bold text-white text-sm mb-1">Drag or Enter mm</h3>
-                    <p class="text-slate-400">Drag corners on screen or type exact margin numbers in millimeters.</p>
+                    <h3 class="font-bold text-white text-sm mb-1">Instant Processing</h3>
+                    <p class="text-slate-400">Our high-speed engine transforms your files into clean {{ meta.tgt_name }} format.</p>
                 </div>
                 <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800">
                     <span class="w-7 h-7 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center mb-2.5 text-xs">3</span>
-                    <h3 class="font-bold text-white text-sm mb-1">Download Real PDF</h3>
-                    <p class="text-slate-400">Export trimmed PDF with full Ctrl+F searchable text and vector sharpness.</p>
+                    <h3 class="font-bold text-white text-sm mb-1">Download</h3>
+                    <p class="text-slate-400">Single files download directly; multiple files download as a clean ZIP archive.</p>
                 </div>
             </div>
         </section>
@@ -295,20 +137,14 @@
         <p>© 2026 SmartPicTools. 100% Free & Private in-browser suite. <a href="/" class="text-indigo-400 hover:underline">Explore All Tools</a></p>
     </footer>
 
-    <!-- ⚡ REAL VISUAL CROP & BULK PDF-LIB ENGINE -->
+    <!-- ⚡ COMPLETE MASTER CONVERTER JS ENGINE -->
     <script>
         pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
 
-        let originalPdfBytes = null;
-        let pdfjsDoc = null;
-        let originalFileName = 'document';
-        let totalPages = 0;
-        let currentPage = 1;
-        let cropper = null;
-        let currentPageDimensionsPt = { width: 595, height: 842 };
-        let isSyncing = false;
-        let isHandMode = false;
-        let isSpacePressed = false;
+        const SRC_FMT = "{{ meta.src }}".toLowerCase();
+        const TGT_FMT = "{{ meta.tgt }}".toLowerCase();
+        const TGT_NAME = "{{ meta.tgt_name }}";
+        let filesList = [];
 
         const dropArea = document.getElementById('drop-area');
         const fileInput = document.getElementById('file-input');
@@ -322,443 +158,362 @@
         ['dragleave', 'drop'].forEach(ev => dropArea.classList.remove('border-indigo-500', 'bg-indigo-950/40'));
 
         dropArea.addEventListener('drop', (e) => {
-            if (e.dataTransfer && e.dataTransfer.files.length > 0) handleIncomingFile(e.dataTransfer.files[0]);
+            if (e.dataTransfer && e.dataTransfer.files.length > 0) handleFiles(e.dataTransfer.files);
         });
         dropArea.addEventListener('click', () => fileInput.click());
         fileInput.addEventListener('change', (e) => {
-            if (e.target.files && e.target.files.length > 0) handleIncomingFile(e.target.files[0]);
+            if (e.target.files && e.target.files.length > 0) handleFiles(e.target.files);
         });
 
-        async function handleIncomingFile(file) {
-            if (!file || !file.name.toLowerCase().endsWith('.pdf')) {
-                alert('Please upload a valid PDF document (.pdf).');
+        async function handleFiles(files) {
+            for (let f of Array.from(files)) {
+                let processedBlob = f;
+                let previewUrl = '';
+                const nameLower = f.name.toLowerCase();
+
+                // 1. PDF Preview
+                if (SRC_FMT === 'pdf' || nameLower.endsWith('.pdf')) {
+                    try {
+                        const ab = await f.arrayBuffer();
+                        const pDoc = await pdfjsLib.getDocument({ data: ab }).promise;
+                        const p1 = await pDoc.getPage(1);
+                        const vp = p1.getViewport({ scale: 0.3 });
+                        const cvs = document.createElement('canvas');
+                        cvs.width = vp.width;
+                        cvs.height = vp.height;
+                        await p1.render({ canvasContext: cvs.getContext('2d'), viewport: vp }).promise;
+                        previewUrl = cvs.toDataURL('image/jpeg', 0.8);
+                    } catch(e) {
+                        previewUrl = '';
+                    }
+                }
+                // 2. iPhone HEIC Decoder (Guarantees decoding on Windows & Android)
+                else if (nameLower.endsWith('.heic') || nameLower.endsWith('.heif')) {
+                    try {
+                        const conv = await heic2any({ blob: f, toType: 'image/jpeg', quality: 0.92 });
+                        processedBlob = Array.isArray(conv) ? conv[0] : conv;
+                        previewUrl = URL.createObjectURL(processedBlob);
+                    } catch(e) {
+                        previewUrl = URL.createObjectURL(f);
+                    }
+                }
+                // 3. TIFF / TIF Decoder via UTIF.js
+                else if (nameLower.endsWith('.tif') || nameLower.endsWith('.tiff')) {
+                    try {
+                        const ab = await f.arrayBuffer();
+                        const ifds = UTIF.decode(ab);
+                        UTIF.decodeImage(ab, ifds[0]);
+                        const rgba = UTIF.toRGBA8(ifds[0]);
+                        const tcvs = document.createElement('canvas');
+                        tcvs.width = ifds[0].width;
+                        tcvs.height = ifds[0].height;
+                        const imgData = tcvs.getContext('2d').createImageData(ifds[0].width, ifds[0].height);
+                        imgData.data.set(rgba);
+                        tcvs.getContext('2d').putImageData(imgData, 0, 0);
+                        processedBlob = await new Promise(res => tcvs.toBlob(res, 'image/png'));
+                        previewUrl = URL.createObjectURL(processedBlob);
+                    } catch(e) {
+                        previewUrl = URL.createObjectURL(f);
+                    }
+                }
+                // 4. Standard Images (JPG, PNG, WEBP, SVG)
+                else {
+                    previewUrl = URL.createObjectURL(f);
+                }
+
+                filesList.push({ file: f, blob: processedBlob, url: previewUrl, name: f.name });
+            }
+            renderGallery();
+        }
+
+        function renderGallery() {
+            if (filesList.length === 0) {
+                document.getElementById('workspace').classList.add('hidden');
+                document.getElementById('drop-area').classList.remove('hidden');
                 return;
             }
+            document.getElementById('workspace').classList.remove('hidden');
+            document.getElementById('drop-area').classList.add('hidden');
+            document.getElementById('file-count').innerText = filesList.length;
 
-            originalFileName = file.name.substring(0, file.name.lastIndexOf('.')) || 'document';
-            document.getElementById('file-name-display').innerText = file.name;
-            document.getElementById('file-size-badge').innerText = (file.size / (1024 * 1024)).toFixed(2) + ' MB';
+            const gallery = document.getElementById('gallery');
+            gallery.innerHTML = '';
 
-            try {
-                originalPdfBytes = await file.arrayBuffer();
+            filesList.forEach((item, index) => {
+                const card = document.createElement('div');
+                card.className = "relative bg-slate-900 p-2 rounded-xl border border-slate-800 text-center";
+                
+                const delBtn = document.createElement('button');
+                delBtn.type = "button";
+                delBtn.className = "absolute top-1 right-1 w-5 h-5 rounded-full bg-rose-600 text-white text-[10px] font-black flex items-center justify-center";
+                delBtn.innerHTML = "✕";
+                delBtn.onclick = () => {
+                    filesList.splice(index, 1);
+                    renderGallery();
+                };
 
-                // Load preview with pdf.js
-                pdfjsDoc = await pdfjsLib.getDocument({ data: originalPdfBytes.slice(0) }).promise;
-                totalPages = pdfjsDoc.numPages;
-                document.getElementById('total-pages-badge').innerText = totalPages;
-                document.getElementById('max-page-num').innerText = totalPages;
-                currentPage = 1;
+                const thumb = document.createElement('img');
+                thumb.className = "w-full h-16 object-cover rounded-lg mb-1 bg-slate-950";
+                thumb.src = item.url || '';
 
-                document.getElementById('drop-area').classList.add('hidden');
-                document.getElementById('workspace').classList.remove('hidden');
-                document.getElementById('status-box').classList.add('hidden');
+                const nameText = document.createElement('p');
+                nameText.className = "text-[10px] font-bold text-white truncate";
+                nameText.innerText = item.name;
 
-                await renderPageToCropper(currentPage);
-                validateRangeInput();
-            } catch(err) {
-                alert('Failed to read PDF file: ' + err.message);
-            }
-        }
-
-        async function renderPageToCropper(pageNum) {
-            if (!pdfjsDoc) return;
-            const page = await pdfjsDoc.getPage(pageNum);
-            document.getElementById('current-page-num').innerText = pageNum;
-
-            const unscaledViewport = page.getViewport({ scale: 1.0 });
-            currentPageDimensionsPt = { width: unscaledViewport.width, height: unscaledViewport.height };
-
-            const renderScale = Math.min(1800 / unscaledViewport.height, 1400 / unscaledViewport.width, 2.0);
-            const currentRenderViewport = page.getViewport({ scale: renderScale });
-
-            const canvas = document.createElement('canvas');
-            canvas.width = currentRenderViewport.width;
-            canvas.height = currentRenderViewport.height;
-            const ctx = canvas.getContext('2d');
-            await page.render({ canvasContext: ctx, viewport: currentRenderViewport, intent: 'print' }).promise;
-
-            const img = document.getElementById('crop-image');
-            img.onload = () => {
-                if (cropper) cropper.destroy();
-                cropper = new Cropper(img, {
-                    aspectRatio: NaN,
-                    viewMode: 1,
-                    background: false,
-                    responsive: true,
-                    autoCropArea: 0.95,
-                    zoomable: true,
-                    zoomOnWheel: false,
-                    toggleDragModeOnDblclick: false,
-                    crop() {
-                        updateInputsFromCropper();
-                    }
-                });
-                if (isHandMode) toggleHandTool();
-            };
-            img.src = canvas.toDataURL('image/jpeg', 0.95);
-        }
-
-        // ⚡ SYNC: CROPPER DRAG ➔ MARGIN INPUTS (MM)
-        function updateInputsFromCropper() {
-            if (isSyncing || !cropper) return;
-            isSyncing = true;
-
-            const cData = cropper.getData(true);
-            const imgData = cropper.getImageData();
-
-            // 1 mm = 2.83465 PDF points
-            const totalW_mm = currentPageDimensionsPt.width / 2.83465;
-            const totalH_mm = currentPageDimensionsPt.height / 2.83465;
-
-            const topMm = Math.max(0, Math.round((cData.y / imgData.naturalHeight) * totalH_mm));
-            const leftMm = Math.max(0, Math.round((cData.x / imgData.naturalWidth) * totalW_mm));
-            const rightMm = Math.max(0, Math.round(((imgData.naturalWidth - (cData.x + cData.width)) / imgData.naturalWidth) * totalW_mm));
-            const bottomMm = Math.max(0, Math.round(((imgData.naturalHeight - (cData.y + cData.height)) / imgData.naturalHeight) * totalH_mm));
-
-            document.getElementById('margin-top').value = topMm;
-            document.getElementById('margin-bottom').value = bottomMm;
-            document.getElementById('margin-left').value = leftMm;
-            document.getElementById('margin-right').value = rightMm;
-
-            isSyncing = false;
-        }
-
-        // ⚡ SYNC: MARGIN INPUTS (MM) ➔ CROPPER BOX
-        function updateCropperFromInputs() {
-            if (isSyncing || !cropper) return;
-            isSyncing = true;
-
-            const totalW_mm = currentPageDimensionsPt.width / 2.83465;
-            const totalH_mm = currentPageDimensionsPt.height / 2.83465;
-
-            const topMm = parseFloat(document.getElementById('margin-top').value) || 0;
-            const bottomMm = parseFloat(document.getElementById('margin-bottom').value) || 0;
-            const leftMm = parseFloat(document.getElementById('margin-left').value) || 0;
-            const rightMm = parseFloat(document.getElementById('margin-right').value) || 0;
-
-            const cData = cropper.getCanvasData();
-            const w = cData.width;
-            const h = cData.height;
-
-            const cropLeft = cData.left + (leftMm / totalW_mm) * w;
-            const cropTop = cData.top + (topMm / totalH_mm) * h;
-            const cropW = Math.max(25, w - ((leftMm + rightMm) / totalW_mm) * w);
-            const cropH = Math.max(25, h - ((topMm + bottomMm) / totalH_mm) * h);
-
-            cropper.setCropBoxData({
-                left: cropLeft,
-                top: cropTop,
-                width: cropW,
-                height: cropH
+                card.appendChild(delBtn);
+                card.appendChild(thumb);
+                card.appendChild(nameText);
+                gallery.appendChild(card);
             });
-
-            isSyncing = false;
         }
 
-        // ZOOM CONTROLS
-        function cropZoom(delta) {
-            if (cropper) cropper.zoom(delta);
+        // ⚡ CONVERT CANVAS TO 100% VALID CLEAN SVG BLOB
+        function canvasToSvgBlob(canvas) {
+            const dataUrl = canvas.toDataURL('image/png');
+            const svgContent = `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="${canvas.width}" height="${canvas.height}" viewBox="0 0 ${canvas.width} ${canvas.height}"><image width="${canvas.width}" height="${canvas.height}" xlink:href="${dataUrl}" href="${dataUrl}"/></svg>`;
+            return new Blob([svgContent], { type: 'image/svg+xml;charset=utf-8' });
         }
 
-        function cropResetZoom() {
-            if (cropper) {
-                cropper.reset();
-                cropper.crop();
-                if (isHandMode) toggleHandTool();
+        function canvasToTiffBlob(canvas) {
+            if (typeof UTIF !== 'undefined') {
+                const ctx = canvas.getContext('2d');
+                const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+                const tiffBytes = UTIF.encodeImage(imgData.data, canvas.width, canvas.height);
+                return new Blob([tiffBytes], { type: 'image/tiff' });
             }
+            return new Promise(r => canvas.toBlob(r, 'image/png'));
         }
 
-        // ⚡ HAND TOOL (PAN / MOVE PAGE WITH MOUSE OR SPACEBAR)
-        function updatePanMode(active) {
-            if (!cropper) return;
-            const container = document.querySelector('.cropper-container');
-            if (active) {
-                cropper.setDragMode('move');
-                if (container) container.classList.add('hand-mode-active');
-            } else {
-                cropper.setDragMode('crop');
-                if (container) container.classList.remove('hand-mode-active');
-            }
-        }
-
-        function toggleHandTool() {
-            if (!cropper) return;
-            isHandMode = !isHandMode;
-            updatePanMode(isHandMode);
-            const btn = document.getElementById('btn-hand-tool');
-            if (btn) {
-                btn.className = isHandMode 
-                    ? "py-1 px-2.5 rounded-lg bg-indigo-600 text-xs font-bold text-white border border-indigo-500 shadow-lg shadow-indigo-600/30 transition flex items-center gap-1 active:scale-95" 
-                    : "py-1 px-2.5 rounded-lg bg-slate-900 hover:bg-indigo-600 text-xs font-bold text-slate-300 hover:text-white border border-slate-700 transition flex items-center gap-1 active:scale-95";
-            }
-        }
-
-        // Spacebar shortcut to temporarily pan
-        window.addEventListener('keydown', function(e) {
-            if (e.code === 'Space' || e.key === ' ' || e.keyCode === 32) {
-                if (document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA') {
-                    e.preventDefault();
-                    if (!isSpacePressed && cropper) {
-                        isSpacePressed = true;
-                        updatePanMode(true);
-                    }
-                }
-            }
-        }, { passive: false });
-
-        window.addEventListener('keyup', function(e) {
-            if (e.code === 'Space' || e.key === ' ' || e.keyCode === 32) {
-                if (document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA') {
-                    e.preventDefault();
-                }
-                if (cropper) {
-                    isSpacePressed = false;
-                    updatePanMode(isHandMode);
-                }
-            }
-        });
-
-        async function changePreviewPage(offset) {
-            if (!pdfjsDoc) return;
-            const newP = currentPage + offset;
-            if (newP >= 1 && newP <= totalPages) {
-                currentPage = newP;
-                await renderPageToCropper(currentPage);
-            }
-        }
-
-        // QUICK SNAP PRESET BUTTONS
-        function applyPresetCrop(preset) {
-            if (!cropper) return;
-            const cData = cropper.getCanvasData();
-            const w = cData.width;
-            const h = cData.height;
-
-            if (preset === 'full') {
-                cropper.setCropBoxData({ left: cData.left, top: cData.top, width: w, height: h });
-            } else if (preset === 'standard-label') {
-                const cropW = w * 0.88;
-                const cropH = cropW * 1.5 > h ? h * 0.9 : cropW * 1.5;
-                cropper.setCropBoxData({
-                    left: cData.left + (w - cropW) / 2,
-                    top: cData.top + (h - cropH) / 2,
-                    width: cropW,
-                    height: cropH
-                });
-            } else if (preset === 'top-half') {
-                cropper.setCropBoxData({
-                    left: cData.left + (w * 0.03),
-                    top: cData.top + (h * 0.02),
-                    width: w * 0.94,
-                    height: h * 0.48
-                });
-            } else if (preset === 'bottom-half') {
-                cropper.setCropBoxData({
-                    left: cData.left + (w * 0.03),
-                    top: cData.top + (h * 0.50),
-                    width: w * 0.94,
-                    height: h * 0.48
-                });
-            }
-        }
-
-        function handlePageModeToggle(mode) {
-            const rangeBox = document.getElementById('custom-range-container');
-            rangeBox.classList.toggle('hidden', mode === 'all');
-            validateRangeInput();
-        }
-
-        function parseRangeString(str, maxPages) {
-            if (!str.trim()) return { valid: false, list: [], msg: 'Please enter at least one page number.' };
-
-            const tokens = str.split(',');
-            const resultSet = new Set();
-
-            for (let raw of tokens) {
-                const token = raw.trim();
-                if (!token) continue;
-
-                if (/^\d+$/.test(token)) {
-                    const page = parseInt(token, 10);
-                    if (page < 1 || page > maxPages) {
-                        return { valid: false, list: [], msg: `Page ${page} is out of bounds (File has 1 to ${maxPages} pages).` };
-                    }
-                    resultSet.add(page);
-                } else if (/^\d+\s*-\s*\d+$/.test(token)) {
-                    const [sStr, eStr] = token.split('-').map(t => t.trim());
-                    const start = parseInt(sStr, 10);
-                    const end = parseInt(eStr, 10);
-
-                    if (start > end) {
-                        return { valid: false, list: [], msg: `Invalid range "${token}". Start (${start}) must be ≤ End (${end}).` };
-                    }
-                    if (start < 1 || end > maxPages) {
-                        return { valid: false, list: [], msg: `Range "${token}" exceeds file boundaries (Max: ${maxPages}).` };
-                    }
-                    for (let i = start; i <= end; i++) resultSet.add(i);
-                } else {
-                    return { valid: false, list: [], msg: `Invalid format near "${token}". Use e.g. "1-5" or "10, 15".` };
-                }
-            }
-
-            if (resultSet.size === 0) return { valid: false, list: [], msg: 'No valid pages found in range.' };
-            return { valid: true, list: Array.from(resultSet).sort((a,b) => a - b), msg: `✓ Valid! ${resultSet.size} page(s) selected.` };
-        }
-
-        function validateRangeInput() {
-            const mode = document.querySelector('input[name="page-mode"]:checked').value;
-            const btn = document.getElementById('crop-download-btn');
-            const msgEl = document.getElementById('range-validation-msg');
-
-            if (mode === 'all') {
-                btn.disabled = false;
-                btn.classList.remove('opacity-50', 'cursor-not-allowed');
-                msgEl.innerText = `✓ All ${totalPages} pages will be cropped.`;
-                msgEl.className = "text-xs font-bold text-emerald-400";
-                return true;
-            }
-
-            const inputVal = document.getElementById('custom-range-input').value;
-            const parsed = parseRangeString(inputVal, totalPages);
-
-            if (!parsed.valid) {
-                btn.disabled = true;
-                btn.classList.add('opacity-50', 'cursor-not-allowed');
-                msgEl.innerText = `⚠️ ${parsed.msg}`;
-                msgEl.className = "text-xs font-bold text-rose-400";
-                return false;
-            } else {
-                btn.disabled = false;
-                btn.classList.remove('opacity-50', 'cursor-not-allowed');
-                msgEl.innerText = parsed.msg;
-                msgEl.className = "text-xs font-bold text-emerald-400";
-                return true;
-            }
-        }
-
-        async function getPDFLibInstance() {
-            if (window.PDFLib) return window.PDFLib;
-            if (typeof PDFLib !== 'undefined') return PDFLib;
-
-            const fallbackUrls = [
-                'https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js',
-                'https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js',
-                'https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js'
-            ];
-
-            for (let url of fallbackUrls) {
-                try {
-                    await new Promise((resolve, reject) => {
-                        const s = document.createElement('script');
-                        s.src = url;
-                        s.onload = resolve;
-                        s.onerror = reject;
-                        document.head.appendChild(s);
-                    });
-                    if (window.PDFLib) return window.PDFLib;
-                } catch(e) {}
-            }
-            return window.PDFLib || null;
-        }
-
-        // ⚡ NATIVE VECTOR PDF CROP USING USER'S VISUAL SELECTION (100% UNTOUCHED MATH)
-        async function executeNativePdfCrop() {
-            if (!originalPdfBytes || !cropper) return;
-            if (!validateRangeInput()) return;
-
-            const btn = document.getElementById('crop-download-btn');
+        async function executeConversion() {
+            if (filesList.length === 0) return;
+            const btn = document.getElementById('convert-btn');
             btn.disabled = true;
-            document.getElementById('btn-text').innerText = "⏳ Loading PDF Engine...";
-
-            const Lib = await getPDFLibInstance();
-            if (!Lib) {
-                alert('Could not connect to PDF engine CDN. Please check your internet connection.');
-                btn.disabled = false;
-                document.getElementById('btn-text').innerText = "✂️ Crop & Download PDF (Searchable Text Intact)";
-                return;
-            }
-
-            document.getElementById('btn-text').innerText = "⏳ Processing Native PDF Bounds...";
-            const progressContainer = document.getElementById('progress-container');
-            const progressBar = document.getElementById('progress-bar-fill');
-            const progressStatus = document.getElementById('progress-status-text');
-            const progressPct = document.getElementById('progress-percentage-text');
-            progressContainer.classList.remove('hidden');
-
-            const mode = document.querySelector('input[name="page-mode"]:checked').value;
-            let targetPagesList = [];
-
-            if (mode === 'all') {
-                for (let p = 1; p <= totalPages; p++) targetPagesList.push(p);
-            } else {
-                const parsed = parseRangeString(document.getElementById('custom-range-input').value, totalPages);
-                targetPagesList = parsed.list;
-            }
-
-            const cropData = cropper.getData(true);
-            const imgData = cropper.getImageData();
+            document.getElementById('btn-text').innerText = `⏳ Converting to ${TGT_NAME}...`;
 
             try {
-                const { PDFDocument } = Lib;
-                const pdfDoc = await PDFDocument.load(originalPdfBytes, { ignoreEncryption: true });
-                const pages = pdfDoc.getPages();
-                const totalTarget = targetPagesList.length;
+                // ==========================================
+                // 1. CONVERTING FROM PDF
+                // ==========================================
+                if (SRC_FMT === 'pdf') {
+                    // PDF TO SVG (COREL-DRAW STYLE VECTOR CURVES)
+                    if (TGT_FMT === 'svg') {
+                        const fd = new FormData();
+                        for (let item of filesList) {
+                            fd.append('files', item.file);
+                        }
 
-                for (let i = 0; i < totalTarget; i++) {
-                    const pageNum = targetPagesList[i];
-                    const page = pages[pageNum - 1];
+                        const resp = await fetch('/convert-pdf-to-svg-curves', {
+                            method: 'POST',
+                            body: fd
+                        });
 
-                    const mediaBox = page.getMediaBox();
-                    
-                    const scaleX = mediaBox.width / imgData.naturalWidth;
-                    const scaleY = mediaBox.height / imgData.naturalHeight;
+                        if (!resp.ok) {
+                            const errData = await resp.json().catch(() => ({}));
+                            throw new Error(errData.error || 'Server vector conversion failed');
+                        }
 
-                    const cropLeftPt = cropData.x * scaleX;
-                    const cropTopPt = cropData.y * scaleY;
-                    const cropWidthPt = cropData.width * scaleX;
-                    const cropHeightPt = cropData.height * scaleY;
+                        const blob = await resp.blob();
+                        let filename = `smartpic_converted_curves.svg`;
+                        if (blob.type.includes('zip')) {
+                            filename = `smartpic_converted_svg_pack.zip`;
+                        } else if (filesList.length === 1) {
+                            const rawName = filesList[0].name.substring(0, filesList[0].name.lastIndexOf('.')) || filesList[0].name;
+                            filename = `smartpic_${rawName}.svg`;
+                        }
 
-                    // PDF Coordinate Math: (0, 0) is at Bottom-Left
-                    const newX = mediaBox.x + cropLeftPt;
-                    const newY = mediaBox.y + (mediaBox.height - cropTopPt - cropHeightPt);
-                    const newWidth = cropWidthPt;
-                    const newHeight = cropHeightPt;
-
-                    if (newWidth > 15 && newHeight > 15) {
-                        page.setCropBox(newX, newY, newWidth, newHeight);
-                        page.setMediaBox(newX, newY, newWidth, newHeight);
+                        downloadBlob(blob, filename);
+                        finish();
+                        return;
                     }
 
-                    if (i % 25 === 0 || i === totalTarget - 1) {
-                        const pct = Math.round(((i + 1) / totalTarget) * 100);
-                        progressBar.style.width = `${pct}%`;
-                        progressPct.innerText = `${pct}%`;
-                        progressStatus.innerText = `Cropping page ${i + 1} of ${totalTarget}...`;
-                        await new Promise(r => setTimeout(r, 0));
+                    // PDF TO OTHER FORMATS (JPG, PNG, WEBP, TIFF, DOC)
+                    const zip = new JSZip();
+                    let singleDownloaded = false;
+
+                    for (let item of filesList) {
+                        const rawName = item.name.substring(0, item.name.lastIndexOf('.')) || item.name;
+                        const ab = await item.file.arrayBuffer();
+                        const pdfDoc = await pdfjsLib.getDocument({ data: ab }).promise;
+
+                        if (TGT_FMT === 'doc') {
+                            let fullText = "";
+                            for (let p = 1; p <= pdfDoc.numPages; p++) {
+                                const page = await pdfDoc.getPage(p);
+                                const tc = await page.getTextContent();
+                                fullText += `--- Page ${p} ---\n\n` + tc.items.map(i => i.str).join(' ') + "\n\n";
+                            }
+                            const docBlob = new Blob([fullText], { type: 'application/msword;charset=utf-8' });
+                            if (filesList.length === 1) {
+                                downloadBlob(docBlob, `smartpic_${rawName}.doc`);
+                                singleDownloaded = true;
+                            } else {
+                                zip.file(`${rawName}.doc`, docBlob);
+                            }
+                            continue;
+                        }
+
+                        // RASTER 300 DPI (JPG, PNG, WEBP, TIFF)
+                        for (let p = 1; p <= pdfDoc.numPages; p++) {
+                            const page = await pdfDoc.getPage(p);
+                            const vp = page.getViewport({ scale: 3.0 });
+                            const cvs = document.createElement('canvas');
+                            cvs.width = vp.width;
+                            cvs.height = vp.height;
+                            await page.render({ canvasContext: cvs.getContext('2d'), viewport: vp, intent: 'print' }).promise;
+
+                            let pageBlob = null;
+                            if (TGT_FMT === 'tiff') {
+                                pageBlob = canvasToTiffBlob(cvs);
+                            } else {
+                                const mime = TGT_FMT === 'png' ? 'image/png' : (TGT_FMT === 'webp' ? 'image/webp' : 'image/jpeg');
+                                pageBlob = await new Promise(r => cvs.toBlob(r, mime, 0.95));
+                            }
+
+                            if (filesList.length === 1 && pdfDoc.numPages === 1) {
+                                downloadBlob(pageBlob, `smartpic_${rawName}.${TGT_FMT}`);
+                                singleDownloaded = true;
+                            } else {
+                                zip.file(`${rawName}_page_${p}.${TGT_FMT}`, pageBlob);
+                            }
+                        }
                     }
+
+                    if (!singleDownloaded) {
+                        const zipBlob = await zip.generateAsync({ type: 'blob' });
+                        downloadBlob(zipBlob, `smartpic_${TGT_FMT}_pack.zip`);
+                    }
+                    finish();
+                    return;
                 }
 
-                progressStatus.innerText = "Finalizing PDF file...";
-                await new Promise(r => setTimeout(r, 10));
+                // ==========================================
+                // 2. CONVERTING IMAGES (JPG, PNG, WEBP, HEIC, TIFF)
+                // ==========================================
 
-                const modifiedPdfBytes = await pdfDoc.save();
-                const blob = new Blob([modifiedPdfBytes], { type: 'application/pdf' });
-                const blobUrl = URL.createObjectURL(blob);
+                // CASE A: CONVERT TO PDF (0% MARGIN EDGE-TO-EDGE)
+                if (TGT_FMT === 'pdf') {
+                    const { jsPDF } = window.jspdf;
+                    let doc = null;
 
-                const downloadLink = document.createElement('a');
-                downloadLink.href = blobUrl;
-                downloadLink.download = `${originalFileName}-cropped.pdf`;
-                downloadLink.click();
+                    for (let i = 0; i < filesList.length; i++) {
+                        const item = filesList[i];
+                        const bmp = await createImageBitmap(item.blob);
+                        const wPt = bmp.width * 0.75;
+                        const hPt = bmp.height * 0.75;
+                        const orient = wPt >= hPt ? 'l' : 'p';
 
-                setTimeout(() => URL.revokeObjectURL(blobUrl), 3000);
-                document.getElementById('status-box').classList.remove('hidden');
+                        if (i === 0) {
+                            doc = new jsPDF({ orientation: orient, unit: 'pt', format: [wPt, hPt] });
+                        } else {
+                            doc.addPage([wPt, hPt], orient);
+                        }
+
+                        const cvs = document.createElement('canvas');
+                        cvs.width = bmp.width;
+                        cvs.height = bmp.height;
+                        cvs.getContext('2d').drawImage(bmp, 0, 0);
+                        doc.addImage(cvs.toDataURL('image/jpeg', 0.92), 'JPEG', 0, 0, wPt, hPt);
+                    }
+
+                    const rawName = filesList[0].name.substring(0, filesList[0].name.lastIndexOf('.')) || 'converted';
+                    doc.save(`smartpic_${rawName}.pdf`);
+                    finish();
+                    return;
+                }
+
+                // CASE B: SINGLE IMAGE TO OTHER FORMATS
+                if (filesList.length === 1) {
+                    const item = filesList[0];
+                    const rawName = item.name.substring(0, item.name.lastIndexOf('.')) || item.name;
+
+                    if (TGT_FMT === 'avif') {
+                        const fd = new FormData();
+                        fd.append('image', item.blob);
+                        fd.append('format', 'AVIF');
+                        const resp = await fetch('/process', { method: 'POST', body: fd });
+                        if (resp.ok) {
+                            downloadBlob(await resp.blob(), `smartpic_${rawName}.avif`);
+                            finish();
+                            return;
+                        }
+                    }
+
+                    const bmp = await createImageBitmap(item.blob);
+                    const cvs = document.createElement('canvas');
+                    cvs.width = bmp.width;
+                    cvs.height = bmp.height;
+                    const ctx = cvs.getContext('2d');
+                    ctx.drawImage(bmp, 0, 0);
+
+                    // ⚡ IMAGE TO SVG (VALID CLEAN XML WITH XMLNS)
+                    if (TGT_FMT === 'svg') {
+                        const svgBlob = canvasToSvgBlob(cvs);
+                        downloadBlob(svgBlob, `smartpic_${rawName}.svg`);
+                        finish();
+                        return;
+                    }
+
+                    if (TGT_FMT === 'tiff') {
+                        const tiffBlob = canvasToTiffBlob(cvs);
+                        downloadBlob(tiffBlob, `smartpic_${rawName}.tiff`);
+                        finish();
+                        return;
+                    }
+
+                    const mime = TGT_FMT === 'png' ? 'image/png' : (TGT_FMT === 'webp' ? 'image/webp' : 'image/jpeg');
+                    cvs.toBlob((blob) => {
+                        downloadBlob(blob, `smartpic_${rawName}.${TGT_FMT}`);
+                        finish();
+                    }, mime, 0.92);
+
+                } else {
+                    // CASE C: BATCH MULTI-IMAGE TO OTHER FORMATS (ZIP DOWNLOAD)
+                    const zip = new JSZip();
+
+                    for (let item of filesList) {
+                        const rawName = item.name.substring(0, item.name.lastIndexOf('.')) || item.name;
+                        const bmp = await createImageBitmap(item.blob);
+                        const cvs = document.createElement('canvas');
+                        cvs.width = bmp.width;
+                        cvs.height = bmp.height;
+                        const ctx = cvs.getContext('2d');
+                        ctx.drawImage(bmp, 0, 0);
+
+                        let fileBlob = null;
+                        if (TGT_FMT === 'svg') {
+                            fileBlob = canvasToSvgBlob(cvs);
+                        } else if (TGT_FMT === 'tiff') {
+                            fileBlob = canvasToTiffBlob(cvs);
+                        } else {
+                            const mime = TGT_FMT === 'png' ? 'image/png' : (TGT_FMT === 'webp' ? 'image/webp' : 'image/jpeg');
+                            fileBlob = await new Promise(r => cvs.toBlob(r, mime, 0.90));
+                        }
+                        zip.file(`${rawName}.${TGT_FMT}`, fileBlob);
+                    }
+
+                    const zipContent = await zip.generateAsync({ type: "blob" });
+                    downloadBlob(zipContent, `smartpic_converted_${TGT_FMT}_pack.zip`);
+                    finish();
+                }
+
             } catch(e) {
-                alert('PDF Cropping error: ' + e.message);
-            } finally {
+                alert('Conversion error: ' + e.message);
                 btn.disabled = false;
-                document.getElementById('btn-text').innerText = "✂️ Crop & Download PDF (Searchable Text Intact)";
-                setTimeout(() => progressContainer.classList.add('hidden'), 2500);
+                document.getElementById('btn-text').innerText = `⚡ Convert to ${TGT_NAME} & Download`;
             }
+        }
+
+        function downloadBlob(blob, filename) {
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = filename;
+            a.click();
+        }
+
+        function finish() {
+            document.getElementById('convert-btn').disabled = false;
+            document.getElementById('btn-text').innerText = `⚡ Convert to ${TGT_NAME} & Download`;
+            document.getElementById('status-box').classList.remove('hidden');
         }
     </script>
 </body>
