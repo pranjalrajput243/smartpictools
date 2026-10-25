@@ -163,6 +163,10 @@ def convert_pdf_to_svg_curves():
                 page = doc[0]
                 # text_as_path=True converts all fonts into mathematical vector shapes (Curves)!
                 svg_data = page.get_svg_image(text_as_path=True)
+                import re
+# CorelDraw के ऑटो-लॉक को हटाने के लिए clip-path साफ़ करें
+svg_data = re.sub(r'\s+clip-path="url\(#[^"]+\)"', '', svg_data)
+svg_data = re.sub(r'<clipPath[^>]*>.*?</clipPath>', '', svg_data, flags=re.DOTALL)
                 doc.close()
                 buf = io.BytesIO(svg_data.encode('utf-8'))
                 return send_file(
