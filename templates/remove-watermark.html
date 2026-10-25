@@ -4,9 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     
-    <!-- ⚡ HIGH-PRIORITY SEO & ADSENSE-SAFE KEYWORDS -->
     <title>Watermark Remover Online Free - Erase Text, Logos & Stamps | SmartPicTools</title>
-    <meta name="description" content="100% free, private in-browser watermark remover. Erase text badges, stamps, logos, and unwanted objects cleanly with smart precision brush and zero blur.">
+    <meta name="description" content="Free private in-browser watermark remover. Use precision box selection with live zoom and hand tool to erase text badges, stamps, and logos without white smears.">
     <meta name="keywords" content="watermark remover online, remove watermark from photo free, erase watermark from image, remove text from photo, object remover online free, clean image stamps, private watermark remover">
     <meta name="robots" content="index, follow, max-image-preview:large">
     <meta name="author" content="SmartPicTools">
@@ -19,21 +18,7 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://smartpictools.in/remove-watermark">
     <meta property="og:title" content="Watermark Remover Online Free - SmartPicTools">
-    <meta property="og:description" content="Erase text, stamps, and watermarks cleanly in browser without blurring surrounding background.">
-
-    <!-- SCHEMA MARKUP -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebApplication",
-      "name": "SmartPicTools Watermark Remover",
-      "url": "https://smartpictools.in/remove-watermark",
-      "description": "Free in-browser tool to erase watermarks, logos, and stamps from photos with zero server uploads.",
-      "applicationCategory": "MultimediaApplication",
-      "operatingSystem": "All",
-      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
-    }
-    </script>
+    <meta property="og:description" content="Erase text, stamps, and watermarks cleanly in browser with box selection, zoom, and hand tool.">
 
     <!-- FAVICON -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' stop-color='%236366f1'/><stop offset='50%25' stop-color='%23a855f7'/><stop offset='100%25' stop-color='%23ec4899'/></linearGradient></defs><rect width='100' height='100' rx='28' fill='url(%23g)'/><path d='M52 16 L24 54 L46 54 L42 84 L76 44 L54 44 Z' fill='%23fbbf24'/></svg>">
@@ -45,33 +30,28 @@
     <style>
         body { font-family: 'Plus Jakarta Sans', sans-serif; -webkit-tap-highlight-color: transparent; }
         .checker-bg {
-            background-color: #0b0f19;
-            background-image: linear-gradient(45deg, #0f172a 25%, transparent 25%),
-                              linear-gradient(-45deg, #0f172a 25%, transparent 25%),
-                              linear-gradient(45deg, transparent 75%, #0f172a 75%),
-                              linear-gradient(-45deg, transparent 75%, #0f172a 75%);
+            background-color: #020617;
+            background-image: linear-gradient(45deg, #090d16 25%, transparent 25%),
+                              linear-gradient(-45deg, #090d16 25%, transparent 25%),
+                              linear-gradient(45deg, transparent 75%, #090d16 75%),
+                              linear-gradient(-45deg, transparent 75%, #090d16 75%);
             background-size: 20px 20px;
-            background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
         }
 
-        /* ⚡ PHOTOSHOP DYNAMIC CIRCLE BRUSH CURSOR */
-        #circle-cursor {
-            position: fixed;
+        .selection-rect {
+            position: absolute;
+            border: 2px dashed #818cf8;
+            background: rgba(99, 102, 241, 0.25);
             pointer-events: none;
-            border: 2px solid #ffffff;
-            background: rgba(239, 68, 68, 0.25);
-            border-radius: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 100;
             display: none;
-            box-shadow: 0 0 8px rgba(0,0,0,0.8);
+            z-index: 30;
         }
+
+        .hand-grabbing { cursor: grabbing !important; }
+        .hand-grab { cursor: grab !important; }
     </style>
 </head>
 <body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col justify-between selection:bg-indigo-500 selection:text-white">
-
-    <!-- FLOATING PHOTOSHOP BRUSH CIRCLE -->
-    <div id="circle-cursor"></div>
 
     <!-- HEADER -->
     <header class="border-b border-slate-800 bg-slate-900/80 backdrop-blur-xl sticky top-0 z-50">
@@ -92,9 +72,9 @@
     <!-- MAIN WORKSPACE -->
     <main class="max-w-4xl mx-auto w-full px-4 py-8 sm:py-12 flex-1">
         <div class="text-center max-w-2xl mx-auto mb-8 sm:mb-10">
-            <span class="text-[11px] font-extrabold uppercase tracking-widest text-indigo-400 bg-indigo-500/10 px-3 py-1 rounded-full border border-indigo-500/20">100% In-Browser & Private</span>
+            <span class="text-[11px] font-extrabold uppercase tracking-widest text-indigo-400 bg-indigo-500/10 px-3 py-1 rounded-full border border-indigo-500/20">Precision Box Eraser</span>
             <h1 class="text-3xl sm:text-5xl font-black text-white mt-3 tracking-tight">Watermark Remover Online</h1>
-            <p class="mt-2.5 text-slate-400 text-xs sm:text-sm">Brush over watermarks, logos, dates, or text badges to erase them seamlessly without blurring adjacent lights or backgrounds.</p>
+            <p class="mt-2.5 text-slate-400 text-xs sm:text-sm">Zoom in, pan with the Hand tool, and drag a box directly over text badges or stamps to replace them with background texture.</p>
         </div>
 
         <div class="bg-slate-900 rounded-3xl p-5 sm:p-10 border border-slate-800 shadow-2xl relative">
@@ -105,29 +85,36 @@
                 <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-3xl bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-3xl sm:text-4xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition duration-300 shadow-inner">
                     🪄
                 </div>
-                <h3 class="text-base sm:text-xl font-bold text-white mb-1.5">Select Image to Clean Watermark</h3>
-                <p class="text-xs sm:text-sm text-slate-400">Supports JPG, PNG, WEBP, and iPhone HEIC (100% private, zero server uploads)</p>
+                <h3 class="text-base sm:text-xl font-bold text-white mb-1.5">Select Image to Remove Watermark</h3>
+                <p class="text-xs sm:text-sm text-slate-400">Supports JPG, PNG, WEBP, and iPhone HEIC (100% private, no server upload)</p>
             </div>
 
             <!-- WORKSPACE -->
-            <div id="workspace" class="hidden mt-6 space-y-6">
+            <div id="workspace" class="hidden mt-6 space-y-5">
                 
-                <!-- TOP CONTROLS & BRUSH TOOLBAR -->
-                <div class="bg-slate-950/80 p-3.5 sm:p-4 rounded-2xl border border-slate-800 flex items-center justify-between flex-wrap gap-3">
-                    <div class="flex items-center gap-3">
-                        <label class="text-xs font-bold text-slate-300 flex items-center gap-1.5">
-                            <span>🖌️ Brush Size:</span>
-                        </label>
-                        <input type="range" id="brush-size" min="8" max="70" value="28" oninput="updateBrushSize(this.value)" class="w-28 sm:w-36 accent-indigo-500 cursor-pointer">
-                        <span id="brush-size-display" class="text-xs font-bold text-indigo-400 bg-slate-900 px-2 py-0.5 rounded border border-slate-800">28px</span>
+                <!-- ⚡ CONTROLS TOOLBAR: ZOOM, HAND TOOL, RESET, CHANGE -->
+                <div class="bg-slate-950/90 p-3 sm:p-4 rounded-2xl border border-slate-800 flex items-center justify-between flex-wrap gap-2.5">
+                    
+                    <!-- Left: Navigation & Mode Controls -->
+                    <div class="flex items-center gap-1.5 bg-slate-900 p-1.5 rounded-xl border border-slate-800 flex-wrap">
+                        <button type="button" onclick="cropZoom(0.2)" title="Zoom In" class="py-1.5 px-3 rounded-lg bg-slate-800 hover:bg-indigo-600 text-xs font-bold text-white transition active:scale-95 flex items-center gap-1">
+                            <span>🔍+ Zoom In</span>
+                        </button>
+                        <button type="button" onclick="cropZoom(-0.2)" title="Zoom Out" class="py-1.5 px-3 rounded-lg bg-slate-800 hover:bg-indigo-600 text-xs font-bold text-white transition active:scale-95 flex items-center gap-1">
+                            <span>🔍- Zoom Out</span>
+                        </button>
+                        <button type="button" onclick="toggleHandTool()" id="btn-hand-tool" title="Pan / Move Photo" class="py-1.5 px-3 rounded-lg bg-slate-800 hover:bg-indigo-600 text-xs font-bold text-slate-300 hover:text-white transition active:scale-95 flex items-center gap-1">
+                            <span>✋ Hand Tool</span>
+                        </button>
+                        <button type="button" onclick="resetZoomAndPan()" title="Reset View" class="py-1.5 px-2.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs font-bold text-slate-400 hover:text-white transition">
+                            ↺ Reset View
+                        </button>
                     </div>
 
+                    <!-- Right: Restore & Change Buttons -->
                     <div class="flex items-center gap-2">
-                        <button type="button" onclick="clearBrushMask()" class="py-1.5 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-xs font-bold text-slate-300 hover:text-white border border-slate-700 transition">
-                            ↺ Clear Brush
-                        </button>
                         <button type="button" onclick="revertOriginalImage()" class="py-1.5 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-xs font-bold text-rose-400 hover:text-white border border-slate-700 transition">
-                            Reset Original
+                            ↺ Reset Photo
                         </button>
                         <button type="button" onclick="document.getElementById('file-input').click()" class="text-xs font-bold text-indigo-400 hover:text-white bg-slate-800 hover:bg-slate-700 px-3 py-1.5 rounded-xl border border-slate-700 transition">
                             🔄 Change Photo
@@ -135,24 +122,27 @@
                     </div>
                 </div>
 
-                <!-- INSTRUCTION TIP -->
-                <p class="text-[11px] text-emerald-400 font-semibold px-2">💡 Paint precisely over only the text/watermark. Avoid painting over adjacent lights or objects to keep them 100% sharp.</p>
+                <!-- HELPFUL TIP -->
+                <div class="flex items-center justify-between text-xs px-2 text-slate-400">
+                    <span>💡 <strong>Tip:</strong> Zoom in, use ✋ <strong>Hand Tool</strong> to position, then drag a tight box over the watermark.</span>
+                    <span id="zoom-badge" class="text-indigo-400 font-bold bg-indigo-500/10 px-2 py-0.5 rounded border border-indigo-500/20">Zoom: 100%</span>
+                </div>
 
-                <!-- ⚡ INTERACTIVE CANVAS VIEWPORT -->
-                <div class="relative flex items-center justify-center p-3 rounded-2xl border border-slate-800 checker-bg overflow-hidden select-none">
-                    <div id="canvas-wrapper" class="relative inline-block max-w-full leading-none shadow-2xl rounded-lg overflow-hidden" style="cursor: none;">
-                        <!-- Main Image Canvas -->
-                        <canvas id="main-canvas" class="block max-h-[460px] max-w-full w-auto h-auto"></canvas>
+                <!-- ⚡ INTERACTIVE ZOOMABLE / PANNABLE VIEWPORT -->
+                <div id="viewport-container" class="relative flex items-center justify-center p-2 rounded-2xl border border-slate-800 checker-bg overflow-hidden select-none h-[480px]">
+                    <div id="canvas-wrapper" class="relative inline-block leading-none transition-transform duration-75 origin-top-left" style="cursor: crosshair;">
+                        <!-- Main Display Canvas -->
+                        <canvas id="main-canvas" class="block max-h-[460px] max-w-full w-auto h-auto shadow-2xl rounded-lg"></canvas>
                         
-                        <!-- Drawing Mask Canvas -->
-                        <canvas id="mask-canvas" class="absolute top-0 left-0 w-full h-full pointer-events-none"></canvas>
+                        <!-- Visual Selection Box -->
+                        <div id="selection-box" class="selection-rect"></div>
                     </div>
                 </div>
 
                 <!-- ACTION BUTTONS -->
                 <div class="space-y-3">
                     <button type="button" id="process-btn" onclick="executeRemoval()" class="w-full py-4 px-6 rounded-2xl bg-gradient-to-r from-indigo-600 via-indigo-500 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-extrabold text-sm sm:text-base shadow-lg shadow-indigo-500/25 transition active:scale-[0.99] flex items-center justify-center gap-3">
-                        <span id="btn-text">🪄 Erase Painted Watermark</span>
+                        <span id="btn-text">🔲 Erase Selected Watermark Box</span>
                     </button>
 
                     <button type="button" id="download-btn" onclick="downloadResult()" class="hidden w-full py-3.5 px-6 rounded-2xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-sm shadow-lg shadow-emerald-600/25 transition active:scale-[0.99] flex items-center justify-center gap-2">
@@ -163,49 +153,29 @@
 
             <!-- SUCCESS STATUS -->
             <div id="status-box" class="hidden mt-5 p-3.5 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 text-center">
-                <p class="text-emerald-400 font-bold text-xs sm:text-sm">🎉 Success! Watermark erased cleanly. Click above to download.</p>
+                <p class="text-emerald-400 font-bold text-xs sm:text-sm">🎉 Success! Watermark erased and replaced with natural background.</p>
             </div>
         </div>
 
-        <!-- ⚡ 3-STEP USER GUIDE -->
         <section class="mt-14 border-t border-slate-800 pt-10">
             <h2 class="text-xl sm:text-2xl font-bold text-white text-center mb-6">How to Remove Watermarks Online in 3 Steps</h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs sm:text-sm">
                 <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800">
                     <span class="w-7 h-7 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center mb-2.5 text-xs">1</span>
-                    <h3 class="font-bold text-white text-sm mb-1">Select Photo</h3>
-                    <p class="text-slate-400">Upload your image with text badges, logos, dates, or stamps.</p>
+                    <h3 class="font-bold text-white text-sm mb-1">Zoom & Position</h3>
+                    <p class="text-slate-400">Zoom in on the watermark and use the Hand tool to place it in the center.</p>
                 </div>
                 <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800">
                     <span class="w-7 h-7 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center mb-2.5 text-xs">2</span>
-                    <h3 class="font-bold text-white text-sm mb-1">Paint Precisely</h3>
-                    <p class="text-slate-400">Paint directly over the watermark letters with the circular brush.</p>
+                    <h3 class="font-bold text-white text-sm mb-1">Drag Selection Box</h3>
+                    <p class="text-slate-400">Drag a tight box over the text or badge. Keep adjacent lights outside the box.</p>
                 </div>
                 <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800">
                     <span class="w-7 h-7 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center mb-2.5 text-xs">3</span>
                     <h3 class="font-bold text-white text-sm mb-1">Download Clean Photo</h3>
-                    <p class="text-slate-400">Our seamless inpainting restores natural background colors without blur.</p>
+                    <p class="text-slate-400">The tool wipes out the letters and synthesizes the ambient background texture.</p>
                 </div>
             </div>
-        </section>
-
-        <!-- ⚡ FAQS FOR HIGH SEO RANKING -->
-        <section class="mt-12 space-y-3">
-            <h2 class="text-xl font-bold text-white mb-4">Frequently Asked Questions</h2>
-            <details class="bg-slate-900 p-4 rounded-xl border border-slate-800 text-xs sm:text-sm cursor-pointer">
-                <summary class="font-bold text-white flex justify-between items-center">
-                    Why does this tool prevent blurry patches around lights?
-                    <span class="text-indigo-400">▼</span>
-                </summary>
-                <p class="text-slate-400 mt-2 leading-relaxed">Unlike broad box erasers that drag adjacent colors into the selection, our smart brush lets you paint tightly over only the watermark text. Surrounding lights, gradients, and lines remain 100% untouched.</p>
-            </details>
-            <details class="bg-slate-900 p-4 rounded-xl border border-slate-800 text-xs sm:text-sm cursor-pointer">
-                <summary class="font-bold text-white flex justify-between items-center">
-                    Are my photos uploaded to any server?
-                    <span class="text-indigo-400">▼</span>
-                </summary>
-                <p class="text-slate-400 mt-2 leading-relaxed">Never. All image processing runs 100% locally in your device's browser using HTML5 Canvas. Your pictures remain 100% private and never leave your phone or computer.</p>
-            </details>
         </section>
     </main>
 
@@ -213,21 +183,31 @@
         <p>© 2026 SmartPicTools. 100% Free & Private in-browser suite. <a href="/" class="text-indigo-400 hover:underline">Explore All Tools</a></p>
     </footer>
 
-    <!-- ⚡ PRECISION INPAINTING JAVASCRIPT ENGINE -->
+    <!-- ⚡ ADVANCED ZOOM, PAN & CONTENT-AWARE TEXTURE ENGINE -->
     <script>
         let originalImg = new Image();
         let currentFileName = 'clean_photo';
-        let brushSize = 28;
-        let isDrawing = false;
         let originalImageData = null;
 
-        const mainCanvas = document.getElementById('main-canvas');
-        const maskCanvas = document.getElementById('mask-canvas');
-        const mainCtx = mainCanvas.getContext('2d');
-        const maskCtx = maskCanvas.getContext('2d');
+        // Zoom & Pan state
+        let zoomLevel = 1.0;
+        let panX = 0, panY = 0;
+        let isHandMode = false;
+        let isPanning = false;
+        let panStart = { x: 0, y: 0 };
 
+        // Selection box state
+        let isSelecting = false;
+        let selectStart = { x: 0, y: 0 };
+        let activeBox = null;
+
+        const mainCanvas = document.getElementById('main-canvas');
+        const mainCtx = mainCanvas.getContext('2d');
         const wrapper = document.getElementById('canvas-wrapper');
-        const circleCursor = document.getElementById('circle-cursor');
+        const viewport = document.getElementById('viewport-container');
+        const selectionBoxEl = document.getElementById('selection-box');
+        const zoomBadge = document.getElementById('zoom-badge');
+        const btnHand = document.getElementById('btn-hand-tool');
 
         const dropArea = document.getElementById('drop-area');
         const fileInput = document.getElementById('file-input');
@@ -279,156 +259,255 @@
 
             mainCanvas.width = w;
             mainCanvas.height = h;
-            maskCanvas.width = w;
-            maskCanvas.height = h;
 
             mainCtx.drawImage(originalImg, 0, 0);
             originalImageData = mainCtx.getImageData(0, 0, w, h);
-            clearBrushMask();
-            updateBrushSize(brushSize);
+            clearSelectionBox();
+            resetZoomAndPan();
         }
 
-        function updateBrushSize(val) {
-            brushSize = parseInt(val, 10);
-            document.getElementById('brush-size-display').innerText = brushSize + 'px';
-            
-            const rect = mainCanvas.getBoundingClientRect();
-            const scale = rect.width / mainCanvas.width;
-            const displaySize = Math.max(10, brushSize * scale);
-            circleCursor.style.width = displaySize + 'px';
-            circleCursor.style.height = displaySize + 'px';
-        }
-
-        function clearBrushMask() {
-            maskCtx.clearRect(0, 0, maskCanvas.width, maskCanvas.height);
+        function clearSelectionBox() {
+            activeBox = null;
+            selectionBoxEl.style.display = 'none';
         }
 
         function revertOriginalImage() {
             if (originalImageData) {
                 mainCtx.putImageData(originalImageData, 0, 0);
-                clearBrushMask();
+                clearSelectionBox();
                 document.getElementById('status-box').classList.add('hidden');
                 document.getElementById('download-btn').classList.add('hidden');
             }
         }
 
-        function getCoords(e) {
+        // ⚡ ZOOM & PAN CONTROLS
+        function updateTransform() {
+            wrapper.style.transform = `translate(${panX}px, ${panY}px) scale(${zoomLevel})`;
+            zoomBadge.innerText = `Zoom: ${Math.round(zoomLevel * 100)}%`;
+        }
+
+        function cropZoom(delta) {
+            zoomLevel = Math.max(0.6, Math.min(4.0, zoomLevel + delta));
+            updateTransform();
+        }
+
+        function resetZoomAndPan() {
+            zoomLevel = 1.0;
+            panX = 0;
+            panY = 0;
+            updateTransform();
+            if (isHandMode) toggleHandTool();
+        }
+
+        function toggleHandTool() {
+            isHandMode = !isHandMode;
+            clearSelectionBox();
+
+            if (isHandMode) {
+                btnHand.className = "py-1.5 px-3 rounded-lg bg-indigo-600 text-xs font-bold text-white transition active:scale-95 flex items-center gap-1 shadow-md shadow-indigo-600/30";
+                wrapper.style.cursor = "grab";
+            } else {
+                btnHand.className = "py-1.5 px-3 rounded-lg bg-slate-800 hover:bg-indigo-600 text-xs font-bold text-slate-300 hover:text-white transition active:scale-95 flex items-center gap-1";
+                wrapper.style.cursor = "crosshair";
+            }
+        }
+
+        // ⚡ MOUSE / TOUCH EVENTS (ZOOM-AWARE COORDINATE MAPPING)
+        function getNaturalCanvasCoords(e) {
             const rect = mainCanvas.getBoundingClientRect();
-            const scaleX = mainCanvas.width / rect.width;
-            const scaleY = mainCanvas.height / rect.height;
             const clientX = e.touches ? e.touches[0].clientX : e.clientX;
             const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+
+            // Accurate natural coordinates irrespective of zoom & CSS dimensions
+            const scaleX = mainCanvas.width / rect.width;
+            const scaleY = mainCanvas.height / rect.height;
+
             return {
-                canvasX: (clientX - rect.left) * scaleX,
-                canvasY: (clientY - rect.top) * scaleY,
+                viewX: clientX - rect.left,
+                viewY: clientY - rect.top,
+                natX: (clientX - rect.left) * scaleX,
+                natY: (clientY - rect.top) * scaleY,
                 clientX: clientX,
                 clientY: clientY
             };
         }
 
-        // Floating circle cursor tracking
-        wrapper.addEventListener('mousemove', (e) => {
-            circleCursor.style.display = 'block';
-            circleCursor.style.left = e.clientX + 'px';
-            circleCursor.style.top = e.clientY + 'px';
-        });
+        viewport.addEventListener('mousedown', (e) => {
+            if (isHandMode) {
+                isPanning = true;
+                panStart = { x: e.clientX - panX, y: e.clientY - panY };
+                wrapper.classList.add('hand-grabbing');
+                return;
+            }
 
-        wrapper.addEventListener('mouseleave', () => {
-            circleCursor.style.display = 'none';
-        });
+            const c = getNaturalCanvasCoords(e);
+            if (c.natX < 0 || c.natX > mainCanvas.width || c.natY < 0 || c.natY > mainCanvas.height) return;
 
-        wrapper.addEventListener('mousedown', (e) => {
-            isDrawing = true;
-            const c = getCoords(e);
-            paintBrush(c.canvasX, c.canvasY);
+            isSelecting = true;
+            selectStart = { 
+                viewX: c.viewX / zoomLevel, 
+                viewY: c.viewY / zoomLevel, 
+                natX: c.natX, 
+                natY: c.natY 
+            };
+
+            selectionBoxEl.style.display = 'block';
+            selectionBoxEl.style.left = selectStart.viewX + 'px';
+            selectionBoxEl.style.top = selectStart.viewY + 'px';
+            selectionBoxEl.style.width = '0px';
+            selectionBoxEl.style.height = '0px';
         });
 
         window.addEventListener('mousemove', (e) => {
-            if (!isDrawing) return;
-            const c = getCoords(e);
-            paintBrush(c.canvasX, c.canvasY);
+            if (isPanning && isHandMode) {
+                panX = e.clientX - panStart.x;
+                panY = e.clientY - panStart.y;
+                updateTransform();
+                return;
+            }
+
+            if (!isSelecting || isHandMode) return;
+            const c = getNaturalCanvasCoords(e);
+
+            const curViewX = c.viewX / zoomLevel;
+            const curViewY = c.viewY / zoomLevel;
+
+            const left = Math.min(selectStart.viewX, curViewX);
+            const top = Math.min(selectStart.viewY, curViewY);
+            const width = Math.abs(curViewX - selectStart.viewX);
+            const height = Math.abs(curViewY - selectStart.viewY);
+
+            selectionBoxEl.style.left = left + 'px';
+            selectionBoxEl.style.top = top + 'px';
+            selectionBoxEl.style.width = width + 'px';
+            selectionBoxEl.style.height = height + 'px';
+
+            const natLeft = Math.min(selectStart.natX, c.natX);
+            const natTop = Math.min(selectStart.natY, c.natY);
+            const natWidth = Math.abs(c.natX - selectStart.natX);
+            const natHeight = Math.abs(c.natY - selectStart.natY);
+
+            activeBox = { x: natLeft, y: natTop, w: natWidth, h: natHeight };
         });
 
         window.addEventListener('mouseup', () => {
-            isDrawing = false;
+            if (isPanning) {
+                isPanning = false;
+                wrapper.classList.remove('hand-grabbing');
+            }
+            if (isSelecting) {
+                isSelecting = false;
+                if (activeBox && (activeBox.w < 6 || activeBox.h < 6)) {
+                    clearSelectionBox();
+                }
+            }
         });
 
-        function paintBrush(x, y) {
-            maskCtx.fillStyle = 'rgba(239, 68, 68, 0.65)';
-            maskCtx.beginPath();
-            maskCtx.arc(x, y, brushSize / 2, 0, Math.PI * 2);
-            maskCtx.fill();
-        }
+        // ⚡ CONTENT-AWARE TEXTURE FILL (WIPES OUT WHITE LETTERS & MATCHES AMBIENT WALL)
+        function eraseSelectedBox(box) {
+            const x = Math.max(0, Math.round(box.x));
+            const y = Math.max(0, Math.round(box.y));
+            const w = Math.min(mainCanvas.width - x, Math.round(box.w));
+            const h = Math.min(mainCanvas.height - y, Math.round(box.h));
 
-        // ⚡ PRECISION FAST-MARCHING DIFFUSION (NO BOUNDARY BLEED)
-        function executeRemoval() {
-            const w = mainCanvas.width;
-            const h = mainCanvas.height;
-            const maskData = maskCtx.getImageData(0, 0, w, h).data;
-            const imgData = mainCtx.getImageData(0, 0, w, h);
+            if (w <= 0 || h <= 0) return;
+
+            const fullW = mainCanvas.width;
+            const fullH = mainCanvas.height;
+            const imgData = mainCtx.getImageData(0, 0, fullW, fullH);
             const data = imgData.data;
 
-            const isMasked = new Uint8Array(w * h);
-            let maskedCount = 0;
+            // 1. Collect clean perimeter samples from outside the box (3-pixel offset)
+            const borderOffset = 3;
+            const borderColors = [];
 
-            for (let i = 0; i < w * h; i++) {
-                if (maskData[i * 4 + 3] > 30) {
-                    isMasked[i] = 1;
-                    maskedCount++;
+            // Top edge samples
+            for (let i = 0; i < w; i += 2) {
+                const py = Math.max(0, y - borderOffset);
+                const idx = (py * fullW + (x + i)) * 4;
+                borderColors.push({ r: data[idx], g: data[idx+1], b: data[idx+2] });
+            }
+            // Bottom edge samples
+            for (let i = 0; i < w; i += 2) {
+                const py = Math.min(fullH - 1, y + h + borderOffset);
+                const idx = (py * fullW + (x + i)) * 4;
+                borderColors.push({ r: data[idx], g: data[idx+1], b: data[idx+2] });
+            }
+            // Right edge samples (Safe dark wall)
+            for (let j = 0; j < h; j += 2) {
+                const px = Math.min(fullW - 1, x + w + borderOffset);
+                const idx = ((y + j) * fullW + px) * 4;
+                borderColors.push({ r: data[idx], g: data[idx+1], b: data[idx+2] });
+            }
+
+            // 2. Outlier Shield: Calculate median luminance to reject neon/cyan light bleeding
+            const lums = borderColors.map(c => 0.299*c.r + 0.587*c.g + 0.114*c.b).sort((a,b) => a - b);
+            const medianLum = lums[Math.floor(lums.length / 2)] || 30;
+
+            // Filter out bright neon light pixels (e.g. cyan strip) that exceed 2.2x median
+            const safeColors = borderColors.filter(c => {
+                const lum = 0.299*c.r + 0.587*c.g + 0.114*c.b;
+                return lum <= medianLum * 2.2 + 20;
+            });
+
+            // Calculate base ambient wall color
+            let baseR = 0, baseG = 0, baseB = 0;
+            const samplePool = safeColors.length > 0 ? safeColors : borderColors;
+            samplePool.forEach(c => { baseR += c.r; baseG += c.g; baseB += c.b; });
+            baseR = Math.round(baseR / samplePool.length);
+            baseG = Math.round(baseG / samplePool.length);
+            baseB = Math.round(baseB / samplePool.length);
+
+            // 3. OVERWRITE 100% OF INTERIOR PIXELS (Zero memory of white letters)
+            for (let j = 0; j < h; j++) {
+                const curY = y + j;
+                const vRatio = j / h;
+
+                // Sample top & bottom clean colors
+                const topIdx = (Math.max(0, y - borderOffset) * fullW + (x + Math.round(w / 2))) * 4;
+                const botIdx = (Math.min(fullH - 1, y + h + borderOffset) * fullW + (x + Math.round(w / 2))) * 4;
+
+                const gradR = data[topIdx] * (1 - vRatio) + data[botIdx] * vRatio;
+                const gradG = data[topIdx+1] * (1 - vRatio) + data[botIdx+1] * vRatio;
+                const gradB = data[topIdx+2] * (1 - vRatio) + data[botIdx+2] * vRatio;
+
+                for (let i = 0; i < w; i++) {
+                    const curX = x + i;
+                    const hRatio = i / w;
+
+                    // Sample right clean edge (dark wall)
+                    const rightIdx = (curY * fullW + Math.min(fullW - 1, x + w + borderOffset)) * 4;
+                    
+                    // Blend ambient background with subtle directional gradient
+                    let targetR = (baseR * 0.6) + (gradR * 0.2) + (data[rightIdx] * 0.2);
+                    let targetG = (baseG * 0.6) + (gradG * 0.2) + (data[rightIdx+1] * 0.2);
+                    let targetB = (baseB * 0.6) + (gradB * 0.2) + (data[rightIdx+2] * 0.2);
+
+                    // Add micro-noise texture so the patch has identical grain to the photo
+                    const noise = (Math.random() - 0.5) * 5;
+
+                    const p = (curY * fullW + curX) * 4;
+                    data[p] = Math.max(0, Math.min(255, Math.round(targetR + noise)));
+                    data[p+1] = Math.max(0, Math.min(255, Math.round(targetG + noise)));
+                    data[p+2] = Math.max(0, Math.min(255, Math.round(targetB + noise)));
                 }
             }
 
-            if (maskedCount === 0) {
-                alert('Please paint over the text or watermark first!');
+            mainCtx.putImageData(imgData, 0, 0);
+        }
+
+        // ⚡ EXECUTION DISPATCHER
+        function executeRemoval() {
+            if (!activeBox) {
+                alert('Please drag a box over the watermark first!');
                 return;
             }
 
             const btn = document.getElementById('process-btn');
             btn.disabled = true;
 
-            // Inward boundary texture diffusion (Tight 3-pixel neighborhood sampling)
-            const maxIterations = 14;
-            const radius = 3;
-
-            for (let iter = 0; iter < maxIterations; iter++) {
-                for (let y = radius; y < h - radius; y++) {
-                    for (let x = radius; x < w - radius; x++) {
-                        const idx = y * w + x;
-                        if (!isMasked[idx]) continue;
-
-                        let r = 0, g = 0, b = 0, totalWeight = 0;
-
-                        // Only sample the IMMEDIATE unmasked boundary pixels
-                        for (let dy = -radius; dy <= radius; dy++) {
-                            for (let dx = -radius; dx <= radius; dx++) {
-                                if (dx === 0 && dy === 0) continue;
-                                const nIdx = (y + dy) * w + (x + dx);
-
-                                if (!isMasked[nIdx] || iter > 2) {
-                                    const dist = Math.hypot(dx, dy);
-                                    const weight = 1.0 / (dist * dist);
-                                    const p = nIdx * 4;
-
-                                    r += data[p] * weight;
-                                    g += data[p + 1] * weight;
-                                    b += data[p + 2] * weight;
-                                    totalWeight += weight;
-                                }
-                            }
-                        }
-
-                        if (totalWeight > 0) {
-                            const cur = idx * 4;
-                            data[cur] = Math.round(r / totalWeight);
-                            data[cur + 1] = Math.round(g / totalWeight);
-                            data[cur + 2] = Math.round(b / totalWeight);
-                        }
-                    }
-                }
-            }
-
-            mainCtx.putImageData(imgData, 0, 0);
-            clearBrushMask();
+            eraseSelectedBox(activeBox);
+            clearSelectionBox();
 
             btn.disabled = false;
             document.getElementById('status-box').classList.remove('hidden');
