@@ -153,11 +153,12 @@ def convert_pdf_to_svg_curves():
             return jsonify({'error': 'No PDF file provided'}), 400
 
         def get_clean_unlocked_svg(page):
-            # 1. Convert text to vector curve paths
+            # 1. Convert text to pure vector curves
             svg = page.get_svg_image(text_as_path=True)
-            # 2. ⚡ Strip clip-paths so CorelDraw never locks objects!
+            # 2. Strip clip-paths & page-level group locks
             svg = re.sub(r'\s+clip-path="url\(#[^"]+\)"', '', svg)
             svg = re.sub(r'<clipPath[^>]*>.*?</clipPath>', '', svg, flags=re.DOTALL)
+            svg = re.sub(r'<rect[^>]+fill="#ffffff"[^>]*/>', '', svg) # White background box removed
             return svg
 
         # Case A: 1 PDF file
