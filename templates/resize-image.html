@@ -99,7 +99,7 @@
                     </div>
                 </div>
 
-                <!-- ⚡ RESIZE INPUTS & LIVE CONTROLS -->
+                <!-- ⚡ RESIZE INPUTS & LIVE CONTROLS (CLEAN - NO PRESETS) -->
                 <div class="bg-slate-950/80 p-4 sm:p-5 rounded-2xl border border-slate-800 space-y-4">
                     <div class="grid grid-cols-2 gap-3">
                         <div>
@@ -121,25 +121,6 @@
                         <button type="button" onclick="resetOriginal()" class="text-xs font-bold text-indigo-400 hover:underline">
                             Reset Original
                         </button>
-                    </div>
-
-                    <!-- ⚡ 1-CLICK POPULAR DIMENSION PRESETS -->
-                    <div>
-                        <span class="text-xs font-bold text-slate-400 block mb-2">Popular Size Presets:</span>
-                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
-                            <button type="button" onclick="applyPreset(350, 450)" class="py-2 px-2.5 rounded-xl bg-slate-900 hover:bg-indigo-600 text-xs font-bold text-slate-300 hover:text-white border border-slate-700 transition">
-                                👤 350×450 (Passport)
-                            </button>
-                            <button type="button" onclick="applyPreset(1080, 1080)" class="py-2 px-2.5 rounded-xl bg-slate-900 hover:bg-indigo-600 text-xs font-bold text-slate-300 hover:text-white border border-slate-700 transition">
-                                📷 1080×1080 (Insta)
-                            </button>
-                            <button type="button" onclick="applyPreset(1280, 720)" class="py-2 px-2.5 rounded-xl bg-slate-900 hover:bg-indigo-600 text-xs font-bold text-slate-300 hover:text-white border border-slate-700 transition">
-                                📺 1280×720 (YouTube)
-                            </button>
-                            <button type="button" onclick="applyPreset(1920, 1080)" class="py-2 px-2.5 rounded-xl bg-slate-900 hover:bg-indigo-600 text-xs font-bold text-slate-300 hover:text-white border border-slate-700 transition">
-                                🖥️ 1920×1080 (Full HD)
-                            </button>
-                        </div>
                     </div>
                 </div>
 
@@ -165,7 +146,7 @@
                 <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800">
                     <span class="w-7 h-7 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center mb-2.5 text-xs">2</span>
                     <h3 class="font-bold text-white text-sm mb-1">Set Dimensions</h3>
-                    <p class="text-slate-400">Type new width or height. Watch the live preview stretch or scale instantly.</p>
+                    <p class="text-slate-400">Type new width or height. Watch the live preview scale instantly.</p>
                 </div>
                 <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800">
                     <span class="w-7 h-7 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center mb-2.5 text-xs">3</span>
@@ -262,7 +243,6 @@
             document.getElementById('status-box').classList.add('hidden');
         }
 
-        // ⚡ LIVE DIMENSION INPUT CHANGE HANDLER
         function handleDimensionChange(source) {
             const wInput = document.getElementById('target-w');
             const hInput = document.getElementById('target-h');
@@ -292,7 +272,6 @@
             }
         }
 
-        // ⚡ REAL-TIME VISUAL STRETCH / SQUISH / SCALE
         function updateResizeLiveVisual(targetW, targetH) {
             if (targetW <= 0 || targetH <= 0 || naturalW <= 0 || naturalH <= 0) return;
 
@@ -303,17 +282,9 @@
             badgeContainer.classList.remove('hidden');
             badge.innerText = `📐 Live Scale: ${targetW} × ${targetH} px (${scalePct}%)`;
 
-            // ⚡ VISUALLY TRANSFORMS IMAGE ASPECT RATIO LIVE ON SCREEN!
             const img = document.getElementById('preview-img');
             img.style.aspectRatio = `${targetW} / ${targetH}`;
             img.style.objectFit = 'fill';
-        }
-
-        function applyPreset(w, h) {
-            document.getElementById('lock-ratio').checked = false; // Disable lock so exact preset dimensions apply
-            document.getElementById('target-w').value = w;
-            document.getElementById('target-h').value = h;
-            updateResizeLiveVisual(w, h);
         }
 
         function resetOriginal() {
