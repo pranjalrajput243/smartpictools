@@ -4,7 +4,7 @@ import re
 import json
 import datetime
 from xml.etree import ElementTree as ET
-from flask import Flask, render_template, request, send_file, jsonify, Response
+from flask import Flask, render_template, request, send_file, jsonify, Response, redirect
 from PIL import Image
 
 try:
@@ -32,7 +32,7 @@ app.config['MAX_CONTENT_LENGTH'] = 100 * 1024 * 1024  # 100MB limit
 FORMAT_NAMES = {
     'jpg': 'JPG', 'jpeg': 'JPG', 'png': 'PNG', 'webp': 'WEBP',
     'avif': 'AVIF', 'svg': 'SVG', 'tiff': 'TIFF', 'tif': 'TIFF',
-    'pdf': 'PDF', 'doc': 'Word'
+    'pdf': 'PDF', 'doc': 'Word', 'heic': 'HEIC'
 }
 
 VALID_CONVERSIONS = {
@@ -40,6 +40,7 @@ VALID_CONVERSIONS = {
     'jpeg': ['png', 'webp', 'avif', 'svg', 'tiff', 'pdf'],
     'png': ['jpg', 'webp', 'avif', 'svg', 'tiff', 'pdf'],
     'webp': ['jpg', 'png', 'avif', 'svg', 'tiff', 'pdf'],
+    'avif': ['jpg', 'png', 'webp', 'svg', 'tiff', 'pdf'],  # ⚡ NEW AVIF HUB & SPOKES
     'heic': ['jpg', 'png', 'webp', 'avif', 'svg', 'tiff', 'pdf'],
     'pdf': ['jpg', 'png', 'webp', 'svg', 'tiff', 'doc'],
     'svg': ['jpg', 'png', 'webp', 'pdf', 'tiff'],
@@ -128,9 +129,9 @@ def favicon_converter_page():
 def image_to_pdf_alias():
     return render_template('image-to-pdf.html')
 
+# SEO 301 REDIRECT TO PREVENT 500 CRASH
 @app.route('/pdf-converter')
 def pdf_converter_alias():
-    from flask import redirect
     return redirect('/convert-from-pdf', code=301)
 
 @app.route('/crop-pdf')
@@ -150,14 +151,12 @@ def generate_unlocked_corel_svg(page):
         root = ET.fromstring(raw_svg)
         parent_map = {c: p for p in root.iter() for c in p}
         
-        # 1. Collect all glyph paths from <defs>
         glyphs = {}
         for elem in root.iter():
             elem_id = elem.attrib.get('id')
             if elem_id and elem.tag.endswith('path'):
                 glyphs[elem_id] = elem.attrib.get('d', '')
 
-        # 2. In-line every <use> element into a real standalone <path>
         use_nodes = [e for e in root.iter() if e.tag.endswith('use')]
         for use in use_nodes:
             parent = parent_map.get(use)
@@ -192,13 +191,11 @@ def generate_unlocked_corel_svg(page):
                 parent.insert(idx, new_p)
                 parent.remove(use)
                 
-        # 3. Strip <defs> since glyphs are now directly inline
         for d in [e for e in root.iter() if e.tag.endswith('defs')]:
             p = parent_map.get(d)
             if p is not None:
                 p.remove(d)
                 
-        # 4. Remove any clipPath elements & attributes
         for cp in [e for e in root.iter() if e.tag.endswith('clipPath')]:
             p = parent_map.get(cp)
             if p is not None:
@@ -211,7 +208,6 @@ def generate_unlocked_corel_svg(page):
         clean_xml = ET.tostring(root, encoding='utf-8').decode('utf-8')
         return clean_xml
     except Exception:
-        # Safe fallback
         return raw_svg
 
 @app.route('/convert-pdf-to-svg-curves', methods=['POST'])
@@ -228,7 +224,6 @@ def convert_pdf_to_svg_curves():
         if not uploaded_files:
             return jsonify({'error': 'No PDF file provided'}), 400
 
-        # Case 1: Single PDF file
         if len(uploaded_files) == 1:
             f = uploaded_files[0]
             raw_name = os.path.splitext(f.filename)[0] or 'document'
@@ -259,7 +254,6 @@ def convert_pdf_to_svg_curves():
                     download_name=f"smartpic_{raw_name}_svg_pack.zip"
                 )
 
-        # Case 2: Multiple PDF files
         zip_buf = io.BytesIO()
         with zipfile.ZipFile(zip_buf, 'w', zipfile.ZIP_DEFLATED) as zf:
             for f in uploaded_files:
