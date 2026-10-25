@@ -95,7 +95,7 @@
                 <!-- PRE-CONFIGURED TARGET BADGE -->
                 <div class="p-3.5 bg-slate-950/80 rounded-xl border border-slate-800 flex items-center justify-between text-xs">
                     <span class="text-slate-400 font-semibold">Target Format: <strong class="text-indigo-400 font-bold">{{ meta.tgt_name }}</strong></span>
-                    <span class="text-emerald-400 font-bold">✓ {% if meta.src == 'pdf' and meta.tgt == 'svg' %}CorelDraw-Style Vector Curves (0% Blur Guaranteed){% else %}Zero Blur Guaranteed{% endif %}</span>
+                    <span class="text-emerald-400 font-bold">✓ High-Quality & Zero Blur Guaranteed</span>
                 </div>
 
                 <button type="button" id="convert-btn" onclick="executeConversion()" class="w-full py-4 px-6 rounded-2xl bg-gradient-to-r from-indigo-600 via-indigo-500 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-extrabold text-sm sm:text-base shadow-lg shadow-indigo-500/25 transition active:scale-[0.99] flex items-center justify-center gap-3">
@@ -103,24 +103,11 @@
                 </button>
             </div>
 
-            <!-- SUCCESS STATUS WITH SMART CORELDRAW GUIDANCE -->
+            <!-- SUCCESS STATUS -->
             <div id="status-box" class="hidden mt-5 space-y-3">
                 <div class="p-3.5 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 text-center">
-                    <p class="text-emerald-400 font-bold text-xs sm:text-sm">🎉 Success! Vector curves file(s) downloaded with 0% blur!</p>
+                    <p class="text-emerald-400 font-bold text-xs sm:text-sm">🎉 Success! {{ meta.tgt_name }} file(s) downloaded successfully!</p>
                 </div>
-
-                {% if meta.src == 'pdf' and meta.tgt == 'svg' %}
-                <!-- ⚡ PRO-TIP FOR CORELDRAW USERS -->
-                <div class="p-4 rounded-2xl bg-indigo-950/40 border border-indigo-500/30 flex items-start gap-3 text-left">
-                    <span class="text-xl">💡</span>
-                    <div class="text-xs space-y-1">
-                        <span class="font-bold text-white block text-sm">CorelDRAW User Tip:</span>
-                        <p class="text-slate-300 leading-relaxed">
-                            CorelDraw me SVG import karne par agar text par lock (🔒) dikhe, to bas keyboard par <strong class="text-amber-300 font-bold">Ctrl + Shift + U</strong> dabayein (ya <strong class="text-indigo-300">Object &rarr; Lock &rarr; Unlock All</strong> karein). Saare letters turant 1 second me unlock ho jayenge!
-                        </p>
-                    </div>
-                </div>
-                {% endif %}
             </div>
         </div>
 
@@ -134,8 +121,8 @@
                 </div>
                 <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800">
                     <span class="w-7 h-7 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center mb-2.5 text-xs">2</span>
-                    <h3 class="font-bold text-white text-sm mb-1">Convert to Curves</h3>
-                    <p class="text-slate-400">Our engine converts all fonts into mathematical vector curve paths.</p>
+                    <h3 class="font-bold text-white text-sm mb-1">Instant Processing</h3>
+                    <p class="text-slate-400">Our high-speed engine transforms your files into clean {{ meta.tgt_name }} format.</p>
                 </div>
                 <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800">
                     <span class="w-7 h-7 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center mb-2.5 text-xs">3</span>
@@ -150,7 +137,7 @@
         <p>© 2026 SmartPicTools. 100% Free & Private in-browser suite. <a href="/" class="text-indigo-400 hover:underline">Explore All Tools</a></p>
     </footer>
 
-    <!-- CONVERTER JS ENGINE -->
+    <!-- ⚡ COMPLETE MASTER CONVERTER JS ENGINE -->
     <script>
         pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
 
@@ -180,9 +167,11 @@
 
         async function handleFiles(files) {
             for (let f of Array.from(files)) {
-                let thumbUrl = '';
+                let processedBlob = f;
+                let previewUrl = '';
                 const nameLower = f.name.toLowerCase();
 
+                // 1. PDF Preview
                 if (SRC_FMT === 'pdf' || nameLower.endsWith('.pdf')) {
                     try {
                         const ab = await f.arrayBuffer();
@@ -193,21 +182,46 @@
                         cvs.width = vp.width;
                         cvs.height = vp.height;
                         await p1.render({ canvasContext: cvs.getContext('2d'), viewport: vp }).promise;
-                        thumbUrl = cvs.toDataURL('image/jpeg', 0.8);
+                        previewUrl = cvs.toDataURL('image/jpeg', 0.8);
                     } catch(e) {
-                        thumbUrl = '';
+                        previewUrl = '';
                     }
-                } else if (nameLower.endsWith('.heic') || nameLower.endsWith('.heif')) {
+                }
+                // 2. iPhone HEIC Decoder (Guarantees decoding on Windows & Android)
+                else if (nameLower.endsWith('.heic') || nameLower.endsWith('.heif')) {
                     try {
-                        const conv = await heic2any({ blob: f, toType: 'image/jpeg', quality: 0.5 });
-                        const b = Array.isArray(conv) ? conv[0] : conv;
-                        thumbUrl = URL.createObjectURL(b);
-                    } catch(e) {}
-                } else {
-                    thumbUrl = URL.createObjectURL(f);
+                        const conv = await heic2any({ blob: f, toType: 'image/jpeg', quality: 0.92 });
+                        processedBlob = Array.isArray(conv) ? conv[0] : conv;
+                        previewUrl = URL.createObjectURL(processedBlob);
+                    } catch(e) {
+                        previewUrl = URL.createObjectURL(f);
+                    }
+                }
+                // 3. TIFF / TIF Decoder via UTIF.js
+                else if (nameLower.endsWith('.tif') || nameLower.endsWith('.tiff')) {
+                    try {
+                        const ab = await f.arrayBuffer();
+                        const ifds = UTIF.decode(ab);
+                        UTIF.decodeImage(ab, ifds[0]);
+                        const rgba = UTIF.toRGBA8(ifds[0]);
+                        const tcvs = document.createElement('canvas');
+                        tcvs.width = ifds[0].width;
+                        tcvs.height = ifds[0].height;
+                        const imgData = tcvs.getContext('2d').createImageData(ifds[0].width, ifds[0].height);
+                        imgData.data.set(rgba);
+                        tcvs.getContext('2d').putImageData(imgData, 0, 0);
+                        processedBlob = await new Promise(res => tcvs.toBlob(res, 'image/png'));
+                        previewUrl = URL.createObjectURL(processedBlob);
+                    } catch(e) {
+                        previewUrl = URL.createObjectURL(f);
+                    }
+                }
+                // 4. Standard Images (JPG, PNG, WEBP, SVG)
+                else {
+                    previewUrl = URL.createObjectURL(f);
                 }
 
-                filesList.push({ file: f, url: thumbUrl, name: f.name });
+                filesList.push({ file: f, blob: processedBlob, url: previewUrl, name: f.name });
             }
             renderGallery();
         }
@@ -253,6 +267,13 @@
             });
         }
 
+        // ⚡ CONVERT CANVAS TO 100% VALID CLEAN SVG BLOB
+        function canvasToSvgBlob(canvas) {
+            const dataUrl = canvas.toDataURL('image/png');
+            const svgContent = `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="${canvas.width}" height="${canvas.height}" viewBox="0 0 ${canvas.width} ${canvas.height}"><image width="${canvas.width}" height="${canvas.height}" xlink:href="${dataUrl}" href="${dataUrl}"/></svg>`;
+            return new Blob([svgContent], { type: 'image/svg+xml;charset=utf-8' });
+        }
+
         function canvasToTiffBlob(canvas) {
             if (typeof UTIF !== 'undefined') {
                 const ctx = canvas.getContext('2d');
@@ -270,8 +291,11 @@
             document.getElementById('btn-text').innerText = `⏳ Converting to ${TGT_NAME}...`;
 
             try {
-                // PDF TO SVG VIA VECTOR CURVES ENGINE
+                // ==========================================
+                // 1. CONVERTING FROM PDF
+                // ==========================================
                 if (SRC_FMT === 'pdf') {
+                    // PDF TO SVG (COREL-DRAW STYLE VECTOR CURVES)
                     if (TGT_FMT === 'svg') {
                         const fd = new FormData();
                         for (let item of filesList) {
@@ -294,7 +318,7 @@
                             filename = `smartpic_converted_svg_pack.zip`;
                         } else if (filesList.length === 1) {
                             const rawName = filesList[0].name.substring(0, filesList[0].name.lastIndexOf('.')) || filesList[0].name;
-                            filename = `smartpic_${rawName}_curves.svg`;
+                            filename = `smartpic_${rawName}.svg`;
                         }
 
                         downloadBlob(blob, filename);
@@ -302,7 +326,7 @@
                         return;
                     }
 
-                    // OTHER FORMATS (JPG, PNG, WEBP, TIFF, DOC)
+                    // PDF TO OTHER FORMATS (JPG, PNG, WEBP, TIFF, DOC)
                     const zip = new JSZip();
                     let singleDownloaded = false;
 
@@ -328,7 +352,7 @@
                             continue;
                         }
 
-                        // RASTER 300 DPI
+                        // RASTER 300 DPI (JPG, PNG, WEBP, TIFF)
                         for (let p = 1; p <= pdfDoc.numPages; p++) {
                             const page = await pdfDoc.getPage(p);
                             const vp = page.getViewport({ scale: 3.0 });
@@ -362,32 +386,49 @@
                     return;
                 }
 
-                // IMAGES TO OTHER FORMATS
-                if (filesList.length === 1) {
-                    const item = filesList[0];
-                    const rawName = item.name.substring(0, item.name.lastIndexOf('.')) || item.name;
+                // ==========================================
+                // 2. CONVERTING IMAGES (JPG, PNG, WEBP, HEIC, TIFF)
+                // ==========================================
 
-                    if (TGT_FMT === 'pdf') {
-                        const bmp = await createImageBitmap(item.file);
-                        const { jsPDF } = window.jspdf;
+                // CASE A: CONVERT TO PDF (0% MARGIN EDGE-TO-EDGE)
+                if (TGT_FMT === 'pdf') {
+                    const { jsPDF } = window.jspdf;
+                    let doc = null;
+
+                    for (let i = 0; i < filesList.length; i++) {
+                        const item = filesList[i];
+                        const bmp = await createImageBitmap(item.blob);
                         const wPt = bmp.width * 0.75;
                         const hPt = bmp.height * 0.75;
                         const orient = wPt >= hPt ? 'l' : 'p';
-                        const doc = new jsPDF({ orientation: orient, unit: 'pt', format: [wPt, hPt] });
+
+                        if (i === 0) {
+                            doc = new jsPDF({ orientation: orient, unit: 'pt', format: [wPt, hPt] });
+                        } else {
+                            doc.addPage([wPt, hPt], orient);
+                        }
 
                         const cvs = document.createElement('canvas');
                         cvs.width = bmp.width;
                         cvs.height = bmp.height;
                         cvs.getContext('2d').drawImage(bmp, 0, 0);
                         doc.addImage(cvs.toDataURL('image/jpeg', 0.92), 'JPEG', 0, 0, wPt, hPt);
-                        doc.save(`smartpic_${rawName}.pdf`);
-                        finish();
-                        return;
                     }
+
+                    const rawName = filesList[0].name.substring(0, filesList[0].name.lastIndexOf('.')) || 'converted';
+                    doc.save(`smartpic_${rawName}.pdf`);
+                    finish();
+                    return;
+                }
+
+                // CASE B: SINGLE IMAGE TO OTHER FORMATS
+                if (filesList.length === 1) {
+                    const item = filesList[0];
+                    const rawName = item.name.substring(0, item.name.lastIndexOf('.')) || item.name;
 
                     if (TGT_FMT === 'avif') {
                         const fd = new FormData();
-                        fd.append('image', item.file);
+                        fd.append('image', item.blob);
                         fd.append('format', 'AVIF');
                         const resp = await fetch('/process', { method: 'POST', body: fd });
                         if (resp.ok) {
@@ -397,12 +438,20 @@
                         }
                     }
 
-                    const bmp = await createImageBitmap(item.file);
+                    const bmp = await createImageBitmap(item.blob);
                     const cvs = document.createElement('canvas');
                     cvs.width = bmp.width;
                     cvs.height = bmp.height;
                     const ctx = cvs.getContext('2d');
                     ctx.drawImage(bmp, 0, 0);
+
+                    // ⚡ IMAGE TO SVG (VALID CLEAN XML WITH XMLNS)
+                    if (TGT_FMT === 'svg') {
+                        const svgBlob = canvasToSvgBlob(cvs);
+                        downloadBlob(svgBlob, `smartpic_${rawName}.svg`);
+                        finish();
+                        return;
+                    }
 
                     if (TGT_FMT === 'tiff') {
                         const tiffBlob = canvasToTiffBlob(cvs);
@@ -418,10 +467,12 @@
                     }, mime, 0.92);
 
                 } else {
+                    // CASE C: BATCH MULTI-IMAGE TO OTHER FORMATS (ZIP DOWNLOAD)
                     const zip = new JSZip();
+
                     for (let item of filesList) {
                         const rawName = item.name.substring(0, item.name.lastIndexOf('.')) || item.name;
-                        const bmp = await createImageBitmap(item.file);
+                        const bmp = await createImageBitmap(item.blob);
                         const cvs = document.createElement('canvas');
                         cvs.width = bmp.width;
                         cvs.height = bmp.height;
@@ -429,7 +480,9 @@
                         ctx.drawImage(bmp, 0, 0);
 
                         let fileBlob = null;
-                        if (TGT_FMT === 'tiff') {
+                        if (TGT_FMT === 'svg') {
+                            fileBlob = canvasToSvgBlob(cvs);
+                        } else if (TGT_FMT === 'tiff') {
                             fileBlob = canvasToTiffBlob(cvs);
                         } else {
                             const mime = TGT_FMT === 'png' ? 'image/png' : (TGT_FMT === 'webp' ? 'image/webp' : 'image/jpeg');
@@ -437,6 +490,7 @@
                         }
                         zip.file(`${rawName}.${TGT_FMT}`, fileBlob);
                     }
+
                     const zipContent = await zip.generateAsync({ type: "blob" });
                     downloadBlob(zipContent, `smartpic_converted_${TGT_FMT}_pack.zip`);
                     finish();
