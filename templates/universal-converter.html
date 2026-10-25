@@ -70,14 +70,22 @@
 
         <div class="bg-slate-900 rounded-3xl p-5 sm:p-10 border border-slate-800 shadow-2xl relative">
             
-            <!-- UPLOAD DROP AREA -->
+            <!-- ⚡ STRICT FILE INPUT (ONLY ACCEPTS EXACT MATCHING SOURCE FORMAT) -->
             <div id="drop-area" class="border-2 border-dashed border-slate-700 hover:border-indigo-500 bg-slate-950/60 hover:bg-indigo-950/20 rounded-2xl p-8 sm:p-14 text-center cursor-pointer transition-all duration-300">
-                <input type="file" id="file-input" multiple {% if meta.src == 'pdf' %}accept="application/pdf, .pdf"{% elif meta.src == 'heic' %}accept=".heic, .HEIC, .heif, .HEIF"{% else %}accept="image/*, .{{ meta.src }}"{% endif %} class="hidden">
+                <input type="file" id="file-input" multiple 
+                    {% if meta.src == 'pdf' %}accept=".pdf, application/pdf"
+                    {% elif meta.src == 'png' %}accept=".png, image/png"
+                    {% elif meta.src in ['jpg', 'jpeg'] %}accept=".jpg, .jpeg, image/jpeg"
+                    {% elif meta.src == 'webp' %}accept=".webp, image/webp"
+                    {% elif meta.src == 'heic' %}accept=".heic, .heif, image/heic, image/heif"
+                    {% elif meta.src == 'svg' %}accept=".svg, image/svg+xml"
+                    {% elif meta.src in ['tiff', 'tif'] %}accept=".tif, .tiff, image/tiff"
+                    {% else %}accept=".{{ meta.src }}"{% endif %} class="hidden">
                 <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-3xl bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-3xl sm:text-4xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition duration-300 shadow-inner">
                     🔄
                 </div>
                 <h3 class="text-base sm:text-xl font-bold text-white mb-1.5">Select {{ meta.src_name }} File(s) to Convert</h3>
-                <p class="text-xs sm:text-sm text-slate-400">Choose single or multiple {{ meta.src_name }} files</p>
+                <p class="text-xs sm:text-sm text-slate-400">Strictly accepts .{{ meta.src }} files only (100% private in-browser)</p>
             </div>
 
             <!-- WORKSPACE -->
@@ -137,13 +145,14 @@
         <p>© 2026 SmartPicTools. 100% Free & Private in-browser suite. <a href="/" class="text-indigo-400 hover:underline">Explore All Tools</a></p>
     </footer>
 
-    <!-- ⚡ COMPLETE MASTER CONVERTER JS ENGINE -->
+    <!-- ⚡ COMPLETE MASTER CONVERTER JS ENGINE (WITH STRICT FORMAT VALIDATION) -->
     <script>
         pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
 
         const SRC_FMT = "{{ meta.src }}".toLowerCase();
         const TGT_FMT = "{{ meta.tgt }}".toLowerCase();
         const TGT_NAME = "{{ meta.tgt_name }}";
+        const SRC_NAME = "{{ meta.src_name }}";
         let filesList = [];
 
         const dropArea = document.getElementById('drop-area');
@@ -165,8 +174,45 @@
             if (e.target.files && e.target.files.length > 0) handleFiles(e.target.files);
         });
 
+        // ⚡ STRICT FORMAT VALIDATOR
+        function isStrictSourceMatch(file) {
+            const name = file.name.toLowerCase();
+            const type = file.type.toLowerCase();
+
+            if (SRC_FMT === 'png') {
+                return name.endsWith('.png') || type === 'image/png';
+            }
+            if (SRC_FMT === 'jpg' || SRC_FMT === 'jpeg') {
+                return name.endsWith('.jpg') || name.endsWith('.jpeg') || type === 'image/jpeg';
+            }
+            if (SRC_FMT === 'webp') {
+                return name.endsWith('.webp') || type === 'image/webp';
+            }
+            if (SRC_FMT === 'pdf') {
+                return name.endsWith('.pdf') || type.includes('pdf');
+            }
+            if (SRC_FMT === 'heic') {
+                return name.endsWith('.heic') || name.endsWith('.heif') || type.includes('heic') || type.includes('heif');
+            }
+            if (SRC_FMT === 'svg') {
+                return name.endsWith('.svg') || type.includes('svg');
+            }
+            if (SRC_FMT === 'tiff' || SRC_FMT === 'tif') {
+                return name.endsWith('.tif') || name.endsWith('.tiff') || type.includes('tiff');
+            }
+            return name.endsWith('.' + SRC_FMT);
+        }
+
         async function handleFiles(files) {
+            let invalidFiles = 0;
+
             for (let f of Array.from(files)) {
+                // Strict check: Block other formats
+                if (!isStrictSourceMatch(f)) {
+                    invalidFiles++;
+                    continue;
+                }
+
                 let processedBlob = f;
                 let previewUrl = '';
                 const nameLower = f.name.toLowerCase();
@@ -187,7 +233,7 @@
                         previewUrl = '';
                     }
                 }
-                // 2. iPhone HEIC Decoder (Guarantees decoding on Windows & Android)
+                // 2. iPhone HEIC Decoder
                 else if (nameLower.endsWith('.heic') || nameLower.endsWith('.heif')) {
                     try {
                         const conv = await heic2any({ blob: f, toType: 'image/jpeg', quality: 0.92 });
@@ -197,7 +243,7 @@
                         previewUrl = URL.createObjectURL(f);
                     }
                 }
-                // 3. TIFF / TIF Decoder via UTIF.js
+                // 3. TIFF Decoder
                 else if (nameLower.endsWith('.tif') || nameLower.endsWith('.tiff')) {
                     try {
                         const ab = await f.arrayBuffer();
@@ -216,13 +262,19 @@
                         previewUrl = URL.createObjectURL(f);
                     }
                 }
-                // 4. Standard Images (JPG, PNG, WEBP, SVG)
+                // 4. Standard Images
                 else {
                     previewUrl = URL.createObjectURL(f);
                 }
 
                 filesList.push({ file: f, blob: processedBlob, url: previewUrl, name: f.name });
             }
+
+            // Alert user if wrong file types were dropped
+            if (invalidFiles > 0) {
+                alert(`⚠️ Rejected ${invalidFiles} file(s)! This dedicated tool strictly accepts only .${SRC_FMT.toUpperCase()} files.`);
+            }
+
             renderGallery();
         }
 
@@ -267,7 +319,6 @@
             });
         }
 
-        // ⚡ CONVERT CANVAS TO 100% VALID CLEAN SVG BLOB
         function canvasToSvgBlob(canvas) {
             const dataUrl = canvas.toDataURL('image/png');
             const svgContent = `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="${canvas.width}" height="${canvas.height}" viewBox="0 0 ${canvas.width} ${canvas.height}"><image width="${canvas.width}" height="${canvas.height}" xlink:href="${dataUrl}" href="${dataUrl}"/></svg>`;
@@ -291,11 +342,8 @@
             document.getElementById('btn-text').innerText = `⏳ Converting to ${TGT_NAME}...`;
 
             try {
-                // ==========================================
-                // 1. CONVERTING FROM PDF
-                // ==========================================
+                // 1. PDF CONVERSION
                 if (SRC_FMT === 'pdf') {
-                    // PDF TO SVG (COREL-DRAW STYLE VECTOR CURVES)
                     if (TGT_FMT === 'svg') {
                         const fd = new FormData();
                         for (let item of filesList) {
@@ -326,7 +374,7 @@
                         return;
                     }
 
-                    // PDF TO OTHER FORMATS (JPG, PNG, WEBP, TIFF, DOC)
+                    // OTHER PDF FORMATS
                     const zip = new JSZip();
                     let singleDownloaded = false;
 
@@ -352,7 +400,6 @@
                             continue;
                         }
 
-                        // RASTER 300 DPI (JPG, PNG, WEBP, TIFF)
                         for (let p = 1; p <= pdfDoc.numPages; p++) {
                             const page = await pdfDoc.getPage(p);
                             const vp = page.getViewport({ scale: 3.0 });
@@ -386,11 +433,7 @@
                     return;
                 }
 
-                // ==========================================
-                // 2. CONVERTING IMAGES (JPG, PNG, WEBP, HEIC, TIFF)
-                // ==========================================
-
-                // CASE A: CONVERT TO PDF (0% MARGIN EDGE-TO-EDGE)
+                // 2. IMAGE CONVERSIONS
                 if (TGT_FMT === 'pdf') {
                     const { jsPDF } = window.jspdf;
                     let doc = null;
@@ -421,7 +464,6 @@
                     return;
                 }
 
-                // CASE B: SINGLE IMAGE TO OTHER FORMATS
                 if (filesList.length === 1) {
                     const item = filesList[0];
                     const rawName = item.name.substring(0, item.name.lastIndexOf('.')) || item.name;
@@ -445,7 +487,6 @@
                     const ctx = cvs.getContext('2d');
                     ctx.drawImage(bmp, 0, 0);
 
-                    // ⚡ IMAGE TO SVG (VALID CLEAN XML WITH XMLNS)
                     if (TGT_FMT === 'svg') {
                         const svgBlob = canvasToSvgBlob(cvs);
                         downloadBlob(svgBlob, `smartpic_${rawName}.svg`);
@@ -467,7 +508,6 @@
                     }, mime, 0.92);
 
                 } else {
-                    // CASE C: BATCH MULTI-IMAGE TO OTHER FORMATS (ZIP DOWNLOAD)
                     const zip = new JSZip();
 
                     for (let item of filesList) {
