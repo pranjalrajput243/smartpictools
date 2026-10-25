@@ -3,6 +3,7 @@ import os
 import re
 import json
 import datetime
+from xml.etree import ElementTree as ET
 from flask import Flask, render_template, request, send_file, jsonify, Response
 from PIL import Image
 
@@ -136,32 +137,81 @@ def crop_pdf_page():
     return render_template('crop-pdf.html')
 
 # ==========================================
-# ⚡ 100% UNLOCKED VECTOR SVG ENGINE (CLEAN STANDALONE)
+# ⚡ SYMBOL DEREFERENCER (ELIMINATES CORELDRAW <use> LOCKS)
 # ==========================================
-def clean_svg_for_import(page):
-    # text_as_path=True se text sidha vector banega
+def generate_unlocked_corel_svg(page):
     raw_svg = page.get_svg_image(text_as_path=True)
     
-    # 1. Page-level clip-path aur masks hatayein (jo Corel me lock lagate hain)
-    raw_svg = re.sub(r'<clipPath[^>]*>.*?</clipPath>', '', raw_svg, flags=re.DOTALL)
-    raw_svg = re.sub(r'\s+clip-path="[^"]*"', '', raw_svg)
-    raw_svg = re.sub(r'<rect[^>]+fill="#ffffff"[^>]*/>', '', raw_svg)  # Background white box remove
+    try:
+        ET.register_namespace('', 'http://www.w3.org/2000/svg')
+        ET.register_namespace('xlink', 'http://www.w3.org/1999/xlink')
+        
+        root = ET.fromstring(raw_svg)
+        parent_map = {c: p for p in root.iter() for c in p}
+        
+        # 1. Collect all glyph paths from <defs>
+        glyphs = {}
+        for elem in root.iter():
+            elem_id = elem.attrib.get('id')
+            if elem_id and elem.tag.endswith('path'):
+                glyphs[elem_id] = elem.attrib.get('d', '')
 
-    # 2. Sare groups (<g>) se fill color ko sidhe <path> me daalna
-    def push_fill(match):
-        color = match.group(1)
-        content = match.group(2)
-        # Har path par fill lagao agar pehle se nahi hai
-        return re.sub(r'<path(?![^>]*\bfill=)', f'<path fill="{color}"', content)
-
-    # Style ya fill attribute wale groups ko process karein
-    raw_svg = re.sub(r'<g\s+style="fill:\s*([^;"]+)[^"]*"[^>]*>(.*?)</g>', push_fill, raw_svg, flags=re.DOTALL)
-    raw_svg = re.sub(r'<g\s+fill="([^"]+)"[^>]*>(.*?)</g>', push_fill, raw_svg, flags=re.DOTALL)
-
-    # 3. Sare <g> aur </g> tags ko mita kar file ko bilkul flat (unlocked) banayein
-    raw_svg = re.sub(r'</?g[^>]*>', '', raw_svg)
-
-    return raw_svg
+        # 2. In-line every <use> element into a real standalone <path>
+        use_nodes = [e for e in root.iter() if e.tag.endswith('use')]
+        for use in use_nodes:
+            parent = parent_map.get(use)
+            if parent is None:
+                continue
+                
+            href = use.attrib.get('{http://www.w3.org/1999/xlink}href') or use.attrib.get('href') or ''
+            gid = href.lstrip('#')
+            
+            if gid in glyphs:
+                d_val = glyphs[gid]
+                x = use.attrib.get('x', '0')
+                y = use.attrib.get('y', '0')
+                xf = use.attrib.get('transform', '')
+                
+                new_p = ET.Element('{http://www.w3.org/2000/svg}path')
+                new_p.attrib['d'] = d_val
+                
+                t_list = []
+                if x != '0' or y != '0':
+                    t_list.append(f"translate({x},{y})")
+                if xf:
+                    t_list.append(xf)
+                if t_list:
+                    new_p.attrib['transform'] = ' '.join(t_list)
+                    
+                for a in ['fill', 'stroke', 'style']:
+                    if a in use.attrib:
+                        new_p.attrib[a] = use.attrib[a]
+                        
+                idx = list(parent).index(use)
+                parent.insert(idx, new_p)
+                parent.remove(use)
+                
+        # 3. Strip <defs> since glyphs are now directly inline
+        for d in [e for e in root.iter() if e.tag.endswith('defs')]:
+            p = parent_map.get(d)
+            if p is not None:
+                p.remove(d)
+                
+        # 4. Remove any clipPath elements & attributes
+        for cp in [e for e in root.iter() if e.tag.endswith('clipPath')]:
+            p = parent_map.get(cp)
+            if p is not None:
+                p.remove(cp)
+                
+        for elem in root.iter():
+            if 'clip-path' in elem.attrib:
+                del elem.attrib['clip-path']
+                
+        clean_xml = ET.tostring(root, encoding='utf-8').decode('utf-8')
+        return clean_xml
+    except Exception:
+        # Safe fallback
+        return raw_svg
 
 @app.route('/convert-pdf-to-svg-curves', methods=['POST'])
 def convert_pdf_to_svg_curves():
@@ -177,14 +227,14 @@ def convert_pdf_to_svg_curves():
         if not uploaded_files:
             return jsonify({'error': 'No PDF file provided'}), 400
 
-        # Case 1: 1 PDF file
+        # Case 1: Single PDF file
         if len(uploaded_files) == 1:
             f = uploaded_files[0]
             raw_name = os.path.splitext(f.filename)[0] or 'document'
             doc = fitz.open(stream=f.read(), filetype="pdf")
             
             if len(doc) == 1:
-                svg_data = clean_svg_for_import(doc[0])
+                svg_data = generate_unlocked_corel_svg(doc[0])
                 doc.close()
                 buf = io.BytesIO(svg_data.encode('utf-8'))
                 return send_file(
@@ -197,7 +247,7 @@ def convert_pdf_to_svg_curves():
                 zip_buf = io.BytesIO()
                 with zipfile.ZipFile(zip_buf, 'w', zipfile.ZIP_DEFLATED) as zf:
                     for p in range(len(doc)):
-                        svg_data = clean_svg_for_import(doc[p])
+                        svg_data = generate_unlocked_corel_svg(doc[p])
                         zf.writestr(f"{raw_name}_page_{p+1}.svg", svg_data.encode('utf-8'))
                 doc.close()
                 zip_buf.seek(0)
@@ -215,7 +265,7 @@ def convert_pdf_to_svg_curves():
                 raw_name = os.path.splitext(f.filename)[0] or 'document'
                 doc = fitz.open(stream=f.read(), filetype="pdf")
                 for p in range(len(doc)):
-                    svg_data = clean_svg_for_import(doc[p])
+                    svg_data = generate_unlocked_corel_svg(doc[p])
                     zf.writestr(f"{raw_name}_page_{p+1}.svg", svg_data.encode('utf-8'))
                 doc.close()
 
