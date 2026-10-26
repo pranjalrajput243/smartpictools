@@ -138,10 +138,6 @@ def pdf_converter_alias():
 def crop_pdf_page():
     return render_template('crop-pdf.html')
 
-@app.route('/remove-watermark')
-def remove_watermark_route():
-    return render_template('remove-watermark.html')
-
 # ==========================================
 # ⚡ SYMBOL DEREFERENCER (ELIMINATES CORELDRAW <use> LOCKS)
 # ==========================================
