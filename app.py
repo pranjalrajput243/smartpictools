@@ -138,6 +138,10 @@ def pdf_converter_alias():
 def crop_pdf_page():
     return render_template('crop-pdf.html')
 
+@app.route('/photo-signature-joiner')
+def photo_signature_joiner_page():
+    return render_template('photo-signature-joiner.html')
+
 # ==========================================
 # ⚡ SYMBOL DEREFERENCER (ELIMINATES CORELDRAW <use> LOCKS)
 # ==========================================
@@ -321,6 +325,7 @@ def sitemap():
         ('https://smartpictools.in/terms', '0.5'),
         ('https://smartpictools.in/contact', '0.6'),
         ('https://smartpictools.in/remove-watermark', '0.9'),
+        ('https://smartpictools.in/photo-signature-joiner', '0.9'),
     ]
 
     for src, tgts in VALID_CONVERSIONS.items():
