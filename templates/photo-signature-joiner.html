@@ -6,7 +6,7 @@
     
     <!-- ⚡ HIGH-PRIORITY SEO & KEYWORDS FOR GOVT EXAMS -->
     <title>Photo and Signature Joiner Online Free - Combine for SSC, UPSC & Govt Forms | SmartPicTools</title>
-    <meta name="description" content="Free online tool to combine photo and signature into a single file for SSC, UPSC, Railway, Police, and government exam forms with interactive pan, scale, rotate, and clean signature background.">
+    <meta name="description" content="Free online tool to combine photo and signature into a single file for SSC, UPSC, Railway, Police, and government exam forms with interactive preview controls.">
     <meta name="keywords" content="photo and signature joiner online, combine photo and signature, ssc photo signature merger, up police photo signature joiner, merge photo and signature for govt exam, photo signature combiner online free, join photo with signature under 50kb">
     <meta name="robots" content="index, follow, max-image-preview:large">
     <meta name="author" content="SmartPicTools">
@@ -19,7 +19,7 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://smartpictools.in/photo-signature-joiner">
     <meta property="og:title" content="Photo and Signature Joiner Online Free - SmartPicTools">
-    <meta property="og:description" content="Combine passport photo and signature into a single file with live scaling, rotating, and position drag in 0.05s.">
+    <meta property="og:description" content="Combine passport photo and signature into a single file with on-screen scaling and positioning in 0.05s.">
 
     <!-- SCHEMA MARKUP -->
     <script type="application/ld+json">
@@ -70,14 +70,16 @@
         <div class="text-center max-w-xl mx-auto mb-5 sm:mb-6">
             <span class="text-[10px] font-extrabold uppercase tracking-widest text-indigo-400 bg-indigo-500/10 px-2.5 py-0.5 rounded-full border border-indigo-500/20">Official Exam Portal Suite</span>
             <h1 class="text-2xl sm:text-3xl font-black text-white mt-1.5 tracking-tight">Photo & Signature Joiner</h1>
-            <p class="mt-1 text-slate-400 text-xs">Combine passport photo and signature into a single file with interactive positioning, scaling, and rotation.</p>
+            <p class="mt-1 text-slate-400 text-xs">Combine passport photo and signature into a single file with on-screen adjustment.</p>
         </div>
 
-        <!-- ⚡ 2-COLUMN STUDIO LAYOUT -->
+        <!-- ⚡ 2-COLUMN BALANCED STUDIO LAYOUT -->
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-6 items-start">
             
-            <!-- LEFT PANEL: CONTROLS, UPLOADS & TRANSFORMS (7 COLS) -->
-            <div class="lg:col-span-7 bg-slate-900 rounded-3xl p-4 sm:p-6 border border-slate-800 shadow-2xl space-y-4">
+            <!-- ============================================== -->
+            <!-- ⚡ LEFT PANEL: CLEAN & UNCLUTTERED (6 COLS) -->
+            <!-- ============================================== -->
+            <div class="lg:col-span-6 bg-slate-900 rounded-3xl p-4 sm:p-6 border border-slate-800 shadow-2xl space-y-4">
                 
                 <!-- 1. DUAL UPLOAD CARDS -->
                 <div>
@@ -117,67 +119,9 @@
                     </div>
                 </div>
 
-                <!-- 2. PHOTO & SIGNATURE TRANSFORM CONTROLS -->
-                <div class="bg-slate-950/80 p-3.5 rounded-2xl border border-slate-800 space-y-3">
-                    <span class="text-xs font-bold text-slate-300 flex items-center justify-between">
-                        <span>2. Adjust & Transform (Scale, Rotate & Align):</span>
-                        <span class="text-[10px] text-emerald-400 font-normal">💡 Drag on preview to position</span>
-                    </span>
-
-                    <!-- PHOTO CONTROLS -->
-                    <div class="bg-slate-900/90 p-2.5 rounded-xl border border-slate-800 space-y-2">
-                        <div class="flex items-center justify-between text-[11px] font-bold text-slate-300">
-                            <span>👤 Passport Photo Fit:</span>
-                            <div class="flex items-center gap-1.5">
-                                <button type="button" onclick="rotateItem('photo', 90)" class="py-1 px-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-[10px] font-bold transition">
-                                    🔄 Rotate 90°
-                                </button>
-                                <button type="button" onclick="resetItemTransform('photo')" class="py-1 px-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-400 text-[10px] transition">
-                                    ↺ Center
-                                </button>
-                            </div>
-                        </div>
-                        <div class="flex items-center gap-3">
-                            <span class="text-[11px] text-slate-400">Scale / Zoom:</span>
-                            <input type="range" id="scale-photo" min="0.6" max="2.0" step="0.05" value="1.0" oninput="updateItemScale('photo', this.value)" class="flex-1 accent-indigo-500 cursor-pointer">
-                            <span id="scale-photo-txt" class="text-[10px] text-indigo-400 font-bold bg-slate-950 px-1.5 py-0.5 rounded border border-slate-800 w-11 text-center">100%</span>
-                        </div>
-                    </div>
-
-                    <!-- SIGNATURE CONTROLS -->
-                    <div class="bg-slate-900/90 p-2.5 rounded-xl border border-slate-800 space-y-2">
-                        <div class="flex items-center justify-between text-[11px] font-bold text-slate-300">
-                            <span>✍️ Signature Fit:</span>
-                            <div class="flex items-center gap-1.5">
-                                <button type="button" onclick="rotateItem('sig', 90)" class="py-1 px-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-[10px] font-bold transition">
-                                    🔄 Rotate 90°
-                                </button>
-                                <button type="button" onclick="resetItemTransform('sig')" class="py-1 px-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-400 text-[10px] transition">
-                                    ↺ Center
-                                </button>
-                            </div>
-                        </div>
-                        <div class="flex items-center gap-3">
-                            <span class="text-[11px] text-slate-400">Scale / Zoom:</span>
-                            <input type="range" id="scale-sig" min="0.4" max="2.0" step="0.05" value="1.0" oninput="updateItemScale('sig', this.value)" class="flex-1 accent-indigo-500 cursor-pointer">
-                            <span id="scale-sig-txt" class="text-[10px] text-indigo-400 font-bold bg-slate-950 px-1.5 py-0.5 rounded border border-slate-800 w-11 text-center">100%</span>
-                        </div>
-
-                        <!-- WHITEN PAPER WITH LOCAL ADAPTIVE FILTER -->
-                        <div class="flex items-center justify-between pt-1 border-t border-slate-800/80">
-                            <label class="flex items-center gap-2 cursor-pointer text-[11px] font-bold text-slate-200">
-                                <input type="checkbox" id="whiten-paper" checked onchange="renderCombinedCanvas()" class="w-3.5 h-3.5 accent-indigo-600 rounded">
-                                <span>✨ Clean Paper Shadow (100% White Background)</span>
-                            </label>
-                            <span class="text-[10px] text-emerald-400 font-semibold">Zero Noise</span>
-                        </div>
-                    </div>
-
-                </div>
-
-                <!-- 3. OFFICIAL EXAM PRESETS -->
+                <!-- 2. OFFICIAL EXAM PRESETS -->
                 <div class="bg-slate-950/80 p-3 rounded-2xl border border-slate-800 space-y-1.5">
-                    <span class="text-xs font-bold text-slate-400 block">3. Official Exam Presets:</span>
+                    <span class="text-xs font-bold text-slate-400 block">2. Official Exam Presets:</span>
                     <div class="grid grid-cols-3 gap-2">
                         <button type="button" onclick="applyExamPreset('ssc')" class="py-1.5 px-2 rounded-xl bg-slate-900 hover:bg-indigo-600 text-xs font-bold text-slate-300 hover:text-white border border-slate-700 transition">
                             🏛️ SSC / Police (350×500)
@@ -191,9 +135,9 @@
                     </div>
                 </div>
 
-                <!-- 4. DIMENSIONS & SPLIT -->
+                <!-- 3. DIMENSIONS & SPLIT -->
                 <div class="bg-slate-950/80 p-3.5 rounded-2xl border border-slate-800 space-y-2.5">
-                    <span class="text-xs font-bold text-slate-400 block">4. Dimensions & Layout:</span>
+                    <span class="text-xs font-bold text-slate-400 block">3. Dimensions & Layout:</span>
                     <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
                         <div>
                             <label class="block text-[11px] font-bold text-slate-400 mb-0.5">Width (px)</label>
@@ -222,7 +166,7 @@
                     </div>
                 </div>
 
-                <!-- 5. ACTION DOWNLOAD BUTTON -->
+                <!-- 4. ACTION DOWNLOAD BUTTON -->
                 <button type="button" id="download-btn" onclick="downloadCombinedImage()" class="w-full py-3.5 px-5 rounded-2xl bg-gradient-to-r from-indigo-600 via-indigo-500 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-extrabold text-sm shadow-lg shadow-indigo-500/25 transition active:scale-[0.99] flex items-center justify-center gap-2">
                     <span>⬇️ Download Combined Photo & Signature</span>
                 </button>
@@ -232,12 +176,15 @@
                 </div>
             </div>
 
-            <!-- RIGHT PANEL: STICKY INTERACTIVE PREVIEW (5 COLS) -->
-            <div class="lg:col-span-5 bg-slate-900 rounded-3xl p-4 sm:p-5 border border-slate-800 shadow-2xl lg:sticky lg:top-24 space-y-3">
+            <!-- ============================================== -->
+            <!-- ⚡ RIGHT PANEL: PREVIEW & ON-SCREEN TRANSFORM (6 COLS) -->
+            <!-- ============================================== -->
+            <div class="lg:col-span-6 bg-slate-900 rounded-3xl p-4 sm:p-5 border border-slate-800 shadow-2xl lg:sticky lg:top-20 space-y-3">
                 
+                <!-- TOP HEADER: TITLE & SIZE -->
                 <div class="flex justify-between items-center text-xs font-bold px-1">
                     <span class="text-slate-300 flex items-center gap-1.5">
-                        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Interactive Live Output
+                        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Live Interactive Preview
                     </span>
                     <div class="flex items-center gap-1.5">
                         <span class="text-slate-400 text-[11px]">Size:</span>
@@ -245,15 +192,51 @@
                     </div>
                 </div>
 
-                <!-- Interactive Output Canvas Container -->
-                <div class="flex items-center justify-center p-3 bg-slate-950 rounded-2xl border border-slate-800 shadow-inner overflow-hidden min-h-[300px] max-h-[460px]">
-                    <canvas id="output-canvas" class="max-h-[420px] max-w-full w-auto h-auto rounded shadow-2xl bg-white block select-none cursor-move" title="Click and drag to position photo or signature"></canvas>
+                <!-- ⚡ ON-SCREEN TRANSFORM TOOLBAR (RIGHT OVER PREVIEW) -->
+                <div class="bg-slate-950/90 p-2.5 rounded-2xl border border-slate-800 space-y-2">
+                    <!-- Target Selector (Photo vs Sign) -->
+                    <div class="flex items-center justify-between gap-2">
+                        <div class="flex items-center gap-1 bg-slate-900 p-1 rounded-xl border border-slate-800">
+                            <button type="button" id="tab-edit-photo" onclick="setTransformMode('photo')" class="py-1 px-2.5 rounded-lg text-xs font-bold bg-indigo-600 text-white transition">
+                                👤 Edit Photo
+                            </button>
+                            <button type="button" id="tab-edit-sig" onclick="setTransformMode('sig')" class="py-1 px-2.5 rounded-lg text-xs font-bold text-slate-400 hover:text-white transition">
+                                ✍️ Edit Signature
+                            </button>
+                        </div>
+                        <div class="flex items-center gap-1.5">
+                            <button type="button" onclick="rotateCurrent()" class="py-1 px-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-[11px] font-bold transition">
+                                🔄 90°
+                            </button>
+                            <button type="button" onclick="resetCurrentTransform()" class="py-1 px-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-400 text-[11px] transition">
+                                ↺ Reset
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Scale Slider for currently active item -->
+                    <div class="flex items-center gap-2.5 pt-1">
+                        <span class="text-[11px] font-bold text-slate-400" id="scale-label">Photo Zoom:</span>
+                        <input type="range" id="active-scale-slider" min="0.5" max="2.0" step="0.05" value="1.0" oninput="handleActiveScale(this.value)" class="flex-1 accent-indigo-500 cursor-pointer">
+                        <span id="active-scale-text" class="text-[11px] text-indigo-400 font-bold bg-slate-900 px-1.5 py-0.5 rounded border border-slate-800 w-12 text-center">100%</span>
+                    </div>
+
+                    <!-- Whiten Paper Toggle (Only for signature) -->
+                    <div id="sig-whiten-wrap" class="hidden items-center justify-between pt-1 border-t border-slate-800">
+                        <label class="flex items-center gap-2 cursor-pointer text-[11px] font-bold text-slate-200">
+                            <input type="checkbox" id="whiten-paper" checked onchange="renderCombinedCanvas()" class="w-3.5 h-3.5 accent-indigo-600 rounded">
+                            <span>✨ Spotless White Paper</span>
+                        </label>
+                        <span class="text-[10px] text-emerald-400 font-semibold">100% Clean</span>
+                    </div>
                 </div>
 
-                <div class="flex items-center justify-between text-[11px] text-slate-400 px-1">
-                    <span>👆 Drag directly on image to reposition</span>
-                    <button type="button" onclick="resetAllTransforms()" class="text-indigo-400 hover:underline">Reset All Transforms</button>
+                <!-- Preview Output Canvas (Interactive Drag) -->
+                <div class="flex items-center justify-center p-2.5 bg-slate-950 rounded-2xl border border-slate-800 shadow-inner overflow-hidden min-h-[290px] max-h-[440px]">
+                    <canvas id="output-canvas" class="max-h-[400px] max-w-full w-auto h-auto rounded shadow-2xl bg-white block select-none cursor-move" title="Click and drag to position photo or signature"></canvas>
                 </div>
+
+                <p class="text-[11px] text-center text-slate-400">👆 Click and drag directly on photo or sign to align.</p>
             </div>
 
         </div>
@@ -269,8 +252,8 @@
                 </div>
                 <div class="bg-slate-900 p-4 rounded-2xl border border-slate-800">
                     <span class="w-6 h-6 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center mb-2 text-xs">2</span>
-                    <h3 class="font-bold text-white text-xs sm:text-sm mb-1">Position & Scale</h3>
-                    <p class="text-slate-400 text-xs">Drag on preview to center, zoom with sliders, and pick exam presets.</p>
+                    <h3 class="font-bold text-white text-xs sm:text-sm mb-1">Adjust on Screen</h3>
+                    <p class="text-slate-400 text-xs">Drag on preview to center, zoom with slider, and choose exam presets.</p>
                 </div>
                 <div class="bg-slate-900 p-4 rounded-2xl border border-slate-800">
                     <span class="w-6 h-6 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center mb-2 text-xs">3</span>
@@ -285,17 +268,17 @@
             <h2 class="text-lg font-bold text-white mb-3">Frequently Asked Questions</h2>
             <details class="bg-slate-900 p-3.5 rounded-xl border border-slate-800 text-xs sm:text-sm cursor-pointer">
                 <summary class="font-bold text-white flex justify-between items-center">
-                    Can I drag and zoom to fit my photo properly?
+                    What is the official photo and signature size for SSC & UP Police forms?
                     <span class="text-indigo-400">▼</span>
                 </summary>
-                <p class="text-slate-400 mt-2 leading-relaxed">Yes! Simply click and drag directly on the photo or signature inside the preview to center your face, and use the zoom sliders to frame it perfectly.</p>
+                <p class="text-slate-400 mt-2 leading-relaxed">Most portals require an image width of 350px and height of 500px, where the photo occupies the top 75% and signature occupies the bottom 25%.</p>
             </details>
             <details class="bg-slate-900 p-3.5 rounded-xl border border-slate-800 text-xs sm:text-sm cursor-pointer">
                 <summary class="font-bold text-white flex justify-between items-center">
-                    How does the Clean Paper Shadow algorithm eliminate noise?
+                    How does the Spotless White Paper feature work?
                     <span class="text-indigo-400">▼</span>
                 </summary>
-                <p class="text-slate-400 mt-2 leading-relaxed">It calculates the local differential contrast between ink and paper. Paper shadows and beige textures are cleanly neutralized into 100% spotless white, keeping pen strokes deep black without any noisy speckles.</p>
+                <p class="text-slate-400 mt-2 leading-relaxed">It samples paper luminance and eliminates shadows without creating noise, leaving the background pure white and signature ink crisp and dark.</p>
             </details>
         </section>
     </main>
@@ -304,18 +287,19 @@
         <p>© 2026 SmartPicTools. 100% Free & Private in-browser suite. <a href="/" class="text-indigo-400 hover:underline">Explore All Tools</a></p>
     </footer>
 
-    <!-- ⚡ INTERACTIVE TRANSFORM & CAMSCANNER-GRADE CLEANING ENGINE -->
+    <!-- ⚡ HIGH-PERFORMANCE PREVIEW TRANSFORM & CLEANING JS ENGINE -->
     <script>
         let photoImg = null;
         let sigImg = null;
 
         // Transform States
+        let currentEditMode = 'photo'; // 'photo' or 'sig'
         let photoTransform = { scale: 1.0, panX: 0, panY: 0, rotate: 0 };
         let sigTransform = { scale: 1.0, panX: 0, panY: 0, rotate: 0 };
 
-        // Dragging state on Canvas
+        // Canvas drag state
         let isDraggingCanvas = false;
-        let dragTarget = null; // 'photo' or 'sig'
+        let dragTarget = null;
         let dragStartMouse = { x: 0, y: 0 };
         let dragStartPan = { x: 0, y: 0 };
 
@@ -377,47 +361,73 @@
             reader.readAsDataURL(blob);
         }
 
-        // ⚡ TRANSFORM HANDLERS (ZOOM, ROTATE, RESET)
-        function updateItemScale(type, val) {
+        // ⚡ ON-SCREEN EDIT MODE TOGGLE
+        function setTransformMode(mode) {
+            currentEditMode = mode;
+            const pBtn = document.getElementById('tab-edit-photo');
+            const sBtn = document.getElementById('tab-edit-sig');
+            const lbl = document.getElementById('scale-label');
+            const slider = document.getElementById('active-scale-slider');
+            const txt = document.getElementById('active-scale-text');
+            const whitenWrap = document.getElementById('sig-whiten-wrap');
+
+            if (mode === 'photo') {
+                pBtn.className = "py-1 px-2.5 rounded-lg text-xs font-bold bg-indigo-600 text-white transition";
+                sBtn.className = "py-1 px-2.5 rounded-lg text-xs font-bold text-slate-400 hover:text-white transition";
+                lbl.innerText = "Photo Zoom:";
+                slider.value = photoTransform.scale;
+                txt.innerText = Math.round(photoTransform.scale * 100) + '%';
+                whitenWrap.classList.add('hidden');
+                whitenWrap.classList.remove('flex');
+            } else {
+                sBtn.className = "py-1 px-2.5 rounded-lg text-xs font-bold bg-indigo-600 text-white transition";
+                pBtn.className = "py-1 px-2.5 rounded-lg text-xs font-bold text-slate-400 hover:text-white transition";
+                lbl.innerText = "Sign Zoom:";
+                slider.value = sigTransform.scale;
+                txt.innerText = Math.round(sigTransform.scale * 100) + '%';
+                whitenWrap.classList.remove('hidden');
+                whitenWrap.classList.add('flex');
+            }
+        }
+
+        function handleActiveScale(val) {
             const num = parseFloat(val) || 1.0;
-            if (type === 'photo') {
+            document.getElementById('active-scale-text').innerText = Math.round(num * 100) + '%';
+            if (currentEditMode === 'photo') {
                 photoTransform.scale = num;
-                document.getElementById('scale-photo-txt').innerText = Math.round(num * 100) + '%';
             } else {
                 sigTransform.scale = num;
-                document.getElementById('scale-sig-txt').innerText = Math.round(num * 100) + '%';
             }
             renderCombinedCanvas();
         }
 
-        function rotateItem(type, deg) {
-            if (type === 'photo') {
-                photoTransform.rotate = (photoTransform.rotate + deg) % 360;
+        function rotateCurrent() {
+            if (currentEditMode === 'photo') {
+                photoTransform.rotate = (photoTransform.rotate + 90) % 360;
             } else {
-                sigTransform.rotate = (sigTransform.rotate + deg) % 360;
+                sigTransform.rotate = (sigTransform.rotate + 90) % 360;
             }
             renderCombinedCanvas();
+        }
+
+        function resetCurrentTransform() {
+            resetItemTransform(currentEditMode);
         }
 
         function resetItemTransform(type) {
             if (type === 'photo') {
                 photoTransform = { scale: 1.0, panX: 0, panY: 0, rotate: 0 };
-                document.getElementById('scale-photo').value = "1.0";
-                document.getElementById('scale-photo-txt').innerText = "100%";
             } else {
                 sigTransform = { scale: 1.0, panX: 0, panY: 0, rotate: 0 };
-                document.getElementById('scale-sig').value = "1.0";
-                document.getElementById('scale-sig-txt').innerText = "100%";
+            }
+            if (currentEditMode === type) {
+                document.getElementById('active-scale-slider').value = "1.0";
+                document.getElementById('active-scale-text').innerText = "100%";
             }
             renderCombinedCanvas();
         }
 
-        function resetAllTransforms() {
-            resetItemTransform('photo');
-            resetItemTransform('sig');
-        }
-
-        // ⚡ DIRECT INTERACTIVE DRAG ON PREVIEW CANVAS
+        // ⚡ DIRECT DRAGGING ON CANVAS
         function initCanvasDragging() {
             function getCanvasPos(e) {
                 const rect = outputCanvas.getBoundingClientRect();
@@ -487,79 +497,43 @@
             renderCombinedCanvas();
         }
 
-        // ⚡ ROCK-SOLID LOCAL DIFFERENTIAL CLEANER (100% SPOTLESS PAPER & NO PEPPER GRAIN)
-        function cleanSignatureSpotless(srcImg) {
+        // ⚡ FOOLPROOF SIGNATURE WHITENER (NO BLACK BLOCKS, SPOTLESS WHITE PAPER)
+        function cleanSignatureClean(srcImg) {
             const tCanvas = document.createElement('canvas');
             tCanvas.width = srcImg.naturalWidth;
             tCanvas.height = srcImg.naturalHeight;
             const tCtx = tCanvas.getContext('2d');
             tCtx.drawImage(srcImg, 0, 0);
 
-            const w = tCanvas.width;
-            const h = tCanvas.height;
-            const imgData = tCtx.getImageData(0, 0, w, h);
+            const imgData = tCtx.getImageData(0, 0, tCanvas.width, tCanvas.height);
             const d = imgData.data;
 
-            // 1. Compute grayscale luminance
-            const lum = new Float32Array(w * h);
-            for (let i = 0; i < w * h; i++) {
-                const p = i * 4;
-                lum[i] = 0.299 * d[p] + 0.587 * d[p + 1] + 0.114 * d[p + 2];
+            // Sample paper background brightness
+            let minLum = 255;
+            let maxLum = 0;
+            const step = Math.max(1, Math.floor(d.length / 4000));
+            for (let i = 0; i < d.length; i += step * 4) {
+                const l = 0.299 * d[i] + 0.587 * d[i+1] + 0.114 * d[i+2];
+                if (l < minLum) minLum = l;
+                if (l > maxLum) maxLum = l;
             }
 
-            // 2. Block-based local background estimation (24px blocks)
-            const blockSize = Math.max(16, Math.min(40, Math.floor(Math.min(w, h) / 10)));
-            const bxCount = Math.ceil(w / blockSize);
-            const byCount = Math.ceil(h / blockSize);
-            const bgGrid = new Float32Array(bxCount * byCount);
+            // Paper threshold (all light shades become 100% pure white)
+            const cutoff = minLum + (maxLum - minLum) * 0.72;
 
-            for (let by = 0; by < byCount; by++) {
-                for (let bx = 0; bx < bxCount; bx++) {
-                    let maxL = 0;
-                    const x0 = bx * blockSize;
-                    const y0 = by * blockSize;
-                    const x1 = Math.min(w, x0 + blockSize);
-                    const y1 = Math.min(h, y0 + blockSize);
-
-                    for (let y = y0; y < y1; y++) {
-                        for (let x = x0; x < x1; x++) {
-                            const l = lum[y * w + x];
-                            if (l > maxL) maxL = l;
-                        }
-                    }
-                    bgGrid[by * bxCount + bx] = Math.max(90, maxL);
-                }
-            }
-
-            // 3. Differential thresholding: If pixel is not distinctly darker than its local paper, it's 100% white!
-            const sensitivity = 16;
-
-            for (let y = 0; y < h; y++) {
-                const gy = Math.min(byCount - 1, Math.floor(y / blockSize));
-                for (let x = 0; x < w; x++) {
-                    const gx = Math.min(bxCount - 1, Math.floor(x / blockSize));
-                    const localPaperLum = bgGrid[gy * bxCount + gx];
-
-                    const idx = y * w + x;
-                    const p = idx * 4;
-                    const l = lum[idx];
-
-                    // Difference from local paper
-                    const diff = localPaperLum - l;
-
-                    if (diff < sensitivity) {
-                        // Paper background -> 100% Spotless White
-                        d[p] = 255;
-                        d[p + 1] = 255;
-                        d[p + 2] = 255;
-                    } else {
-                        // Pen ink -> Jet black contrast
-                        const inkStrength = Math.min(1.0, (diff - sensitivity) / 35.0);
-                        const inkVal = Math.max(0, Math.round(30 * (1 - inkStrength)));
-                        d[p] = inkVal;
-                        d[p + 1] = inkVal;
-                        d[p + 2] = inkVal;
-                    }
+            for (let i = 0; i < d.length; i += 4) {
+                const l = 0.299 * d[i] + 0.587 * d[i+1] + 0.114 * d[i+2];
+                if (l >= cutoff) {
+                    d[i] = 255;
+                    d[i+1] = 255;
+                    d[i+2] = 255;
+                } else {
+                    // Smooth ink darkening
+                    const factor = l / cutoff;
+                    const ink = Math.round(factor * factor * 50);
+                    d[i] = ink;
+                    d[i+1] = ink;
+                    d[i+2] = ink;
                 }
             }
 
@@ -584,11 +558,11 @@
             const photoH = Math.round(h * splitRatio);
             const sigH = h - photoH;
 
-            // 1. DRAW PASSPORT PHOTO WITH FULL TRANSFORM
+            // 1. DRAW PASSPORT PHOTO
             ctx.save();
             ctx.beginPath();
             ctx.rect(0, 0, w, photoH);
-            ctx.clip(); // Restrict to photo slot
+            ctx.clip();
 
             if (photoImg) {
                 const pRatio = photoImg.naturalWidth / photoImg.naturalHeight;
@@ -603,7 +577,6 @@
                     baseW = photoH * pRatio;
                 }
 
-                // Apply Pan, Rotate, and Zoom
                 ctx.translate(w / 2 + photoTransform.panX, photoH / 2 + photoTransform.panY);
                 ctx.rotate((photoTransform.rotate * Math.PI) / 180);
                 ctx.scale(photoTransform.scale, photoTransform.scale);
@@ -618,11 +591,11 @@
             }
             ctx.restore();
 
-            // 2. DRAW SIGNATURE WITH FULL TRANSFORM
+            // 2. DRAW SIGNATURE
             ctx.save();
             ctx.beginPath();
             ctx.rect(0, photoH, w, sigH);
-            ctx.clip(); // Restrict to signature slot
+            ctx.clip();
 
             if (sigImg) {
                 const sRatio = sigImg.naturalWidth / sigImg.naturalHeight;
@@ -631,15 +604,14 @@
 
                 if (sRatio > slotRatio) {
                     baseW = w * 0.88;
-                    baseH = drawW = baseW / sRatio;
+                    baseH = baseW / sRatio;
                 } else {
                     baseH = sigH * 0.82;
                     baseW = baseH * sRatio;
                 }
 
-                const cleanCanvas = shouldWhiten ? cleanSignatureSpotless(sigImg) : sigImg;
+                const cleanCanvas = shouldWhiten ? cleanSignatureClean(sigImg) : sigImg;
 
-                // Apply Pan, Rotate, and Zoom
                 ctx.translate(w / 2 + sigTransform.panX, photoH + sigH / 2 + sigTransform.panY);
                 ctx.rotate((sigTransform.rotate * Math.PI) / 180);
                 ctx.scale(sigTransform.scale, sigTransform.scale);
@@ -672,7 +644,7 @@
                 ctx.stroke();
             }
 
-            // Update live estimated KB meter
+            // Live estimated KB meter
             outputCanvas.toBlob((blob) => {
                 if (blob) {
                     const kb = (blob.size / 1024).toFixed(1);
