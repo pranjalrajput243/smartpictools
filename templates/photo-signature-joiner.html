@@ -50,209 +50,215 @@
 
     <!-- HEADER -->
     <header class="border-b border-slate-800 bg-slate-900/80 backdrop-blur-xl sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 h-18 sm:h-20 flex items-center justify-between">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 sm:h-18 flex items-center justify-between">
             <a href="/" class="flex items-center gap-2.5 sm:gap-3 group">
-                <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-2xl bg-gradient-to-tr from-indigo-500 via-purple-500 to-pink-500 flex items-center justify-center text-white text-lg sm:text-xl shadow-lg shadow-indigo-500/30 group-hover:scale-105 transition">⚡</div>
+                <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-2xl bg-gradient-to-tr from-indigo-500 via-purple-500 to-pink-500 flex items-center justify-center text-white text-base sm:text-lg shadow-lg shadow-indigo-500/30 group-hover:scale-105 transition">⚡</div>
                 <div>
-                    <span class="text-xl sm:text-2xl font-black tracking-tight text-white">SmartPic<span class="text-indigo-400">Tools</span></span>
-                    <span class="block text-[9px] sm:text-[10px] uppercase font-bold tracking-widest text-slate-400 -mt-1">Exam Form Tools</span>
+                    <span class="text-lg sm:text-xl font-black tracking-tight text-white">SmartPic<span class="text-indigo-400">Tools</span></span>
+                    <span class="block text-[8px] sm:text-[9px] uppercase font-bold tracking-widest text-slate-400 -mt-1">Exam Form Tools</span>
                 </div>
             </a>
-            <a href="/" class="py-2 px-3.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-bold text-indigo-400 hover:text-white border border-slate-700 transition flex items-center gap-1.5 shadow-md">
+            <a href="/" class="py-1.5 px-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-bold text-indigo-400 hover:text-white border border-slate-700 transition flex items-center gap-1.5 shadow-md">
                 <span>← All Tools</span>
             </a>
         </div>
     </header>
 
-    <!-- MAIN WORKSPACE -->
-    <main class="max-w-4xl mx-auto w-full px-4 py-8 sm:py-12 flex-1">
-        <div class="text-center max-w-2xl mx-auto mb-8 sm:mb-10">
-            <span class="text-[11px] font-extrabold uppercase tracking-widest text-indigo-400 bg-indigo-500/10 px-3 py-1 rounded-full border border-indigo-500/20">Official Exam Portal Suite</span>
-            <h1 class="text-3xl sm:text-5xl font-black text-white mt-3 tracking-tight">Photo and Signature Joiner</h1>
-            <p class="mt-2.5 text-slate-400 text-xs sm:text-sm">Combine your passport photo and signature into a single image for SSC, UPSC, Police, and Railway application forms.</p>
+    <!-- MAIN STUDIO WORKSPACE (COMPACT HEADER + 2-COLUMN VIEWPORT) -->
+    <main class="max-w-7xl mx-auto w-full px-3 sm:px-6 py-5 sm:py-8 flex-1">
+        
+        <!-- COMPACT TITLE -->
+        <div class="text-center max-w-xl mx-auto mb-5 sm:mb-6">
+            <span class="text-[10px] font-extrabold uppercase tracking-widest text-indigo-400 bg-indigo-500/10 px-2.5 py-0.5 rounded-full border border-indigo-500/20">Official Exam Portal Suite</span>
+            <h1 class="text-2xl sm:text-3xl font-black text-white mt-1.5 tracking-tight">Photo & Signature Joiner</h1>
+            <p class="mt-1 text-slate-400 text-xs">Combine passport photo and signature into a single file for SSC, UPSC, and state exam forms.</p>
         </div>
 
-        <div class="bg-slate-900 rounded-3xl p-5 sm:p-10 border border-slate-800 shadow-2xl relative space-y-7">
+        <!-- ⚡ 2-COLUMN ALL-IN-ONE STUDIO LAYOUT -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-6 items-start">
             
-            <!-- ⚡ 1. LIVE COMBINED PREVIEW (SABSE UPAR) -->
-            <div class="bg-slate-950/90 p-5 rounded-2xl border border-slate-800 text-center space-y-3">
-                <div class="flex justify-between items-center text-xs font-bold px-2">
-                    <span class="text-slate-300 flex items-center gap-1.5">
-                        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Live Combined Preview
-                    </span>
-                    <div class="flex items-center gap-2">
-                        <span class="text-slate-400">File Weight:</span>
-                        <span id="live-kb-badge" class="text-indigo-400 bg-indigo-500/10 px-2.5 py-1 rounded-lg border border-indigo-500/20 font-black">0 KB</span>
-                    </div>
-                </div>
-
-                <!-- Combined Preview Canvas -->
-                <div class="flex items-center justify-center p-3 bg-slate-950 rounded-xl border border-slate-800 shadow-xl overflow-hidden min-h-[260px] max-h-[380px]">
-                    <canvas id="output-canvas" class="max-h-[340px] w-auto h-auto rounded shadow-lg bg-white block"></canvas>
-                </div>
-            </div>
-
-            <!-- ⚡ 2. UPLOAD FEATURE (LIVE PREVIEW KE THEEK NICHE) -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <!-- ============================================== -->
+            <!-- ⚡ LEFT PANEL: CONTROLS, UPLOADS & PRESETS (7 COLS) -->
+            <!-- ============================================== -->
+            <div class="lg:col-span-7 bg-slate-900 rounded-3xl p-4 sm:p-6 border border-slate-800 shadow-2xl space-y-4">
                 
-                <!-- PHOTO UPLOAD CARD -->
-                <div class="border-2 border-dashed border-slate-700 hover:border-indigo-500 bg-slate-950/60 rounded-2xl p-5 text-center cursor-pointer transition relative group" onclick="document.getElementById('input-photo').click()">
-                    <input type="file" id="input-photo" accept="image/*, .heic, .HEIC, .heif, .HEIF" class="hidden" onchange="handlePhotoUpload(this.files[0])">
-                    <div id="photo-placeholder">
-                        <div class="w-12 h-12 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-2xl flex items-center justify-center mx-auto mb-2.5 group-hover:scale-110 transition">👤</div>
-                        <h4 class="text-xs sm:text-sm font-bold text-white mb-0.5">1. Select Passport Photo</h4>
-                        <p class="text-[11px] text-slate-400">Click to upload or change</p>
-                    </div>
-                    <div id="photo-preview-wrap" class="hidden">
-                        <img id="thumb-photo" class="h-20 w-auto mx-auto object-contain rounded-lg border border-slate-700 mb-1.5" src="#" alt="Photo Thumbnail">
-                        <span class="text-xs text-emerald-400 font-bold block">✓ Photo Selected</span>
-                        <span class="text-[10px] text-indigo-400 underline">Click to change</span>
+                <!-- 1. DUAL UPLOAD CARDS -->
+                <div>
+                    <span class="text-xs font-bold text-slate-300 block mb-2">1. Upload Photo & Signature:</span>
+                    <div class="grid grid-cols-2 gap-3">
+                        
+                        <!-- PHOTO UPLOAD -->
+                        <div class="border border-dashed border-slate-700 hover:border-indigo-500 bg-slate-950/70 rounded-2xl p-3 text-center cursor-pointer transition relative group" onclick="document.getElementById('input-photo').click()">
+                            <input type="file" id="input-photo" accept="image/*, .heic, .HEIC, .heif, .HEIF" class="hidden" onchange="handlePhotoUpload(this.files[0])">
+                            <div id="photo-placeholder">
+                                <div class="w-9 h-9 rounded-xl bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-lg flex items-center justify-center mx-auto mb-1.5 group-hover:scale-110 transition">👤</div>
+                                <h4 class="text-xs font-bold text-white mb-0.5">Passport Photo</h4>
+                                <p class="text-[10px] text-slate-400">Click to upload</p>
+                            </div>
+                            <div id="photo-preview-wrap" class="hidden">
+                                <img id="thumb-photo" class="h-14 w-auto mx-auto object-contain rounded border border-slate-700 mb-1" src="#" alt="Photo">
+                                <span class="text-[10px] text-emerald-400 font-bold block">✓ Photo Selected</span>
+                                <span class="text-[9px] text-indigo-400 underline">Change</span>
+                            </div>
+                        </div>
+
+                        <!-- SIGNATURE UPLOAD -->
+                        <div class="border border-dashed border-slate-700 hover:border-purple-500 bg-slate-950/70 rounded-2xl p-3 text-center cursor-pointer transition relative group" onclick="document.getElementById('input-sig').click()">
+                            <input type="file" id="input-sig" accept="image/*, .heic, .HEIC, .heif, .HEIF" class="hidden" onchange="handleSigUpload(this.files[0])">
+                            <div id="sig-placeholder">
+                                <div class="w-9 h-9 rounded-xl bg-purple-500/10 border border-purple-500/20 text-purple-400 text-lg flex items-center justify-center mx-auto mb-1.5 group-hover:scale-110 transition">✍️</div>
+                                <h4 class="text-xs font-bold text-white mb-0.5">Signature</h4>
+                                <p class="text-[10px] text-slate-400">Click to upload</p>
+                            </div>
+                            <div id="sig-preview-wrap" class="hidden">
+                                <img id="thumb-sig" class="h-14 w-auto mx-auto object-contain rounded border border-slate-700 mb-1 bg-white" src="#" alt="Sign">
+                                <span class="text-[10px] text-emerald-400 font-bold block">✓ Sign Selected</span>
+                                <span class="text-[9px] text-indigo-400 underline">Change</span>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
 
-                <!-- SIGNATURE UPLOAD CARD -->
-                <div class="border-2 border-dashed border-slate-700 hover:border-purple-500 bg-slate-950/60 rounded-2xl p-5 text-center cursor-pointer transition relative group" onclick="document.getElementById('input-sig').click()">
-                    <input type="file" id="input-sig" accept="image/*, .heic, .HEIC, .heif, .HEIF" class="hidden" onchange="handleSigUpload(this.files[0])">
-                    <div id="sig-placeholder">
-                        <div class="w-12 h-12 rounded-2xl bg-purple-500/10 border border-purple-500/20 text-purple-400 text-2xl flex items-center justify-center mx-auto mb-2.5 group-hover:scale-110 transition">✍️</div>
-                        <h4 class="text-xs sm:text-sm font-bold text-white mb-0.5">2. Select Signature</h4>
-                        <p class="text-[11px] text-slate-400">Click to upload or change</p>
-                    </div>
-                    <div id="sig-preview-wrap" class="hidden">
-                        <img id="thumb-sig" class="h-20 w-auto mx-auto object-contain rounded-lg border border-slate-700 mb-1.5 bg-white" src="#" alt="Signature Thumbnail">
-                        <span class="text-xs text-emerald-400 font-bold block">✓ Signature Selected</span>
-                        <span class="text-[10px] text-indigo-400 underline">Click to change</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- ⚡ 3. CONTROLS & SETTINGS (UPLOAD KE NICHE) -->
-            <div id="joiner-controls" class="space-y-4">
-                
-                <!-- 1-CLICK EXAM PRESETS -->
-                <div class="bg-slate-950/80 p-3 sm:p-4 rounded-2xl border border-slate-800 space-y-2">
-                    <div class="flex items-center justify-between">
-                        <span class="text-xs font-bold text-slate-400">Official Exam Portal Presets:</span>
-                        <span class="text-[11px] text-emerald-400 font-semibold">⚡ 1-Click Snapping</span>
-                    </div>
-                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-2">
-                        <button type="button" onclick="applyExamPreset('ssc')" class="py-2 px-2.5 rounded-xl bg-slate-900 hover:bg-indigo-600 text-xs font-bold text-slate-300 hover:text-white border border-slate-700 transition">
-                            🏛️ SSC / UP Police (350×500)
+                <!-- 2. OFFICIAL EXAM PRESETS -->
+                <div class="bg-slate-950/80 p-3 rounded-2xl border border-slate-800 space-y-1.5">
+                    <span class="text-xs font-bold text-slate-400 block">2. Official Exam Presets:</span>
+                    <div class="grid grid-cols-3 gap-2">
+                        <button type="button" onclick="applyExamPreset('ssc')" class="py-1.5 px-2 rounded-xl bg-slate-900 hover:bg-indigo-600 text-xs font-bold text-slate-300 hover:text-white border border-slate-700 transition">
+                            🏛️ SSC / Police (350×500)
                         </button>
-                        <button type="button" onclick="applyExamPreset('upsc')" class="py-2 px-2.5 rounded-xl bg-slate-900 hover:bg-indigo-600 text-xs font-bold text-slate-300 hover:text-white border border-slate-700 transition">
-                            📑 UPSC / Banking (400×560)
+                        <button type="button" onclick="applyExamPreset('upsc')" class="py-1.5 px-2 rounded-xl bg-slate-900 hover:bg-indigo-600 text-xs font-bold text-slate-300 hover:text-white border border-slate-700 transition">
+                            📑 UPSC / Bank (400×560)
                         </button>
-                        <button type="button" onclick="applyExamPreset('square')" class="py-2 px-2.5 rounded-xl bg-slate-900 hover:bg-indigo-600 text-xs font-bold text-slate-300 hover:text-white border border-slate-700 transition">
+                        <button type="button" onclick="applyExamPreset('square')" class="py-1.5 px-2 rounded-xl bg-slate-900 hover:bg-indigo-600 text-xs font-bold text-slate-300 hover:text-white border border-slate-700 transition">
                             ⏹️ 1:1 Square (500×500)
                         </button>
                     </div>
                 </div>
 
-                <!-- DIMENSIONS, PROPORTIONS & BORDER -->
-                <div class="bg-slate-950/80 p-4 rounded-2xl border border-slate-800 space-y-3.5">
-                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                <!-- 3. DIMENSIONS & SPLIT -->
+                <div class="bg-slate-950/80 p-3.5 rounded-2xl border border-slate-800 space-y-3">
+                    <span class="text-xs font-bold text-slate-400 block">3. Adjust Dimensions & Layout:</span>
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
                         <div>
-                            <label class="block text-xs font-bold text-slate-400 mb-1">Target Width (px)</label>
-                            <input type="number" id="target-w" value="350" oninput="renderCombinedCanvas()" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs font-bold text-white focus:outline-none focus:border-indigo-500">
+                            <label class="block text-[11px] font-bold text-slate-400 mb-0.5">Width (px)</label>
+                            <input type="number" id="target-w" value="350" oninput="renderCombinedCanvas()" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-2.5 py-1.5 text-xs font-bold text-white focus:outline-none focus:border-indigo-500">
                         </div>
                         <div>
-                            <label class="block text-xs font-bold text-slate-400 mb-1">Target Height (px)</label>
-                            <input type="number" id="target-h" value="500" oninput="renderCombinedCanvas()" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs font-bold text-white focus:outline-none focus:border-indigo-500">
+                            <label class="block text-[11px] font-bold text-slate-400 mb-0.5">Height (px)</label>
+                            <input type="number" id="target-h" value="500" oninput="renderCombinedCanvas()" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-2.5 py-1.5 text-xs font-bold text-white focus:outline-none focus:border-indigo-500">
                         </div>
                         <div>
-                            <label class="block text-xs font-bold text-slate-400 mb-1">Photo Split Ratio</label>
-                            <select id="split-ratio" onchange="renderCombinedCanvas()" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs font-bold text-white focus:outline-none focus:border-indigo-500">
+                            <label class="block text-[11px] font-bold text-slate-400 mb-0.5">Split Ratio</label>
+                            <select id="split-ratio" onchange="renderCombinedCanvas()" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-2.5 py-1.5 text-xs font-bold text-white focus:outline-none focus:border-indigo-500">
                                 <option value="0.75" selected>75% Photo / 25% Sign</option>
                                 <option value="0.70">70% Photo / 30% Sign</option>
                                 <option value="0.80">80% Photo / 20% Sign</option>
                             </select>
                         </div>
                         <div>
-                            <label class="block text-xs font-bold text-slate-400 mb-1">Separator & Borders</label>
-                            <select id="border-style" onchange="renderCombinedCanvas()" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs font-bold text-white focus:outline-none focus:border-indigo-500">
+                            <label class="block text-[11px] font-bold text-slate-400 mb-0.5">Separator Line</label>
+                            <select id="border-style" onchange="renderCombinedCanvas()" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-2.5 py-1.5 text-xs font-bold text-white focus:outline-none focus:border-indigo-500">
                                 <option value="thin-line" selected>Thin Line (Official)</option>
-                                <option value="none">Seamless (No Line)</option>
-                                <option value="outer-border">Full Studio Border</option>
+                                <option value="none">No Line</option>
+                                <option value="outer-border">Studio Border</option>
                             </select>
                         </div>
                     </div>
 
-                    <!-- ⚡ SMART SIGNATURE BACKGROUND WHITENER -->
-                    <div class="flex items-center justify-between p-3 bg-slate-900 rounded-xl border border-slate-800">
-                        <label class="flex items-center gap-2.5 cursor-pointer text-xs font-bold text-slate-200">
+                    <!-- ⚡ ADAPTIVE SIGNATURE BACKGROUND WHITENER -->
+                    <div class="flex items-center justify-between p-2.5 bg-slate-900 rounded-xl border border-slate-800">
+                        <label class="flex items-center gap-2 cursor-pointer text-xs font-bold text-slate-200">
                             <input type="checkbox" id="whiten-paper" checked onchange="renderCombinedCanvas()" class="w-4 h-4 accent-indigo-600 rounded">
-                            <span>✨ Whiten Signature Paper (Removes yellow paper tints & mobile shadows)</span>
+                            <span>✨ Whiten Paper Background</span>
                         </label>
-                        <span class="text-[11px] text-emerald-400 font-semibold">Clean Scanned Look</span>
+                        <span class="text-[10px] text-emerald-400 font-semibold">Removes Paper Shadows</span>
                     </div>
                 </div>
 
-                <!-- ⚡ 4. DOWNLOAD BUTTON (COMPRESS SLIDER COMPLETELY REMOVED) -->
-                <button type="button" id="download-btn" onclick="downloadCombinedImage()" class="w-full py-4 px-6 rounded-2xl bg-gradient-to-r from-indigo-600 via-indigo-500 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-extrabold text-sm sm:text-base shadow-lg shadow-indigo-500/25 transition active:scale-[0.99] flex items-center justify-center gap-3">
+                <!-- 4. ACTION DOWNLOAD BUTTON -->
+                <button type="button" id="download-btn" onclick="downloadCombinedImage()" class="w-full py-3.5 px-5 rounded-2xl bg-gradient-to-r from-indigo-600 via-indigo-500 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-extrabold text-sm shadow-lg shadow-indigo-500/25 transition active:scale-[0.99] flex items-center justify-center gap-2">
                     <span>⬇️ Download Combined Photo & Signature</span>
                 </button>
+
+                <!-- STATUS MESSAGE -->
+                <div id="status-box" class="hidden p-2.5 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-center">
+                    <p class="text-emerald-400 font-bold text-xs">🎉 Download complete! Ready for portal upload.</p>
+                </div>
             </div>
 
-            <!-- SUCCESS STATUS -->
-            <div id="status-box" class="hidden p-3.5 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 text-center">
-                <p class="text-emerald-400 font-bold text-xs sm:text-sm">🎉 Success! Combined file downloaded directly to your device.</p>
+            <!-- ============================================== -->
+            <!-- ⚡ RIGHT PANEL: STICKY LIVE PREVIEW (5 COLS) -->
+            <!-- ============================================== -->
+            <div class="lg:col-span-5 bg-slate-900 rounded-3xl p-4 sm:p-5 border border-slate-800 shadow-2xl lg:sticky lg:top-24 space-y-3">
+                
+                <div class="flex justify-between items-center text-xs font-bold px-1">
+                    <span class="text-slate-300 flex items-center gap-1.5">
+                        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Live Output
+                    </span>
+                    <div class="flex items-center gap-1.5">
+                        <span class="text-slate-400 text-[11px]">Size:</span>
+                        <span id="live-kb-badge" class="text-indigo-400 bg-indigo-500/10 px-2 py-0.5 rounded border border-indigo-500/20 font-black text-xs">0 KB</span>
+                    </div>
+                </div>
+
+                <!-- Live Output Canvas Container (Auto-scales within view) -->
+                <div class="flex items-center justify-center p-3 bg-slate-950 rounded-2xl border border-slate-800 shadow-inner overflow-hidden min-h-[300px] max-h-[460px]">
+                    <canvas id="output-canvas" class="max-h-[420px] max-w-full w-auto h-auto rounded shadow-2xl bg-white block"></canvas>
+                </div>
+
+                <p class="text-[11px] text-center text-slate-400">Preview updates live as you upload or change presets.</p>
             </div>
+
         </div>
 
         <!-- ⚡ 3-STEP USER GUIDE -->
-        <section class="mt-14 border-t border-slate-800 pt-10">
-            <h2 class="text-xl sm:text-2xl font-bold text-white text-center mb-6">How to Join Photo & Signature Online in 3 Steps</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs sm:text-sm">
-                <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800">
-                    <span class="w-7 h-7 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center mb-2.5 text-xs">1</span>
-                    <h3 class="font-bold text-white text-sm mb-1">Select Photo & Sign</h3>
-                    <p class="text-slate-400">Upload your passport photograph and signature picture from your phone or PC.</p>
+        <section class="mt-14 border-t border-slate-800 pt-8">
+            <h2 class="text-lg sm:text-xl font-bold text-white text-center mb-5">How to Join Photo & Signature Online in 3 Steps</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3.5 text-xs sm:text-sm">
+                <div class="bg-slate-900 p-4 rounded-2xl border border-slate-800">
+                    <span class="w-6 h-6 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center mb-2 text-xs">1</span>
+                    <h3 class="font-bold text-white text-xs sm:text-sm mb-1">Upload Images</h3>
+                    <p class="text-slate-400 text-xs">Select your passport photo and signature picture from your device.</p>
                 </div>
-                <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800">
-                    <span class="w-7 h-7 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center mb-2.5 text-xs">2</span>
-                    <h3 class="font-bold text-white text-sm mb-1">Choose Exam Preset</h3>
-                    <p class="text-slate-400">Select SSC, UPSC, or UP Police dimensions, or customize width and height.</p>
+                <div class="bg-slate-900 p-4 rounded-2xl border border-slate-800">
+                    <span class="w-6 h-6 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center mb-2 text-xs">2</span>
+                    <h3 class="font-bold text-white text-xs sm:text-sm mb-1">Pick Exam Preset</h3>
+                    <p class="text-slate-400 text-xs">Select SSC, UPSC, or UP Police dimensions with 1-click snapping.</p>
                 </div>
-                <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800">
-                    <span class="w-7 h-7 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center mb-2.5 text-xs">3</span>
-                    <h3 class="font-bold text-white text-sm mb-1">Instant Download</h3>
-                    <p class="text-slate-400">Download the perfectly combined image directly for your exam application form.</p>
+                <div class="bg-slate-900 p-4 rounded-2xl border border-slate-800">
+                    <span class="w-6 h-6 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center mb-2 text-xs">3</span>
+                    <h3 class="font-bold text-white text-xs sm:text-sm mb-1">Instant Download</h3>
+                    <p class="text-slate-400 text-xs">Download the combined single image ready for official portal upload.</p>
                 </div>
             </div>
         </section>
 
         <!-- ⚡ FAQS FOR HIGH SEO RANKING -->
-        <section class="mt-12 space-y-3">
-            <h2 class="text-xl font-bold text-white mb-4">Frequently Asked Questions</h2>
-            <details class="bg-slate-900 p-4 rounded-xl border border-slate-800 text-xs sm:text-sm cursor-pointer">
+        <section class="mt-10 space-y-2.5">
+            <h2 class="text-lg font-bold text-white mb-3">Frequently Asked Questions</h2>
+            <details class="bg-slate-900 p-3.5 rounded-xl border border-slate-800 text-xs sm:text-sm cursor-pointer">
                 <summary class="font-bold text-white flex justify-between items-center">
                     What is the official photo and signature size for SSC & UP Police forms?
                     <span class="text-indigo-400">▼</span>
                 </summary>
                 <p class="text-slate-400 mt-2 leading-relaxed">Most portals require an image width of 350px and height of 500px, where the photo occupies the top 75% and signature occupies the bottom 25%.</p>
             </details>
-            <details class="bg-slate-900 p-4 rounded-xl border border-slate-800 text-xs sm:text-sm cursor-pointer">
+            <details class="bg-slate-900 p-3.5 rounded-xl border border-slate-800 text-xs sm:text-sm cursor-pointer">
                 <summary class="font-bold text-white flex justify-between items-center">
                     How does the Whiten Signature Paper feature work?
                     <span class="text-indigo-400">▼</span>
                 </summary>
-                <p class="text-slate-400 mt-2 leading-relaxed">It smoothly stretches lighting levels, turning yellow paper and room shadows into pure clean white, while darkening the pen ink so it looks professionally scanned.</p>
-            </details>
-            <details class="bg-slate-900 p-4 rounded-xl border border-slate-800 text-xs sm:text-sm cursor-pointer">
-                <summary class="font-bold text-white flex justify-between items-center">
-                    Are my photos uploaded to any server?
-                    <span class="text-indigo-400">▼</span>
-                </summary>
-                <p class="text-slate-400 mt-2 leading-relaxed">No. Everything runs 100% locally in your device's browser using HTML5 Canvas. Your photos never leave your device.</p>
+                <p class="text-slate-400 mt-2 leading-relaxed">It uses adaptive local background division, turning yellow paper, phone shadows, and vignette into pure clean white, while keeping pen ink strokes crisp and dark.</p>
             </details>
         </section>
     </main>
 
-    <footer class="border-t border-slate-800 bg-slate-950 py-8 px-4 text-xs text-slate-400 text-center">
+    <footer class="border-t border-slate-800 bg-slate-950 py-6 px-4 text-xs text-slate-400 text-center">
         <p>© 2026 SmartPicTools. 100% Free & Private in-browser suite. <a href="/" class="text-indigo-400 hover:underline">Explore All Tools</a></p>
     </footer>
 
-    <!-- ⚡ CLIENT-SIDE CANVAS MERGER JAVASCRIPT ENGINE -->
+    <!-- ⚡ CLIENT-SIDE CANVAS MERGER & CAMSCANNER-QUALITY ALGORITHM -->
     <script>
         let photoImg = null;
         let sigImg = null;
@@ -260,7 +266,6 @@
         const outputCanvas = document.getElementById('output-canvas');
         const ctx = outputCanvas.getContext('2d');
 
-        // Initial default canvas setup
         window.addEventListener('DOMContentLoaded', () => {
             renderCombinedCanvas();
         });
@@ -332,37 +337,71 @@
             renderCombinedCanvas();
         }
 
-        // ⚡ SMOOTH LEVELS SIGNATURE CLEANER (ZERO GRAIN / ZERO SPRAY NOISE)
-        function cleanSignatureSmooth(srcImg) {
+        // ⚡ ADAPTIVE FLAT-FIELD DIVISION (100% SPRAY-FREE & PURE WHITE PAPER)
+        function cleanSignatureAdaptive(srcImg) {
             const tCanvas = document.createElement('canvas');
             tCanvas.width = srcImg.naturalWidth;
             tCanvas.height = srcImg.naturalHeight;
             const tCtx = tCanvas.getContext('2d');
             tCtx.drawImage(srcImg, 0, 0);
 
-            const imgData = tCtx.getImageData(0, 0, tCanvas.width, tCanvas.height);
+            const w = tCanvas.width;
+            const h = tCanvas.height;
+            const imgData = tCtx.getImageData(0, 0, w, h);
             const d = imgData.data;
 
-            // Anti-aliased smooth levels stretching:
-            // Lum > 175 becomes 255 pure white
-            // Lum < 75 becomes deep black ink
-            // In between: smooth cubic transition to eliminate pepper noise
-            const blackPoint = 75;
-            const whitePoint = 175;
+            // 1. Calculate luminance map
+            const lum = new Float32Array(w * h);
+            for (let i = 0; i < w * h; i++) {
+                const p = i * 4;
+                lum[i] = 0.299 * d[p] + 0.587 * d[p + 1] + 0.114 * d[p + 2];
+            }
 
-            for (let i = 0; i < d.length; i += 4) {
-                const lum = 0.299 * d[i] + 0.587 * d[i+1] + 0.114 * d[i+2];
+            // 2. Block-based local background estimation (measures shadow gradients)
+            const blockSize = Math.max(12, Math.min(36, Math.floor(Math.min(w, h) / 8)));
+            const blocksX = Math.ceil(w / blockSize);
+            const blocksY = Math.ceil(h / blockSize);
+            const bgGrid = new Float32Array(blocksX * blocksY);
 
-                let v = (lum - blackPoint) / (whitePoint - blackPoint);
-                v = Math.max(0, Math.min(1, v));
-                
-                // Smoothstep curve for crisp ink edges without spray dots
-                v = v * v * (3 - 2 * v);
-                const finalVal = Math.round(v * 255);
+            for (let by = 0; by < blocksY; by++) {
+                for (let bx = 0; bx < blocksX; bx++) {
+                    let maxL = 0;
+                    const startX = bx * blockSize;
+                    const startY = by * blockSize;
+                    const endX = Math.min(w, startX + blockSize);
+                    const endY = Math.min(h, startY + blockSize);
 
-                d[i] = finalVal;
-                d[i+1] = finalVal;
-                d[i+2] = finalVal;
+                    for (let y = startY; y < endY; y++) {
+                        for (let x = startX; x < endX; x++) {
+                            const l = lum[y * w + x];
+                            if (l > maxL) maxL = l;
+                        }
+                    }
+                    bgGrid[by * blocksX + bx] = Math.max(110, maxL);
+                }
+            }
+
+            // 3. Flat-field division: normalizes each pixel by local background
+            for (let y = 0; y < h; y++) {
+                const by = Math.min(blocksY - 1, Math.floor(y / blockSize));
+                for (let x = 0; x < w; x++) {
+                    const bx = Math.min(blocksX - 1, Math.floor(x / blockSize));
+                    const localBg = bgGrid[by * blocksX + bx];
+
+                    const idx = y * w + x;
+                    const ratio = lum[idx] / localBg;
+
+                    // Smooth transition without dithering / pepper noise
+                    let v = (ratio - 0.65) / (0.86 - 0.65);
+                    v = Math.max(0, Math.min(1, v));
+                    v = v * v * (3 - 2 * v); // smoothstep curve
+
+                    const finalVal = Math.round(v * 255);
+                    const p = idx * 4;
+                    d[p] = finalVal;
+                    d[p + 1] = finalVal;
+                    d[p + 2] = finalVal;
+                }
             }
 
             tCtx.putImageData(imgData, 0, 0);
@@ -379,14 +418,14 @@
             outputCanvas.width = w;
             outputCanvas.height = h;
 
-            // Pure solid white background
+            // Pure solid white canvas base
             ctx.fillStyle = '#ffffff';
             ctx.fillRect(0, 0, w, h);
 
             const photoH = Math.round(h * splitRatio);
             const sigH = h - photoH;
 
-            // 1. Draw Photo (Top)
+            // 1. Draw Passport Photo
             if (photoImg) {
                 const pRatio = photoImg.naturalWidth / photoImg.naturalHeight;
                 const slotRatio = w / photoH;
@@ -404,16 +443,15 @@
 
                 ctx.drawImage(photoImg, drawX, drawY, drawW, drawH);
             } else {
-                // Placeholder styling before upload
                 ctx.fillStyle = '#f8fafc';
                 ctx.fillRect(0, 0, w, photoH);
                 ctx.fillStyle = '#94a3b8';
-                ctx.font = 'bold 13px sans-serif';
+                ctx.font = 'bold 12px sans-serif';
                 ctx.textAlign = 'center';
-                ctx.fillText('Passport Photo Area (Upload Below)', w / 2, photoH / 2);
+                ctx.fillText('Passport Photo Area', w / 2, photoH / 2);
             }
 
-            // 2. Draw Signature (Bottom)
+            // 2. Draw Signature
             if (sigImg) {
                 const sRatio = sigImg.naturalWidth / sigImg.naturalHeight;
                 const slotRatio = w / sigH;
@@ -431,16 +469,15 @@
                     drawX = (w - drawW) / 2;
                 }
 
-                const cleanedCanvas = shouldWhiten ? cleanSignatureSmooth(sigImg) : sigImg;
+                const cleanedCanvas = shouldWhiten ? cleanSignatureAdaptive(sigImg) : sigImg;
                 ctx.drawImage(cleanedCanvas, drawX, drawY, drawW, drawH);
             } else {
-                // Placeholder styling before upload
                 ctx.fillStyle = '#ffffff';
                 ctx.fillRect(0, photoH, w, sigH);
                 ctx.fillStyle = '#94a3b8';
-                ctx.font = 'bold 12px sans-serif';
+                ctx.font = 'bold 11px sans-serif';
                 ctx.textAlign = 'center';
-                ctx.fillText('Signature Area (Upload Below)', w / 2, photoH + sigH / 2);
+                ctx.fillText('Signature Area', w / 2, photoH + sigH / 2);
             }
 
             // 3. Separator Line & Borders
