@@ -218,16 +218,16 @@
                     <div class="flex items-center gap-2.5 pt-1">
                         <span class="text-[11px] font-bold text-slate-400" id="scale-label">Photo Zoom:</span>
                         <input type="range" id="active-scale-slider" min="0.5" max="2.0" step="0.05" value="1.0" oninput="handleActiveScale(this.value)" class="flex-1 accent-indigo-500 cursor-pointer">
-                        <span id="active-scale-text" class="text-[11px] text-indigo-400 font-bold bg-slate-900 px-1.5 py-0.5 rounded border border-slate-800 w-12 text-center">100%</span>
+                        <span id="active-scale-text" class="text-[11px] text-indigo-400 font-bold bg-slate-950 px-1.5 py-0.5 rounded border border-slate-800 w-12 text-center">100%</span>
                     </div>
 
                     <!-- Whiten Paper Toggle (Only for signature) -->
                     <div id="sig-whiten-wrap" class="hidden items-center justify-between pt-1 border-t border-slate-800">
                         <label class="flex items-center gap-2 cursor-pointer text-[11px] font-bold text-slate-200">
                             <input type="checkbox" id="whiten-paper" checked onchange="renderCombinedCanvas()" class="w-3.5 h-3.5 accent-indigo-600 rounded">
-                            <span>✨ Spotless White Paper</span>
+                            <span>✨ Clean Paper Shadow (100% White Background)</span>
                         </label>
-                        <span class="text-[10px] text-emerald-400 font-semibold">100% Clean</span>
+                        <span class="text-[10px] text-emerald-400 font-semibold">Zero Noise</span>
                     </div>
                 </div>
 
@@ -275,10 +275,10 @@
             </details>
             <details class="bg-slate-900 p-3.5 rounded-xl border border-slate-800 text-xs sm:text-sm cursor-pointer">
                 <summary class="font-bold text-white flex justify-between items-center">
-                    How does the Spotless White Paper feature work?
+                    How does the Clean Paper Shadow algorithm eliminate noise?
                     <span class="text-indigo-400">▼</span>
                 </summary>
-                <p class="text-slate-400 mt-2 leading-relaxed">It samples paper luminance and eliminates shadows without creating noise, leaving the background pure white and signature ink crisp and dark.</p>
+                <p class="text-slate-400 mt-2 leading-relaxed">It calculates the local background paper luminance using morphological subtraction. Shadows and beige paper are neutralized into 100% spotless white, keeping ink strokes sharp and dark without any noisy dots.</p>
             </details>
         </section>
     </main>
@@ -287,7 +287,7 @@
         <p>© 2026 SmartPicTools. 100% Free & Private in-browser suite. <a href="/" class="text-indigo-400 hover:underline">Explore All Tools</a></p>
     </footer>
 
-    <!-- ⚡ HIGH-PERFORMANCE PREVIEW TRANSFORM & CLEANING JS ENGINE -->
+    <!-- ⚡ MORPHOLOGICAL BACKGROUND SUBTRACTION & ON-SCREEN TRANSFORM JS ENGINE -->
     <script>
         let photoImg = null;
         let sigImg = null;
@@ -497,43 +497,79 @@
             renderCombinedCanvas();
         }
 
-        // ⚡ FOOLPROOF SIGNATURE WHITENER (NO BLACK BLOCKS, SPOTLESS WHITE PAPER)
-        function cleanSignatureClean(srcImg) {
+        // ⚡ MORPHOLOGICAL ADAPTIVE BACKGROUND SUBTRACTION (100% NOISE-FREE WHITE PAPER)
+        function cleanSignatureAdaptive(srcImg) {
             const tCanvas = document.createElement('canvas');
             tCanvas.width = srcImg.naturalWidth;
             tCanvas.height = srcImg.naturalHeight;
             const tCtx = tCanvas.getContext('2d');
             tCtx.drawImage(srcImg, 0, 0);
 
-            const imgData = tCtx.getImageData(0, 0, tCanvas.width, tCanvas.height);
+            const w = tCanvas.width;
+            const h = tCanvas.height;
+            const imgData = tCtx.getImageData(0, 0, w, h);
             const d = imgData.data;
 
-            // Sample paper background brightness
-            let minLum = 255;
-            let maxLum = 0;
-            const step = Math.max(1, Math.floor(d.length / 4000));
-            for (let i = 0; i < d.length; i += step * 4) {
-                const l = 0.299 * d[i] + 0.587 * d[i+1] + 0.114 * d[i+2];
-                if (l < minLum) minLum = l;
-                if (l > maxLum) maxLum = l;
+            // 1. Grayscale luminance array
+            const lum = new Uint8Array(w * h);
+            for (let i = 0; i < w * h; i++) {
+                const p = i * 4;
+                lum[i] = Math.round(0.299 * d[p] + 0.587 * d[p + 1] + 0.114 * d[p + 2]);
             }
 
-            // Paper threshold (all light shades become 100% pure white)
-            const cutoff = minLum + (maxLum - minLum) * 0.72;
+            // 2. Separable Morphological Max Filter (Extracts paper background & shadows while ignoring thin pen lines)
+            const radius = Math.max(12, Math.min(26, Math.floor(Math.min(w, h) / 12)));
+            const temp = new Uint8Array(w * h);
+            const bg = new Uint8Array(w * h);
 
-            for (let i = 0; i < d.length; i += 4) {
-                const l = 0.299 * d[i] + 0.587 * d[i+1] + 0.114 * d[i+2];
-                if (l >= cutoff) {
-                    d[i] = 255;
-                    d[i+1] = 255;
-                    d[i+2] = 255;
+            // Horizontal Max pass
+            for (let y = 0; y < h; y++) {
+                const row = y * w;
+                for (let x = 0; x < w; x++) {
+                    let m = 0;
+                    const x0 = Math.max(0, x - radius);
+                    const x1 = Math.min(w - 1, x + radius);
+                    for (let k = x0; k <= x1; k++) {
+                        const val = lum[row + k];
+                        if (val > m) m = val;
+                    }
+                    temp[row + x] = m;
+                }
+            }
+
+            // Vertical Max pass
+            for (let x = 0; x < w; x++) {
+                for (let y = 0; y < h; y++) {
+                    let m = 0;
+                    const y0 = Math.max(0, y - radius);
+                    const y1 = Math.min(h - 1, y + radius);
+                    for (let k = y0; k <= y1; k++) {
+                        const val = temp[k * w + x];
+                        if (val > m) m = val;
+                    }
+                    bg[y * w + x] = Math.max(70, m);
+                }
+            }
+
+            // 3. Differential Contrast Subtraction: Paper has diff <= 18, Ink has diff > 25
+            const threshold = 18;
+
+            for (let i = 0; i < w * h; i++) {
+                const diff = bg[i] - lum[i];
+                const p = i * 4;
+
+                if (diff <= threshold) {
+                    // Spotless 100% Pure White Paper (No pepper dots!)
+                    d[p] = 255;
+                    d[p + 1] = 255;
+                    d[p + 2] = 255;
                 } else {
-                    // Smooth ink darkening
-                    const factor = l / cutoff;
-                    const ink = Math.round(factor * factor * 50);
-                    d[i] = ink;
-                    d[i+1] = ink;
-                    d[i+2] = ink;
+                    // Deep Dark Anti-Aliased Ink
+                    const strength = Math.min(1.0, (diff - threshold) / 30.0);
+                    const inkVal = Math.round(255 - strength * 230); // deep smooth black
+                    d[p] = inkVal;
+                    d[p + 1] = inkVal;
+                    d[p + 2] = inkVal;
                 }
             }
 
@@ -558,7 +594,7 @@
             const photoH = Math.round(h * splitRatio);
             const sigH = h - photoH;
 
-            // 1. DRAW PASSPORT PHOTO
+            // 1. DRAW PASSPORT PHOTO WITH TRANSFORM
             ctx.save();
             ctx.beginPath();
             ctx.rect(0, 0, w, photoH);
@@ -591,7 +627,7 @@
             }
             ctx.restore();
 
-            // 2. DRAW SIGNATURE
+            // 2. DRAW SIGNATURE WITH TRANSFORM
             ctx.save();
             ctx.beginPath();
             ctx.rect(0, photoH, w, sigH);
@@ -610,7 +646,8 @@
                     baseW = baseH * sRatio;
                 }
 
-                const cleanCanvas = shouldWhiten ? cleanSignatureClean(sigImg) : sigImg;
+                // ⚡ Clean paper shadows with local background subtraction
+                const cleanCanvas = shouldWhiten ? cleanSignatureAdaptive(sigImg) : sigImg;
 
                 ctx.translate(w / 2 + sigTransform.panX, photoH + sigH / 2 + sigTransform.panY);
                 ctx.rotate((sigTransform.rotate * Math.PI) / 180);
