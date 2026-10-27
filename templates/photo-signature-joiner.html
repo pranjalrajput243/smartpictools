@@ -4,10 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     
-    <!-- ⚡ HIGH-PRIORITY SEO & KEYWORDS FOR GOVT EXAMS -->
     <title>Photo and Signature Joiner Online Free - Combine for SSC, UPSC & Govt Forms | SmartPicTools</title>
-    <meta name="description" content="Free online tool to combine photo and signature into a single file for SSC, UPSC, Railway, Police, and government exam forms with interactive preview controls.">
-    <meta name="keywords" content="photo and signature joiner online, combine photo and signature, ssc photo signature merger, up police photo signature joiner, merge photo and signature for govt exam, photo signature combiner online free, join photo with signature under 50kb">
+    <meta name="description" content="Free online tool to combine photo and signature into a single file for SSC, UPSC, Railway, Police, and government exam forms with exact 80/20 ratio.">
+    <meta name="keywords" content="photo and signature joiner online, combine photo and signature, ssc photo signature merger, up police photo signature joiner, merge photo and signature for govt exam">
     <meta name="robots" content="index, follow, max-image-preview:large">
     <meta name="author" content="SmartPicTools">
     <link rel="canonical" href="https://smartpictools.in/photo-signature-joiner">
@@ -19,299 +18,166 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://smartpictools.in/photo-signature-joiner">
     <meta property="og:title" content="Photo and Signature Joiner Online Free - SmartPicTools">
-    <meta property="og:description" content="Combine passport photo and signature into a single file with on-screen scaling and positioning in 0.05s.">
-
-    <!-- SCHEMA MARKUP -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebApplication",
-      "name": "SmartPicTools Photo and Signature Joiner",
-      "url": "https://smartpictools.in/photo-signature-joiner",
-      "description": "Free tool to combine photo and signature into a single image for exam forms.",
-      "applicationCategory": "MultimediaApplication",
-      "operatingSystem": "All",
-      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
-    }
-    </script>
+    <meta property="og:description" content="Combine passport photo and signature into a single file with on-image crop and frame adjustments.">
 
     <!-- FAVICON -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' stop-color='%236366f1'/><stop offset='50%25' stop-color='%23a855f7'/><stop offset='100%25' stop-color='%23ec4899'/></linearGradient></defs><rect width='100' height='100' rx='28' fill='url(%23g)'/><path d='M52 16 L24 54 L46 54 L42 84 L76 44 L54 44 Z' fill='%23fbbf24'/></svg>">
 
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- ⚡ CROPPER.JS FOR DIRECT ON-IMAGE TRANSFORM FRAME -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/heic2any/0.0.4/heic2any.min.js"></script>
 
     <style>
         body { font-family: 'Plus Jakarta Sans', sans-serif; -webkit-tap-highlight-color: transparent; }
+        .cropper-bg { background-image: none !important; background-color: #020617 !important; }
+        .cropper-view-box { outline: 2px solid #818cf8 !important; outline-color: #818cf8 !important; }
     </style>
 </head>
 <body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col justify-between selection:bg-indigo-500 selection:text-white">
 
     <!-- HEADER -->
     <header class="border-b border-slate-800 bg-slate-900/80 backdrop-blur-xl sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 sm:h-18 flex items-center justify-between">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 h-18 sm:h-20 flex items-center justify-between">
             <a href="/" class="flex items-center gap-2.5 sm:gap-3 group">
-                <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-2xl bg-gradient-to-tr from-indigo-500 via-purple-500 to-pink-500 flex items-center justify-center text-white text-base sm:text-lg shadow-lg shadow-indigo-500/30 group-hover:scale-105 transition">⚡</div>
+                <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-2xl bg-gradient-to-tr from-indigo-500 via-purple-500 to-pink-500 flex items-center justify-center text-white text-lg sm:text-xl shadow-lg shadow-indigo-500/30 group-hover:scale-105 transition">⚡</div>
                 <div>
-                    <span class="text-lg sm:text-xl font-black tracking-tight text-white">SmartPic<span class="text-indigo-400">Tools</span></span>
-                    <span class="block text-[8px] sm:text-[9px] uppercase font-bold tracking-widest text-slate-400 -mt-1">Exam Form Tools</span>
+                    <span class="text-xl sm:text-2xl font-black tracking-tight text-white">SmartPic<span class="text-indigo-400">Tools</span></span>
+                    <span class="block text-[9px] sm:text-[10px] uppercase font-bold tracking-widest text-slate-400 -mt-1">Exam Form Tools</span>
                 </div>
             </a>
-            <a href="/" class="py-1.5 px-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-bold text-indigo-400 hover:text-white border border-slate-700 transition flex items-center gap-1.5 shadow-md">
+            <a href="/" class="py-2 px-3.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-bold text-indigo-400 hover:text-white border border-slate-700 transition flex items-center gap-1.5 shadow-md">
                 <span>← All Tools</span>
             </a>
         </div>
     </header>
 
-    <!-- MAIN STUDIO WORKSPACE -->
-    <main class="max-w-7xl mx-auto w-full px-3 sm:px-6 py-5 sm:py-8 flex-1">
+    <!-- MAIN WORKSPACE (CLEAN SINGLE-COLUMN LAYOUT) -->
+    <main class="max-w-3xl mx-auto w-full px-4 py-8 sm:py-12 flex-1">
         
-        <div class="text-center max-w-xl mx-auto mb-5 sm:mb-6">
-            <span class="text-[10px] font-extrabold uppercase tracking-widest text-indigo-400 bg-indigo-500/10 px-2.5 py-0.5 rounded-full border border-indigo-500/20">Official Exam Portal Suite</span>
-            <h1 class="text-2xl sm:text-3xl font-black text-white mt-1.5 tracking-tight">Photo & Signature Joiner</h1>
-            <p class="mt-1 text-slate-400 text-xs">Combine passport photo and signature into a single file with on-screen adjustment.</p>
+        <div class="text-center max-w-xl mx-auto mb-8 sm:mb-10">
+            <span class="text-[11px] font-extrabold uppercase tracking-widest text-indigo-400 bg-indigo-500/10 px-3 py-1 rounded-full border border-indigo-500/20">Official Exam Portal Suite</span>
+            <h1 class="text-3xl sm:text-4xl font-black text-white mt-3 tracking-tight">Photo & Signature Joiner</h1>
+            <p class="mt-2 text-slate-400 text-xs sm:text-sm">Crop your photo and signature with on-image frames. Automatically joins into an official 80% photo / 20% signature file.</p>
         </div>
 
-        <!-- ⚡ 2-COLUMN BALANCED STUDIO LAYOUT -->
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-6 items-start">
+        <div class="bg-slate-900 rounded-3xl p-5 sm:p-8 border border-slate-800 shadow-2xl space-y-6">
             
-            <!-- ============================================== -->
-            <!-- ⚡ LEFT PANEL: CLEAN & UNCLUTTERED (6 COLS) -->
-            <!-- ============================================== -->
-            <div class="lg:col-span-6 bg-slate-900 rounded-3xl p-4 sm:p-6 border border-slate-800 shadow-2xl space-y-4">
-                
-                <!-- 1. DUAL UPLOAD CARDS -->
-                <div>
-                    <span class="text-xs font-bold text-slate-300 block mb-2">1. Upload Images:</span>
-                    <div class="grid grid-cols-2 gap-3">
-                        
-                        <!-- PHOTO UPLOAD -->
-                        <div class="border border-dashed border-slate-700 hover:border-indigo-500 bg-slate-950/70 rounded-2xl p-3 text-center cursor-pointer transition relative group" onclick="document.getElementById('input-photo').click()">
-                            <input type="file" id="input-photo" accept="image/*, .heic, .HEIC, .heif, .HEIF" class="hidden" onchange="handlePhotoUpload(this.files[0])">
-                            <div id="photo-placeholder">
-                                <div class="w-9 h-9 rounded-xl bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-lg flex items-center justify-center mx-auto mb-1.5 group-hover:scale-110 transition">👤</div>
-                                <h4 class="text-xs font-bold text-white mb-0.5">Passport Photo</h4>
-                                <p class="text-[10px] text-slate-400">Click to upload</p>
-                            </div>
-                            <div id="photo-preview-wrap" class="hidden">
-                                <img id="thumb-photo" class="h-14 w-auto mx-auto object-contain rounded border border-slate-700 mb-1" src="#" alt="Photo">
-                                <span class="text-[10px] text-emerald-400 font-bold block">✓ Photo Loaded</span>
-                                <span class="text-[9px] text-indigo-400 underline">Change</span>
-                            </div>
-                        </div>
-
-                        <!-- SIGNATURE UPLOAD -->
-                        <div class="border border-dashed border-slate-700 hover:border-purple-500 bg-slate-950/70 rounded-2xl p-3 text-center cursor-pointer transition relative group" onclick="document.getElementById('input-sig').click()">
-                            <input type="file" id="input-sig" accept="image/*, .heic, .HEIC, .heif, .HEIF" class="hidden" onchange="handleSigUpload(this.files[0])">
-                            <div id="sig-placeholder">
-                                <div class="w-9 h-9 rounded-xl bg-purple-500/10 border border-purple-500/20 text-purple-400 text-lg flex items-center justify-center mx-auto mb-1.5 group-hover:scale-110 transition">✍️</div>
-                                <h4 class="text-xs font-bold text-white mb-0.5">Signature</h4>
-                                <p class="text-[10px] text-slate-400">Click to upload</p>
-                            </div>
-                            <div id="sig-preview-wrap" class="hidden">
-                                <img id="thumb-sig" class="h-14 w-auto mx-auto object-contain rounded border border-slate-700 mb-1 bg-white" src="#" alt="Sign">
-                                <span class="text-[10px] text-emerald-400 font-bold block">✓ Sign Loaded</span>
-                                <span class="text-[9px] text-indigo-400 underline">Change</span>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-
-                <!-- 2. OFFICIAL EXAM PRESETS -->
-                <div class="bg-slate-950/80 p-3 rounded-2xl border border-slate-800 space-y-1.5">
-                    <span class="text-xs font-bold text-slate-400 block">2. Official Exam Presets:</span>
-                    <div class="grid grid-cols-3 gap-2">
-                        <button type="button" onclick="applyExamPreset('ssc')" class="py-1.5 px-2 rounded-xl bg-slate-900 hover:bg-indigo-600 text-xs font-bold text-slate-300 hover:text-white border border-slate-700 transition">
-                            🏛️ SSC / Police (350×500)
-                        </button>
-                        <button type="button" onclick="applyExamPreset('upsc')" class="py-1.5 px-2 rounded-xl bg-slate-900 hover:bg-indigo-600 text-xs font-bold text-slate-300 hover:text-white border border-slate-700 transition">
-                            📑 UPSC / Bank (400×560)
-                        </button>
-                        <button type="button" onclick="applyExamPreset('square')" class="py-1.5 px-2 rounded-xl bg-slate-900 hover:bg-indigo-600 text-xs font-bold text-slate-300 hover:text-white border border-slate-700 transition">
-                            ⏹️ 1:1 Square (500×500)
-                        </button>
-                    </div>
-                </div>
-
-                <!-- 3. DIMENSIONS & SPLIT -->
-                <div class="bg-slate-950/80 p-3.5 rounded-2xl border border-slate-800 space-y-2.5">
-                    <span class="text-xs font-bold text-slate-400 block">3. Dimensions & Layout:</span>
-                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
-                        <div>
-                            <label class="block text-[11px] font-bold text-slate-400 mb-0.5">Width (px)</label>
-                            <input type="number" id="target-w" value="350" oninput="renderCombinedCanvas()" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-2.5 py-1.5 text-xs font-bold text-white focus:outline-none focus:border-indigo-500">
-                        </div>
-                        <div>
-                            <label class="block text-[11px] font-bold text-slate-400 mb-0.5">Height (px)</label>
-                            <input type="number" id="target-h" value="500" oninput="renderCombinedCanvas()" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-2.5 py-1.5 text-xs font-bold text-white focus:outline-none focus:border-indigo-500">
-                        </div>
-                        <div>
-                            <label class="block text-[11px] font-bold text-slate-400 mb-0.5">Split Ratio</label>
-                            <select id="split-ratio" onchange="renderCombinedCanvas()" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-2.5 py-1.5 text-xs font-bold text-white focus:outline-none focus:border-indigo-500">
-                                <option value="0.75" selected>75% Photo / 25% Sign</option>
-                                <option value="0.70">70% Photo / 30% Sign</option>
-                                <option value="0.80">80% Photo / 20% Sign</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label class="block text-[11px] font-bold text-slate-400 mb-0.5">Separator Line</label>
-                            <select id="border-style" onchange="renderCombinedCanvas()" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-2.5 py-1.5 text-xs font-bold text-white focus:outline-none focus:border-indigo-500">
-                                <option value="thin-line" selected>Thin Line (Official)</option>
-                                <option value="none">No Line</option>
-                                <option value="outer-border">Studio Border</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 4. ACTION DOWNLOAD BUTTON -->
-                <button type="button" id="download-btn" onclick="downloadCombinedImage()" class="w-full py-3.5 px-5 rounded-2xl bg-gradient-to-r from-indigo-600 via-indigo-500 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-extrabold text-sm shadow-lg shadow-indigo-500/25 transition active:scale-[0.99] flex items-center justify-center gap-2">
-                    <span>⬇️ Download Combined Photo & Signature</span>
-                </button>
-
-                <div id="status-box" class="hidden p-2 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-center">
-                    <p class="text-emerald-400 font-bold text-xs">🎉 Download complete! Ready for exam portal.</p>
-                </div>
-            </div>
-
-            <!-- ============================================== -->
-            <!-- ⚡ RIGHT PANEL: PREVIEW & ON-SCREEN TRANSFORM (6 COLS) -->
-            <!-- ============================================== -->
-            <div class="lg:col-span-6 bg-slate-900 rounded-3xl p-4 sm:p-5 border border-slate-800 shadow-2xl lg:sticky lg:top-20 space-y-3">
-                
-                <!-- TOP HEADER: TITLE & SIZE -->
-                <div class="flex justify-between items-center text-xs font-bold px-1">
-                    <span class="text-slate-300 flex items-center gap-1.5">
-                        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Live Interactive Preview
+            <!-- 1. PASSPORT PHOTO SECTION WITH DIRECT TRANSFORM FRAME -->
+            <div class="bg-slate-950/80 p-4 sm:p-5 rounded-2xl border border-slate-800 space-y-3">
+                <div class="flex items-center justify-between">
+                    <span class="text-xs sm:text-sm font-bold text-white flex items-center gap-2">
+                        <span>👤 1. Passport Photo (Covers 80% Area)</span>
                     </span>
-                    <div class="flex items-center gap-1.5">
-                        <span class="text-slate-400 text-[11px]">Size:</span>
-                        <span id="live-kb-badge" class="text-indigo-400 bg-indigo-500/10 px-2 py-0.5 rounded border border-indigo-500/20 font-black text-xs">0 KB</span>
-                    </div>
+                    <button type="button" onclick="document.getElementById('input-photo').click()" class="text-xs font-bold text-indigo-400 hover:text-white bg-slate-900 hover:bg-slate-800 px-3 py-1.5 rounded-xl border border-slate-700 transition">
+                        📁 Choose Photo
+                    </button>
+                    <input type="file" id="input-photo" accept="image/*, .heic, .HEIC, .heif, .HEIF" class="hidden" onchange="loadPhoto(this.files[0])">
                 </div>
 
-                <!-- ⚡ ON-SCREEN TRANSFORM TOOLBAR (RIGHT OVER PREVIEW) -->
-                <div class="bg-slate-950/90 p-2.5 rounded-2xl border border-slate-800 space-y-2">
-                    <!-- Target Selector (Photo vs Sign) -->
-                    <div class="flex items-center justify-between gap-2">
-                        <div class="flex items-center gap-1 bg-slate-900 p-1 rounded-xl border border-slate-800">
-                            <button type="button" id="tab-edit-photo" onclick="setTransformMode('photo')" class="py-1 px-2.5 rounded-lg text-xs font-bold bg-indigo-600 text-white transition">
-                                👤 Edit Photo
-                            </button>
-                            <button type="button" id="tab-edit-sig" onclick="setTransformMode('sig')" class="py-1 px-2.5 rounded-lg text-xs font-bold text-slate-400 hover:text-white transition">
-                                ✍️ Edit Signature
-                            </button>
-                        </div>
-                        <div class="flex items-center gap-1.5">
-                            <button type="button" onclick="rotateCurrent()" class="py-1 px-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-[11px] font-bold transition">
-                                🔄 90°
-                            </button>
-                            <button type="button" onclick="resetCurrentTransform()" class="py-1 px-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-400 text-[11px] transition">
-                                ↺ Reset
-                            </button>
-                        </div>
+                <div id="photo-cropper-wrap" class="hidden text-center space-y-2">
+                    <div class="max-h-[320px] bg-slate-950 rounded-xl overflow-hidden border border-slate-800 flex items-center justify-center">
+                        <img id="photo-image" src="#" alt="Photo to Crop" class="max-h-[300px] max-w-full block">
                     </div>
-
-                    <!-- Scale Slider for currently active item -->
-                    <div class="flex items-center gap-2.5 pt-1">
-                        <span class="text-[11px] font-bold text-slate-400" id="scale-label">Photo Zoom:</span>
-                        <input type="range" id="active-scale-slider" min="0.5" max="2.0" step="0.05" value="1.0" oninput="handleActiveScale(this.value)" class="flex-1 accent-indigo-500 cursor-pointer">
-                        <span id="active-scale-text" class="text-[11px] text-indigo-400 font-bold bg-slate-950 px-1.5 py-0.5 rounded border border-slate-800 w-12 text-center">100%</span>
-                    </div>
-
-                    <!-- Whiten Paper Toggle (Only for signature) -->
-                    <div id="sig-whiten-wrap" class="hidden items-center justify-between pt-1 border-t border-slate-800">
-                        <label class="flex items-center gap-2 cursor-pointer text-[11px] font-bold text-slate-200">
-                            <input type="checkbox" id="whiten-paper" checked onchange="renderCombinedCanvas()" class="w-3.5 h-3.5 accent-indigo-600 rounded">
-                            <span>✨ Clean Paper Shadow (100% White Background)</span>
-                        </label>
-                        <span class="text-[10px] text-emerald-400 font-semibold">Zero Noise</span>
-                    </div>
+                    <span class="text-[11px] text-slate-400 block">💡 Drag corners directly on the photo to adjust framing</span>
                 </div>
-
-                <!-- Preview Output Canvas (Interactive Drag) -->
-                <div class="flex items-center justify-center p-2.5 bg-slate-950 rounded-2xl border border-slate-800 shadow-inner overflow-hidden min-h-[290px] max-h-[440px]">
-                    <canvas id="output-canvas" class="max-h-[400px] max-w-full w-auto h-auto rounded shadow-2xl bg-white block select-none cursor-move" title="Click and drag to position photo or signature"></canvas>
-                </div>
-
-                <p class="text-[11px] text-center text-slate-400">👆 Click and drag directly on photo or sign to align.</p>
             </div>
 
+            <!-- 2. SIGNATURE SECTION WITH DIRECT TRANSFORM FRAME -->
+            <div class="bg-slate-950/80 p-4 sm:p-5 rounded-2xl border border-slate-800 space-y-3">
+                <div class="flex items-center justify-between">
+                    <span class="text-xs sm:text-sm font-bold text-white flex items-center gap-2">
+                        <span>✍️ 2. Signature (Covers 20% Area)</span>
+                    </span>
+                    <button type="button" onclick="document.getElementById('input-sig').click()" class="text-xs font-bold text-indigo-400 hover:text-white bg-slate-900 hover:bg-slate-800 px-3 py-1.5 rounded-xl border border-slate-700 transition">
+                        📁 Choose Signature
+                    </button>
+                    <input type="file" id="input-sig" accept="image/*, .heic, .HEIC, .heif, .HEIF" class="hidden" onchange="loadSig(this.files[0])">
+                </div>
+
+                <div id="sig-cropper-wrap" class="hidden text-center space-y-2">
+                    <div class="max-h-[220px] bg-slate-950 rounded-xl overflow-hidden border border-slate-800 flex items-center justify-center">
+                        <img id="sig-image" src="#" alt="Signature to Crop" class="max-h-[200px] max-w-full block">
+                    </div>
+                    <span class="text-[11px] text-slate-400 block">💡 Drag corners directly on the signature to crop tightly</span>
+                </div>
+            </div>
+
+            <!-- 3. EXAM PRESETS & SIZE OPTIONS -->
+            <div class="bg-slate-950/80 p-4 rounded-2xl border border-slate-800 space-y-3">
+                <span class="text-xs font-bold text-slate-400 block">Output Exam Dimensions:</span>
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+                    <button type="button" onclick="setDimensions(350, 500)" class="py-2 px-2.5 rounded-xl bg-slate-900 hover:bg-indigo-600 text-xs font-bold text-slate-300 hover:text-white border border-slate-700 transition">
+                        SSC (350×500)
+                    </button>
+                    <button type="button" onclick="setDimensions(400, 560)" class="py-2 px-2.5 rounded-xl bg-slate-900 hover:bg-indigo-600 text-xs font-bold text-slate-300 hover:text-white border border-slate-700 transition">
+                        UPSC (400×560)
+                    </button>
+                    <button type="button" onclick="setDimensions(300, 400)" class="py-2 px-2.5 rounded-xl bg-slate-900 hover:bg-indigo-600 text-xs font-bold text-slate-300 hover:text-white border border-slate-700 transition">
+                        Police (300×400)
+                    </button>
+                    <button type="button" onclick="setDimensions(500, 500)" class="py-2 px-2.5 rounded-xl bg-slate-900 hover:bg-indigo-600 text-xs font-bold text-slate-300 hover:text-white border border-slate-700 transition">
+                        Square (500×500)
+                    </button>
+                </div>
+
+                <div class="grid grid-cols-2 gap-3 pt-1">
+                    <div>
+                        <label class="block text-[11px] font-bold text-slate-400 mb-1">Width (px)</label>
+                        <input type="number" id="target-w" value="350" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs font-bold text-white focus:outline-none focus:border-indigo-500">
+                    </div>
+                    <div>
+                        <label class="block text-[11px] font-bold text-slate-400 mb-1">Height (px)</label>
+                        <input type="number" id="target-h" value="500" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs font-bold text-white focus:outline-none focus:border-indigo-500">
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4. COMBINE & DOWNLOAD BUTTON -->
+            <button type="button" id="download-btn" onclick="executeCombineAndDownload()" class="w-full py-4 px-6 rounded-2xl bg-gradient-to-r from-indigo-600 via-indigo-500 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-extrabold text-sm sm:text-base shadow-lg shadow-indigo-500/25 transition active:scale-[0.99] flex items-center justify-center gap-3">
+                <span>⬇️ Combine & Download Photo + Signature</span>
+            </button>
+
+            <div id="status-box" class="hidden p-3 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 text-center">
+                <p class="text-emerald-400 font-bold text-xs sm:text-sm">🎉 Success! Combined image downloaded (80% Photo / 20% Signature).</p>
+            </div>
         </div>
 
-        <!-- ⚡ 3-STEP USER GUIDE -->
-        <section class="mt-14 border-t border-slate-800 pt-8">
-            <h2 class="text-lg sm:text-xl font-bold text-white text-center mb-5">How to Join Photo & Signature Online in 3 Steps</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-3.5 text-xs sm:text-sm">
-                <div class="bg-slate-900 p-4 rounded-2xl border border-slate-800">
-                    <span class="w-6 h-6 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center mb-2 text-xs">1</span>
-                    <h3 class="font-bold text-white text-xs sm:text-sm mb-1">Upload Images</h3>
-                    <p class="text-slate-400 text-xs">Select your passport photo and signature picture from your device.</p>
+        <section class="mt-14 border-t border-slate-800 pt-10">
+            <h2 class="text-xl sm:text-2xl font-bold text-white text-center mb-6">How to Join Photo & Signature Online in 3 Steps</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs sm:text-sm">
+                <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800">
+                    <span class="w-7 h-7 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center mb-2.5 text-xs">1</span>
+                    <h3 class="font-bold text-white text-sm mb-1">Upload Photo & Sign</h3>
+                    <p class="text-slate-400">Choose your passport photo and signature picture from your device.</p>
                 </div>
-                <div class="bg-slate-900 p-4 rounded-2xl border border-slate-800">
-                    <span class="w-6 h-6 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center mb-2 text-xs">2</span>
-                    <h3 class="font-bold text-white text-xs sm:text-sm mb-1">Adjust on Screen</h3>
-                    <p class="text-slate-400 text-xs">Drag on preview to center, zoom with slider, and choose exam presets.</p>
+                <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800">
+                    <span class="w-7 h-7 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center mb-2.5 text-xs">2</span>
+                    <h3 class="font-bold text-white text-sm mb-1">Crop with Handles</h3>
+                    <p class="text-slate-400">Drag the bounding handles directly on the images to frame them perfectly.</p>
                 </div>
-                <div class="bg-slate-900 p-4 rounded-2xl border border-slate-800">
-                    <span class="w-6 h-6 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center mb-2 text-xs">3</span>
-                    <h3 class="font-bold text-white text-xs sm:text-sm mb-1">Instant Download</h3>
-                    <p class="text-slate-400 text-xs">Download the combined single image ready for official portal upload.</p>
+                <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800">
+                    <span class="w-7 h-7 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center mb-2.5 text-xs">3</span>
+                    <h3 class="font-bold text-white text-sm mb-1">Instant Download</h3>
+                    <p class="text-slate-400">Generates a single combined file with official 80% photo / 20% signature ratio.</p>
                 </div>
             </div>
-        </section>
-
-        <!-- ⚡ FAQS FOR HIGH SEO RANKING -->
-        <section class="mt-10 space-y-2.5">
-            <h2 class="text-lg font-bold text-white mb-3">Frequently Asked Questions</h2>
-            <details class="bg-slate-900 p-3.5 rounded-xl border border-slate-800 text-xs sm:text-sm cursor-pointer">
-                <summary class="font-bold text-white flex justify-between items-center">
-                    What is the official photo and signature size for SSC & UP Police forms?
-                    <span class="text-indigo-400">▼</span>
-                </summary>
-                <p class="text-slate-400 mt-2 leading-relaxed">Most portals require an image width of 350px and height of 500px, where the photo occupies the top 75% and signature occupies the bottom 25%.</p>
-            </details>
-            <details class="bg-slate-900 p-3.5 rounded-xl border border-slate-800 text-xs sm:text-sm cursor-pointer">
-                <summary class="font-bold text-white flex justify-between items-center">
-                    How does the Clean Paper Shadow algorithm eliminate noise?
-                    <span class="text-indigo-400">▼</span>
-                </summary>
-                <p class="text-slate-400 mt-2 leading-relaxed">It calculates the local background paper luminance using morphological subtraction. Shadows and beige paper are neutralized into 100% spotless white, keeping ink strokes sharp and dark without any noisy dots.</p>
-            </details>
         </section>
     </main>
 
-    <footer class="border-t border-slate-800 bg-slate-950 py-6 px-4 text-xs text-slate-400 text-center">
+    <footer class="border-t border-slate-800 bg-slate-950 py-8 px-4 text-xs text-slate-400 text-center">
         <p>© 2026 SmartPicTools. 100% Free & Private in-browser suite. <a href="/" class="text-indigo-400 hover:underline">Explore All Tools</a></p>
     </footer>
 
-    <!-- ⚡ MORPHOLOGICAL BACKGROUND SUBTRACTION & ON-SCREEN TRANSFORM JS ENGINE -->
+    <!-- ⚡ ON-IMAGE TRANSFORM & COMBINE JAVASCRIPT ENGINE -->
     <script>
-        let photoImg = null;
-        let sigImg = null;
+        let photoCropper = null;
+        let sigCropper = null;
 
-        // Transform States
-        let currentEditMode = 'photo'; // 'photo' or 'sig'
-        let photoTransform = { scale: 1.0, panX: 0, panY: 0, rotate: 0 };
-        let sigTransform = { scale: 1.0, panX: 0, panY: 0, rotate: 0 };
-
-        // Canvas drag state
-        let isDraggingCanvas = false;
-        let dragTarget = null;
-        let dragStartMouse = { x: 0, y: 0 };
-        let dragStartPan = { x: 0, y: 0 };
-
-        const outputCanvas = document.getElementById('output-canvas');
-        const ctx = outputCanvas.getContext('2d');
-
-        window.addEventListener('DOMContentLoaded', () => {
-            renderCombinedCanvas();
-            initCanvasDragging();
-        });
-
-        async function handlePhotoUpload(file) {
+        async function loadPhoto(file) {
             if (!file) return;
             let blob = file;
             if (file.name.toLowerCase().endsWith('.heic') || file.name.toLowerCase().endsWith('.heif')) {
@@ -323,20 +189,25 @@
 
             const reader = new FileReader();
             reader.onload = (e) => {
-                const img = new Image();
+                const img = document.getElementById('photo-image');
+                document.getElementById('photo-cropper-wrap').classList.remove('hidden');
+
                 img.onload = () => {
-                    photoImg = img;
-                    document.getElementById('photo-placeholder').classList.add('hidden');
-                    document.getElementById('photo-preview-wrap').classList.remove('hidden');
-                    document.getElementById('thumb-photo').src = e.target.result;
-                    resetItemTransform('photo');
+                    if (photoCropper) photoCropper.destroy();
+                    photoCropper = new Cropper(img, {
+                        aspectRatio: NaN, // Freeform drag
+                        viewMode: 1,
+                        background: false,
+                        autoCropArea: 0.95,
+                        responsive: true
+                    });
                 };
                 img.src = e.target.result;
             };
             reader.readAsDataURL(blob);
         }
 
-        async function handleSigUpload(file) {
+        async function loadSig(file) {
             if (!file) return;
             let blob = file;
             if (file.name.toLowerCase().endsWith('.heic') || file.name.toLowerCase().endsWith('.heif')) {
@@ -348,356 +219,96 @@
 
             const reader = new FileReader();
             reader.onload = (e) => {
-                const img = new Image();
+                const img = document.getElementById('sig-image');
+                document.getElementById('sig-cropper-wrap').classList.remove('hidden');
+
                 img.onload = () => {
-                    sigImg = img;
-                    document.getElementById('sig-placeholder').classList.add('hidden');
-                    document.getElementById('sig-preview-wrap').classList.remove('hidden');
-                    document.getElementById('thumb-sig').src = e.target.result;
-                    resetItemTransform('sig');
+                    if (sigCropper) sigCropper.destroy();
+                    sigCropper = new Cropper(img, {
+                        aspectRatio: NaN,
+                        viewMode: 1,
+                        background: false,
+                        autoCropArea: 0.95,
+                        responsive: true
+                    });
                 };
                 img.src = e.target.result;
             };
             reader.readAsDataURL(blob);
         }
 
-        // ⚡ ON-SCREEN EDIT MODE TOGGLE
-        function setTransformMode(mode) {
-            currentEditMode = mode;
-            const pBtn = document.getElementById('tab-edit-photo');
-            const sBtn = document.getElementById('tab-edit-sig');
-            const lbl = document.getElementById('scale-label');
-            const slider = document.getElementById('active-scale-slider');
-            const txt = document.getElementById('active-scale-text');
-            const whitenWrap = document.getElementById('sig-whiten-wrap');
-
-            if (mode === 'photo') {
-                pBtn.className = "py-1 px-2.5 rounded-lg text-xs font-bold bg-indigo-600 text-white transition";
-                sBtn.className = "py-1 px-2.5 rounded-lg text-xs font-bold text-slate-400 hover:text-white transition";
-                lbl.innerText = "Photo Zoom:";
-                slider.value = photoTransform.scale;
-                txt.innerText = Math.round(photoTransform.scale * 100) + '%';
-                whitenWrap.classList.add('hidden');
-                whitenWrap.classList.remove('flex');
-            } else {
-                sBtn.className = "py-1 px-2.5 rounded-lg text-xs font-bold bg-indigo-600 text-white transition";
-                pBtn.className = "py-1 px-2.5 rounded-lg text-xs font-bold text-slate-400 hover:text-white transition";
-                lbl.innerText = "Sign Zoom:";
-                slider.value = sigTransform.scale;
-                txt.innerText = Math.round(sigTransform.scale * 100) + '%';
-                whitenWrap.classList.remove('hidden');
-                whitenWrap.classList.add('flex');
-            }
+        function setDimensions(w, h) {
+            document.getElementById('target-w').value = w;
+            document.getElementById('target-h').value = h;
         }
 
-        function handleActiveScale(val) {
-            const num = parseFloat(val) || 1.0;
-            document.getElementById('active-scale-text').innerText = Math.round(num * 100) + '%';
-            if (currentEditMode === 'photo') {
-                photoTransform.scale = num;
-            } else {
-                sigTransform.scale = num;
-            }
-            renderCombinedCanvas();
-        }
-
-        function rotateCurrent() {
-            if (currentEditMode === 'photo') {
-                photoTransform.rotate = (photoTransform.rotate + 90) % 360;
-            } else {
-                sigTransform.rotate = (sigTransform.rotate + 90) % 360;
-            }
-            renderCombinedCanvas();
-        }
-
-        function resetCurrentTransform() {
-            resetItemTransform(currentEditMode);
-        }
-
-        function resetItemTransform(type) {
-            if (type === 'photo') {
-                photoTransform = { scale: 1.0, panX: 0, panY: 0, rotate: 0 };
-            } else {
-                sigTransform = { scale: 1.0, panX: 0, panY: 0, rotate: 0 };
-            }
-            if (currentEditMode === type) {
-                document.getElementById('active-scale-slider').value = "1.0";
-                document.getElementById('active-scale-text').innerText = "100%";
-            }
-            renderCombinedCanvas();
-        }
-
-        // ⚡ DIRECT DRAGGING ON CANVAS
-        function initCanvasDragging() {
-            function getCanvasPos(e) {
-                const rect = outputCanvas.getBoundingClientRect();
-                const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-                const clientY = e.touches ? e.touches[0].clientY : e.clientY;
-                const scaleY = outputCanvas.height / rect.height;
-                return {
-                    y: (clientY - rect.top) * scaleY,
-                    clientX: clientX,
-                    clientY: clientY
-                };
+        function executeCombineAndDownload() {
+            if (!photoCropper && !sigCropper) {
+                alert('Please upload at least your Passport Photo or Signature!');
+                return;
             }
 
-            outputCanvas.addEventListener('mousedown', (e) => {
-                const pos = getCanvasPos(e);
-                const h = outputCanvas.height;
-                const splitRatio = parseFloat(document.getElementById('split-ratio').value) || 0.75;
-                const photoH = h * splitRatio;
+            const targetW = parseInt(document.getElementById('target-w').value, 10) || 350;
+            const targetH = parseInt(document.getElementById('target-h').value, 10) || 500;
 
-                isDraggingCanvas = true;
-                dragTarget = pos.y < photoH ? 'photo' : 'sig';
-                dragStartMouse = { x: e.clientX, y: e.clientY };
+            // ⚡ STRICT 80% PHOTO / 20% SIGNATURE SPLIT
+            const photoH = Math.round(targetH * 0.80);
+            const sigH = targetH - photoH;
 
-                const currentT = dragTarget === 'photo' ? photoTransform : sigTransform;
-                dragStartPan = { x: currentT.panX, y: currentT.panY };
-            });
-
-            window.addEventListener('mousemove', (e) => {
-                if (!isDraggingCanvas || !dragTarget) return;
-
-                const rect = outputCanvas.getBoundingClientRect();
-                const scale = outputCanvas.width / rect.width;
-
-                const dx = (e.clientX - dragStartMouse.x) * scale;
-                const dy = (e.clientY - dragStartMouse.y) * scale;
-
-                if (dragTarget === 'photo') {
-                    photoTransform.panX = dragStartPan.x + dx;
-                    photoTransform.panY = dragStartPan.y + dy;
-                } else {
-                    sigTransform.panX = dragStartPan.x + dx;
-                    sigTransform.panY = dragStartPan.y + dy;
-                }
-                renderCombinedCanvas();
-            });
-
-            window.addEventListener('mouseup', () => {
-                isDraggingCanvas = false;
-                dragTarget = null;
-            });
-        }
-
-        function applyExamPreset(preset) {
-            if (preset === 'ssc') {
-                document.getElementById('target-w').value = 350;
-                document.getElementById('target-h').value = 500;
-                document.getElementById('split-ratio').value = "0.75";
-            } else if (preset === 'upsc') {
-                document.getElementById('target-w').value = 400;
-                document.getElementById('target-h').value = 560;
-                document.getElementById('split-ratio').value = "0.75";
-            } else if (preset === 'square') {
-                document.getElementById('target-w').value = 500;
-                document.getElementById('target-h').value = 500;
-                document.getElementById('split-ratio').value = "0.70";
-            }
-            renderCombinedCanvas();
-        }
-
-        // ⚡ MORPHOLOGICAL ADAPTIVE BACKGROUND SUBTRACTION (100% NOISE-FREE WHITE PAPER)
-        function cleanSignatureAdaptive(srcImg) {
-            const tCanvas = document.createElement('canvas');
-            tCanvas.width = srcImg.naturalWidth;
-            tCanvas.height = srcImg.naturalHeight;
-            const tCtx = tCanvas.getContext('2d');
-            tCtx.drawImage(srcImg, 0, 0);
-
-            const w = tCanvas.width;
-            const h = tCanvas.height;
-            const imgData = tCtx.getImageData(0, 0, w, h);
-            const d = imgData.data;
-
-            // 1. Grayscale luminance array
-            const lum = new Uint8Array(w * h);
-            for (let i = 0; i < w * h; i++) {
-                const p = i * 4;
-                lum[i] = Math.round(0.299 * d[p] + 0.587 * d[p + 1] + 0.114 * d[p + 2]);
-            }
-
-            // 2. Separable Morphological Max Filter (Extracts paper background & shadows while ignoring thin pen lines)
-            const radius = Math.max(12, Math.min(26, Math.floor(Math.min(w, h) / 12)));
-            const temp = new Uint8Array(w * h);
-            const bg = new Uint8Array(w * h);
-
-            // Horizontal Max pass
-            for (let y = 0; y < h; y++) {
-                const row = y * w;
-                for (let x = 0; x < w; x++) {
-                    let m = 0;
-                    const x0 = Math.max(0, x - radius);
-                    const x1 = Math.min(w - 1, x + radius);
-                    for (let k = x0; k <= x1; k++) {
-                        const val = lum[row + k];
-                        if (val > m) m = val;
-                    }
-                    temp[row + x] = m;
-                }
-            }
-
-            // Vertical Max pass
-            for (let x = 0; x < w; x++) {
-                for (let y = 0; y < h; y++) {
-                    let m = 0;
-                    const y0 = Math.max(0, y - radius);
-                    const y1 = Math.min(h - 1, y + radius);
-                    for (let k = y0; k <= y1; k++) {
-                        const val = temp[k * w + x];
-                        if (val > m) m = val;
-                    }
-                    bg[y * w + x] = Math.max(70, m);
-                }
-            }
-
-            // 3. Differential Contrast Subtraction: Paper has diff <= 18, Ink has diff > 25
-            const threshold = 18;
-
-            for (let i = 0; i < w * h; i++) {
-                const diff = bg[i] - lum[i];
-                const p = i * 4;
-
-                if (diff <= threshold) {
-                    // Spotless 100% Pure White Paper (No pepper dots!)
-                    d[p] = 255;
-                    d[p + 1] = 255;
-                    d[p + 2] = 255;
-                } else {
-                    // Deep Dark Anti-Aliased Ink
-                    const strength = Math.min(1.0, (diff - threshold) / 30.0);
-                    const inkVal = Math.round(255 - strength * 230); // deep smooth black
-                    d[p] = inkVal;
-                    d[p + 1] = inkVal;
-                    d[p + 2] = inkVal;
-                }
-            }
-
-            tCtx.putImageData(imgData, 0, 0);
-            return tCanvas;
-        }
-
-        function renderCombinedCanvas() {
-            const w = parseInt(document.getElementById('target-w').value) || 350;
-            const h = parseInt(document.getElementById('target-h').value) || 500;
-            const splitRatio = parseFloat(document.getElementById('split-ratio').value) || 0.75;
-            const borderStyle = document.getElementById('border-style').value;
-            const shouldWhiten = document.getElementById('whiten-paper').checked;
-
-            outputCanvas.width = w;
-            outputCanvas.height = h;
+            const finalCanvas = document.createElement('canvas');
+            finalCanvas.width = targetW;
+            finalCanvas.height = targetH;
+            const ctx = finalCanvas.getContext('2d');
 
             // Pure solid white background
             ctx.fillStyle = '#ffffff';
-            ctx.fillRect(0, 0, w, h);
+            ctx.fillRect(0, 0, targetW, targetH);
 
-            const photoH = Math.round(h * splitRatio);
-            const sigH = h - photoH;
-
-            // 1. DRAW PASSPORT PHOTO WITH TRANSFORM
-            ctx.save();
-            ctx.beginPath();
-            ctx.rect(0, 0, w, photoH);
-            ctx.clip();
-
-            if (photoImg) {
-                const pRatio = photoImg.naturalWidth / photoImg.naturalHeight;
-                const slotRatio = w / photoH;
-                let baseW = w, baseH = photoH;
-
-                if (pRatio > slotRatio) {
-                    baseW = w;
-                    baseH = w / pRatio;
-                } else {
-                    baseH = photoH;
-                    baseW = photoH * pRatio;
-                }
-
-                ctx.translate(w / 2 + photoTransform.panX, photoH / 2 + photoTransform.panY);
-                ctx.rotate((photoTransform.rotate * Math.PI) / 180);
-                ctx.scale(photoTransform.scale, photoTransform.scale);
-                ctx.drawImage(photoImg, -baseW / 2, -baseH / 2, baseW, baseH);
-            } else {
-                ctx.fillStyle = '#f8fafc';
-                ctx.fillRect(0, 0, w, photoH);
-                ctx.fillStyle = '#94a3b8';
-                ctx.font = 'bold 12px sans-serif';
-                ctx.textAlign = 'center';
-                ctx.fillText('Passport Photo Area', w / 2, photoH / 2);
+            // 1. Draw Cropped Photo (Top 80%)
+            if (photoCropper) {
+                const photoCanvas = photoCropper.getCroppedCanvas();
+                ctx.drawImage(photoCanvas, 0, 0, targetW, photoH);
             }
-            ctx.restore();
 
-            // 2. DRAW SIGNATURE WITH TRANSFORM
-            ctx.save();
-            ctx.beginPath();
-            ctx.rect(0, photoH, w, sigH);
-            ctx.clip();
-
-            if (sigImg) {
-                const sRatio = sigImg.naturalWidth / sigImg.naturalHeight;
-                const slotRatio = w / sigH;
-                let baseW = w * 0.90, baseH = sigH * 0.85;
+            // 2. Draw Cropped Signature (Bottom 20% - 100% Original & Natural)
+            if (sigCropper) {
+                const sigCanvas = sigCropper.getCroppedCanvas();
+                
+                // Keep signature natural aspect ratio inside the 20% bottom slot
+                const sRatio = sigCanvas.width / sigCanvas.height;
+                const slotRatio = targetW / sigH;
+                let drawW = targetW, drawH = sigH;
 
                 if (sRatio > slotRatio) {
-                    baseW = w * 0.88;
-                    baseH = baseW / sRatio;
+                    drawW = targetW * 0.92;
+                    drawH = drawW / sRatio;
                 } else {
-                    baseH = sigH * 0.82;
-                    baseW = baseH * sRatio;
+                    drawH = sigH * 0.88;
+                    drawW = drawH * sRatio;
                 }
 
-                // ⚡ Clean paper shadows with local background subtraction
-                const cleanCanvas = shouldWhiten ? cleanSignatureAdaptive(sigImg) : sigImg;
+                const drawX = (targetW - drawW) / 2;
+                const drawY = photoH + (sigH - drawH) / 2;
 
-                ctx.translate(w / 2 + sigTransform.panX, photoH + sigH / 2 + sigTransform.panY);
-                ctx.rotate((sigTransform.rotate * Math.PI) / 180);
-                ctx.scale(sigTransform.scale, sigTransform.scale);
-                ctx.drawImage(cleanCanvas, -baseW / 2, -baseH / 2, baseW, baseH);
-            } else {
-                ctx.fillStyle = '#ffffff';
-                ctx.fillRect(0, photoH, w, sigH);
-                ctx.fillStyle = '#94a3b8';
-                ctx.font = 'bold 11px sans-serif';
-                ctx.textAlign = 'center';
-                ctx.fillText('Signature Area', w / 2, photoH + sigH / 2);
-            }
-            ctx.restore();
-
-            // 3. SEPARATOR LINE & BORDERS
-            if (borderStyle === 'thin-line') {
-                ctx.strokeStyle = '#cbd5e1';
-                ctx.lineWidth = 1;
-                ctx.beginPath();
-                ctx.moveTo(0, photoH);
-                ctx.lineTo(w, photoH);
-                ctx.stroke();
-            } else if (borderStyle === 'outer-border') {
-                ctx.strokeStyle = '#0f172a';
-                ctx.lineWidth = 2;
-                ctx.strokeRect(1, 1, w - 2, h - 2);
-                ctx.beginPath();
-                ctx.moveTo(0, photoH);
-                ctx.lineTo(w, photoH);
-                ctx.stroke();
+                ctx.drawImage(sigCanvas, drawX, drawY, drawW, drawH);
             }
 
-            // Live estimated KB meter
-            outputCanvas.toBlob((blob) => {
-                if (blob) {
-                    const kb = (blob.size / 1024).toFixed(1);
-                    document.getElementById('live-kb-badge').innerText = `${kb} KB`;
-                }
-            }, 'image/jpeg', 0.90);
-        }
+            // 3. Separator Line between Photo and Signature
+            ctx.strokeStyle = '#cbd5e1';
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(0, photoH);
+            ctx.lineTo(targetW, photoH);
+            ctx.stroke();
 
-        function downloadCombinedImage() {
-            outputCanvas.toBlob((blob) => {
+            // Download directly as clean JPG
+            finalCanvas.toBlob((blob) => {
                 const a = document.createElement('a');
                 a.href = URL.createObjectURL(blob);
                 a.download = `smartpic_photo_signature_joined.jpg`;
                 a.click();
                 document.getElementById('status-box').classList.remove('hidden');
-            }, 'image/jpeg', 0.90);
+            }, 'image/jpeg', 0.92);
         }
     </script>
 </body>
