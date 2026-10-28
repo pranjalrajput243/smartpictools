@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     
-    <!-- ⚡ HIGH-PRIORITY SEO & KEYWORDS FOR GOVT EXAMS -->
+    <!-- ⚡ HIGH-PRIORITY SEO & EXAM KEYWORDS -->
     <title>Photo and Signature Joiner Online Free - Combine for SSC, UPSC & Govt Forms | SmartPicTools</title>
-    <meta name="description" content="Free online tool to combine photo and signature into a single file with name and date (DOP) for SSC, UPSC, Railway, Police, and government exam forms under 50KB.">
+    <meta name="description" content="Free online tool to combine photo and signature into a single file with crop, name, date (DOP), and official exam presets for SSC, UPSC, Railway, and Police under 50KB.">
     <meta name="keywords" content="photo and signature joiner online, combine photo and signature, ssc photo signature merger, up police photo signature joiner, add name and date on photo, photo signature combiner online free, join photo with signature under 50kb">
     <meta name="robots" content="index, follow, max-image-preview:large">
     <meta name="author" content="SmartPicTools">
@@ -40,16 +40,52 @@
 
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- ⚡ CROPPER.JS FOR MODAL POPUP CROPPING -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/heic2any/0.0.4/heic2any.min.js"></script>
 
     <style>
         body { font-family: 'Plus Jakarta Sans', sans-serif; -webkit-tap-highlight-color: transparent; }
+        .cropper-view-box { outline: 2px solid #818cf8 !important; outline-color: #818cf8 !important; }
+        .cropper-modal { background-color: #020617 !important; opacity: 0.75 !important; }
     </style>
 </head>
 <body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col justify-between selection:bg-indigo-500 selection:text-white">
 
+    <!-- ⚡ CROPPER MODAL POPUP (OPENS IMMEDIATELY ON SELECTING IMAGE/SIGNATURE) -->
+    <div id="cropper-modal" class="fixed inset-0 z-50 bg-slate-950/85 backdrop-blur-md hidden flex items-center justify-center p-3 sm:p-5">
+        <div class="bg-slate-900 border border-slate-800 rounded-3xl max-w-xl w-full p-4 sm:p-6 shadow-2xl space-y-4">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h3 id="modal-title" class="text-base sm:text-lg font-bold text-white">Crop & Frame Image</h3>
+                    <p class="text-xs text-slate-400">Crop unwanted paper margins, bedsheet, or table edges</p>
+                </div>
+                <button type="button" onclick="closeCropperModal()" class="w-8 h-8 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-300 text-sm font-bold flex items-center justify-center">✕</button>
+            </div>
+
+            <!-- Cropper Area -->
+            <div class="h-64 sm:h-80 bg-slate-950 rounded-2xl overflow-hidden border border-slate-800 flex items-center justify-center">
+                <img id="modal-crop-img" src="#" alt="Crop Preview" class="max-h-full max-w-full block">
+            </div>
+
+            <!-- Action Toolbar in Modal -->
+            <div class="flex items-center justify-between gap-3 pt-1">
+                <div class="flex items-center gap-2">
+                    <button type="button" onclick="cropperInstance.rotate(-90)" class="py-1.5 px-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-bold text-slate-300">↺ -90°</button>
+                    <button type="button" onclick="cropperInstance.rotate(90)" class="py-1.5 px-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-bold text-slate-300">↻ +90°</button>
+                    <button type="button" onclick="cropperInstance.reset()" class="py-1.5 px-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-bold text-slate-400">Reset</button>
+                </div>
+                <button type="button" onclick="applyCroppedImage()" class="py-2 px-5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-extrabold text-xs sm:text-sm shadow-lg shadow-indigo-600/30 transition">
+                    ✓ Crop & Set
+                </button>
+            </div>
+        </div>
+    </div>
+
     <!-- HEADER -->
-    <header class="border-b border-slate-800 bg-slate-900/80 backdrop-blur-xl sticky top-0 z-50">
+    <header class="border-b border-slate-800 bg-slate-900/80 backdrop-blur-xl sticky top-0 z-40">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 sm:h-18 flex items-center justify-between">
             <a href="/" class="flex items-center gap-2.5 sm:gap-3 group">
                 <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-2xl bg-gradient-to-tr from-indigo-500 via-purple-500 to-pink-500 flex items-center justify-center text-white text-base sm:text-lg shadow-lg shadow-indigo-500/30 group-hover:scale-105 transition">⚡</div>
@@ -73,45 +109,47 @@
             <!-- ============================================== -->
             <!-- ⚡ LEFT PANEL: CONTROLS & SETTINGS (7 COLS)   -->
             <!-- ============================================== -->
-            <div class="lg:col-span-7 bg-slate-900 rounded-3xl p-5 sm:p-7 border border-slate-800 shadow-2xl space-y-6">
+            <div class="lg:col-span-7 bg-slate-900 rounded-3xl p-4 sm:p-7 border border-slate-800 shadow-2xl space-y-5">
                 
-                <h2 class="text-xl sm:text-2xl font-black text-white tracking-tight">Photo & Signature Joiner</h2>
+                <h1 class="text-xl sm:text-2xl font-black text-white tracking-tight">Photo & Signature Joiner</h1>
 
-                <!-- 1. UPLOAD SECTION -->
+                <!-- 1. UPLOAD SECTION (WITH CROP BUTTON TRIGGER) -->
                 <div class="space-y-2.5">
                     <span class="text-xs font-bold text-slate-300 block">1. Upload Section</span>
-                    <div class="grid grid-cols-2 gap-3.5">
+                    <div class="grid grid-cols-2 gap-3 sm:gap-3.5">
                         
                         <!-- Upload Photo Card -->
-                        <div class="border border-dashed border-slate-700 hover:border-indigo-500 bg-slate-950/70 rounded-2xl p-3.5 text-center cursor-pointer transition relative group" onclick="document.getElementById('input-photo').click()">
-                            <input type="file" id="input-photo" accept="image/*, .heic, .HEIC, .heif, .HEIF" class="hidden" onchange="handlePhotoUpload(this.files[0])">
+                        <div class="border border-dashed border-slate-700 hover:border-indigo-500 bg-slate-950/70 rounded-2xl p-3 sm:p-3.5 text-center cursor-pointer transition relative group" onclick="document.getElementById('input-photo').click()">
+                            <input type="file" id="input-photo" accept="image/*, .heic, .HEIC, .heif, .HEIF" class="hidden" onchange="handleFileSelect(this.files[0], 'photo')">
                             <span class="text-xs font-bold text-slate-300 block mb-2">Upload Photo (Max 5MB)</span>
                             <div id="photo-placeholder" class="h-20 flex items-center justify-center">
                                 <div class="w-11 h-11 rounded-xl bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-xl flex items-center justify-center group-hover:scale-110 transition">👤</div>
                             </div>
-                            <div id="photo-preview-wrap" class="hidden">
-                                <img id="thumb-photo" class="h-20 w-auto mx-auto object-contain rounded-lg border border-slate-700" src="#" alt="Photo Thumbnail">
+                            <div id="photo-preview-wrap" class="hidden space-y-1">
+                                <img id="thumb-photo" class="h-16 w-auto mx-auto object-contain rounded-lg border border-slate-700" src="#" alt="Photo Thumbnail">
+                                <span class="text-[10px] text-indigo-400 font-bold underline block" onclick="event.stopPropagation(); reopenCropper('photo')">✂️ Re-crop Photo</span>
                             </div>
                         </div>
 
                         <!-- Upload Signature Card -->
-                        <div class="border border-dashed border-slate-700 hover:border-indigo-500 bg-slate-950/70 rounded-2xl p-3.5 text-center cursor-pointer transition relative group" onclick="document.getElementById('input-sig').click()">
-                            <input type="file" id="input-sig" accept="image/*, .heic, .HEIC, .heif, .HEIF" class="hidden" onchange="handleSigUpload(this.files[0])">
+                        <div class="border border-dashed border-slate-700 hover:border-indigo-500 bg-slate-950/70 rounded-2xl p-3 sm:p-3.5 text-center cursor-pointer transition relative group" onclick="document.getElementById('input-sig').click()">
+                            <input type="file" id="input-sig" accept="image/*, .heic, .HEIC, .heif, .HEIF" class="hidden" onchange="handleFileSelect(this.files[0], 'sig')">
                             <span class="text-xs font-bold text-slate-300 block mb-2">Upload Signature (Max 5MB)</span>
                             <div id="sig-placeholder" class="h-20 flex items-center justify-center">
                                 <div class="w-11 h-11 rounded-xl bg-purple-500/10 border border-purple-500/20 text-purple-400 text-xl flex items-center justify-center group-hover:scale-110 transition">✍️</div>
                             </div>
-                            <div id="sig-preview-wrap" class="hidden">
-                                <img id="thumb-sig" class="h-20 w-auto mx-auto object-contain rounded-lg border border-slate-700 bg-white" src="#" alt="Sign Thumbnail">
+                            <div id="sig-preview-wrap" class="hidden space-y-1">
+                                <img id="thumb-sig" class="h-16 w-auto mx-auto object-contain rounded-lg border border-slate-700 bg-white" src="#" alt="Sign Thumbnail">
+                                <span class="text-[10px] text-indigo-400 font-bold underline block" onclick="event.stopPropagation(); reopenCropper('sig')">✂️ Re-crop Sign</span>
                             </div>
                         </div>
 
                     </div>
                 </div>
 
-                <!-- 2. LAYOUT & ALIGN -->
+                <!-- 2. LAYOUT & OFFICIAL EXAM PRESETS -->
                 <div class="space-y-3 pt-1 border-t border-slate-800">
-                    <span class="text-xs font-bold text-slate-300 block">2. Layout & Align</span>
+                    <span class="text-xs font-bold text-slate-300 block">2. Layout & Exam Presets</span>
                     
                     <div class="flex items-center justify-between p-3 bg-slate-950/80 rounded-2xl border border-slate-800">
                         <label class="flex items-center gap-2.5 cursor-pointer text-xs font-bold text-slate-200">
@@ -121,10 +159,23 @@
                         <span class="text-[11px] text-slate-400 bg-slate-900 px-2 py-0.5 rounded border border-slate-800">Official</span>
                     </div>
 
+                    <!-- ⚡ OFFICIAL EXAM PORTAL PRESETS DROPDOWN -->
+                    <div>
+                        <label class="block text-[11px] font-bold text-slate-400 mb-1">Official Exam Preset:</label>
+                        <select id="exam-preset" onchange="applyExamPreset(this.value)" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs font-bold text-white focus:outline-none focus:border-indigo-500">
+                            <option value="ssc" selected>🏛️ SSC (CGL, CHSL, MTS, GD) — 350 × 450 px</option>
+                            <option value="upsc">📑 UPSC (Civil Services, NDA, CDS, OTR) — 350 × 500 px</option>
+                            <option value="police">👮 UP Police / State Police — 350 × 500 px</option>
+                            <option value="railway">🚆 Railway (RRB NTPC, Group D) — 320 × 400 px</option>
+                            <option value="banking">🏦 Banking (IBPS, SBI PO/Clerk) — 400 × 560 px</option>
+                            <option value="custom">⚙️ Custom Dimensions</option>
+                        </select>
+                    </div>
+
                     <div>
                         <label class="block text-[11px] font-bold text-slate-400 mb-1">Preset Ratio:</label>
-                        <select id="split-ratio" onchange="renderCombinedCanvas()" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2.5 text-xs font-bold text-white focus:outline-none focus:border-indigo-500">
-                            <option value="0.75" selected>75% Photo + 25% Sign (Recommended)</option>
+                        <select id="split-ratio" onchange="renderCombinedCanvas()" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs font-bold text-white focus:outline-none focus:border-indigo-500">
+                            <option value="0.75" selected>75% Photo + 25% Sign</option>
                             <option value="0.80">80% Photo + 20% Sign</option>
                             <option value="0.70">70% Photo + 30% Sign</option>
                         </select>
@@ -136,23 +187,22 @@
                     <span class="text-xs font-bold text-slate-300 block">3. Edit & Enhance</span>
                     
                     <div class="space-y-2.5">
-                        
-                        <!-- ⚡ SIGNATURE ENHANCE WITH THRESHOLD SLIDER -->
-                        <div class="p-3 bg-slate-950/80 rounded-2xl border border-slate-800 space-y-2.5">
+                        <!-- Enhance Signature Checkbox + Threshold Slider -->
+                        <div class="p-3 bg-slate-950/80 rounded-2xl border border-slate-800 space-y-2">
                             <label class="flex items-center justify-between cursor-pointer text-xs font-bold text-slate-200">
-                                <span>Enhance Signature (Make BG White / Ink Dark)</span>
+                                <span>Enhance Signature (Pure White Paper & Jet Black Ink)</span>
                                 <input type="checkbox" id="enhance-sig" checked onchange="toggleSigSlider()" class="w-4 h-4 accent-indigo-600 rounded">
                             </label>
 
-                            <!-- Live Sensitivity / Threshold Slider -->
+                            <!-- Live Slider for thresholding with dark paper detection -->
                             <div id="sig-slider-box" class="pt-2 border-t border-slate-800 space-y-1">
                                 <div class="flex items-center justify-between text-[11px]">
-                                    <span class="text-slate-400 font-bold">Paper Clean Threshold:</span>
+                                    <span class="text-slate-400 font-bold">Paper Clean Sensitivity:</span>
                                     <span id="sig-threshold-val" class="text-indigo-400 font-bold bg-slate-900 px-2 py-0.5 rounded border border-slate-800">145</span>
                                 </div>
                                 <div class="flex items-center gap-2">
                                     <span class="text-[10px] text-slate-500">Lighter</span>
-                                    <input type="range" id="sig-threshold-slider" min="100" max="200" value="145" oninput="handleThresholdChange(this.value)" class="flex-1 accent-indigo-500 cursor-pointer">
+                                    <input type="range" id="sig-threshold-slider" min="90" max="210" value="145" oninput="handleThresholdChange(this.value)" class="flex-1 accent-indigo-500 cursor-pointer">
                                     <span class="text-[10px] text-slate-500">Darker</span>
                                 </div>
                             </div>
@@ -184,8 +234,8 @@
                 <div class="space-y-3 pt-1 border-t border-slate-800">
                     <span class="text-xs font-bold text-slate-300 block">4. Output Quality & Dimensions</span>
                     
-                    <div>
-                        <label class="block text-[11px] font-bold text-slate-400 mb-1">Custom Dimensions:</label>
+                    <div id="custom-dim-box">
+                        <label class="block text-[11px] font-bold text-slate-400 mb-1">Dimensions:</label>
                         <div class="flex items-center gap-2">
                             <input type="number" id="dim-w" value="350" oninput="renderCombinedCanvas()" class="w-24 bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs font-bold text-white text-center focus:outline-none focus:border-indigo-500">
                             <span class="text-xs text-slate-400 font-bold">×</span>
@@ -225,7 +275,7 @@
             <!-- ============================================== -->
             <div class="lg:col-span-5 bg-slate-900 rounded-3xl p-5 border border-slate-800 shadow-2xl lg:sticky lg:top-24 space-y-4">
                 
-                <h3 class="text-lg font-black text-white tracking-tight">Merged Preview</h3>
+                <h2 class="text-lg font-black text-white tracking-tight">Merged Preview</h2>
 
                 <div class="bg-slate-950 p-4 rounded-2xl border border-slate-800 text-center space-y-3">
                     <span id="joint-size-badge" class="text-xs font-bold text-indigo-300 bg-indigo-500/10 px-3 py-1 rounded-full border border-indigo-500/20 inline-block">
@@ -261,18 +311,18 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-3.5 text-xs sm:text-sm">
                 <div class="bg-slate-900 p-4 rounded-2xl border border-slate-800">
                     <span class="w-6 h-6 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center mb-2 text-xs">1</span>
-                    <h3 class="font-bold text-white text-xs sm:text-sm mb-1">Upload Images</h3>
-                    <p class="text-slate-400 text-xs">Select your passport photo and signature picture from your device.</p>
+                    <h3 class="font-bold text-white text-xs sm:text-sm mb-1">Upload & Crop</h3>
+                    <p class="text-slate-400 text-xs">Upload your photo and signature. Crop tightly to cut off extra borders.</p>
                 </div>
                 <div class="bg-slate-900 p-4 rounded-2xl border border-slate-800">
                     <span class="w-6 h-6 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center mb-2 text-xs">2</span>
-                    <h3 class="font-bold text-white text-xs sm:text-sm mb-1">Add Name & Date</h3>
-                    <p class="text-slate-400 text-xs">Optionally add your name and photo date strip required for SSC exams.</p>
+                    <h3 class="font-bold text-white text-xs sm:text-sm mb-1">Pick Exam Preset</h3>
+                    <p class="text-slate-400 text-xs">Select SSC, UPSC, Railway, or Police dimensions with auto 50KB optimization.</p>
                 </div>
                 <div class="bg-slate-900 p-4 rounded-2xl border border-slate-800">
                     <span class="w-6 h-6 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center mb-2 text-xs">3</span>
                     <h3 class="font-bold text-white text-xs sm:text-sm mb-1">Instant Download</h3>
-                    <p class="text-slate-400 text-xs">Download combined image kept automatically under 50KB for portals.</p>
+                    <p class="text-slate-400 text-xs">Download single combined image ready for official application portals.</p>
                 </div>
             </div>
         </section>
@@ -282,10 +332,16 @@
         <p>© 2026 SmartPicTools. 100% Free & Private in-browser suite. <a href="/" class="text-indigo-400 hover:underline">Explore All Tools</a></p>
     </footer>
 
-    <!-- ⚡ AUTO-DETECT & DYNAMIC THRESHOLD JS ENGINE -->
+    <!-- ⚡ CROPPER MODAL & REAL-TIME AUTO-THRESHOLD JAVASCRIPT ENGINE -->
     <script>
-        let photoImg = null;
-        let sigImg = null;
+        let photoCanvas = null;
+        let sigCanvas = null;
+
+        let rawPhotoBlob = null;
+        let rawSigBlob = null;
+
+        let cropperInstance = null;
+        let currentCroppingType = 'photo'; // 'photo' or 'sig'
         let currentSigThreshold = 145;
 
         const canvas = document.getElementById('merged-canvas');
@@ -295,7 +351,8 @@
             renderCombinedCanvas();
         });
 
-        async function handlePhotoUpload(file) {
+        // ⚡ FILE SELECTION & IMMEDIATE MODAL OPENING
+        async function handleFileSelect(file, type) {
             if (!file) return;
             let blob = file;
             if (file.name.toLowerCase().endsWith('.heic') || file.name.toLowerCase().endsWith('.heif')) {
@@ -305,65 +362,106 @@
                 } catch(e) {}
             }
 
+            if (type === 'photo') rawPhotoBlob = blob;
+            else rawSigBlob = blob;
+
+            openCropperModal(blob, type);
+        }
+
+        function reopenCropper(type) {
+            const blob = type === 'photo' ? rawPhotoBlob : rawSigBlob;
+            if (blob) openCropperModal(blob, type);
+        }
+
+        function openCropperModal(blob, type) {
+            currentCroppingType = type;
+            const modal = document.getElementById('cropper-modal');
+            const title = document.getElementById('modal-title');
+            const img = document.getElementById('modal-crop-img');
+
+            title.innerText = type === 'photo' ? '👤 Crop Passport Photo' : '✍️ Crop Signature tightly';
+
             const reader = new FileReader();
             reader.onload = (e) => {
-                const img = new Image();
-                img.onload = () => {
-                    photoImg = img;
-                    document.getElementById('photo-placeholder').classList.add('hidden');
-                    document.getElementById('photo-preview-wrap').classList.remove('hidden');
-                    document.getElementById('thumb-photo').src = e.target.result;
-                    renderCombinedCanvas();
-                };
                 img.src = e.target.result;
+                modal.classList.remove('hidden');
+
+                if (cropperInstance) cropperInstance.destroy();
+                cropperInstance = new Cropper(img, {
+                    aspectRatio: NaN,
+                    viewMode: 1,
+                    background: false,
+                    autoCropArea: 0.92,
+                    responsive: true
+                });
             };
             reader.readAsDataURL(blob);
         }
 
-        async function handleSigUpload(file) {
-            if (!file) return;
-            let blob = file;
-            if (file.name.toLowerCase().endsWith('.heic') || file.name.toLowerCase().endsWith('.heif')) {
-                try {
-                    const conv = await heic2any({ blob: file, toType: 'image/jpeg', quality: 0.95 });
-                    blob = Array.isArray(conv) ? conv[0] : conv;
-                } catch(e) {}
+        function closeCropperModal() {
+            document.getElementById('cropper-modal').classList.add('hidden');
+            if (cropperInstance) {
+                cropperInstance.destroy();
+                cropperInstance = null;
+            }
+        }
+
+        function applyCroppedImage() {
+            if (!cropperInstance) return;
+
+            const cropped = cropperInstance.getCroppedCanvas();
+
+            if (currentCroppingType === 'photo') {
+                photoCanvas = cropped;
+                document.getElementById('photo-placeholder').classList.add('hidden');
+                document.getElementById('photo-preview-wrap').classList.remove('hidden');
+                document.getElementById('thumb-photo').src = cropped.toDataURL('image/jpeg', 0.9);
+            } else {
+                sigCanvas = cropped;
+                document.getElementById('sig-placeholder').classList.add('hidden');
+                document.getElementById('sig-preview-wrap').classList.remove('hidden');
+                document.getElementById('thumb-sig').src = cropped.toDataURL('image/jpeg', 0.9);
             }
 
-            const reader = new FileReader();
-            reader.onload = (e) => {
-                const img = new Image();
-                img.onload = () => {
-                    sigImg = img;
-                    document.getElementById('sig-placeholder').classList.add('hidden');
-                    document.getElementById('sig-preview-wrap').classList.remove('hidden');
-                    document.getElementById('thumb-sig').src = e.target.result;
-                    renderCombinedCanvas();
-                };
-                img.src = e.target.result;
-            };
-            reader.readAsDataURL(blob);
+            closeCropperModal();
+            renderCombinedCanvas();
+        }
+
+        // ⚡ EXAM PRESET DROPDOWN HANDLER
+        function applyExamPreset(preset) {
+            const wInput = document.getElementById('dim-w');
+            const hInput = document.getElementById('dim-h');
+
+            if (preset === 'ssc') {
+                wInput.value = 350;
+                hInput.value = 450;
+            } else if (preset === 'upsc') {
+                wInput.value = 350;
+                hInput.value = 500;
+            } else if (preset === 'police') {
+                wInput.value = 350;
+                hInput.value = 500;
+            } else if (preset === 'railway') {
+                wInput.value = 320;
+                hInput.value = 400;
+            } else if (preset === 'banking') {
+                wInput.value = 400;
+                hInput.value = 560;
+            }
+            renderCombinedCanvas();
         }
 
         function toggleNameDateSection() {
             const isChecked = document.getElementById('toggle-name-date').checked;
             const container = document.getElementById('name-date-inputs');
-            if (isChecked) {
-                container.classList.remove('hidden');
-            } else {
-                container.classList.add('hidden');
-            }
+            container.classList.toggle('hidden', !isChecked);
             renderCombinedCanvas();
         }
 
         function toggleSigSlider() {
             const isChecked = document.getElementById('enhance-sig').checked;
             const box = document.getElementById('sig-slider-box');
-            if (isChecked) {
-                box.classList.remove('hidden');
-            } else {
-                box.classList.add('hidden');
-            }
+            box.classList.toggle('hidden', !isChecked);
             renderCombinedCanvas();
         }
 
@@ -379,14 +477,19 @@
         }
 
         function resetAll() {
-            photoImg = null;
-            sigImg = null;
+            photoCanvas = null;
+            sigCanvas = null;
+            rawPhotoBlob = null;
+            rawSigBlob = null;
+
             document.getElementById('input-photo').value = '';
             document.getElementById('input-sig').value = '';
             document.getElementById('photo-placeholder').classList.remove('hidden');
             document.getElementById('photo-preview-wrap').classList.add('hidden');
             document.getElementById('sig-placeholder').classList.remove('hidden');
             document.getElementById('sig-preview-wrap').classList.add('hidden');
+
+            document.getElementById('exam-preset').value = 'ssc';
             document.getElementById('dim-w').value = '350';
             document.getElementById('dim-h').value = '450';
             document.getElementById('split-ratio').value = '0.75';
@@ -398,46 +501,41 @@
             document.getElementById('sig-threshold-val').innerText = '145';
             currentSigThreshold = 145;
             document.getElementById('name-date-inputs').classList.remove('hidden');
+
             renderCombinedCanvas();
         }
 
-        // ⚡ AUTO-DETECT BACKGROUND + DYNAMIC INVERT & THRESHOLDING
-        function cleanSignatureBackground(srcImg, threshold = 145) {
+        // ⚡ 4-CORNER AUTO-INVERT & DYNAMIC THRESHOLD (100% PURE WHITE PAPER)
+        function cleanSignatureCanvas(srcCvs, threshold = 145) {
             const tCanvas = document.createElement('canvas');
-            tCanvas.width = srcImg.naturalWidth;
-            tCanvas.height = srcImg.naturalHeight;
+            tCanvas.width = srcCvs.width;
+            tCanvas.height = srcCvs.height;
             const tCtx = tCanvas.getContext('2d');
-            tCtx.drawImage(srcImg, 0, 0);
+            tCtx.drawImage(srcCvs, 0, 0);
 
             const imgData = tCtx.getImageData(0, 0, tCanvas.width, tCanvas.height);
             const data = imgData.data;
 
-            // Step 1: Detect background brightness (Sample 4 corners)
+            // 1. Detect background brightness (Sample 4 corners)
             const samplePoints = [
-                0, // Top-left
-                (tCanvas.width - 1) * 4, // Top-right
-                (tCanvas.width * (tCanvas.height - 1)) * 4, // Bottom-left
-                ((tCanvas.width * tCanvas.height) - 1) * 4 // Bottom-right
+                0,
+                (tCanvas.width - 1) * 4,
+                (tCanvas.width * (tCanvas.height - 1)) * 4,
+                ((tCanvas.width * tCanvas.height) - 1) * 4
             ];
 
             let cornerBrightnessSum = 0;
             samplePoints.forEach(idx => {
-                const r = data[idx];
-                const g = data[idx + 1];
-                const b = data[idx + 2];
-                cornerBrightnessSum += (0.299 * r + 0.587 * g + 0.114 * b);
+                cornerBrightnessSum += (0.299 * data[idx] + 0.587 * data[idx + 1] + 0.114 * data[idx + 2]);
             });
 
             const avgCornerBrightness = cornerBrightnessSum / 4;
-            const isDarkBackground = avgCornerBrightness < 128; // If dark paper, invert
+            const isDarkBackground = avgCornerBrightness < 120;
 
-            // Step 2: Pixel-by-pixel binary thresholding
+            // 2. Thresholding: Pure #FFFFFF background & Pure #000000 ink
             for (let i = 0; i < data.length; i += 4) {
-                let r = data[i];
-                let g = data[i + 1];
-                let b = data[i + 2];
+                let r = data[i], g = data[i + 1], b = data[i + 2];
 
-                // If dark background, invert colors
                 if (isDarkBackground) {
                     r = 255 - r;
                     g = 255 - g;
@@ -446,7 +544,6 @@
 
                 const luminance = 0.299 * r + 0.587 * g + 0.114 * b;
 
-                // Thresholding: Ink -> Pure Black, Paper -> Pure White
                 if (luminance < threshold) {
                     data[i] = 0;
                     data[i + 1] = 0;
@@ -481,29 +578,16 @@
             const photoH = Math.round(h * splitRatio);
             const sigH = h - photoH;
 
-            // 2. Draw Candidate Photo
-            if (photoImg) {
-                const pRatio = photoImg.naturalWidth / photoImg.naturalHeight;
-                const slotRatio = w / photoH;
-                let drawW = w, drawH = photoH, drawX = 0, drawY = 0;
-
-                if (pRatio > slotRatio) {
-                    drawW = w;
-                    drawH = w / pRatio;
-                    drawY = (photoH - drawH) / 2;
-                } else {
-                    drawH = photoH;
-                    drawW = photoH * pRatio;
-                    drawX = (w - drawW) / 2;
-                }
-                ctx.drawImage(photoImg, drawX, drawY, drawW, drawH);
+            // 2. Draw Candidate Photo (Top slot)
+            if (photoCanvas) {
+                ctx.drawImage(photoCanvas, 0, 0, w, photoH);
             } else {
                 ctx.fillStyle = '#f1f5f9';
                 ctx.fillRect(0, 0, w, photoH);
                 ctx.fillStyle = '#94a3b8';
                 ctx.font = 'bold 13px sans-serif';
                 ctx.textAlign = 'center';
-                ctx.fillText('Passport Photo Area', w / 2, photoH / 2);
+                ctx.fillText('1. Passport Photo Area', w / 2, photoH / 2);
             }
 
             // 3. Draw Official Name & Date Strip (Bottom of Photo)
@@ -532,8 +616,12 @@
             ctx.stroke();
 
             // 5. Draw Signature (Bottom slot)
-            if (sigImg) {
-                const sRatio = sigImg.naturalWidth / sigImg.naturalHeight;
+            if (sigCanvas) {
+                const processedSig = shouldEnhanceSig 
+                    ? cleanSignatureCanvas(sigCanvas, currentSigThreshold) 
+                    : sigCanvas;
+
+                const sRatio = processedSig.width / processedSig.height;
                 const slotRatio = w / sigH;
                 let drawW = w * 0.90, drawH = sigH * 0.85;
 
@@ -548,9 +636,6 @@
                 const drawX = (w - drawW) / 2;
                 const drawY = photoH + (sigH - drawH) / 2;
 
-                const processedSig = shouldEnhanceSig 
-                    ? cleanSignatureBackground(sigImg, currentSigThreshold) 
-                    : sigImg;
                 ctx.drawImage(processedSig, drawX, drawY, drawW, drawH);
             } else {
                 ctx.fillStyle = '#ffffff';
@@ -558,30 +643,29 @@
                 ctx.fillStyle = '#94a3b8';
                 ctx.font = 'bold 11px sans-serif';
                 ctx.textAlign = 'center';
-                ctx.fillText('Signature Area', w / 2, photoH + sigH / 2);
+                ctx.fillText('2. Signature Area', w / 2, photoH + sigH / 2);
             }
 
-            // 6. Update Estimated File Size
+            // 6. Real-Time Accurate Live KB Feedback
             const format = document.getElementById('export-format').value;
             const mime = format === 'png' ? 'image/png' : 'image/jpeg';
             const targetKB = parseInt(document.getElementById('size-slider').value, 10) || 45;
-            
-            // Auto calculate compression quality to stay close to slider target
-            let q = 0.90;
+
+            let q = 0.88;
             if (targetKB <= 30) q = 0.70;
             else if (targetKB <= 50) q = 0.82;
             else q = 0.92;
 
             canvas.toBlob((blob) => {
                 if (blob) {
-                    const kb = Math.round(blob.size / 1024);
-                    document.getElementById('joint-size-badge').innerText = `Joint Preview (Estimated: ${kb} KB)`;
+                    const kb = (blob.size / 1024).toFixed(1);
+                    document.getElementById('joint-size-badge').innerText = `Current Size: ${kb} KB (Target: ≤ ${targetKB} KB)`;
                 }
             }, mime, q);
         }
 
         function downloadMergedImage() {
-            if (!photoImg && !sigImg) {
+            if (!photoCanvas && !sigCanvas) {
                 alert('Please upload your Passport Photo and Signature!');
                 return;
             }
@@ -591,7 +675,7 @@
             const ext = format === 'png' ? 'png' : 'jpg';
             const targetKB = parseInt(document.getElementById('size-slider').value, 10) || 45;
 
-            let q = 0.90;
+            let q = 0.88;
             if (targetKB <= 30) q = 0.70;
             else if (targetKB <= 50) q = 0.82;
             else q = 0.92;
