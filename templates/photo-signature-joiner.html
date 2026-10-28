@@ -54,7 +54,7 @@
 </head>
 <body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col justify-between selection:bg-indigo-500 selection:text-white">
 
-    <!-- ⚡ CROPPER MODAL POPUP (OPENS IMMEDIATELY ON SELECTING IMAGE/SIGNATURE) -->
+    <!-- ⚡ CROPPER MODAL POPUP -->
     <div id="cropper-modal" class="fixed inset-0 z-50 bg-slate-950/85 backdrop-blur-md hidden flex items-center justify-center p-3 sm:p-5">
         <div class="bg-slate-900 border border-slate-800 rounded-3xl max-w-xl w-full p-4 sm:p-6 shadow-2xl space-y-4">
             <div class="flex items-center justify-between">
@@ -113,7 +113,7 @@
                 
                 <h1 class="text-xl sm:text-2xl font-black text-white tracking-tight">Photo & Signature Joiner</h1>
 
-                <!-- 1. UPLOAD SECTION (WITH CROP BUTTON TRIGGER) -->
+                <!-- 1. UPLOAD SECTION -->
                 <div class="space-y-2.5">
                     <span class="text-xs font-bold text-slate-300 block">1. Upload Section</span>
                     <div class="grid grid-cols-2 gap-3 sm:gap-3.5">
@@ -159,7 +159,7 @@
                         <span class="text-[11px] text-slate-400 bg-slate-900 px-2 py-0.5 rounded border border-slate-800">Official</span>
                     </div>
 
-                    <!-- ⚡ OFFICIAL EXAM PORTAL PRESETS DROPDOWN -->
+                    <!-- OFFICIAL EXAM PRESET DROPDOWN -->
                     <div>
                         <label class="block text-[11px] font-bold text-slate-400 mb-1">Official Exam Preset:</label>
                         <select id="exam-preset" onchange="applyExamPreset(this.value)" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs font-bold text-white focus:outline-none focus:border-indigo-500">
@@ -187,24 +187,33 @@
                     <span class="text-xs font-bold text-slate-300 block">3. Edit & Enhance</span>
                     
                     <div class="space-y-2.5">
-                        <!-- Enhance Signature Checkbox + Threshold Slider -->
-                        <div class="p-3 bg-slate-950/80 rounded-2xl border border-slate-800 space-y-2">
+                        
+                        <!-- ⚡ SIGNATURE CLEANER WITH THRESHOLD & MANUAL DARK PAPER INVERT -->
+                        <div class="p-3 bg-slate-950/80 rounded-2xl border border-slate-800 space-y-2.5">
                             <label class="flex items-center justify-between cursor-pointer text-xs font-bold text-slate-200">
                                 <span>Enhance Signature (Pure White Paper & Jet Black Ink)</span>
                                 <input type="checkbox" id="enhance-sig" checked onchange="toggleSigSlider()" class="w-4 h-4 accent-indigo-600 rounded">
                             </label>
 
-                            <!-- Live Slider for thresholding with dark paper detection -->
-                            <div id="sig-slider-box" class="pt-2 border-t border-slate-800 space-y-1">
-                                <div class="flex items-center justify-between text-[11px]">
-                                    <span class="text-slate-400 font-bold">Paper Clean Sensitivity:</span>
-                                    <span id="sig-threshold-val" class="text-indigo-400 font-bold bg-slate-900 px-2 py-0.5 rounded border border-slate-800">145</span>
+                            <!-- Live Controls -->
+                            <div id="sig-slider-box" class="pt-2 border-t border-slate-800 space-y-2.5">
+                                <div class="space-y-1">
+                                    <div class="flex items-center justify-between text-[11px]">
+                                        <span class="text-slate-400 font-bold">Paper Clean Sensitivity:</span>
+                                        <span id="sig-threshold-val" class="text-indigo-400 font-bold bg-slate-900 px-2 py-0.5 rounded border border-slate-800">145</span>
+                                    </div>
+                                    <div class="flex items-center gap-2">
+                                        <span class="text-[10px] text-slate-500">Lighter</span>
+                                        <input type="range" id="sig-threshold-slider" min="90" max="210" value="145" oninput="handleThresholdChange(this.value)" class="flex-1 accent-indigo-500 cursor-pointer">
+                                        <span class="text-[10px] text-slate-500">Darker</span>
+                                    </div>
                                 </div>
-                                <div class="flex items-center gap-2">
-                                    <span class="text-[10px] text-slate-500">Lighter</span>
-                                    <input type="range" id="sig-threshold-slider" min="90" max="210" value="145" oninput="handleThresholdChange(this.value)" class="flex-1 accent-indigo-500 cursor-pointer">
-                                    <span class="text-[10px] text-slate-500">Darker</span>
-                                </div>
+
+                                <!-- ⚡ MANUAL INVERT DARK PAPER / NIGHT MODE CHECKBOX -->
+                                <label class="flex items-center gap-2 cursor-pointer text-[11px] font-bold text-slate-300 pt-1.5 border-t border-slate-800">
+                                    <input type="checkbox" id="invert-dark-paper" onchange="renderCombinedCanvas()" class="w-3.5 h-3.5 accent-indigo-600 rounded">
+                                    <span>🌙 Invert Dark Paper / Night Mode (Dark Paper ➔ White & Ink ➔ Black)</span>
+                                </label>
                             </div>
                         </div>
 
@@ -230,16 +239,19 @@
                     </div>
                 </div>
 
-                <!-- 4. OUTPUT QUALITY & DIMENSIONS -->
+                <!-- 4. OUTPUT QUALITY & DIMENSIONS (WITH PRESET AUTO-LOCK) -->
                 <div class="space-y-3 pt-1 border-t border-slate-800">
                     <span class="text-xs font-bold text-slate-300 block">4. Output Quality & Dimensions</span>
                     
                     <div id="custom-dim-box">
-                        <label class="block text-[11px] font-bold text-slate-400 mb-1">Dimensions:</label>
+                        <div class="flex items-center justify-between mb-1">
+                            <label class="block text-[11px] font-bold text-slate-400">Dimensions:</label>
+                            <span id="dim-lock-badge" class="text-[10px] text-amber-400 font-bold bg-amber-500/10 px-2 py-0.5 rounded border border-amber-500/20">🔒 Preset Locked</span>
+                        </div>
                         <div class="flex items-center gap-2">
-                            <input type="number" id="dim-w" value="350" oninput="renderCombinedCanvas()" class="w-24 bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs font-bold text-white text-center focus:outline-none focus:border-indigo-500">
+                            <input type="number" id="dim-w" value="350" readonly oninput="handleManualDimChange()" class="w-24 bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs font-bold text-white text-center focus:outline-none focus:border-indigo-500 opacity-70 cursor-not-allowed">
                             <span class="text-xs text-slate-400 font-bold">×</span>
-                            <input type="number" id="dim-h" value="450" oninput="renderCombinedCanvas()" class="w-24 bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs font-bold text-white text-center focus:outline-none focus:border-indigo-500">
+                            <input type="number" id="dim-h" value="450" readonly oninput="handleManualDimChange()" class="w-24 bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs font-bold text-white text-center focus:outline-none focus:border-indigo-500 opacity-70 cursor-not-allowed">
                             <span class="text-xs text-slate-400 font-bold">px</span>
                             <span class="text-xs font-bold text-indigo-400 bg-indigo-500/10 px-2.5 py-1.5 rounded-xl border border-indigo-500/20 ml-auto">300 DPI</span>
                         </div>
@@ -332,7 +344,7 @@
         <p>© 2026 SmartPicTools. 100% Free & Private in-browser suite. <a href="/" class="text-indigo-400 hover:underline">Explore All Tools</a></p>
     </footer>
 
-    <!-- ⚡ CROPPER MODAL & REAL-TIME AUTO-THRESHOLD JAVASCRIPT ENGINE -->
+    <!-- ⚡ REAL-TIME CROPPER, AUTO-INVERT & PRESET LOCK JS ENGINE -->
     <script>
         let photoCanvas = null;
         let sigCanvas = null;
@@ -341,7 +353,7 @@
         let rawSigBlob = null;
 
         let cropperInstance = null;
-        let currentCroppingType = 'photo'; // 'photo' or 'sig'
+        let currentCroppingType = 'photo';
         let currentSigThreshold = 145;
 
         const canvas = document.getElementById('merged-canvas');
@@ -427,27 +439,52 @@
             renderCombinedCanvas();
         }
 
-        // ⚡ EXAM PRESET DROPDOWN HANDLER
+        // ⚡ EXAM PRESET HANDLER WITH READ-ONLY INPUT AUTO-LOCK
         function applyExamPreset(preset) {
             const wInput = document.getElementById('dim-w');
             const hInput = document.getElementById('dim-h');
+            const badge = document.getElementById('dim-lock-badge');
 
-            if (preset === 'ssc') {
-                wInput.value = 350;
-                hInput.value = 450;
-            } else if (preset === 'upsc') {
-                wInput.value = 350;
-                hInput.value = 500;
-            } else if (preset === 'police') {
-                wInput.value = 350;
-                hInput.value = 500;
-            } else if (preset === 'railway') {
-                wInput.value = 320;
-                hInput.value = 400;
-            } else if (preset === 'banking') {
-                wInput.value = 400;
-                hInput.value = 560;
+            if (preset === 'custom') {
+                wInput.readOnly = false;
+                hInput.readOnly = false;
+                wInput.classList.remove('opacity-70', 'cursor-not-allowed');
+                hInput.classList.remove('opacity-70', 'cursor-not-allowed');
+                badge.innerText = '🔓 Custom Editable';
+                badge.className = 'text-[10px] text-emerald-400 font-bold bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20';
+            } else {
+                wInput.readOnly = true;
+                hInput.readOnly = true;
+                wInput.classList.add('opacity-70', 'cursor-not-allowed');
+                hInput.classList.add('opacity-70', 'cursor-not-allowed');
+                badge.innerText = '🔒 Preset Locked';
+                badge.className = 'text-[10px] text-amber-400 font-bold bg-amber-500/10 px-2 py-0.5 rounded border border-amber-500/20';
+
+                if (preset === 'ssc') {
+                    wInput.value = 350;
+                    hInput.value = 450;
+                } else if (preset === 'upsc') {
+                    wInput.value = 350;
+                    hInput.value = 500;
+                } else if (preset === 'police') {
+                    wInput.value = 350;
+                    hInput.value = 500;
+                } else if (preset === 'railway') {
+                    wInput.value = 320;
+                    hInput.value = 400;
+                } else if (preset === 'banking') {
+                    wInput.value = 400;
+                    hInput.value = 560;
+                }
             }
+            renderCombinedCanvas();
+        }
+
+        function handleManualDimChange() {
+            document.getElementById('exam-preset').value = 'custom';
+            const badge = document.getElementById('dim-lock-badge');
+            badge.innerText = '🔓 Custom Editable';
+            badge.className = 'text-[10px] text-emerald-400 font-bold bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20';
             renderCombinedCanvas();
         }
 
@@ -490,13 +527,14 @@
             document.getElementById('sig-preview-wrap').classList.add('hidden');
 
             document.getElementById('exam-preset').value = 'ssc';
-            document.getElementById('dim-w').value = '350';
-            document.getElementById('dim-h').value = '450';
+            applyExamPreset('ssc');
+
             document.getElementById('split-ratio').value = '0.75';
             document.getElementById('input-name').value = 'RAHUL KUMAR';
             document.getElementById('input-date').value = '28-10-2026';
             document.getElementById('toggle-name-date').checked = true;
             document.getElementById('enhance-sig').checked = true;
+            document.getElementById('invert-dark-paper').checked = false;
             document.getElementById('sig-threshold-slider').value = '145';
             document.getElementById('sig-threshold-val').innerText = '145';
             currentSigThreshold = 145;
@@ -505,7 +543,7 @@
             renderCombinedCanvas();
         }
 
-        // ⚡ 4-CORNER AUTO-INVERT & DYNAMIC THRESHOLD (100% PURE WHITE PAPER)
+        // ⚡ 4-CORNER AUTO-INVERT + MANUAL DARK PAPER TOGGLE + DYNAMIC THRESHOLDING
         function cleanSignatureCanvas(srcCvs, threshold = 145) {
             const tCanvas = document.createElement('canvas');
             tCanvas.width = srcCvs.width;
@@ -515,6 +553,9 @@
 
             const imgData = tCtx.getImageData(0, 0, tCanvas.width, tCanvas.height);
             const data = imgData.data;
+
+            // Manual Invert checkbox state
+            const manualInvert = document.getElementById('invert-dark-paper').checked;
 
             // 1. Detect background brightness (Sample 4 corners)
             const samplePoints = [
@@ -530,7 +571,8 @@
             });
 
             const avgCornerBrightness = cornerBrightnessSum / 4;
-            const isDarkBackground = avgCornerBrightness < 120;
+            // Invert if manual checkbox is clicked OR corners indicate dark surface (<120)
+            const isDarkBackground = manualInvert || (avgCornerBrightness < 120);
 
             // 2. Thresholding: Pure #FFFFFF background & Pure #000000 ink
             for (let i = 0; i < data.length; i += 4) {
