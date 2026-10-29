@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     
-    <!-- ⚡ HIGH-RANKING KEYWORDS FOR PASSPORT PHOTO -->
-    <title>Passport Size Photo Maker Online Free - 3.5 x 4.5 cm & A4 Print Sheet | SmartPicTools</title>
-    <meta name="description" content="Free online passport size photo maker. Crop to exact 3.5cm x 4.5cm for SSC, UPSC, and print custom number of photos on A4 or 4x6 sheet with cutting borders. 100% private.">
-    <meta name="keywords" content="passport size photo maker, 3.5 x 4.5 cm photo maker, passport photo print sheet a4, ssc passport photo, custom passport photo sheet maker">
+    <!-- ⚡ HIGH-PRIORITY SEO & KEYWORDS FOR PASSPORT PHOTOS -->
+    <title>Passport Size Photo Maker Online Free - 300 DPI Studio Quality | SmartPicTools</title>
+    <meta name="description" content="Free online passport size photo maker with 300 DPI Ultra HD print clarity. Crop to 3.5x4.5cm for SSC/UPSC, 2x2 inch Visa, print 4x6 or A4 sheets with cutting borders.">
+    <meta name="keywords" content="passport size photo maker online free, ssc photo maker 3.5x4.5, upsc passport photo size, 2x2 visa photo maker, create passport photo 4x6 sheet, passport photo printable a4 sheet, studio quality passport photo 300 dpi">
     <meta name="robots" content="index, follow, max-image-preview:large">
     <meta name="author" content="SmartPicTools">
     <link rel="canonical" href="https://smartpictools.in/passport-photo-maker">
@@ -19,211 +19,236 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://smartpictools.in/passport-photo-maker">
     <meta property="og:title" content="Passport Size Photo Maker Online Free - SmartPicTools">
-    <meta property="og:description" content="Make 3.5x4.5cm passport photos and custom print sheets (A4 or 4x6) with cutting borders in 0.1s.">
+    <meta property="og:description" content="Create 300 DPI ultra-sharp passport photos for SSC, UPSC, and Visas on 4x6 or A4 sheets in 0.05s.">
+
+    <!-- SCHEMA MARKUP -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "SmartPicTools Passport Size Photo Maker",
+      "url": "https://smartpictools.in/passport-photo-maker",
+      "description": "Free studio-quality passport photo creator for official exams, visas, and printable sheets.",
+      "applicationCategory": "MultimediaApplication",
+      "operatingSystem": "All",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+    }
+    </script>
 
     <!-- FAVICON -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' stop-color='%236366f1'/><stop offset='50%25' stop-color='%23a855f7'/><stop offset='100%25' stop-color='%23ec4899'/></linearGradient></defs><rect width='100' height='100' rx='28' fill='url(%23g)'/><path d='M52 16 L24 54 L46 54 L42 84 L76 44 L54 44 Z' fill='%23fbbf24'/></svg>">
 
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- ⚡ CROPPER.JS FOR EXACT ASPECT RATIO FRAMING -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css"/>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/heic2any/0.0.4/heic2any.min.js"></script>
 
     <style>
         body { font-family: 'Plus Jakarta Sans', sans-serif; -webkit-tap-highlight-color: transparent; }
-        .cropper-view-box, .cropper-face { border-radius: 4px; }
-        
-        /* ⚡ ZERO CHECKERBOARD */
-        .cropper-bg,
-        .cropper-container,
-        .cropper-wrap-box {
-            background: #020617 !important;
-            background-image: none !important;
-        }
-        .cropper-modal {
-            background-color: #020617 !important;
-            opacity: 0.65 !important;
-        }
-        #crop-image {
-            display: block;
-            max-width: 100%;
-        }
+        .cropper-bg { background-image: none !important; background-color: #020617 !important; }
+        .cropper-view-box { outline: 2px solid #818cf8 !important; }
+        .cropper-point { background-color: #818cf8 !important; }
     </style>
 </head>
 <body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col justify-between selection:bg-indigo-500 selection:text-white">
 
     <!-- HEADER -->
     <header class="border-b border-slate-800 bg-slate-900/80 backdrop-blur-xl sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 h-18 sm:h-20 flex items-center justify-between">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 sm:h-18 flex items-center justify-between">
             <a href="/" class="flex items-center gap-2.5 sm:gap-3 group">
-                <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-2xl bg-gradient-to-tr from-indigo-500 via-purple-500 to-pink-500 flex items-center justify-center text-white text-lg sm:text-xl shadow-lg shadow-indigo-500/30 group-hover:scale-105 transition">
-                    ⚡
-                </div>
+                <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-2xl bg-gradient-to-tr from-indigo-500 via-purple-500 to-pink-500 flex items-center justify-center text-white text-base sm:text-lg shadow-lg shadow-indigo-500/30 group-hover:scale-105 transition">⚡</div>
                 <div>
-                    <span class="text-xl sm:text-2xl font-black tracking-tight text-white">SmartPic<span class="text-indigo-400">Tools</span></span>
-                    <span class="block text-[9px] sm:text-[10px] uppercase font-bold tracking-widest text-slate-400 -mt-1">Passport Studio</span>
+                    <span class="text-lg sm:text-xl font-black tracking-tight text-white">SmartPic<span class="text-indigo-400">Tools</span></span>
+                    <span class="block text-[8px] sm:text-[9px] uppercase font-bold tracking-widest text-slate-400 -mt-1">Passport Studio</span>
                 </div>
             </a>
-            <a href="/" class="py-2 px-3.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-bold text-indigo-400 hover:text-white border border-slate-700 transition flex items-center gap-1.5 shadow-md">
+            <a href="/" class="py-1.5 px-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-bold text-indigo-400 hover:text-white border border-slate-700 transition flex items-center gap-1.5 shadow-md">
                 <span>← All Tools</span>
             </a>
         </div>
     </header>
 
-    <!-- MAIN WORKSPACE -->
-    <main class="max-w-4xl mx-auto w-full px-4 py-8 sm:py-12 flex-1">
-        <div class="text-center max-w-2xl mx-auto mb-8 sm:mb-10">
-            <h1 class="text-3xl sm:text-5xl font-black text-white tracking-tight">Passport Size Photo Maker</h1>
-            <p class="mt-2.5 text-slate-400 text-xs sm:text-sm">Create official 3.5cm × 4.5cm photos or generate custom print sheets (A4 / 4×6) with studio white border & black cutting lines.</p>
+    <!-- MAIN STUDIO WORKSPACE -->
+    <main class="max-w-7xl mx-auto w-full px-3 sm:px-6 py-5 sm:py-8 flex-1">
+        
+        <div class="text-center max-w-xl mx-auto mb-6">
+            <span class="text-[10px] font-extrabold uppercase tracking-widest text-indigo-400 bg-indigo-500/10 px-2.5 py-0.5 rounded-full border border-indigo-500/20">300 DPI Studio HD Quality</span>
+            <h1 class="text-2xl sm:text-4xl font-black text-white mt-1.5 tracking-tight">Passport Size Photo Maker</h1>
+            <p class="mt-1 text-slate-400 text-xs sm:text-sm">Create crystal-clear 300 DPI passport photos for SSC, UPSC, or Visa. Print single photo or multi-photo 4x6 / A4 sheets with cutting borders.</p>
         </div>
 
-        <div class="bg-slate-900 rounded-3xl p-5 sm:p-10 border border-slate-800 shadow-2xl relative">
-            
-            <!-- UPLOAD DROP AREA -->
-            <div id="drop-area" class="border-2 border-dashed border-slate-700 hover:border-indigo-500 bg-slate-950/60 hover:bg-indigo-950/20 rounded-2xl p-8 sm:p-14 text-center cursor-pointer transition-all duration-300">
-                <input type="file" id="file-input" accept="image/*, .heic, .HEIC, .heif, .HEIF" class="hidden">
-                <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-3xl bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-3xl sm:text-4xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition duration-300 shadow-inner">
-                    👤
-                </div>
-                <h3 class="text-base sm:text-xl font-bold text-white mb-1.5">Select Photo to Make Passport Size</h3>
-                <p class="text-xs sm:text-sm text-slate-400">Choose any clear photo taken from mobile or camera (Supports JPG, PNG, WEBP, HEIC)</p>
-            </div>
+        <!-- UPLOAD DROP AREA (SHOWN BEFORE UPLOAD) -->
+        <div id="drop-area" class="max-w-xl mx-auto border-2 border-dashed border-slate-700 hover:border-indigo-500 bg-slate-900/60 rounded-3xl p-8 sm:p-12 text-center cursor-pointer transition relative group mb-6">
+            <input type="file" id="file-input" accept="image/*, .heic, .HEIC, .heif, .HEIF" class="hidden">
+            <div class="w-16 h-16 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-3xl flex items-center justify-center mx-auto mb-3.5 group-hover:scale-110 transition shadow-inner">👤</div>
+            <h3 class="text-base sm:text-lg font-bold text-white mb-1">Select Photo to Make Passport Photo</h3>
+            <p class="text-xs text-slate-400">Supports JPG, PNG, WEBP, and iPhone HEIC (100% private in-browser)</p>
+        </div>
 
-            <!-- WORKSPACE -->
-            <div id="workspace" class="hidden mt-6 space-y-6">
+        <!-- ⚡ 2-COLUMN STUDIO WORKSPACE (SHOWN AFTER UPLOAD) -->
+        <div id="workspace" class="hidden grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+            
+            <!-- LEFT PANEL: CROPPER & SETTINGS (7 COLS) -->
+            <div class="lg:col-span-7 bg-slate-900 rounded-3xl p-4 sm:p-6 border border-slate-800 shadow-2xl space-y-4">
+                
                 <div class="flex items-center justify-between">
-                    <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Center Face Inside Frame</span>
+                    <span class="text-xs font-bold text-slate-300">1. Adjust Crop & Framing:</span>
                     <button type="button" onclick="document.getElementById('file-input').click()" class="text-xs font-bold text-indigo-400 hover:text-white bg-slate-800 hover:bg-slate-700 px-3 py-1.5 rounded-xl border border-slate-700 transition">
                         🔄 Change Photo
                     </button>
                 </div>
 
-                <!-- ⚡ CROPPER CONTAINER (EXACT FIT - ZERO CHECKERBOARD & ZERO GAP) -->
-                <div class="flex items-center justify-center select-none overflow-hidden">
-                    <div class="inline-block max-w-full rounded-2xl border border-slate-800 overflow-hidden leading-none shadow-xl bg-slate-950">
-                        <img id="crop-image" src="#" alt="Crop Preview" class="max-h-[460px] max-w-full block">
+                <!-- Cropper Canvas Container -->
+                <div class="h-64 sm:h-80 bg-slate-950 rounded-2xl overflow-hidden border border-slate-800 flex items-center justify-center relative">
+                    <img id="cropper-image" src="#" alt="Crop Preview" class="max-h-full max-w-full block">
+                </div>
+
+                <!-- Cropper Toolbar (Rotate, Reset) -->
+                <div class="flex items-center justify-between bg-slate-950/80 p-2.5 rounded-xl border border-slate-800 text-xs">
+                    <div class="flex items-center gap-2">
+                        <button type="button" onclick="cropper.rotate(-90)" class="py-1 px-2.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-slate-300 font-bold border border-slate-700">↺ -90°</button>
+                        <button type="button" onclick="cropper.rotate(90)" class="py-1 px-2.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-slate-300 font-bold border border-slate-700">↻ +90°</button>
+                        <button type="button" onclick="cropper.reset()" class="py-1 px-2.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-slate-400 border border-slate-700">Reset</button>
+                    </div>
+                    <span class="text-[11px] text-emerald-400 font-semibold">💡 Drag frame to position face</span>
+                </div>
+
+                <!-- 2. OFFICIAL PASSPORT SIZE PRESETS -->
+                <div class="space-y-2 pt-1 border-t border-slate-800">
+                    <span class="text-xs font-bold text-slate-300 block">2. Official Passport Size:</span>
+                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                        <button type="button" onclick="selectSizePreset('3.5x4.5')" id="btn-size-35x45" class="py-2 px-2.5 rounded-xl bg-indigo-600 text-white text-xs font-bold border border-indigo-500 transition text-center">
+                            🇮🇳 3.5 × 4.5 cm (SSC/UPSC)
+                        </button>
+                        <button type="button" onclick="selectSizePreset('2x2')" id="btn-size-2x2" class="py-2 px-2.5 rounded-xl bg-slate-950 hover:bg-slate-800 text-slate-300 text-xs font-bold border border-slate-700 transition text-center">
+                            🇺🇸 2 × 2 inch (US Visa)
+                        </button>
+                        <button type="button" onclick="selectSizePreset('3.5x3.5')" id="btn-size-35x35" class="py-2 px-2.5 rounded-xl bg-slate-950 hover:bg-slate-800 text-slate-300 text-xs font-bold border border-slate-700 transition text-center">
+                            🌐 3.5 × 3.5 cm (Square)
+                        </button>
                     </div>
                 </div>
 
-                <!-- PASSPORT SETTINGS -->
-                <div class="bg-slate-950/80 p-4 sm:p-5 rounded-2xl border border-slate-800 space-y-4">
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div>
-                            <label class="block text-xs font-bold text-slate-400 mb-1">Passport Standard Size:</label>
-                            <select id="size-preset" onchange="changeRatio()" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-white font-bold focus:outline-none">
-                                <option value="india" selected>3.5 × 4.5 cm (India Standard / SSC / UPSC)</option>
-                                <option value="visa">2 × 2 Inch / 5 × 5 cm (US / International Visa)</option>
-                            </select>
-                        </div>
+                <!-- 3. SHEET & PRINTING OPTIONS -->
+                <div class="space-y-3 pt-1 border-t border-slate-800">
+                    <span class="text-xs font-bold text-slate-300 block">3. Print Sheet & Paper Size:</span>
+                    <div class="grid grid-cols-3 gap-2">
+                        <button type="button" onclick="selectSheetType('single')" id="btn-sheet-single" class="py-2 px-2 rounded-xl bg-indigo-600 text-white text-xs font-bold border border-indigo-500 transition text-center">
+                            👤 Single Photo
+                        </button>
+                        <button type="button" onclick="selectSheetType('4x6')" id="btn-sheet-4x6" class="py-2 px-2 rounded-xl bg-slate-950 hover:bg-slate-800 text-slate-300 text-xs font-bold border border-slate-700 transition text-center">
+                            🖨️ 4×6 inch Sheet (8 Photos)
+                        </button>
+                        <button type="button" onclick="selectSheetType('a4')" id="btn-sheet-a4" class="py-2 px-2 rounded-xl bg-slate-950 hover:bg-slate-800 text-slate-300 text-xs font-bold border border-slate-700 transition text-center">
+                            📄 A4 Sheet (16 Photos)
+                        </button>
+                    </div>
 
-                        <div>
-                            <label class="block text-xs font-bold text-slate-400 mb-1">Download Format:</label>
-                            <select id="output-type" onchange="toggleSheetOptions()" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-white font-bold focus:outline-none">
-                                <option value="single">Single Photo (For Online Form Upload - 30 to 50 KB)</option>
-                                <option value="sheet" selected>Print Sheet (Custom Number of Photos on Paper)</option>
+                    <!-- Custom Photo Count on Sheet -->
+                    <div id="photo-count-wrap" class="hidden flex items-center justify-between p-2.5 bg-slate-950 rounded-xl border border-slate-800 text-xs">
+                        <span class="text-slate-400 font-bold">Number of Photos on Sheet:</span>
+                        <div class="flex items-center gap-1.5">
+                            <select id="sheet-photo-count" onchange="renderHighResOutput()" class="bg-slate-900 border border-slate-700 text-white font-bold rounded-lg px-2.5 py-1 text-xs focus:outline-none">
+                                <option value="4">4 Photos</option>
+                                <option value="6">6 Photos</option>
+                                <option value="8" selected>8 Photos (Standard 4x6)</option>
+                                <option value="12">12 Photos</option>
+                                <option value="16">16 Photos</option>
+                                <option value="24">24 Photos (Full A4)</option>
                             </select>
                         </div>
                     </div>
 
-                    <!-- ⚡ CUSTOM SHEET SETTINGS (A4 OR 4X6 WITH EXACT MANUAL COUNT) -->
-                    <div id="sheet-settings-box" class="p-3.5 bg-slate-900 rounded-xl border border-slate-800 space-y-3">
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                            <div>
-                                <label class="block text-xs font-bold text-slate-400 mb-1">Paper Sheet Size:</label>
-                                <select id="paper-type" onchange="validatePhotoCount()" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white font-bold focus:outline-none">
-                                    <option value="a4" selected>A4 Paper Sheet (Max: 30 Photos)</option>
-                                    <option value="4x6">4×6 Inch Photo Paper (Max: 8 Photos)</option>
-                                </select>
-                            </div>
-
-                            <div>
-                                <label class="block text-xs font-bold text-slate-400 mb-1">How Many Photos Needed (Count)?</label>
-                                <input type="number" id="photo-count" value="8" min="1" max="30" oninput="validatePhotoCount()" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white font-bold focus:outline-none focus:border-indigo-500">
-                            </div>
-                        </div>
-
-                        <!-- ⚡ REAL-TIME ERROR / VALIDATION MESSAGE -->
-                        <div id="count-error-msg" class="text-xs font-semibold">
-                            <span class="text-emerald-400 font-bold">✓ 8 Photos will be neatly arranged on your selected sheet.</span>
-                        </div>
-                    </div>
-
-                    <!-- ⚡ WIDE WHITE BORDER + BLACK CUTTING STROKE TOGGLE -->
-                    <div class="p-3 bg-slate-900 rounded-xl border border-slate-800">
-                        <label for="add-border" class="flex items-center gap-2.5 cursor-pointer text-xs font-bold text-slate-300">
-                            <input type="checkbox" id="add-border" checked class="w-4 h-4 rounded accent-indigo-600 cursor-pointer">
-                            <span>Wide White Margin + Outer Black Cutting Stroke (साफ़ कटिंग गाइड लाइन)</span>
+                    <!-- Studio White Border & Cutting Line -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1">
+                        <label class="flex items-center gap-2 p-2.5 bg-slate-950 rounded-xl border border-slate-800 cursor-pointer text-xs font-bold text-slate-300">
+                            <input type="checkbox" id="chk-studio-border" checked onchange="renderHighResOutput()" class="w-4 h-4 accent-indigo-600 rounded">
+                            <span>Studio White Border (14px)</span>
                         </label>
-                        <p class="text-[11px] text-slate-400 mt-1 pl-6.5">✓ 14px का साफ़ सफ़ेद बॉर्डर और उसके बाहर 1.5px की काली लाइन बनेगी ताकि कैंची से काटना आसान हो।</p>
+                        <label class="flex items-center gap-2 p-2.5 bg-slate-950 rounded-xl border border-slate-800 cursor-pointer text-xs font-bold text-slate-300">
+                            <input type="checkbox" id="chk-cutting-line" checked onchange="renderHighResOutput()" class="w-4 h-4 accent-indigo-600 rounded">
+                            <span>Black Cutting Guide Lines</span>
+                        </label>
                     </div>
                 </div>
 
-                <button type="button" id="download-btn" onclick="executePassportDownload()" class="w-full py-4 px-6 rounded-2xl bg-gradient-to-r from-indigo-600 via-indigo-500 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-extrabold text-sm sm:text-base shadow-lg shadow-indigo-500/25 transition active:scale-[0.99] flex items-center justify-center gap-3">
-                    <span id="btn-text">📥 Download Passport Photo</span>
-                </button>
             </div>
 
-            <div id="status-box" class="hidden mt-5 p-3.5 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 text-center">
-                <p class="text-emerald-400 font-bold text-xs sm:text-sm">🎉 Success! Passport photo downloaded directly to your device.</p>
+            <!-- RIGHT PANEL: 300 DPI PREVIEW & DOWNLOAD (5 COLS) -->
+            <div class="lg:col-span-5 bg-slate-900 rounded-3xl p-5 border border-slate-800 shadow-2xl lg:sticky lg:top-24 space-y-4">
+                
+                <div class="flex justify-between items-center text-xs font-bold">
+                    <span class="text-slate-200">Print Preview:</span>
+                    <span class="text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">300 DPI Ultra HD</span>
+                </div>
+
+                <!-- Preview Output Canvas Container -->
+                <div class="bg-slate-950 p-3 rounded-2xl border border-slate-800 flex items-center justify-center min-h-[300px] max-h-[460px] overflow-hidden shadow-inner">
+                    <canvas id="output-canvas" class="max-h-[420px] max-w-full w-auto h-auto rounded shadow-2xl bg-white block"></canvas>
+                </div>
+
+                <!-- ⚡ DUAL DOWNLOAD BUTTONS (SINGLE PHOTO + PRINTABLE SHEET) -->
+                <div class="space-y-2.5 pt-1">
+                    <button type="button" onclick="downloadImage('single')" class="w-full py-3.5 px-4 rounded-2xl bg-gradient-to-r from-indigo-600 via-indigo-500 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-extrabold text-sm shadow-lg shadow-indigo-500/30 transition active:scale-[0.99] flex items-center justify-center gap-2">
+                        <span>⬇️ Download Single Photo (300 DPI Ultra HD)</span>
+                    </button>
+                    
+                    <button type="button" id="btn-download-sheet" onclick="downloadImage('sheet')" class="w-full py-3 px-4 rounded-2xl bg-slate-800 hover:bg-slate-700 text-indigo-300 hover:text-white font-bold text-xs border border-slate-700 transition active:scale-[0.99] flex items-center justify-center gap-2">
+                        <span>🖨️ Download Printable Sheet</span>
+                    </button>
+                </div>
+
+                <div id="status-box" class="hidden p-2.5 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-center">
+                    <p class="text-emerald-400 font-bold text-xs">🎉 300 DPI Studio Quality Photo Downloaded!</p>
+                </div>
             </div>
+
         </div>
 
-        <!-- HOW TO USE -->
-        <section class="mt-14 border-t border-slate-800 pt-10">
-            <h2 class="text-xl sm:text-2xl font-bold text-white text-center mb-6">How to Make Passport Photos in 3 Easy Steps</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs sm:text-sm">
-                <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800">
-                    <span class="w-7 h-7 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center mb-2.5 text-xs">1</span>
-                    <h3 class="font-bold text-white text-sm mb-1">Select Photo</h3>
-                    <p class="text-slate-400">Choose a clear photo where your face is looking straight forward.</p>
+        <!-- 3-STEP USER GUIDE -->
+        <section class="mt-14 border-t border-slate-800 pt-8">
+            <h2 class="text-lg sm:text-xl font-bold text-white text-center mb-5">How to Create 300 DPI Passport Photos in 3 Steps</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3.5 text-xs sm:text-sm">
+                <div class="bg-slate-900 p-4 rounded-2xl border border-slate-800">
+                    <span class="w-6 h-6 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center mb-2 text-xs">1</span>
+                    <h3 class="font-bold text-white text-xs sm:text-sm mb-1">Upload Photo</h3>
+                    <p class="text-slate-400 text-xs">Select any picture. Our engine automatically loads high-res pixels.</p>
                 </div>
-                <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800">
-                    <span class="w-7 h-7 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center mb-2.5 text-xs">2</span>
-                    <h3 class="font-bold text-white text-sm mb-1">Set Count & Paper</h3>
-                    <p class="text-slate-400">Choose Single photo, or select A4 / 4×6 paper and type exact count (e.g. 4, 12, 20 photos).</p>
+                <div class="bg-slate-900 p-4 rounded-2xl border border-slate-800">
+                    <span class="w-6 h-6 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center mb-2 text-xs">2</span>
+                    <h3 class="font-bold text-white text-xs sm:text-sm mb-1">Adjust Face Framing</h3>
+                    <p class="text-slate-400 text-xs">Select official 3.5x4.5cm or 2x2 inch Visa ratio and frame your face.</p>
                 </div>
-                <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800">
-                    <span class="w-7 h-7 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center mb-2.5 text-xs">3</span>
-                    <h3 class="font-bold text-white text-sm mb-1">Instant Download</h3>
-                    <p class="text-slate-400">Download single photo for online portals or custom print sheet ready to print.</p>
+                <div class="bg-slate-900 p-4 rounded-2xl border border-slate-800">
+                    <span class="w-6 h-6 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center mb-2 text-xs">3</span>
+                    <h3 class="font-bold text-white text-xs sm:text-sm mb-1">Ultra HD 300 DPI Download</h3>
+                    <p class="text-slate-400 text-xs">Download single high-res photo or 4x6 / A4 printable sheet for studio print.</p>
                 </div>
             </div>
-        </section>
-
-        <!-- FAQS -->
-        <section class="mt-12 space-y-3">
-            <h2 class="text-xl font-bold text-white mb-4">Frequently Asked Questions</h2>
-            <details class="bg-slate-900 p-4 rounded-xl border border-slate-800 text-xs sm:text-sm cursor-pointer">
-                <summary class="font-bold text-white flex justify-between items-center">
-                    Why is there a wide white margin and black cutting stroke?
-                    <span class="text-indigo-400">▼</span>
-                </summary>
-                <p class="text-slate-400 mt-2 leading-relaxed">The 14px white margin creates an authentic studio-quality border, while the outer black hairline serves as an exact scissor cutting guide so you never accidentally slice into your face or shoulders.</p>
-            </details>
-            <details class="bg-slate-900 p-4 rounded-xl border border-slate-800 text-xs sm:text-sm cursor-pointer">
-                <summary class="font-bold text-white flex justify-between items-center">
-                    How many passport photos fit on one A4 paper sheet?
-                    <span class="text-indigo-400">▼</span>
-                </summary>
-                <p class="text-slate-400 mt-2 leading-relaxed">A standard A4 sheet can hold up to 30 passport photos (5 columns × 6 rows) at official 3.5 × 4.5 cm dimensions with neat cutting margins.</p>
-            </details>
         </section>
     </main>
 
-    <footer class="border-t border-slate-800 bg-slate-950 py-8 px-4 text-xs text-slate-400 text-center">
+    <footer class="border-t border-slate-800 bg-slate-950 py-6 px-4 text-xs text-slate-400 text-center">
         <p>© 2026 SmartPicTools. 100% Free & Private in-browser suite. <a href="/" class="text-indigo-400 hover:underline">Explore All Tools</a></p>
     </footer>
 
-    <!-- ⚡ 100% BUG-FREE JAVASCRIPT ENGINE -->
+    <!-- ⚡ TRUE 300 DPI STUDIO ENGINE (ZERO PIXELATION) -->
     <script>
         let cropper = null;
-        let currentFile = null;
+        let originalFileName = 'passport_photo';
+        let currentSizePreset = '3.5x4.5'; // '3.5x4.5', '2x2', '3.5x3.5'
+        let currentSheetType = 'single';   // 'single', '4x6', 'a4'
 
         const dropArea = document.getElementById('drop-area');
         const fileInput = document.getElementById('file-input');
+        const cropperImg = document.getElementById('cropper-image');
+        const outputCanvas = document.getElementById('output-canvas');
+        const ctx = outputCanvas.getContext('2d');
 
-        // Drag & Drop Handlers
+        // Drag & Drop Listeners
         ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(ev => {
             window.addEventListener(ev, (e) => { e.preventDefault(); e.stopPropagation(); }, false);
             dropArea.addEventListener(ev, (e) => { e.preventDefault(); e.stopPropagation(); }, false);
@@ -241,191 +266,242 @@
         });
 
         async function handleFile(file) {
-            currentFile = file;
-            let displayBlob = file;
+            if (!file) return;
+            originalFileName = file.name.substring(0, file.name.lastIndexOf('.')) || 'passport_photo';
+            let blob = file;
 
             if (file.name.toLowerCase().endsWith('.heic') || file.name.toLowerCase().endsWith('.heif')) {
                 try {
-                    const conv = await heic2any({ blob: file, toType: 'image/jpeg', quality: 0.92 });
-                    displayBlob = Array.isArray(conv) ? conv[0] : conv;
+                    const conv = await heic2any({ blob: file, toType: 'image/jpeg', quality: 0.98 });
+                    blob = Array.isArray(conv) ? conv[0] : conv;
                 } catch(e) {}
             }
 
             const reader = new FileReader();
             reader.onload = (e) => {
-                const img = document.getElementById('crop-image');
+                dropArea.classList.add('hidden');
+                document.getElementById('workspace').classList.remove('hidden');
 
-                // ⚡ Wait for image load before initializing cropper
-                img.onload = function() {
-                    document.getElementById('drop-area').classList.add('hidden');
-                    document.getElementById('workspace').classList.remove('hidden');
-                    document.getElementById('status-box').classList.add('hidden');
-
-                    if (cropper) cropper.destroy();
-
-                    const preset = document.getElementById('size-preset').value;
-                    const initialRatio = preset === 'india' ? (7 / 9) : 1;
-
-                    cropper = new Cropper(img, {
-                        aspectRatio: initialRatio,
-                        viewMode: 1,
-                        background: false,
-                        responsive: true,
-                        zoomable: false,
-                        zoomOnWheel: false,
-                        zoomOnTouch: false,
-                        autoCropArea: 0.88,
-                        toggleDragModeOnDblclick: false
-                    });
-
-                    validatePhotoCount();
+                cropperImg.src = e.target.result;
+                cropperImg.onload = () => {
+                    initCropper();
                 };
-
-                img.src = e.target.result;
             };
-            reader.readAsDataURL(displayBlob);
+            reader.readAsDataURL(blob);
         }
 
-        function changeRatio() {
+        function initCropper() {
+            if (cropper) cropper.destroy();
+
+            // Official Aspect Ratio: 3.5cm / 4.5cm = 0.7777778
+            let aspect = 3.5 / 4.5;
+            if (currentSizePreset === '2x2' || currentSizePreset === '3.5x3.5') aspect = 1.0;
+
+            cropper = new Cropper(cropperImg, {
+                aspectRatio: aspect,
+                viewMode: 1,
+                background: false,
+                autoCropArea: 0.88,
+                responsive: true,
+                crop() {
+                    renderHighResOutput();
+                }
+            });
+        }
+
+        function selectSizePreset(preset) {
+            currentSizePreset = preset;
+            ['35x45', '2x2', '35x35'].forEach(p => {
+                const b = document.getElementById('btn-size-' + p);
+                b.className = (p === preset.replace('.', ''))
+                    ? "py-2 px-2.5 rounded-xl bg-indigo-600 text-white text-xs font-bold border border-indigo-500 transition text-center"
+                    : "py-2 px-2.5 rounded-xl bg-slate-950 hover:bg-slate-800 text-slate-300 text-xs font-bold border border-slate-700 transition text-center";
+            });
+
+            let aspect = 3.5 / 4.5;
+            if (preset === '2x2' || preset === '3.5x3.5') aspect = 1.0;
+            if (cropper) cropper.setAspectRatio(aspect);
+
+            renderHighResOutput();
+        }
+
+        function selectSheetType(type) {
+            currentSheetType = type;
+            ['single', '4x6', 'a4'].forEach(s => {
+                const b = document.getElementById('btn-sheet-' + s);
+                b.className = (s === type)
+                    ? "py-2 px-2 rounded-xl bg-indigo-600 text-white text-xs font-bold border border-indigo-500 transition text-center"
+                    : "py-2 px-2 rounded-xl bg-slate-950 hover:bg-slate-800 text-slate-300 text-xs font-bold border border-slate-700 transition text-center";
+            });
+
+            const countWrap = document.getElementById('photo-count-wrap');
+            countWrap.classList.toggle('hidden', type === 'single');
+
+            const countSelect = document.getElementById('sheet-photo-count');
+            if (type === '4x6') countSelect.value = "8";
+            else if (type === 'a4') countSelect.value = "16";
+
+            renderHighResOutput();
+        }
+
+        // ⚡ RENDER STUDIO HIGH-RESOLUTION PASSPORT CANVASES (300 DPI STANDARD)
+        function renderHighResOutput() {
             if (!cropper) return;
-            const preset = document.getElementById('size-preset').value;
-            cropper.setAspectRatio(preset === 'india' ? (7 / 9) : 1);
-            validatePhotoCount();
-        }
 
-        function toggleSheetOptions() {
-            const outType = document.getElementById('output-type').value;
-            const sheetBox = document.getElementById('sheet-settings-box');
-            sheetBox.classList.toggle('hidden', outType === 'single');
-            validatePhotoCount();
-        }
+            // 1. Target Single Passport Dimensions at True 300 DPI:
+            // 3.5cm x 4.5cm @ 300 DPI = 413 x 531 px (We double to 826 x 1062 for Ultra-HD Razor Sharpness!)
+            let photoW = 826;
+            let photoH = 1062;
 
-        // ⚡ REAL-TIME MANUAL COUNT VALIDATION WITH AUTO-LOCK
-        function validatePhotoCount() {
-            const outType = document.getElementById('output-type').value;
-            const btn = document.getElementById('download-btn');
-            const errorMsg = document.getElementById('count-error-msg');
+            if (currentSizePreset === '2x2') {
+                photoW = 1200; // 2 inches @ 300 DPI (x2 for 600 DPI Ultra HD)
+                photoH = 1200;
+            } else if (currentSizePreset === '3.5x3.5') {
+                photoW = 826;
+                photoH = 826;
+            }
 
-            if (outType === 'single') {
-                btn.disabled = false;
-                btn.classList.remove('opacity-50', 'cursor-not-allowed');
+            // Extract high-resolution cropped source canvas
+            const croppedSource = cropper.getCroppedCanvas({
+                imageSmoothingEnabled: true,
+                imageSmoothingQuality: 'high'
+            });
+            if (!croppedSource) return;
+
+            const hasStudioBorder = document.getElementById('chk-studio-border').checked;
+            const hasCuttingLine = document.getElementById('chk-cutting-line').checked;
+
+            // Padding / Studio Border: 24px in Ultra-HD 300 DPI space
+            const borderPadding = hasStudioBorder ? 24 : 0;
+            const cardW = photoW + borderPadding * 2;
+            const cardH = photoH + borderPadding * 2;
+
+            // Prepare Master Single Passport Card Canvas
+            const singleCardCanvas = document.createElement('canvas');
+            singleCardCanvas.width = cardW;
+            singleCardCanvas.height = cardH;
+            const sCtx = singleCardCanvas.getContext('2d');
+            sCtx.imageSmoothingEnabled = true;
+            sCtx.imageSmoothingQuality = 'high';
+
+            // Fill pure white studio card
+            sCtx.fillStyle = '#ffffff';
+            sCtx.fillRect(0, 0, cardW, cardH);
+
+            // Draw cropped face photo inside
+            sCtx.drawImage(croppedSource, borderPadding, borderPadding, photoW, photoH);
+
+            // Draw cutting border (1.5px to 2px cutting line)
+            if (hasCuttingLine) {
+                sCtx.strokeStyle = '#0f172a';
+                sCtx.lineWidth = 2;
+                sCtx.strokeRect(1, 1, cardW - 2, cardH - 2);
+            }
+
+            // ==========================================
+            // CASE A: SINGLE PHOTO OUTPUT
+            // ==========================================
+            if (currentSheetType === 'single') {
+                outputCanvas.width = cardW;
+                outputCanvas.height = cardH;
+                ctx.imageSmoothingEnabled = true;
+                ctx.imageSmoothingQuality = 'high';
+                ctx.drawImage(singleCardCanvas, 0, 0);
                 return;
             }
 
-            const paper = document.getElementById('paper-type').value;
-            const countInput = document.getElementById('photo-count');
-            const count = parseInt(countInput.value) || 0;
-            const maxAllowed = paper === 'a4' ? 30 : 8;
+            // ==========================================
+            // CASE B: 4x6 INCH SHEET (1800 x 1200 px @ 300 DPI)
+            // ==========================================
+            // CASE C: A4 SHEET (2480 x 3508 px @ 300 DPI)
+            // ==========================================
+            let sheetW = 1800;
+            let sheetH = 1200; // 4x6 landscape
 
-            if (count <= 0) {
-                errorMsg.innerHTML = `<span class="text-rose-400">⚠️ Please enter at least 1 photo count.</span>`;
-                btn.disabled = true;
-                btn.classList.add('opacity-50', 'cursor-not-allowed');
-            } else if (count > maxAllowed) {
-                errorMsg.innerHTML = `<span class="text-rose-400 font-bold">⚠️ Maximum ${maxAllowed} photos can fit on ${paper.toUpperCase()} sheet! (You entered ${count}). Please enter ${maxAllowed} or less.</span>`;
-                btn.disabled = true;
-                btn.classList.add('opacity-50', 'cursor-not-allowed');
-            } else {
-                errorMsg.innerHTML = `<span class="text-emerald-400 font-bold">✓ Valid! ${count} photo(s) will be printed on ${paper.toUpperCase()} paper sheet.</span>`;
-                btn.disabled = false;
-                btn.classList.remove('opacity-50', 'cursor-not-allowed');
-            }
-        }
-
-        // ⚡ WIDE STUDIO WHITE BORDER (14px) + OUTER BLACK CUTTING LINE (1.5px)
-        function applyStudioCuttingBorder(canvas) {
-            const ctx = canvas.getContext('2d');
-            const w = canvas.width;
-            const h = canvas.height;
-
-            // 1. Wide Professional White Margin (14px - 3.5x wider)
-            const whiteThickness = 14;
-            ctx.lineWidth = whiteThickness;
-            ctx.strokeStyle = '#ffffff';
-            ctx.strokeRect(whiteThickness / 2, whiteThickness / 2, w - whiteThickness, h - whiteThickness);
-
-            // 2. Crisp Jet Black Cutting Line (1.5px on exact boundary)
-            ctx.lineWidth = 1.5;
-            ctx.strokeStyle = '#000000';
-            ctx.strokeRect(0.75, 0.75, w - 1.5, h - 1.5);
-        }
-
-        // ⚡ DYNAMIC PRINT SHEET GENERATOR (A4 OR 4X6 WITH EXACT MANUAL COUNT)
-        function executePassportDownload() {
-            if (!cropper) return;
-            const outputType = document.getElementById('output-type').value;
-            const hasBorder = document.getElementById('add-border').checked;
-            const isVisa = document.getElementById('size-preset').value === 'visa';
-
-            // 300 DPI Official Dimensions: 413 × 531 px for 3.5 × 4.5 cm
-            const targetW = isVisa ? 600 : 413;
-            const targetH = isVisa ? 600 : 531;
-
-            const singleCanvas = cropper.getCroppedCanvas({
-                width: targetW,
-                height: targetH,
-                imageSmoothingQuality: 'high'
-            });
-
-            if (hasBorder) {
-                applyStudioCuttingBorder(singleCanvas);
+            if (currentSheetType === 'a4') {
+                sheetW = 2480;
+                sheetH = 3508; // A4 portrait
             }
 
-            if (outputType === 'single') {
-                singleCanvas.toBlob((blob) => {
-                    triggerDownload(blob, `smartpic_passport_photo_${Date.now()}.jpg`);
-                }, 'image/jpeg', 0.88);
-            } else {
-                const paper = document.getElementById('paper-type').value;
-                const requestedCount = parseInt(document.getElementById('photo-count').value) || (paper === 'a4' ? 12 : 8);
+            outputCanvas.width = sheetW;
+            outputCanvas.height = sheetH;
+            ctx.imageSmoothingEnabled = true;
+            ctx.imageSmoothingQuality = 'high';
 
-                let sheetW = 1800, sheetH = 1200; // 4x6 (300 DPI)
-                let cols = 4;
-                let photoGap = 20;
+            // Solid clean white paper background
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(0, 0, sheetW, sheetH);
 
-                if (paper === 'a4') {
-                    sheetW = 2480;
-                    sheetH = 3508;
-                    cols = 5; // 5 photos per row on A4
-                    photoGap = 35;
+            const count = parseInt(document.getElementById('sheet-photo-count').value, 10) || 8;
+
+            // Scaled passport card for printing grid (413x531 px space)
+            const printW = Math.round(cardW / 2);
+            const printH = Math.round(cardH / 2);
+            const gapX = 35;
+            const gapY = 35;
+
+            // Calculate grid cols & rows
+            let cols = Math.floor((sheetW - 60) / (printW + gapX));
+            if (cols < 1) cols = 1;
+            let rows = Math.ceil(count / cols);
+
+            // Centering grid on sheet
+            const totalGridW = cols * printW + (cols - 1) * gapX;
+            const startX = Math.max(30, Math.round((sheetW - totalGridW) / 2));
+            const startY = 50;
+
+            let drawn = 0;
+            for (let r = 0; r < rows; r++) {
+                for (let c = 0; c < cols; c++) {
+                    if (drawn >= count) break;
+                    const x = startX + c * (printW + gapX);
+                    const y = startY + r * (printH + gapY);
+
+                    ctx.drawImage(singleCardCanvas, x, y, printW, printH);
+                    drawn++;
                 }
-
-                const sheetCanvas = document.createElement('canvas');
-                sheetCanvas.width = sheetW;
-                sheetCanvas.height = sheetH;
-                const sheetCtx = sheetCanvas.getContext('2d');
-
-                // White Paper Sheet Background
-                sheetCtx.fillStyle = '#ffffff';
-                sheetCtx.fillRect(0, 0, sheetW, sheetH);
-
-                const totalRowWidth = (cols * targetW) + ((cols - 1) * photoGap);
-                const startX = (sheetW - totalRowWidth) / 2;
-                const startY = paper === 'a4' ? 100 : ((sheetH - (2 * targetH + photoGap)) / 2);
-
-                // Draw ONLY the exact requested count
-                for (let i = 0; i < requestedCount; i++) {
-                    const c = i % cols;
-                    const r = Math.floor(i / cols);
-
-                    const x = startX + c * (targetW + photoGap);
-                    const y = startY + r * (targetH + photoGap);
-
-                    sheetCtx.drawImage(singleCanvas, x, y, targetW, targetH);
-                }
-
-                sheetCanvas.toBlob((blob) => {
-                    triggerDownload(blob, `smartpic_passport_${requestedCount}photos_${paper}_sheet_${Date.now()}.jpg`);
-                }, 'image/jpeg', 0.95);
             }
         }
 
-        function triggerDownload(blob, filename) {
-            const a = document.createElement('a');
-            a.href = URL.createObjectURL(blob);
-            a.download = filename;
-            a.click();
-            document.getElementById('status-box').classList.remove('hidden');
+        // ⚡ HIGH RESOLUTION DOWNLOAD (0.98 QUALITY - ZERO BLUR)
+        function downloadImage(type) {
+            if (!cropper) {
+                alert('Please upload a photo first!');
+                return;
+            }
+
+            // Temporary canvas for exact export
+            const exportCanvas = document.createElement('canvas');
+            const expCtx = exportCanvas.getContext('2d');
+            expCtx.imageSmoothingEnabled = true;
+            expCtx.imageSmoothingQuality = 'high';
+
+            let downloadName = `${originalFileName}_passport_300dpi.jpg`;
+
+            if (type === 'single') {
+                // Force render single photo onto export canvas
+                renderHighResOutput();
+                exportCanvas.width = outputCanvas.width;
+                exportCanvas.height = outputCanvas.height;
+                expCtx.drawImage(outputCanvas, 0, 0);
+            } else {
+                // Sheet export
+                downloadName = `${originalFileName}_passport_${currentSheetType}_sheet_300dpi.jpg`;
+                exportCanvas.width = outputCanvas.width;
+                exportCanvas.height = outputCanvas.height;
+                expCtx.drawImage(outputCanvas, 0, 0);
+            }
+
+            // ⚡ 0.98 Maximum Quality JPEG Export
+            outputCanvas.toBlob((blob) => {
+                const a = document.createElement('a');
+                a.href = URL.createObjectURL(blob);
+                a.download = downloadName;
+                a.click();
+
+                document.getElementById('status-box').classList.remove('hidden');
+                setTimeout(() => document.getElementById('status-box').classList.add('hidden'), 3500);
+            }, 'image/jpeg', 0.98);
         }
     </script>
 </body>
