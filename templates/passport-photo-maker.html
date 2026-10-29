@@ -152,7 +152,7 @@
                         <span class="text-slate-300 font-bold">Number of Photos on Sheet:</span>
                         <div class="flex items-center gap-1.5">
                             <button type="button" onclick="adjustCount(-1)" class="w-7 h-7 rounded-lg bg-slate-800 hover:bg-slate-700 text-white font-bold flex items-center justify-center transition active:scale-95">-</button>
-                            <input type="number" id="sheet-photo-count" min="1" max="45" value="6" oninput="renderHighResOutput()" class="w-14 bg-slate-900 border border-indigo-500 text-white font-bold rounded-lg py-1 text-xs text-center focus:outline-none">
+                            <input type="number" id="sheet-photo-count" min="1" max="45" value="5" oninput="renderHighResOutput()" class="w-14 bg-slate-900 border border-indigo-500 text-white font-bold rounded-lg py-1 text-xs text-center focus:outline-none">
                             <button type="button" onclick="adjustCount(1)" class="w-7 h-7 rounded-lg bg-slate-800 hover:bg-slate-700 text-white font-bold flex items-center justify-center transition active:scale-95">+</button>
                             <span class="text-slate-400 text-[11px] ml-1">photos</span>
                         </div>
@@ -216,7 +216,7 @@
                 <div class="bg-slate-900 p-4 rounded-2xl border border-slate-800">
                     <span class="w-6 h-6 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center mb-2 text-xs">2</span>
                     <h3 class="font-bold text-white text-xs sm:text-sm mb-1">Top-Left Aligned Print</h3>
-                    <p class="text-slate-400 text-xs">Photos align to the top-left edge with touching cutting guide lines.</p>
+                    <p class="text-slate-400 text-xs">Photos fill rows completely from the top-left edge.</p>
                 </div>
                 <div class="bg-slate-900 p-4 rounded-2xl border border-slate-800">
                     <span class="w-6 h-6 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center mb-2 text-xs">3</span>
@@ -231,7 +231,7 @@
         <p>© 2026 SmartPicTools. 100% Free & Private in-browser suite. <a href="/" class="text-indigo-400 hover:underline">Explore All Tools</a></p>
     </footer>
 
-    <!-- ⚡ TRUE 300 DPI STUDIO ENGINE (100% PURE TOP-LEFT ALIGNMENT) -->
+    <!-- ⚡ TRUE 300 DPI STUDIO ENGINE (FIXED COLUMNS: FULL ROWS FILLED FROM LEFT) -->
     <script>
         let cropper = null;
         let originalFileName = 'passport_photo';
@@ -336,7 +336,7 @@
                 countInput.value = "8";
                 countInput.max = "12";
             } else if (type === 'a4') {
-                countInput.value = "6";
+                countInput.value = "5";
                 countInput.max = "35";
             }
 
@@ -351,7 +351,7 @@
             renderHighResOutput();
         }
 
-        // ⚡ RENDER HIGH-RES OUTPUT (STRICT TOP-LEFT ALIGNMENT: startX = 60, startY = 60)
+        // ⚡ RENDER HIGH-RES OUTPUT (FIXED 5-COLUMNS ON A4, 4-COLUMNS ON 4x6)
         function renderHighResOutput() {
             if (!cropper) return;
 
@@ -424,45 +424,33 @@
             ctx.fillStyle = '#ffffff';
             ctx.fillRect(0, 0, sheetW, sheetH);
 
-            let count = parseInt(document.getElementById('sheet-photo-count').value, 10) || 6;
+            let count = parseInt(document.getElementById('sheet-photo-count').value, 10) || 5;
             count = Math.max(1, Math.min(40, count));
 
             const printW = Math.round(cardW / 2);
             const printH = Math.round(cardH / 2);
 
-            // Maximum columns that fit on the sheet
-            const maxCols = Math.max(1, Math.floor((sheetW - 100) / printW));
+            // ⚡ FIXED COLUMNS: A4 पर हमेशा 5 फ़ोटो की पूरी लाइन बनेगी, 4x6 पर हमेशा 4 फ़ोटो की पूरी लाइन बनेगी!
+            const cols = (currentSheetType === 'a4') ? 5 : 4;
 
-            let cols = maxCols;
-            if (count < maxCols) {
-                cols = count;
-            } else {
-                for (let c = maxCols; c >= 2; c--) {
-                    if (count % c === 0) {
-                        cols = c;
-                        break;
-                    }
-                }
-            }
-            let rows = Math.ceil(count / cols);
-
-            // ⚡ 100% PURE TOP-LEFT ALIGNMENT - ZERO CENTER CALCULATION!
-            const startX = (currentSheetType === '4x6') ? 40 : 60;
-            const startY = (currentSheetType === '4x6') ? 40 : 60;
+            // ⚡ STRICT TOP-LEFT ALIGNMENT (NO HORIZONTAL OR VERTICAL CENTERING)
+            const startX = 60;
+            const startY = 60;
 
             let drawn = 0;
-            for (let r = 0; r < rows; r++) {
-                for (let c = 0; c < cols; c++) {
-                    if (drawn >= count) break;
-                    const x = startX + c * printW;
-                    const y = startY + r * printH;
+            while (drawn < count) {
+                const c = drawn % cols; // कॉलम हमेशा 0 से cols-1 तक भरेगा (यानी पूरी पहली लाइन)
+                const r = Math.floor(drawn / cols); // जब पहली लाइन भरेगी, तभी अगली लाइन में जाएगा
 
-                    ctx.drawImage(singleCardCanvas, x, y, printW, printH);
-                    drawn++;
-                }
+                const x = startX + c * printW;
+                const y = startY + r * printH;
+
+                ctx.drawImage(singleCardCanvas, x, y, printW, printH);
+                drawn++;
             }
         }
 
+        // ⚡ HIGH RESOLUTION DOWNLOAD (0.98 QUALITY)
         function downloadImage(type) {
             if (!cropper) {
                 alert('Please upload a photo first!');
