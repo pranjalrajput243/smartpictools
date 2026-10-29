@@ -6,7 +6,7 @@
     
     <!-- ⚡ HIGH-PRIORITY SEO & KEYWORDS FOR PASSPORT PHOTOS -->
     <title>Passport Size Photo Maker Online Free - 300 DPI Studio Quality | SmartPicTools</title>
-    <meta name="description" content="Free online passport size photo maker with 300 DPI Ultra HD print clarity. Crop to 3.5x4.5cm for SSC/UPSC, 2x2 inch Visa, print custom photo counts on 4x6 or A4 sheets with zero-gap left-aligned cutting borders.">
+    <meta name="description" content="Free online passport size photo maker with 300 DPI Ultra HD print clarity. Crop to 3.5x4.5cm for SSC/UPSC, 2x2 inch Visa, print custom photo counts on 4x6 or A4 sheets with zero-gap cutting borders.">
     <meta name="keywords" content="passport size photo maker online free, ssc photo maker 3.5x4.5, upsc passport photo size, 2x2 visa photo maker, create passport photo 4x6 sheet, passport photo printable a4 sheet, custom photo count on sheet, studio quality passport photo 300 dpi">
     <meta name="robots" content="index, follow, max-image-preview:large">
     <meta name="author" content="SmartPicTools">
@@ -77,7 +77,7 @@
         <div class="text-center max-w-xl mx-auto mb-6">
             <span class="text-[10px] font-extrabold uppercase tracking-widest text-indigo-400 bg-indigo-500/10 px-2.5 py-0.5 rounded-full border border-indigo-500/20">300 DPI Studio HD Quality</span>
             <h1 class="text-2xl sm:text-4xl font-black text-white mt-1.5 tracking-tight">Passport Size Photo Maker</h1>
-            <p class="mt-1 text-slate-400 text-xs sm:text-sm">Create crystal-clear 300 DPI passport photos for SSC, UPSC, or Visa. Left-aligned printing saves paper with touching cutting borders.</p>
+            <p class="mt-1 text-slate-400 text-xs sm:text-sm">Create crystal-clear 300 DPI passport photos for SSC, UPSC, or Visa. Single cuts save paper with touching cutting borders.</p>
         </div>
 
         <!-- UPLOAD DROP AREA (SHOWN BEFORE UPLOAD) -->
@@ -215,13 +215,13 @@
                 </div>
                 <div class="bg-slate-900 p-4 rounded-2xl border border-slate-800">
                     <span class="w-6 h-6 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center mb-2 text-xs">2</span>
-                    <h3 class="font-bold text-white text-xs sm:text-sm mb-1">Top-Left Aligned Print</h3>
-                    <p class="text-slate-400 text-xs">Photos fill rows completely from the top-left edge.</p>
+                    <h3 class="font-bold text-white text-xs sm:text-sm mb-1">Balanced Row Print</h3>
+                    <p class="text-slate-400 text-xs">Photos fill from top with equal left and right sheet margins.</p>
                 </div>
                 <div class="bg-slate-900 p-4 rounded-2xl border border-slate-800">
                     <span class="w-6 h-6 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center mb-2 text-xs">3</span>
                     <h3 class="font-bold text-white text-xs sm:text-sm mb-1">Save Clean Paper</h3>
-                    <p class="text-slate-400 text-xs">Slice photos off top-left. All remaining paper stays clean and reusable.</p>
+                    <p class="text-slate-400 text-xs">Cut photos off top. All remaining bottom paper stays clean and reusable.</p>
                 </div>
             </div>
         </section>
@@ -231,7 +231,7 @@
         <p>© 2026 SmartPicTools. 100% Free & Private in-browser suite. <a href="/" class="text-indigo-400 hover:underline">Explore All Tools</a></p>
     </footer>
 
-    <!-- ⚡ TRUE 300 DPI STUDIO ENGINE (FIXED COLUMNS: FULL ROWS FILLED FROM LEFT) -->
+    <!-- ⚡ TRUE 300 DPI STUDIO ENGINE (BALANCED HORIZONTAL ROW WIDTH + TOP ALIGNED) -->
     <script>
         let cropper = null;
         let originalFileName = 'passport_photo';
@@ -351,7 +351,7 @@
             renderHighResOutput();
         }
 
-        // ⚡ RENDER HIGH-RES OUTPUT (FIXED 5-COLUMNS ON A4, 4-COLUMNS ON 4x6)
+        // ⚡ RENDER HIGH-RES OUTPUT: 5 COLUMNS BALANCED HORIZONTALLY ACROSS A4 SHEET
         function renderHighResOutput() {
             if (!cropper) return;
 
@@ -430,17 +430,19 @@
             const printW = Math.round(cardW / 2);
             const printH = Math.round(cardH / 2);
 
-            // ⚡ FIXED COLUMNS: A4 पर हमेशा 5 फ़ोटो की पूरी लाइन बनेगी, 4x6 पर हमेशा 4 फ़ोटो की पूरी लाइन बनेगी!
+            // ⚡ FIXED ROW CAPACITY: A4 पर हमेशा 5 फ़ोटो की लाइन, 4x6 पर हमेशा 4 फ़ोटो की लाइन
             const cols = (currentSheetType === 'a4') ? 5 : 4;
 
-            // ⚡ STRICT TOP-LEFT ALIGNMENT (NO HORIZONTAL OR VERTICAL CENTERING)
-            const startX = 60;
-            const startY = 60;
+            // ⚡ EXACT EQUAL MARGIN ON LEFT & RIGHT:
+            // 5 फ़ोटो की पूरी लाइन के हिसाब से दाएँ और बाएँ बिल्कुल एक बराबर मार्जिन छूटेगा!
+            const fullLineWidth = cols * printW;
+            const startX = Math.max(20, Math.round((sheetW - fullLineWidth) / 2));
+            const startY = 60; // ऊपर से शुरू
 
             let drawn = 0;
             while (drawn < count) {
-                const c = drawn % cols; // कॉलम हमेशा 0 से cols-1 तक भरेगा (यानी पूरी पहली लाइन)
-                const r = Math.floor(drawn / cols); // जब पहली लाइन भरेगी, तभी अगली लाइन में जाएगा
+                const c = drawn % cols;
+                const r = Math.floor(drawn / cols);
 
                 const x = startX + c * printW;
                 const y = startY + r * printH;
