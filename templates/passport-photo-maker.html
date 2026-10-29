@@ -19,7 +19,7 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://smartpictools.in/passport-photo-maker">
     <meta property="og:title" content="Passport Size Photo Maker Online Free - SmartPicTools">
-    <meta property="og:description" content="Create 300 DPI ultra-sharp passport photos for SSC, UPSC, and Visas on 4x6 or A4 sheets with zero-gap cutting lines in 0.05s.">
+    <meta property="og:description" content="Create 300 DPI ultra-sharp passport photos for SSC, UPSC, and Visas on 4x6 or A4 sheets in 0.05s.">
 
     <!-- SCHEMA MARKUP -->
     <script type="application/ld+json">
@@ -77,7 +77,7 @@
         <div class="text-center max-w-xl mx-auto mb-6">
             <span class="text-[10px] font-extrabold uppercase tracking-widest text-indigo-400 bg-indigo-500/10 px-2.5 py-0.5 rounded-full border border-indigo-500/20">300 DPI Studio HD Quality</span>
             <h1 class="text-2xl sm:text-4xl font-black text-white mt-1.5 tracking-tight">Passport Size Photo Maker</h1>
-            <p class="mt-1 text-slate-400 text-xs sm:text-sm">Create crystal-clear 300 DPI passport photos for SSC, UPSC, or Visa. Single cuts save paper with touching cutting borders.</p>
+            <p class="mt-1 text-slate-400 text-xs sm:text-sm">Create crystal-clear 300 DPI passport photos for SSC, UPSC, or Visa with exact proportions and zero-gap cutting lines.</p>
         </div>
 
         <!-- UPLOAD DROP AREA (SHOWN BEFORE UPLOAD) -->
@@ -113,7 +113,7 @@
                         <button type="button" onclick="cropper.rotate(90)" class="py-1 px-2.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-slate-300 font-bold border border-slate-700">↻ +90°</button>
                         <button type="button" onclick="cropper.reset()" class="py-1 px-2.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-slate-400 border border-slate-700">Reset</button>
                     </div>
-                    <span class="text-[11px] text-emerald-400 font-semibold">💡 Drag frame to position face</span>
+                    <span class="text-[11px] text-emerald-400 font-semibold">🔒 Proportions Locked (No Distortion)</span>
                 </div>
 
                 <!-- 2. OFFICIAL PASSPORT SIZE PRESETS -->
@@ -215,13 +215,13 @@
                 </div>
                 <div class="bg-slate-900 p-4 rounded-2xl border border-slate-800">
                     <span class="w-6 h-6 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center mb-2 text-xs">2</span>
-                    <h3 class="font-bold text-white text-xs sm:text-sm mb-1">Balanced Row Print</h3>
-                    <p class="text-slate-400 text-xs">Photos fill from top with equal left and right sheet margins.</p>
+                    <h3 class="font-bold text-white text-xs sm:text-sm mb-1">Locked Aspect Ratio</h3>
+                    <p class="text-slate-400 text-xs">Ratio stays locked to official 3.5x4.5cm or 2x2 inch to prevent distortion.</p>
                 </div>
                 <div class="bg-slate-900 p-4 rounded-2xl border border-slate-800">
                     <span class="w-6 h-6 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center mb-2 text-xs">3</span>
-                    <h3 class="font-bold text-white text-xs sm:text-sm mb-1">Save Clean Paper</h3>
-                    <p class="text-slate-400 text-xs">Cut photos off top. All remaining bottom paper stays clean and reusable.</p>
+                    <h3 class="font-bold text-white text-xs sm:text-sm mb-1">Exact Grid Print</h3>
+                    <p class="text-slate-400 text-xs">Rows fill completely from top with touching cutting guide lines.</p>
                 </div>
             </div>
         </section>
@@ -231,7 +231,7 @@
         <p>© 2026 SmartPicTools. 100% Free & Private in-browser suite. <a href="/" class="text-indigo-400 hover:underline">Explore All Tools</a></p>
     </footer>
 
-    <!-- ⚡ TRUE 300 DPI STUDIO ENGINE (BALANCED HORIZONTAL ROW WIDTH + TOP ALIGNED) -->
+    <!-- ⚡ TRUE 300 DPI STUDIO ENGINE (PHYSICAL DIMENSION PACKING) -->
     <script>
         let cropper = null;
         let originalFileName = 'passport_photo';
@@ -288,6 +288,7 @@
         function initCropper() {
             if (cropper) cropper.destroy();
 
+            // ⚡ STRICT ENFORCED ASPECT RATIO LOCK (CAN NEVER SQUISH FACE)
             let aspect = 3.5 / 4.5;
             if (currentSizePreset === '2x2' || currentSizePreset === '3.5x3.5') aspect = 1.0;
 
@@ -333,7 +334,7 @@
 
             const countInput = document.getElementById('sheet-photo-count');
             if (type === '4x6') {
-                countInput.value = "8";
+                countInput.value = (currentSizePreset === '2x2') ? "6" : "8";
                 countInput.max = "12";
             } else if (type === 'a4') {
                 countInput.value = "5";
@@ -351,22 +352,26 @@
             renderHighResOutput();
         }
 
-        // ⚡ RENDER HIGH-RES OUTPUT: 5 COLUMNS BALANCED HORIZONTALLY ACROSS A4 SHEET
+        // ⚡ RENDER HIGH-RES OUTPUT (PHYSICAL 300 DPI PRECISION)
         function renderHighResOutput() {
             if (!cropper) return;
 
-            let photoW = 826;
-            let photoH = 1062;
+            // 1. EXACT PHYSICAL 300 DPI PIXELS:
+            // 1mm = 11.811 px at 300 DPI
+            let photoW = 413; // 35mm
+            let photoH = 531; // 45mm
 
             if (currentSizePreset === '2x2') {
-                photoW = 1200;
-                photoH = 1200;
+                photoW = 600; // exactly 2 inches (50.8mm) @ 300 DPI
+                photoH = 600;
             } else if (currentSizePreset === '3.5x3.5') {
-                photoW = 826;
-                photoH = 826;
+                photoW = 413;
+                photoH = 413;
             }
 
             const croppedSource = cropper.getCroppedCanvas({
+                width: photoW,
+                height: photoH,
                 imageSmoothingEnabled: true,
                 imageSmoothingQuality: 'high'
             });
@@ -375,9 +380,12 @@
             const hasStudioBorder = document.getElementById('chk-studio-border').checked;
             const hasCuttingLine = document.getElementById('chk-cutting-line').checked;
 
-            const borderPadding = hasStudioBorder ? 24 : 0;
-            const cardW = photoW + borderPadding * 2;
-            const cardH = photoH + borderPadding * 2;
+            // Studio Border padding
+            const borderPadding = hasStudioBorder ? 14 : 0;
+            const cardW = photoW;
+            const cardH = photoH;
+            const innerW = cardW - borderPadding * 2;
+            const innerH = cardH - borderPadding * 2;
 
             // Single Passport Card Canvas
             const singleCardCanvas = document.createElement('canvas');
@@ -389,12 +397,12 @@
 
             sCtx.fillStyle = '#ffffff';
             sCtx.fillRect(0, 0, cardW, cardH);
-            sCtx.drawImage(croppedSource, borderPadding, borderPadding, photoW, photoH);
+            sCtx.drawImage(croppedSource, borderPadding, borderPadding, innerW, innerH);
 
             if (hasCuttingLine) {
-                sCtx.strokeStyle = '#0f172a';
-                sCtx.lineWidth = 2;
-                sCtx.strokeRect(1, 1, cardW - 2, cardH - 2);
+                sCtx.strokeStyle = '#000000';
+                sCtx.lineWidth = 1.5;
+                sCtx.strokeRect(0, 0, cardW, cardH);
             }
 
             // CASE A: SINGLE PHOTO OUTPUT
@@ -409,11 +417,11 @@
 
             // CASE B & C: PRINTABLE SHEETS (4x6 or A4)
             let sheetW = 1800;
-            let sheetH = 1200; // 4x6 landscape
+            let sheetH = 1200; // 4x6 landscape (6x4 inches @ 300 DPI)
 
             if (currentSheetType === 'a4') {
                 sheetW = 2480;
-                sheetH = 3508; // A4 portrait
+                sheetH = 3508; // A4 portrait (210x297 mm @ 300 DPI)
             }
 
             outputCanvas.width = sheetW;
@@ -425,29 +433,28 @@
             ctx.fillRect(0, 0, sheetW, sheetH);
 
             let count = parseInt(document.getElementById('sheet-photo-count').value, 10) || 5;
-            count = Math.max(1, Math.min(40, count));
+            count = Math.max(1, Math.min(45, count));
 
-            const printW = Math.round(cardW / 2);
-            const printH = Math.round(cardH / 2);
-
-            // ⚡ FIXED ROW CAPACITY: A4 पर हमेशा 5 फ़ोटो की लाइन, 4x6 पर हमेशा 4 फ़ोटो की लाइन
-            const cols = (currentSheetType === 'a4') ? 5 : 4;
-
-            // ⚡ EXACT EQUAL MARGIN ON LEFT & RIGHT:
-            // 5 फ़ोटो की पूरी लाइन के हिसाब से दाएँ और बाएँ बिल्कुल एक बराबर मार्जिन छूटेगा!
-            const fullLineWidth = cols * printW;
-            const startX = Math.max(20, Math.round((sheetW - fullLineWidth) / 2));
-            const startY = 60; // ऊपर से शुरू
+            // ⚡ DYNAMIC COLUMNS CAPACITY CALCULATION:
+            // For 2x2 inch (600px wide): 4x6 sheet fits exactly 3 cols (3x600 = 1800px).
+            // For 3.5x4.5cm (413px wide): 4x6 sheet fits 4 cols (4x413 = 1652px).
+            // For A4 (2480px wide): fits 5 cols (5x413 = 2065px).
+            const cols = Math.floor(sheetW / cardW);
+            
+            // Equal Balanced Margins
+            const totalGridW = cols * cardW;
+            const startX = Math.max(0, Math.floor((sheetW - totalGridW) / 2));
+            const startY = (currentSheetType === 'a4') ? 80 : Math.max(0, Math.floor((sheetH - Math.ceil(count / cols) * cardH) / 2));
 
             let drawn = 0;
             while (drawn < count) {
                 const c = drawn % cols;
                 const r = Math.floor(drawn / cols);
 
-                const x = startX + c * printW;
-                const y = startY + r * printH;
+                const x = startX + c * cardW;
+                const y = startY + r * cardH;
 
-                ctx.drawImage(singleCardCanvas, x, y, printW, printH);
+                ctx.drawImage(singleCardCanvas, x, y, cardW, cardH);
                 drawn++;
             }
         }
