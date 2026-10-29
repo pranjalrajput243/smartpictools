@@ -6,7 +6,7 @@
     
     <!-- ⚡ HIGH-PRIORITY SEO & KEYWORDS FOR PASSPORT PHOTOS -->
     <title>Passport Size Photo Maker Online Free - 300 DPI Studio Quality | SmartPicTools</title>
-    <meta name="description" content="Free online passport size photo maker with 300 DPI Ultra HD print clarity. Crop to 3.5x4.5cm for SSC/UPSC, 2x2 inch Visa, print custom photo counts on 4x6 or A4 sheets with cutting borders.">
+    <meta name="description" content="Free online passport size photo maker with 300 DPI Ultra HD print clarity. Crop to 3.5x4.5cm for SSC/UPSC, 2x2 inch Visa, print custom photo counts on 4x6 or A4 sheets with zero-gap left-aligned cutting borders.">
     <meta name="keywords" content="passport size photo maker online free, ssc photo maker 3.5x4.5, upsc passport photo size, 2x2 visa photo maker, create passport photo 4x6 sheet, passport photo printable a4 sheet, custom photo count on sheet, studio quality passport photo 300 dpi">
     <meta name="robots" content="index, follow, max-image-preview:large">
     <meta name="author" content="SmartPicTools">
@@ -19,7 +19,7 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://smartpictools.in/passport-photo-maker">
     <meta property="og:title" content="Passport Size Photo Maker Online Free - SmartPicTools">
-    <meta property="og:description" content="Create 300 DPI ultra-sharp passport photos for SSC, UPSC, and Visas on 4x6 or A4 sheets with custom photo counts in 0.05s.">
+    <meta property="og:description" content="Create 300 DPI ultra-sharp passport photos for SSC, UPSC, and Visas on 4x6 or A4 sheets with zero-gap cutting lines in 0.05s.">
 
     <!-- SCHEMA MARKUP -->
     <script type="application/ld+json">
@@ -77,7 +77,7 @@
         <div class="text-center max-w-xl mx-auto mb-6">
             <span class="text-[10px] font-extrabold uppercase tracking-widest text-indigo-400 bg-indigo-500/10 px-2.5 py-0.5 rounded-full border border-indigo-500/20">300 DPI Studio HD Quality</span>
             <h1 class="text-2xl sm:text-4xl font-black text-white mt-1.5 tracking-tight">Passport Size Photo Maker</h1>
-            <p class="mt-1 text-slate-400 text-xs sm:text-sm">Create crystal-clear 300 DPI passport photos for SSC, UPSC, or Visa. Print single photo or multi-photo 4x6 / A4 sheets with cutting borders.</p>
+            <p class="mt-1 text-slate-400 text-xs sm:text-sm">Create crystal-clear 300 DPI passport photos for SSC, UPSC, or Visa. Left-aligned printing saves paper with touching cutting borders.</p>
         </div>
 
         <!-- UPLOAD DROP AREA (SHOWN BEFORE UPLOAD) -->
@@ -147,25 +147,14 @@
                         </button>
                     </div>
 
-                    <!-- ⚡ CUSTOM & PRESET PHOTO COUNT ON SHEET -->
-                    <div id="photo-count-wrap" class="hidden flex items-center justify-between p-2.5 bg-slate-950 rounded-xl border border-slate-800 text-xs flex-wrap gap-2">
-                        <span class="text-slate-400 font-bold">Number of Photos on Sheet:</span>
-                        <div class="flex items-center gap-2">
-                            <select id="sheet-photo-count" onchange="handlePhotoCountChange(this.value)" class="bg-slate-900 border border-slate-700 text-white font-bold rounded-lg px-2.5 py-1 text-xs focus:outline-none">
-                                <option value="4">4 Photos</option>
-                                <option value="6">6 Photos</option>
-                                <option value="8" selected>8 Photos (Standard 4x6)</option>
-                                <option value="12">12 Photos</option>
-                                <option value="16">16 Photos</option>
-                                <option value="24">24 Photos (Full A4)</option>
-                                <option value="custom">⚙️ Custom Count</option>
-                            </select>
-
-                            <!-- Custom Numeric Input (Shows when Custom is selected) -->
-                            <div id="custom-count-input-wrap" class="hidden flex items-center gap-1.5">
-                                <input type="number" id="custom-photo-count" min="1" max="50" value="8" oninput="renderHighResOutput()" class="w-16 bg-slate-900 border border-indigo-500 text-white font-bold rounded-lg px-2 py-1 text-xs text-center focus:outline-none">
-                                <span class="text-slate-400 text-[11px]">photos</span>
-                            </div>
+                    <!-- ⚡ DIRECT CUSTOM PHOTO COUNT -->
+                    <div id="photo-count-wrap" class="hidden flex items-center justify-between p-2.5 bg-slate-950 rounded-xl border border-slate-800 text-xs">
+                        <span class="text-slate-300 font-bold">Number of Photos on Sheet:</span>
+                        <div class="flex items-center gap-1.5">
+                            <button type="button" onclick="adjustCount(-1)" class="w-7 h-7 rounded-lg bg-slate-800 hover:bg-slate-700 text-white font-bold flex items-center justify-center transition active:scale-95">-</button>
+                            <input type="number" id="sheet-photo-count" min="1" max="45" value="6" oninput="renderHighResOutput()" class="w-14 bg-slate-900 border border-indigo-500 text-white font-bold rounded-lg py-1 text-xs text-center focus:outline-none">
+                            <button type="button" onclick="adjustCount(1)" class="w-7 h-7 rounded-lg bg-slate-800 hover:bg-slate-700 text-white font-bold flex items-center justify-center transition active:scale-95">+</button>
+                            <span class="text-slate-400 text-[11px] ml-1">photos</span>
                         </div>
                     </div>
 
@@ -177,7 +166,7 @@
                         </label>
                         <label class="flex items-center gap-2 p-2.5 bg-slate-950 rounded-xl border border-slate-800 cursor-pointer text-xs font-bold text-slate-300">
                             <input type="checkbox" id="chk-cutting-line" checked onchange="renderHighResOutput()" class="w-4 h-4 accent-indigo-600 rounded">
-                            <span>Black Cutting Guide Lines</span>
+                            <span>Black Cutting Lines (0px Gap)</span>
                         </label>
                     </div>
                 </div>
@@ -189,7 +178,7 @@
                 
                 <div class="flex justify-between items-center text-xs font-bold">
                     <span class="text-slate-200">Print Preview:</span>
-                    <span class="text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">300 DPI Ultra HD</span>
+                    <span class="text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">300 DPI Studio Quality</span>
                 </div>
 
                 <!-- Preview Output Canvas Container -->
@@ -226,13 +215,13 @@
                 </div>
                 <div class="bg-slate-900 p-4 rounded-2xl border border-slate-800">
                     <span class="w-6 h-6 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center mb-2 text-xs">2</span>
-                    <h3 class="font-bold text-white text-xs sm:text-sm mb-1">Adjust Face Framing</h3>
-                    <p class="text-slate-400 text-xs">Select official 3.5x4.5cm or 2x2 inch Visa ratio and frame your face.</p>
+                    <h3 class="font-bold text-white text-xs sm:text-sm mb-1">Top-Left Aligned Print</h3>
+                    <p class="text-slate-400 text-xs">Photos align to the top-left edge with touching cutting guide lines.</p>
                 </div>
                 <div class="bg-slate-900 p-4 rounded-2xl border border-slate-800">
                     <span class="w-6 h-6 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center mb-2 text-xs">3</span>
-                    <h3 class="font-bold text-white text-xs sm:text-sm mb-1">Ultra HD 300 DPI Download</h3>
-                    <p class="text-slate-400 text-xs">Download single high-res photo or 4x6 / A4 printable sheet for studio print.</p>
+                    <h3 class="font-bold text-white text-xs sm:text-sm mb-1">Save Clean Paper</h3>
+                    <p class="text-slate-400 text-xs">Slice photos off top-left. All remaining paper stays clean and reusable.</p>
                 </div>
             </div>
         </section>
@@ -242,7 +231,7 @@
         <p>© 2026 SmartPicTools. 100% Free & Private in-browser suite. <a href="/" class="text-indigo-400 hover:underline">Explore All Tools</a></p>
     </footer>
 
-    <!-- ⚡ TRUE 300 DPI STUDIO ENGINE (WITH CUSTOM COUNT SUPPORT) -->
+    <!-- ⚡ TRUE 300 DPI STUDIO ENGINE (100% PURE TOP-LEFT ALIGNMENT) -->
     <script>
         let cropper = null;
         let originalFileName = 'passport_photo';
@@ -255,7 +244,6 @@
         const outputCanvas = document.getElementById('output-canvas');
         const ctx = outputCanvas.getContext('2d');
 
-        // Drag & Drop Listeners
         ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(ev => {
             window.addEventListener(ev, (e) => { e.preventDefault(); e.stopPropagation(); }, false);
             dropArea.addEventListener(ev, (e) => { e.preventDefault(); e.stopPropagation(); }, false);
@@ -343,27 +331,27 @@
             const countWrap = document.getElementById('photo-count-wrap');
             countWrap.classList.toggle('hidden', type === 'single');
 
-            const countSelect = document.getElementById('sheet-photo-count');
-            if (countSelect.value !== 'custom') {
-                if (type === '4x6') countSelect.value = "8";
-                else if (type === 'a4') countSelect.value = "16";
+            const countInput = document.getElementById('sheet-photo-count');
+            if (type === '4x6') {
+                countInput.value = "8";
+                countInput.max = "12";
+            } else if (type === 'a4') {
+                countInput.value = "6";
+                countInput.max = "35";
             }
 
             renderHighResOutput();
         }
 
-        // ⚡ HANDLE CUSTOM PHOTO COUNT TOGGLE
-        function handlePhotoCountChange(val) {
-            const customWrap = document.getElementById('custom-count-input-wrap');
-            if (val === 'custom') {
-                customWrap.classList.remove('hidden');
-            } else {
-                customWrap.classList.add('hidden');
-            }
+        function adjustCount(delta) {
+            const input = document.getElementById('sheet-photo-count');
+            let val = parseInt(input.value, 10) || 1;
+            val = Math.max(1, Math.min(45, val + delta));
+            input.value = val;
             renderHighResOutput();
         }
 
-        // ⚡ RENDER HIGH-RES OUTPUT (WITH PRECISE CUSTOM COUNT)
+        // ⚡ RENDER HIGH-RES OUTPUT (STRICT TOP-LEFT ALIGNMENT: startX = 60, startY = 60)
         function renderHighResOutput() {
             if (!cropper) return;
 
@@ -391,7 +379,7 @@
             const cardW = photoW + borderPadding * 2;
             const cardH = photoH + borderPadding * 2;
 
-            // Master Single Passport Card Canvas
+            // Single Passport Card Canvas
             const singleCardCanvas = document.createElement('canvas');
             singleCardCanvas.width = cardW;
             singleCardCanvas.height = cardH;
@@ -436,35 +424,38 @@
             ctx.fillStyle = '#ffffff';
             ctx.fillRect(0, 0, sheetW, sheetH);
 
-            // Read count (Preset or Custom input)
-            const countSelectVal = document.getElementById('sheet-photo-count').value;
-            let count = 8;
-            if (countSelectVal === 'custom') {
-                count = parseInt(document.getElementById('custom-photo-count').value, 10) || 1;
-            } else {
-                count = parseInt(countSelectVal, 10) || 8;
-            }
-            count = Math.max(1, Math.min(50, count));
+            let count = parseInt(document.getElementById('sheet-photo-count').value, 10) || 6;
+            count = Math.max(1, Math.min(40, count));
 
             const printW = Math.round(cardW / 2);
             const printH = Math.round(cardH / 2);
-            const gapX = 35;
-            const gapY = 35;
 
-            let cols = Math.floor((sheetW - 60) / (printW + gapX));
-            if (cols < 1) cols = 1;
+            // Maximum columns that fit on the sheet
+            const maxCols = Math.max(1, Math.floor((sheetW - 100) / printW));
+
+            let cols = maxCols;
+            if (count < maxCols) {
+                cols = count;
+            } else {
+                for (let c = maxCols; c >= 2; c--) {
+                    if (count % c === 0) {
+                        cols = c;
+                        break;
+                    }
+                }
+            }
             let rows = Math.ceil(count / cols);
 
-            const totalGridW = cols * printW + (cols - 1) * gapX;
-            const startX = Math.max(30, Math.round((sheetW - totalGridW) / 2));
-            const startY = 50;
+            // ⚡ 100% PURE TOP-LEFT ALIGNMENT - ZERO CENTER CALCULATION!
+            const startX = (currentSheetType === '4x6') ? 40 : 60;
+            const startY = (currentSheetType === '4x6') ? 40 : 60;
 
             let drawn = 0;
             for (let r = 0; r < rows; r++) {
                 for (let c = 0; c < cols; c++) {
                     if (drawn >= count) break;
-                    const x = startX + c * (printW + gapX);
-                    const y = startY + r * (printH + gapY);
+                    const x = startX + c * printW;
+                    const y = startY + r * printH;
 
                     ctx.drawImage(singleCardCanvas, x, y, printW, printH);
                     drawn++;
@@ -472,7 +463,6 @@
             }
         }
 
-        // ⚡ HIGH RESOLUTION DOWNLOAD (0.98 QUALITY)
         function downloadImage(type) {
             if (!cropper) {
                 alert('Please upload a photo first!');
