@@ -6,8 +6,8 @@
     
     <!-- ⚡ HIGH-PRIORITY SEO & KEYWORDS FOR PASSPORT PHOTOS -->
     <title>Passport Size Photo Maker Online Free - 300 DPI Studio Quality | SmartPicTools</title>
-    <meta name="description" content="Free online passport size photo maker with 300 DPI Ultra HD print clarity. Crop to 3.5x4.5cm for SSC/UPSC, 2x2 inch Visa, print 4x6 or A4 sheets with cutting borders.">
-    <meta name="keywords" content="passport size photo maker online free, ssc photo maker 3.5x4.5, upsc passport photo size, 2x2 visa photo maker, create passport photo 4x6 sheet, passport photo printable a4 sheet, studio quality passport photo 300 dpi">
+    <meta name="description" content="Free online passport size photo maker with 300 DPI Ultra HD print clarity. Crop to 3.5x4.5cm for SSC/UPSC, 2x2 inch Visa, print custom photo counts on 4x6 or A4 sheets with cutting borders.">
+    <meta name="keywords" content="passport size photo maker online free, ssc photo maker 3.5x4.5, upsc passport photo size, 2x2 visa photo maker, create passport photo 4x6 sheet, passport photo printable a4 sheet, custom photo count on sheet, studio quality passport photo 300 dpi">
     <meta name="robots" content="index, follow, max-image-preview:large">
     <meta name="author" content="SmartPicTools">
     <link rel="canonical" href="https://smartpictools.in/passport-photo-maker">
@@ -19,7 +19,7 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://smartpictools.in/passport-photo-maker">
     <meta property="og:title" content="Passport Size Photo Maker Online Free - SmartPicTools">
-    <meta property="og:description" content="Create 300 DPI ultra-sharp passport photos for SSC, UPSC, and Visas on 4x6 or A4 sheets in 0.05s.">
+    <meta property="og:description" content="Create 300 DPI ultra-sharp passport photos for SSC, UPSC, and Visas on 4x6 or A4 sheets with custom photo counts in 0.05s.">
 
     <!-- SCHEMA MARKUP -->
     <script type="application/ld+json">
@@ -140,25 +140,32 @@
                             👤 Single Photo
                         </button>
                         <button type="button" onclick="selectSheetType('4x6')" id="btn-sheet-4x6" class="py-2 px-2 rounded-xl bg-slate-950 hover:bg-slate-800 text-slate-300 text-xs font-bold border border-slate-700 transition text-center">
-                            🖨️ 4×6 inch Sheet (8 Photos)
+                            🖨️ 4×6 inch Sheet
                         </button>
                         <button type="button" onclick="selectSheetType('a4')" id="btn-sheet-a4" class="py-2 px-2 rounded-xl bg-slate-950 hover:bg-slate-800 text-slate-300 text-xs font-bold border border-slate-700 transition text-center">
-                            📄 A4 Sheet (16 Photos)
+                            📄 A4 Sheet
                         </button>
                     </div>
 
-                    <!-- Custom Photo Count on Sheet -->
-                    <div id="photo-count-wrap" class="hidden flex items-center justify-between p-2.5 bg-slate-950 rounded-xl border border-slate-800 text-xs">
+                    <!-- ⚡ CUSTOM & PRESET PHOTO COUNT ON SHEET -->
+                    <div id="photo-count-wrap" class="hidden flex items-center justify-between p-2.5 bg-slate-950 rounded-xl border border-slate-800 text-xs flex-wrap gap-2">
                         <span class="text-slate-400 font-bold">Number of Photos on Sheet:</span>
-                        <div class="flex items-center gap-1.5">
-                            <select id="sheet-photo-count" onchange="renderHighResOutput()" class="bg-slate-900 border border-slate-700 text-white font-bold rounded-lg px-2.5 py-1 text-xs focus:outline-none">
+                        <div class="flex items-center gap-2">
+                            <select id="sheet-photo-count" onchange="handlePhotoCountChange(this.value)" class="bg-slate-900 border border-slate-700 text-white font-bold rounded-lg px-2.5 py-1 text-xs focus:outline-none">
                                 <option value="4">4 Photos</option>
                                 <option value="6">6 Photos</option>
                                 <option value="8" selected>8 Photos (Standard 4x6)</option>
                                 <option value="12">12 Photos</option>
                                 <option value="16">16 Photos</option>
                                 <option value="24">24 Photos (Full A4)</option>
+                                <option value="custom">⚙️ Custom Count</option>
                             </select>
+
+                            <!-- Custom Numeric Input (Shows when Custom is selected) -->
+                            <div id="custom-count-input-wrap" class="hidden flex items-center gap-1.5">
+                                <input type="number" id="custom-photo-count" min="1" max="50" value="8" oninput="renderHighResOutput()" class="w-16 bg-slate-900 border border-indigo-500 text-white font-bold rounded-lg px-2 py-1 text-xs text-center focus:outline-none">
+                                <span class="text-slate-400 text-[11px]">photos</span>
+                            </div>
                         </div>
                     </div>
 
@@ -190,7 +197,7 @@
                     <canvas id="output-canvas" class="max-h-[420px] max-w-full w-auto h-auto rounded shadow-2xl bg-white block"></canvas>
                 </div>
 
-                <!-- ⚡ DUAL DOWNLOAD BUTTONS (SINGLE PHOTO + PRINTABLE SHEET) -->
+                <!-- DUAL DOWNLOAD BUTTONS -->
                 <div class="space-y-2.5 pt-1">
                     <button type="button" onclick="downloadImage('single')" class="w-full py-3.5 px-4 rounded-2xl bg-gradient-to-r from-indigo-600 via-indigo-500 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-extrabold text-sm shadow-lg shadow-indigo-500/30 transition active:scale-[0.99] flex items-center justify-center gap-2">
                         <span>⬇️ Download Single Photo (300 DPI Ultra HD)</span>
@@ -235,12 +242,12 @@
         <p>© 2026 SmartPicTools. 100% Free & Private in-browser suite. <a href="/" class="text-indigo-400 hover:underline">Explore All Tools</a></p>
     </footer>
 
-    <!-- ⚡ TRUE 300 DPI STUDIO ENGINE (ZERO PIXELATION) -->
+    <!-- ⚡ TRUE 300 DPI STUDIO ENGINE (WITH CUSTOM COUNT SUPPORT) -->
     <script>
         let cropper = null;
         let originalFileName = 'passport_photo';
-        let currentSizePreset = '3.5x4.5'; // '3.5x4.5', '2x2', '3.5x3.5'
-        let currentSheetType = 'single';   // 'single', '4x6', 'a4'
+        let currentSizePreset = '3.5x4.5';
+        let currentSheetType = 'single';
 
         const dropArea = document.getElementById('drop-area');
         const fileInput = document.getElementById('file-input');
@@ -293,7 +300,6 @@
         function initCropper() {
             if (cropper) cropper.destroy();
 
-            // Official Aspect Ratio: 3.5cm / 4.5cm = 0.7777778
             let aspect = 3.5 / 4.5;
             if (currentSizePreset === '2x2' || currentSizePreset === '3.5x3.5') aspect = 1.0;
 
@@ -338,30 +344,40 @@
             countWrap.classList.toggle('hidden', type === 'single');
 
             const countSelect = document.getElementById('sheet-photo-count');
-            if (type === '4x6') countSelect.value = "8";
-            else if (type === 'a4') countSelect.value = "16";
+            if (countSelect.value !== 'custom') {
+                if (type === '4x6') countSelect.value = "8";
+                else if (type === 'a4') countSelect.value = "16";
+            }
 
             renderHighResOutput();
         }
 
-        // ⚡ RENDER STUDIO HIGH-RESOLUTION PASSPORT CANVASES (300 DPI STANDARD)
+        // ⚡ HANDLE CUSTOM PHOTO COUNT TOGGLE
+        function handlePhotoCountChange(val) {
+            const customWrap = document.getElementById('custom-count-input-wrap');
+            if (val === 'custom') {
+                customWrap.classList.remove('hidden');
+            } else {
+                customWrap.classList.add('hidden');
+            }
+            renderHighResOutput();
+        }
+
+        // ⚡ RENDER HIGH-RES OUTPUT (WITH PRECISE CUSTOM COUNT)
         function renderHighResOutput() {
             if (!cropper) return;
 
-            // 1. Target Single Passport Dimensions at True 300 DPI:
-            // 3.5cm x 4.5cm @ 300 DPI = 413 x 531 px (We double to 826 x 1062 for Ultra-HD Razor Sharpness!)
             let photoW = 826;
             let photoH = 1062;
 
             if (currentSizePreset === '2x2') {
-                photoW = 1200; // 2 inches @ 300 DPI (x2 for 600 DPI Ultra HD)
+                photoW = 1200;
                 photoH = 1200;
             } else if (currentSizePreset === '3.5x3.5') {
                 photoW = 826;
                 photoH = 826;
             }
 
-            // Extract high-resolution cropped source canvas
             const croppedSource = cropper.getCroppedCanvas({
                 imageSmoothingEnabled: true,
                 imageSmoothingQuality: 'high'
@@ -371,12 +387,11 @@
             const hasStudioBorder = document.getElementById('chk-studio-border').checked;
             const hasCuttingLine = document.getElementById('chk-cutting-line').checked;
 
-            // Padding / Studio Border: 24px in Ultra-HD 300 DPI space
             const borderPadding = hasStudioBorder ? 24 : 0;
             const cardW = photoW + borderPadding * 2;
             const cardH = photoH + borderPadding * 2;
 
-            // Prepare Master Single Passport Card Canvas
+            // Master Single Passport Card Canvas
             const singleCardCanvas = document.createElement('canvas');
             singleCardCanvas.width = cardW;
             singleCardCanvas.height = cardH;
@@ -384,23 +399,17 @@
             sCtx.imageSmoothingEnabled = true;
             sCtx.imageSmoothingQuality = 'high';
 
-            // Fill pure white studio card
             sCtx.fillStyle = '#ffffff';
             sCtx.fillRect(0, 0, cardW, cardH);
-
-            // Draw cropped face photo inside
             sCtx.drawImage(croppedSource, borderPadding, borderPadding, photoW, photoH);
 
-            // Draw cutting border (1.5px to 2px cutting line)
             if (hasCuttingLine) {
                 sCtx.strokeStyle = '#0f172a';
                 sCtx.lineWidth = 2;
                 sCtx.strokeRect(1, 1, cardW - 2, cardH - 2);
             }
 
-            // ==========================================
             // CASE A: SINGLE PHOTO OUTPUT
-            // ==========================================
             if (currentSheetType === 'single') {
                 outputCanvas.width = cardW;
                 outputCanvas.height = cardH;
@@ -410,11 +419,7 @@
                 return;
             }
 
-            // ==========================================
-            // CASE B: 4x6 INCH SHEET (1800 x 1200 px @ 300 DPI)
-            // ==========================================
-            // CASE C: A4 SHEET (2480 x 3508 px @ 300 DPI)
-            // ==========================================
+            // CASE B & C: PRINTABLE SHEETS (4x6 or A4)
             let sheetW = 1800;
             let sheetH = 1200; // 4x6 landscape
 
@@ -428,24 +433,28 @@
             ctx.imageSmoothingEnabled = true;
             ctx.imageSmoothingQuality = 'high';
 
-            // Solid clean white paper background
             ctx.fillStyle = '#ffffff';
             ctx.fillRect(0, 0, sheetW, sheetH);
 
-            const count = parseInt(document.getElementById('sheet-photo-count').value, 10) || 8;
+            // Read count (Preset or Custom input)
+            const countSelectVal = document.getElementById('sheet-photo-count').value;
+            let count = 8;
+            if (countSelectVal === 'custom') {
+                count = parseInt(document.getElementById('custom-photo-count').value, 10) || 1;
+            } else {
+                count = parseInt(countSelectVal, 10) || 8;
+            }
+            count = Math.max(1, Math.min(50, count));
 
-            // Scaled passport card for printing grid (413x531 px space)
             const printW = Math.round(cardW / 2);
             const printH = Math.round(cardH / 2);
             const gapX = 35;
             const gapY = 35;
 
-            // Calculate grid cols & rows
             let cols = Math.floor((sheetW - 60) / (printW + gapX));
             if (cols < 1) cols = 1;
             let rows = Math.ceil(count / cols);
 
-            // Centering grid on sheet
             const totalGridW = cols * printW + (cols - 1) * gapX;
             const startX = Math.max(30, Math.round((sheetW - totalGridW) / 2));
             const startY = 50;
@@ -463,14 +472,13 @@
             }
         }
 
-        // ⚡ HIGH RESOLUTION DOWNLOAD (0.98 QUALITY - ZERO BLUR)
+        // ⚡ HIGH RESOLUTION DOWNLOAD (0.98 QUALITY)
         function downloadImage(type) {
             if (!cropper) {
                 alert('Please upload a photo first!');
                 return;
             }
 
-            // Temporary canvas for exact export
             const exportCanvas = document.createElement('canvas');
             const expCtx = exportCanvas.getContext('2d');
             expCtx.imageSmoothingEnabled = true;
@@ -479,20 +487,17 @@
             let downloadName = `${originalFileName}_passport_300dpi.jpg`;
 
             if (type === 'single') {
-                // Force render single photo onto export canvas
                 renderHighResOutput();
                 exportCanvas.width = outputCanvas.width;
                 exportCanvas.height = outputCanvas.height;
                 expCtx.drawImage(outputCanvas, 0, 0);
             } else {
-                // Sheet export
                 downloadName = `${originalFileName}_passport_${currentSheetType}_sheet_300dpi.jpg`;
                 exportCanvas.width = outputCanvas.width;
                 exportCanvas.height = outputCanvas.height;
                 expCtx.drawImage(outputCanvas, 0, 0);
             }
 
-            // ⚡ 0.98 Maximum Quality JPEG Export
             outputCanvas.toBlob((blob) => {
                 const a = document.createElement('a');
                 a.href = URL.createObjectURL(blob);
