@@ -36,7 +36,7 @@
     }
     </script>
 
-    <!-- ⚡ HIGH-RES FAVICONS (GOOGLE SEARCH COMPLIANT) -->
+    <!-- ⚡ HIGH-RES FAVICONS (GOOGLE SEARCH SNIPPET COMPLIANT) -->
     <link rel="icon" type="image/png" sizes="96x96" href="/favicon.png">
     <link rel="shortcut icon" href="/favicon.ico">
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -47,8 +47,45 @@
 </head>
 <body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col justify-between selection:bg-indigo-500 selection:text-white overflow-x-hidden">
 
+    <!-- ⚡ SUGGESTION BOX MODAL (DIRECT FORMSUBMIT POPUP TO GMAIL) -->
+    <div id="suggestion-modal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md hidden flex items-center justify-center p-4">
+        <div class="bg-slate-900 border border-slate-800 rounded-3xl max-w-md w-full p-6 shadow-2xl relative">
+            <button type="button" onclick="closeSuggestionModal()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold flex items-center justify-center transition">✕</button>
+            <div class="flex items-center gap-2.5 mb-2">
+                <span class="text-2xl">💡</span>
+                <h3 class="text-lg font-bold text-white">Suggestion Box</h3>
+            </div>
+            <p class="text-xs text-slate-400 mb-4">Have an idea for a new tool, improvement, or feedback? Your message goes directly to our personal Gmail!</p>
+            
+            <form action="https://formsubmit.co/support@smartpictools.in" method="POST" class="space-y-3.5">
+                <!-- FormSubmit Configurations -->
+                <input type="hidden" name="_captcha" value="false">
+                <input type="hidden" name="_template" value="table">
+                <input type="hidden" name="_subject" value="New Tool Suggestion - SmartPicTools User">
+                <input type="hidden" name="_next" value="https://smartpictools.in/">
+
+                <div>
+                    <label class="block text-[11px] font-bold text-slate-300 mb-1">Your Name (Optional)</label>
+                    <input type="text" name="name" placeholder="e.g. Rahul Sharma" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-indigo-500 font-medium">
+                </div>
+                <div>
+                    <label class="block text-[11px] font-bold text-slate-300 mb-1">Your Email (Optional, if you need a reply)</label>
+                    <input type="email" name="email" placeholder="name@example.com" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-indigo-500 font-medium">
+                </div>
+                <div>
+                    <label class="block text-[11px] font-bold text-slate-300 mb-1">Your Feedback / Tool Request *</label>
+                    <textarea name="message" required rows="4" placeholder="Tell us what new tool you want, or any improvements..." class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-indigo-500 font-medium resize-none"></textarea>
+                </div>
+
+                <button type="submit" class="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-amber-500 to-indigo-600 hover:from-amber-400 hover:to-indigo-500 text-white font-extrabold text-xs shadow-lg shadow-indigo-500/25 transition active:scale-[0.99] flex items-center justify-center gap-2">
+                    <span>🚀 Send Suggestion Directly</span>
+                </button>
+            </form>
+        </div>
+    </div>
+
     <!-- HEADER -->
-    <header class="border-b border-slate-800 bg-slate-900/80 backdrop-blur-xl sticky top-0 z-50">
+    <header class="border-b border-slate-800 bg-slate-900/80 backdrop-blur-xl sticky top-0 z-40">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 h-18 sm:h-20 flex items-center justify-between">
             <a href="/" class="flex items-center gap-2.5 sm:gap-3 group">
                 <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-2xl bg-gradient-to-tr from-indigo-500 via-purple-500 to-pink-500 flex items-center justify-center text-white text-lg sm:text-xl shadow-lg shadow-indigo-500/30 group-hover:scale-105 transition">
@@ -69,9 +106,10 @@
             </nav>
 
             <div class="flex items-center gap-2.5">
-                <a href="/contact" class="py-2 px-3 sm:px-3.5 rounded-xl bg-slate-800 hover:bg-slate-700 active:scale-95 text-xs font-bold text-amber-300 border border-slate-700 transition flex items-center gap-1.5 shadow-md">
+                <!-- ⚡ CLICK OPENS SUGGESTION POPUP DIRECTLY -->
+                <button type="button" onclick="openSuggestionModal()" class="py-2 px-3 sm:px-3.5 rounded-xl bg-slate-800 hover:bg-slate-700 active:scale-95 text-xs font-bold text-amber-300 border border-slate-700 transition flex items-center gap-1.5 shadow-md">
                     <span>💡 Suggestions</span>
-                </a>
+                </button>
                 <span class="hidden sm:inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-bold bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">
                     <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> 100% Free & Private
                 </span>
@@ -367,98 +405,188 @@
 
     </div>
 
-    <!-- ============================================== -->
-    <!-- ⚡ HIGH-VALUE ADSENSE SECTION: HOW TO USE GUIDE -->
-    <!-- ============================================== -->
-    <section class="max-w-5xl mx-auto w-full px-4 mb-16 border-t border-slate-800 pt-12" id="how-to-use">
-        <div class="text-center max-w-2xl mx-auto mb-10">
-            <span class="text-xs font-extrabold uppercase tracking-widest text-indigo-400 bg-indigo-500/10 px-3 py-1 rounded-full border border-indigo-500/20">Step-by-Step Instructions</span>
-            <h2 class="text-2xl sm:text-4xl font-black text-white tracking-tight mt-3">How to Use SmartPicTools Online Suite</h2>
-            <p class="text-slate-400 text-xs sm:text-sm mt-2">Process and optimize your images in 3 easy, secure steps directly on your phone or computer.</p>
+    <!-- ========================================================= -->
+    <!-- ⚡ ARTICLE-STYLE HOW TO USE & IN-DEPTH SUITE DOCUMENTATION -->
+    <!-- ========================================================= -->
+    <section class="max-w-5xl mx-auto w-full px-4 mb-20 border-t border-slate-800 pt-14" id="how-to-use">
+        <div class="text-center max-w-3xl mx-auto mb-12">
+            <span class="text-xs font-extrabold uppercase tracking-widest text-indigo-400 bg-indigo-500/10 px-3 py-1 rounded-full border border-indigo-500/20">Complete Suite Documentation</span>
+            <h2 class="text-2xl sm:text-4xl font-black text-white tracking-tight mt-3">In-Depth Guides: How to Use SmartPicTools</h2>
+            <p class="text-slate-400 text-xs sm:text-sm mt-2">Comprehensive step-by-step tutorials, official dimensions, and technical insights to help you get the best results.</p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
-            <div class="bg-slate-900/90 border border-slate-800 p-6 rounded-3xl space-y-3">
-                <div class="w-10 h-10 rounded-2xl bg-indigo-600 text-white font-extrabold flex items-center justify-center text-base shadow-lg shadow-indigo-600/30">1</div>
-                <h3 class="text-base font-bold text-white">Select Tool & Upload</h3>
-                <p class="text-xs text-slate-400 leading-relaxed">Choose any tool above (Compressor, Passport Photo, PDF Maker, or Converter). Select single or multiple files from your phone or PC storage.</p>
-            </div>
-            <div class="bg-slate-900/90 border border-slate-800 p-6 rounded-3xl space-y-3">
-                <div class="w-10 h-10 rounded-2xl bg-indigo-600 text-white font-extrabold flex items-center justify-center text-base shadow-lg shadow-indigo-600/30">2</div>
-                <h3 class="text-base font-bold text-white">Customize & Optimize</h3>
-                <p class="text-xs text-slate-400 leading-relaxed">Adjust your target parameters in real time. Crop faces, pick official exam dimensions (SSC/UPSC), set target file sizes (20KB/50KB), or choose output formats.</p>
-            </div>
-            <div class="bg-slate-900/90 border border-slate-800 p-6 rounded-3xl space-y-3">
-                <div class="w-10 h-10 rounded-2xl bg-indigo-600 text-white font-extrabold flex items-center justify-center text-base shadow-lg shadow-indigo-600/30">3</div>
-                <h3 class="text-base font-bold text-white">Instant Client-Side Export</h3>
-                <p class="text-xs text-slate-400 leading-relaxed">Click Download to save your processed picture or document in 0.05 seconds. Processing completes 100% in local memory with zero privacy risk.</p>
-            </div>
+        <div class="space-y-10">
+            <!-- Article 1: Photo & Exam Form Tools -->
+            <article class="bg-slate-900/80 border border-slate-800 rounded-3xl p-6 sm:p-8 space-y-4 shadow-xl">
+                <div class="flex items-center gap-3">
+                    <span class="w-10 h-10 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 flex items-center justify-center text-xl font-bold">⚡</span>
+                    <div>
+                        <h3 class="text-lg sm:text-xl font-extrabold text-white">1. Mastering Government Exam Photo & Signature Utilities</h3>
+                        <p class="text-xs text-slate-400">Complete guide for SSC CGL/CHSL/MTS, UPSC, UP Police, Railway, and IBPS online forms.</p>
+                    </div>
+                </div>
+                <div class="text-xs sm:text-sm text-slate-300 leading-relaxed space-y-3">
+                    <p>
+                        Applying for government competitive examinations in India requires strict adherence to portal dimensions and file sizes. Uploading an incorrect file size or distorted face aspect ratio often leads to immediate form rejection. SmartPicTools provides dedicated exam utilities designed to ensure 100% compliance without needing professional photo studio assistance:
+                    </p>
+                    <ul class="list-disc list-inside space-y-1.5 text-slate-400 pl-2">
+                        <li><strong class="text-white">Compress Image to Exact KB:</strong> Use our live iterative compression slider to target exact sizes like <strong class="text-indigo-400">20 KB, 50 KB, or 100 KB</strong>. Unlike standard compressors that blur the picture, our mathematical matrix reduces file weight while keeping registration text, eyes, and signatures crisp and legible.</li>
+                        <li><strong class="text-white">Passport Size Photo Maker:</strong> Crop your photo to the official <strong class="text-indigo-400">3.5 cm × 4.5 cm</strong> ratio (for Indian portals) or <strong class="text-indigo-400">2 × 2 inch</strong> (for US/International Visas). Export single Ultra HD photos or print balanced, zero-gap 4×6 or A4 sheets with 14px white studio borders and cutting guide lines that allow single-cut scissor separation.</li>
+                        <li><strong class="text-white">Photo & Signature Joiner:</strong> Portals such as SSC or State Police often request a single merged file with an 80% passport photo on top and a 20% signature below. Our tool aligns both images seamlessly, applies paper background color matching to prevent sticker-like cutouts, and automatically keeps the final file under 50 KB.</li>
+                    </ul>
+                </div>
+            </article>
+
+            <!-- Article 2: PDF & Document Suite -->
+            <article class="bg-slate-900/80 border border-slate-800 rounded-3xl p-6 sm:p-8 space-y-4 shadow-xl">
+                <div class="flex items-center gap-3">
+                    <span class="w-10 h-10 rounded-2xl bg-rose-500/10 border border-rose-500/20 text-rose-400 flex items-center justify-center text-xl font-bold">📄</span>
+                    <div>
+                        <h3 class="text-lg sm:text-xl font-extrabold text-white">2. PDF Document Management: Searchable, Clean, and Scalable</h3>
+                        <p class="text-xs text-slate-400">How our native vector engine handles shipping labels, legal docs, and multi-page books.</p>
+                    </div>
+                </div>
+                <div class="text-xs sm:text-sm text-slate-300 leading-relaxed space-y-3">
+                    <p>
+                        Traditional online PDF tools convert documents into flattened, blurry JPEG images. This strips away searchable text layers, makes barcodes unreadable by handheld laser scanners, and inflates file size. SmartPicTools approaches PDF manipulation natively:
+                    </p>
+                    <ul class="list-disc list-inside space-y-1.5 text-slate-400 pl-2">
+                        <li><strong class="text-white">Crop PDF Online:</strong> Whether you are trimming margins from a 500-page bulk e-commerce shipping label batch (Amazon, Flipkart, Meesho) or cleaning up scanned legal notes, our visual drag cropper adjusts the native MediaBox. This ensures that <strong class="text-indigo-400">Ctrl+F text search remains 100% active</strong> and barcode vectors stay razor-sharp.</li>
+                        <li><strong class="text-white">PDF Maker (Merge to PDF):</strong> Combine multiple photos (JPG, PNG, WEBP, SVG, HEIC) into a single PDF document with edge-to-edge 0% white borders, ideal for official paperwork, receipts, and portfolios.</li>
+                        <li><strong class="text-white">Convert from PDF:</strong> Extract pages into 300 DPI high-resolution JPG/PNG images or convert directly to <strong class="text-indigo-400">True Vector SVG</strong> where fonts are embedded or converted to mathematical curves (CorelDraw Ctrl+Q style), guaranteeing zero blur at any zoom level.</li>
+                    </ul>
+                </div>
+            </article>
+
+            <!-- Article 3: Format Conversion & Performance -->
+            <article class="bg-slate-900/80 border border-slate-800 rounded-3xl p-6 sm:p-8 space-y-4 shadow-xl">
+                <div class="flex items-center gap-3">
+                    <span class="w-10 h-10 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center text-xl font-bold">🔄</span>
+                    <div>
+                        <h3 class="text-lg sm:text-xl font-extrabold text-white">3. Universal Format Conversion: Speed, Compatibility & Next-Gen Codecs</h3>
+                        <p class="text-xs text-slate-400">Decoding Apple HEIC, AVIF, WebP, PNG, and TIFF right in your browser.</p>
+                    </div>
+                </div>
+                <div class="text-xs sm:text-sm text-slate-300 leading-relaxed space-y-3">
+                    <p>
+                        Modern mobile devices capture photos in efficient next-generation formats like Apple HEIC or Google AVIF. However, older government portals, legacy software, and printing kiosks often fail to recognize these files. SmartPicTools bridges this gap with dedicated conversion hubs:
+                    </p>
+                    <ul class="list-disc list-inside space-y-1.5 text-slate-400 pl-2">
+                        <li><strong class="text-white">Convert from HEIC (iPhone):</strong> Instantly decode Apple iOS photos on Windows, Linux, or Android devices without installing third-party codecs or software.</li>
+                        <li><strong class="text-white">Convert from AVIF & WEBP:</strong> Transform modern compressed web graphics into standard JPG/PNG files for offline editing, or encode JPGs into AVIF to achieve 50% lighter websites for Google PageSpeed optimization.</li>
+                        <li><strong class="text-white">Strict Source Matching:</strong> Each dedicated converter hub strictly filters files so you never accidentally convert incompatible formats, and batch packages download in clean, organized ZIP archives.</li>
+                    </ul>
+                </div>
+            </article>
+
+            <!-- Article 4: Utilities, Branding & Security -->
+            <article class="bg-slate-900/80 border border-slate-800 rounded-3xl p-6 sm:p-8 space-y-4 shadow-xl">
+                <div class="flex items-center gap-3">
+                    <span class="w-10 h-10 rounded-2xl bg-teal-500/10 border border-teal-500/20 text-teal-400 flex items-center justify-center text-xl font-bold">🛠️</span>
+                    <div>
+                        <h3 class="text-lg sm:text-xl font-extrabold text-white">4. Everyday Utilities: QR Generation, Watermarking, and Favicons</h3>
+                        <p class="text-xs text-slate-400">Protecting digital artwork and creating brand assets in seconds.</p>
+                    </div>
+                </div>
+                <div class="text-xs sm:text-sm text-slate-300 leading-relaxed space-y-3">
+                    <p>
+                        Beyond file conversion and exam prep, creators and business owners require fast utility tools to brand their assets and secure their digital intellectual property:
+                    </p>
+                    <ul class="list-disc list-inside space-y-1.5 text-slate-400 pl-2">
+                        <li><strong class="text-white">QR & Barcode Studio:</strong> Generate high-contrast, scannable QR codes for website URLs, UPI payments, and Wi-Fi credentials alongside Code128 product barcodes with instant PNG exports.</li>
+                        <li><strong class="text-white">Add Watermark Studio:</strong> Protect confidential documents, sample mockups, and photography with diagonal repeated security grids or custom corner stamps with adjustable opacity.</li>
+                        <li><strong class="text-white">Image to Favicon:</strong> Turn square logos into multi-resolution .ICO files (16px, 32px, 64px, 128px, 256px) that render crisply across Google Search, Chrome tabs, and iOS bookmarks.</li>
+                    </ul>
+                </div>
+            </article>
         </div>
     </section>
 
-    <!-- ============================================== -->
-    <!-- ⚡ HIGH-VALUE ADSENSE SECTION: COMPREHENSIVE FAQS -->
-    <!-- ============================================== -->
-    <section class="max-w-5xl mx-auto w-full px-4 mb-20 border-t border-slate-800 pt-12" id="faqs">
+    <!-- ========================================================= -->
+    <!-- ⚡ COMPREHENSIVE SITE-WIDE FAQS (COVERING THE ENTIRE SUITE) -->
+    <!-- ========================================================= -->
+    <section class="max-w-5xl mx-auto w-full px-4 mb-20 border-t border-slate-800 pt-14" id="faqs">
         <div class="text-center max-w-2xl mx-auto mb-10">
             <span class="text-xs font-extrabold uppercase tracking-widest text-indigo-400 bg-indigo-500/10 px-3 py-1 rounded-full border border-indigo-500/20">Frequently Asked Questions</span>
-            <h2 class="text-2xl sm:text-4xl font-black text-white tracking-tight mt-3">Got Questions? We Have Answers</h2>
-            <p class="text-slate-400 text-xs sm:text-sm mt-2">Everything you need to know about SmartPicTools privacy, exam requirements, and image conversion.</p>
+            <h2 class="text-2xl sm:text-4xl font-black text-white tracking-tight mt-3">Frequently Asked Questions</h2>
+            <p class="text-slate-400 text-xs sm:text-sm mt-2">Everything you need to know about SmartPicTools privacy, compliance, PDF processing, and commercial usage.</p>
         </div>
 
         <div class="space-y-3.5 max-w-3xl mx-auto">
-            <!-- FAQ 1 -->
+            <!-- FAQ 1: Privacy & Zero Upload -->
             <details class="bg-slate-900/90 p-5 rounded-2xl border border-slate-800 text-xs sm:text-sm cursor-pointer group">
                 <summary class="font-bold text-white flex justify-between items-center group-hover:text-indigo-400 transition">
-                    Are my uploaded photos and documents stored on your servers?
+                    How does SmartPicTools guarantee 100% private, client-side processing?
                     <span class="text-indigo-400 text-base">▼</span>
                 </summary>
                 <p class="text-slate-400 mt-3 leading-relaxed">
-                    No, never. SmartPicTools is built on a 100% private, client-side architecture using HTML5 Canvas, WebAssembly, and local JavaScript engines. Your pictures, signatures, and confidential PDF files never leave your device and are processed exclusively in your web browser's temporary memory. We do not maintain any storage databases or cloud backups of your files.
+                    Most online file tools upload your private pictures and sensitive PDF documents to remote cloud servers to process them. In contrast, SmartPicTools runs directly inside your web browser using HTML5 Canvas, WebAssembly, and local JavaScript engines. Your documents, signatures, and personal photos never leave your device and are never saved to any database. Once you close your browser tab, all temporary memory is instantly cleared.
                 </p>
             </details>
 
-            <!-- FAQ 2 -->
+            <!-- FAQ 2: Govt Exam Guidelines -->
             <details class="bg-slate-900/90 p-5 rounded-2xl border border-slate-800 text-xs sm:text-sm cursor-pointer group">
                 <summary class="font-bold text-white flex justify-between items-center group-hover:text-indigo-400 transition">
-                    How do I compress an image to exact 20 KB or 50 KB for online government exam forms?
+                    Will my compressed photos and joined signatures be accepted by SSC, UPSC, and Police exam portals?
                     <span class="text-indigo-400 text-base">▼</span>
                 </summary>
                 <p class="text-slate-400 mt-3 leading-relaxed">
-                    Open our dedicated 'Compress Image to Exact KB' tool, select your image, and choose the 20 KB or 50 KB exam preset button. Our iterative compression engine calculates the optimal compression matrix in real time, delivering a file that precisely meets official application portals requirements (like SSC, UPSC, State Police, Railway, and IBPS) while keeping text and facial features clear.
+                    Yes, absolutely. Our 'Compress Image to Exact KB', 'Passport Size Photo Maker', and 'Photo & Signature Joiner' are engineered specifically according to the official notification guidelines published by bodies like the Staff Selection Commission (SSC), Union Public Service Commission (UPSC), Railway Recruitment Board (RRB), and State Police Recruitment Boards. The output images conform strictly to official pixel dimensions (e.g., 350×450px or 350×500px), 80/20 layout proportions, and file weight caps (under 50KB or 20KB).
                 </p>
             </details>
 
-            <!-- FAQ 3 -->
+            <!-- FAQ 3: PDF Searchable Text -->
             <details class="bg-slate-900/90 p-5 rounded-2xl border border-slate-800 text-xs sm:text-sm cursor-pointer group">
                 <summary class="font-bold text-white flex justify-between items-center group-hover:text-indigo-400 transition">
-                    What is the official passport photo size for Indian competitive exams and Visas?
+                    Does cropping a PDF document break text searchability (Ctrl+F) or blur barcodes?
                     <span class="text-indigo-400 text-base">▼</span>
                 </summary>
                 <p class="text-slate-400 mt-3 leading-relaxed">
-                    In India, government exams like SSC, UPSC, and State PSCs officially require a 3.5 cm × 4.5 cm photograph with an aspect ratio of 3.5:4.5 and a clean white studio background. For US Visas and international travel, a 2 × 2 inch (51 mm × 51 mm) square format is required. Our Passport Size Photo Maker includes built-in 300 DPI templates for both standards with optional studio cutting lines.
+                    No. Our 'Crop PDF Online' tool uses a native PDF-Lib manipulation engine that adjusts page bounding boxes (MediaBox and CropBox) mathematically rather than rasterizing the pages into low-resolution images. This means that all original vector fonts, selectable text (Ctrl+F), links, and high-density barcodes remain 100% sharp and completely readable by laser scanners and PDF readers.
                 </p>
             </details>
 
-            <!-- FAQ 4 -->
+            <!-- FAQ 4: Vector SVG Quality -->
             <details class="bg-slate-900/90 p-5 rounded-2xl border border-slate-800 text-xs sm:text-sm cursor-pointer group">
                 <summary class="font-bold text-white flex justify-between items-center group-hover:text-indigo-400 transition">
-                    Why do converted vector SVG files remain sharp with 0% blur when zoomed in?
+                    Can I open converted SVG vector files in CorelDraw and Adobe Illustrator without missing fonts?
                     <span class="text-indigo-400 text-base">▼</span>
                 </summary>
                 <p class="text-slate-400 mt-3 leading-relaxed">
-                    Unlike ordinary online converters that simply embed low-resolution raster bitmaps inside SVG tags, our native vector conversion engine extracts true mathematical curve paths and vector glyphs directly from original documents. When you open the exported SVG in CorelDraw, Adobe Illustrator, or web browsers, every letter and curve remains infinitely scalable without pixelation or quality loss.
+                    Yes. When converting PDF or image documents to SVG through our vector engine, all typography is converted directly into mathematical vector curves (equivalent to CorelDraw's 'Convert to Curves' Ctrl+Q feature). Furthermore, our engine cleans nested symbol definitions so that all objects open unlocked and immediately editable in CorelDraw, Figma, and Adobe Illustrator with 0% blur at any zoom scale.
                 </p>
             </details>
 
-            <!-- FAQ 5 -->
+            <!-- FAQ 5: Free and Commercial Usage -->
             <details class="bg-slate-900/90 p-5 rounded-2xl border border-slate-800 text-xs sm:text-sm cursor-pointer group">
                 <summary class="font-bold text-white flex justify-between items-center group-hover:text-indigo-400 transition">
-                    Is SmartPicTools completely free to use for commercial and personal tasks?
+                    Is SmartPicTools completely free to use for commercial and freelance work?
                     <span class="text-indigo-400 text-base">▼</span>
                 </summary>
                 <p class="text-slate-400 mt-3 leading-relaxed">
-                    Yes. All 18 tools and 70+ format conversion hubs on SmartPicTools are 100% free with no registration, no daily conversion limits, and no hidden watermarks. Students, job applicants, designers, and e-commerce sellers can use our full suite without providing credit card details or email addresses.
+                    Yes. All 18 tools and 70+ format conversion hubs on SmartPicTools are 100% free forever. There are no subscriptions, no daily processing limits, no forced registrations, and no watermarks placed on your exported files. Students, job aspirants, photo studio operators, e-commerce merchants, and graphic designers can use the entire platform freely for both personal and commercial projects.
+                </p>
+            </details>
+
+            <!-- FAQ 6: Printing Passport Sheets -->
+            <details class="bg-slate-900/90 p-5 rounded-2xl border border-slate-800 text-xs sm:text-sm cursor-pointer group">
+                <summary class="font-bold text-white flex justify-between items-center group-hover:text-indigo-400 transition">
+                    How do touching cutting lines save paper when printing passport photos on A4 or 4x6 sheets?
+                    <span class="text-indigo-400 text-base">▼</span>
+                </summary>
+                <p class="text-slate-400 mt-3 leading-relaxed">
+                    In traditional photo printing, wide white gaps between individual passport photos force you to make multiple scissor cuts, wasting paper and leaving ragged edges. Our Passport Photo Maker arranges photos with zero-gap touching black cutting lines aligned to the top-left of the sheet. You only need to make single, straight cuts along the shared line, and any unused portion of the paper remains clean and reusable for future prints.
+                </p>
+            </details>
+
+            <!-- FAQ 7: Suggestion Box & Feedback -->
+            <details class="bg-slate-900/90 p-5 rounded-2xl border border-slate-800 text-xs sm:text-sm cursor-pointer group">
+                <summary class="font-bold text-white flex justify-between items-center group-hover:text-indigo-400 transition">
+                    How does the Suggestion Box work if I want to request a new tool or report a bug?
+                    <span class="text-indigo-400 text-base">▼</span>
+                </summary>
+                <p class="text-slate-400 mt-3 leading-relaxed">
+                    Clicking the '💡 Suggestions' button in the top navigation opens an instant feedback modal. When you submit your feedback or request a new tool, our FormSubmit integration delivers your message directly to our official support inbox (support@smartpictools.in) without navigating you away from what you are doing. We review community requests daily to launch new utilities.
                 </p>
             </details>
         </div>
@@ -476,5 +604,23 @@
             </div>
         </div>
     </footer>
+
+    <!-- ⚡ SUGGESTION BOX JAVASCRIPT CONTROLLER -->
+    <script>
+        function openSuggestionModal() {
+            document.getElementById('suggestion-modal').classList.remove('hidden');
+        }
+
+        function closeSuggestionModal() {
+            document.getElementById('suggestion-modal').classList.add('hidden');
+        }
+
+        // Close modal when clicking on backdrop
+        document.getElementById('suggestion-modal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeSuggestionModal();
+            }
+        });
+    </script>
 </body>
 </html>
