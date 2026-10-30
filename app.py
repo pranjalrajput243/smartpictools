@@ -5,7 +5,7 @@ import json
 import datetime
 from xml.etree import ElementTree as ET
 from flask import Flask, render_template, request, send_file, jsonify, Response, redirect
-from PIL import Image
+from PIL import Image, ImageDraw
 
 try:
     import pillow_avif
@@ -19,7 +19,7 @@ except Exception:
     pass
 
 try:
-    import fitz  # PyMuPDF
+    import fitz  # PyMuPDF Engine
 except Exception:
     pass
 
@@ -40,7 +40,7 @@ VALID_CONVERSIONS = {
     'jpeg': ['png', 'webp', 'avif', 'svg', 'tiff', 'pdf'],
     'png': ['jpg', 'webp', 'avif', 'svg', 'tiff', 'pdf'],
     'webp': ['jpg', 'png', 'avif', 'svg', 'tiff', 'pdf'],
-    'avif': ['jpg', 'png', 'webp', 'svg', 'tiff', 'pdf'],  # ⚡ NEW AVIF HUB & SPOKES
+    'avif': ['jpg', 'png', 'webp', 'svg', 'tiff', 'pdf'],
     'heic': ['jpg', 'png', 'webp', 'avif', 'svg', 'tiff', 'pdf'],
     'pdf': ['jpg', 'png', 'webp', 'svg', 'tiff', 'doc'],
     'svg': ['jpg', 'png', 'webp', 'pdf', 'tiff'],
@@ -48,7 +48,7 @@ VALID_CONVERSIONS = {
 }
 
 # ==========================================
-# ⚡ UNIVERSAL DYNAMIC HUBS & SPOKES
+# ⚡ HOMEPAGE & HUBS / SPOKES ROUTES
 # ==========================================
 @app.route('/')
 def home():
@@ -65,7 +65,7 @@ def universal_hub(src):
             'target_name': FORMAT_NAMES.get(t, t.upper())
         } for t in VALID_CONVERSIONS[src]]
         return render_template('format-hub.html', src=src, src_name=src_name, targets=targets)
-    return render_template('index.html')
+    return redirect('/')
 
 @app.route('/<src>-to-<tgt>')
 def universal_conversion_tool(src, tgt):
@@ -84,14 +84,22 @@ def universal_conversion_tool(src, tgt):
             'keywords': f"convert {src} to {tgt}, {src} to {tgt} converter, {src} to {tgt} online free, batch {src} to {tgt}"
         }
         return render_template('universal-converter.html', meta=meta)
-    return render_template('index.html')
+    return redirect('/')
 
 # ==========================================
-# ⚡ STANDALONE ADVANCED TOOLS
+# ⚡ STANDALONE ADVANCED UTILITY TOOLS
 # ==========================================
 @app.route('/compress-image')
 def compress_route():
     return render_template('compress-image.html')
+
+@app.route('/passport-photo-maker')
+def passport_photo_page():
+    return render_template('passport-photo-maker.html')
+
+@app.route('/photo-signature-joiner')
+def photo_signature_joiner_page():
+    return render_template('photo-signature-joiner.html')
 
 @app.route('/crop-image')
 def crop_route():
@@ -104,10 +112,6 @@ def resize_route():
 @app.route('/convert-image')
 def convert_route():
     return render_template('convert-image.html')
-
-@app.route('/passport-photo-maker')
-def passport_photo_page():
-    return render_template('passport-photo-maker.html')
 
 @app.route('/add-watermark')
 def watermark_route():
@@ -129,25 +133,20 @@ def favicon_converter_page():
 def image_to_pdf_alias():
     return render_template('image-to-pdf.html')
 
-# SEO 301 REDIRECT TO PREVENT 500 CRASH
-@app.route('/pdf-converter')
-def pdf_converter_alias():
-    return redirect('/convert-from-pdf', code=301)
-
 @app.route('/crop-pdf')
 def crop_pdf_page():
     return render_template('crop-pdf.html')
 
-@app.route('/photo-signature-joiner')
-def photo_signature_joiner_page():
-    return render_template('photo-signature-joiner.html')
+# 301 Permanent Redirect to Preserve Google SEO Juice
+@app.route('/pdf-converter')
+def pdf_converter_alias():
+    return redirect('/convert-from-pdf', code=301)
 
 # ==========================================
-# ⚡ SYMBOL DEREFERENCER (ELIMINATES CORELDRAW <use> LOCKS)
+# ⚡ COREL-DRAW STYLE PDF-TO-SVG CURVES ENGINE
 # ==========================================
 def generate_unlocked_corel_svg(page):
     raw_svg = page.get_svg_image(text_as_path=True)
-    
     try:
         ET.register_namespace('', 'http://www.w3.org/2000/svg')
         ET.register_namespace('xlink', 'http://www.w3.org/1999/xlink')
@@ -209,8 +208,7 @@ def generate_unlocked_corel_svg(page):
             if 'clip-path' in elem.attrib:
                 del elem.attrib['clip-path']
                 
-        clean_xml = ET.tostring(root, encoding='utf-8').decode('utf-8')
-        return clean_xml
+        return ET.tostring(root, encoding='utf-8').decode('utf-8')
     except Exception:
         return raw_svg
 
@@ -237,12 +235,7 @@ def convert_pdf_to_svg_curves():
                 svg_data = generate_unlocked_corel_svg(doc[0])
                 doc.close()
                 buf = io.BytesIO(svg_data.encode('utf-8'))
-                return send_file(
-                    buf,
-                    mimetype='image/svg+xml',
-                    as_attachment=True,
-                    download_name=f"smartpic_{raw_name}.svg"
-                )
+                return send_file(buf, mimetype='image/svg+xml', as_attachment=True, download_name=f"smartpic_{raw_name}.svg")
             else:
                 zip_buf = io.BytesIO()
                 with zipfile.ZipFile(zip_buf, 'w', zipfile.ZIP_DEFLATED) as zf:
@@ -251,12 +244,7 @@ def convert_pdf_to_svg_curves():
                         zf.writestr(f"{raw_name}_page_{p+1}.svg", svg_data.encode('utf-8'))
                 doc.close()
                 zip_buf.seek(0)
-                return send_file(
-                    zip_buf,
-                    mimetype='application/zip',
-                    as_attachment=True,
-                    download_name=f"smartpic_{raw_name}_svg_pack.zip"
-                )
+                return send_file(zip_buf, mimetype='application/zip', as_attachment=True, download_name=f"smartpic_{raw_name}_svg_pack.zip")
 
         zip_buf = io.BytesIO()
         with zipfile.ZipFile(zip_buf, 'w', zipfile.ZIP_DEFLATED) as zf:
@@ -269,49 +257,76 @@ def convert_pdf_to_svg_curves():
                 doc.close()
 
         zip_buf.seek(0)
-        return send_file(
-            zip_buf,
-            mimetype='application/zip',
-            as_attachment=True,
-            download_name="smartpic_batch_svg_pack.zip"
-        )
+        return send_file(zip_buf, mimetype='application/zip', as_attachment=True, download_name="smartpic_batch_svg_pack.zip")
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
 # ==========================================
-# LEGAL & INFO
+# ⚡ 100% GOOGLE-COMPATIBLE ULTRA HD FAVICON (PNG + SVG)
 # ==========================================
-@app.route('/privacy')
-def privacy():
-    return render_template('privacy.html')
-
-@app.route('/terms')
-def terms():
-    return render_template('terms.html')
-
-@app.route('/about')
-def about():
-    return render_template('about.html')
-
-@app.route('/contact')
-def contact():
-    return render_template('contact.html')
-
-# FAVICON (True Purple & Pinkish Gradient)
 FAVICON_SVG_DATA = """<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='g' x1='0%' y1='0%' x2='100%' y2='100%'><stop offset='0%' stop-color='#6366f1'/><stop offset='50%' stop-color='#a855f7'/><stop offset='100%' stop-color='#ec4899'/></linearGradient></defs><rect width='100' height='100' rx='28' fill='url(#g)'/><path d='M52 16 L24 54 L46 54 L42 84 L76 44 L54 44 Z' fill='#fbbf24'/></svg>"""
 
+def generate_pixel_perfect_favicon(size=96):
+    img = Image.new("RGBA", (size, size), (0, 0, 0, 0))
+    draw = ImageDraw.Draw(img)
+    
+    # Draw Smooth Purple-to-Pink Gradient
+    for y in range(size):
+        ratio = y / float(size)
+        r = int(99 + (236 - 99) * ratio)
+        g = int(102 + (72 - 102) * ratio)
+        b = int(241 + (153 - 241) * ratio)
+        draw.line([(0, y), (size, y)], fill=(r, g, b, 255))
+        
+    # Mask rounded squircle corners
+    mask = Image.new("L", (size, size), 0)
+    mask_draw = ImageDraw.Draw(mask)
+    corner_radius = int(size * 0.28)
+    mask_draw.rounded_rectangle([0, 0, size, size], radius=corner_radius, fill=255)
+    img.putalpha(mask)
+    
+    # Draw Sharp Golden Thunderbolt
+    icon_draw = ImageDraw.Draw(img)
+    scale = size / 100.0
+    bolt_points = [
+        (52 * scale, 16 * scale),
+        (24 * scale, 54 * scale),
+        (46 * scale, 54 * scale),
+        (42 * scale, 84 * scale),
+        (76 * scale, 44 * scale),
+        (54 * scale, 44 * scale)
+    ]
+    icon_draw.polygon(bolt_points, fill=(251, 191, 36, 255))
+    
+    buf = io.BytesIO()
+    img.save(buf, format="PNG")
+    buf.seek(0)
+    return buf
+
 @app.route('/favicon.ico')
+def serve_favicon_ico():
+    buf = generate_pixel_perfect_favicon(96)
+    return send_file(buf, mimetype='image/x-icon')
+
+@app.route('/favicon.png')
+def serve_favicon_png():
+    buf = generate_pixel_perfect_favicon(96)
+    return send_file(buf, mimetype='image/png')
+
 @app.route('/favicon.svg')
-def serve_favicon():
+def serve_favicon_svg():
     return Response(FAVICON_SVG_DATA, mimetype='image/svg+xml')
 
-# SITEMAP & ROBOTS
+# ==========================================
+# ⚡ SITEMAP & ROBOTS (SEARCH CONSOLE READY)
+# ==========================================
 @app.route('/sitemap.xml')
 def sitemap():
     urls = [
         ('https://smartpictools.in/', '1.0'),
         ('https://smartpictools.in/compress-image', '0.9'),
         ('https://smartpictools.in/passport-photo-maker', '0.9'),
+        ('https://smartpictools.in/photo-signature-joiner', '0.9'),
         ('https://smartpictools.in/crop-image', '0.9'),
         ('https://smartpictools.in/resize-image', '0.9'),
         ('https://smartpictools.in/convert-image', '0.9'),
@@ -324,8 +339,6 @@ def sitemap():
         ('https://smartpictools.in/privacy', '0.5'),
         ('https://smartpictools.in/terms', '0.5'),
         ('https://smartpictools.in/contact', '0.6'),
-        ('https://smartpictools.in/remove-watermark', '0.9'),
-        ('https://smartpictools.in/photo-signature-joiner', '0.9'),
     ]
 
     for src, tgts in VALID_CONVERSIONS.items():
@@ -345,7 +358,28 @@ def robots():
     txt = "User-agent: *\nAllow: /\nSitemap: https://smartpictools.in/sitemap.xml\n"
     return Response(txt, mimetype='text/plain')
 
-# TURBO AVIF FALLBACK ENGINE
+# ==========================================
+# ⚡ LEGAL & COMPANY PAGES
+# ==========================================
+@app.route('/privacy')
+def privacy():
+    return render_template('privacy.html')
+
+@app.route('/terms')
+def terms():
+    return render_template('terms.html')
+
+@app.route('/about')
+def about():
+    return render_template('about.html')
+
+@app.route('/contact')
+def contact():
+    return render_template('contact.html')
+
+# ==========================================
+# ⚡ FALLBACK AVIF CONVERTER ENGINE
+# ==========================================
 @app.route('/process', methods=['POST'])
 def process_fallback():
     try:
