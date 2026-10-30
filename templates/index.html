@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     
+    <!-- ⚡ HIGH-VALUE ADSENSE & SEO OPTIMIZATION -->
     <title>SmartPicTools - All-in-One Online Image, PDF & Utility Suite</title>
     <meta name="description" content="Free 100% private in-browser image tools: Compress to exact 20KB/50KB, Passport photo maker, Photo & signature joiner, Crop, Resize, Convert from JPG/PNG/WEBP/AVIF/PDF, QR in 0.2s.">
     <meta name="keywords" content="smartpictools, image compressor to 20kb, compress image to 50kb, passport size photo maker online, photo and signature joiner, ssc photo signature merger, crop image online, image resizer online, convert avif to jpg, convert jpg to pdf, merge images to pdf, crop pdf online, convert pdf to jpg 300 dpi, convert heic to jpg, image format converter, qr code generator, add watermark online, rotate image online">
@@ -46,43 +47,12 @@
 </head>
 <body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col justify-between selection:bg-indigo-500 selection:text-white overflow-x-hidden">
 
-    <!-- ⚡ RELIABLE DIRECT SUGGESTION MODAL (ZERO THIRD-PARTY FAILURE) -->
-    <div id="suggestion-modal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md hidden flex items-center justify-center p-4">
-        <div class="bg-slate-900 border border-slate-800 rounded-3xl max-w-md w-full p-6 shadow-2xl relative">
-            <button type="button" onclick="closeSuggestionModal()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold flex items-center justify-center transition">✕</button>
-            <div class="flex items-center gap-2.5 mb-2">
-                <span class="text-2xl">💡</span>
-                <h3 class="text-lg font-bold text-white">Suggestion Box</h3>
-            </div>
-            <p class="text-xs text-slate-400 mb-4">Have an idea for a new tool, improvement, or feedback? Your message goes directly to our team inbox!</p>
-            
-            <form id="suggestion-form" onsubmit="handleSuggestionSubmit(event)" class="space-y-3.5">
-                <div>
-                    <label class="block text-[11px] font-bold text-slate-300 mb-1">Your Name (Optional)</label>
-                    <input type="text" id="sug-name" placeholder="e.g. Rahul Sharma" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-indigo-500 font-medium">
-                </div>
-                <div>
-                    <label class="block text-[11px] font-bold text-slate-300 mb-1">Your Email (Optional, if you want a reply)</label>
-                    <input type="email" id="sug-email" placeholder="name@example.com" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-indigo-500 font-medium">
-                </div>
-                <div>
-                    <label class="block text-[11px] font-bold text-slate-300 mb-1">Your Feedback / Tool Request *</label>
-                    <textarea id="sug-msg" required rows="4" placeholder="Tell us what new tool you want, or any improvements..." class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-indigo-500 font-medium resize-none"></textarea>
-                </div>
-
-                <div id="sug-status" class="hidden p-2.5 rounded-xl text-center text-xs font-bold"></div>
-
-                <button type="submit" id="sug-btn" class="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-amber-500 to-indigo-600 hover:from-amber-400 hover:to-indigo-500 text-white font-extrabold text-xs shadow-lg shadow-indigo-500/25 transition active:scale-[0.99] flex items-center justify-center gap-2">
-                    <span id="sug-btn-txt">🚀 Send Suggestion Directly</span>
-                </button>
-            </form>
-        </div>
-    </div>
-
     <!-- HEADER -->
     <header class="border-b border-slate-800 bg-slate-900/80 backdrop-blur-xl sticky top-0 z-40">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 h-18 sm:h-20 flex items-center justify-between">
-            <a href="/" class="flex items-center gap-2.5 sm:gap-3 group">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 h-18 sm:h-20 flex items-center justify-between gap-4">
+            
+            <!-- Left: Logo -->
+            <a href="/" class="flex items-center gap-2.5 sm:gap-3 group flex-shrink-0">
                 <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-2xl bg-gradient-to-tr from-indigo-500 via-purple-500 to-pink-500 flex items-center justify-center text-white text-lg sm:text-xl shadow-lg shadow-indigo-500/30 group-hover:scale-105 transition">
                     ⚡
                 </div>
@@ -92,21 +62,23 @@
                 </div>
             </a>
             
-            <nav class="hidden md:flex items-center gap-7 text-sm font-semibold text-slate-300">
+            <!-- Center: Pure Category Navigation (About & Contact removed) -->
+            <nav class="hidden lg:flex items-center gap-6 text-xs sm:text-sm font-semibold text-slate-300">
                 <a href="#photo-tools" class="hover:text-indigo-400 transition">Photo Tools</a>
                 <a href="#pdf-tools" class="hover:text-indigo-400 transition">PDF Suite</a>
                 <a href="#conversion-tools" class="hover:text-indigo-400 transition">Converters</a>
-                <a href="#faqs" class="hover:text-indigo-400 transition">FAQs</a>
-                <a href="/about" class="hover:text-indigo-400 transition">About</a>
-                <a href="/contact" class="hover:text-indigo-400 transition">Contact</a>
+                <a href="#utility-tools" class="hover:text-indigo-400 transition">Utilities</a>
+                <a href="#how-to-use" class="hover:text-indigo-400 transition">How to Use</a>
             </nav>
 
-            <div class="flex items-center gap-2.5">
-                <button type="button" onclick="openSuggestionModal()" class="py-2 px-3 sm:px-3.5 rounded-xl bg-slate-800 hover:bg-slate-700 active:scale-95 text-xs font-bold text-amber-300 border border-slate-700 transition flex items-center gap-1.5 shadow-md">
-                    <span>💡 Suggestions</span>
-                </button>
-                <span class="hidden sm:inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-bold bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">
-                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> 100% Free & Private
+            <!-- Right: ⚡ INSTANT LIVE SEARCH BAR -->
+            <div class="flex items-center gap-3 flex-1 sm:flex-initial justify-end max-w-xs sm:max-w-sm">
+                <div class="relative w-full">
+                    <input type="text" id="tool-search-input" oninput="filterToolsLive(this.value)" placeholder="🔍 Search any tool (e.g. passport, compress)..." class="w-full bg-slate-950/90 border border-slate-700 focus:border-indigo-500 rounded-xl px-3.5 py-2 text-xs text-white placeholder-slate-400 focus:outline-none transition shadow-inner">
+                    <button type="button" id="clear-search-btn" onclick="clearToolSearch()" class="hidden absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-white text-xs font-bold w-4 h-4 rounded-full bg-slate-800 flex items-center justify-center">✕</button>
+                </div>
+                <span class="hidden xl:inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-bold bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 whitespace-nowrap">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> 100% Free
                 </span>
             </div>
         </div>
@@ -145,13 +117,21 @@
         </div>
     </section>
 
+    <!-- SEARCH NO-RESULTS MESSAGE -->
+    <div id="no-search-results" class="hidden max-w-md mx-auto text-center p-8 bg-slate-900/80 rounded-3xl border border-slate-800 my-8">
+        <span class="text-3xl block mb-2">🔍</span>
+        <h3 class="text-base font-bold text-white mb-1">No matching tools found</h3>
+        <p class="text-xs text-slate-400 mb-4">Try searching for passport, compress, signature, pdf, or crop.</p>
+        <button type="button" onclick="clearToolSearch()" class="py-2 px-4 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-xs font-bold text-white transition">Show All Tools</button>
+    </div>
+
     <!-- ============================================== -->
     <!-- ⚡ CATEGORIZED ALL TOOLS CATALOG               -->
     <!-- ============================================== -->
     <div class="max-w-5xl mx-auto w-full px-4 space-y-16 mb-20" id="all-tools-grid">
 
         <!-- 1. PHOTO & EXAM FORM TOOLS -->
-        <section id="photo-tools" class="space-y-5">
+        <section id="photo-tools" class="tool-category-section space-y-5">
             <div class="flex items-center gap-3 border-b border-slate-800/80 pb-3">
                 <span class="w-8 h-8 rounded-xl bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 flex items-center justify-center font-bold text-sm">⚡</span>
                 <div>
@@ -163,7 +143,7 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
                 
                 <!-- 1. Compress Image -->
-                <a href="/compress-image" class="bg-slate-900/80 hover:bg-slate-900 border border-slate-800 hover:border-indigo-500/60 p-6 rounded-3xl transition duration-200 group shadow-lg flex flex-col justify-between">
+                <a href="/compress-image" data-title="compress image to exact kb shrink resize reduce size 20kb 50kb 100kb exam" class="tool-card bg-slate-900/80 hover:bg-slate-900 border border-slate-800 hover:border-indigo-500/60 p-6 rounded-3xl transition duration-200 group shadow-lg flex flex-col justify-between">
                     <div>
                         <div class="w-12 h-12 rounded-2xl bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition">⚡</div>
                         <h3 class="text-lg font-bold text-white group-hover:text-indigo-400 transition">Compress Image to Exact KB</h3>
@@ -173,7 +153,7 @@
                 </a>
 
                 <!-- 2. Passport Size Photo Maker -->
-                <a href="/passport-photo-maker" class="bg-slate-900/80 hover:bg-slate-900 border border-slate-800 hover:border-indigo-500/60 p-6 rounded-3xl transition duration-200 group shadow-lg flex flex-col justify-between">
+                <a href="/passport-photo-maker" data-title="passport size photo maker ssc upsc visa 3.5x4.5 2x2 sheet print a4 4x6" class="tool-card bg-slate-900/80 hover:bg-slate-900 border border-slate-800 hover:border-indigo-500/60 p-6 rounded-3xl transition duration-200 group shadow-lg flex flex-col justify-between">
                     <div>
                         <div class="w-12 h-12 rounded-2xl bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition">👤</div>
                         <h3 class="text-lg font-bold text-white group-hover:text-indigo-400 transition">Passport Size Photo Maker</h3>
@@ -183,7 +163,7 @@
                 </a>
 
                 <!-- 3. Photo & Signature Joiner -->
-                <a href="/photo-signature-joiner" class="bg-slate-900/80 hover:bg-slate-900 border border-slate-800 hover:border-indigo-500/60 p-6 rounded-3xl transition duration-200 group shadow-lg flex flex-col justify-between">
+                <a href="/photo-signature-joiner" data-title="photo signature joiner merge combine ssc upsc exam form sign 80 20" class="tool-card bg-slate-900/80 hover:bg-slate-900 border border-slate-800 hover:border-indigo-500/60 p-6 rounded-3xl transition duration-200 group shadow-lg flex flex-col justify-between">
                     <div>
                         <div class="w-12 h-12 rounded-2xl bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition">🪪</div>
                         <h3 class="text-lg font-bold text-white group-hover:text-indigo-400 transition">Photo & Signature Joiner</h3>
@@ -193,7 +173,7 @@
                 </a>
 
                 <!-- 4. Crop Image -->
-                <a href="/crop-image" class="bg-slate-900/80 hover:bg-slate-900 border border-slate-800 hover:border-purple-500/60 p-6 rounded-3xl transition duration-200 group shadow-lg flex flex-col justify-between">
+                <a href="/crop-image" data-title="crop image aspect ratios instagram youtube reels 1:1 16:9 9:16 freeform" class="tool-card bg-slate-900/80 hover:bg-slate-900 border border-slate-800 hover:border-purple-500/60 p-6 rounded-3xl transition duration-200 group shadow-lg flex flex-col justify-between">
                     <div>
                         <div class="w-12 h-12 rounded-2xl bg-purple-500/10 text-purple-400 border border-purple-500/20 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition">✂️</div>
                         <h3 class="text-lg font-bold text-white group-hover:text-purple-400 transition">Crop Image with Aspect Ratios</h3>
@@ -203,7 +183,7 @@
                 </a>
 
                 <!-- 5. Resize Image -->
-                <a href="/resize-image" class="bg-slate-900/80 hover:bg-slate-900 border border-slate-800 hover:border-blue-500/60 p-6 rounded-3xl transition duration-200 group shadow-lg flex flex-col justify-between">
+                <a href="/resize-image" data-title="resize image dimensions pixel width height proportion lock resolution" class="tool-card bg-slate-900/80 hover:bg-slate-900 border border-slate-800 hover:border-blue-500/60 p-6 rounded-3xl transition duration-200 group shadow-lg flex flex-col justify-between">
                     <div>
                         <div class="w-12 h-12 rounded-2xl bg-blue-500/10 text-blue-400 border border-blue-500/20 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition">📐</div>
                         <h3 class="text-lg font-bold text-white group-hover:text-blue-400 transition">Resize Image Dimensions</h3>
@@ -216,7 +196,7 @@
         </section>
 
         <!-- 2. PDF & DOCUMENT SUITE -->
-        <section id="pdf-tools" class="space-y-5">
+        <section id="pdf-tools" class="tool-category-section space-y-5">
             <div class="flex items-center gap-3 border-b border-slate-800/80 pb-3">
                 <span class="w-8 h-8 rounded-xl bg-rose-500/10 border border-rose-500/20 text-rose-400 flex items-center justify-center font-bold text-sm">📄</span>
                 <div>
@@ -228,7 +208,7 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
                 
                 <!-- 6. PDF Maker -->
-                <a href="/image-to-pdf" class="bg-slate-900/80 hover:bg-slate-900 border border-slate-800 hover:border-amber-500/60 p-6 rounded-3xl transition duration-200 group shadow-lg flex flex-col justify-between">
+                <a href="/image-to-pdf" data-title="pdf maker merge images to pdf convert jpg to pdf photo to pdf documents" class="tool-card bg-slate-900/80 hover:bg-slate-900 border border-slate-800 hover:border-amber-500/60 p-6 rounded-3xl transition duration-200 group shadow-lg flex flex-col justify-between">
                     <div>
                         <div class="w-12 h-12 rounded-2xl bg-amber-500/10 text-amber-400 border border-amber-500/20 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition">📄</div>
                         <h3 class="text-lg font-bold text-white group-hover:text-amber-400 transition">PDF Maker (Merge to PDF)</h3>
@@ -238,7 +218,7 @@
                 </a>
 
                 <!-- 7. Crop PDF Online -->
-                <a href="/crop-pdf" class="bg-slate-900/80 hover:bg-slate-900 border border-slate-800 hover:border-purple-500/60 p-6 rounded-3xl transition duration-200 group shadow-lg flex flex-col justify-between">
+                <a href="/crop-pdf" data-title="crop pdf online trim shipping labels amazon flipkart meesho searchable text ctrl+f barcode" class="tool-card bg-slate-900/80 hover:bg-slate-900 border border-slate-800 hover:border-purple-500/60 p-6 rounded-3xl transition duration-200 group shadow-lg flex flex-col justify-between">
                     <div>
                         <div class="w-12 h-12 rounded-2xl bg-purple-500/10 text-purple-400 border border-purple-500/20 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition">✂️</div>
                         <h3 class="text-lg font-bold text-white group-hover:text-purple-400 transition">Crop PDF Online</h3>
@@ -248,7 +228,7 @@
                 </a>
 
                 <!-- 8. Convert from PDF (Main Hub) -->
-                <a href="/convert-from-pdf" class="bg-slate-900/80 hover:bg-slate-900 border border-slate-800 hover:border-rose-500/60 p-6 rounded-3xl transition duration-200 group shadow-lg flex flex-col justify-between">
+                <a href="/convert-from-pdf" data-title="convert from pdf to jpg png webp svg tiff word doc 300 dpi high resolution" class="tool-card bg-slate-900/80 hover:bg-slate-900 border border-slate-800 hover:border-rose-500/60 p-6 rounded-3xl transition duration-200 group shadow-lg flex flex-col justify-between">
                     <div>
                         <div class="w-12 h-12 rounded-2xl bg-rose-500/10 text-rose-400 border border-rose-500/20 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition">📑</div>
                         <h3 class="text-lg font-bold text-white group-hover:text-rose-400 transition">Convert from PDF</h3>
@@ -261,7 +241,7 @@
         </section>
 
         <!-- 3. FORMAT CONVERSION HUBS -->
-        <section id="conversion-tools" class="space-y-5">
+        <section id="conversion-tools" class="tool-category-section space-y-5">
             <div class="flex items-center gap-3 border-b border-slate-800/80 pb-3">
                 <span class="w-8 h-8 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold text-sm">🔄</span>
                 <div>
@@ -273,7 +253,7 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
                 
                 <!-- 9. Convert from JPG / JPEG -->
-                <a href="/convert-from-jpg" class="bg-slate-900/80 hover:bg-slate-900 border border-slate-800 hover:border-amber-500/60 p-6 rounded-3xl transition duration-200 group shadow-lg flex flex-col justify-between">
+                <a href="/convert-from-jpg" data-title="convert from jpg jpeg to png webp avif svg tiff pdf batch download" class="tool-card bg-slate-900/80 hover:bg-slate-900 border border-slate-800 hover:border-amber-500/60 p-6 rounded-3xl transition duration-200 group shadow-lg flex flex-col justify-between">
                     <div>
                         <div class="w-12 h-12 rounded-2xl bg-amber-500/10 text-amber-400 border border-amber-500/20 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition">📂</div>
                         <h3 class="text-lg font-bold text-white group-hover:text-amber-400 transition">Convert from JPG / JPEG</h3>
@@ -283,7 +263,7 @@
                 </a>
 
                 <!-- 10. Convert from PNG -->
-                <a href="/convert-from-png" class="bg-slate-900/80 hover:bg-slate-900 border border-slate-800 hover:border-purple-500/60 p-6 rounded-3xl transition duration-200 group shadow-lg flex flex-col justify-between">
+                <a href="/convert-from-png" data-title="convert from png to jpg webp svg tiff avif pdf transparent white background" class="tool-card bg-slate-900/80 hover:bg-slate-900 border border-slate-800 hover:border-purple-500/60 p-6 rounded-3xl transition duration-200 group shadow-lg flex flex-col justify-between">
                     <div>
                         <div class="w-12 h-12 rounded-2xl bg-purple-500/10 text-purple-400 border border-purple-500/20 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition">🖼️</div>
                         <h3 class="text-lg font-bold text-white group-hover:text-purple-400 transition">Convert from PNG</h3>
@@ -293,7 +273,7 @@
                 </a>
 
                 <!-- 11. Convert from WEBP -->
-                <a href="/convert-from-webp" class="bg-slate-900/80 hover:bg-slate-900 border border-slate-800 hover:border-emerald-500/60 p-6 rounded-3xl transition duration-200 group shadow-lg flex flex-col justify-between">
+                <a href="/convert-from-webp" data-title="convert from webp to jpg png avif svg tiff pdf google webp image" class="tool-card bg-slate-900/80 hover:bg-slate-900 border border-slate-800 hover:border-emerald-500/60 p-6 rounded-3xl transition duration-200 group shadow-lg flex flex-col justify-between">
                     <div>
                         <div class="w-12 h-12 rounded-2xl bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition">🚀</div>
                         <h3 class="text-lg font-bold text-white group-hover:text-emerald-400 transition">Convert from WEBP</h3>
@@ -303,7 +283,7 @@
                 </a>
 
                 <!-- 12. Convert from AVIF -->
-                <a href="/convert-from-avif" class="bg-slate-900/80 hover:bg-slate-900 border border-slate-800 hover:border-indigo-500/60 p-6 rounded-3xl transition duration-200 group shadow-lg flex flex-col justify-between">
+                <a href="/convert-from-avif" data-title="convert from avif to jpg png webp svg tiff pdf next-gen image" class="tool-card bg-slate-900/80 hover:bg-slate-900 border border-slate-800 hover:border-indigo-500/60 p-6 rounded-3xl transition duration-200 group shadow-lg flex flex-col justify-between">
                     <div>
                         <div class="w-12 h-12 rounded-2xl bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition">✨</div>
                         <h3 class="text-lg font-bold text-white group-hover:text-indigo-400 transition">Convert from AVIF</h3>
@@ -313,7 +293,7 @@
                 </a>
 
                 <!-- 13. Convert from HEIC (iPhone) -->
-                <a href="/convert-from-heic" class="bg-slate-900/80 hover:bg-slate-900 border border-slate-800 hover:border-indigo-500/60 p-6 rounded-3xl transition duration-200 group shadow-lg flex flex-col justify-between">
+                <a href="/convert-from-heic" data-title="convert from heic iphone apple heif to jpg png webp pdf decode" class="tool-card bg-slate-900/80 hover:bg-slate-900 border border-slate-800 hover:border-indigo-500/60 p-6 rounded-3xl transition duration-200 group shadow-lg flex flex-col justify-between">
                     <div>
                         <div class="w-12 h-12 rounded-2xl bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition">📱</div>
                         <h3 class="text-lg font-bold text-white group-hover:text-indigo-400 transition">Convert from HEIC (iPhone)</h3>
@@ -323,7 +303,7 @@
                 </a>
 
                 <!-- 14. Image Format Converter -->
-                <a href="/convert-image" class="bg-slate-900/80 hover:bg-slate-900 border border-slate-800 hover:border-pink-500/60 p-6 rounded-3xl transition duration-200 group shadow-lg flex flex-col justify-between">
+                <a href="/convert-image" data-title="image format converter all in one jpg png webp avif svg tiff bmp ico" class="tool-card bg-slate-900/80 hover:bg-slate-900 border border-slate-800 hover:border-pink-500/60 p-6 rounded-3xl transition duration-200 group shadow-lg flex flex-col justify-between">
                     <div>
                         <div class="w-12 h-12 rounded-2xl bg-pink-500/10 text-pink-400 border border-pink-500/20 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition">🔄</div>
                         <h3 class="text-lg font-bold text-white group-hover:text-pink-400 transition">Image Format Converter</h3>
@@ -336,7 +316,7 @@
         </section>
 
         <!-- 4. UTILITIES, BRANDING & SECURITY -->
-        <section id="utility-tools" class="space-y-5">
+        <section id="utility-tools" class="tool-category-section space-y-5">
             <div class="flex items-center gap-3 border-b border-slate-800/80 pb-3">
                 <span class="w-8 h-8 rounded-xl bg-teal-500/10 border border-teal-500/20 text-teal-400 flex items-center justify-center font-bold text-sm">🛠️</span>
                 <div>
@@ -348,7 +328,7 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
                 
                 <!-- 15. QR Code & Barcode -->
-                <a href="/qr-code-generator" class="bg-slate-900/80 hover:bg-slate-900 border border-slate-800 hover:border-teal-500/60 p-6 rounded-3xl transition duration-200 group shadow-lg flex flex-col justify-between">
+                <a href="/qr-code-generator" data-title="qr code barcode generator create custom qr upi wifi code128" class="tool-card bg-slate-900/80 hover:bg-slate-900 border border-slate-800 hover:border-teal-500/60 p-6 rounded-3xl transition duration-200 group shadow-lg flex flex-col justify-between">
                     <div>
                         <div class="w-12 h-12 rounded-2xl bg-teal-500/10 text-teal-400 border border-teal-500/20 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition">📊</div>
                         <h3 class="text-lg font-bold text-white group-hover:text-teal-400 transition">QR & Barcode</h3>
@@ -358,7 +338,7 @@
                 </a>
 
                 <!-- 16. Add Watermark -->
-                <a href="/add-watermark" class="bg-slate-900/80 hover:bg-slate-900 border border-slate-800 hover:border-yellow-500/60 p-6 rounded-3xl transition duration-200 group shadow-lg flex flex-col justify-between">
+                <a href="/add-watermark" data-title="add watermark protect images diagonal security grid corner stamp text logo" class="tool-card bg-slate-900/80 hover:bg-slate-900 border border-slate-800 hover:border-yellow-500/60 p-6 rounded-3xl transition duration-200 group shadow-lg flex flex-col justify-between">
                     <div>
                         <div class="w-12 h-12 rounded-2xl bg-yellow-500/10 text-yellow-400 border border-yellow-500/20 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition">🏷️</div>
                         <h3 class="text-lg font-bold text-white group-hover:text-yellow-400 transition">Add Watermark</h3>
@@ -368,7 +348,7 @@
                 </a>
 
                 <!-- 17. Rotate & Flip -->
-                <a href="/rotate-image" class="bg-slate-900/80 hover:bg-slate-900 border border-slate-800 hover:border-cyan-500/60 p-6 rounded-3xl transition duration-200 group shadow-lg flex flex-col justify-between">
+                <a href="/rotate-image" data-title="rotate image flip mirror horizontal vertical 90 180 270 degrees" class="tool-card bg-slate-900/80 hover:bg-slate-900 border border-slate-800 hover:border-cyan-500/60 p-6 rounded-3xl transition duration-200 group shadow-lg flex flex-col justify-between">
                     <div>
                         <div class="w-12 h-12 rounded-2xl bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition">🔁</div>
                         <h3 class="text-lg font-bold text-white group-hover:text-cyan-400 transition">Rotate & Flip</h3>
@@ -378,7 +358,7 @@
                 </a>
 
                 <!-- 18. Image to Favicon -->
-                <a href="/favicon-converter" class="bg-slate-900/80 hover:bg-slate-900 border border-slate-800 hover:border-yellow-500/60 p-6 rounded-3xl transition duration-200 group shadow-lg flex flex-col justify-between">
+                <a href="/favicon-converter" data-title="image to favicon converter logo to .ico 64px 128px 256px sharp website icon" class="tool-card bg-slate-900/80 hover:bg-slate-900 border border-slate-800 hover:border-yellow-500/60 p-6 rounded-3xl transition duration-200 group shadow-lg flex flex-col justify-between">
                     <div>
                         <div class="w-12 h-12 rounded-2xl bg-yellow-500/10 text-yellow-400 border border-yellow-500/20 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition">⭐</div>
                         <h3 class="text-lg font-bold text-white group-hover:text-yellow-400 transition">Image to Favicon</h3>
@@ -392,93 +372,32 @@
 
     </div>
 
-    <!-- ========================================================= -->
-    <!-- ⚡ COMPREHENSIVE SITE-WIDE FAQS                            -->
-    <!-- ========================================================= -->
-    <section class="max-w-5xl mx-auto w-full px-4 mb-20 border-t border-slate-800 pt-14" id="faqs">
+    <!-- ============================================== -->
+    <!-- ⚡ HOW TO USE GUIDE (CLEAN 3-STEP SECTION)      -->
+    <!-- ============================================== -->
+    <section class="max-w-5xl mx-auto w-full px-4 mb-20 border-t border-slate-800 pt-14" id="how-to-use">
         <div class="text-center max-w-2xl mx-auto mb-10">
-            <span class="text-xs font-extrabold uppercase tracking-widest text-indigo-400 bg-indigo-500/10 px-3 py-1 rounded-full border border-indigo-500/20">Frequently Asked Questions</span>
-            <h2 class="text-2xl sm:text-4xl font-black text-white tracking-tight mt-3">Frequently Asked Questions</h2>
-            <p class="text-slate-400 text-xs sm:text-sm mt-2">Everything you need to know about SmartPicTools privacy, exam compliance, and file processing.</p>
+            <span class="text-xs font-extrabold uppercase tracking-widest text-indigo-400 bg-indigo-500/10 px-3 py-1 rounded-full border border-indigo-500/20">Step-by-Step Instructions</span>
+            <h2 class="text-2xl sm:text-4xl font-black text-white tracking-tight mt-3">How to Use SmartPicTools Online Suite</h2>
+            <p class="text-slate-400 text-xs sm:text-sm mt-2">Process and optimize your images in 3 easy, secure steps directly on your phone or computer.</p>
         </div>
 
-        <div class="space-y-3.5 max-w-3xl mx-auto">
-            <!-- FAQ 1: Privacy -->
-            <details class="bg-slate-900/90 p-5 rounded-2xl border border-slate-800 text-xs sm:text-sm cursor-pointer group">
-                <summary class="font-bold text-white flex justify-between items-center group-hover:text-indigo-400 transition">
-                    How does SmartPicTools guarantee 100% private, client-side processing?
-                    <span class="text-indigo-400 text-base">▼</span>
-                </summary>
-                <p class="text-slate-400 mt-3 leading-relaxed">
-                    Most online file tools upload your private pictures and sensitive PDF documents to remote cloud servers to process them. In contrast, SmartPicTools runs directly inside your web browser using HTML5 Canvas, WebAssembly, and local JavaScript engines. Your documents, signatures, and personal photos never leave your device and are never saved to any database.
-                </p>
-            </details>
-
-            <!-- FAQ 2: Govt Exam Guidelines -->
-            <details class="bg-slate-900/90 p-5 rounded-2xl border border-slate-800 text-xs sm:text-sm cursor-pointer group">
-                <summary class="font-bold text-white flex justify-between items-center group-hover:text-indigo-400 transition">
-                    Will my compressed photos and joined signatures be accepted by SSC, UPSC, and Police exam portals?
-                    <span class="text-indigo-400 text-base">▼</span>
-                </summary>
-                <p class="text-slate-400 mt-3 leading-relaxed">
-                    Yes, absolutely. Our 'Compress Image to Exact KB', 'Passport Size Photo Maker', and 'Photo & Signature Joiner' conform strictly to official notification guidelines (such as SSC, UPSC, State Police, Railway, and IBPS). The output images follow exact official dimensions (350×450px or 350×500px), 80/20 proportions, and file weight caps (under 50KB or 20KB).
-                </p>
-            </details>
-
-            <!-- FAQ 3: PDF Searchable Text -->
-            <details class="bg-slate-900/90 p-5 rounded-2xl border border-slate-800 text-xs sm:text-sm cursor-pointer group">
-                <summary class="font-bold text-white flex justify-between items-center group-hover:text-indigo-400 transition">
-                    Does cropping a PDF document break text searchability (Ctrl+F) or blur barcodes?
-                    <span class="text-indigo-400 text-base">▼</span>
-                </summary>
-                <p class="text-slate-400 mt-3 leading-relaxed">
-                    No. Our 'Crop PDF Online' tool uses a native PDF manipulation engine that adjusts page bounding boxes mathematically rather than rasterizing pages into blurry images. All original vector fonts, selectable text (Ctrl+F works), links, and high-density barcodes remain 100% sharp and readable by laser scanners and PDF readers.
-                </p>
-            </details>
-
-            <!-- FAQ 4: Vector SVG Quality -->
-            <details class="bg-slate-900/90 p-5 rounded-2xl border border-slate-800 text-xs sm:text-sm cursor-pointer group">
-                <summary class="font-bold text-white flex justify-between items-center group-hover:text-indigo-400 transition">
-                    Can I open converted SVG vector files in CorelDraw and Adobe Illustrator without missing fonts?
-                    <span class="text-indigo-400 text-base">▼</span>
-                </summary>
-                <p class="text-slate-400 mt-3 leading-relaxed">
-                    Yes. When converting PDF or image documents to SVG through our vector engine, typography is converted directly into mathematical vector curves (equivalent to CorelDraw's 'Convert to Curves' Ctrl+Q feature). All objects open unlocked and immediately editable in CorelDraw, Figma, and Illustrator with 0% blur at any zoom scale.
-                </p>
-            </details>
-
-            <!-- FAQ 5: Free and Commercial Usage -->
-            <details class="bg-slate-900/90 p-5 rounded-2xl border border-slate-800 text-xs sm:text-sm cursor-pointer group">
-                <summary class="font-bold text-white flex justify-between items-center group-hover:text-indigo-400 transition">
-                    Is SmartPicTools completely free to use for commercial and freelance work?
-                    <span class="text-indigo-400 text-base">▼</span>
-                </summary>
-                <p class="text-slate-400 mt-3 leading-relaxed">
-                    Yes. All 18 tools and 70+ format conversion hubs on SmartPicTools are 100% free forever. There are no subscriptions, no daily processing limits, no forced registrations, and no watermarks placed on your exported files.
-                </p>
-            </details>
-
-            <!-- FAQ 6: Printing Passport Sheets -->
-            <details class="bg-slate-900/90 p-5 rounded-2xl border border-slate-800 text-xs sm:text-sm cursor-pointer group">
-                <summary class="font-bold text-white flex justify-between items-center group-hover:text-indigo-400 transition">
-                    How do touching cutting lines save paper when printing passport photos on A4 or 4x6 sheets?
-                    <span class="text-indigo-400 text-base">▼</span>
-                </summary>
-                <p class="text-slate-400 mt-3 leading-relaxed">
-                    In traditional photo printing, wide white gaps between individual passport photos force you to make multiple scissor cuts, wasting paper. Our Passport Photo Maker arranges photos with zero-gap touching black cutting lines aligned to the top-left of the sheet. You only need to make single, straight cuts along the shared line, and any unused paper remains clean and reusable.
-                </p>
-            </details>
-
-            <!-- FAQ 7: Suggestion Box & Feedback -->
-            <details class="bg-slate-900/90 p-5 rounded-2xl border border-slate-800 text-xs sm:text-sm cursor-pointer group">
-                <summary class="font-bold text-white flex justify-between items-center group-hover:text-indigo-400 transition">
-                    How does the Suggestion Box work if I want to request a new tool or report an issue?
-                    <span class="text-indigo-400 text-base">▼</span>
-                </summary>
-                <p class="text-slate-400 mt-3 leading-relaxed">
-                    Clicking the '💡 Suggestions' button in the top navigation opens an instant modal popup right on your screen. You can type your tool request or feedback directly, and our internal system logs your message immediately so our development team can review it.
-                </p>
-            </details>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+            <div class="bg-slate-900/90 border border-slate-800 p-6 rounded-3xl space-y-3">
+                <div class="w-10 h-10 rounded-2xl bg-indigo-600 text-white font-extrabold flex items-center justify-center text-base shadow-lg shadow-indigo-600/30">1</div>
+                <h3 class="text-base font-bold text-white">Select Tool & Upload</h3>
+                <p class="text-xs text-slate-400 leading-relaxed">Choose any tool above (Compressor, Passport Photo, PDF Maker, or Converter). Select single or multiple files from your phone or PC storage.</p>
+            </div>
+            <div class="bg-slate-900/90 border border-slate-800 p-6 rounded-3xl space-y-3">
+                <div class="w-10 h-10 rounded-2xl bg-indigo-600 text-white font-extrabold flex items-center justify-center text-base shadow-lg shadow-indigo-600/30">2</div>
+                <h3 class="text-base font-bold text-white">Customize & Optimize</h3>
+                <p class="text-xs text-slate-400 leading-relaxed">Adjust your target parameters in real time. Crop faces, pick official exam dimensions (SSC/UPSC), set target file sizes (20KB/50KB), or choose output formats.</p>
+            </div>
+            <div class="bg-slate-900/90 border border-slate-800 p-6 rounded-3xl space-y-3">
+                <div class="w-10 h-10 rounded-2xl bg-indigo-600 text-white font-extrabold flex items-center justify-center text-base shadow-lg shadow-indigo-600/30">3</div>
+                <h3 class="text-base font-bold text-white">Instant Client-Side Export</h3>
+                <p class="text-xs text-slate-400 leading-relaxed">Click Download to save your processed picture or document in 0.05 seconds. Processing completes 100% in local memory with zero privacy risk.</p>
+            </div>
         </div>
     </section>
 
@@ -495,8 +414,61 @@
         </div>
     </footer>
 
-    <!-- ⚡ SUGGESTION BOX JAVASCRIPT CONTROLLER (DIRECT ASYNC SUBMIT) -->
+    <!-- ⚡ INSTANT LIVE SEARCH JAVASCRIPT CONTROLLER -->
     <script>
+        function filterToolsLive(query) {
+            const cleanQuery = query.toLowerCase().trim();
+            const cards = document.querySelectorAll('.tool-card');
+            const sections = document.querySelectorAll('.tool-category-section');
+            const clearBtn = document.getElementById('clear-search-btn');
+            const noResults = document.getElementById('no-search-results');
+
+            if (cleanQuery.length > 0) {
+                clearBtn.classList.remove('hidden');
+            } else {
+                clearBtn.classList.add('hidden');
+            }
+
+            let totalVisible = 0;
+
+            cards.forEach(card => {
+                const title = card.getAttribute('data-title') || '';
+                const cardText = card.innerText.toLowerCase();
+
+                if (cleanQuery === '' || title.includes(cleanQuery) || cardText.includes(cleanQuery)) {
+                    card.style.display = 'flex';
+                    totalVisible++;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            // Hide empty category sections when filtering
+            sections.forEach(sec => {
+                const visibleInSec = sec.querySelectorAll('.tool-card[style*="display: flex"]').length;
+                if (cleanQuery === '') {
+                    sec.style.display = 'block';
+                } else {
+                    sec.style.display = visibleInSec > 0 ? 'block' : 'none';
+                }
+            });
+
+            // Show or hide "No Results" message
+            if (totalVisible === 0 && cleanQuery !== '') {
+                noResults.classList.remove('hidden');
+            } else {
+                noResults.classList.add('hidden');
+            }
+        }
+
+        function clearToolSearch() {
+            const input = document.getElementById('tool-search-input');
+            input.value = '';
+            filterToolsLive('');
+            input.focus();
+        }
+
+        // Suggestions Modal Controls
         function openSuggestionModal() {
             document.getElementById('suggestion-modal').classList.remove('hidden');
             document.getElementById('sug-status').classList.add('hidden');
@@ -507,9 +479,7 @@
         }
 
         document.getElementById('suggestion-modal').addEventListener('click', function(e) {
-            if (e.target === this) {
-                closeSuggestionModal();
-            }
+            if (e.target === this) closeSuggestionModal();
         });
 
         async function handleSuggestionSubmit(e) {
@@ -539,9 +509,9 @@
                     statusBox.innerText = "🎉 Thank you! Your suggestion has been received.";
                     statusBox.classList.remove('hidden');
                     document.getElementById('suggestion-form').reset();
-                    setTimeout(() => closeSuggestionModal(), 2500);
+                    setTimeout(() => closeSuggestionModal(), 2000);
                 } else {
-                    throw new Error('Failed to send');
+                    throw new Error('Failed');
                 }
             } catch(err) {
                 statusBox.className = "p-2.5 rounded-xl text-center text-xs font-bold bg-rose-500/10 border border-rose-500/30 text-rose-400";
