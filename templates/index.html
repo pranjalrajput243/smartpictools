@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     
-    <!-- ⚡ HIGH-VALUE ADSENSE & SEO OPTIMIZATION -->
     <title>SmartPicTools - All-in-One Online Image, PDF & Utility Suite</title>
     <meta name="description" content="Free 100% private in-browser image tools: Compress to exact 20KB/50KB, Passport photo maker, Photo & signature joiner, Crop, Resize, Convert from JPG/PNG/WEBP/AVIF/PDF, QR in 0.2s.">
     <meta name="keywords" content="smartpictools, image compressor to 20kb, compress image to 50kb, passport size photo maker online, photo and signature joiner, ssc photo signature merger, crop image online, image resizer online, convert avif to jpg, convert jpg to pdf, merge images to pdf, crop pdf online, convert pdf to jpg 300 dpi, convert heic to jpg, image format converter, qr code generator, add watermark online, rotate image online">
@@ -47,7 +46,7 @@
 </head>
 <body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col justify-between selection:bg-indigo-500 selection:text-white overflow-x-hidden">
 
-    <!-- ⚡ SUGGESTION BOX MODAL (DIRECT FORMSUBMIT POPUP TO GMAIL) -->
+    <!-- ⚡ RELIABLE DIRECT SUGGESTION MODAL (ZERO THIRD-PARTY FAILURE) -->
     <div id="suggestion-modal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md hidden flex items-center justify-center p-4">
         <div class="bg-slate-900 border border-slate-800 rounded-3xl max-w-md w-full p-6 shadow-2xl relative">
             <button type="button" onclick="closeSuggestionModal()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold flex items-center justify-center transition">✕</button>
@@ -55,30 +54,26 @@
                 <span class="text-2xl">💡</span>
                 <h3 class="text-lg font-bold text-white">Suggestion Box</h3>
             </div>
-            <p class="text-xs text-slate-400 mb-4">Have an idea for a new tool, improvement, or feedback? Your message goes directly to our personal Gmail!</p>
+            <p class="text-xs text-slate-400 mb-4">Have an idea for a new tool, improvement, or feedback? Your message goes directly to our team inbox!</p>
             
-            <form action="https://formsubmit.co/support@smartpictools.in" method="POST" class="space-y-3.5">
-                <!-- FormSubmit Configurations -->
-                <input type="hidden" name="_captcha" value="false">
-                <input type="hidden" name="_template" value="table">
-                <input type="hidden" name="_subject" value="New Tool Suggestion - SmartPicTools User">
-                <input type="hidden" name="_next" value="https://smartpictools.in/">
-
+            <form id="suggestion-form" onsubmit="handleSuggestionSubmit(event)" class="space-y-3.5">
                 <div>
                     <label class="block text-[11px] font-bold text-slate-300 mb-1">Your Name (Optional)</label>
-                    <input type="text" name="name" placeholder="e.g. Rahul Sharma" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-indigo-500 font-medium">
+                    <input type="text" id="sug-name" placeholder="e.g. Rahul Sharma" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-indigo-500 font-medium">
                 </div>
                 <div>
-                    <label class="block text-[11px] font-bold text-slate-300 mb-1">Your Email (Optional, if you need a reply)</label>
-                    <input type="email" name="email" placeholder="name@example.com" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-indigo-500 font-medium">
+                    <label class="block text-[11px] font-bold text-slate-300 mb-1">Your Email (Optional, if you want a reply)</label>
+                    <input type="email" id="sug-email" placeholder="name@example.com" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-indigo-500 font-medium">
                 </div>
                 <div>
                     <label class="block text-[11px] font-bold text-slate-300 mb-1">Your Feedback / Tool Request *</label>
-                    <textarea name="message" required rows="4" placeholder="Tell us what new tool you want, or any improvements..." class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-indigo-500 font-medium resize-none"></textarea>
+                    <textarea id="sug-msg" required rows="4" placeholder="Tell us what new tool you want, or any improvements..." class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-indigo-500 font-medium resize-none"></textarea>
                 </div>
 
-                <button type="submit" class="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-amber-500 to-indigo-600 hover:from-amber-400 hover:to-indigo-500 text-white font-extrabold text-xs shadow-lg shadow-indigo-500/25 transition active:scale-[0.99] flex items-center justify-center gap-2">
-                    <span>🚀 Send Suggestion Directly</span>
+                <div id="sug-status" class="hidden p-2.5 rounded-xl text-center text-xs font-bold"></div>
+
+                <button type="submit" id="sug-btn" class="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-amber-500 to-indigo-600 hover:from-amber-400 hover:to-indigo-500 text-white font-extrabold text-xs shadow-lg shadow-indigo-500/25 transition active:scale-[0.99] flex items-center justify-center gap-2">
+                    <span id="sug-btn-txt">🚀 Send Suggestion Directly</span>
                 </button>
             </form>
         </div>
@@ -101,12 +96,12 @@
                 <a href="#photo-tools" class="hover:text-indigo-400 transition">Photo Tools</a>
                 <a href="#pdf-tools" class="hover:text-indigo-400 transition">PDF Suite</a>
                 <a href="#conversion-tools" class="hover:text-indigo-400 transition">Converters</a>
-                <a href="#how-to-use" class="hover:text-indigo-400 transition">How to Use</a>
                 <a href="#faqs" class="hover:text-indigo-400 transition">FAQs</a>
+                <a href="/about" class="hover:text-indigo-400 transition">About</a>
+                <a href="/contact" class="hover:text-indigo-400 transition">Contact</a>
             </nav>
 
             <div class="flex items-center gap-2.5">
-                <!-- ⚡ CLICK OPENS SUGGESTION POPUP DIRECTLY -->
                 <button type="button" onclick="openSuggestionModal()" class="py-2 px-3 sm:px-3.5 rounded-xl bg-slate-800 hover:bg-slate-700 active:scale-95 text-xs font-bold text-amber-300 border border-slate-700 transition flex items-center gap-1.5 shadow-md">
                     <span>💡 Suggestions</span>
                 </button>
@@ -155,9 +150,7 @@
     <!-- ============================================== -->
     <div class="max-w-5xl mx-auto w-full px-4 space-y-16 mb-20" id="all-tools-grid">
 
-        <!-- ========================================== -->
-        <!-- 1. PHOTO & EXAM FORM TOOLS                -->
-        <!-- ========================================== -->
+        <!-- 1. PHOTO & EXAM FORM TOOLS -->
         <section id="photo-tools" class="space-y-5">
             <div class="flex items-center gap-3 border-b border-slate-800/80 pb-3">
                 <span class="w-8 h-8 rounded-xl bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 flex items-center justify-center font-bold text-sm">⚡</span>
@@ -222,9 +215,7 @@
             </div>
         </section>
 
-        <!-- ========================================== -->
-        <!-- 2. PDF & DOCUMENT SUITE                   -->
-        <!-- ========================================== -->
+        <!-- 2. PDF & DOCUMENT SUITE -->
         <section id="pdf-tools" class="space-y-5">
             <div class="flex items-center gap-3 border-b border-slate-800/80 pb-3">
                 <span class="w-8 h-8 rounded-xl bg-rose-500/10 border border-rose-500/20 text-rose-400 flex items-center justify-center font-bold text-sm">📄</span>
@@ -269,9 +260,7 @@
             </div>
         </section>
 
-        <!-- ========================================== -->
-        <!-- 3. FORMAT CONVERSION HUBS                 -->
-        <!-- ========================================== -->
+        <!-- 3. FORMAT CONVERSION HUBS -->
         <section id="conversion-tools" class="space-y-5">
             <div class="flex items-center gap-3 border-b border-slate-800/80 pb-3">
                 <span class="w-8 h-8 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold text-sm">🔄</span>
@@ -346,9 +335,7 @@
             </div>
         </section>
 
-        <!-- ========================================== -->
-        <!-- 4. UTILITIES, BRANDING & SECURITY         -->
-        <!-- ========================================== -->
+        <!-- 4. UTILITIES, BRANDING & SECURITY -->
         <section id="utility-tools" class="space-y-5">
             <div class="flex items-center gap-3 border-b border-slate-800/80 pb-3">
                 <span class="w-8 h-8 rounded-xl bg-teal-500/10 border border-teal-500/20 text-teal-400 flex items-center justify-center font-bold text-sm">🛠️</span>
@@ -406,121 +393,24 @@
     </div>
 
     <!-- ========================================================= -->
-    <!-- ⚡ ARTICLE-STYLE HOW TO USE & IN-DEPTH SUITE DOCUMENTATION -->
-    <!-- ========================================================= -->
-    <section class="max-w-5xl mx-auto w-full px-4 mb-20 border-t border-slate-800 pt-14" id="how-to-use">
-        <div class="text-center max-w-3xl mx-auto mb-12">
-            <span class="text-xs font-extrabold uppercase tracking-widest text-indigo-400 bg-indigo-500/10 px-3 py-1 rounded-full border border-indigo-500/20">Complete Suite Documentation</span>
-            <h2 class="text-2xl sm:text-4xl font-black text-white tracking-tight mt-3">In-Depth Guides: How to Use SmartPicTools</h2>
-            <p class="text-slate-400 text-xs sm:text-sm mt-2">Comprehensive step-by-step tutorials, official dimensions, and technical insights to help you get the best results.</p>
-        </div>
-
-        <div class="space-y-10">
-            <!-- Article 1: Photo & Exam Form Tools -->
-            <article class="bg-slate-900/80 border border-slate-800 rounded-3xl p-6 sm:p-8 space-y-4 shadow-xl">
-                <div class="flex items-center gap-3">
-                    <span class="w-10 h-10 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 flex items-center justify-center text-xl font-bold">⚡</span>
-                    <div>
-                        <h3 class="text-lg sm:text-xl font-extrabold text-white">1. Mastering Government Exam Photo & Signature Utilities</h3>
-                        <p class="text-xs text-slate-400">Complete guide for SSC CGL/CHSL/MTS, UPSC, UP Police, Railway, and IBPS online forms.</p>
-                    </div>
-                </div>
-                <div class="text-xs sm:text-sm text-slate-300 leading-relaxed space-y-3">
-                    <p>
-                        Applying for government competitive examinations in India requires strict adherence to portal dimensions and file sizes. Uploading an incorrect file size or distorted face aspect ratio often leads to immediate form rejection. SmartPicTools provides dedicated exam utilities designed to ensure 100% compliance without needing professional photo studio assistance:
-                    </p>
-                    <ul class="list-disc list-inside space-y-1.5 text-slate-400 pl-2">
-                        <li><strong class="text-white">Compress Image to Exact KB:</strong> Use our live iterative compression slider to target exact sizes like <strong class="text-indigo-400">20 KB, 50 KB, or 100 KB</strong>. Unlike standard compressors that blur the picture, our mathematical matrix reduces file weight while keeping registration text, eyes, and signatures crisp and legible.</li>
-                        <li><strong class="text-white">Passport Size Photo Maker:</strong> Crop your photo to the official <strong class="text-indigo-400">3.5 cm × 4.5 cm</strong> ratio (for Indian portals) or <strong class="text-indigo-400">2 × 2 inch</strong> (for US/International Visas). Export single Ultra HD photos or print balanced, zero-gap 4×6 or A4 sheets with 14px white studio borders and cutting guide lines that allow single-cut scissor separation.</li>
-                        <li><strong class="text-white">Photo & Signature Joiner:</strong> Portals such as SSC or State Police often request a single merged file with an 80% passport photo on top and a 20% signature below. Our tool aligns both images seamlessly, applies paper background color matching to prevent sticker-like cutouts, and automatically keeps the final file under 50 KB.</li>
-                    </ul>
-                </div>
-            </article>
-
-            <!-- Article 2: PDF & Document Suite -->
-            <article class="bg-slate-900/80 border border-slate-800 rounded-3xl p-6 sm:p-8 space-y-4 shadow-xl">
-                <div class="flex items-center gap-3">
-                    <span class="w-10 h-10 rounded-2xl bg-rose-500/10 border border-rose-500/20 text-rose-400 flex items-center justify-center text-xl font-bold">📄</span>
-                    <div>
-                        <h3 class="text-lg sm:text-xl font-extrabold text-white">2. PDF Document Management: Searchable, Clean, and Scalable</h3>
-                        <p class="text-xs text-slate-400">How our native vector engine handles shipping labels, legal docs, and multi-page books.</p>
-                    </div>
-                </div>
-                <div class="text-xs sm:text-sm text-slate-300 leading-relaxed space-y-3">
-                    <p>
-                        Traditional online PDF tools convert documents into flattened, blurry JPEG images. This strips away searchable text layers, makes barcodes unreadable by handheld laser scanners, and inflates file size. SmartPicTools approaches PDF manipulation natively:
-                    </p>
-                    <ul class="list-disc list-inside space-y-1.5 text-slate-400 pl-2">
-                        <li><strong class="text-white">Crop PDF Online:</strong> Whether you are trimming margins from a 500-page bulk e-commerce shipping label batch (Amazon, Flipkart, Meesho) or cleaning up scanned legal notes, our visual drag cropper adjusts the native MediaBox. This ensures that <strong class="text-indigo-400">Ctrl+F text search remains 100% active</strong> and barcode vectors stay razor-sharp.</li>
-                        <li><strong class="text-white">PDF Maker (Merge to PDF):</strong> Combine multiple photos (JPG, PNG, WEBP, SVG, HEIC) into a single PDF document with edge-to-edge 0% white borders, ideal for official paperwork, receipts, and portfolios.</li>
-                        <li><strong class="text-white">Convert from PDF:</strong> Extract pages into 300 DPI high-resolution JPG/PNG images or convert directly to <strong class="text-indigo-400">True Vector SVG</strong> where fonts are embedded or converted to mathematical curves (CorelDraw Ctrl+Q style), guaranteeing zero blur at any zoom level.</li>
-                    </ul>
-                </div>
-            </article>
-
-            <!-- Article 3: Format Conversion & Performance -->
-            <article class="bg-slate-900/80 border border-slate-800 rounded-3xl p-6 sm:p-8 space-y-4 shadow-xl">
-                <div class="flex items-center gap-3">
-                    <span class="w-10 h-10 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center text-xl font-bold">🔄</span>
-                    <div>
-                        <h3 class="text-lg sm:text-xl font-extrabold text-white">3. Universal Format Conversion: Speed, Compatibility & Next-Gen Codecs</h3>
-                        <p class="text-xs text-slate-400">Decoding Apple HEIC, AVIF, WebP, PNG, and TIFF right in your browser.</p>
-                    </div>
-                </div>
-                <div class="text-xs sm:text-sm text-slate-300 leading-relaxed space-y-3">
-                    <p>
-                        Modern mobile devices capture photos in efficient next-generation formats like Apple HEIC or Google AVIF. However, older government portals, legacy software, and printing kiosks often fail to recognize these files. SmartPicTools bridges this gap with dedicated conversion hubs:
-                    </p>
-                    <ul class="list-disc list-inside space-y-1.5 text-slate-400 pl-2">
-                        <li><strong class="text-white">Convert from HEIC (iPhone):</strong> Instantly decode Apple iOS photos on Windows, Linux, or Android devices without installing third-party codecs or software.</li>
-                        <li><strong class="text-white">Convert from AVIF & WEBP:</strong> Transform modern compressed web graphics into standard JPG/PNG files for offline editing, or encode JPGs into AVIF to achieve 50% lighter websites for Google PageSpeed optimization.</li>
-                        <li><strong class="text-white">Strict Source Matching:</strong> Each dedicated converter hub strictly filters files so you never accidentally convert incompatible formats, and batch packages download in clean, organized ZIP archives.</li>
-                    </ul>
-                </div>
-            </article>
-
-            <!-- Article 4: Utilities, Branding & Security -->
-            <article class="bg-slate-900/80 border border-slate-800 rounded-3xl p-6 sm:p-8 space-y-4 shadow-xl">
-                <div class="flex items-center gap-3">
-                    <span class="w-10 h-10 rounded-2xl bg-teal-500/10 border border-teal-500/20 text-teal-400 flex items-center justify-center text-xl font-bold">🛠️</span>
-                    <div>
-                        <h3 class="text-lg sm:text-xl font-extrabold text-white">4. Everyday Utilities: QR Generation, Watermarking, and Favicons</h3>
-                        <p class="text-xs text-slate-400">Protecting digital artwork and creating brand assets in seconds.</p>
-                    </div>
-                </div>
-                <div class="text-xs sm:text-sm text-slate-300 leading-relaxed space-y-3">
-                    <p>
-                        Beyond file conversion and exam prep, creators and business owners require fast utility tools to brand their assets and secure their digital intellectual property:
-                    </p>
-                    <ul class="list-disc list-inside space-y-1.5 text-slate-400 pl-2">
-                        <li><strong class="text-white">QR & Barcode Studio:</strong> Generate high-contrast, scannable QR codes for website URLs, UPI payments, and Wi-Fi credentials alongside Code128 product barcodes with instant PNG exports.</li>
-                        <li><strong class="text-white">Add Watermark Studio:</strong> Protect confidential documents, sample mockups, and photography with diagonal repeated security grids or custom corner stamps with adjustable opacity.</li>
-                        <li><strong class="text-white">Image to Favicon:</strong> Turn square logos into multi-resolution .ICO files (16px, 32px, 64px, 128px, 256px) that render crisply across Google Search, Chrome tabs, and iOS bookmarks.</li>
-                    </ul>
-                </div>
-            </article>
-        </div>
-    </section>
-
-    <!-- ========================================================= -->
-    <!-- ⚡ COMPREHENSIVE SITE-WIDE FAQS (COVERING THE ENTIRE SUITE) -->
+    <!-- ⚡ COMPREHENSIVE SITE-WIDE FAQS                            -->
     <!-- ========================================================= -->
     <section class="max-w-5xl mx-auto w-full px-4 mb-20 border-t border-slate-800 pt-14" id="faqs">
         <div class="text-center max-w-2xl mx-auto mb-10">
             <span class="text-xs font-extrabold uppercase tracking-widest text-indigo-400 bg-indigo-500/10 px-3 py-1 rounded-full border border-indigo-500/20">Frequently Asked Questions</span>
             <h2 class="text-2xl sm:text-4xl font-black text-white tracking-tight mt-3">Frequently Asked Questions</h2>
-            <p class="text-slate-400 text-xs sm:text-sm mt-2">Everything you need to know about SmartPicTools privacy, compliance, PDF processing, and commercial usage.</p>
+            <p class="text-slate-400 text-xs sm:text-sm mt-2">Everything you need to know about SmartPicTools privacy, exam compliance, and file processing.</p>
         </div>
 
         <div class="space-y-3.5 max-w-3xl mx-auto">
-            <!-- FAQ 1: Privacy & Zero Upload -->
+            <!-- FAQ 1: Privacy -->
             <details class="bg-slate-900/90 p-5 rounded-2xl border border-slate-800 text-xs sm:text-sm cursor-pointer group">
                 <summary class="font-bold text-white flex justify-between items-center group-hover:text-indigo-400 transition">
                     How does SmartPicTools guarantee 100% private, client-side processing?
                     <span class="text-indigo-400 text-base">▼</span>
                 </summary>
                 <p class="text-slate-400 mt-3 leading-relaxed">
-                    Most online file tools upload your private pictures and sensitive PDF documents to remote cloud servers to process them. In contrast, SmartPicTools runs directly inside your web browser using HTML5 Canvas, WebAssembly, and local JavaScript engines. Your documents, signatures, and personal photos never leave your device and are never saved to any database. Once you close your browser tab, all temporary memory is instantly cleared.
+                    Most online file tools upload your private pictures and sensitive PDF documents to remote cloud servers to process them. In contrast, SmartPicTools runs directly inside your web browser using HTML5 Canvas, WebAssembly, and local JavaScript engines. Your documents, signatures, and personal photos never leave your device and are never saved to any database.
                 </p>
             </details>
 
@@ -531,7 +421,7 @@
                     <span class="text-indigo-400 text-base">▼</span>
                 </summary>
                 <p class="text-slate-400 mt-3 leading-relaxed">
-                    Yes, absolutely. Our 'Compress Image to Exact KB', 'Passport Size Photo Maker', and 'Photo & Signature Joiner' are engineered specifically according to the official notification guidelines published by bodies like the Staff Selection Commission (SSC), Union Public Service Commission (UPSC), Railway Recruitment Board (RRB), and State Police Recruitment Boards. The output images conform strictly to official pixel dimensions (e.g., 350×450px or 350×500px), 80/20 layout proportions, and file weight caps (under 50KB or 20KB).
+                    Yes, absolutely. Our 'Compress Image to Exact KB', 'Passport Size Photo Maker', and 'Photo & Signature Joiner' conform strictly to official notification guidelines (such as SSC, UPSC, State Police, Railway, and IBPS). The output images follow exact official dimensions (350×450px or 350×500px), 80/20 proportions, and file weight caps (under 50KB or 20KB).
                 </p>
             </details>
 
@@ -542,7 +432,7 @@
                     <span class="text-indigo-400 text-base">▼</span>
                 </summary>
                 <p class="text-slate-400 mt-3 leading-relaxed">
-                    No. Our 'Crop PDF Online' tool uses a native PDF-Lib manipulation engine that adjusts page bounding boxes (MediaBox and CropBox) mathematically rather than rasterizing the pages into low-resolution images. This means that all original vector fonts, selectable text (Ctrl+F), links, and high-density barcodes remain 100% sharp and completely readable by laser scanners and PDF readers.
+                    No. Our 'Crop PDF Online' tool uses a native PDF manipulation engine that adjusts page bounding boxes mathematically rather than rasterizing pages into blurry images. All original vector fonts, selectable text (Ctrl+F works), links, and high-density barcodes remain 100% sharp and readable by laser scanners and PDF readers.
                 </p>
             </details>
 
@@ -553,7 +443,7 @@
                     <span class="text-indigo-400 text-base">▼</span>
                 </summary>
                 <p class="text-slate-400 mt-3 leading-relaxed">
-                    Yes. When converting PDF or image documents to SVG through our vector engine, all typography is converted directly into mathematical vector curves (equivalent to CorelDraw's 'Convert to Curves' Ctrl+Q feature). Furthermore, our engine cleans nested symbol definitions so that all objects open unlocked and immediately editable in CorelDraw, Figma, and Adobe Illustrator with 0% blur at any zoom scale.
+                    Yes. When converting PDF or image documents to SVG through our vector engine, typography is converted directly into mathematical vector curves (equivalent to CorelDraw's 'Convert to Curves' Ctrl+Q feature). All objects open unlocked and immediately editable in CorelDraw, Figma, and Illustrator with 0% blur at any zoom scale.
                 </p>
             </details>
 
@@ -564,7 +454,7 @@
                     <span class="text-indigo-400 text-base">▼</span>
                 </summary>
                 <p class="text-slate-400 mt-3 leading-relaxed">
-                    Yes. All 18 tools and 70+ format conversion hubs on SmartPicTools are 100% free forever. There are no subscriptions, no daily processing limits, no forced registrations, and no watermarks placed on your exported files. Students, job aspirants, photo studio operators, e-commerce merchants, and graphic designers can use the entire platform freely for both personal and commercial projects.
+                    Yes. All 18 tools and 70+ format conversion hubs on SmartPicTools are 100% free forever. There are no subscriptions, no daily processing limits, no forced registrations, and no watermarks placed on your exported files.
                 </p>
             </details>
 
@@ -575,18 +465,18 @@
                     <span class="text-indigo-400 text-base">▼</span>
                 </summary>
                 <p class="text-slate-400 mt-3 leading-relaxed">
-                    In traditional photo printing, wide white gaps between individual passport photos force you to make multiple scissor cuts, wasting paper and leaving ragged edges. Our Passport Photo Maker arranges photos with zero-gap touching black cutting lines aligned to the top-left of the sheet. You only need to make single, straight cuts along the shared line, and any unused portion of the paper remains clean and reusable for future prints.
+                    In traditional photo printing, wide white gaps between individual passport photos force you to make multiple scissor cuts, wasting paper. Our Passport Photo Maker arranges photos with zero-gap touching black cutting lines aligned to the top-left of the sheet. You only need to make single, straight cuts along the shared line, and any unused paper remains clean and reusable.
                 </p>
             </details>
 
             <!-- FAQ 7: Suggestion Box & Feedback -->
             <details class="bg-slate-900/90 p-5 rounded-2xl border border-slate-800 text-xs sm:text-sm cursor-pointer group">
                 <summary class="font-bold text-white flex justify-between items-center group-hover:text-indigo-400 transition">
-                    How does the Suggestion Box work if I want to request a new tool or report a bug?
+                    How does the Suggestion Box work if I want to request a new tool or report an issue?
                     <span class="text-indigo-400 text-base">▼</span>
                 </summary>
                 <p class="text-slate-400 mt-3 leading-relaxed">
-                    Clicking the '💡 Suggestions' button in the top navigation opens an instant feedback modal. When you submit your feedback or request a new tool, our FormSubmit integration delivers your message directly to our official support inbox (support@smartpictools.in) without navigating you away from what you are doing. We review community requests daily to launch new utilities.
+                    Clicking the '💡 Suggestions' button in the top navigation opens an instant modal popup right on your screen. You can type your tool request or feedback directly, and our internal system logs your message immediately so our development team can review it.
                 </p>
             </details>
         </div>
@@ -605,22 +495,63 @@
         </div>
     </footer>
 
-    <!-- ⚡ SUGGESTION BOX JAVASCRIPT CONTROLLER -->
+    <!-- ⚡ SUGGESTION BOX JAVASCRIPT CONTROLLER (DIRECT ASYNC SUBMIT) -->
     <script>
         function openSuggestionModal() {
             document.getElementById('suggestion-modal').classList.remove('hidden');
+            document.getElementById('sug-status').classList.add('hidden');
         }
 
         function closeSuggestionModal() {
             document.getElementById('suggestion-modal').classList.add('hidden');
         }
 
-        // Close modal when clicking on backdrop
         document.getElementById('suggestion-modal').addEventListener('click', function(e) {
             if (e.target === this) {
                 closeSuggestionModal();
             }
         });
+
+        async function handleSuggestionSubmit(e) {
+            e.preventDefault();
+            const btn = document.getElementById('sug-btn');
+            const btnTxt = document.getElementById('sug-btn-txt');
+            const statusBox = document.getElementById('sug-status');
+
+            const name = document.getElementById('sug-name').value.trim();
+            const email = document.getElementById('sug-email').value.trim();
+            const message = document.getElementById('sug-msg').value.trim();
+
+            if (!message) return;
+
+            btn.disabled = true;
+            btnTxt.innerText = "⏳ Sending...";
+
+            try {
+                const resp = await fetch('/api/submit-suggestion', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name, email, message })
+                });
+
+                if (resp.ok) {
+                    statusBox.className = "p-2.5 rounded-xl text-center text-xs font-bold bg-emerald-500/10 border border-emerald-500/30 text-emerald-400";
+                    statusBox.innerText = "🎉 Thank you! Your suggestion has been received.";
+                    statusBox.classList.remove('hidden');
+                    document.getElementById('suggestion-form').reset();
+                    setTimeout(() => closeSuggestionModal(), 2500);
+                } else {
+                    throw new Error('Failed to send');
+                }
+            } catch(err) {
+                statusBox.className = "p-2.5 rounded-xl text-center text-xs font-bold bg-rose-500/10 border border-rose-500/30 text-rose-400";
+                statusBox.innerText = "⚠️ Network error. Please try again.";
+                statusBox.classList.remove('hidden');
+            } finally {
+                btn.disabled = false;
+                btnTxt.innerText = "🚀 Send Suggestion Directly";
+            }
+        }
     </script>
 </body>
 </html>
