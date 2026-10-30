@@ -6,7 +6,7 @@
     
     <!-- ⚡ HIGH-PRIORITY SEO & KEYWORDS FOR PASSPORT PHOTOS -->
     <title>Passport Size Photo Maker Online Free - 300 DPI Studio Quality | SmartPicTools</title>
-    <meta name="description" content="Free online passport size photo maker with 300 DPI Ultra HD print clarity. Crop to 3.5x4.5cm for SSC/UPSC, 2x2 inch Visa, print custom photo counts on 4x6 or A4 sheets with centered zero-gap cutting borders.">
+    <meta name="description" content="Free online passport size photo maker with 300 DPI Ultra HD print clarity. Crop to 3.5x4.5cm for SSC/UPSC, 2x2 inch Visa, print custom photo counts on 4x6 or A4 sheets with zero-gap cutting borders.">
     <meta name="keywords" content="passport size photo maker online free, ssc photo maker 3.5x4.5, upsc passport photo size, 2x2 visa photo maker, create passport photo 4x6 sheet, passport photo printable a4 sheet, custom photo count on sheet, studio quality passport photo 300 dpi">
     <meta name="robots" content="index, follow, max-image-preview:large">
     <meta name="author" content="SmartPicTools">
@@ -19,7 +19,7 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://smartpictools.in/passport-photo-maker">
     <meta property="og:title" content="Passport Size Photo Maker Online Free - SmartPicTools">
-    <meta property="og:description" content="Create 300 DPI ultra-sharp passport photos for SSC, UPSC, and Visas on 4x6 or A4 sheets with perfectly centered layouts in 0.05s.">
+    <meta property="og:description" content="Create 300 DPI ultra-sharp passport photos for SSC, UPSC, and Visas on 4x6 or A4 sheets with auto-capacity protection in 0.05s.">
 
     <!-- SCHEMA MARKUP -->
     <script type="application/ld+json">
@@ -77,7 +77,7 @@
         <div class="text-center max-w-xl mx-auto mb-6">
             <span class="text-[10px] font-extrabold uppercase tracking-widest text-indigo-400 bg-indigo-500/10 px-2.5 py-0.5 rounded-full border border-indigo-500/20">300 DPI Studio HD Quality</span>
             <h1 class="text-2xl sm:text-4xl font-black text-white mt-1.5 tracking-tight">Passport Size Photo Maker</h1>
-            <p class="mt-1 text-slate-400 text-xs sm:text-sm">Create crystal-clear 300 DPI passport photos for SSC, UPSC, or Visa. Balanced center-aligned printing prevents paper waste and photo overflow.</p>
+            <p class="mt-1 text-slate-400 text-xs sm:text-sm">Create crystal-clear 300 DPI passport photos for SSC, UPSC, or Visa. Automatic physical sheet capacity calculation prevents photo overflow.</p>
         </div>
 
         <!-- UPLOAD DROP AREA (SHOWN BEFORE UPLOAD) -->
@@ -147,14 +147,26 @@
                         </button>
                     </div>
 
-                    <!-- ⚡ DIRECT CUSTOM PHOTO COUNT WITH AUTO-CAPACITY -->
-                    <div id="photo-count-wrap" class="hidden flex items-center justify-between p-2.5 bg-slate-950 rounded-xl border border-slate-800 text-xs">
-                        <span class="text-slate-300 font-bold">Number of Photos on Sheet:</span>
-                        <div class="flex items-center gap-1.5">
-                            <button type="button" onclick="adjustCount(-1)" class="w-7 h-7 rounded-lg bg-slate-800 hover:bg-slate-700 text-white font-bold flex items-center justify-center transition active:scale-95">-</button>
-                            <input type="number" id="sheet-photo-count" min="1" max="30" value="8" oninput="renderHighResOutput()" class="w-14 bg-slate-900 border border-indigo-500 text-white font-bold rounded-lg py-1 text-xs text-center focus:outline-none">
-                            <button type="button" onclick="adjustCount(1)" class="w-7 h-7 rounded-lg bg-slate-800 hover:bg-slate-700 text-white font-bold flex items-center justify-center transition active:scale-95">+</button>
-                            <span id="max-capacity-label" class="text-slate-400 text-[11px] ml-1">photos</span>
+                    <!-- ⚡ DYNAMIC AUTO-CAPACITY PHOTO COUNT ON SHEET -->
+                    <div id="photo-count-wrap" class="hidden flex flex-col gap-1.5 p-3 bg-slate-950 rounded-xl border border-slate-800 text-xs">
+                        <div class="flex items-center justify-between">
+                            <span class="text-slate-300 font-bold">Number of Photos on Sheet:</span>
+                            <div class="flex items-center gap-1.5">
+                                <button type="button" onclick="adjustCount(-1)" class="w-7 h-7 rounded-lg bg-slate-800 hover:bg-slate-700 text-white font-bold flex items-center justify-center transition active:scale-95">-</button>
+                                <input type="number" id="sheet-photo-count" min="1" value="5" oninput="handleManualCountInput(this.value)" class="w-14 bg-slate-900 border border-indigo-500 text-white font-bold rounded-lg py-1 text-xs text-center focus:outline-none">
+                                <button type="button" onclick="adjustCount(1)" class="w-7 h-7 rounded-lg bg-slate-800 hover:bg-slate-700 text-white font-bold flex items-center justify-center transition active:scale-95">+</button>
+                                <span class="text-slate-400 text-[11px] ml-1">photos</span>
+                            </div>
+                        </div>
+
+                        <!-- Capacity Indicator & Error Warning Strip -->
+                        <div class="flex items-center justify-between pt-1 border-t border-slate-800/80 text-[11px]">
+                            <span id="capacity-badge" class="text-slate-400">Max capacity: <strong id="max-capacity-text" class="text-indigo-400 font-bold">30</strong> photos</span>
+                            <span class="text-emerald-400 font-semibold">✓ Exact fit</span>
+                        </div>
+
+                        <!-- Error Message Alert (Triggers if user enters more than sheet fits) -->
+                        <div id="capacity-error-msg" class="hidden p-2 rounded-lg bg-rose-500/10 border border-rose-500/30 text-rose-300 text-[11px] font-bold text-center">
                         </div>
                     </div>
 
@@ -215,8 +227,8 @@
                 </div>
                 <div class="bg-slate-900 p-4 rounded-2xl border border-slate-800">
                     <span class="w-6 h-6 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center mb-2 text-xs">2</span>
-                    <h3 class="font-bold text-white text-xs sm:text-sm mb-1">Perfect Balanced Fit</h3>
-                    <p class="text-slate-400 text-xs">Photos align dead-center with equal margins and zero sheet overflow.</p>
+                    <h3 class="font-bold text-white text-xs sm:text-sm mb-1">Auto-Capacity Fit</h3>
+                    <p class="text-slate-400 text-xs">The tool automatically calculates the exact number of photos that fit without cutting.</p>
                 </div>
                 <div class="bg-slate-900 p-4 rounded-2xl border border-slate-800">
                     <span class="w-6 h-6 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center mb-2 text-xs">3</span>
@@ -231,7 +243,7 @@
         <p>© 2026 SmartPicTools. 100% Free & Private in-browser suite. <a href="/" class="text-indigo-400 hover:underline">Explore All Tools</a></p>
     </footer>
 
-    <!-- ⚡ TRUE 300 DPI STUDIO ENGINE (PERFECT CENTER ALIGNMENT & STRICT OVERFLOW PREVENTION) -->
+    <!-- ⚡ TRUE 300 DPI STUDIO ENGINE (PHYSICAL CAPACITY & ERROR SHIELD) -->
     <script>
         let cropper = null;
         let originalFileName = 'passport_photo';
@@ -288,7 +300,6 @@
         function initCropper() {
             if (cropper) cropper.destroy();
 
-            // ⚡ STRICT ENFORCED ASPECT RATIO LOCK (CAN NEVER SQUISH FACE)
             let aspect = 3.5 / 4.5;
             if (currentSizePreset === '2x2' || currentSizePreset === '3.5x3.5') aspect = 1.0;
 
@@ -317,8 +328,7 @@
             if (preset === '2x2' || preset === '3.5x3.5') aspect = 1.0;
             if (cropper) cropper.setAspectRatio(aspect);
 
-            // Update max capacity
-            updateSheetCapacities();
+            updateCapacityUI();
             renderHighResOutput();
         }
 
@@ -334,68 +344,101 @@
             const countWrap = document.getElementById('photo-count-wrap');
             countWrap.classList.toggle('hidden', type === 'single');
 
-            updateSheetCapacities();
+            updateCapacityUI();
             renderHighResOutput();
         }
 
-        // ⚡ DYNAMIC SHEET CAPACITY CALCULATOR (NEVER OVERFLOW / NEVER CUT OFF)
-        function updateSheetCapacities() {
+        // ⚡ EXACT PHYSICAL CAPACITY ENGINE (NO GUESSWORK)
+        function getSheetPhysicalSpecs() {
+            let cardW = 413, cardH = 531;
+            if (currentSizePreset === '2x2') { cardW = 580; cardH = 580; }
+            else if (currentSizePreset === '3.5x3.5') { cardW = 413; cardH = 413; }
+
+            let sheetW = 1800, sheetH = 1200; // 4x6
+            let marginX = 60, marginY = 40;
+
+            if (currentSheetType === 'a4') {
+                sheetW = 2480; sheetH = 3508;
+                marginX = 100; marginY = 140;
+            }
+
+            const cols = Math.floor((sheetW - marginX) / cardW);
+            const rows = Math.floor((sheetH - marginY) / cardH);
+            const maxCap = cols * rows;
+
+            return { cardW, cardH, sheetW, sheetH, cols, rows, maxCap };
+        }
+
+        function updateCapacityUI() {
+            if (currentSheetType === 'single') return;
+            const specs = getSheetPhysicalSpecs();
             const countInput = document.getElementById('sheet-photo-count');
-            const maxLabel = document.getElementById('max-capacity-label');
+            const maxText = document.getElementById('max-capacity-text');
 
-            let maxAllowed = 8;
-            let defaultVal = 8;
+            countInput.max = specs.maxCap;
+            maxText.innerText = specs.maxCap;
 
-            if (currentSheetType === '4x6') {
-                if (currentSizePreset === '2x2') {
-                    maxAllowed = 6; // 3 cols x 2 rows
-                    defaultVal = 6;
-                } else {
-                    maxAllowed = 8; // 4 cols x 2 rows
-                    defaultVal = 8;
-                }
-            } else if (currentSheetType === 'a4') {
-                if (currentSizePreset === '2x2') {
-                    maxAllowed = 20; // 4 cols x 5 rows
-                    defaultVal = 12;
-                } else {
-                    maxAllowed = 30; // 5 cols x 6 rows
-                    defaultVal = 15;
-                }
+            // Default suggested value
+            let defaultCount = (currentSheetType === '4x6') ? specs.maxCap : Math.min(15, specs.maxCap);
+            if (parseInt(countInput.value, 10) > specs.maxCap || parseInt(countInput.value, 10) <= 0) {
+                countInput.value = defaultCount;
             }
+            hideCapacityError();
+        }
 
-            countInput.max = maxAllowed;
-            if (parseInt(countInput.value, 10) > maxAllowed || parseInt(countInput.value, 10) <= 0) {
-                countInput.value = defaultVal;
+        // ⚡ ERROR WARNING TRIGGER SYSTEM
+        function showCapacityError(msg) {
+            const errBox = document.getElementById('capacity-error-msg');
+            errBox.innerText = msg;
+            errBox.classList.remove('hidden');
+        }
+
+        function hideCapacityError() {
+            const errBox = document.getElementById('capacity-error-msg');
+            errBox.classList.add('hidden');
+        }
+
+        function handleManualCountInput(val) {
+            const specs = getSheetPhysicalSpecs();
+            let num = parseInt(val, 10);
+            const input = document.getElementById('sheet-photo-count');
+
+            if (num > specs.maxCap) {
+                showCapacityError(`⚠️ Sheet Limit: Only ${specs.maxCap} photos (${specs.cols} cols × ${specs.rows} rows) can physically fit without cutting!`);
+                input.value = specs.maxCap;
+            } else if (num < 1 || isNaN(num)) {
+                hideCapacityError();
+            } else {
+                hideCapacityError();
             }
-            maxLabel.innerText = `photos (Max ${maxAllowed})`;
+            renderHighResOutput();
         }
 
         function adjustCount(delta) {
+            const specs = getSheetPhysicalSpecs();
             const input = document.getElementById('sheet-photo-count');
-            const max = parseInt(input.max, 10) || 30;
             let val = parseInt(input.value, 10) || 1;
-            val = Math.max(1, Math.min(max, val + delta));
-            input.value = val;
+
+            if (val + delta > specs.maxCap) {
+                showCapacityError(`⚠️ Sheet Limit: Maximum ${specs.maxCap} photos fit on this sheet without overflow!`);
+                input.value = specs.maxCap;
+            } else if (val + delta < 1) {
+                input.value = 1;
+                hideCapacityError();
+            } else {
+                input.value = val + delta;
+                hideCapacityError();
+            }
             renderHighResOutput();
         }
 
-        // ⚡ RENDER HIGH-RES OUTPUT (PERFECT CENTER ALIGNMENT & ZERO OVERFLOW)
+        // ⚡ RENDER HIGH-RES OUTPUT (BALANCED CENTERED ALIGNMENT & STRICT CAPACITY)
         function renderHighResOutput() {
             if (!cropper) return;
 
-            // 1. EXACT PHYSICAL 300 DPI SIZES:
-            let cardW = 413; // 35mm
-            let cardH = 531; // 45mm
-
-            if (currentSizePreset === '2x2') {
-                // 580px neatly centers 3 cols across 1800px on 4x6, and 4 cols on A4 with zero overflow
-                cardW = 580;
-                cardH = 580;
-            } else if (currentSizePreset === '3.5x3.5') {
-                cardW = 413;
-                cardH = 413;
-            }
+            const specs = getSheetPhysicalSpecs();
+            let cardW = specs.cardW;
+            let cardH = specs.cardH;
 
             const croppedSource = cropper.getCroppedCanvas({
                 width: cardW,
@@ -430,9 +473,7 @@
                 sCtx.strokeRect(0, 0, cardW, cardH);
             }
 
-            // ==========================================
             // CASE A: SINGLE PHOTO OUTPUT
-            // ==========================================
             if (currentSheetType === 'single') {
                 outputCanvas.width = cardW;
                 outputCanvas.height = cardH;
@@ -442,16 +483,9 @@
                 return;
             }
 
-            // ==========================================
             // CASE B & C: PRINTABLE SHEETS (4x6 or A4)
-            // ==========================================
-            let sheetW = 1800;
-            let sheetH = 1200; // 4x6 landscape (6x4 inches @ 300 DPI)
-
-            if (currentSheetType === 'a4') {
-                sheetW = 2480;
-                sheetH = 3508; // A4 portrait (210x297 mm @ 300 DPI)
-            }
+            let sheetW = specs.sheetW;
+            let sheetH = specs.sheetH;
 
             outputCanvas.width = sheetW;
             outputCanvas.height = sheetH;
@@ -461,30 +495,15 @@
             ctx.fillStyle = '#ffffff';
             ctx.fillRect(0, 0, sheetW, sheetH);
 
-            // ⚡ EXACT COLUMNS & MAXIMUM CAPACITY
-            let cols = 4;
-            if (currentSheetType === '4x6') {
-                cols = (currentSizePreset === '2x2') ? 3 : 4;
-            } else if (currentSheetType === 'a4') {
-                cols = (currentSizePreset === '2x2') ? 4 : 5;
-            }
+            let count = parseInt(document.getElementById('sheet-photo-count').value, 10) || 5;
+            count = Math.max(1, Math.min(specs.maxCap, count));
 
-            const maxCapacity = (currentSheetType === '4x6') 
-                ? (currentSizePreset === '2x2' ? 6 : 8)
-                : (currentSizePreset === '2x2' ? 20 : 30);
+            const cols = specs.cols;
 
-            let count = parseInt(document.getElementById('sheet-photo-count').value, 10) || 6;
-            count = Math.max(1, Math.min(maxCapacity, count));
-
-            // ⚡ 100% HORIZONTALLY & VERTICALLY CENTERED BALANCED MARGINS
-            const totalGridW = cols * cardW;
-            const startX = Math.max(0, Math.floor((sheetW - totalGridW) / 2));
-
-            let startY = 70;
-            if (currentSheetType === '4x6') {
-                const totalGridH = Math.ceil(count / cols) * cardH;
-                startY = Math.max(15, Math.floor((sheetH - totalGridH) / 2));
-            }
+            // ⚡ EXACT EQUAL MARGIN ON LEFT & RIGHT:
+            const fullLineWidth = cols * cardW;
+            const startX = Math.max(0, Math.floor((sheetW - fullLineWidth) / 2));
+            const startY = 60; // Top-aligned printer margin
 
             let drawn = 0;
             while (drawn < count) {
