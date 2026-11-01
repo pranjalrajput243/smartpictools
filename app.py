@@ -15,6 +15,8 @@ except Exception:
 try:
     import pillow_heif
     pillow_heif.register_heif_opener()
+    if hasattr(pillow_heif, 'register_avif_opener'):
+        pillow_heif.register_avif_opener()
 except Exception:
     pass
 
@@ -405,10 +407,16 @@ def process_fallback():
         mimetype = f"image/{target_fmt.lower()}"
 
         if target_fmt == 'AVIF':
+            saved = False
             try:
-                img.save(buf, format='AVIF', quality=60, speed=10)
+                img.save(buf, format='AVIF', quality=65)
+                saved = True
             except Exception:
-                img.save(buf, format='AVIF', quality=60)
+                pass
+            if not saved:
+                import pillow_heif
+                heif_file = pillow_heif.from_pillow(img)
+                heif_file.save(buf, format="AVIF", quality=65)
         elif target_fmt in ['JPG', 'JPEG']:
             img.save(buf, format='JPEG', quality=90)
             mimetype = 'image/jpeg'
