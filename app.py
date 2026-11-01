@@ -139,6 +139,10 @@ def image_to_pdf_alias():
 def crop_pdf_page():
     return render_template('crop-pdf.html')
 
+@app.route('/split-pdf')
+def split_pdf_page():
+    return render_template('split-pdf.html')
+
 # 301 Permanent Redirect to Preserve Google SEO Juice
 @app.route('/pdf-converter')
 def pdf_converter_alias():
@@ -333,6 +337,7 @@ def sitemap():
         ('https://smartpictools.in/resize-image', '0.9'),
         ('https://smartpictools.in/convert-image', '0.9'),
         ('https://smartpictools.in/crop-pdf', '0.9'),
+        ('https://smartpictools.in/split-pdf', '0.9'),
         ('https://smartpictools.in/add-watermark', '0.9'),
         ('https://smartpictools.in/rotate-image', '0.9'),
         ('https://smartpictools.in/qr-code-generator', '0.9'),
