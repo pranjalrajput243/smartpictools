@@ -65,18 +65,19 @@
         <div class="text-center max-w-2xl mx-auto mb-8 sm:mb-10">
             <span class="text-[11px] font-extrabold uppercase tracking-widest text-indigo-400 bg-indigo-500/10 px-3 py-1 rounded-full border border-indigo-500/20">Dedicated Conversion Studio</span>
             <h1 class="text-3xl sm:text-5xl font-black text-white mt-3 tracking-tight">Convert {{ meta.src_name }} to {{ meta.tgt_name }}</h1>
-            <p class="mt-2.5 text-slate-400 text-xs sm:text-sm">Turn {{ meta.src_name }} files into crisp {{ meta.tgt_name }} with zero blur in 0.1s. 100% private tool.</p>
+            <p class="mt-2.5 text-slate-400 text-xs sm:text-sm">Turn {{ meta.src_name }} files into crisp {{ meta.tgt_name }} with zero blur in 0.1s. 100% private in-browser tool.</p>
         </div>
 
         <div class="bg-slate-900 rounded-3xl p-5 sm:p-10 border border-slate-800 shadow-2xl relative">
             
-            <!-- ⚡ STRICT FILE INPUT (ONLY ACCEPTS EXACT MATCHING SOURCE FORMAT) -->
-            <div id="drop-area" class="border-2 border-dashed border-slate-700 hover:border-indigo-500 bg-slate-950/60 hover:bg-indigo-950/20 rounded-2xl p-8 sm:p-14 text-center cursor-pointer transition-all duration-300">
+            <!-- ⚡ NATIVE CLICKABLE DROP/UPLOAD AREA -->
+            <label id="drop-area" for="file-input" class="block border-2 border-dashed border-slate-700 hover:border-indigo-500 bg-slate-950/60 hover:bg-indigo-950/20 rounded-2xl p-8 sm:p-14 text-center cursor-pointer transition-all duration-300">
                 <input type="file" id="file-input" multiple 
                     {% if meta.src == 'pdf' %}accept=".pdf, application/pdf"
                     {% elif meta.src == 'png' %}accept=".png, image/png"
                     {% elif meta.src in ['jpg', 'jpeg'] %}accept=".jpg, .jpeg, image/jpeg"
                     {% elif meta.src == 'webp' %}accept=".webp, image/webp"
+                    {% elif meta.src == 'avif' %}accept=".avif, image/avif"
                     {% elif meta.src == 'heic' %}accept=".heic, .heif, image/heic, image/heif"
                     {% elif meta.src == 'svg' %}accept=".svg, image/svg+xml"
                     {% elif meta.src in ['tiff', 'tif'] %}accept=".tif, .tiff, image/tiff"
@@ -86,7 +87,7 @@
                 </div>
                 <h3 class="text-base sm:text-xl font-bold text-white mb-1.5">Select {{ meta.src_name }} File(s) to Convert</h3>
                 <p class="text-xs sm:text-sm text-slate-400">Strictly accepts .{{ meta.src }} files only (100% private in-browser)</p>
-            </div>
+            </label>
 
             <!-- WORKSPACE -->
             <div id="workspace" class="hidden mt-6 space-y-6">
@@ -112,19 +113,17 @@
             </div>
 
             <!-- SUCCESS STATUS -->
-            <div id="status-box" class="hidden mt-5 space-y-3">
-                <div class="p-3.5 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 text-center">
-                    <p class="text-emerald-400 font-bold text-xs sm:text-sm">🎉 Success! {{ meta.tgt_name }} file(s) downloaded successfully!</p>
-                </div>
+            <div id="status-box" class="hidden mt-5 p-3.5 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 text-center">
+                <p class="text-emerald-400 font-bold text-xs sm:text-sm">🎉 Success! {{ meta.tgt_name }} file(s) downloaded successfully!</p>
             </div>
         </div>
 
-       <!-- ========================================================= -->
+        <!-- ========================================================= -->
         <!-- ⚡ IN-DEPTH PRODUCT DOCUMENTATION & SEO CONTENT          -->
         <!-- ========================================================= -->
         <section class="mt-16 border-t border-slate-800 pt-12 space-y-12 text-slate-300">
             
-            <!-- 1. DETAILED HOW TO USE (ARTICLE STYLE, NO DISJOINTED CARDS) -->
+            <!-- 1. DETAILED HOW TO USE -->
             <div class="space-y-4">
                 <div class="flex items-center gap-2.5">
                     <span class="w-8 h-8 rounded-xl bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 flex items-center justify-center text-sm font-bold">📖</span>
@@ -205,7 +204,7 @@
                 </div>
             </div>
 
-            <!-- 3. FREQUENTLY ASKED QUESTIONS (COLLAPSIBLE DROPDOWNS) -->
+            <!-- 3. FREQUENTLY ASKED QUESTIONS -->
             <div class="space-y-4">
                 <div class="flex items-center gap-2.5">
                     <span class="w-8 h-8 rounded-xl bg-teal-500/10 border border-teal-500/20 text-teal-400 flex items-center justify-center text-sm font-bold">❓</span>
@@ -261,14 +260,13 @@
         <p>© 2026 SmartPicTools. 100% Free & Private in-browser suite. <a href="/" class="text-indigo-400 hover:underline">Explore All Tools</a></p>
     </footer>
 
-    <!-- ⚡ COMPLETE MASTER CONVERTER JS ENGINE (WITH STRICT FORMAT VALIDATION) -->
+    <!-- ⚡ CONVERTER JS ENGINE (WITH FULL AVIF & BATCH FIX) -->
     <script>
         pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
 
         const SRC_FMT = "{{ meta.src }}".toLowerCase();
         const TGT_FMT = "{{ meta.tgt }}".toLowerCase();
         const TGT_NAME = "{{ meta.tgt_name }}";
-        const SRC_NAME = "{{ meta.src_name }}";
         let filesList = [];
 
         const dropArea = document.getElementById('drop-area');
@@ -285,37 +283,23 @@
         dropArea.addEventListener('drop', (e) => {
             if (e.dataTransfer && e.dataTransfer.files.length > 0) handleFiles(e.dataTransfer.files);
         });
-        dropArea.addEventListener('click', () => fileInput.click());
+
         fileInput.addEventListener('change', (e) => {
             if (e.target.files && e.target.files.length > 0) handleFiles(e.target.files);
         });
 
-        // ⚡ STRICT FORMAT VALIDATOR
         function isStrictSourceMatch(file) {
             const name = file.name.toLowerCase();
             const type = file.type.toLowerCase();
 
-            if (SRC_FMT === 'png') {
-                return name.endsWith('.png') || type === 'image/png';
-            }
-            if (SRC_FMT === 'jpg' || SRC_FMT === 'jpeg') {
-                return name.endsWith('.jpg') || name.endsWith('.jpeg') || type === 'image/jpeg';
-            }
-            if (SRC_FMT === 'webp') {
-                return name.endsWith('.webp') || type === 'image/webp';
-            }
-            if (SRC_FMT === 'pdf') {
-                return name.endsWith('.pdf') || type.includes('pdf');
-            }
-            if (SRC_FMT === 'heic') {
-                return name.endsWith('.heic') || name.endsWith('.heif') || type.includes('heic') || type.includes('heif');
-            }
-            if (SRC_FMT === 'svg') {
-                return name.endsWith('.svg') || type.includes('svg');
-            }
-            if (SRC_FMT === 'tiff' || SRC_FMT === 'tif') {
-                return name.endsWith('.tif') || name.endsWith('.tiff') || type.includes('tiff');
-            }
+            if (SRC_FMT === 'png') return name.endsWith('.png') || type === 'image/png';
+            if (SRC_FMT === 'jpg' || SRC_FMT === 'jpeg') return name.endsWith('.jpg') || name.endsWith('.jpeg') || type === 'image/jpeg';
+            if (SRC_FMT === 'webp') return name.endsWith('.webp') || type === 'image/webp';
+            if (SRC_FMT === 'avif') return name.endsWith('.avif') || type === 'image/avif';
+            if (SRC_FMT === 'pdf') return name.endsWith('.pdf') || type.includes('pdf');
+            if (SRC_FMT === 'heic') return name.endsWith('.heic') || name.endsWith('.heif') || type.includes('heic') || type.includes('heif');
+            if (SRC_FMT === 'svg') return name.endsWith('.svg') || type.includes('svg');
+            if (SRC_FMT === 'tiff' || SRC_FMT === 'tif') return name.endsWith('.tif') || name.endsWith('.tiff') || type.includes('tiff');
             return name.endsWith('.' + SRC_FMT);
         }
 
@@ -323,7 +307,6 @@
             let invalidFiles = 0;
 
             for (let f of Array.from(files)) {
-                // Strict check: Block other formats
                 if (!isStrictSourceMatch(f)) {
                     invalidFiles++;
                     continue;
@@ -333,7 +316,6 @@
                 let previewUrl = '';
                 const nameLower = f.name.toLowerCase();
 
-                // 1. PDF Preview
                 if (SRC_FMT === 'pdf' || nameLower.endsWith('.pdf')) {
                     try {
                         const ab = await f.arrayBuffer();
@@ -348,9 +330,7 @@
                     } catch(e) {
                         previewUrl = '';
                     }
-                }
-                // 2. iPhone HEIC Decoder
-                else if (nameLower.endsWith('.heic') || nameLower.endsWith('.heif')) {
+                } else if (nameLower.endsWith('.heic') || nameLower.endsWith('.heif')) {
                     try {
                         const conv = await heic2any({ blob: f, toType: 'image/jpeg', quality: 0.92 });
                         processedBlob = Array.isArray(conv) ? conv[0] : conv;
@@ -358,9 +338,7 @@
                     } catch(e) {
                         previewUrl = URL.createObjectURL(f);
                     }
-                }
-                // 3. TIFF Decoder
-                else if (nameLower.endsWith('.tif') || nameLower.endsWith('.tiff')) {
+                } else if (nameLower.endsWith('.tif') || nameLower.endsWith('.tiff')) {
                     try {
                         const ab = await f.arrayBuffer();
                         const ifds = UTIF.decode(ab);
@@ -377,18 +355,15 @@
                     } catch(e) {
                         previewUrl = URL.createObjectURL(f);
                     }
-                }
-                // 4. Standard Images
-                else {
+                } else {
                     previewUrl = URL.createObjectURL(f);
                 }
 
                 filesList.push({ file: f, blob: processedBlob, url: previewUrl, name: f.name });
             }
 
-            // Alert user if wrong file types were dropped
             if (invalidFiles > 0) {
-                alert(`⚠️ Rejected ${invalidFiles} file(s)! This dedicated tool strictly accepts only .${SRC_FMT.toUpperCase()} files.`);
+                alert(`⚠️ Rejected ${invalidFiles} file(s)! This tool strictly accepts only .${SRC_FMT.toUpperCase()} files.`);
             }
 
             renderGallery();
@@ -458,23 +433,15 @@
             document.getElementById('btn-text').innerText = `⏳ Converting to ${TGT_NAME}...`;
 
             try {
-                // 1. PDF CONVERSION
+                // 1. PDF SOURCE CONVERSION
                 if (SRC_FMT === 'pdf') {
                     if (TGT_FMT === 'svg') {
                         const fd = new FormData();
                         for (let item of filesList) {
                             fd.append('files', item.file);
                         }
-
-                        const resp = await fetch('/convert-pdf-to-svg-curves', {
-                            method: 'POST',
-                            body: fd
-                        });
-
-                        if (!resp.ok) {
-                            const errData = await resp.json().catch(() => ({}));
-                            throw new Error(errData.error || 'Server vector conversion failed');
-                        }
+                        const resp = await fetch('/convert-pdf-to-svg-curves', { method: 'POST', body: fd });
+                        if (!resp.ok) throw new Error('Server vector conversion failed');
 
                         const blob = await resp.blob();
                         let filename = `smartpic_converted_curves.svg`;
@@ -484,13 +451,11 @@
                             const rawName = filesList[0].name.substring(0, filesList[0].name.lastIndexOf('.')) || filesList[0].name;
                             filename = `smartpic_${rawName}.svg`;
                         }
-
                         downloadBlob(blob, filename);
                         finish();
                         return;
                     }
 
-                    // OTHER PDF FORMATS
                     const zip = new JSZip();
                     let singleDownloaded = false;
 
@@ -549,7 +514,7 @@
                     return;
                 }
 
-                // 2. IMAGE CONVERSIONS
+                // 2. IMAGE CONVERSIONS (JPG, PNG, WEBP, AVIF, HEIC, TIFF)
                 if (TGT_FMT === 'pdf') {
                     const { jsPDF } = window.jspdf;
                     let doc = null;
@@ -580,24 +545,22 @@
                     return;
                 }
 
+                // SINGLE FILE CONVERSION
                 if (filesList.length === 1) {
                     const item = filesList[0];
                     const rawName = item.name.substring(0, item.name.lastIndexOf('.')) || item.name;
 
+                    // ⚡ ROBUST AVIF CONVERSION
                     if (TGT_FMT === 'avif') {
                         const fd = new FormData();
                         fd.append('image', item.blob || item.file);
                         fd.append('format', 'AVIF');
                         const resp = await fetch('/process', { method: 'POST', body: fd });
-                        if (!resp.ok) {
-                            const errData = await resp.json().catch(() => ({}));
-                            throw new Error(errData.error || 'AVIF server conversion failed');
-                        }
+                        if (!resp.ok) throw new Error('AVIF server conversion failed');
                         const avifBlob = await resp.blob();
                         downloadBlob(avifBlob, `smartpic_${rawName}.avif`);
                         finish();
                         return;
-                    }
                     }
 
                     const bmp = await createImageBitmap(item.blob);
@@ -628,10 +591,23 @@
                     }, mime, 0.92);
 
                 } else {
+                    // MULTI-FILE BATCH CONVERSION
                     const zip = new JSZip();
 
                     for (let item of filesList) {
                         const rawName = item.name.substring(0, item.name.lastIndexOf('.')) || item.name;
+
+                        if (TGT_FMT === 'avif') {
+                            const fd = new FormData();
+                            fd.append('image', item.blob || item.file);
+                            fd.append('format', 'AVIF');
+                            const resp = await fetch('/process', { method: 'POST', body: fd });
+                            if (resp.ok) {
+                                zip.file(`${rawName}.avif`, await resp.blob());
+                            }
+                            continue;
+                        }
+
                         const bmp = await createImageBitmap(item.blob);
                         const cvs = document.createElement('canvas');
                         cvs.width = bmp.width;
