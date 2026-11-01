@@ -383,6 +383,8 @@ def contact():
 # ⚡ FALLBACK AVIF CONVERTER ENGINE
 # ==========================================
 @app.route('/process', methods=['POST'])
+# ⚡ HIGH-SPEED AVIF & FALLBACK ENGINE
+@app.route('/process', methods=['POST'])
 def process_fallback():
     try:
         file = request.files.get('image')
@@ -391,6 +393,8 @@ def process_fallback():
             return jsonify({'error': 'No file provided'}), 400
 
         img = Image.open(io.BytesIO(file.read()))
+        
+        # Handle transparency
         if img.mode in ('RGBA', 'LA') or (img.mode == 'P' and 'transparency' in img.info):
             if target_fmt in ['JPG', 'JPEG']:
                 bg = Image.new('RGB', img.size, (255, 255, 255))
@@ -399,8 +403,9 @@ def process_fallback():
         else:
             img = img.convert('RGB')
 
-        if img.width > 1280 or img.height > 1280:
-            img.thumbnail((1280, 1280), Image.Resampling.BILINEAR)
+        # Scale down very large camera photos to ensure sub-second AVIF encoding
+        if img.width > 1600 or img.height > 1600:
+            img.thumbnail((1600, 1600), Image.Resampling.LANCZOS)
 
         buf = io.BytesIO()
         out_name = f"smartpic_converted.{target_fmt.lower()}"
@@ -408,15 +413,23 @@ def process_fallback():
 
         if target_fmt == 'AVIF':
             saved = False
+            # Method 1: Ultra-fast pillow save with max speed
             try:
-                img.save(buf, format='AVIF', quality=65)
+                img.save(buf, format='AVIF', quality=65, speed=9)
                 saved = True
             except Exception:
-                pass
+                try:
+                    img.save(buf, format='AVIF', quality=65)
+                    saved = True
+                except Exception:
+                    pass
+            
+            # Method 2: Direct pillow-heif encoding
             if not saved:
                 import pillow_heif
                 heif_file = pillow_heif.from_pillow(img)
                 heif_file.save(buf, format="AVIF", quality=65)
+
         elif target_fmt in ['JPG', 'JPEG']:
             img.save(buf, format='JPEG', quality=90)
             mimetype = 'image/jpeg'
@@ -428,9 +441,10 @@ def process_fallback():
             img.save(buf, format='TIFF')
             mimetype = 'image/tiff'
 
-        return send_file(io.BytesIO(buf.getvalue()), mimetype=mimetype, as_attachment=True, download_name=out_name)
+        buf.seek(0)
+        return send_file(buf, mimetype=mimetype, as_attachment=True, download_name=out_name)
     except Exception as e:
+        print(f"❌ Process error: {str(e)}")
         return jsonify({'error': str(e)}), 500
-
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
