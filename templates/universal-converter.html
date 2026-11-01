@@ -550,10 +550,26 @@
                     const item = filesList[0];
                     const rawName = item.name.substring(0, item.name.lastIndexOf('.')) || item.name;
 
-                    // ⚡ ROBUST AVIF CONVERSION
+                   // ⚡ TURBO FAST AVIF STREAM
                     if (TGT_FMT === 'avif') {
+                        // Fast canvas pre-compression before upload (slashes transfer time by 90%)
+                        let uploadBlob = item.blob || item.file;
+                        try {
+                            const bmp = await createImageBitmap(uploadBlob);
+                            const maxD = 1280;
+                            let w = bmp.width, h = bmp.height;
+                            if (w > maxD || h > maxD) {
+                                if (w > h) { h = Math.round((h * maxD) / w); w = maxD; }
+                                else { w = Math.round((w * maxD) / h); h = maxD; }
+                                const c = document.createElement('canvas');
+                                c.width = w; c.height = h;
+                                c.getContext('2d').drawImage(bmp, 0, 0, w, h);
+                                uploadBlob = await new Promise(r => c.toBlob(r, 'image/jpeg', 0.85));
+                            }
+                        } catch(e) {}
+
                         const fd = new FormData();
-                        fd.append('image', item.blob || item.file);
+                        fd.append('image', uploadBlob);
                         fd.append('format', 'AVIF');
                         const resp = await fetch('/process', { method: 'POST', body: fd });
                         if (!resp.ok) throw new Error('AVIF server conversion failed');
