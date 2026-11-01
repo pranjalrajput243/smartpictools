@@ -586,14 +586,18 @@
 
                     if (TGT_FMT === 'avif') {
                         const fd = new FormData();
-                        fd.append('image', item.blob);
+                        fd.append('image', item.blob || item.file);
                         fd.append('format', 'AVIF');
                         const resp = await fetch('/process', { method: 'POST', body: fd });
-                        if (resp.ok) {
-                            downloadBlob(await resp.blob(), `smartpic_${rawName}.avif`);
-                            finish();
-                            return;
+                        if (!resp.ok) {
+                            const errData = await resp.json().catch(() => ({}));
+                            throw new Error(errData.error || 'AVIF server conversion failed');
                         }
+                        const avifBlob = await resp.blob();
+                        downloadBlob(avifBlob, `smartpic_${rawName}.avif`);
+                        finish();
+                        return;
+                    }
                     }
 
                     const bmp = await createImageBitmap(item.blob);
