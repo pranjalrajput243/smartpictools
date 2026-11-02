@@ -50,6 +50,34 @@
         body { font-family: 'Plus Jakarta Sans', sans-serif; -webkit-tap-highlight-color: transparent; }
         .cropper-view-box { outline: 2px solid #818cf8 !important; }
         .cropper-modal { background-color: #020617 !important; opacity: 0.75 !important; }
+        
+        /* ⚡ FIGMA-STYLE SMART SNAP GUIDES (INVISIBLE UNTIL SNAPPED) */
+        .snap-guide-h {
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 40%;
+            height: 1.5px;
+            background: #10b981;
+            box-shadow: 0 0 8px rgba(16, 185, 129, 0.7);
+            pointer-events: none;
+            z-index: 20;
+            opacity: 0;
+            transition: opacity 0.08s ease-in-out;
+        }
+        .snap-guide-v {
+            position: absolute;
+            top: 0;
+            bottom: 20%;
+            left: 50%;
+            width: 1.5px;
+            background: #10b981;
+            box-shadow: 0 0 8px rgba(16, 185, 129, 0.7);
+            pointer-events: none;
+            z-index: 20;
+            opacity: 0;
+            transition: opacity 0.08s ease-in-out;
+        }
     </style>
 </head>
 <body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col justify-between selection:bg-indigo-500 selection:text-white">
@@ -104,7 +132,7 @@
         <div class="text-center max-w-xl mx-auto mb-6">
             <span class="text-[10px] font-extrabold uppercase tracking-widest text-indigo-400 bg-indigo-500/10 px-2.5 py-0.5 rounded-full border border-indigo-500/20">Official Exam Portal Suite</span>
             <h1 class="text-2xl sm:text-4xl font-black text-white mt-1.5 tracking-tight">Add Name & Date on Photo</h1>
-            <p class="mt-1 text-slate-400 text-xs sm:text-sm">Print candidate name and Date of Photo (DOP) with magnetic center snapping and independent font size controls.</p>
+            <p class="mt-1 text-slate-400 text-xs sm:text-sm">Print candidate name and Date of Photo (DOP) with smart magnetic center snapping and independent font size controls.</p>
         </div>
 
         <!-- ⚡ 2-COLUMN BALANCED STUDIO LAYOUT -->
@@ -239,15 +267,15 @@
                     </div>
                 </div>
 
-                <!-- ⚡ CLEAN PREVIEW (NO LINES ON FACE, CLEAN MAGNETIC SNAP) -->
+                <!-- ⚡ CLEAN PREVIEW WITH SMART MAGNETIC GREEN SNAP LINES -->
                 <div class="bg-slate-950 p-3 rounded-2xl border border-slate-800 flex flex-col items-center justify-center min-h-[300px] max-h-[440px] overflow-hidden shadow-inner">
                     <div class="relative inline-block leading-none">
                         <canvas id="output-canvas" class="max-h-[370px] w-auto h-auto rounded shadow-2xl bg-white block select-none cursor-move" title="Click and drag to position face"></canvas>
+                        
+                        <!-- ⚡ GREEN SMART SNAP LINES (APPEARS ONLY WHEN MAGNETICALLY LOCKED, INVISIBLE OTHERWISE) -->
+                        <div id="guide-h" class="snap-guide-h"></div>
+                        <div id="guide-v" class="snap-guide-v"></div>
                     </div>
-                    
-                    <span id="snap-feedback" class="text-[10px] text-slate-400 mt-2.5 flex items-center gap-1.5 transition">
-                        <span>🧲 Magnetic Snap:</span> Drag face near center to lock automatically
-                    </span>
                 </div>
 
                 <!-- ACTION DOWNLOAD BUTTON -->
@@ -286,8 +314,8 @@
                         <li class="flex items-start gap-3">
                             <span class="w-6 h-6 rounded-full bg-indigo-600 text-white font-bold text-xs flex items-center justify-center flex-shrink-0 mt-0.5">2</span>
                             <div>
-                                <strong class="text-white block">Magnetic Snapping to Center:</strong>
-                                <span>The photo automatically covers the full frame. When you drag your photo, it magnetically snaps into dead-center alignment automatically.</span>
+                                <strong class="text-white block">Smart Magnetic Snapping:</strong>
+                                <span>The photo automatically covers the full frame. When you drag your photo, smart green center guidelines flash to confirm dead-center alignment.</span>
                             </div>
                         </li>
                         <li class="flex items-start gap-3">
@@ -319,10 +347,10 @@
 
                     <div class="bg-slate-900/80 p-5 rounded-2xl border border-slate-800 space-y-1.5 shadow-lg">
                         <h3 class="text-sm font-bold text-white flex items-center gap-2">
-                            <span class="text-indigo-400">🧲</span> Magnetic Center Snap
+                            <span class="text-indigo-400">🧲</span> Smart Magnetic Center Snap
                         </h3>
                         <p class="text-xs text-slate-400 leading-relaxed">
-                            No guessing. Intelligent magnetic snapping locks your face into dead-center alignment horizontally and vertically as you drag.
+                            No guessing. Intelligent magnetic snapping locks your face into dead-center alignment horizontally and vertically with subtle green smart guides.
                         </p>
                     </div>
 
@@ -337,10 +365,10 @@
 
                     <div class="bg-slate-900/80 p-5 rounded-2xl border border-slate-800 space-y-1.5 shadow-lg">
                         <h3 class="text-sm font-bold text-white flex items-center gap-2">
-                            <span class="text-indigo-400">🔒</span> 100% Confidential In-Browser Privacy
+                            <span class="text-indigo-400">💎</span> True 300 DPI Ultra HD Print Clarity
                         </h3>
                         <p class="text-xs text-slate-400 leading-relaxed">
-                            Your personal ID photos, full names, and birth details never leave your device. All rendering executes strictly inside your local browser memory.
+                            Unlike basic phone apps that blur printed text, our high-density canvas renders crisp typography and facial details that remain 100% legible.
                         </p>
                     </div>
                 </div>
@@ -402,7 +430,7 @@
         <p>© 2026 SmartPicTools. 100% Free & Private in-browser suite. <a href="/" class="text-indigo-400 hover:underline">Explore All Tools</a></p>
     </footer>
 
-    <!-- ⚡ DIRECT INTERACTIVE TRANSFORM, MAGNETIC SNAP & 300 DPI ENGINE -->
+    <!-- ⚡ DIRECT INTERACTIVE TRANSFORM, SMART GREEN SNAP & 300 DPI ENGINE -->
     <script>
         let photoCanvas = null;
         let cropper = null;
@@ -421,7 +449,8 @@
 
         const outputCanvas = document.getElementById('output-canvas');
         const ctx = outputCanvas.getContext('2d');
-        const snapFeedback = document.getElementById('snap-feedback');
+        const guideH = document.getElementById('guide-h');
+        const guideV = document.getElementById('guide-v');
 
         // Physical 300 DPI Dimensions for 3.5cm x 4.5cm
         const CANVAS_W = 826;
@@ -450,7 +479,6 @@
             openCropModal(blob);
         }
 
-        // ⚡ FREEFORM CROPPER MODAL
         function openCropModal(blob) {
             const modal = document.getElementById('crop-modal');
             const img = document.getElementById('modal-crop-img');
@@ -462,7 +490,7 @@
 
                 if (cropper) cropper.destroy();
                 cropper = new Cropper(img, {
-                    aspectRatio: NaN,
+                    aspectRatio: NaN, // ⚡ 100% FREEFORM CROP
                     viewMode: 1,
                     background: false,
                     autoCropArea: 0.98,
@@ -496,7 +524,6 @@
             resetTransform();
         }
 
-        // ⚡ FONT SIZE CONTROLS & RECOMMENDED BUTTONS
         function handleNameSizeChange(val) {
             nameFontSize = parseInt(val, 10);
             document.getElementById('name-size-val').innerText = val + 'px';
@@ -522,7 +549,6 @@
             renderFinalCanvas();
         }
 
-        // ⚡ ZOOM & ROTATE CONTROLS
         function handleZoomChange(val) {
             transform.scale = parseFloat(val) || 1.0;
             document.getElementById('zoom-val-text').innerText = Math.round(transform.scale * 100) + '%';
@@ -541,7 +567,7 @@
             renderFinalCanvas();
         }
 
-        // ⚡ MAGNETIC SNAP-TO-CENTER DRAG ENGINE (CLEAN - NO ON-SCREEN LINE CLUTTER)
+        // ⚡ MAGNETIC SNAP-TO-CENTER DRAG WITH DISCREET GREEN SMART GUIDES
         function initDirectDrag() {
             outputCanvas.addEventListener('mousedown', (e) => {
                 if (!photoCanvas) return;
@@ -561,7 +587,7 @@
                 let newPanX = dragStartPan.x + dx;
                 let newPanY = dragStartPan.y + dy;
 
-                // ⚡ MAGNETIC SNAP LOGIC
+                // ⚡ MAGNETIC SNAP LOGIC (Threshold = 18px)
                 const SNAP_THRESHOLD = 18;
                 let snappedX = false;
                 let snappedY = false;
@@ -576,15 +602,9 @@
                     snappedY = true;
                 }
 
-                if (snappedX && snappedY) {
-                    snapFeedback.innerHTML = '<span class="text-emerald-400 font-bold">🧲 Snapped to Dead-Center! (Horizontal & Vertical Lock)</span>';
-                } else if (snappedX) {
-                    snapFeedback.innerHTML = '<span class="text-emerald-400 font-bold">🧲 Snapped to Vertical Center!</span>';
-                } else if (snappedY) {
-                    snapFeedback.innerHTML = '<span class="text-emerald-400 font-bold">🧲 Snapped to Horizontal Center!</span>';
-                } else {
-                    snapFeedback.innerHTML = '<span>🧲 Magnetic Snap:</span> Drag face near center to lock automatically';
-                }
+                // ⚡ GREEN SMART GUIDES (ONLY SHOW WHEN SNAPPED, INVISIBLE OTHERWISE)
+                guideV.style.opacity = snappedX ? '1' : '0';
+                guideH.style.opacity = snappedY ? '1' : '0';
 
                 transform.panX = newPanX;
                 transform.panY = newPanY;
@@ -593,10 +613,13 @@
 
             window.addEventListener('mouseup', () => {
                 isDragging = false;
+                // Automatically hide smart lines on mouse release
+                guideV.style.opacity = '0';
+                guideH.style.opacity = '0';
             });
         }
 
-        // ⚡ RENDER HIGH-RES 300 DPI CANVAS (PERFECT TEXT GAP & BALANCE)
+        // ⚡ RENDER HIGH-RES 300 DPI CANVAS (PERFECT BALANCED COMPACT TEXT GAP)
         function renderFinalCanvas() {
             outputCanvas.width = CANVAS_W;
             outputCanvas.height = CANVAS_H;
@@ -659,15 +682,15 @@
             ctx.lineWidth = 3;
             ctx.strokeRect(1.5, 1.5, CANVAS_W - 3, CANVAS_H - 3);
 
-            // ⚡ 4. PRINT CANDIDATE NAME & DATE WITH BALANCED COMPACT DISTANCE
+            // ⚡ 4. PRINT CANDIDATE NAME & DATE (BALANCED COMPACT DISTANCE)
             ctx.fillStyle = '#0f172a';
             ctx.textAlign = 'center';
 
-            // Candidate Name (Centered in top half of strip)
+            // Candidate Name
             ctx.font = `${fontWeight} ${nameFontSize}px sans-serif`;
             ctx.fillText(candName.toUpperCase(), CANVAS_W / 2, stripY + 95);
 
-            // Date of Photo (Compact, balanced directly below name)
+            // Date of Photo (Compact & perfectly aligned right beneath name)
             ctx.font = `${fontWeight} ${dateFontSize}px sans-serif`;
             ctx.fillText(candDate.toUpperCase(), CANVAS_W / 2, stripY + 152);
         }
