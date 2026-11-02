@@ -103,6 +103,10 @@ def passport_photo_page():
 def photo_signature_joiner_page():
     return render_template('photo-signature-joiner.html')
 
+@app.route('/add-name-date-on-photo')
+def add_name_date_route():
+    return render_template('add-name-date-on-photo.html')
+
 @app.route('/crop-image')
 def crop_route():
     return render_template('crop-image.html')
@@ -333,6 +337,7 @@ def sitemap():
         ('https://smartpictools.in/compress-image', '0.9'),
         ('https://smartpictools.in/passport-photo-maker', '0.9'),
         ('https://smartpictools.in/photo-signature-joiner', '0.9'),
+        ('https://smartpictools.in/add-name-date-on-photo', '0.9'),
         ('https://smartpictools.in/crop-image', '0.9'),
         ('https://smartpictools.in/resize-image', '0.9'),
         ('https://smartpictools.in/convert-image', '0.9'),
