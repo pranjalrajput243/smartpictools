@@ -19,7 +19,7 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://smartpictools.in/add-name-date-on-photo">
     <meta property="og:title" content="Add Name and Date on Photo Online Free - SmartPicTools">
-    <meta property="og:description" content="Add candidate name and date (DOP) on passport photos for SSC, UPSC, and govt forms in 0.05s.">
+    <meta property="og:description" content="Add candidate name and date (DOP) on passport photos with magnetic center snapping in 0.05s.">
 
     <!-- SCHEMA MARKUP -->
     <script type="application/ld+json">
@@ -51,28 +51,30 @@
         .cropper-view-box { outline: 2px solid #818cf8 !important; }
         .cropper-modal { background-color: #020617 !important; opacity: 0.75 !important; }
         
-        /* ⚡ HORIZONTAL & VERTICAL CENTER GUIDELINES */
-        .guide-line-h {
+        /* ⚡ MAGNETIC CENTER SNAP VISUAL FEEDBACK */
+        .snap-line-h {
             position: absolute;
             left: 0;
             right: 0;
             top: 40%;
             height: 1px;
-            background: rgba(99, 102, 241, 0.45);
-            border-top: 1px dashed #818cf8;
             pointer-events: none;
-            z-index: 10;
+            z-index: 15;
+            transition: opacity 0.15s ease;
         }
-        .guide-line-v {
+        .snap-line-v {
             position: absolute;
             top: 0;
             bottom: 20%;
             left: 50%;
             width: 1px;
-            background: rgba(99, 102, 241, 0.45);
-            border-left: 1px dashed #818cf8;
             pointer-events: none;
-            z-index: 10;
+            z-index: 15;
+            transition: opacity 0.15s ease;
+        }
+        .snap-active {
+            box-shadow: 0 0 10px #10b981 !important;
+            border-color: #10b981 !important;
         }
     </style>
 </head>
@@ -128,7 +130,7 @@
         <div class="text-center max-w-xl mx-auto mb-6">
             <span class="text-[10px] font-extrabold uppercase tracking-widest text-indigo-400 bg-indigo-500/10 px-2.5 py-0.5 rounded-full border border-indigo-500/20">Official Exam Portal Suite</span>
             <h1 class="text-2xl sm:text-4xl font-black text-white mt-1.5 tracking-tight">Add Name & Date on Photo</h1>
-            <p class="mt-1 text-slate-400 text-xs sm:text-sm">Print candidate name and Date of Photo (DOP) with interactive center alignment guides and 300 DPI Ultra HD export.</p>
+            <p class="mt-1 text-slate-400 text-xs sm:text-sm">Print candidate name and Date of Photo (DOP) with magnetic center snapping and independent font size controls.</p>
         </div>
 
         <!-- ⚡ 2-COLUMN BALANCED STUDIO LAYOUT -->
@@ -155,7 +157,7 @@
                             <div class="flex items-center gap-3">
                                 <img id="thumb-preview" class="h-16 w-auto object-contain rounded-lg border border-slate-700" src="#" alt="Thumb">
                                 <div class="text-left">
-                                    <span class="text-xs text-emerald-400 font-bold block">✓ Photo Active</span>
+                                    <span class="text-xs text-emerald-400 font-bold block">✓ Photo Loaded</span>
                                     <span class="text-[11px] text-slate-400">Auto-covered & centered</span>
                                 </div>
                             </div>
@@ -171,18 +173,47 @@
                     </div>
                 </div>
 
-                <!-- 2. CANDIDATE NAME & DATE INPUTS -->
-                <div class="space-y-3 pt-1 border-t border-slate-800">
-                    <span class="text-xs font-bold text-slate-300 block">2. Name & Date to Print on Strip:</span>
+                <!-- 2. CANDIDATE NAME & DATE INPUTS WITH FONT SIZE CONTROLS -->
+                <div class="space-y-4 pt-1 border-t border-slate-800">
+                    <span class="text-xs font-bold text-slate-300 block">2. Name & Date Setup:</span>
                     
-                    <div class="space-y-3 bg-slate-950/80 p-4 rounded-2xl border border-slate-800">
+                    <!-- Candidate Name Section -->
+                    <div class="bg-slate-950/80 p-3.5 rounded-2xl border border-slate-800 space-y-2.5">
                         <div>
                             <label class="block text-[11px] font-bold text-slate-400 mb-1">Candidate Name (Capital Letters):</label>
                             <input type="text" id="input-name" value="RAHUL SHARMA" oninput="renderFinalCanvas()" placeholder="e.g. RAHUL SHARMA" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs font-bold text-white uppercase focus:outline-none focus:border-indigo-500">
                         </div>
+                        
+                        <!-- Name Font Size Slider & Recommended Button -->
+                        <div class="flex items-center justify-between gap-3 text-xs pt-1">
+                            <div class="flex items-center gap-2 flex-1">
+                                <span class="text-[11px] text-slate-400 font-semibold whitespace-nowrap">Size:</span>
+                                <input type="range" id="name-size-slider" min="24" max="64" value="44" oninput="handleNameSizeChange(this.value)" class="w-full accent-indigo-500 cursor-pointer">
+                                <span id="name-size-val" class="text-[10px] text-indigo-400 font-bold bg-slate-900 px-1.5 py-0.5 rounded border border-slate-800 w-11 text-center">44px</span>
+                            </div>
+                            <button type="button" onclick="setRecommendedSize('name')" class="py-1 px-2 rounded-lg bg-indigo-500/10 hover:bg-indigo-500/20 text-indigo-300 text-[10px] font-bold border border-indigo-500/30 whitespace-nowrap transition">
+                                ★ Recommended (44px)
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Date of Photo (DOP) Section -->
+                    <div class="bg-slate-950/80 p-3.5 rounded-2xl border border-slate-800 space-y-2.5">
                         <div>
                             <label class="block text-[11px] font-bold text-slate-400 mb-1">Date of Photo (DOP / DOB):</label>
                             <input type="text" id="input-date" value="DOP: 28-10-2026" oninput="renderFinalCanvas()" placeholder="e.g. DOP: 28-10-2026" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs font-bold text-white focus:outline-none focus:border-indigo-500">
+                        </div>
+
+                        <!-- Date Font Size Slider & Recommended Button -->
+                        <div class="flex items-center justify-between gap-3 text-xs pt-1">
+                            <div class="flex items-center gap-2 flex-1">
+                                <span class="text-[11px] text-slate-400 font-semibold whitespace-nowrap">Size:</span>
+                                <input type="range" id="date-size-slider" min="20" max="54" value="36" oninput="handleDateSizeChange(this.value)" class="w-full accent-indigo-500 cursor-pointer">
+                                <span id="date-size-val" class="text-[10px] text-indigo-400 font-bold bg-slate-900 px-1.5 py-0.5 rounded border border-slate-800 w-11 text-center">36px</span>
+                            </div>
+                            <button type="button" onclick="setRecommendedSize('date')" class="py-1 px-2 rounded-lg bg-indigo-500/10 hover:bg-indigo-500/20 text-indigo-300 text-[10px] font-bold border border-indigo-500/30 whitespace-nowrap transition">
+                                ★ Recommended (36px)
+                            </button>
                         </div>
                     </div>
 
@@ -234,17 +265,18 @@
                     </div>
                 </div>
 
-                <!-- ⚡ CANVAS PREVIEW WITH CENTER ALIGNMENT GUIDELINES (CROSSHAIR) -->
+                <!-- ⚡ CANVAS PREVIEW WITH MAGNETIC SNAP LINES -->
                 <div class="bg-slate-950 p-3 rounded-2xl border border-slate-800 flex flex-col items-center justify-center min-h-[300px] max-h-[440px] overflow-hidden shadow-inner">
                     <div class="relative inline-block leading-none">
                         <canvas id="output-canvas" class="max-h-[370px] w-auto h-auto rounded shadow-2xl bg-white block select-none cursor-move" title="Click and drag to position face"></canvas>
                         
-                        <!-- ⚡ HORIZONTAL & VERTICAL CENTER GUIDE LINES (OVERLAY ONLY - DOES NOT PRINT IN DOWNLOAD) -->
-                        <div class="guide-line-h"></div>
-                        <div class="guide-line-v"></div>
+                        <!-- ⚡ MAGNETIC SNAP GUIDES (TURNS GREEN WHEN SNAPPED TO DEAD-CENTER) -->
+                        <div id="guide-h" class="snap-line-h border-t border-dashed border-indigo-400/40"></div>
+                        <div id="guide-v" class="snap-line-v border-l border-dashed border-indigo-400/40"></div>
                     </div>
-                    <span class="text-[10px] text-slate-400 mt-2.5 flex items-center gap-1.5">
-                        <span class="text-indigo-400 font-bold">🎯 Center Guides:</span> Align nose & eyes with the dashed center lines
+                    
+                    <span id="snap-feedback" class="text-[10px] text-slate-400 mt-2.5 flex items-center gap-1.5 transition">
+                        <span>🧲 Magnetic Snap:</span> Drag face near center lines to lock automatically
                     </span>
                 </div>
 
@@ -278,21 +310,21 @@
                             <span class="w-6 h-6 rounded-full bg-indigo-600 text-white font-bold text-xs flex items-center justify-center flex-shrink-0 mt-0.5">1</span>
                             <div>
                                 <strong class="text-white block">Upload & Freeform Crop:</strong>
-                                <span>Click on the upload card or drop your picture. A freeform crop popup opens allowing you to adjust corners without ratio constraints.</span>
+                                <span>Click on the upload card or drop your picture. A freeform crop popup opens allowing you to adjust corners freely without ratio constraints.</span>
                             </div>
                         </li>
                         <li class="flex items-start gap-3">
                             <span class="w-6 h-6 rounded-full bg-indigo-600 text-white font-bold text-xs flex items-center justify-center flex-shrink-0 mt-0.5">2</span>
                             <div>
-                                <strong class="text-white block">Align Face with Center Crosshair Guides:</strong>
-                                <span>The photo automatically covers the full frame and centers itself. Use the horizontal and vertical center guide lines to align your eyes and nose dead-center by dragging directly on the photo.</span>
+                                <strong class="text-white block">Magnetic Snapping to Center:</strong>
+                                <span>The photo automatically covers the full frame. When you drag your photo, it magnetically snaps into dead-center alignment, highlighted by active green center lines.</span>
                             </div>
                         </li>
                         <li class="flex items-start gap-3">
                             <span class="w-6 h-6 rounded-full bg-indigo-600 text-white font-bold text-xs flex items-center justify-center flex-shrink-0 mt-0.5">3</span>
                             <div>
-                                <strong class="text-white block">Enter Name, Date & Download in 300 DPI:</strong>
-                                <span>Type your candidate name in capital letters and enter the Date of Photograph (e.g. DOP: 28-10-2026). Click Download to export an ultra-sharp 300 DPI photo ready for exam portals.</span>
+                                <strong class="text-white block">Customize Name & Date Font Sizes:</strong>
+                                <span>Type your name and date. Adjust independent font size sliders with one-click recommended presets to ensure perfect legibility. Click Download to export an ultra-sharp 300 DPI photo.</span>
                             </div>
                         </li>
                     </ol>
@@ -308,10 +340,19 @@
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div class="bg-slate-900/80 p-5 rounded-2xl border border-slate-800 space-y-1.5 shadow-lg">
                         <h3 class="text-sm font-bold text-white flex items-center gap-2">
-                            <span class="text-indigo-400">🏛️</span> 100% SSC & UPSC Portal Rejection-Proof
+                            <span class="text-indigo-400">🧲</span> Magnetic Center Snap
                         </h3>
                         <p class="text-xs text-slate-400 leading-relaxed">
-                            Follows official Staff Selection Commission (SSC) and UPSC guidelines for high-contrast typography, official 3.5×4.5cm dimensions, and standardized strip placement.
+                            No guessing. Intelligent magnetic snapping locks your face into dead-center alignment horizontally and vertically as you drag.
+                        </p>
+                    </div>
+
+                    <div class="bg-slate-900/80 p-5 rounded-2xl border border-slate-800 space-y-1.5 shadow-lg">
+                        <h3 class="text-sm font-bold text-white flex items-center gap-2">
+                            <span class="text-indigo-400">📏</span> Independent Font Size Controls
+                        </h3>
+                        <p class="text-xs text-slate-400 leading-relaxed">
+                            Customize text size for your candidate name and date separately with 1-click recommended presets tailored for official admit cards.
                         </p>
                     </div>
 
@@ -320,16 +361,7 @@
                             <span class="text-indigo-400">💎</span> True 300 DPI Ultra HD Print Clarity
                         </h3>
                         <p class="text-xs text-slate-400 leading-relaxed">
-                            Unlike basic phone apps that blur printed text, our high-density canvas renders crisp typography and facial details that remain 100% legible on admit cards.
-                        </p>
-                    </div>
-
-                    <div class="bg-slate-900/80 p-5 rounded-2xl border border-slate-800 space-y-1.5 shadow-lg">
-                        <h3 class="text-sm font-bold text-white flex items-center gap-2">
-                            <span class="text-indigo-400">🎯</span> Precision Center Guidelines
-                        </h3>
-                        <p class="text-xs text-slate-400 leading-relaxed">
-                            Interactive horizontal and vertical alignment lines ensure your face and posture are balanced in the frame, preventing off-center rejections.
+                            Unlike basic phone apps that blur printed text, our high-density canvas renders crisp typography and facial details that remain 100% legible.
                         </p>
                     </div>
 
@@ -353,31 +385,31 @@
                 <div class="space-y-3">
                     <details class="bg-slate-900/90 p-4 sm:p-5 rounded-2xl border border-slate-800 text-xs sm:text-sm cursor-pointer group">
                         <summary class="font-bold text-white flex justify-between items-center group-hover:text-indigo-400 transition">
-                            Is printing the Date of Photo (DOP) compulsory for SSC and UP Police recruitment?
+                            How does the magnetic snap feature help with passport photo alignment?
                             <span class="text-indigo-400 text-base">▼</span>
                         </summary>
                         <p class="text-slate-400 mt-2.5 leading-relaxed">
-                            Yes. Most official SSC notifications (CGL, CHSL, MTS, GD Constable) and State Police recruitment rules state that the photograph must not be older than 3 months from the notice date and must clearly display the candidate's name and the date the photo was taken printed at the bottom.
+                            Official exam guidelines require your face to be centered with equal space on both shoulders. When you drag your photo, our magnetic snap automatically detects the center axis and locks your photo into position, turning the lines green to confirm perfect centering.
                         </p>
                     </details>
 
                     <details class="bg-slate-900/90 p-4 sm:p-5 rounded-2xl border border-slate-800 text-xs sm:text-sm cursor-pointer group">
                         <summary class="font-bold text-white flex justify-between items-center group-hover:text-indigo-400 transition">
-                            Will the center guide lines be visible on my downloaded photograph?
+                            Will the magnetic snap lines appear on the downloaded photo?
                             <span class="text-indigo-400 text-base">▼</span>
                         </summary>
                         <p class="text-slate-400 mt-2.5 leading-relaxed">
-                            No. The dashed center lines are visual positioning guides on your screen only. When you click download, only your clean photograph and the official name/date strip are exported.
+                            No. The snap lines are on-screen alignment aids only. When you click download, only your clean photograph, official white strip, and sharp text are exported.
                         </p>
                     </details>
 
                     <details class="bg-slate-900/90 p-4 sm:p-5 rounded-2xl border border-slate-800 text-xs sm:text-sm cursor-pointer group">
                         <summary class="font-bold text-white flex justify-between items-center group-hover:text-indigo-400 transition">
-                            What are the exact photo dimensions generated by this tool?
+                            What are the recommended font sizes for SSC and UP Police photos?
                             <span class="text-indigo-400 text-base">▼</span>
                         </summary>
                         <p class="text-slate-400 mt-2.5 leading-relaxed">
-                            The output image is formatted to standard Indian government exam proportions (826 × 1062 pixels @ 300 DPI), perfectly matching the official 3.5 cm × 4.5 cm passport standard in razor-sharp clarity.
+                            We recommend 44px for the Candidate Name and 36px for the Date of Photo (DOP) in 300 DPI space. You can instantly restore these optimal sizes by clicking the 'Recommended' buttons next to each slider.
                         </p>
                     </details>
 
@@ -400,12 +432,16 @@
         <p>© 2026 SmartPicTools. 100% Free & Private in-browser suite. <a href="/" class="text-indigo-400 hover:underline">Explore All Tools</a></p>
     </footer>
 
-    <!-- ⚡ DIRECT INTERACTIVE TRANSFORM & 300 DPI ENGINE -->
+    <!-- ⚡ DIRECT INTERACTIVE TRANSFORM, MAGNETIC SNAP & 300 DPI ENGINE -->
     <script>
         let photoCanvas = null;
         let cropper = null;
         let rawPhotoBlob = null;
         let originalFileName = 'candidate_photo';
+
+        // Font Sizes State
+        let nameFontSize = 44;
+        let dateFontSize = 36;
 
         // Direct Transform State
         let transform = { scale: 1.0, panX: 0, panY: 0, rotate: 0 };
@@ -415,6 +451,9 @@
 
         const outputCanvas = document.getElementById('output-canvas');
         const ctx = outputCanvas.getContext('2d');
+        const guideH = document.getElementById('guide-h');
+        const guideV = document.getElementById('guide-v');
+        const snapFeedback = document.getElementById('snap-feedback');
 
         // Physical 300 DPI Dimensions for 3.5cm x 4.5cm
         const CANVAS_W = 826;
@@ -443,7 +482,7 @@
             openCropModal(blob);
         }
 
-        // ⚡ FREEFORM CROPPER MODAL (NO RATIO RESTRICTION)
+        // ⚡ FREEFORM CROPPER MODAL
         function openCropModal(blob) {
             const modal = document.getElementById('crop-modal');
             const img = document.getElementById('modal-crop-img');
@@ -455,7 +494,7 @@
 
                 if (cropper) cropper.destroy();
                 cropper = new Cropper(img, {
-                    aspectRatio: NaN, // ⚡ 100% FREEFORM CROP!
+                    aspectRatio: NaN, // ⚡ 100% FREEFORM
                     viewMode: 1,
                     background: false,
                     autoCropArea: 0.98,
@@ -486,7 +525,33 @@
             document.getElementById('thumb-preview').src = photoCanvas.toDataURL('image/jpeg', 0.9);
 
             closeCropModal();
-            resetTransform(); // Auto full-cover & center!
+            resetTransform();
+        }
+
+        // ⚡ FONT SIZE CONTROLS & RECOMMENDED BUTTONS
+        function handleNameSizeChange(val) {
+            nameFontSize = parseInt(val, 10);
+            document.getElementById('name-size-val').innerText = val + 'px';
+            renderFinalCanvas();
+        }
+
+        function handleDateSizeChange(val) {
+            dateFontSize = parseInt(val, 10);
+            document.getElementById('date-size-val').innerText = val + 'px';
+            renderFinalCanvas();
+        }
+
+        function setRecommendedSize(type) {
+            if (type === 'name') {
+                nameFontSize = 44;
+                document.getElementById('name-size-slider').value = 44;
+                document.getElementById('name-size-val').innerText = '44px';
+            } else {
+                dateFontSize = 36;
+                document.getElementById('date-size-slider').value = 36;
+                document.getElementById('date-size-val').innerText = '36px';
+            }
+            renderFinalCanvas();
         }
 
         // ⚡ ZOOM & ROTATE CONTROLS
@@ -501,7 +566,6 @@
             renderFinalCanvas();
         }
 
-        // ⚡ AUTOMATIC 100% FULL-AREA COVER & DEAD-CENTER ALIGNMENT
         function resetTransform() {
             transform = { scale: 1.0, panX: 0, panY: 0, rotate: 0 };
             document.getElementById('zoom-slider').value = "1.0";
@@ -509,7 +573,7 @@
             renderFinalCanvas();
         }
 
-        // ⚡ DIRECT ON-CANVAS PANNING/DRAGGING
+        // ⚡ MAGNETIC SNAP-TO-CENTER DRAG ENGINE
         function initDirectDrag() {
             outputCanvas.addEventListener('mousedown', (e) => {
                 if (!photoCanvas) return;
@@ -526,13 +590,58 @@
                 const dx = (e.clientX - dragStartMouse.x) * scaleFactor;
                 const dy = (e.clientY - dragStartMouse.y) * scaleFactor;
 
-                transform.panX = dragStartPan.x + dx;
-                transform.panY = dragStartPan.y + dy;
+                let newPanX = dragStartPan.x + dx;
+                let newPanY = dragStartPan.y + dy;
+
+                // ⚡ MAGNETIC SNAP LOGIC: (Threshold = 18px)
+                const SNAP_THRESHOLD = 18;
+                let snappedX = false;
+                let snappedY = false;
+
+                // Snap Horizontally to Center
+                if (Math.abs(newPanX) < SNAP_THRESHOLD) {
+                    newPanX = 0;
+                    snappedX = true;
+                }
+
+                // Snap Vertically to Center
+                if (Math.abs(newPanY) < SNAP_THRESHOLD) {
+                    newPanY = 0;
+                    snappedY = true;
+                }
+
+                // Visual Feedback on Snap
+                if (snappedX) {
+                    guideV.className = "snap-line-v border-l-2 border-emerald-400 opacity-100";
+                } else {
+                    guideV.className = "snap-line-v border-l border-dashed border-indigo-400/40 opacity-70";
+                }
+
+                if (snappedY) {
+                    guideH.className = "snap-line-h border-t-2 border-emerald-400 opacity-100";
+                } else {
+                    guideH.className = "snap-line-h border-t border-dashed border-indigo-400/40 opacity-70";
+                }
+
+                if (snappedX && snappedY) {
+                    snapFeedback.innerHTML = '<span class="text-emerald-400 font-bold">🧲 Snapped to Dead-Center! (Horizontal & Vertical Lock)</span>';
+                } else if (snappedX) {
+                    snapFeedback.innerHTML = '<span class="text-emerald-400 font-bold">🧲 Snapped to Vertical Center!</span>';
+                } else if (snappedY) {
+                    snapFeedback.innerHTML = '<span class="text-emerald-400 font-bold">🧲 Snapped to Horizontal Center!</span>';
+                } else {
+                    snapFeedback.innerHTML = '<span>🧲 Magnetic Snap:</span> Drag face near center lines to lock automatically';
+                }
+
+                transform.panX = newPanX;
+                transform.panY = newPanY;
                 renderFinalCanvas();
             });
 
             window.addEventListener('mouseup', () => {
                 isDragging = false;
+                guideV.className = "snap-line-v border-l border-dashed border-indigo-400/40 opacity-70";
+                guideH.className = "snap-line-h border-t border-dashed border-indigo-400/40 opacity-70";
             });
         }
 
@@ -558,10 +667,10 @@
             ctx.save();
             ctx.beginPath();
             ctx.rect(0, 0, CANVAS_W, stripY);
-            ctx.clip(); // Strictly clips inside photo area above name strip
+            ctx.clip();
 
             if (photoCanvas) {
-                // ⚡ OBJECT-FIT: COVER FORMULA (Zero white borders, covers 100% of photo slot!)
+                // Object-fit: cover formula
                 const pW = photoCanvas.width;
                 const pH = photoCanvas.height;
                 const coverScale = Math.max(CANVAS_W / pW, stripY / pH);
@@ -600,20 +709,20 @@
             ctx.lineWidth = 3;
             ctx.strokeRect(1.5, 1.5, CANVAS_W - 3, CANVAS_H - 3);
 
-            // 4. Print Candidate Name & Date Text (High-Density Vector Typography)
+            // 4. Print Candidate Name & Date Text with Dynamic Font Sizes
             ctx.fillStyle = '#0f172a';
             ctx.textAlign = 'center';
 
-            // Candidate Name
-            ctx.font = `${fontWeight} 44px sans-serif`;
-            ctx.fillText(candName.toUpperCase(), CANVAS_W / 2, stripY + 85);
+            // Candidate Name (Independent Size Control)
+            ctx.font = `${fontWeight} ${nameFontSize}px sans-serif`;
+            ctx.fillText(candName.toUpperCase(), CANVAS_W / 2, stripY + 82);
 
-            // Date of Photo (DOP)
-            ctx.font = `${fontWeight} 36px sans-serif`;
+            // Date of Photo (Independent Size Control)
+            ctx.font = `${fontWeight} ${dateFontSize}px sans-serif`;
             ctx.fillText(candDate.toUpperCase(), CANVAS_W / 2, stripY + 155);
         }
 
-        // ⚡ HIGH-RESOLUTION 300 DPI EXPORT (NO GUIDELINES IN DOWNLOAD)
+        // ⚡ HIGH-RESOLUTION 300 DPI EXPORT
         function downloadImage() {
             if (!photoCanvas) {
                 alert('Please upload a photo first!');
