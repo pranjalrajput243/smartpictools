@@ -50,32 +50,6 @@
         body { font-family: 'Plus Jakarta Sans', sans-serif; -webkit-tap-highlight-color: transparent; }
         .cropper-view-box { outline: 2px solid #818cf8 !important; }
         .cropper-modal { background-color: #020617 !important; opacity: 0.75 !important; }
-        
-        /* ⚡ MAGNETIC CENTER SNAP VISUAL FEEDBACK */
-        .snap-line-h {
-            position: absolute;
-            left: 0;
-            right: 0;
-            top: 40%;
-            height: 1px;
-            pointer-events: none;
-            z-index: 15;
-            transition: opacity 0.15s ease;
-        }
-        .snap-line-v {
-            position: absolute;
-            top: 0;
-            bottom: 20%;
-            left: 50%;
-            width: 1px;
-            pointer-events: none;
-            z-index: 15;
-            transition: opacity 0.15s ease;
-        }
-        .snap-active {
-            box-shadow: 0 0 10px #10b981 !important;
-            border-color: #10b981 !important;
-        }
     </style>
 </head>
 <body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col justify-between selection:bg-indigo-500 selection:text-white">
@@ -157,7 +131,7 @@
                             <div class="flex items-center gap-3">
                                 <img id="thumb-preview" class="h-16 w-auto object-contain rounded-lg border border-slate-700" src="#" alt="Thumb">
                                 <div class="text-left">
-                                    <span class="text-xs text-emerald-400 font-bold block">✓ Photo Loaded</span>
+                                    <span class="text-xs text-emerald-400 font-bold block">✓ Photo Active</span>
                                     <span class="text-[11px] text-slate-400">Auto-covered & centered</span>
                                 </div>
                             </div>
@@ -181,7 +155,7 @@
                     <div class="bg-slate-950/80 p-3.5 rounded-2xl border border-slate-800 space-y-2.5">
                         <div>
                             <label class="block text-[11px] font-bold text-slate-400 mb-1">Candidate Name (Capital Letters):</label>
-                            <input type="text" id="input-name" value="RAHUL SHARMA" oninput="renderFinalCanvas()" placeholder="e.g. RAHUL SHARMA" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs font-bold text-white uppercase focus:outline-none focus:border-indigo-500">
+                            <input type="text" id="input-name" value="PRANJAL RAJPUT" oninput="renderFinalCanvas()" placeholder="e.g. PRANJAL RAJPUT" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs font-bold text-white uppercase focus:outline-none focus:border-indigo-500">
                         </div>
                         
                         <!-- Name Font Size Slider & Recommended Button -->
@@ -208,11 +182,11 @@
                         <div class="flex items-center justify-between gap-3 text-xs pt-1">
                             <div class="flex items-center gap-2 flex-1">
                                 <span class="text-[11px] text-slate-400 font-semibold whitespace-nowrap">Size:</span>
-                                <input type="range" id="date-size-slider" min="20" max="54" value="36" oninput="handleDateSizeChange(this.value)" class="w-full accent-indigo-500 cursor-pointer">
-                                <span id="date-size-val" class="text-[10px] text-indigo-400 font-bold bg-slate-900 px-1.5 py-0.5 rounded border border-slate-800 w-11 text-center">36px</span>
+                                <input type="range" id="date-size-slider" min="20" max="54" value="34" oninput="handleDateSizeChange(this.value)" class="w-full accent-indigo-500 cursor-pointer">
+                                <span id="date-size-val" class="text-[10px] text-indigo-400 font-bold bg-slate-900 px-1.5 py-0.5 rounded border border-slate-800 w-11 text-center">34px</span>
                             </div>
                             <button type="button" onclick="setRecommendedSize('date')" class="py-1 px-2 rounded-lg bg-indigo-500/10 hover:bg-indigo-500/20 text-indigo-300 text-[10px] font-bold border border-indigo-500/30 whitespace-nowrap transition">
-                                ★ Recommended (36px)
+                                ★ Recommended (34px)
                             </button>
                         </div>
                     </div>
@@ -265,18 +239,14 @@
                     </div>
                 </div>
 
-                <!-- ⚡ CANVAS PREVIEW WITH MAGNETIC SNAP LINES -->
+                <!-- ⚡ CLEAN PREVIEW (NO LINES ON FACE, CLEAN MAGNETIC SNAP) -->
                 <div class="bg-slate-950 p-3 rounded-2xl border border-slate-800 flex flex-col items-center justify-center min-h-[300px] max-h-[440px] overflow-hidden shadow-inner">
                     <div class="relative inline-block leading-none">
                         <canvas id="output-canvas" class="max-h-[370px] w-auto h-auto rounded shadow-2xl bg-white block select-none cursor-move" title="Click and drag to position face"></canvas>
-                        
-                        <!-- ⚡ MAGNETIC SNAP GUIDES (TURNS GREEN WHEN SNAPPED TO DEAD-CENTER) -->
-                        <div id="guide-h" class="snap-line-h border-t border-dashed border-indigo-400/40"></div>
-                        <div id="guide-v" class="snap-line-v border-l border-dashed border-indigo-400/40"></div>
                     </div>
                     
                     <span id="snap-feedback" class="text-[10px] text-slate-400 mt-2.5 flex items-center gap-1.5 transition">
-                        <span>🧲 Magnetic Snap:</span> Drag face near center lines to lock automatically
+                        <span>🧲 Magnetic Snap:</span> Drag face near center to lock automatically
                     </span>
                 </div>
 
@@ -317,7 +287,7 @@
                             <span class="w-6 h-6 rounded-full bg-indigo-600 text-white font-bold text-xs flex items-center justify-center flex-shrink-0 mt-0.5">2</span>
                             <div>
                                 <strong class="text-white block">Magnetic Snapping to Center:</strong>
-                                <span>The photo automatically covers the full frame. When you drag your photo, it magnetically snaps into dead-center alignment, highlighted by active green center lines.</span>
+                                <span>The photo automatically covers the full frame. When you drag your photo, it magnetically snaps into dead-center alignment automatically.</span>
                             </div>
                         </li>
                         <li class="flex items-start gap-3">
@@ -340,6 +310,15 @@
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div class="bg-slate-900/80 p-5 rounded-2xl border border-slate-800 space-y-1.5 shadow-lg">
                         <h3 class="text-sm font-bold text-white flex items-center gap-2">
+                            <span class="text-indigo-400">🏛️</span> 100% SSC & UPSC Portal Rejection-Proof
+                        </h3>
+                        <p class="text-xs text-slate-400 leading-relaxed">
+                            Follows official Staff Selection Commission (SSC) and UPSC guidelines for high-contrast typography, official 3.5×4.5cm dimensions, and standardized strip placement.
+                        </p>
+                    </div>
+
+                    <div class="bg-slate-900/80 p-5 rounded-2xl border border-slate-800 space-y-1.5 shadow-lg">
+                        <h3 class="text-sm font-bold text-white flex items-center gap-2">
                             <span class="text-indigo-400">🧲</span> Magnetic Center Snap
                         </h3>
                         <p class="text-xs text-slate-400 leading-relaxed">
@@ -353,15 +332,6 @@
                         </h3>
                         <p class="text-xs text-slate-400 leading-relaxed">
                             Customize text size for your candidate name and date separately with 1-click recommended presets tailored for official admit cards.
-                        </p>
-                    </div>
-
-                    <div class="bg-slate-900/80 p-5 rounded-2xl border border-slate-800 space-y-1.5 shadow-lg">
-                        <h3 class="text-sm font-bold text-white flex items-center gap-2">
-                            <span class="text-indigo-400">💎</span> True 300 DPI Ultra HD Print Clarity
-                        </h3>
-                        <p class="text-xs text-slate-400 leading-relaxed">
-                            Unlike basic phone apps that blur printed text, our high-density canvas renders crisp typography and facial details that remain 100% legible.
                         </p>
                     </div>
 
@@ -385,31 +355,31 @@
                 <div class="space-y-3">
                     <details class="bg-slate-900/90 p-4 sm:p-5 rounded-2xl border border-slate-800 text-xs sm:text-sm cursor-pointer group">
                         <summary class="font-bold text-white flex justify-between items-center group-hover:text-indigo-400 transition">
-                            How does the magnetic snap feature help with passport photo alignment?
+                            Is printing the Date of Photo (DOP) compulsory for SSC and UP Police recruitment?
                             <span class="text-indigo-400 text-base">▼</span>
                         </summary>
                         <p class="text-slate-400 mt-2.5 leading-relaxed">
-                            Official exam guidelines require your face to be centered with equal space on both shoulders. When you drag your photo, our magnetic snap automatically detects the center axis and locks your photo into position, turning the lines green to confirm perfect centering.
+                            Yes. Most official SSC notifications (CGL, CHSL, MTS, GD Constable) and State Police recruitment rules state that the photograph must not be older than 3 months from the notice date and must clearly display the candidate's name and the date the photo was taken printed at the bottom.
                         </p>
                     </details>
 
                     <details class="bg-slate-900/90 p-4 sm:p-5 rounded-2xl border border-slate-800 text-xs sm:text-sm cursor-pointer group">
                         <summary class="font-bold text-white flex justify-between items-center group-hover:text-indigo-400 transition">
-                            Will the magnetic snap lines appear on the downloaded photo?
+                            Should I enter my Date of Birth (DOB) or Date of Photo (DOP)?
                             <span class="text-indigo-400 text-base">▼</span>
                         </summary>
                         <p class="text-slate-400 mt-2.5 leading-relaxed">
-                            No. The snap lines are on-screen alignment aids only. When you click download, only your clean photograph, official white strip, and sharp text are exported.
+                            Check your official exam notification. SSC exams require the Date of Photo (DOP) to prove the photo was captured within the last three months. Some state police exams require Date of Birth (DOB). You can customize the date text prefix freely in our tool (e.g. 'DOP: 28-10-2026' or 'DOB: 15-08-2000').
                         </p>
                     </details>
 
                     <details class="bg-slate-900/90 p-4 sm:p-5 rounded-2xl border border-slate-800 text-xs sm:text-sm cursor-pointer group">
                         <summary class="font-bold text-white flex justify-between items-center group-hover:text-indigo-400 transition">
-                            What are the recommended font sizes for SSC and UP Police photos?
+                            What are the exact photo dimensions generated by this tool?
                             <span class="text-indigo-400 text-base">▼</span>
                         </summary>
                         <p class="text-slate-400 mt-2.5 leading-relaxed">
-                            We recommend 44px for the Candidate Name and 36px for the Date of Photo (DOP) in 300 DPI space. You can instantly restore these optimal sizes by clicking the 'Recommended' buttons next to each slider.
+                            The output image is formatted to standard Indian government exam proportions (826 × 1062 pixels @ 300 DPI), perfectly matching the official 3.5 cm × 4.5 cm passport standard in razor-sharp clarity.
                         </p>
                     </details>
 
@@ -441,7 +411,7 @@
 
         // Font Sizes State
         let nameFontSize = 44;
-        let dateFontSize = 36;
+        let dateFontSize = 34;
 
         // Direct Transform State
         let transform = { scale: 1.0, panX: 0, panY: 0, rotate: 0 };
@@ -451,15 +421,13 @@
 
         const outputCanvas = document.getElementById('output-canvas');
         const ctx = outputCanvas.getContext('2d');
-        const guideH = document.getElementById('guide-h');
-        const guideV = document.getElementById('guide-v');
         const snapFeedback = document.getElementById('snap-feedback');
 
         // Physical 300 DPI Dimensions for 3.5cm x 4.5cm
         const CANVAS_W = 826;
         const CANVAS_H = 1062;
         const STRIP_H = 210;
-        const PHOTO_SLOT_H = CANVAS_H - STRIP_H; // Exactly 852px
+        const PHOTO_SLOT_H = CANVAS_H - STRIP_H;
 
         window.addEventListener('DOMContentLoaded', () => {
             renderFinalCanvas();
@@ -494,7 +462,7 @@
 
                 if (cropper) cropper.destroy();
                 cropper = new Cropper(img, {
-                    aspectRatio: NaN, // ⚡ 100% FREEFORM
+                    aspectRatio: NaN,
                     viewMode: 1,
                     background: false,
                     autoCropArea: 0.98,
@@ -547,9 +515,9 @@
                 document.getElementById('name-size-slider').value = 44;
                 document.getElementById('name-size-val').innerText = '44px';
             } else {
-                dateFontSize = 36;
-                document.getElementById('date-size-slider').value = 36;
-                document.getElementById('date-size-val').innerText = '36px';
+                dateFontSize = 34;
+                document.getElementById('date-size-slider').value = 34;
+                document.getElementById('date-size-val').innerText = '34px';
             }
             renderFinalCanvas();
         }
@@ -573,7 +541,7 @@
             renderFinalCanvas();
         }
 
-        // ⚡ MAGNETIC SNAP-TO-CENTER DRAG ENGINE
+        // ⚡ MAGNETIC SNAP-TO-CENTER DRAG ENGINE (CLEAN - NO ON-SCREEN LINE CLUTTER)
         function initDirectDrag() {
             outputCanvas.addEventListener('mousedown', (e) => {
                 if (!photoCanvas) return;
@@ -593,34 +561,19 @@
                 let newPanX = dragStartPan.x + dx;
                 let newPanY = dragStartPan.y + dy;
 
-                // ⚡ MAGNETIC SNAP LOGIC: (Threshold = 18px)
+                // ⚡ MAGNETIC SNAP LOGIC
                 const SNAP_THRESHOLD = 18;
                 let snappedX = false;
                 let snappedY = false;
 
-                // Snap Horizontally to Center
                 if (Math.abs(newPanX) < SNAP_THRESHOLD) {
                     newPanX = 0;
                     snappedX = true;
                 }
 
-                // Snap Vertically to Center
                 if (Math.abs(newPanY) < SNAP_THRESHOLD) {
                     newPanY = 0;
                     snappedY = true;
-                }
-
-                // Visual Feedback on Snap
-                if (snappedX) {
-                    guideV.className = "snap-line-v border-l-2 border-emerald-400 opacity-100";
-                } else {
-                    guideV.className = "snap-line-v border-l border-dashed border-indigo-400/40 opacity-70";
-                }
-
-                if (snappedY) {
-                    guideH.className = "snap-line-h border-t-2 border-emerald-400 opacity-100";
-                } else {
-                    guideH.className = "snap-line-h border-t border-dashed border-indigo-400/40 opacity-70";
                 }
 
                 if (snappedX && snappedY) {
@@ -630,7 +583,7 @@
                 } else if (snappedY) {
                     snapFeedback.innerHTML = '<span class="text-emerald-400 font-bold">🧲 Snapped to Horizontal Center!</span>';
                 } else {
-                    snapFeedback.innerHTML = '<span>🧲 Magnetic Snap:</span> Drag face near center lines to lock automatically';
+                    snapFeedback.innerHTML = '<span>🧲 Magnetic Snap:</span> Drag face near center to lock automatically';
                 }
 
                 transform.panX = newPanX;
@@ -640,12 +593,10 @@
 
             window.addEventListener('mouseup', () => {
                 isDragging = false;
-                guideV.className = "snap-line-v border-l border-dashed border-indigo-400/40 opacity-70";
-                guideH.className = "snap-line-h border-t border-dashed border-indigo-400/40 opacity-70";
             });
         }
 
-        // ⚡ RENDER HIGH-RES 300 DPI CANVAS
+        // ⚡ RENDER HIGH-RES 300 DPI CANVAS (PERFECT TEXT GAP & BALANCE)
         function renderFinalCanvas() {
             outputCanvas.width = CANVAS_W;
             outputCanvas.height = CANVAS_H;
@@ -670,7 +621,6 @@
             ctx.clip();
 
             if (photoCanvas) {
-                // Object-fit: cover formula
                 const pW = photoCanvas.width;
                 const pH = photoCanvas.height;
                 const coverScale = Math.max(CANVAS_W / pW, stripY / pH);
@@ -709,17 +659,17 @@
             ctx.lineWidth = 3;
             ctx.strokeRect(1.5, 1.5, CANVAS_W - 3, CANVAS_H - 3);
 
-            // 4. Print Candidate Name & Date Text with Dynamic Font Sizes
+            // ⚡ 4. PRINT CANDIDATE NAME & DATE WITH BALANCED COMPACT DISTANCE
             ctx.fillStyle = '#0f172a';
             ctx.textAlign = 'center';
 
-            // Candidate Name (Independent Size Control)
+            // Candidate Name (Centered in top half of strip)
             ctx.font = `${fontWeight} ${nameFontSize}px sans-serif`;
-            ctx.fillText(candName.toUpperCase(), CANVAS_W / 2, stripY + 82);
+            ctx.fillText(candName.toUpperCase(), CANVAS_W / 2, stripY + 95);
 
-            // Date of Photo (Independent Size Control)
+            // Date of Photo (Compact, balanced directly below name)
             ctx.font = `${fontWeight} ${dateFontSize}px sans-serif`;
-            ctx.fillText(candDate.toUpperCase(), CANVAS_W / 2, stripY + 155);
+            ctx.fillText(candDate.toUpperCase(), CANVAS_W / 2, stripY + 152);
         }
 
         // ⚡ HIGH-RESOLUTION 300 DPI EXPORT
