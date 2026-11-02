@@ -40,13 +40,71 @@
 
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- ⚡ CROPPER.JS FOR FREEFORM POPUP CROPPING -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/heic2any/0.0.4/heic2any.min.js"></script>
 
     <style>
         body { font-family: 'Plus Jakarta Sans', sans-serif; -webkit-tap-highlight-color: transparent; }
+        .cropper-view-box { outline: 2px solid #818cf8 !important; }
+        .cropper-modal { background-color: #020617 !important; opacity: 0.75 !important; }
+        
+        /* ⚡ HORIZONTAL & VERTICAL CENTER GUIDELINES */
+        .guide-line-h {
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 40%;
+            height: 1px;
+            background: rgba(99, 102, 241, 0.45);
+            border-top: 1px dashed #818cf8;
+            pointer-events: none;
+            z-index: 10;
+        }
+        .guide-line-v {
+            position: absolute;
+            top: 0;
+            bottom: 20%;
+            left: 50%;
+            width: 1px;
+            background: rgba(99, 102, 241, 0.45);
+            border-left: 1px dashed #818cf8;
+            pointer-events: none;
+            z-index: 10;
+        }
     </style>
 </head>
 <body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col justify-between selection:bg-indigo-500 selection:text-white">
+
+    <!-- ⚡ FREEFORM CROPPER MODAL POPUP -->
+    <div id="crop-modal" class="fixed inset-0 z-50 bg-slate-950/85 backdrop-blur-md hidden flex items-center justify-center p-3 sm:p-5">
+        <div class="bg-slate-900 border border-slate-800 rounded-3xl max-w-lg w-full p-4 sm:p-6 shadow-2xl space-y-4">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h3 class="text-base font-bold text-white">Crop Photo (Freeform)</h3>
+                    <p class="text-xs text-slate-400">Drag handles freely to crop face and shoulders</p>
+                </div>
+                <button type="button" onclick="closeCropModal()" class="w-8 h-8 rounded-full bg-slate-800 text-slate-300 font-bold flex items-center justify-center hover:bg-slate-700">✕</button>
+            </div>
+            
+            <div class="h-64 sm:h-80 bg-slate-950 rounded-2xl overflow-hidden border border-slate-800 flex items-center justify-center">
+                <img id="modal-crop-img" src="#" alt="Crop Preview" class="max-h-full max-w-full block">
+            </div>
+            
+            <div class="flex items-center justify-between pt-1">
+                <div class="flex items-center gap-2">
+                    <button type="button" onclick="cropper.rotate(-90)" class="py-1.5 px-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-bold text-slate-300">↺ -90°</button>
+                    <button type="button" onclick="cropper.rotate(90)" class="py-1.5 px-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-bold text-slate-300">↻ +90°</button>
+                    <button type="button" onclick="cropper.reset()" class="py-1.5 px-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-bold text-slate-400">Reset</button>
+                </div>
+                <button type="button" onclick="applyCrop()" class="py-2 px-5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-extrabold text-xs sm:text-sm shadow-lg shadow-indigo-600/30 transition">
+                    ✓ Crop & Set
+                </button>
+            </div>
+        </div>
+    </div>
 
     <!-- HEADER -->
     <header class="border-b border-slate-800 bg-slate-900/80 backdrop-blur-xl sticky top-0 z-40">
@@ -70,10 +128,10 @@
         <div class="text-center max-w-xl mx-auto mb-6">
             <span class="text-[10px] font-extrabold uppercase tracking-widest text-indigo-400 bg-indigo-500/10 px-2.5 py-0.5 rounded-full border border-indigo-500/20">Official Exam Portal Suite</span>
             <h1 class="text-2xl sm:text-4xl font-black text-white mt-1.5 tracking-tight">Add Name & Date on Photo</h1>
-            <p class="mt-1 text-slate-400 text-xs sm:text-sm">Print candidate name and Date of Photo (DOP) with on-screen pan, zoom, and 300 DPI Ultra HD export.</p>
+            <p class="mt-1 text-slate-400 text-xs sm:text-sm">Print candidate name and Date of Photo (DOP) with interactive center alignment guides and 300 DPI Ultra HD export.</p>
         </div>
 
-        <!-- ⚡ 2-COLUMN CLEAN STUDIO LAYOUT -->
+        <!-- ⚡ 2-COLUMN BALANCED STUDIO LAYOUT -->
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
             
             <!-- LEFT PANEL: UPLOAD & TEXT DETAILS (6 COLS) -->
@@ -98,12 +156,17 @@
                                 <img id="thumb-preview" class="h-16 w-auto object-contain rounded-lg border border-slate-700" src="#" alt="Thumb">
                                 <div class="text-left">
                                     <span class="text-xs text-emerald-400 font-bold block">✓ Photo Active</span>
-                                    <span class="text-[11px] text-slate-400">Click & drag on right to position</span>
+                                    <span class="text-[11px] text-slate-400">Auto-covered & centered</span>
                                 </div>
                             </div>
-                            <button type="button" onclick="event.stopPropagation(); document.getElementById('file-input').click()" class="py-1 px-3 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-bold border border-slate-700 transition">
-                                🔄 Change
-                            </button>
+                            <div class="flex items-center gap-2">
+                                <button type="button" onclick="event.stopPropagation(); document.getElementById('file-input').click()" class="py-1 px-2.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-bold border border-slate-700 transition">
+                                    Change
+                                </button>
+                                <button type="button" onclick="event.stopPropagation(); reopenCropModal()" class="py-1 px-2.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold shadow-md shadow-indigo-600/30 transition">
+                                    ✂️ Re-Crop
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -158,7 +221,7 @@
                 <div class="bg-slate-950/90 p-2.5 rounded-2xl border border-slate-800 flex items-center justify-between gap-3 text-xs">
                     <div class="flex items-center gap-2 flex-1">
                         <span class="text-[11px] font-bold text-slate-400 whitespace-nowrap">🔍 Zoom:</span>
-                        <input type="range" id="zoom-slider" min="0.6" max="2.2" step="0.05" value="1.0" oninput="handleZoomChange(this.value)" class="w-full accent-indigo-500 cursor-pointer">
+                        <input type="range" id="zoom-slider" min="0.7" max="2.2" step="0.05" value="1.0" oninput="handleZoomChange(this.value)" class="w-full accent-indigo-500 cursor-pointer">
                         <span id="zoom-val-text" class="text-[10px] text-indigo-400 font-bold bg-slate-900 px-1.5 py-0.5 rounded border border-slate-800 w-11 text-center">100%</span>
                     </div>
                     <div class="flex items-center gap-1.5">
@@ -171,10 +234,18 @@
                     </div>
                 </div>
 
-                <!-- Canvas Preview Container (Direct Interactive Drag) -->
+                <!-- ⚡ CANVAS PREVIEW WITH CENTER ALIGNMENT GUIDELINES (CROSSHAIR) -->
                 <div class="bg-slate-950 p-3 rounded-2xl border border-slate-800 flex flex-col items-center justify-center min-h-[300px] max-h-[440px] overflow-hidden shadow-inner">
-                    <canvas id="output-canvas" class="max-h-[370px] w-auto h-auto rounded shadow-2xl bg-white block select-none cursor-move" title="Click and drag to position face"></canvas>
-                    <span class="text-[10px] text-slate-400 mt-2">👆 Click and drag directly on photo to center your face</span>
+                    <div class="relative inline-block leading-none">
+                        <canvas id="output-canvas" class="max-h-[370px] w-auto h-auto rounded shadow-2xl bg-white block select-none cursor-move" title="Click and drag to position face"></canvas>
+                        
+                        <!-- ⚡ HORIZONTAL & VERTICAL CENTER GUIDE LINES (OVERLAY ONLY - DOES NOT PRINT IN DOWNLOAD) -->
+                        <div class="guide-line-h"></div>
+                        <div class="guide-line-v"></div>
+                    </div>
+                    <span class="text-[10px] text-slate-400 mt-2.5 flex items-center gap-1.5">
+                        <span class="text-indigo-400 font-bold">🎯 Center Guides:</span> Align nose & eyes with the dashed center lines
+                    </span>
                 </div>
 
                 <!-- ACTION DOWNLOAD BUTTON -->
@@ -206,22 +277,22 @@
                         <li class="flex items-start gap-3">
                             <span class="w-6 h-6 rounded-full bg-indigo-600 text-white font-bold text-xs flex items-center justify-center flex-shrink-0 mt-0.5">1</span>
                             <div>
-                                <strong class="text-white block">Upload Your Passport Photo:</strong>
-                                <span>Click on the upload card or drop your picture. The tool automatically adapts your picture to official 3.5 × 4.5 cm proportions.</span>
+                                <strong class="text-white block">Upload & Freeform Crop:</strong>
+                                <span>Click on the upload card or drop your picture. A freeform crop popup opens allowing you to adjust corners without ratio constraints.</span>
                             </div>
                         </li>
                         <li class="flex items-start gap-3">
                             <span class="w-6 h-6 rounded-full bg-indigo-600 text-white font-bold text-xs flex items-center justify-center flex-shrink-0 mt-0.5">2</span>
                             <div>
-                                <strong class="text-white block">Position Face with Live Pan & Zoom:</strong>
-                                <span>Click and drag directly on the preview photo with your mouse or touch to position your face and eyes. Use the zoom slider to frame your head and shoulders perfectly.</span>
+                                <strong class="text-white block">Align Face with Center Crosshair Guides:</strong>
+                                <span>The photo automatically covers the full frame and centers itself. Use the horizontal and vertical center guide lines to align your eyes and nose dead-center by dragging directly on the photo.</span>
                             </div>
                         </li>
                         <li class="flex items-start gap-3">
                             <span class="w-6 h-6 rounded-full bg-indigo-600 text-white font-bold text-xs flex items-center justify-center flex-shrink-0 mt-0.5">3</span>
                             <div>
                                 <strong class="text-white block">Enter Name, Date & Download in 300 DPI:</strong>
-                                <span>Type your name in capital letters and enter the Date of Photograph (e.g., DOP: 28-10-2026). Click Download to export an ultra-sharp 300 DPI photo ready for exam portals.</span>
+                                <span>Type your candidate name in capital letters and enter the Date of Photograph (e.g. DOP: 28-10-2026). Click Download to export an ultra-sharp 300 DPI photo ready for exam portals.</span>
                             </div>
                         </li>
                     </ol>
@@ -255,10 +326,10 @@
 
                     <div class="bg-slate-900/80 p-5 rounded-2xl border border-slate-800 space-y-1.5 shadow-lg">
                         <h3 class="text-sm font-bold text-white flex items-center gap-2">
-                            <span class="text-indigo-400">👆</span> Interactive Direct Drag & Zoom
+                            <span class="text-indigo-400">🎯</span> Precision Center Guidelines
                         </h3>
                         <p class="text-xs text-slate-400 leading-relaxed">
-                            No complicated multi-step crop popups. Simply drag your photo directly on the preview screen and zoom with a smooth slider to center your face.
+                            Interactive horizontal and vertical alignment lines ensure your face and posture are balanced in the frame, preventing off-center rejections.
                         </p>
                     </div>
 
@@ -292,11 +363,11 @@
 
                     <details class="bg-slate-900/90 p-4 sm:p-5 rounded-2xl border border-slate-800 text-xs sm:text-sm cursor-pointer group">
                         <summary class="font-bold text-white flex justify-between items-center group-hover:text-indigo-400 transition">
-                            Should I enter my Date of Birth (DOB) or Date of Photo (DOP)?
+                            Will the center guide lines be visible on my downloaded photograph?
                             <span class="text-indigo-400 text-base">▼</span>
                         </summary>
                         <p class="text-slate-400 mt-2.5 leading-relaxed">
-                            Check your official exam notification. SSC exams require the Date of Photo (DOP) to prove the photo was captured within the last three months. Some state police exams require Date of Birth (DOB). You can customize the date text prefix freely in our tool (e.g. 'DOP: 28-10-2026' or 'DOB: 15-08-2000').
+                            No. The dashed center lines are visual positioning guides on your screen only. When you click download, only your clean photograph and the official name/date strip are exported.
                         </p>
                     </details>
 
@@ -331,7 +402,9 @@
 
     <!-- ⚡ DIRECT INTERACTIVE TRANSFORM & 300 DPI ENGINE -->
     <script>
-        let photoImg = null;
+        let photoCanvas = null;
+        let cropper = null;
+        let rawPhotoBlob = null;
         let originalFileName = 'candidate_photo';
 
         // Direct Transform State
@@ -346,6 +419,8 @@
         // Physical 300 DPI Dimensions for 3.5cm x 4.5cm
         const CANVAS_W = 826;
         const CANVAS_H = 1062;
+        const STRIP_H = 210;
+        const PHOTO_SLOT_H = CANVAS_H - STRIP_H; // Exactly 852px
 
         window.addEventListener('DOMContentLoaded', () => {
             renderFinalCanvas();
@@ -364,19 +439,54 @@
                 } catch(e) {}
             }
 
+            rawPhotoBlob = blob;
+            openCropModal(blob);
+        }
+
+        // ⚡ FREEFORM CROPPER MODAL (NO RATIO RESTRICTION)
+        function openCropModal(blob) {
+            const modal = document.getElementById('crop-modal');
+            const img = document.getElementById('modal-crop-img');
+
             const reader = new FileReader();
             reader.onload = (e) => {
-                const img = new Image();
-                img.onload = () => {
-                    photoImg = img;
-                    document.getElementById('upload-placeholder').classList.add('hidden');
-                    document.getElementById('upload-preview-wrap').classList.remove('hidden');
-                    document.getElementById('thumb-preview').src = e.target.result;
-                    resetTransform();
-                };
                 img.src = e.target.result;
+                modal.classList.remove('hidden');
+
+                if (cropper) cropper.destroy();
+                cropper = new Cropper(img, {
+                    aspectRatio: NaN, // ⚡ 100% FREEFORM CROP!
+                    viewMode: 1,
+                    background: false,
+                    autoCropArea: 0.98,
+                    responsive: true
+                });
             };
             reader.readAsDataURL(blob);
+        }
+
+        function reopenCropModal() {
+            if (rawPhotoBlob) openCropModal(rawPhotoBlob);
+        }
+
+        function closeCropModal() {
+            document.getElementById('crop-modal').classList.add('hidden');
+            if (cropper) {
+                cropper.destroy();
+                cropper = null;
+            }
+        }
+
+        function applyCrop() {
+            if (!cropper) return;
+            photoCanvas = cropper.getCroppedCanvas();
+
+            document.getElementById('upload-placeholder').classList.add('hidden');
+            document.getElementById('upload-preview-wrap').classList.remove('hidden');
+            document.getElementById('thumb-preview').src = photoCanvas.toDataURL('image/jpeg', 0.9);
+
+            closeCropModal();
+            resetTransform(); // Auto full-cover & center!
         }
 
         // ⚡ ZOOM & ROTATE CONTROLS
@@ -391,6 +501,7 @@
             renderFinalCanvas();
         }
 
+        // ⚡ AUTOMATIC 100% FULL-AREA COVER & DEAD-CENTER ALIGNMENT
         function resetTransform() {
             transform = { scale: 1.0, panX: 0, panY: 0, rotate: 0 };
             document.getElementById('zoom-slider').value = "1.0";
@@ -401,14 +512,14 @@
         // ⚡ DIRECT ON-CANVAS PANNING/DRAGGING
         function initDirectDrag() {
             outputCanvas.addEventListener('mousedown', (e) => {
-                if (!photoImg) return;
+                if (!photoCanvas) return;
                 isDragging = true;
                 dragStartMouse = { x: e.clientX, y: e.clientY };
                 dragStartPan = { x: transform.panX, y: transform.panY };
             });
 
             window.addEventListener('mousemove', (e) => {
-                if (!isDragging || !photoImg) return;
+                if (!isDragging || !photoCanvas) return;
                 const rect = outputCanvas.getBoundingClientRect();
                 const scaleFactor = CANVAS_W / rect.width;
 
@@ -441,38 +552,32 @@
             const stripBg = document.getElementById('strip-bg').value;
             const fontWeight = document.getElementById('font-weight').value;
 
-            // Strip dimensions (approx bottom 20% of 3.5x4.5cm photo)
-            const stripH = 210;
-            const stripY = CANVAS_H - stripH;
+            const stripY = CANVAS_H - STRIP_H;
 
-            // 2. Draw Candidate Photo with Full Transform
+            // 2. Draw Candidate Photo with Full-Area Cover & Dead-Center Math
             ctx.save();
             ctx.beginPath();
             ctx.rect(0, 0, CANVAS_W, stripY);
-            ctx.clip(); // Clip strictly above the name strip
+            ctx.clip(); // Strictly clips inside photo area above name strip
 
-            if (photoImg) {
-                const pRatio = photoImg.naturalWidth / photoImg.naturalHeight;
-                const slotRatio = CANVAS_W / stripY;
-                let baseW = CANVAS_W, baseH = stripY;
-
-                if (pRatio > slotRatio) {
-                    baseW = CANVAS_W;
-                    baseH = CANVAS_W / pRatio;
-                } else {
-                    baseH = stripY;
-                    baseW = stripY * pRatio;
-                }
+            if (photoCanvas) {
+                // ⚡ OBJECT-FIT: COVER FORMULA (Zero white borders, covers 100% of photo slot!)
+                const pW = photoCanvas.width;
+                const pH = photoCanvas.height;
+                const coverScale = Math.max(CANVAS_W / pW, stripY / pH);
+                
+                const baseW = pW * coverScale;
+                const baseH = pH * coverScale;
 
                 ctx.translate(CANVAS_W / 2 + transform.panX, stripY / 2 + transform.panY);
                 ctx.rotate((transform.rotate * Math.PI) / 180);
                 ctx.scale(transform.scale, transform.scale);
-                ctx.drawImage(photoImg, -baseW / 2, -baseH / 2, baseW, baseH);
+                ctx.drawImage(photoCanvas, -baseW / 2, -baseH / 2, baseW, baseH);
             } else {
                 ctx.fillStyle = '#f8fafc';
                 ctx.fillRect(0, 0, CANVAS_W, stripY);
                 ctx.fillStyle = '#94a3b8';
-                ctx.font = 'bold 32px sans-serif';
+                ctx.font = 'bold 30px sans-serif';
                 ctx.textAlign = 'center';
                 ctx.fillText('Passport Photo Area (3.5 × 4.5 cm)', CANVAS_W / 2, stripY / 2);
             }
@@ -480,7 +585,7 @@
 
             // 3. Draw Official Name & Date Bottom Strip
             ctx.fillStyle = (stripBg === 'white') ? '#ffffff' : '#f1f5f9';
-            ctx.fillRect(0, stripY, CANVAS_W, stripH);
+            ctx.fillRect(0, stripY, CANVAS_W, STRIP_H);
 
             // Dividing line
             ctx.strokeStyle = '#cbd5e1';
@@ -508,9 +613,9 @@
             ctx.fillText(candDate.toUpperCase(), CANVAS_W / 2, stripY + 155);
         }
 
-        // ⚡ HIGH-RESOLUTION 300 DPI EXPORT
+        // ⚡ HIGH-RESOLUTION 300 DPI EXPORT (NO GUIDELINES IN DOWNLOAD)
         function downloadImage() {
-            if (!photoImg) {
+            if (!photoCanvas) {
                 alert('Please upload a photo first!');
                 return;
             }
