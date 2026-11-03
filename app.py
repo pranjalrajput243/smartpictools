@@ -153,7 +153,7 @@ def split_pdf_page():
 def pdf_password_page():
     return render_template('pdf-password.html')
 
-# ⚡ MILITARY-GRADE AES-256 PDF ENCRYPTION / DECRYPTION ENGINE
+# ⚡ MILITARY-GRADE AES-256 PDF ENCRYPTION & SMART DECRYPTION ENGINE
 @app.route('/api/pdf-password-process', methods=['POST'])
 def process_pdf_password():
     try:
@@ -162,30 +162,37 @@ def process_pdf_password():
         action = request.form.get('action', 'lock')
         password = request.form.get('password', '')
 
-        if not f or not password:
-            return jsonify({'error': 'PDF file and password are required.'}), 400
+        if not f:
+            return jsonify({'error': 'PDF file is required.'}), 400
 
         raw_name = os.path.splitext(f.filename)[0] or 'document'
         pdf_bytes = f.read()
         doc = fitz.open(stream=pdf_bytes, filetype="pdf")
-
         buf = io.BytesIO()
 
         if action == 'lock':
-            # Highest level AES-256 PDF 2.0 encryption
+            if not password:
+                doc.close()
+                return jsonify({'error': 'Please enter a password to protect the PDF.'}), 400
+            # Highest standard AES-256 PDF 2.0 encryption
             doc.save(buf, encryption=fitz.PDF_ENCRYPT_AES_256, user_pw=password, owner_pw=password)
             doc.close()
             buf.seek(0)
             return send_file(buf, mimetype="application/pdf", as_attachment=True, download_name=f"{raw_name}_protected.pdf")
         else:
-            # Unlock / Decrypt
+            # Smart Unlock: First test if it unlocks with empty password (for permission-only locked files)
             if doc.needs_pass:
-                rc = doc.authenticate(password)
+                rc = doc.authenticate("")
                 if rc <= 0:
-                    doc.close()
-                    return jsonify({'error': 'Incorrect password! Please verify and enter the correct password.'}), 400
+                    if not password:
+                        doc.close()
+                        return jsonify({'error': 'This PDF requires a password to open. Please enter the password.'}), 400
+                    rc = doc.authenticate(password)
+                    if rc <= 0:
+                        doc.close()
+                        return jsonify({'error': 'Incorrect password! Please verify and enter the correct password.'}), 400
             
-            # Save completely unencrypted
+            # Save completely unencrypted (permanently removes password & permissions)
             doc.save(buf, encryption=fitz.PDF_ENCRYPT_NONE)
             doc.close()
             buf.seek(0)
