@@ -146,6 +146,54 @@ def crop_pdf_page():
 @app.route('/split-pdf')
 def split_pdf_page():
     return render_template('split-pdf.html')
+# ⚡ PDF PASSWORD PROTECT & UNLOCK ROUTES
+@app.route('/pdf-password')
+@app.route('/protect-pdf')
+@app.route('/unlock-pdf')
+def pdf_password_page():
+    return render_template('pdf-password.html')
+
+# ⚡ MILITARY-GRADE AES-256 PDF ENCRYPTION / DECRYPTION ENGINE
+@app.route('/api/pdf-password-process', methods=['POST'])
+def process_pdf_password():
+    try:
+        import fitz  # PyMuPDF
+        f = request.files.get('file')
+        action = request.form.get('action', 'lock')
+        password = request.form.get('password', '')
+
+        if not f or not password:
+            return jsonify({'error': 'PDF file and password are required.'}), 400
+
+        raw_name = os.path.splitext(f.filename)[0] or 'document'
+        pdf_bytes = f.read()
+        doc = fitz.open(stream=pdf_bytes, filetype="pdf")
+
+        buf = io.BytesIO()
+
+        if action == 'lock':
+            # Highest level AES-256 PDF 2.0 encryption
+            doc.save(buf, encryption=fitz.PDF_ENCRYPT_AES_256, user_pw=password, owner_pw=password)
+            doc.close()
+            buf.seek(0)
+            return send_file(buf, mimetype="application/pdf", as_attachment=True, download_name=f"{raw_name}_protected.pdf")
+        else:
+            # Unlock / Decrypt
+            if doc.needs_pass:
+                rc = doc.authenticate(password)
+                if rc <= 0:
+                    doc.close()
+                    return jsonify({'error': 'Incorrect password! Please verify and enter the correct password.'}), 400
+            
+            # Save completely unencrypted
+            doc.save(buf, encryption=fitz.PDF_ENCRYPT_NONE)
+            doc.close()
+            buf.seek(0)
+            return send_file(buf, mimetype="application/pdf", as_attachment=True, download_name=f"{raw_name}_unlocked.pdf")
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
 
 # 301 Permanent Redirect to Preserve Google SEO Juice
 @app.route('/pdf-converter')
@@ -343,6 +391,9 @@ def sitemap():
         ('https://smartpictools.in/convert-image', '0.9'),
         ('https://smartpictools.in/crop-pdf', '0.9'),
         ('https://smartpictools.in/split-pdf', '0.9'),
+        ('https://smartpictools.in/pdf-password', '0.9'),
+        ('https://smartpictools.in/protect-pdf', '0.9'),
+        ('https://smartpictools.in/unlock-pdf', '0.9'),
         ('https://smartpictools.in/add-watermark', '0.9'),
         ('https://smartpictools.in/rotate-image', '0.9'),
         ('https://smartpictools.in/qr-code-generator', '0.9'),
