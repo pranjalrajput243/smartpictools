@@ -107,6 +107,12 @@ def photo_signature_joiner_page():
 def add_name_date_route():
     return render_template('add-name-date-on-photo.html')
 
+# ⚡ MEESHO LOW SHIPPING IMAGE GENERATOR
+@app.route('/meesho-image-generator')
+@app.route('/meesho-low-shipping')
+def meesho_generator_page():
+    return render_template('meesho-image-generator.html')
+
 @app.route('/crop-image')
 def crop_route():
     return render_template('crop-image.html')
@@ -393,6 +399,7 @@ def sitemap():
         ('https://smartpictools.in/passport-photo-maker', '0.9'),
         ('https://smartpictools.in/photo-signature-joiner', '0.9'),
         ('https://smartpictools.in/add-name-date-on-photo', '0.9'),
+        ('https://smartpictools.in/meesho-image-generator', '0.9'),
         ('https://smartpictools.in/crop-image', '0.9'),
         ('https://smartpictools.in/resize-image', '0.9'),
         ('https://smartpictools.in/convert-image', '0.9'),
