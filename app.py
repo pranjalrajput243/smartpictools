@@ -113,6 +113,69 @@ def add_name_date_route():
 def meesho_generator_page():
     return render_template('meesho-image-generator.html')
 
+# ⚡ DYNAMIC 1-CLICK CHROME EXTENSION ZIP BUILDER (₹0 COST)
+@app.route('/download-meesho-extension')
+def download_meesho_extension():
+    try:
+        import zipfile
+        buf = io.BytesIO()
+
+        manifest_json = """{
+  "manifest_version": 3,
+  "name": "SmartPicTools - Meesho Shipping Optimizer",
+  "version": "1.0",
+  "description": "Automatically detect lowest shipping slabs on Meesho Supplier Panel and crop 4x6 labels.",
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://supplier.meesho.com/*"],
+      "js": ["content.js"]
+    }
+  ]
+}"""
+
+        popup_html = """<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    body { width: 280px; font-family: sans-serif; background: #0f172a; color: #fff; padding: 14px; margin: 0; }
+    h3 { font-size: 14px; margin: 0 0 4px 0; color: #818cf8; }
+    p { font-size: 11px; color: #94a3b8; line-height: 1.4; margin: 0 0 12px 0; }
+    .btn { display: block; width: 100%; box-sizing: border-box; text-align: center; padding: 8px 10px; margin-bottom: 8px; border-radius: 8px; text-decoration: none; font-size: 11px; font-weight: bold; }
+    .btn-primary { background: #6366f1; color: #fff; }
+    .btn-secondary { background: #1e293b; color: #38bdf8; border: 1px solid #334155; }
+  </style>
+</head>
+<body>
+  <h3>⚡ SmartPicTools Assistant</h3>
+  <p>Active on Meesho Supplier Panel. Test variations directly on catalog upload page.</p>
+  <a href="https://smartpictools.in/crop-pdf" target="_blank" class="btn btn-primary">✂️ Crop 4×6 Shipping Labels</a>
+  <a href="https://smartpictools.in/meesho-image-generator" target="_blank" class="btn btn-secondary">🌐 Open Web Studio</a>
+</body>
+</html>"""
+
+        content_js = """console.log("⚡ SmartPicTools Meesho Assistant Active on Supplier Panel.");
+// Injects helper link into seller catalog upload dashboard
+window.addEventListener('load', () => {
+    const banner = document.createElement('div');
+    banner.style.cssText = "position:fixed;bottom:15px;right:15px;z-index:999999;background:#0f172a;color:#fff;border:1px solid #6366f1;padding:8px 14px;border-radius:12px;font-family:sans-serif;font-size:11px;font-weight:bold;box-shadow:0 4px 15px rgba(0,0,0,0.5);display:flex;align-items:center;gap:8px;";
+    banner.innerHTML = '<span>⚡ SmartPicTools</span><a href="https://smartpictools.in/crop-pdf" target="_blank" style="color:#38bdf8;text-decoration:underline;">Crop 4×6 Labels</a>';
+    document.body.appendChild(banner);
+});"""
+
+        with zipfile.ZipFile(buf, 'w', zipfile.ZIP_DEFLATED) as zf:
+            zf.writestr('manifest.json', manifest_json)
+            zf.writestr('popup.html', popup_html)
+            zf.writestr('content.js', content_js)
+
+        buf.seek(0)
+        return send_file(buf, mimetype='application/zip', as_attachment=True, download_name='smartpictools-meesho-extension.zip')
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
 @app.route('/crop-image')
 def crop_route():
     return render_template('crop-image.html')
