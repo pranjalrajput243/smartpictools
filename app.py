@@ -107,75 +107,6 @@ def photo_signature_joiner_page():
 def add_name_date_route():
     return render_template('add-name-date-on-photo.html')
 
-# ⚡ MEESHO LOW SHIPPING IMAGE GENERATOR
-@app.route('/meesho-image-generator')
-@app.route('/meesho-low-shipping')
-def meesho_generator_page():
-    return render_template('meesho-image-generator.html')
-
-# ⚡ DYNAMIC 1-CLICK CHROME EXTENSION ZIP BUILDER (₹0 COST)
-@app.route('/download-meesho-extension')
-def download_meesho_extension():
-    try:
-        import zipfile
-        buf = io.BytesIO()
-
-        manifest_json = """{
-  "manifest_version": 3,
-  "name": "SmartPicTools - Meesho Shipping Optimizer",
-  "version": "1.0",
-  "description": "Automatically detect lowest shipping slabs on Meesho Supplier Panel and crop 4x6 labels.",
-  "action": {
-    "default_popup": "popup.html"
-  },
-  "content_scripts": [
-    {
-      "matches": ["*://supplier.meesho.com/*"],
-      "js": ["content.js"]
-    }
-  ]
-}"""
-
-        popup_html = """<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <style>
-    body { width: 280px; font-family: sans-serif; background: #0f172a; color: #fff; padding: 14px; margin: 0; }
-    h3 { font-size: 14px; margin: 0 0 4px 0; color: #818cf8; }
-    p { font-size: 11px; color: #94a3b8; line-height: 1.4; margin: 0 0 12px 0; }
-    .btn { display: block; width: 100%; box-sizing: border-box; text-align: center; padding: 8px 10px; margin-bottom: 8px; border-radius: 8px; text-decoration: none; font-size: 11px; font-weight: bold; }
-    .btn-primary { background: #6366f1; color: #fff; }
-    .btn-secondary { background: #1e293b; color: #38bdf8; border: 1px solid #334155; }
-  </style>
-</head>
-<body>
-  <h3>⚡ SmartPicTools Assistant</h3>
-  <p>Active on Meesho Supplier Panel. Test variations directly on catalog upload page.</p>
-  <a href="https://smartpictools.in/crop-pdf" target="_blank" class="btn btn-primary">✂️ Crop 4×6 Shipping Labels</a>
-  <a href="https://smartpictools.in/meesho-image-generator" target="_blank" class="btn btn-secondary">🌐 Open Web Studio</a>
-</body>
-</html>"""
-
-        content_js = """console.log("⚡ SmartPicTools Meesho Assistant Active on Supplier Panel.");
-// Injects helper link into seller catalog upload dashboard
-window.addEventListener('load', () => {
-    const banner = document.createElement('div');
-    banner.style.cssText = "position:fixed;bottom:15px;right:15px;z-index:999999;background:#0f172a;color:#fff;border:1px solid #6366f1;padding:8px 14px;border-radius:12px;font-family:sans-serif;font-size:11px;font-weight:bold;box-shadow:0 4px 15px rgba(0,0,0,0.5);display:flex;align-items:center;gap:8px;";
-    banner.innerHTML = '<span>⚡ SmartPicTools</span><a href="https://smartpictools.in/crop-pdf" target="_blank" style="color:#38bdf8;text-decoration:underline;">Crop 4×6 Labels</a>';
-    document.body.appendChild(banner);
-});"""
-
-        with zipfile.ZipFile(buf, 'w', zipfile.ZIP_DEFLATED) as zf:
-            zf.writestr('manifest.json', manifest_json)
-            zf.writestr('popup.html', popup_html)
-            zf.writestr('content.js', content_js)
-
-        buf.seek(0)
-        return send_file(buf, mimetype='application/zip', as_attachment=True, download_name='smartpictools-meesho-extension.zip')
-    except Exception as e:
-        return jsonify({'error': str(e)}), 500
-
 @app.route('/crop-image')
 def crop_route():
     return render_template('crop-image.html')
@@ -215,6 +146,7 @@ def crop_pdf_page():
 @app.route('/split-pdf')
 def split_pdf_page():
     return render_template('split-pdf.html')
+
 # ⚡ PDF PASSWORD PROTECT & UNLOCK ROUTES
 @app.route('/pdf-password')
 @app.route('/protect-pdf')
@@ -222,7 +154,35 @@ def split_pdf_page():
 def pdf_password_page():
     return render_template('pdf-password.html')
 
-# ⚡ MILITARY-GRADE AES-256 PDF ENCRYPTION & SMART DECRYPTION ENGINE
+# 301 Permanent Redirects to Preserve Google SEO Juice (Zero 404 Errors)
+@app.route('/pdf-converter')
+def pdf_converter_alias():
+    return redirect('/convert-from-pdf', code=301)
+
+@app.route('/meesho-image-generator')
+@app.route('/meesho-low-shipping')
+@app.route('/download-meesho-extension')
+def meesho_clean_redirect():
+    return redirect('/', code=301)
+
+# ==========================================
+# ⚡ SUGGESTION BOX (FORMSUBMIT & API BACKUP)
+# ==========================================
+@app.route('/api/submit-suggestion', methods=['POST'])
+def submit_suggestion():
+    try:
+        data = request.get_json(silent=True) or request.form
+        name = data.get('name', 'Anonymous')
+        email = data.get('email', 'Not provided')
+        msg = data.get('message', '')
+        print(f"⚡ [SUGGESTION] From: {name} ({email}) | Message: {msg}")
+        return jsonify({'status': 'success', 'message': 'Thank you! Your feedback has been received.'}), 200
+    except Exception as e:
+        return jsonify({'status': 'error', 'message': str(e)}), 500
+
+# ==========================================
+# ⚡ MILITARY-GRADE AES-256 PDF ENCRYPTION & UNLOCK ENGINE
+# ==========================================
 @app.route('/api/pdf-password-process', methods=['POST'])
 def process_pdf_password():
     try:
@@ -243,13 +203,11 @@ def process_pdf_password():
             if not password:
                 doc.close()
                 return jsonify({'error': 'Please enter a password to protect the PDF.'}), 400
-            # Highest standard AES-256 PDF 2.0 encryption
             doc.save(buf, encryption=fitz.PDF_ENCRYPT_AES_256, user_pw=password, owner_pw=password)
             doc.close()
             buf.seek(0)
             return send_file(buf, mimetype="application/pdf", as_attachment=True, download_name=f"{raw_name}_protected.pdf")
         else:
-            # Smart Unlock: First test if it unlocks with empty password (for permission-only locked files)
             if doc.needs_pass:
                 rc = doc.authenticate("")
                 if rc <= 0:
@@ -261,7 +219,6 @@ def process_pdf_password():
                         doc.close()
                         return jsonify({'error': 'Incorrect password! Please verify and enter the correct password.'}), 400
             
-            # Save completely unencrypted (permanently removes password & permissions)
             doc.save(buf, encryption=fitz.PDF_ENCRYPT_NONE)
             doc.close()
             buf.seek(0)
@@ -269,12 +226,6 @@ def process_pdf_password():
 
     except Exception as e:
         return jsonify({'error': str(e)}), 500
-
-
-# 301 Permanent Redirect to Preserve Google SEO Juice
-@app.route('/pdf-converter')
-def pdf_converter_alias():
-    return redirect('/convert-from-pdf', code=301)
 
 # ==========================================
 # ⚡ COREL-DRAW STYLE PDF-TO-SVG CURVES ENGINE
@@ -404,7 +355,6 @@ def generate_pixel_perfect_favicon(size=96):
     img = Image.new("RGBA", (size, size), (0, 0, 0, 0))
     draw = ImageDraw.Draw(img)
     
-    # Draw Smooth Purple-to-Pink Gradient
     for y in range(size):
         ratio = y / float(size)
         r = int(99 + (236 - 99) * ratio)
@@ -412,14 +362,12 @@ def generate_pixel_perfect_favicon(size=96):
         b = int(241 + (153 - 241) * ratio)
         draw.line([(0, y), (size, y)], fill=(r, g, b, 255))
         
-    # Mask rounded squircle corners
     mask = Image.new("L", (size, size), 0)
     mask_draw = ImageDraw.Draw(mask)
     corner_radius = int(size * 0.28)
     mask_draw.rounded_rectangle([0, 0, size, size], radius=corner_radius, fill=255)
     img.putalpha(mask)
     
-    # Draw Sharp Golden Thunderbolt
     icon_draw = ImageDraw.Draw(img)
     scale = size / 100.0
     bolt_points = [
@@ -462,7 +410,6 @@ def sitemap():
         ('https://smartpictools.in/passport-photo-maker', '0.9'),
         ('https://smartpictools.in/photo-signature-joiner', '0.9'),
         ('https://smartpictools.in/add-name-date-on-photo', '0.9'),
-        ('https://smartpictools.in/meesho-image-generator', '0.9'),
         ('https://smartpictools.in/crop-image', '0.9'),
         ('https://smartpictools.in/resize-image', '0.9'),
         ('https://smartpictools.in/convert-image', '0.9'),
@@ -525,10 +472,8 @@ def contact():
     return render_template('contact.html')
 
 # ==========================================
-# ⚡ FALLBACK AVIF CONVERTER ENGINE
+# ⚡ TURBO 1-SECOND AVIF & FALLBACK ENGINE
 # ==========================================
-@app.route('/process', methods=['POST'])
-# ⚡ HIGH-SPEED AVIF & FALLBACK ENGINE
 @app.route('/process', methods=['POST'])
 def process_fallback():
     try:
@@ -539,18 +484,18 @@ def process_fallback():
 
         img = Image.open(io.BytesIO(file.read()))
         
-        # Handle transparency
-        if img.mode in ('RGBA', 'LA') or (img.mode == 'P' and 'transparency' in img.info):
-            if target_fmt in ['JPG', 'JPEG']:
+        # Fast RGB convert
+        if img.mode != 'RGB':
+            if img.mode in ('RGBA', 'LA') or (img.mode == 'P' and 'transparency' in img.info):
                 bg = Image.new('RGB', img.size, (255, 255, 255))
-                bg.paste(img, mask=img.split()[3])
+                bg.paste(img, mask=img.split()[3] if len(img.split()) > 3 else None)
                 img = bg
-        else:
-            img = img.convert('RGB')
+            else:
+                img = img.convert('RGB')
 
-        # Scale down very large camera photos to ensure sub-second AVIF encoding
-        if img.width > 1600 or img.height > 1600:
-            img.thumbnail((1600, 1600), Image.Resampling.LANCZOS)
+        # Fast Bilinear downscale for sub-second web speed
+        if img.width > 1280 or img.height > 1280:
+            img.thumbnail((1280, 1280), Image.Resampling.BILINEAR)
 
         buf = io.BytesIO()
         out_name = f"smartpic_converted.{target_fmt.lower()}"
@@ -558,30 +503,28 @@ def process_fallback():
 
         if target_fmt == 'AVIF':
             saved = False
-            # Method 1: Ultra-fast pillow save with max speed
             try:
-                img.save(buf, format='AVIF', quality=65, speed=9)
+                img.save(buf, format='AVIF', quality=55, speed=10)
                 saved = True
             except Exception:
                 try:
-                    img.save(buf, format='AVIF', quality=65)
+                    img.save(buf, format='AVIF', quality=55)
                     saved = True
                 except Exception:
                     pass
             
-            # Method 2: Direct pillow-heif encoding
             if not saved:
                 import pillow_heif
                 heif_file = pillow_heif.from_pillow(img)
-                heif_file.save(buf, format="AVIF", quality=65)
+                heif_file.save(buf, format="AVIF", quality=55)
 
         elif target_fmt in ['JPG', 'JPEG']:
-            img.save(buf, format='JPEG', quality=90)
+            img.save(buf, format='JPEG', quality=85)
             mimetype = 'image/jpeg'
         elif target_fmt == 'PNG':
             img.save(buf, format='PNG')
         elif target_fmt == 'WEBP':
-            img.save(buf, format='WEBP', quality=85)
+            img.save(buf, format='WEBP', quality=80)
         elif target_fmt in ['TIFF', 'TIF']:
             img.save(buf, format='TIFF')
             mimetype = 'image/tiff'
@@ -589,7 +532,7 @@ def process_fallback():
         buf.seek(0)
         return send_file(buf, mimetype=mimetype, as_attachment=True, download_name=out_name)
     except Exception as e:
-        print(f"❌ Process error: {str(e)}")
         return jsonify({'error': str(e)}), 500
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
