@@ -449,7 +449,7 @@ def robots():
 @app.route('/ads.txt')
 def ads_txt():
     # Replace pub-0000000000000000 with your real AdSense Publisher ID upon approval
-    ads_content = "google.com, pub-0000000000000000, DIRECT, f08c47fec0942fa0\n"
+    ads_content = "google.com, pub-6941008868816067, DIRECT, f08c47fec0942fa0\n"
     return Response(ads_content, mimetype='text/plain')
 
 # ==========================================
