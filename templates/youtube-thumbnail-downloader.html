@@ -21,6 +21,54 @@
     <meta property="og:title" content="YouTube Thumbnail Downloader Online Free - 4K & Shorts HD">
     <meta property="og:description" content="Download YouTube video & Shorts thumbnails in 4K, 1080p, 720p with automatic 9:16 vertical crop.">
 
+    <!-- ⚡ SCHEMA MARKUP (WEBAPP + FAQ RICH SNIPPET) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebApplication",
+          "name": "SmartPicTools YouTube Thumbnail Downloader",
+          "url": "https://smartpictools.in/youtube-thumbnail-downloader",
+          "description": "Free online YouTube thumbnail downloader for 4K, 1080p, and Shorts auto-crop in 9:16 vertical format.",
+          "applicationCategory": "MultimediaApplication",
+          "operatingSystem": "All",
+          "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "Why does YouTube add blurred bars on the sides of Shorts thumbnails?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "YouTube's CDN defaults to 16:9 landscape aspect ratio. When a 9:16 vertical Shorts video is uploaded, YouTube pads sides with blurred borders. Our tool detects Shorts and extracts only the pure 9:16 vertical crop without borders."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Can I download in 4K resolution?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. Selecting 'Download 4K' applies high-precision Lanczos interpolation to upscale master thumbnails to 3840x2160 pixels with sharp edges."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Is it legal to download YouTube video thumbnails?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. Saving thumbnails for personal reference, design inspiration, or educational presentations falls under fair use. Re-uploading someone else's thumbnail on your own video without permission is a copyright violation."
+              }
+            }
+          ]
+        }
+      ]
+    }
+    </script>
+
+    
     <!-- FAVICON -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' stop-color='%236366f1'/><stop offset='50%25' stop-color='%23a855f7'/><stop offset='100%25' stop-color='%23ec4899'/></linearGradient></defs><rect width='100' height='100' rx='28' fill='url(%23g)'/><path d='M52 16 L24 54 L46 54 L42 84 L76 44 L54 44 Z' fill='%23fbbf24'/></svg>">
 
@@ -280,8 +328,31 @@
             </div>
 
         </section>
-    </main>
 
+        <!-- ⚡ RELATED CREATOR TOOLS SILO (SEO INTERNAL LINKING) -->
+            <div class="mt-12 bg-slate-900/90 p-6 rounded-3xl border border-slate-800 space-y-4">
+                <div class="flex items-center gap-2">
+                    <span class="text-indigo-400 font-bold text-sm">🔗</span>
+                    <h3 class="text-sm font-bold text-white uppercase tracking-wider">Helpful Next Steps for Video Creators:</h3>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
+                    <a href="/crop-image" class="p-3 bg-slate-950/80 hover:bg-slate-950 rounded-xl border border-slate-800 hover:border-indigo-500/50 transition block">
+                        <strong class="text-white block">✂️ Crop Image (16:9 & 9:16)</strong>
+                        <span class="text-slate-400 text-[11px]">Crop custom banners for YouTube, Instagram & Shorts.</span>
+                    </a>
+                    <a href="/resize-image" class="p-3 bg-slate-950/80 hover:bg-slate-950 rounded-xl border border-slate-800 hover:border-indigo-500/50 transition block">
+                        <strong class="text-white block">📐 Resize Image Dimensions</strong>
+                        <span class="text-slate-400 text-[11px]">Scale thumbnails to exact 1280x720 or 1920x1080 pixels.</span>
+                    </a>
+                    <a href="/compress-image" class="p-3 bg-slate-950/80 hover:bg-slate-950 rounded-xl border border-slate-800 hover:border-indigo-500/50 transition block">
+                        <strong class="text-white block">🎯 Compress Image Under 2MB</strong>
+                        <span class="text-slate-400 text-[11px]">Keep thumbnail file weight strictly under YouTube's 2MB cap.</span>
+                    </a>
+                </div>
+            </div>
+    
+    
+    </main>
     <footer class="border-t border-slate-800 bg-slate-950 py-6 px-4 text-xs text-slate-400 text-center">
         <p>© 2026 SmartPicTools. 100% Free & Private in-browser suite. <a href="/" class="text-indigo-400 hover:underline">Explore All Tools</a></p>
     </footer>
