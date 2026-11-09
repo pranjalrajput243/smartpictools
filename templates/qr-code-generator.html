@@ -19,6 +19,62 @@
     <meta property="og:title" content="Free QR Code & Barcode Generator Online - SmartPicTools">
     <meta property="og:description" content="Instant real-time live preview for custom QR codes and barcodes with 1-click PNG download.">
 
+    <!-- ⚡ SCHEMA MARKUP (WEBAPP + FAQ RICH SNIPPET) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebApplication",
+          "name": "SmartPicTools Free QR Code & Barcode Generator",
+          "url": "https://smartpictools.in/qr-code-generator",
+          "description": "Generate permanent static QR codes (URL, UPI, Wi-Fi) and Code128 barcodes online for free with instant live preview.",
+          "applicationCategory": "BusinessApplication",
+          "operatingSystem": "All",
+          "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "Will the QR codes generated on SmartPicTools expire or stop working?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "No. All QR codes and barcodes created on SmartPicTools are static. Your destination URL or text is encoded directly into the pixel pattern with zero intermediary redirect servers, working permanently without fees."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Can I create a UPI QR code for Google Pay, PhonePe, and Paytm payments?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. You can enter a standard NPCI UPI link format (e.g. upi://pay?pa=yourvpa@bank&pn=YourName). When customers scan the code with any UPI app, it opens directly to payment."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What type of barcode is generated, and is it compatible with inventory scanners?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Our engine generates high-density Code 128 barcodes supporting alphanumeric characters and numbers, making it 100% compatible with retail POS systems, warehouse inventory scanners, and logistics labels."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Is there any limit on how many QR codes or barcodes I can create?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "No limits. You can create and download unlimited high-resolution codes completely free for personal or commercial projects without account sign-ups, subscriptions, or watermarks."
+              }
+            }
+          ]
+        }
+      ]
+    }
+    </script>
+
+    
     <!-- FAVICON -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' stop-color='%236366f1'/><stop offset='50%25' stop-color='%23a855f7'/><stop offset='100%25' stop-color='%23ec4899'/></linearGradient></defs><rect width='100' height='100' rx='28' fill='url(%23g)'/><path d='M52 16 L24 54 L46 54 L42 84 L76 44 L54 44 Z' fill='%23fbbf24'/></svg>">
 
@@ -258,8 +314,30 @@
             </div>
 
         </section>
-    </main>
 
+        <!-- ⚡ RELATED TOOLS SILO (SEO INTERNAL LINKING) -->
+            <div class="mt-12 bg-slate-900/90 p-6 rounded-3xl border border-slate-800 space-y-4">
+                <div class="flex items-center gap-2">
+                    <span class="text-indigo-400 font-bold text-sm">🔗</span>
+                    <h3 class="text-sm font-bold text-white uppercase tracking-wider">Helpful Next Steps for Branding & Security:</h3>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
+                    <a href="/add-watermark" class="p-3 bg-slate-950/80 hover:bg-slate-950 rounded-xl border border-slate-800 hover:border-indigo-500/50 transition block">
+                        <strong class="text-white block">🏷️ Add Watermark to Photo</strong>
+                        <span class="text-slate-400 text-[11px]">Stamp copyright text or security grid on branded images.</span>
+                    </a>
+                    <a href="/favicon-converter" class="p-3 bg-slate-950/80 hover:bg-slate-950 rounded-xl border border-slate-800 hover:border-indigo-500/50 transition block">
+                        <strong class="text-white block">⭐ Image to Favicon (.ICO)</strong>
+                        <span class="text-slate-400 text-[11px]">Generate sharp 256px multi-resolution website favicons.</span>
+                    </a>
+                    <a href="/crop-image" class="p-3 bg-slate-950/80 hover:bg-slate-950 rounded-xl border border-slate-800 hover:border-indigo-500/50 transition block">
+                        <strong class="text-white block">✂️ Crop Image (Aspect Ratios)</strong>
+                        <span class="text-slate-400 text-[11px]">Crop promotional graphics for Instagram, YouTube & web.</span>
+                    </a>
+                </div>
+            </div>
+    
+    </main>
     <footer class="border-t border-slate-800 bg-slate-950 py-8 px-4 text-xs text-slate-400 text-center">
         <p>© 2026 SmartPicTools. 100% Free & Private in-browser suite. <a href="/" class="text-indigo-400 hover:underline">Explore All Tools</a></p>
     </footer>
