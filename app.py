@@ -154,28 +154,57 @@ def yt_thumbnail_page():
     return render_template('youtube-thumbnail-downloader.html')
 
 # ⚡ DIRECT ATTACHMENT STREAM (PREVENTS OPENING IN NEW TAB ON MOBILE)
+# ⚡ YOUTUBE THUMBNAIL ENGINE (4K, 1080P, 720P & 9:16 SHORTS CROPPER)
 @app.route('/get-yt-thumb')
 def get_yt_thumb():
     import urllib.request
     vid = request.args.get('id', '')
-    quality = request.args.get('q', 'maxresdefault')
+    res = request.args.get('res', '1080p').lower()
+    is_shorts = request.args.get('shorts', 'false').lower() == 'true'
+
     if not vid or len(vid) != 11:
         return jsonify({'error': 'Invalid video ID'}), 400
-    
-    url = f"https://img.youtube.com/vi/{vid}/{quality}.jpg"
-    try:
-        req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
-        resp = urllib.request.urlopen(req)
-        data = resp.read()
-        # Fallback to HQ if maxres returns tiny 120x90 placeholder error
-        if len(data) < 2000 and quality == 'maxresdefault':
-            url = f"https://img.youtube.com/vi/{vid}/hqdefault.jpg"
+
+    raw_data = None
+    for q_name in ['maxresdefault', 'hqdefault']:
+        try:
+            url = f"https://img.youtube.com/vi/{vid}/{q_name}.jpg"
             req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
             resp = urllib.request.urlopen(req)
             data = resp.read()
-        return send_file(io.BytesIO(data), mimetype='image/jpeg', as_attachment=True, download_name=f"yt_thumbnail_{vid}.jpg")
-    except Exception:
+            if len(data) > 2500:
+                raw_data = data
+                break
+        except Exception:
+            continue
+
+    if not raw_data:
         return redirect(f"https://img.youtube.com/vi/{vid}/hqdefault.jpg")
+
+    try:
+        img = Image.open(io.BytesIO(raw_data)).convert('RGB')
+
+        # ⚡ 9:16 Shorts Crop (Cuts off blurred sidebars)
+        if is_shorts:
+            target_aspect = 9.0 / 16.0
+            crop_w = int(img.height * target_aspect)
+            crop_x = (img.width - crop_w) // 2
+            img = img.crop((crop_x, 0, crop_x + crop_w, img.height))
+            sizes = {'4k': (2160, 3840), '1080p': (1080, 1920), '720p': (720, 1280), '480p': (480, 854)}
+        else:
+            sizes = {'4k': (3840, 2160), '1080p': (1920, 1080), '720p': (1280, 720), '480p': (854, 480)}
+
+        target_size = sizes.get(res, sizes['1080p'])
+        img = img.resize(target_size, Image.Resampling.LANCZOS)
+
+        buf = io.BytesIO()
+        img.save(buf, format='JPEG', quality=95)
+        buf.seek(0)
+
+        out_label = f"shorts_{res}" if is_shorts else f"video_{res}"
+        return send_file(buf, mimetype='image/jpeg', as_attachment=True, download_name=f"yt_thumb_{vid}_{out_label}.jpg")
+    except Exception:
+        return send_file(io.BytesIO(raw_data), mimetype='image/jpeg', as_attachment=True, download_name=f"yt_thumb_{vid}.jpg")
 
 
 # ⚡ PDF PASSWORD PROTECT & UNLOCK ROUTES
