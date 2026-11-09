@@ -21,17 +21,58 @@
     <meta property="og:title" content="Split PDF Online Free - SmartPicTools">
     <meta property="og:description" content="Extract specific pages or split multi-page PDF documents into separate files with 100% searchable text intact.">
 
-    <!-- SCHEMA MARKUP -->
+   <!-- SCHEMA MARKUP (WEBAPP + FAQ RICH SNIPPET) -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "WebApplication",
-      "name": "SmartPicTools Split PDF",
-      "url": "https://smartpictools.in/split-pdf",
-      "description": "Free in-browser tool to extract pages or split PDF documents without server uploads.",
-      "applicationCategory": "MultimediaApplication",
-      "operatingSystem": "All",
-      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+      "@graph": [
+        {
+          "@type": "WebApplication",
+          "name": "SmartPicTools Split PDF Online Free",
+          "url": "https://smartpictools.in/split-pdf",
+          "description": "Free in-browser tool to extract specific pages or split PDF documents into separate files keeping text searchable.",
+          "applicationCategory": "BusinessApplication",
+          "operatingSystem": "All",
+          "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "Does splitting a PDF cause any quality loss or blur text and signatures?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "No. Our tool uses native object copying with PDF-Lib. The vector definitions, typography, embedded font streams, and high-resolution images are extracted with 100% lossless fidelity, preserving original print quality."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Can I extract multiple non-consecutive pages (e.g. Page 1, Page 5, and Page 12)?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. You can either click on those exact pages in the visual grid or type comma-separated numbers like 1, 5, 12 in the range box. The tool will compile only those specific pages into your new PDF."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Why does text search (Ctrl+F) remain active in the extracted PDF?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Standard web tools convert pages into pictures before recombining them, destroying text data. SmartPicTools extracts native PDF page structures directly, keeping character streams, search capabilities, and hyperlinks intact."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Is there any page limit or file size restriction?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "SmartPicTools is 100% free with no file size caps or daily quotas. You can split documents with 500+ pages without subscriptions, watermark stamps, or registration requirements."
+              }
+            }
+          ]
+        }
+      ]
     }
     </script>
 
