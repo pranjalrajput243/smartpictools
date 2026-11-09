@@ -21,6 +21,62 @@
     <meta property="og:title" content="Convert Image Format Online Free - SmartPicTools">
     <meta property="og:description" content="Convert single or batch photos to JPG, PNG, WEBP, AVIF, SVG, or TIFF in 0.2s directly on your device.">
 
+
+    <!-- ⚡ SCHEMA MARKUP (WEBAPP + FAQ RICH SNIPPET) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebApplication",
+          "name": "SmartPicTools Image Format Converter",
+          "url": "https://smartpictools.in/convert-image",
+          "description": "Free online image converter to batch convert JPG, PNG, WEBP, AVIF, SVG, and TIFF in 0.2s with zero server uploads.",
+          "applicationCategory": "MultimediaApplication",
+          "operatingSystem": "All",
+          "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "Which format is best for fast website loading speed: AVIF, WEBP, or JPG?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "AVIF and WEBP are next-generation formats recommended by Google. AVIF provides up to 50% smaller file sizes than JPG at equal quality, improving Core Web Vitals, while WEBP offers 98%+ broad compatibility."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What happens to transparent backgrounds when converting a PNG to JPG?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "The JPEG specification does not support alpha transparency. Our tool fills transparent areas with clean solid white, preventing black box glitches produced by basic converters."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Can I convert Apple iPhone HEIC photos to JPG or PNG on Windows and Android?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. Modern iPhone photos (.heic/.heif) are decoded client-side inside your browser, converting directly into universal JPG, PNG, or PDF formats without third-party desktop codecs."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Is there any limit on file size or the number of images I can convert?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "SmartPicTools is 100% free with unlimited conversions. You can convert individual pictures or batches of dozens of photos simultaneously with 1-click ZIP downloads."
+              }
+            }
+          ]
+        }
+      ]
+    }
+    </script>
+    
     <!-- FAVICON -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' stop-color='%236366f1'/><stop offset='50%25' stop-color='%23a855f7'/><stop offset='100%25' stop-color='%23ec4899'/></linearGradient></defs><rect width='100' height='100' rx='28' fill='url(%23g)'/><path d='M52 16 L24 54 L46 54 L42 84 L76 44 L54 44 Z' fill='%23fbbf24'/></svg>">
 
@@ -253,8 +309,30 @@
             </div>
 
         </section>
+    
+    <!-- ⚡ RELATED CONVERTER TOOLS SILO (SEO INTERNAL LINKING) -->
+            <div class="mt-12 bg-slate-900/90 p-6 rounded-3xl border border-slate-800 space-y-4">
+                <div class="flex items-center gap-2">
+                    <span class="text-indigo-400 font-bold text-sm">🔗</span>
+                    <h3 class="text-sm font-bold text-white uppercase tracking-wider">Explore Dedicated Format Converters:</h3>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
+                    <a href="/compress-image" class="p-3 bg-slate-950/80 hover:bg-slate-950 rounded-xl border border-slate-800 hover:border-indigo-500/50 transition block">
+                        <strong class="text-white block">⚡ Compress Image (Exact KB)</strong>
+                        <span class="text-slate-400 text-[11px]">Shrink converted files to 20KB, 50KB, or 100KB.</span>
+                    </a>
+                    <a href="/image-to-pdf" class="p-3 bg-slate-950/80 hover:bg-slate-950 rounded-xl border border-slate-800 hover:border-indigo-500/50 transition block">
+                        <strong class="text-white block">📄 PDF Maker (Merge to PDF)</strong>
+                        <span class="text-slate-400 text-[11px]">Combine multiple converted images into clean PDF.</span>
+                    </a>
+                    <a href="/favicon-converter" class="p-3 bg-slate-950/80 hover:bg-slate-950 rounded-xl border border-slate-800 hover:border-indigo-500/50 transition block">
+                        <strong class="text-white block">⭐ Image to Favicon (.ICO)</strong>
+                        <span class="text-slate-400 text-[11px]">Create sharp 256px / 128px HD multi-resolution website favicons.</span>
+                    </a>
+                </div>
+            </div>
+    
     </main>
-
     <footer class="border-t border-slate-800 bg-slate-950 py-8 px-4 text-xs text-slate-400 text-center">
         <p>© 2026 SmartPicTools. 100% Free & Private in-browser suite. <a href="/" class="text-indigo-400 hover:underline">Explore All Tools</a></p>
     </footer>
