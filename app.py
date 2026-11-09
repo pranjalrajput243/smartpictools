@@ -147,6 +147,37 @@ def crop_pdf_page():
 def split_pdf_page():
     return render_template('split-pdf.html')
 
+# ⚡ YOUTUBE THUMBNAIL DOWNLOADER ROUTES
+@app.route('/youtube-thumbnail-downloader')
+@app.route('/yt-thumbnail-downloader')
+def yt_thumbnail_page():
+    return render_template('youtube-thumbnail-downloader.html')
+
+# ⚡ DIRECT ATTACHMENT STREAM (PREVENTS OPENING IN NEW TAB ON MOBILE)
+@app.route('/get-yt-thumb')
+def get_yt_thumb():
+    import urllib.request
+    vid = request.args.get('id', '')
+    quality = request.args.get('q', 'maxresdefault')
+    if not vid or len(vid) != 11:
+        return jsonify({'error': 'Invalid video ID'}), 400
+    
+    url = f"https://img.youtube.com/vi/{vid}/{quality}.jpg"
+    try:
+        req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
+        resp = urllib.request.urlopen(req)
+        data = resp.read()
+        # Fallback to HQ if maxres returns tiny 120x90 placeholder error
+        if len(data) < 2000 and quality == 'maxresdefault':
+            url = f"https://img.youtube.com/vi/{vid}/hqdefault.jpg"
+            req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
+            resp = urllib.request.urlopen(req)
+            data = resp.read()
+        return send_file(io.BytesIO(data), mimetype='image/jpeg', as_attachment=True, download_name=f"yt_thumbnail_{vid}.jpg")
+    except Exception:
+        return redirect(f"https://img.youtube.com/vi/{vid}/hqdefault.jpg")
+
+
 # ⚡ PDF PASSWORD PROTECT & UNLOCK ROUTES
 @app.route('/pdf-password')
 @app.route('/protect-pdf')
@@ -415,6 +446,7 @@ def sitemap():
         ('https://smartpictools.in/convert-image', '0.9'),
         ('https://smartpictools.in/crop-pdf', '0.9'),
         ('https://smartpictools.in/split-pdf', '0.9'),
+        ('https://smartpictools.in/youtube-thumbnail-downloader', '0.9'),
         ('https://smartpictools.in/pdf-password', '0.9'),
         ('https://smartpictools.in/protect-pdf', '0.9'),
         ('https://smartpictools.in/unlock-pdf', '0.9'),
