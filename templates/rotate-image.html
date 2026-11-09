@@ -21,6 +21,62 @@
     <meta property="og:title" content="Rotate & Flip Image Online Free - SmartPicTools">
     <meta property="og:description" content="Rotate orientation and mirror flip photos in 0.05s directly on your device.">
 
+    <!-- ⚡ SCHEMA MARKUP (WEBAPP + FAQ RICH SNIPPET) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebApplication",
+          "name": "SmartPicTools Rotate & Flip Image Online",
+          "url": "https://smartpictools.in/rotate-image",
+          "description": "Rotate images 90 degrees clockwise or counter-clockwise and mirror flip horizontally or vertically in 0.05s.",
+          "applicationCategory": "MultimediaApplication",
+          "operatingSystem": "All",
+          "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "Why do photos taken on mobile phones automatically turn sideways when uploaded to websites?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Phones embed a small EXIF tag for orientation. Many web portals discard EXIF metadata, making photos display sideways. Our tool permanently rotates the physical canvas coordinates so your picture displays upright everywhere."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Does rotating or flipping an image degrade its sharpness or resolution?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "No. Rotating by 90, 180, or 270 degrees is a clean mathematical transpose of pixel columns and rows with zero re-sampling or blurring, retaining 100% of original clarity."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How do I fix a reversed selfie where text on my shirt appears backwards?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Upload your selfie and click 'Flip Horizontally'. This inverts the horizontal axis, transforming the mirror reflection back to a natural perspective so all text and logos read correctly."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Can I rotate Apple iPhone HEIC photos directly?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. Modern iPhone photos (.heic/.heif) are decoded client-side inside your browser, rotated to your desired angle, and downloaded as standard JPEG files instantly."
+              }
+            }
+          ]
+        }
+      ]
+    }
+    </script>
+
+    
     <!-- FAVICON -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' stop-color='%236366f1'/><stop offset='50%25' stop-color='%23a855f7'/><stop offset='100%25' stop-color='%23ec4899'/></linearGradient></defs><rect width='100' height='100' rx='28' fill='url(%23g)'/><path d='M52 16 L24 54 L46 54 L42 84 L76 44 L54 44 Z' fill='%23fbbf24'/></svg>">
 
@@ -262,8 +318,29 @@
             </div>
 
         </section>
+    <!-- ⚡ RELATED TOOLS SILO (SEO INTERNAL LINKING) -->
+            <div class="mt-12 bg-slate-900/90 p-6 rounded-3xl border border-slate-800 space-y-4">
+                <div class="flex items-center gap-2">
+                    <span class="text-indigo-400 font-bold text-sm">🔗</span>
+                    <h3 class="text-sm font-bold text-white uppercase tracking-wider">Useful Next Steps After Rotating:</h3>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
+                    <a href="/crop-image" class="p-3 bg-slate-950/80 hover:bg-slate-950 rounded-xl border border-slate-800 hover:border-indigo-500/50 transition block">
+                        <strong class="text-white block">✂️ Crop Image (Aspect Ratios)</strong>
+                        <span class="text-slate-400 text-[11px]">Crop unwanted borders with 1:1, 16:9, or 9:16 templates.</span>
+                    </a>
+                    <a href="/compress-image" class="p-3 bg-slate-950/80 hover:bg-slate-950 rounded-xl border border-slate-800 hover:border-indigo-500/50 transition block">
+                        <strong class="text-white block">🎯 Compress Image (Exact KB)</strong>
+                        <span class="text-slate-400 text-[11px]">Shrink file weight to 20KB, 50KB, or 100KB for forms.</span>
+                    </a>
+                    <a href="/resize-image" class="p-3 bg-slate-950/80 hover:bg-slate-950 rounded-xl border border-slate-800 hover:border-indigo-500/50 transition block">
+                        <strong class="text-white block">📐 Resize Image Dimensions</strong>
+                        <span class="text-slate-400 text-[11px]">Adjust width and height in pixels with proportion lock.</span>
+                    </a>
+                </div>
+            </div>
+    
     </main>
-
     <footer class="border-t border-slate-800 bg-slate-950 py-8 px-4 text-xs text-slate-400 text-center">
         <p>© 2026 SmartPicTools. 100% Free & Private in-browser suite. <a href="/" class="text-indigo-400 hover:underline">Explore All Tools</a></p>
     </footer>
