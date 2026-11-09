@@ -15,11 +15,60 @@
     <!-- ⚡ PERMANENT GOOGLE SEARCH CONSOLE VERIFICATION TAG -->
     <meta name="google-site-verification" content="uUq17UUsROyHMRQ8jkqKqrjZmsJnkuxZMKKoJLw_X3E" />
 
-    <!-- OPEN GRAPH -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://smartpictools.in/image-to-pdf">
-    <meta property="og:title" content="PDF Maker - Merge Images, SVG & TIFF to PDF Free - SmartPicTools">
-    <meta property="og:description" content="Merge multiple JPG, PNG, SVG, TIFF, and HEIC photos into one clean PDF document with 0% white borders in 0.5s.">
+    <!-- ⚡ SCHEMA MARKUP (WEBAPP + FAQ RICH SNIPPET) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebApplication",
+          "name": "SmartPicTools PDF Maker & Merge Photos",
+          "url": "https://smartpictools.in/image-to-pdf",
+          "description": "Free in-browser PDF maker to merge JPG, PNG, WEBP, SVG, TIFF, and iPhone HEIC photos into one clean PDF with zero white borders.",
+          "applicationCategory": "MultimediaApplication",
+          "operatingSystem": "All",
+          "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "Can I combine photos with different sizes and orientations into a single PDF?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. Our compiler evaluates each image individually. A landscape photo generates a landscape PDF page, and a portrait photo generates a portrait PDF page, keeping all pictures centered with zero distortion."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Why does SmartPicTools produce 0% white borders around pictures?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Traditional tools force photos onto fixed paper sheets, creating white padding on the sides. Our tool scales the PDF page viewport to match exact image boundaries, producing a clean, edge-to-edge document."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Can I convert Apple iPhone HEIC pictures directly to PDF?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. Modern iOS photos (.heic/.heif) are decoded client-side inside your browser, allowing you to select them alongside standard JPGs or PNGs and combine them seamlessly into one PDF file."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Is there a daily limit on how many images I can convert to PDF?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "No limits. SmartPicTools is 100% free with unlimited conversions. You can merge as many pages and create as many PDF documents as you need without registrations or watermarks."
+              }
+            }
+          ]
+        }
+      ]
+    }
+    </script>
 
     <!-- FAVICON -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' stop-color='%236366f1'/><stop offset='50%25' stop-color='%23a855f7'/><stop offset='100%25' stop-color='%23ec4899'/></linearGradient></defs><rect width='100' height='100' rx='28' fill='url(%23g)'/><path d='M52 16 L24 54 L46 54 L42 84 L76 44 L54 44 Z' fill='%23fbbf24'/></svg>">
@@ -249,9 +298,31 @@
             </div>
 
         </section>
-    </main>
 
-    <footer class="border-t border-slate-800 bg-slate-950 py-8 px-4 text-xs text-slate-400 text-center">
+    <!-- ⚡ RELATED TOOLS SILO (SEO INTERNAL LINKING) -->
+            <div class="mt-12 bg-slate-900/90 p-6 rounded-3xl border border-slate-800 space-y-4">
+                <div class="flex items-center gap-2">
+                    <span class="text-indigo-400 font-bold text-sm">🔗</span>
+                    <h3 class="text-sm font-bold text-white uppercase tracking-wider">Helpful Next Steps for Your PDF Documents:</h3>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
+                    <a href="/compress-image" class="p-3 bg-slate-950/80 hover:bg-slate-950 rounded-xl border border-slate-800 hover:border-indigo-500/50 transition block">
+                        <strong class="text-white block">🎯 Compress Image (20KB - 50KB)</strong>
+                        <span class="text-slate-400 text-[11px]">Shrink heavy photos before compiling into PDF.</span>
+                    </a>
+                    <a href="/crop-pdf" class="p-3 bg-slate-950/80 hover:bg-slate-950 rounded-xl border border-slate-800 hover:border-indigo-500/50 transition block">
+                        <strong class="text-white block">✂️ Crop PDF Document</strong>
+                        <span class="text-slate-400 text-[11px]">Trim unwanted white margins and thermal labels.</span>
+                    </a>
+                    <a href="/pdf-password" class="p-3 bg-slate-950/80 hover:bg-slate-950 rounded-xl border border-slate-800 hover:border-indigo-500/50 transition block">
+                        <strong class="text-white block">🔐 Protect & Lock PDF</strong>
+                        <span class="text-slate-400 text-[11px]">Add strong AES-256 password protection to your new PDF.</span>
+                    </a>
+                </div>
+            </div>
+    
+    </main>
+<footer class="border-t border-slate-800 bg-slate-950 py-8 px-4 text-xs text-slate-400 text-center">
         <p>© 2026 SmartPicTools. 100% Free & Private in-browser suite. <a href="/" class="text-indigo-400 hover:underline">Explore All Tools</a></p>
     </footer>
 
