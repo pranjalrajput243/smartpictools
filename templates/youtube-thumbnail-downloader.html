@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     
     <!-- ⚡ HIGH-PRIORITY SEO & YOUTUBE KEYWORDS -->
-    <title>YouTube Thumbnail Downloader Online Free - 1080p Full HD | SmartPicTools</title>
-    <meta name="description" content="Free online YouTube thumbnail downloader. Grab HD, 4K, 1080p, and 720p thumbnails from any YouTube video or Shorts in 1 click with zero quality loss.">
-    <meta name="keywords" content="youtube thumbnail downloader, download youtube thumbnail hd 1080p, save youtube thumbnail online free, youtube video thumbnail grabber, youtube shorts thumbnail downloader, get youtube thumbnail 4k">
+    <title>YouTube Thumbnail Downloader Online Free - 4K, 1080p & Shorts HD | SmartPicTools</title>
+    <meta name="description" content="Free online YouTube thumbnail downloader. Grab 4K, 1080p, and 720p thumbnails. Automatically crops YouTube Shorts into true 9:16 vertical format without sidebars.">
+    <meta name="keywords" content="youtube thumbnail downloader, download youtube thumbnail 4k 1080p, youtube shorts thumbnail downloader 9:16, save youtube thumbnail online free, youtube video thumbnail grabber">
     <meta name="robots" content="index, follow, max-image-preview:large">
     <meta name="author" content="SmartPicTools">
     <link rel="canonical" href="https://smartpictools.in/youtube-thumbnail-downloader">
@@ -18,22 +18,8 @@
     <!-- OPEN GRAPH -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://smartpictools.in/youtube-thumbnail-downloader">
-    <meta property="og:title" content="YouTube Thumbnail Downloader Online Free - SmartPicTools">
-    <meta property="og:description" content="Download high-resolution YouTube video and Shorts thumbnails in Full HD (1080p) in 0.05s.">
-
-    <!-- SCHEMA MARKUP -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebApplication",
-      "name": "SmartPicTools YouTube Thumbnail Downloader",
-      "url": "https://smartpictools.in/youtube-thumbnail-downloader",
-      "description": "Free tool to download high quality YouTube video thumbnails in 1080p, 720p, and 480p.",
-      "applicationCategory": "MultimediaApplication",
-      "operatingSystem": "All",
-      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
-    }
-    </script>
+    <meta property="og:title" content="YouTube Thumbnail Downloader Online Free - 4K & Shorts HD">
+    <meta property="og:description" content="Download YouTube video & Shorts thumbnails in 4K, 1080p, 720p with automatic 9:16 vertical crop.">
 
     <!-- FAVICON -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' stop-color='%236366f1'/><stop offset='50%25' stop-color='%23a855f7'/><stop offset='100%25' stop-color='%23ec4899'/></linearGradient></defs><rect width='100' height='100' rx='28' fill='url(%23g)'/><path d='M52 16 L24 54 L46 54 L42 84 L76 44 L54 44 Z' fill='%23fbbf24'/></svg>">
@@ -65,9 +51,9 @@
         
         <!-- TITLE -->
         <div class="text-center max-w-2xl mx-auto space-y-2">
-            <span class="text-[10px] sm:text-[11px] font-extrabold uppercase tracking-widest text-rose-400 bg-rose-500/10 px-3 py-1 rounded-full border border-rose-500/20">Ultra HD 1080p Grabber</span>
+            <span class="text-[10px] sm:text-[11px] font-extrabold uppercase tracking-widest text-rose-400 bg-rose-500/10 px-3 py-1 rounded-full border border-rose-500/20">4K & 1080p Ultra HD</span>
             <h1 class="text-3xl sm:text-5xl font-black text-white tracking-tight">YouTube Thumbnail Downloader</h1>
-            <p class="text-slate-400 text-xs sm:text-sm">Paste any YouTube video or Shorts link to instantly preview and download Full HD (1080p, 720p, 480p) thumbnails.</p>
+            <p class="text-slate-400 text-xs sm:text-sm">Download Full HD & 4K thumbnails. Auto-detects YouTube Shorts to export in true 9:16 vertical format with zero sidebars.</p>
         </div>
 
         <!-- INPUT BOX -->
@@ -75,7 +61,7 @@
             <div class="space-y-1.5">
                 <label class="block text-xs font-bold text-slate-300">Enter YouTube Video or Shorts URL:</label>
                 <div class="flex items-center gap-2">
-                    <input type="text" id="yt-url-input" oninput="handleUrlInput(this.value)" placeholder="e.g. https://www.youtube.com/watch?v=... or https://youtu.be/..." class="w-full bg-slate-950 border border-slate-700 rounded-2xl px-4 py-3 text-xs sm:text-sm text-white placeholder-slate-500 focus:outline-none focus:border-indigo-500 font-medium transition">
+                    <input type="text" id="yt-url-input" oninput="handleUrlInput(this.value)" placeholder="e.g. https://www.youtube.com/watch?v=... or https://youtube.com/shorts/..." class="w-full bg-slate-950 border border-slate-700 rounded-2xl px-4 py-3 text-xs sm:text-sm text-white placeholder-slate-500 focus:outline-none focus:border-indigo-500 font-medium transition">
                     <button type="button" onclick="pasteFromClipboard()" class="py-3 px-4 rounded-2xl bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white text-xs font-bold border border-slate-700 transition whitespace-nowrap">
                         📋 Paste
                     </button>
@@ -85,66 +71,81 @@
             <div id="error-alert" class="hidden p-3 rounded-2xl bg-rose-500/10 border border-rose-500/30 text-rose-300 text-xs font-bold text-center"></div>
         </div>
 
-        <!-- ⚡ THUMBNAIL RESULTS (APPEARS AS SOON AS URL IS DETECTED) -->
+        <!-- ⚡ THUMBNAIL RESULTS SECTION -->
         <div id="results-card" class="hidden bg-slate-900 rounded-3xl p-5 sm:p-8 border border-slate-800 shadow-2xl space-y-6">
             
-            <div class="flex items-center justify-between border-b border-slate-800/80 pb-3">
+            <div class="flex items-center justify-between border-b border-slate-800/80 pb-3 flex-wrap gap-2">
                 <span class="text-xs sm:text-sm font-bold text-white flex items-center gap-2">
-                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Thumbnail Detected
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Thumbnail Ready
                 </span>
                 <span id="video-id-badge" class="text-xs font-mono font-bold text-indigo-400 bg-indigo-500/10 px-2.5 py-0.5 rounded border border-indigo-500/20">ID: ...</span>
             </div>
 
-            <!-- Preview Image -->
-            <div class="relative rounded-2xl overflow-hidden border border-slate-800 bg-slate-950 flex items-center justify-center shadow-inner">
-                <img id="main-preview-img" src="#" alt="Thumbnail Preview" class="w-full max-h-[420px] object-contain block">
+            <!-- ⚡ FORMAT MODE SELECTOR: 9:16 SHORTS VS 16:9 LANDSCAPE -->
+            <div class="flex items-center justify-between p-3 bg-slate-950 rounded-2xl border border-slate-800 flex-wrap gap-3">
+                <span class="text-xs font-bold text-slate-300">Format Mode:</span>
+                <div class="flex items-center gap-1.5 bg-slate-900 p-1 rounded-xl border border-slate-800">
+                    <button type="button" id="btn-mode-shorts" onclick="setFormatMode(true)" class="py-1.5 px-3 rounded-lg text-xs font-bold transition">
+                        📱 9:16 Vertical (Shorts Crop)
+                    </button>
+                    <button type="button" id="btn-mode-video" onclick="setFormatMode(false)" class="py-1.5 px-3 rounded-lg text-xs font-bold transition">
+                        🖥️ 16:9 Landscape (Full Video)
+                    </button>
+                </div>
             </div>
 
-            <!-- ⚡ QUALITY DOWNLOAD OPTIONS -->
+            <!-- Preview Image (Auto-adapts to 9:16 or 16:9) -->
+            <div class="relative rounded-2xl overflow-hidden border border-slate-800 bg-slate-950 flex items-center justify-center p-2 min-h-[260px] max-h-[440px]">
+                <img id="main-preview-img" src="#" alt="Thumbnail Preview" class="rounded-xl object-contain block transition-all duration-200">
+            </div>
+
+            <!-- ⚡ 4 DOWNLOAD OPTIONS (4K, 1080p, 720p, 480p) -->
             <div class="space-y-3">
-                <span class="text-xs font-bold text-slate-300 block">Choose Resolution & Download Directly:</span>
+                <span class="text-xs font-bold text-slate-300 block">Select Resolution & Download Directly:</span>
                 
-                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
                     
-                    <!-- 1. Ultra HD (1080p / 720p) -->
-                    <div class="bg-slate-950 p-4 rounded-2xl border border-slate-800 space-y-2 flex flex-col justify-between">
+                    <!-- 1. 4K Ultra HD -->
+                    <div class="bg-slate-950 p-3.5 rounded-2xl border border-slate-800 space-y-2 flex flex-col justify-between text-center">
                         <div>
-                            <div class="flex items-center justify-between mb-1">
-                                <span class="text-xs font-black text-white">Full HD (1080p)</span>
-                                <span class="text-[10px] font-bold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">Maximum</span>
-                            </div>
-                            <p class="text-[11px] text-slate-400">1280 × 720 px (MaxResDefault)</p>
+                            <span class="text-xs font-black text-amber-300 block">4K Ultra HD</span>
+                            <span id="label-dim-4k" class="text-[10px] text-slate-400">3840 × 2160 px</span>
                         </div>
-                        <button type="button" onclick="triggerDownload('maxresdefault')" class="w-full py-2.5 px-3 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-extrabold text-xs shadow-md transition active:scale-95">
-                            ⬇️ Download HD (1080p)
+                        <button type="button" onclick="triggerDownload('4k')" class="w-full py-2.5 px-2 rounded-xl bg-gradient-to-r from-amber-500 to-indigo-600 hover:from-amber-400 hover:to-indigo-500 text-white font-black text-xs shadow-md transition active:scale-95">
+                            ⬇️ Download 4K
                         </button>
                     </div>
 
-                    <!-- 2. High Quality (480p) -->
-                    <div class="bg-slate-950 p-4 rounded-2xl border border-slate-800 space-y-2 flex flex-col justify-between">
+                    <!-- 2. Full HD (1080p) -->
+                    <div class="bg-slate-950 p-3.5 rounded-2xl border border-slate-800 space-y-2 flex flex-col justify-between text-center">
                         <div>
-                            <div class="flex items-center justify-between mb-1">
-                                <span class="text-xs font-black text-white">High Quality (480p)</span>
-                                <span class="text-[10px] font-bold text-indigo-400 bg-indigo-500/10 px-2 py-0.5 rounded border border-indigo-500/20">Standard</span>
-                            </div>
-                            <p class="text-[11px] text-slate-400">480 × 360 px (HqDefault)</p>
+                            <span class="text-xs font-black text-emerald-400 block">Full HD (1080p)</span>
+                            <span id="label-dim-1080p" class="text-[10px] text-slate-400">1920 × 1080 px</span>
                         </div>
-                        <button type="button" onclick="triggerDownload('hqdefault')" class="w-full py-2.5 px-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 hover:text-white font-bold text-xs border border-slate-700 transition active:scale-95">
-                            ⬇️ Download (480p)
+                        <button type="button" onclick="triggerDownload('1080p')" class="w-full py-2.5 px-2 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-black text-xs shadow-md transition active:scale-95">
+                            ⬇️ Download 1080p
                         </button>
                     </div>
 
-                    <!-- 3. Medium Quality (360p) -->
-                    <div class="bg-slate-950 p-4 rounded-2xl border border-slate-800 space-y-2 flex flex-col justify-between">
+                    <!-- 3. HD (720p) -->
+                    <div class="bg-slate-950 p-3.5 rounded-2xl border border-slate-800 space-y-2 flex flex-col justify-between text-center">
                         <div>
-                            <div class="flex items-center justify-between mb-1">
-                                <span class="text-xs font-black text-white">Medium (360p)</span>
-                                <span class="text-[10px] font-bold text-slate-400 bg-slate-900 px-2 py-0.5 rounded border border-slate-800">Compact</span>
-                            </div>
-                            <p class="text-[11px] text-slate-400">320 × 180 px (MqDefault)</p>
+                            <span class="text-xs font-black text-white block">HD (720p)</span>
+                            <span id="label-dim-720p" class="text-[10px] text-slate-400">1280 × 720 px</span>
                         </div>
-                        <button type="button" onclick="triggerDownload('mqdefault')" class="w-full py-2.5 px-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 hover:text-white font-bold text-xs border border-slate-700 transition active:scale-95">
-                            ⬇️ Download (360p)
+                        <button type="button" onclick="triggerDownload('720p')" class="w-full py-2.5 px-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 hover:text-white font-bold text-xs border border-slate-700 transition active:scale-95">
+                            ⬇️ Download 720p
+                        </button>
+                    </div>
+
+                    <!-- 4. High Quality (480p) -->
+                    <div class="bg-slate-950 p-3.5 rounded-2xl border border-slate-800 space-y-2 flex flex-col justify-between text-center">
+                        <div>
+                            <span class="text-xs font-black text-slate-300 block">Quality (480p)</span>
+                            <span id="label-dim-480p" class="text-[10px] text-slate-400">854 × 480 px</span>
+                        </div>
+                        <button type="button" onclick="triggerDownload('480p')" class="w-full py-2.5 px-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white font-bold text-xs border border-slate-700 transition active:scale-95">
+                            ⬇️ Download 480p
                         </button>
                     </div>
 
@@ -166,7 +167,7 @@
                 </div>
                 <div class="space-y-4 text-xs sm:text-sm text-slate-300 leading-relaxed bg-slate-900/80 p-6 sm:p-8 rounded-3xl border border-slate-800 shadow-xl">
                     <p>
-                        Content creators, graphic designers, and educators often need to save high-resolution cover graphics from YouTube videos for presentations, design inspiration, or backup archives. SmartPicTools fetches the highest quality source images directly from YouTube's media servers in three simple steps:
+                        Whether you are saving thumbnail graphics for design inspiration, YouTube Shorts analysis, or video backups, SmartPicTools fetches the highest-resolution master files directly from YouTube servers:
                     </p>
                     <ol class="space-y-3 pl-2">
                         <li class="flex items-start gap-3">
@@ -179,15 +180,15 @@
                         <li class="flex items-start gap-3">
                             <span class="w-6 h-6 rounded-full bg-indigo-600 text-white font-bold text-xs flex items-center justify-center flex-shrink-0 mt-0.5">2</span>
                             <div>
-                                <strong class="text-white block">Paste URL in the Box:</strong>
-                                <span>Paste the link into the box above. Our parser instantly extracts the 11-character video ID and displays the high-resolution cover preview without page reloads.</span>
+                                <strong class="text-white block">Paste & Auto-Detect:</strong>
+                                <span>Paste the URL into the box. Our engine automatically detects if it is a Shorts video and switches to true 9:16 vertical crop, cutting away blurred black sidebars.</span>
                             </div>
                         </li>
                         <li class="flex items-start gap-3">
                             <span class="w-6 h-6 rounded-full bg-indigo-600 text-white font-bold text-xs flex items-center justify-center flex-shrink-0 mt-0.5">3</span>
                             <div>
-                                <strong class="text-white block">Select Quality & Direct Download:</strong>
-                                <span>Click 'Download HD (1080p)' or pick medium resolutions. The thumbnail downloads directly to your device storage ready to use.</span>
+                                <strong class="text-white block">Choose 4K, 1080p, or 720p:</strong>
+                                <span>Click your desired resolution button. The image downloads directly to your device gallery without opening in an external tab.</span>
                             </div>
                         </li>
                     </ol>
@@ -203,37 +204,37 @@
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div class="bg-slate-900/80 p-5 rounded-2xl border border-slate-800 space-y-1.5 shadow-lg">
                         <h3 class="text-sm font-bold text-white flex items-center gap-2">
-                            <span class="text-indigo-400">🌟</span> True 1080p Maximum Resolution
+                            <span class="text-indigo-400">📱</span> True 9:16 Shorts Crop (No Sidebars)
                         </h3>
                         <p class="text-xs text-slate-400 leading-relaxed">
-                            Fetches the uncompressed <code>maxresdefault</code> 1280×720 / 1080p master image uploaded by the creator, not a blurry downscaled mobile thumbnail.
+                            YouTube stores Shorts thumbnails inside a 16:9 box with ugly blurred sidebars. Our tool automatically crops the center 9:16 frame to give you a full-screen vertical thumbnail.
                         </p>
                     </div>
 
                     <div class="bg-slate-900/80 p-5 rounded-2xl border border-slate-800 space-y-1.5 shadow-lg">
                         <h3 class="text-sm font-bold text-white flex items-center gap-2">
-                            <span class="text-indigo-400">⚡</span> Direct File Download (No New Tab Bug)
+                            <span class="text-indigo-400">🌟</span> 4K Ultra HD & 1080p Scaling
                         </h3>
                         <p class="text-xs text-slate-400 leading-relaxed">
-                            Unlike basic tools that merely open the picture in an external tab forcing manual right-clicks, our tool triggers immediate file downloads to your gallery.
+                            Download the original master 1080p image or high-quality 4K upscaled versions with high-end Lanczos resampling.
                         </p>
                     </div>
 
                     <div class="bg-slate-900/80 p-5 rounded-2xl border border-slate-800 space-y-1.5 shadow-lg">
                         <h3 class="text-sm font-bold text-white flex items-center gap-2">
-                            <span class="text-indigo-400">📱</span> YouTube Shorts & Mobile Links
+                            <span class="text-indigo-400">⚡</span> Direct File Download
                         </h3>
                         <p class="text-xs text-slate-400 leading-relaxed">
-                            Fully supports all link variants including <code>youtube.com/shorts/...</code>, <code>youtu.be/...</code>, and mobile web URLs.
+                            No manual 'Right Click & Save Image As'. The image triggers an immediate download directly to your mobile phone gallery or PC downloads folder.
                         </p>
                     </div>
 
                     <div class="bg-slate-900/80 p-5 rounded-2xl border border-slate-800 space-y-1.5 shadow-lg">
                         <h3 class="text-sm font-bold text-white flex items-center gap-2">
-                            <span class="text-indigo-400">🔒</span> 100% Free With Zero Tracking
+                            <span class="text-indigo-400">🔒</span> 100% Free & Zero Tracking
                         </h3>
                         <p class="text-xs text-slate-400 leading-relaxed">
-                            No spammy popups, subscriptions, or login requirements. Search queries and URLs are never logged or stored.
+                            Unlimited downloads with zero ads, subscriptions, or watermarks. Your searched URLs are never logged or saved.
                         </p>
                     </div>
                 </div>
@@ -248,41 +249,31 @@
                 <div class="space-y-3">
                     <details class="bg-slate-900/90 p-4 sm:p-5 rounded-2xl border border-slate-800 text-xs sm:text-sm cursor-pointer group">
                         <summary class="font-bold text-white flex justify-between items-center group-hover:text-indigo-400 transition">
+                            Why does YouTube add blurred bars on the sides of Shorts thumbnails?
+                            <span class="text-indigo-400 text-base">▼</span>
+                        </summary>
+                        <p class="text-slate-400 mt-2.5 leading-relaxed">
+                            YouTube's image CDN defaults to a 16:9 landscape aspect ratio. When a 9:16 vertical Shorts video is uploaded, YouTube pads the left and right sides with blurred borders. Our tool detects this and extracts only the pure 9:16 vertical crop.
+                        </p>
+                    </details>
+
+                    <details class="bg-slate-900/90 p-4 sm:p-5 rounded-2xl border border-slate-800 text-xs sm:text-sm cursor-pointer group">
+                        <summary class="font-bold text-white flex justify-between items-center group-hover:text-indigo-400 transition">
+                            Can I download in 4K resolution?
+                            <span class="text-indigo-400 text-base">▼</span>
+                        </summary>
+                        <p class="text-slate-400 mt-2.5 leading-relaxed">
+                            Yes. By selecting the 'Download 4K' option, our backend applies high-precision Lanczos interpolation to upscale the master image to 3840×2160 pixels with sharp edges.
+                        </p>
+                    </details>
+
+                    <details class="bg-slate-900/90 p-4 sm:p-5 rounded-2xl border border-slate-800 text-xs sm:text-sm cursor-pointer group">
+                        <summary class="font-bold text-white flex justify-between items-center group-hover:text-indigo-400 transition">
                             Is it legal to download YouTube video thumbnails?
                             <span class="text-indigo-400 text-base">▼</span>
                         </summary>
                         <p class="text-slate-400 mt-2.5 leading-relaxed">
-                            Yes. Downloading thumbnails for personal use, design inspiration, educational presentations, or content analysis falls under fair use. However, re-uploading another creator's copyrighted thumbnail on your own commercial video without permission is prohibited by YouTube community guidelines.
-                        </p>
-                    </details>
-
-                    <details class="bg-slate-900/90 p-4 sm:p-5 rounded-2xl border border-slate-800 text-xs sm:text-sm cursor-pointer group">
-                        <summary class="font-bold text-white flex justify-between items-center group-hover:text-indigo-400 transition">
-                            Can I download thumbnails from YouTube Shorts videos?
-                            <span class="text-indigo-400 text-base">▼</span>
-                        </summary>
-                        <p class="text-slate-400 mt-2.5 leading-relaxed">
-                            Yes. Simply copy the link from the Shorts share button (e.g. <code>https://youtube.com/shorts/...</code>) and paste it into the box. Our engine automatically resolves the Shorts ID and extracts the cover graphic.
-                        </p>
-                    </details>
-
-                    <details class="bg-slate-900/90 p-4 sm:p-5 rounded-2xl border border-slate-800 text-xs sm:text-sm cursor-pointer group">
-                        <summary class="font-bold text-white flex justify-between items-center group-hover:text-indigo-400 transition">
-                            Why do some very old videos not have 1080p (MaxRes) resolution?
-                            <span class="text-indigo-400 text-base">▼</span>
-                        </summary>
-                        <p class="text-slate-400 mt-2.5 leading-relaxed">
-                            Videos uploaded prior to 2012 or uploaded in low resolution (360p or 480p) might not have a 1080p master thumbnail generated by YouTube. In such cases, our tool automatically falls back to High Quality (480p) so your download always succeeds.
-                        </p>
-                    </details>
-
-                    <details class="bg-slate-900/90 p-4 sm:p-5 rounded-2xl border border-slate-800 text-xs sm:text-sm cursor-pointer group">
-                        <summary class="font-bold text-white flex justify-between items-center group-hover:text-indigo-400 transition">
-                            Are there any daily download limits or watermark branding?
-                            <span class="text-indigo-400 text-base">▼</span>
-                        </summary>
-                        <p class="text-slate-400 mt-2.5 leading-relaxed">
-                            No limits. SmartPicTools is 100% free forever. You can download as many thumbnails as you need with zero watermarks, sign-ups, or subscriptions.
+                            Yes. Saving thumbnails for personal use, design inspiration, or educational presentations falls under fair use. However, re-uploading someone else's thumbnail on your own video without permission is a copyright violation.
                         </p>
                     </details>
                 </div>
@@ -295,15 +286,23 @@
         <p>© 2026 SmartPicTools. 100% Free & Private in-browser suite. <a href="/" class="text-indigo-400 hover:underline">Explore All Tools</a></p>
     </footer>
 
-    <!-- ⚡ THUMBNAIL EXTRACTOR JAVASCRIPT CONTROLLER -->
+    <!-- ⚡ THUMBNAIL SCRIPT CONTROLLER -->
     <script>
         let currentVideoId = null;
+        let isShortsMode = false;
 
-        function extractVideoId(url) {
+        function extractVideoInfo(url) {
             if (!url) return null;
+            const cleanUrl = url.trim();
+
+            const isShorts = cleanUrl.includes('/shorts/');
             const regExp = /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=|shorts\/)|youtu\.be\/)([^"&?\/\s]{11})/;
-            const match = url.trim().match(regExp);
-            return (match && match[1]) ? match[1] : null;
+            const match = cleanUrl.match(regExp);
+
+            if (match && match[1]) {
+                return { id: match[1], isShorts: isShorts };
+            }
+            return null;
         }
 
         function handleUrlInput(val) {
@@ -318,28 +317,64 @@
                 return;
             }
 
-            const vid = extractVideoId(val);
+            const info = extractVideoInfo(val);
 
-            if (vid) {
-                currentVideoId = vid;
-                document.getElementById('video-id-badge').innerText = `ID: ${vid}`;
-                
-                // Set high quality preview
+            if (info) {
+                currentVideoId = info.id;
+                document.getElementById('video-id-badge').innerText = `ID: ${info.id}`;
+
+                // Set image preview
                 const previewImg = document.getElementById('main-preview-img');
-                previewImg.src = `https://img.youtube.com/vi/${vid}/maxresdefault.jpg`;
-                
-                // Fallback to hqdefault if maxres fails
+                previewImg.src = `https://img.youtube.com/vi/${info.id}/maxresdefault.jpg`;
                 previewImg.onerror = function() {
                     this.onerror = null;
-                    this.src = `https://img.youtube.com/vi/${vid}/hqdefault.jpg`;
+                    this.src = `https://img.youtube.com/vi/${info.id}/hqdefault.jpg`;
                 };
 
+                // Auto-set mode
+                setFormatMode(info.isShorts);
                 resCard.classList.remove('hidden');
             } else if (val.trim().length > 15) {
                 errBox.innerText = "⚠️ Invalid YouTube URL. Please paste a valid YouTube video or Shorts link.";
                 errBox.classList.remove('hidden');
                 resCard.classList.add('hidden');
                 currentVideoId = null;
+            }
+        }
+
+        function setFormatMode(shorts) {
+            isShortsMode = shorts;
+            const bShorts = document.getElementById('btn-mode-shorts');
+            const bVideo = document.getElementById('btn-mode-video');
+            const previewImg = document.getElementById('main-preview-img');
+
+            if (shorts) {
+                bShorts.className = "py-1.5 px-3 rounded-lg text-xs font-bold bg-rose-600 text-white transition shadow";
+                bVideo.className = "py-1.5 px-3 rounded-lg text-xs font-bold text-slate-400 hover:text-white transition";
+
+                // Visual CSS Crop to show 9:16 in preview!
+                previewImg.style.maxHeight = "360px";
+                previewImg.style.aspectRatio = "9 / 16";
+                previewImg.style.objectFit = "cover";
+
+                // Labels
+                document.getElementById('label-dim-4k').innerText = "2160 × 3840 px (9:16)";
+                document.getElementById('label-dim-1080p').innerText = "1080 × 1920 px (9:16)";
+                document.getElementById('label-dim-720p').innerText = "720 × 1280 px (9:16)";
+                document.getElementById('label-dim-480p').innerText = "480 × 854 px (9:16)";
+            } else {
+                bVideo.className = "py-1.5 px-3 rounded-lg text-xs font-bold bg-indigo-600 text-white transition shadow";
+                bShorts.className = "py-1.5 px-3 rounded-lg text-xs font-bold text-slate-400 hover:text-white transition";
+
+                previewImg.style.maxHeight = "400px";
+                previewImg.style.aspectRatio = "16 / 9";
+                previewImg.style.objectFit = "contain";
+
+                // Labels
+                document.getElementById('label-dim-4k').innerText = "3840 × 2160 px (16:9)";
+                document.getElementById('label-dim-1080p').innerText = "1920 × 1080 px (16:9)";
+                document.getElementById('label-dim-720p').innerText = "1280 × 720 px (16:9)";
+                document.getElementById('label-dim-480p').innerText = "854 × 480 px (16:9)";
             }
         }
 
@@ -353,10 +388,9 @@
             }
         }
 
-        function triggerDownload(quality) {
+        function triggerDownload(res) {
             if (!currentVideoId) return;
-            // Direct download via server-assisted clean stream
-            window.location.href = `/get-yt-thumb?id=${currentVideoId}&q=${quality}`;
+            window.location.href = `/get-yt-thumb?id=${currentVideoId}&res=${res}&shorts=${isShortsMode}`;
         }
     </script>
 </body>
