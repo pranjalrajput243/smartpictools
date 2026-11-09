@@ -464,6 +464,7 @@ def serve_favicon_svg():
 # ==========================================
 @app.route('/sitemap.xml')
 def sitemap():
+    today = datetime.date.today().isoformat()
     urls = [
         ('https://smartpictools.in/', '1.0'),
         ('https://smartpictools.in/compress-image', '0.9'),
@@ -496,7 +497,7 @@ def sitemap():
 
     xml = ['<?xml version="1.0" encoding="UTF-8"?>', '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
     for u, p in urls:
-        xml.append(f'  <url><loc>{u}</loc><changefreq>weekly</changefreq><priority>{p}</priority></url>')
+        xml.append(f'  <url><loc>{u}</loc><lastmod>{today}</lastmod><changefreq>weekly</changefreq><priority>{p}</priority></url>')
     xml.append('</urlset>')
 
     return Response("\n".join(xml), mimetype='application/xml')
