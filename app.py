@@ -513,6 +513,10 @@ def ads_txt():
     ads_content = "google.com, pub-6941008868816067, DIRECT, f08c47fec0942fa0\n"
     return Response(ads_content, mimetype='text/plain')
 
+@app.route('/google1c187c8e8addbbb4.html')
+def google_verify():
+    return 'google-site-verification: google1c187c8e8addbbb4.html'
+
 # ==========================================
 # ⚡ LEGAL & COMPANY PAGES
 # ==========================================
