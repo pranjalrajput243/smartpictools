@@ -21,17 +21,58 @@
     <meta property="og:title" content="Photo and Signature Joiner Online Free - SmartPicTools">
     <meta property="og:description" content="Combine passport photo and signature into a single image under 50KB for govt exam portals in 0.05s.">
 
-    <!-- SCHEMA MARKUP -->
+  <!-- SCHEMA MARKUP (WEBAPP + FAQ RICH SNIPPET) -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "WebApplication",
-      "name": "SmartPicTools Photo and Signature Joiner",
-      "url": "https://smartpictools.in/photo-signature-joiner",
-      "description": "Free tool to combine photo and signature for exam forms.",
-      "applicationCategory": "MultimediaApplication",
-      "operatingSystem": "All",
-      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+      "@graph": [
+        {
+          "@type": "WebApplication",
+          "name": "SmartPicTools Photo and Signature Joiner",
+          "url": "https://smartpictools.in/photo-signature-joiner",
+          "description": "Free tool to combine photo and signature for official exam forms under 50KB.",
+          "applicationCategory": "MultimediaApplication",
+          "operatingSystem": "All",
+          "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "What is the official ratio and dimension for SSC and UP Police photo-signature images?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Recruitment notices for SSC and UP Police specify a 350 x 450 px or 350 x 500 px image where the photo occupies the top 80% and the signature occupies the bottom 20%, kept strictly under 50 KB."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Why do recruitment portals reject combined images with grey sticker outlines?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Pasting a grey phone-captured signature onto a white canvas creates a harsh box that scanners flag as tampering. Our tool balances paper edge color so the signature blends seamlessly into the official template."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Can I crop away extra table or paper edges before joining?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. Upon selecting your photo or signature, an interactive crop window opens allowing you to crop tightly around your face or ink strokes before merging."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How does the tool ensure the final combined file stays under 50 KB?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Our client-side encoder dynamically monitors byte weight and applies targeted discrete cosine transform quantization to keep the output under 50 KB without blurring facial details or signatures."
+              }
+            }
+          ]
+        }
+      ]
     }
     </script>
 
