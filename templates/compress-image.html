@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     
-    <!-- ⚡ HIGH-RANKING KEYWORDS FOR COMPRESSION -->
-    <title>Compress Image to 20KB, 50KB, 100KB Online Free | SmartPicTools</title>
-    <meta name="description" content="Compress image to exact 20KB, 50KB, 100KB with real-time live preview and file size calculator. Perfect for SSC, UPSC, and online exam forms. 100% private in-browser tool.">
+    <!-- ⚡ DYNAMIC HIGH-RANKING KEYWORDS & CANONICAL -->
+    <title>{{ meta.title if meta else "Compress Image to 20KB, 50KB, 100KB Online Free | SmartPicTools" }}</title>
+    <meta name="description" content="{{ meta.desc if meta else 'Compress image to exact 20KB, 50KB, 100KB with real-time live preview and file size calculator. Perfect for SSC, UPSC, and online exam forms. 100% private in-browser tool.' }}">
     <meta name="keywords" content="compress image to 20kb, compress image to 50kb, compress image to 100kb, exact kb image compressor, compress photo for online exam, ssc photo compressor, upsc photo resizer, live image compressor">
     <meta name="robots" content="index, follow, max-image-preview:large">
     <meta name="author" content="SmartPicTools">
-    <link rel="canonical" href="https://smartpictools.in/compress-image">
+    <link rel="canonical" href="{{ meta.canonical if meta else 'https://smartpictools.in/compress-image' }}">
     
     <!-- ⚡ PERMANENT GOOGLE SEARCH CONSOLE VERIFICATION TAG -->
     <meta name="google-site-verification" content="uUq17UUsROyHMRQ8jkqKqrjZmsJnkuxZMKKoJLw_X3E" />
@@ -109,8 +109,12 @@
     <!-- MAIN WORKSPACE -->
     <main class="max-w-4xl mx-auto w-full px-4 py-8 sm:py-12 flex-1">
         <div class="text-center max-w-2xl mx-auto mb-8 sm:mb-10">
-            <h1 class="text-3xl sm:text-5xl font-black text-white tracking-tight">Compress Image to Exact KB</h1>
-            <p class="mt-2.5 text-slate-400 text-xs sm:text-sm">Move the slider to watch real-time clarity and live file size before downloading. Zero guesswork.</p>
+            <h1 class="text-3xl sm:text-5xl font-black text-white tracking-tight">
+                {{ "Compress Image to " ~ meta.target_kb ~ "KB" if meta else "Compress Image to Exact KB" }}
+            </h1>
+            <p class="mt-2.5 text-slate-400 text-xs sm:text-sm">
+                {{ "Automatically compress and shrink image to exact " ~ meta.target_kb ~ "KB with live preview. Zero guesswork." if meta else "Move the slider to watch real-time clarity and live file size before downloading. Zero guesswork." }}
+            </p>
         </div>
 
         <div class="bg-slate-900 rounded-3xl p-5 sm:p-10 border border-slate-800 shadow-2xl relative">
@@ -427,10 +431,15 @@
                     document.getElementById('workspace').classList.remove('hidden');
                     document.getElementById('status-box').classList.add('hidden');
 
-                    // Run initial live calculation at 65%
-                    document.getElementById('quality-slider').value = 65;
-                    document.getElementById('quality-val-badge').innerText = '65%';
-                    runLiveCompression(65);
+                    // Auto-snap to preset KB if landed via targeted URL, else default to 65%
+                    const targetPresetKb = {{ meta.target_kb if meta else 'null' }};
+                    if (targetPresetKb) {
+                        snapToExactTarget(targetPresetKb);
+                    } else {
+                        document.getElementById('quality-slider').value = 65;
+                        document.getElementById('quality-val-badge').innerText = '65%';
+                        runLiveCompression(65);
+                    }
                 };
                 loadedImg.src = e.target.result;
             };
