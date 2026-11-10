@@ -17,8 +17,8 @@
 
     <!-- OPEN GRAPH -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://smartpictools.in/photo-signature-joiner">
-    <meta property="og:title" content="Photo and Signature Joiner Online Free - SmartPicTools">
+    <meta property="og:url" content="{{ meta.canonical if meta else 'https://smartpictools.in/photo-signature-joiner' }}">
+    <meta property="og:title" content="{{ meta.title if meta else 'Photo and Signature Joiner Online Free - SmartPicTools' }}">
     <meta property="og:description" content="Combine passport photo and signature into a single image under 50KB for govt exam portals in 0.05s.">
 
     <!-- SCHEMA MARKUP (WEBAPP + FAQ RICH SNIPPET) -->
@@ -128,18 +128,16 @@
         <div class="bg-slate-900 border border-slate-800 rounded-3xl max-w-xl w-full p-4 sm:p-6 shadow-2xl space-y-4">
             <div class="flex items-center justify-between">
                 <div>
-                    <h3 id="modal-title" class="text-base sm:text-lg font-bold text-white">Crop Image</h3>
+                    <h3 id="modal-title" class="text-base sm:lg font-bold text-white">Crop Image</h3>
                     <p class="text-xs text-slate-400">Crop unwanted paper margins or table edges tightly</p>
                 </div>
                 <button type="button" onclick="closeCropperModal()" class="w-8 h-8 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-300 text-sm font-bold flex items-center justify-center">✕</button>
             </div>
 
-            <!-- Cropper Viewport -->
             <div class="h-64 sm:h-80 bg-slate-950 rounded-2xl overflow-hidden border border-slate-800 flex items-center justify-center">
                 <img id="modal-crop-img" src="#" alt="Crop Preview" class="max-h-full max-w-full block">
             </div>
 
-            <!-- Toolbar in Modal -->
             <div class="flex items-center justify-between gap-3 pt-1">
                 <div class="flex items-center gap-2">
                     <button type="button" onclick="cropperInstance.rotate(-90)" class="py-1.5 px-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-bold text-slate-300">↺ -90°</button>
@@ -175,16 +173,14 @@
         <!-- ⚡ 2-COLUMN WIREFRAME LAYOUT -->
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
             
-            <!-- ============================================== -->
-            <!-- ⚡ LEFT PANEL: CONTROLS & SETTINGS (7 COLS)   -->
-            <!-- ============================================== -->
+            <!-- LEFT PANEL: CONTROLS & SETTINGS (7 COLS) -->
             <div class="lg:col-span-7 bg-slate-900 rounded-3xl p-5 sm:p-7 border border-slate-800 shadow-2xl space-y-5">
                 
                 <h1 class="text-xl sm:text-2xl font-black text-white tracking-tight">
                     {{ meta.h1 if meta else "Photo & Signature Joiner" }}
                 </h1>
 
-                <!-- 1. UPLOAD SECTION WITH EXPLICIT CROP BUTTONS -->
+                <!-- 1. UPLOAD SECTION -->
                 <div class="space-y-2.5">
                     <span class="text-xs font-bold text-slate-300 block">1. Upload Section</span>
                     <div class="grid grid-cols-2 gap-3.5">
@@ -199,7 +195,6 @@
                                 <span class="text-[11px] text-indigo-400 underline font-semibold">Choose File</span>
                             </div>
                             
-                            <!-- Thumbnail + Action Buttons -->
                             <div id="photo-preview-wrap" class="hidden space-y-2">
                                 <img id="thumb-photo" class="h-16 w-auto mx-auto object-contain rounded-lg border border-slate-700" src="#" alt="Photo Thumbnail">
                                 <div class="flex items-center justify-center gap-1.5">
@@ -223,7 +218,6 @@
                                 <span class="text-[11px] text-purple-400 underline font-semibold">Choose File</span>
                             </div>
                             
-                            <!-- Thumbnail + Action Buttons -->
                             <div id="sig-preview-wrap" class="hidden space-y-2">
                                 <img id="thumb-sig" class="h-16 w-auto mx-auto object-contain rounded-lg border border-slate-700 bg-white" src="#" alt="Sign Thumbnail">
                                 <div class="flex items-center justify-center gap-1.5">
@@ -240,11 +234,10 @@
                     </div>
                 </div>
 
-                <!-- ⚡ 2. OFFICIAL EXAM PRESETS & CUSTOM DIMENSIONS -->
+                <!-- 2. DIMENSIONS & PRESETS -->
                 <div class="space-y-3 pt-1 border-t border-slate-800">
                     <span class="text-xs font-bold text-slate-300 block">2. Dimensions & Exam Presets</span>
                     
-                    <!-- Official Exam Presets Dropdown -->
                     <div>
                         <label class="block text-[11px] font-bold text-slate-400 mb-1">Select Exam Portal:</label>
                         <select id="exam-preset" onchange="applyExamPreset(this.value)" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs font-bold text-white focus:outline-none focus:border-indigo-500">
@@ -257,7 +250,6 @@
                         </select>
                     </div>
 
-                    <!-- Dimension Inputs (Auto-locked for Presets) -->
                     <div id="custom-dim-box">
                         <div class="flex items-center justify-between mb-1">
                             <label class="block text-[11px] font-bold text-slate-400">Dimensions:</label>
@@ -273,11 +265,10 @@
                     </div>
                 </div>
 
-                <!-- ⚡ 3. OUTPUT QUALITY & TARGET FILE SIZE -->
+                <!-- 3. OUTPUT QUALITY -->
                 <div class="space-y-3 pt-1 border-t border-slate-800">
                     <span class="text-xs font-bold text-slate-300 block">3. Output Quality & File Weight</span>
 
-                    <!-- Target File Size Slider with Under 50KB Badge -->
                     <div class="space-y-1.5">
                         <div class="flex items-center justify-between text-xs">
                             <span class="font-bold text-slate-400">Target File Size (KB):</span>
@@ -302,9 +293,7 @@
 
             </div>
 
-            <!-- ============================================== -->
-            <!-- ⚡ RIGHT PANEL: MERGED PREVIEW (5 COLS)        -->
-            <!-- ============================================== -->
+            <!-- RIGHT PANEL: MERGED PREVIEW (5 COLS) -->
             <div class="lg:col-span-5 bg-slate-900 rounded-3xl p-5 border border-slate-800 shadow-2xl lg:sticky lg:top-24 space-y-4">
                 
                 <h2 class="text-lg font-black text-white tracking-tight">Merged Preview</h2>
@@ -314,7 +303,6 @@
                         Current Size: 8.8 KB (Target: ≤ 45 KB)
                     </span>
 
-                    <!-- The Clean Merged Canvas with Smart Magnetic Green Snap Lines -->
                     <div class="flex items-center justify-center p-2 rounded-xl bg-slate-950 overflow-hidden shadow-2xl">
                         <div class="relative inline-block leading-none">
                             <canvas id="merged-canvas" class="max-h-[380px] w-auto h-auto rounded shadow-lg bg-white block border border-slate-700 select-none cursor-move" title="Click & drag to position face with smart snapping"></canvas>
@@ -323,8 +311,9 @@
                             <div id="guide-v" class="snap-guide-v"></div>
                         </div>
                     </div>
+                </div>
 
-                <!-- ACTION BUTTONS: COMBINE & DOWNLOAD + RESET -->
+                <!-- ACTION BUTTONS -->
                 <div class="flex items-center gap-3 pt-1">
                     <button type="button" onclick="downloadMergedImage()" class="flex-1 py-3.5 px-4 rounded-2xl bg-blue-600 hover:bg-blue-500 text-white font-extrabold text-sm shadow-lg shadow-blue-600/30 transition active:scale-[0.99] flex items-center justify-center gap-2">
                         <span>Combine & Download</span>
@@ -339,14 +328,36 @@
                 </div>
             </div>
 
+        </div> <!-- Closes 2-Column Grid -->
+
+        <!-- ⚡ RELATED EXAM TOOLS SILO (FULL WIDTH, CLEAN BELOW WORKSPACE) -->
+        <div class="mt-14 bg-slate-900/90 p-6 rounded-3xl border border-slate-800 space-y-4">
+            <div class="flex items-center gap-2">
+                <span class="text-indigo-400 font-bold text-sm">🔗</span>
+                <h3 class="text-sm font-bold text-white uppercase tracking-wider">Related Candidate Tools for Government Forms:</h3>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
+                <a href="/add-name-date-on-photo" class="p-3 bg-slate-950/80 hover:bg-slate-950 rounded-xl border border-slate-800 hover:border-indigo-500/50 transition block">
+                    <strong class="text-white block">📅 Add Name & Date on Photo</strong>
+                    <span class="text-slate-400 text-[11px]">Print candidate name and DOP with magnetic center alignment.</span>
+                </a>
+                <a href="/passport-photo-maker" class="p-3 bg-slate-950/80 hover:bg-slate-950 rounded-xl border border-slate-800 hover:border-indigo-500/50 transition block">
+                    <strong class="text-white block">👤 Passport Size Photo Maker</strong>
+                    <span class="text-slate-400 text-[11px]">Official 3.5x4.5cm photos & printable 4x6 / A4 sheets.</span>
+                </a>
+                <a href="/compress-image" class="p-3 bg-slate-950/80 hover:bg-slate-950 rounded-xl border border-slate-800 hover:border-indigo-500/50 transition block">
+                    <strong class="text-white block">🎯 Compress Image (20KB - 50KB)</strong>
+                    <span class="text-slate-400 text-[11px]">Exact target file size reduction for candidate signatures.</span>
+                </a>
+            </div>
         </div>
 
         <!-- ========================================================= -->
         <!-- ⚡ IN-DEPTH PRODUCT DOCUMENTATION & SEO CONTENT          -->
         <!-- ========================================================= -->
-        <section class="mt-16 border-t border-slate-800 pt-12 space-y-12 text-slate-300">
+        <section class="mt-14 border-t border-slate-800 pt-12 space-y-12 text-slate-300">
             
-            <!-- 1. DETAILED HOW TO USE (ARTICLE STYLE, NO DISJOINTED CARDS) -->
+            <!-- 1. DETAILED HOW TO USE -->
             <div class="space-y-4">
                 <div class="flex items-center gap-2.5">
                     <span class="w-8 h-8 rounded-xl bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 flex items-center justify-center text-sm font-bold">📖</span>
@@ -389,7 +400,7 @@
                 </div>
             </div>
 
-            <!-- 2. WHY CHOOSE SMARTPICTOOLS PHOTO & SIGNATURE JOINER? -->
+            <!-- 2. WHY CHOOSE -->
             <div class="space-y-4">
                 <div class="flex items-center gap-2.5">
                     <span class="w-8 h-8 rounded-xl bg-purple-500/10 border border-purple-500/20 text-purple-400 flex items-center justify-center text-sm font-bold">⭐</span>
@@ -434,7 +445,7 @@
                 </div>
             </div>
 
-            <!-- 3. FREQUENTLY ASKED QUESTIONS (COLLAPSIBLE DROPDOWNS) -->
+            <!-- 3. FAQS -->
             <div class="space-y-4">
                 <div class="flex items-center gap-2.5">
                     <span class="w-8 h-8 rounded-xl bg-teal-500/10 border border-teal-500/20 text-teal-400 flex items-center justify-center text-sm font-bold">❓</span>
@@ -494,35 +505,13 @@
             </div>
 
         </section>
-    
-    <!-- ⚡ RELATED EXAM TOOLS SILO (SEO INTERNAL LINKING) -->
-            <div class="mt-12 bg-slate-900/90 p-6 rounded-3xl border border-slate-800 space-y-4">
-                <div class="flex items-center gap-2">
-                    <span class="text-indigo-400 font-bold text-sm">🔗</span>
-                    <h3 class="text-sm font-bold text-white uppercase tracking-wider">Related Candidate Tools for Government Forms:</h3>
-                </div>
-                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
-                    <a href="/add-name-date-on-photo" class="p-3 bg-slate-950/80 hover:bg-slate-950 rounded-xl border border-slate-800 hover:border-indigo-500/50 transition block">
-                        <strong class="text-white block">📅 Add Name & Date on Photo</strong>
-                        <span class="text-slate-400 text-[11px]">Print candidate name and DOP with magnetic center alignment.</span>
-                    </a>
-                    <a href="/passport-photo-maker" class="p-3 bg-slate-950/80 hover:bg-slate-950 rounded-xl border border-slate-800 hover:border-indigo-500/50 transition block">
-                        <strong class="text-white block">👤 Passport Size Photo Maker</strong>
-                        <span class="text-slate-400 text-[11px]">Official 3.5x4.5cm photos & printable 4x6 / A4 sheets.</span>
-                    </a>
-                    <a href="/compress-image" class="p-3 bg-slate-950/80 hover:bg-slate-950 rounded-xl border border-slate-800 hover:border-indigo-500/50 transition block">
-                        <strong class="text-white block">🎯 Compress Image (20KB - 50KB)</strong>
-                        <span class="text-slate-400 text-[11px]">Exact target file size reduction for candidate signatures.</span>
-                    </a>
-                </div>
-            </div>
-    
     </main>
+
     <footer class="border-t border-slate-800 bg-slate-950 py-6 px-4 text-xs text-slate-400 text-center">
         <p>© 2026 SmartPicTools. 100% Free & Private in-browser suite. <a href="/" class="text-indigo-400 hover:underline">Explore All Tools</a></p>
     </footer>
 
-    <!-- ⚡ CROPPER MODAL & DYNAMIC BACKGROUND MATCH JS ENGINE -->
+    <!-- ⚡ CROPPER MODAL, DRAG SNAP & DYNAMIC BACKGROUND MATCH JS ENGINE -->
     <script>
         let photoCanvas = null;
         let sigCanvas = null;
@@ -620,7 +609,6 @@
             window.addEventListener('touchend', endDrag);
         }
 
-        // ⚡ FILE SELECTION & MODAL OPENING
         async function handleFileSelect(file, type) {
             if (!file) return;
             let blob = file;
@@ -682,6 +670,7 @@
 
             if (currentCroppingType === 'photo') {
                 photoCanvas = cropped;
+                photoTransform = { panX: 0, panY: 0 };
                 document.getElementById('photo-placeholder').classList.add('hidden');
                 document.getElementById('photo-preview-wrap').classList.remove('hidden');
                 document.getElementById('thumb-photo').src = cropped.toDataURL('image/jpeg', 0.9);
@@ -696,7 +685,6 @@
             renderCombinedCanvas();
         }
 
-        // ⚡ EXAM PRESET HANDLER WITH READ-ONLY INPUT AUTO-LOCK
         function applyExamPreset(preset) {
             const wInput = document.getElementById('dim-w');
             const hInput = document.getElementById('dim-h');
@@ -755,6 +743,7 @@
             sigCanvas = null;
             rawPhotoBlob = null;
             rawSigBlob = null;
+            photoTransform = { panX: 0, panY: 0 };
 
             document.getElementById('input-photo').value = '';
             document.getElementById('input-sig').value = '';
@@ -769,7 +758,6 @@
             renderCombinedCanvas();
         }
 
-        // ⚡ DETECT SIGNATURE BACKGROUND COLOR (SAMPLES OUTER EDGE PAPER PIXELS)
         function getSignaturePaperColor(srcCanvas) {
             const sCtx = srcCanvas.getContext('2d');
             const w = srcCanvas.width;
@@ -779,22 +767,17 @@
 
             let rSum = 0, gSum = 0, bSum = 0, count = 0;
 
-            // Sample the outer perimeter (outermost 1-2px border which is 100% paper background)
             for (let x = 0; x < w; x++) {
-                // Top border
                 let idx = (0 * w + x) * 4;
                 rSum += data[idx]; gSum += data[idx + 1]; bSum += data[idx + 2];
-                // Bottom border
                 idx = ((h - 1) * w + x) * 4;
                 rSum += data[idx]; gSum += data[idx + 1]; bSum += data[idx + 2];
                 count += 2;
             }
             for (let y = 1; y < h - 1; y++) {
-                // Left border
                 let idx = (y * w + 0) * 4;
                 rSum += data[idx]; gSum += data[idx + 1]; bSum += data[idx + 2];
-                // Right border
-                idx = (y * w + (w - 1)) * 4;
+                idx = ((y * w) + (w - 1)) * 4;
                 rSum += data[idx]; gSum += data[idx + 1]; bSum += data[idx + 2];
                 count += 2;
             }
@@ -807,7 +790,7 @@
             };
         }
 
-        // ⚡ RENDER FINAL COMBINED CANVAS (DYNAMIC PAPER BACKGROUND MATCH - ZERO CUTOUT LOOK)
+        // ⚡ RENDER FINAL COMBINED CANVAS (100% UNCLIPPED & RESTORED)
         function renderCombinedCanvas() {
             const w = parseInt(document.getElementById('dim-w').value, 10) || 350;
             const h = parseInt(document.getElementById('dim-h').value, 10) || 450;
@@ -827,7 +810,7 @@
             ctx.save();
             ctx.beginPath();
             ctx.rect(0, 0, w, photoH);
-            ctx.clip();
+            ctx.clip(); // Only clips photo within top 80%
 
             if (photoCanvas) {
                 const pW = photoCanvas.width;
@@ -846,6 +829,7 @@
                 ctx.textAlign = 'center';
                 ctx.fillText('1. Passport Photo Area (80%)', w / 2, photoH / 2);
             }
+            ctx.restore(); // ⚡ CRITICAL RESTORE: Removes clipping so Signature can draw!
 
             // 2. Crisp Clean Separator Line
             ctx.strokeStyle = '#cbd5e1';
@@ -857,14 +841,11 @@
 
             // 3. Draw Signature Slot with DYNAMIC PAPER COLOR MATCHING
             if (sigCanvas) {
-                // ⚡ Sample exact paper color from signature borders
                 const paperColor = getSignaturePaperColor(sigCanvas);
 
-                // Fill the ENTIRE bottom 20% slot with that exact paper color!
                 ctx.fillStyle = `rgb(${paperColor.r}, ${paperColor.g}, ${paperColor.b})`;
                 ctx.fillRect(0, photoH, w, sigH);
 
-                // Draw signature centered inside the slot
                 const sRatio = sigCanvas.width / sigCanvas.height;
                 const slotRatio = w / sigH;
                 let drawW = w, drawH = sigH;
@@ -880,7 +861,6 @@
                 const drawX = (w - drawW) / 2;
                 const drawY = photoH + (sigH - drawH) / 2;
 
-                // Draw original signature - since slot background matches paper edges, seams disappear!
                 ctx.drawImage(sigCanvas, drawX, drawY, drawW, drawH);
             } else {
                 ctx.fillStyle = '#ffffff';
@@ -890,6 +870,11 @@
                 ctx.textAlign = 'center';
                 ctx.fillText('2. Signature Area (20%)', w / 2, photoH + sigH / 2);
             }
+
+            // Outer border
+            ctx.strokeStyle = '#0f172a';
+            ctx.lineWidth = 1.5;
+            ctx.strokeRect(0, 0, w, h);
 
             // 4. Accurate Real-Time Live KB Feedback
             const format = document.getElementById('export-format').value;
@@ -931,6 +916,7 @@
                 a.download = `smartpic_photo_signature_joined.${ext}`;
                 a.click();
                 document.getElementById('status-box').classList.remove('hidden');
+                setTimeout(() => document.getElementById('status-box').classList.add('hidden'), 3500);
             }, mime, q);
         }
     </script>
