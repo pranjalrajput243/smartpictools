@@ -178,6 +178,29 @@ def photo_sig_spokes_route():
 @app.route('/add-name-date-on-photo')
 def add_name_date_route():
     return render_template('add-name-date-on-photo.html')
+    # ⚡ DEDICATED HIGH-INTENT NAME & DATE ON PHOTO SPOKES
+@app.route('/ssc-photo-name-and-date-maker')
+@app.route('/up-police-photo-name-date-maker')
+def name_date_spokes_route():
+    endpoint = request.path.strip('/')
+    spokes = {
+        'ssc-photo-name-and-date-maker': {
+            'title': 'SSC Photo Name and Date Maker Online Free - CGL, CHSL, GD DOP | SmartPicTools',
+            'desc': 'Free online tool to add candidate name and Date of Photo (DOP) on passport photo for SSC CGL, CHSL, MTS, and GD in 300 DPI Ultra HD.',
+            'h1': 'SSC Photo Name & Date Maker (DOP)',
+            'placeholder_date': 'e.g. DOP: 01-11-2026',
+            'canonical': 'https://smartpictools.in/ssc-photo-name-and-date-maker'
+        },
+        'up-police-photo-name-date-maker': {
+            'title': 'UP Police Photo Name and Date Maker Online Free - 300 DPI HD | SmartPicTools',
+            'desc': 'Generate candidate passport photo with legal name and capture date for UP Police Constable and SI recruitment forms. 100% private in-browser.',
+            'h1': 'UP Police Photo Name & Date Maker',
+            'placeholder_date': 'e.g. DOP: 01-11-2026',
+            'canonical': 'https://smartpictools.in/up-police-photo-name-date-maker'
+        }
+    }
+    meta = spokes.get(endpoint)
+    return render_template('add-name-date-on-photo.html', meta=meta)
 
 @app.route('/crop-image')
 def crop_route():
@@ -551,6 +574,8 @@ def sitemap():
         ('https://smartpictools.in/ssc-photo-signature-joiner', '0.9'),
         ('https://smartpictools.in/up-police-photo-signature-joiner', '0.9'),
         ('https://smartpictools.in/add-name-date-on-photo', '0.9'),
+        ('https://smartpictools.in/ssc-photo-name-and-date-maker', '0.9'),
+        ('https://smartpictools.in/up-police-photo-name-date-maker', '0.9'),
         ('https://smartpictools.in/crop-image', '0.9'),
         ('https://smartpictools.in/resize-image', '0.9'),
         ('https://smartpictools.in/convert-image', '0.9'),
