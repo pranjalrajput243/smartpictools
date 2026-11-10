@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     
-    <!-- ⚡ HIGH-PRIORITY SEO & KEYWORDS FOR PASSPORT PHOTOS -->
-    <title>Passport Size Photo Maker Online Free - 300 DPI Studio Quality | SmartPicTools</title>
-    <meta name="description" content="Free online passport size photo maker with 300 DPI Ultra HD print clarity. Crop to 3.5x4.5cm for SSC/UPSC, 2x2 inch Visa, print custom photo counts on 4x6 or A4 sheets with zero-gap cutting borders.">
+    <!-- ⚡ DYNAMIC HIGH-PRIORITY SEO & KEYWORDS FOR PASSPORT PHOTOS -->
+    <title>{{ meta.title if meta else "Passport Size Photo Maker Online Free - 300 DPI Studio Quality | SmartPicTools" }}</title>
+    <meta name="description" content="{{ meta.desc if meta else 'Free online passport size photo maker with 300 DPI Ultra HD print clarity. Crop to 3.5x4.5cm for SSC/UPSC, 2x2 inch Visa, print custom photo counts on 4x6 or A4 sheets with zero-gap cutting borders.' }}">
     <meta name="keywords" content="passport size photo maker online free, ssc photo maker 3.5x4.5, upsc passport photo size, 2x2 visa photo maker, create passport photo 4x6 sheet, passport photo printable a4 sheet, custom photo count on sheet, studio quality passport photo 300 dpi">
     <meta name="robots" content="index, follow, max-image-preview:large">
     <meta name="author" content="SmartPicTools">
-    <link rel="canonical" href="https://smartpictools.in/passport-photo-maker">
+    <link rel="canonical" href="{{ meta.canonical if meta else 'https://smartpictools.in/passport-photo-maker' }}">
     
     <!-- ⚡ PERMANENT GOOGLE SEARCH CONSOLE VERIFICATION TAG -->
     <meta name="google-site-verification" content="uUq17UUsROyHMRQ8jkqKqrjZmsJnkuxZMKKoJLw_X3E" />
@@ -117,7 +117,7 @@
         
         <div class="text-center max-w-xl mx-auto mb-6">
             <span class="text-[10px] font-extrabold uppercase tracking-widest text-indigo-400 bg-indigo-500/10 px-2.5 py-0.5 rounded-full border border-indigo-500/20">300 DPI Studio HD Quality</span>
-            <h1 class="text-2xl sm:text-4xl font-black text-white mt-1.5 tracking-tight">Passport Size Photo Maker</h1>
+            <h1 class="text-2xl sm:text-4xl font-black text-white mt-1.5 tracking-tight">{{ meta.h1 if meta else "Passport Size Photo Maker" }}</h1>
             <p class="mt-1 text-slate-400 text-xs sm:text-sm">Create crystal-clear 300 DPI passport photos for SSC, UPSC, or Visa. Automatic physical sheet capacity calculation prevents photo overflow.</p>
         </div>
 
@@ -442,8 +442,13 @@
     <script>
         let cropper = null;
         let originalFileName = 'passport_photo';
-        let currentSizePreset = '3.5x4.5';
-        let currentSheetType = 'single';
+        let currentSizePreset = "{{ meta.size_preset if meta else '3.5x4.5' }}";
+        let currentSheetType = "{{ meta.sheet_type if meta else 'single' }}";
+
+        window.addEventListener('DOMContentLoaded', () => {
+            selectSizePreset(currentSizePreset);
+            selectSheetType(currentSheetType);
+        });
 
         const dropArea = document.getElementById('drop-area');
         const fileInput = document.getElementById('file-input');
