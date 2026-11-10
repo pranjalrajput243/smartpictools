@@ -667,12 +667,6 @@
             sCtx.fillRect(0, 0, cardW, cardH);
             sCtx.drawImage(croppedSource, borderPadding, borderPadding, innerW, innerH);
 
-            if (hasCuttingLine) {
-                sCtx.strokeStyle = '#000000';
-                sCtx.lineWidth = 1.5;
-                sCtx.strokeRect(0, 0, cardW, cardH);
-            }
-
             // CASE A: SINGLE PHOTO OUTPUT
             if (currentSheetType === 'single') {
                 outputCanvas.width = cardW;
@@ -680,6 +674,12 @@
                 ctx.imageSmoothingEnabled = true;
                 ctx.imageSmoothingQuality = 'high';
                 ctx.drawImage(singleCardCanvas, 0, 0);
+
+                if (hasCuttingLine) {
+                    ctx.strokeStyle = '#000000';
+                    ctx.lineWidth = 2;
+                    ctx.strokeRect(1, 1, cardW - 2, cardH - 2);
+                }
                 return;
             }
 
@@ -699,18 +699,16 @@
             count = Math.max(1, Math.min(specs.maxCap, count));
 
             const cols = specs.cols;
-
-           // ⚡ PERFECT 2-AXIS DYNAMIC CENTER ALIGNMENT (PREVENTS CUT-OFF)
             const fullLineWidth = cols * cardW;
             const startX = Math.max(0, Math.floor((sheetW - fullLineWidth) / 2));
 
-            // Calculate exact grid height based on sheet capacity to balance top and bottom margins equally
-            const fullGridHeight = (currentSheetType === '4x6') 
-                ? (specs.rows * cardH) 
-                : (Math.ceil(count / cols) * cardH);
+            const activeRows = Math.ceil(count / cols);
+            const totalDrawnRows = (currentSheetType === '4x6') ? specs.rows : activeRows;
+            const fullGridHeight = totalDrawnRows * cardH;
 
             const startY = Math.max(0, Math.floor((sheetH - fullGridHeight) / 2));
 
+            // 1. Draw all photos on the sheet first
             let drawn = 0;
             while (drawn < count) {
                 const c = drawn % cols;
@@ -721,6 +719,30 @@
 
                 ctx.drawImage(singleCardCanvas, x, y, cardW, cardH);
                 drawn++;
+            }
+
+            // ⚡ 2. DRAW UNBROKEN CUTTING GUIDE LINES ON TOP OF SHEET (NEVER OVERWRITTEN)
+            if (hasCuttingLine) {
+                ctx.strokeStyle = '#000000';
+                ctx.lineWidth = 2.5; // Studio Standard Cutting Guide
+                ctx.beginPath();
+
+                // Draw All Horizontal Cutting Lines (Top, Middle Row Separator, Bottom)
+                for (let r = 0; r <= totalDrawnRows; r++) {
+                    const hy = startY + r * cardH;
+                    ctx.moveTo(startX, hy);
+                    ctx.lineTo(startX + fullLineWidth, hy);
+                }
+
+                // Draw All Vertical Cutting Lines (Left, Column Separators, Right)
+                const gridBottomY = startY + totalDrawnRows * cardH;
+                for (let c = 0; c <= cols; c++) {
+                    const vx = startX + c * cardW;
+                    ctx.moveTo(vx, startY);
+                    ctx.lineTo(vx, gridBottomY);
+                }
+
+                ctx.stroke();
             }
         }
 
