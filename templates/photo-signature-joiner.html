@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     
-    <!-- ⚡ HIGH-PRIORITY SEO & EXAM KEYWORDS -->
-    <title>Photo and Signature Joiner Online Free - Combine for SSC, UPSC & Govt Forms | SmartPicTools</title>
-    <meta name="description" content="Free online tool to combine photo and signature into a single file with crop, seamless background matching, and official exam presets for SSC, UPSC, Railway, and Police under 50KB.">
+    <!-- ⚡ DYNAMIC HIGH-PRIORITY SEO & EXAM KEYWORDS -->
+    <title>{{ meta.title if meta else "Photo and Signature Joiner Online Free - Combine for SSC, UPSC & Govt Forms | SmartPicTools" }}</title>
+    <meta name="description" content="{{ meta.desc if meta else 'Free online tool to combine photo and signature into a single file with crop, seamless background matching, and official exam presets for SSC, UPSC, Railway, and Police under 50KB.' }}">
     <meta name="keywords" content="photo and signature joiner online, combine photo and signature, ssc photo signature merger, up police photo signature joiner, photo signature combiner online free, join photo with signature under 50kb">
     <meta name="robots" content="index, follow, max-image-preview:large">
     <meta name="author" content="SmartPicTools">
-    <link rel="canonical" href="https://smartpictools.in/photo-signature-joiner">
+    <link rel="canonical" href="{{ meta.canonical if meta else 'https://smartpictools.in/photo-signature-joiner' }}">
     
     <!-- ⚡ PERMANENT GOOGLE SEARCH CONSOLE VERIFICATION TAG -->
     <meta name="google-site-verification" content="uUq17UUsROyHMRQ8jkqKqrjZmsJnkuxZMKKoJLw_X3E" />
@@ -91,6 +91,34 @@
         body { font-family: 'Plus Jakarta Sans', sans-serif; -webkit-tap-highlight-color: transparent; }
         .cropper-view-box { outline: 2px solid #818cf8 !important; }
         .cropper-modal { background-color: #020617 !important; opacity: 0.75 !important; }
+
+        /* ⚡ FIGMA-STYLE SMART SNAP GUIDES (PHOTO AREA 80%) */
+        .snap-guide-h {
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 40%; /* Dead-center of top 80% photo slot */
+            height: 1.5px;
+            background: #10b981;
+            box-shadow: 0 0 8px rgba(16, 185, 129, 0.75);
+            pointer-events: none;
+            z-index: 20;
+            opacity: 0;
+            transition: opacity 0.08s ease-in-out;
+        }
+        .snap-guide-v {
+            position: absolute;
+            top: 0;
+            bottom: 20%; /* Stops right above signature slot */
+            left: 50%;
+            width: 1.5px;
+            background: #10b981;
+            box-shadow: 0 0 8px rgba(16, 185, 129, 0.75);
+            pointer-events: none;
+            z-index: 20;
+            opacity: 0;
+            transition: opacity 0.08s ease-in-out;
+        }
     </style>
 </head>
 <body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col justify-between selection:bg-indigo-500 selection:text-white">
@@ -152,7 +180,9 @@
             <!-- ============================================== -->
             <div class="lg:col-span-7 bg-slate-900 rounded-3xl p-5 sm:p-7 border border-slate-800 shadow-2xl space-y-5">
                 
-                <h1 class="text-xl sm:text-2xl font-black text-white tracking-tight">Photo & Signature Joiner</h1>
+                <h1 class="text-xl sm:text-2xl font-black text-white tracking-tight">
+                    {{ meta.h1 if meta else "Photo & Signature Joiner" }}
+                </h1>
 
                 <!-- 1. UPLOAD SECTION WITH EXPLICIT CROP BUTTONS -->
                 <div class="space-y-2.5">
@@ -284,11 +314,15 @@
                         Current Size: 8.8 KB (Target: ≤ 45 KB)
                     </span>
 
-                    <!-- The Clean Merged Canvas (Seamless Integrated Signature) -->
+                    <!-- The Clean Merged Canvas with Smart Magnetic Green Snap Lines -->
                     <div class="flex items-center justify-center p-2 rounded-xl bg-slate-950 overflow-hidden shadow-2xl">
-                        <canvas id="merged-canvas" class="max-h-[380px] w-auto h-auto rounded shadow-lg bg-white block border border-slate-700"></canvas>
+                        <div class="relative inline-block leading-none">
+                            <canvas id="merged-canvas" class="max-h-[380px] w-auto h-auto rounded shadow-lg bg-white block border border-slate-700 select-none cursor-move" title="Click & drag to position face with smart snapping"></canvas>
+                            <!-- ⚡ GREEN SMART SNAP LINES -->
+                            <div id="guide-h" class="snap-guide-h"></div>
+                            <div id="guide-v" class="snap-guide-v"></div>
+                        </div>
                     </div>
-                </div>
 
                 <!-- ACTION BUTTONS: COMBINE & DOWNLOAD + RESET -->
                 <div class="flex items-center gap-3 pt-1">
@@ -499,12 +533,92 @@
         let cropperInstance = null;
         let currentCroppingType = 'photo';
 
+        // ⚡ Direct Interactive Drag & Snap State
+        let photoTransform = { panX: 0, panY: 0 };
+        let isDraggingPhoto = false;
+        let dragStartMouse = { x: 0, y: 0 };
+        let dragStartPan = { x: 0, y: 0 };
+
         const canvas = document.getElementById('merged-canvas');
         const ctx = canvas.getContext('2d');
+        const guideH = document.getElementById('guide-h');
+        const guideV = document.getElementById('guide-v');
 
         window.addEventListener('DOMContentLoaded', () => {
-            renderCombinedCanvas();
+            const presetFromMeta = "{{ meta.preset if meta else '' }}";
+            if (presetFromMeta) {
+                const sel = document.getElementById('exam-preset');
+                if (sel) {
+                    sel.value = presetFromMeta;
+                    applyExamPreset(presetFromMeta);
+                }
+            } else {
+                renderCombinedCanvas();
+            }
+            initDirectPhotoDrag();
         });
+
+        // ⚡ FIGMA-STYLE SMART MAGNETIC SNAP DRAG ENGINE
+        function initDirectPhotoDrag() {
+            function startDrag(clientX, clientY) {
+                if (!photoCanvas) return;
+                isDraggingPhoto = true;
+                dragStartMouse = { x: clientX, y: clientY };
+                dragStartPan = { x: photoTransform.panX, y: photoTransform.panY };
+            }
+
+            function moveDrag(clientX, clientY) {
+                if (!isDraggingPhoto || !photoCanvas) return;
+                const rect = canvas.getBoundingClientRect();
+                const scaleFactor = canvas.width / rect.width;
+
+                const dx = (clientX - dragStartMouse.x) * scaleFactor;
+                const dy = (clientY - dragStartMouse.y) * scaleFactor;
+
+                let newX = dragStartPan.x + dx;
+                let newY = dragStartPan.y + dy;
+
+                // ⚡ Magnetic Snap threshold (16px)
+                const SNAP_THRESH = 16;
+                let snappedX = false;
+                let snappedY = false;
+
+                if (Math.abs(newX) < SNAP_THRESH) {
+                    newX = 0;
+                    snappedX = true;
+                }
+                if (Math.abs(newY) < SNAP_THRESH) {
+                    newY = 0;
+                    snappedY = true;
+                }
+
+                if (guideV) guideV.style.opacity = snappedX ? '1' : '0';
+                if (guideH) guideH.style.opacity = snappedY ? '1' : '0';
+
+                photoTransform.panX = newX;
+                photoTransform.panY = newY;
+                renderCombinedCanvas();
+            }
+
+            function endDrag() {
+                isDraggingPhoto = false;
+                if (guideV) guideV.style.opacity = '0';
+                if (guideH) guideH.style.opacity = '0';
+            }
+
+            canvas.addEventListener('mousedown', (e) => startDrag(e.clientX, e.clientY));
+            window.addEventListener('mousemove', (e) => moveDrag(e.clientX, e.clientY));
+            window.addEventListener('mouseup', endDrag);
+
+            // Mobile Touch Support
+            canvas.addEventListener('touchstart', (e) => {
+                if (e.touches.length === 1) startDrag(e.touches[0].clientX, e.touches[0].clientY);
+            }, { passive: true });
+            window.addEventListener('touchmove', (e) => {
+                if (e.touches.length === 1) moveDrag(e.touches[0].clientX, e.touches[0].clientY);
+            }, { passive: true });
+            window.addEventListener('touchend', endDrag);
+        }
 
         // ⚡ FILE SELECTION & MODAL OPENING
         async function handleFileSelect(file, type) {
@@ -709,9 +823,21 @@
             const photoH = Math.round(h * 0.80);
             const sigH = h - photoH;
 
-            // 1. Draw Candidate Photo (Top 80%)
+            // 1. Draw Candidate Photo (Top 80%) with Smart Center Snapping & Pan
+            ctx.save();
+            ctx.beginPath();
+            ctx.rect(0, 0, w, photoH);
+            ctx.clip();
+
             if (photoCanvas) {
-                ctx.drawImage(photoCanvas, 0, 0, w, photoH);
+                const pW = photoCanvas.width;
+                const pH = photoCanvas.height;
+                const coverScale = Math.max(w / pW, photoH / pH);
+                const baseW = pW * coverScale;
+                const baseH = pH * coverScale;
+
+                ctx.translate(w / 2 + photoTransform.panX, photoH / 2 + photoTransform.panY);
+                ctx.drawImage(photoCanvas, -baseW / 2, -baseH / 2, baseW, baseH);
             } else {
                 ctx.fillStyle = '#f1f5f9';
                 ctx.fillRect(0, 0, w, photoH);
