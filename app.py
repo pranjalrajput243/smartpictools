@@ -112,6 +112,41 @@ def compress_exact_kb_route(target_kb):
 def passport_photo_page():
     return render_template('passport-photo-maker.html')
 
+# ⚡ DEDICATED HIGH-INTENT PASSPORT SPOKES
+@app.route('/passport-photo-3.5x4.5-cm')
+@app.route('/2x2-inch-visa-photo-maker')
+@app.route('/passport-photo-4x6-sheet')
+def passport_spokes_route():
+    endpoint = request.path.strip('/')
+    spokes = {
+        'passport-photo-3.5x4.5-cm': {
+            'size_preset': '3.5x4.5',
+            'sheet_type': 'single',
+            'title': 'Passport Photo 3.5 x 4.5 cm Maker Online Free - SSC, UPSC 300 DPI | SmartPicTools',
+            'desc': 'Create official 3.5 x 4.5 cm passport size photos online for SSC, UPSC, and Indian exam forms. 300 DPI Ultra HD, 100% private in-browser.',
+            'h1': 'Passport Photo 3.5 × 4.5 cm Maker',
+            'canonical': 'https://smartpictools.in/passport-photo-3.5x4.5-cm'
+        },
+        '2x2-inch-visa-photo-maker': {
+            'size_preset': '2x2',
+            'sheet_type': 'single',
+            'title': '2x2 Inch Visa Photo Maker Online Free - US, Schengen & OCI (51x51mm) | SmartPicTools',
+            'desc': 'Free online 2x2 inch (51x51 mm) photo creator for US Visa, Schengen, OCI, and international passports in 300 DPI studio quality.',
+            'h1': '2 × 2 Inch Visa Photo Maker',
+            'canonical': 'https://smartpictools.in/2x2-inch-visa-photo-maker'
+        },
+        'passport-photo-4x6-sheet': {
+            'size_preset': '3.5x4.5',
+            'sheet_type': '4x6',
+            'title': 'Create Passport Size Photo 4x6 Printable Sheet Online Free | SmartPicTools',
+            'desc': 'Generate printable 4x6 inch passport photo sheets with zero-gap single-cut borders. Print 8+ photos in 300 DPI studio quality for under ₹10.',
+            'h1': 'Passport Photo 4×6 Sheet Maker',
+            'canonical': 'https://smartpictools.in/passport-photo-4x6-sheet'
+        }
+    }
+    meta = spokes.get(endpoint)
+    return render_template('passport-photo-maker.html', meta=meta)
+
 @app.route('/photo-signature-joiner')
 def photo_signature_joiner_page():
     return render_template('photo-signature-joiner.html')
@@ -485,6 +520,9 @@ def sitemap():
         ('https://smartpictools.in/compress-image-to-50kb', '0.9'),
         ('https://smartpictools.in/compress-image-to-100kb', '0.9'),
         ('https://smartpictools.in/passport-photo-maker', '0.9'),
+        ('https://smartpictools.in/passport-photo-3.5x4.5-cm', '0.9'),
+        ('https://smartpictools.in/2x2-inch-visa-photo-maker', '0.9'),
+        ('https://smartpictools.in/passport-photo-4x6-sheet', '0.9'),
         ('https://smartpictools.in/photo-signature-joiner', '0.9'),
         ('https://smartpictools.in/add-name-date-on-photo', '0.9'),
         ('https://smartpictools.in/crop-image', '0.9'),
