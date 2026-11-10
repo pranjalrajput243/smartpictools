@@ -151,6 +151,30 @@ def passport_spokes_route():
 def photo_signature_joiner_page():
     return render_template('photo-signature-joiner.html')
 
+# ⚡ DEDICATED HIGH-INTENT PHOTO & SIGNATURE JOINER SPOKES
+@app.route('/ssc-photo-signature-joiner')
+@app.route('/up-police-photo-signature-joiner')
+def photo_sig_spokes_route():
+    endpoint = request.path.strip('/')
+    spokes = {
+        'ssc-photo-signature-joiner': {
+            'preset': 'ssc',
+            'title': 'SSC Photo and Signature Joiner Online Free - 350x450 px Under 50KB | SmartPicTools',
+            'desc': 'Combine photo and signature for SSC CGL, CHSL, MTS, and GD forms. Official 350x450 px with 80/20 ratio and auto 50KB compression.',
+            'h1': 'SSC Photo & Signature Joiner (350 × 450 px)',
+            'canonical': 'https://smartpictools.in/ssc-photo-signature-joiner'
+        },
+        'up-police-photo-signature-joiner': {
+            'preset': 'police',
+            'title': 'UP Police Photo and Signature Joiner Online Free - 350x500 px Under 50KB | SmartPicTools',
+            'desc': 'Join passport photo and signature for UP Police Constable and SI recruitment. Official 350x500 px under 50KB in 300 DPI clarity.',
+            'h1': 'UP Police Photo & Signature Joiner (350 × 500 px)',
+            'canonical': 'https://smartpictools.in/up-police-photo-signature-joiner'
+        }
+    }
+    meta = spokes.get(endpoint)
+    return render_template('photo-signature-joiner.html', meta=meta)
+
 @app.route('/add-name-date-on-photo')
 def add_name_date_route():
     return render_template('add-name-date-on-photo.html')
@@ -524,6 +548,8 @@ def sitemap():
         ('https://smartpictools.in/2x2-inch-visa-photo-maker', '0.9'),
         ('https://smartpictools.in/passport-photo-4x6-sheet', '0.9'),
         ('https://smartpictools.in/photo-signature-joiner', '0.9'),
+        ('https://smartpictools.in/ssc-photo-signature-joiner', '0.9'),
+        ('https://smartpictools.in/up-police-photo-signature-joiner', '0.9'),
         ('https://smartpictools.in/add-name-date-on-photo', '0.9'),
         ('https://smartpictools.in/crop-image', '0.9'),
         ('https://smartpictools.in/resize-image', '0.9'),
