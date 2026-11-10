@@ -205,6 +205,40 @@ def name_date_spokes_route():
 @app.route('/crop-image')
 def crop_route():
     return render_template('crop-image.html')
+    # ⚡ DEDICATED HIGH-INTENT CROP IMAGE SPOKES
+@app.route('/crop-image-1-1')
+@app.route('/crop-image-16-9')
+@app.route('/crop-image-9-16')
+def crop_spokes_route():
+    endpoint = request.path.strip('/')
+    spokes = {
+        'crop-image-1-1': {
+            'ratio': 1.0,
+            'preset_key': '1',
+            'title': 'Crop Image 1:1 Square Online Free - DP Cropper | SmartPicTools',
+            'desc': 'Crop photos into perfect 1:1 square aspect ratio online for free. Ideal for posts, WhatsApp DP, and profile pictures. 100% private in-browser.',
+            'h1': 'Crop Image 1:1 Square (Profile & DP)',
+            'canonical': 'https://smartpictools.in/crop-image-1-1'
+        },
+        'crop-image-16-9': {
+            'ratio': 16 / 9,
+            'preset_key': '16/9',
+            'title': 'Crop Image 16:9 Online Free - YouTube Thumbnail Cropper | SmartPicTools',
+            'desc': 'Crop photos into official 16:9 widescreen landscape ratio online for free. Perfect for YouTube thumbnails, desktop wallpapers, and banners.',
+            'h1': 'Crop Image 16:9 Landscape (YouTube Thumbnail)',
+            'canonical': 'https://smartpictools.in/crop-image-16-9'
+        },
+        'crop-image-9-16': {
+            'ratio': 9 / 16,
+            'preset_key': '9/16',
+            'title': 'Crop Image 9:16 Online Free - Shorts Cropper | SmartPicTools',
+            'desc': 'Crop photos into 9:16 vertical fullscreen format online for free. YouTube Shorts, and TikTok stories without black borders.',
+            'h1': 'Crop Image 9:16 Vertical (Reels & Shorts)',
+            'canonical': 'https://smartpictools.in/crop-image-9-16'
+        }
+    }
+    meta = spokes.get(endpoint)
+    return render_template('crop-image.html', meta=meta)
 
 @app.route('/resize-image')
 def resize_route():
@@ -577,6 +611,9 @@ def sitemap():
         ('https://smartpictools.in/ssc-photo-name-and-date-maker', '0.9'),
         ('https://smartpictools.in/up-police-photo-name-date-maker', '0.9'),
         ('https://smartpictools.in/crop-image', '0.9'),
+        ('https://smartpictools.in/crop-image-1-1', '0.9'),
+        ('https://smartpictools.in/crop-image-16-9', '0.9'),
+        ('https://smartpictools.in/crop-image-9-16', '0.9'),
         ('https://smartpictools.in/resize-image', '0.9'),
         ('https://smartpictools.in/convert-image', '0.9'),
         ('https://smartpictools.in/crop-pdf', '0.9'),
