@@ -519,16 +519,18 @@
             currentSizePreset = preset;
             ['35x45', '2x2', '35x35'].forEach(p => {
                 const b = document.getElementById('btn-size-' + p);
-                b.className = (p === preset.replace('.', ''))
-                    ? "py-2 px-2.5 rounded-xl bg-indigo-600 text-white text-xs font-bold border border-indigo-500 transition text-center"
-                    : "py-2 px-2.5 rounded-xl bg-slate-950 hover:bg-slate-800 text-slate-300 text-xs font-bold border border-slate-700 transition text-center";
+                if (b) {
+                    b.className = (p === preset.replace('.', ''))
+                        ? "py-2 px-2.5 rounded-xl bg-indigo-600 text-white text-xs font-bold border border-indigo-500 transition text-center"
+                        : "py-2 px-2.5 rounded-xl bg-slate-950 hover:bg-slate-800 text-slate-300 text-xs font-bold border border-slate-700 transition text-center";
+                }
             });
 
             let aspect = 3.5 / 4.5;
             if (preset === '2x2' || preset === '3.5x3.5') aspect = 1.0;
             if (cropper) cropper.setAspectRatio(aspect);
 
-            updateCapacityUI();
+            updateCapacityUI(true); // ⚡ Auto-set to full sheet on size change
             renderHighResOutput();
         }
 
@@ -536,15 +538,17 @@
             currentSheetType = type;
             ['single', '4x6', 'a4'].forEach(s => {
                 const b = document.getElementById('btn-sheet-' + s);
-                b.className = (s === type)
-                    ? "py-2 px-2 rounded-xl bg-indigo-600 text-white text-xs font-bold border border-indigo-500 transition text-center"
-                    : "py-2 px-2 rounded-xl bg-slate-950 hover:bg-slate-800 text-slate-300 text-xs font-bold border border-slate-700 transition text-center";
+                if (b) {
+                    b.className = (s === type)
+                        ? "py-2 px-2 rounded-xl bg-indigo-600 text-white text-xs font-bold border border-indigo-500 transition text-center"
+                        : "py-2 px-2 rounded-xl bg-slate-950 hover:bg-slate-800 text-slate-300 text-xs font-bold border border-slate-700 transition text-center";
+                }
             });
 
             const countWrap = document.getElementById('photo-count-wrap');
-            countWrap.classList.toggle('hidden', type === 'single');
+            if (countWrap) countWrap.classList.toggle('hidden', type === 'single');
 
-            updateCapacityUI();
+            updateCapacityUI(true); // ⚡ Auto-set to full sheet on sheet change
             renderHighResOutput();
         }
 
@@ -569,7 +573,7 @@
             return { cardW, cardH, sheetW, sheetH, cols, rows, maxCap };
         }
 
-        function updateCapacityUI() {
+        function updateCapacityUI(forceFullSheet = false) {
             if (currentSheetType === 'single') return;
             const specs = getSheetPhysicalSpecs();
             const countInput = document.getElementById('sheet-photo-count');
@@ -578,10 +582,9 @@
             countInput.max = specs.maxCap;
             maxText.innerText = specs.maxCap;
 
-            // Default suggested value
-            let defaultCount = (currentSheetType === '4x6') ? specs.maxCap : Math.min(15, specs.maxCap);
-            if (parseInt(countInput.value, 10) > specs.maxCap || parseInt(countInput.value, 10) <= 0) {
-                countInput.value = defaultCount;
+            // ⚡ Always default to 100% FULL sheet capacity
+            if (forceFullSheet || !countInput.value || parseInt(countInput.value, 10) > specs.maxCap || parseInt(countInput.value, 10) <= 0) {
+                countInput.value = specs.maxCap;
             }
             hideCapacityError();
         }
@@ -721,28 +724,19 @@
                 drawn++;
             }
 
-            // ⚡ 2. DRAW UNBROKEN CUTTING GUIDE LINES ON TOP OF SHEET (NEVER OVERWRITTEN)
+            // ⚡ 2. DRAW CRISP CUTTING GUIDE LINES ONLY AROUND ACTUAL PHOTOS (EMPTY PAPER STAYS 100% CLEAN)
             if (hasCuttingLine) {
                 ctx.strokeStyle = '#000000';
-                ctx.lineWidth = 2.5; // Studio Standard Cutting Guide
-                ctx.beginPath();
+                ctx.lineWidth = 2; // Studio Standard Cutting Guide
 
-                // Draw All Horizontal Cutting Lines (Top, Middle Row Separator, Bottom)
-                for (let r = 0; r <= totalDrawnRows; r++) {
-                    const hy = startY + r * cardH;
-                    ctx.moveTo(startX, hy);
-                    ctx.lineTo(startX + fullLineWidth, hy);
+                // Draw cutting borders strictly for photos that are actually printed
+                for (let i = 0; i < count; i++) {
+                    const c = i % cols;
+                    const r = Math.floor(i / cols);
+                    const x = startX + c * cardW;
+                    const y = startY + r * cardH;
+                    ctx.strokeRect(x, y, cardW, cardH);
                 }
-
-                // Draw All Vertical Cutting Lines (Left, Column Separators, Right)
-                const gridBottomY = startY + totalDrawnRows * cardH;
-                for (let c = 0; c <= cols; c++) {
-                    const vx = startX + c * cardW;
-                    ctx.moveTo(vx, startY);
-                    ctx.lineTo(vx, gridBottomY);
-                }
-
-                ctx.stroke();
             }
         }
 
