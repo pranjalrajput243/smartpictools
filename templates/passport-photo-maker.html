@@ -700,10 +700,16 @@
 
             const cols = specs.cols;
 
-            // ⚡ EXACT EQUAL MARGIN ON LEFT & RIGHT:
+           // ⚡ PERFECT 2-AXIS DYNAMIC CENTER ALIGNMENT (PREVENTS CUT-OFF)
             const fullLineWidth = cols * cardW;
             const startX = Math.max(0, Math.floor((sheetW - fullLineWidth) / 2));
-            const startY = 60; // Top-aligned printer margin
+
+            // Calculate exact grid height based on sheet capacity to balance top and bottom margins equally
+            const fullGridHeight = (currentSheetType === '4x6') 
+                ? (specs.rows * cardH) 
+                : (Math.ceil(count / cols) * cardH);
+
+            const startY = Math.max(0, Math.floor((sheetH - fullGridHeight) / 2));
 
             let drawn = 0;
             while (drawn < count) {
