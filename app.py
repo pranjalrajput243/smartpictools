@@ -95,6 +95,19 @@ def universal_conversion_tool(src, tgt):
 def compress_route():
     return render_template('compress-image.html')
 
+@app.route('/compress-image-to-<int:target_kb>kb')
+def compress_exact_kb_route(target_kb):
+    if target_kb in [20, 50, 100, 200]:
+        use_case = "Signature & Thumb Impression" if target_kb == 20 else ("Official SSC/UPSC Photo" if target_kb == 50 else "Online Application Forms")
+        meta = {
+            'target_kb': target_kb,
+            'title': f"Compress Image to {target_kb}KB Online Free - Exact Size for {use_case} | SmartPicTools",
+            'desc': f"Compress image to exact {target_kb}KB online free with live preview. Perfect for {use_case}. 100% private in-browser tool with zero server uploads.",
+            'canonical': f"https://smartpictools.in/compress-image-to-{target_kb}kb"
+        }
+        return render_template('compress-image.html', meta=meta)
+    return redirect('/compress-image')
+
 @app.route('/passport-photo-maker')
 def passport_photo_page():
     return render_template('passport-photo-maker.html')
@@ -468,6 +481,9 @@ def sitemap():
     urls = [
         ('https://smartpictools.in/', '1.0'),
         ('https://smartpictools.in/compress-image', '0.9'),
+        ('https://smartpictools.in/compress-image-to-20kb', '0.9'),
+        ('https://smartpictools.in/compress-image-to-50kb', '0.9'),
+        ('https://smartpictools.in/compress-image-to-100kb', '0.9'),
         ('https://smartpictools.in/passport-photo-maker', '0.9'),
         ('https://smartpictools.in/photo-signature-joiner', '0.9'),
         ('https://smartpictools.in/add-name-date-on-photo', '0.9'),
