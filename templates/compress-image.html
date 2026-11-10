@@ -528,19 +528,45 @@
             }, 'image/jpeg', q);
         }
 
-        // ⚡ SNAP TO EXACT TARGET KB (20KB, 50KB, 100KB)
+        // ⚡ SMART HIGH-CLARITY SNAP (PREVENTS 5% BLUR & PIXELATION)
         async function snapToExactTarget(targetKb) {
             if (!loadedImg.src) return;
             const targetBytes = targetKb * 1024;
             const slider = document.getElementById('quality-slider');
 
-            let minQ = 0.05, maxQ = 0.95, bestQ = 0.5;
+            // 1. Smart Dimension Cap (Chhoti file size ke liye smart scaling taaki quality 70%+ rahe)
+            let maxDim = (targetKb <= 25) ? 750 : ((targetKb <= 55) ? 1100 : ((targetKb <= 110) ? 1600 : 2560));
+            
+            let w = loadedImg.naturalWidth;
+            let h = loadedImg.naturalHeight;
+            if (w > maxDim || h > maxDim) {
+                const s = maxDim / Math.max(w, h);
+                w = Math.round(w * s);
+                h = Math.round(h * s);
+            }
 
-            for (let i = 0; i < 5; i++) {
+            offscreenCanvas.width = w;
+            offscreenCanvas.height = h;
+            applyCanvasRendering();
+
+            // 2. High-Quality Binary Search (Quality stays crisp between 60% and 92%)
+            let minQ = 0.60, maxQ = 0.92, bestQ = 0.75;
+            for (let i = 0; i < 6; i++) {
                 bestQ = (minQ + maxQ) / 2;
                 const b = await new Promise(res => offscreenCanvas.toBlob(res, 'image/jpeg', bestQ));
                 if (b.size > targetBytes) maxQ = bestQ;
                 else minQ = bestQ;
+            }
+
+            // 3. Agar abhi bhi target se thoda bada hai, toh quality ko 5% tak girane ke bajaye dimension halka sa trim karein
+            let testBlob = await new Promise(res => offscreenCanvas.toBlob(res, 'image/jpeg', bestQ));
+            while (testBlob.size > targetBytes && w > 250) {
+                w = Math.round(w * 0.92);
+                h = Math.round(h * 0.92);
+                offscreenCanvas.width = w;
+                offscreenCanvas.height = h;
+                applyCanvasRendering();
+                testBlob = await new Promise(res => offscreenCanvas.toBlob(res, 'image/jpeg', bestQ));
             }
 
             const targetSliderVal = Math.round(bestQ * 100);
