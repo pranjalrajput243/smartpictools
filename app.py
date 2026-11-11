@@ -252,6 +252,41 @@ def crop_spokes_route():
 def resize_route():
     return render_template('resize-image.html')
 
+# ⚡ DEDICATED HIGH-INTENT RESIZE IMAGE SPOKES
+@app.route('/resize-image-200x230')
+@app.route('/resize-image-140x60')
+@app.route('/resize-image-1000x1000')
+def resize_spokes_route():
+    endpoint = request.path.strip('/')
+    spokes = {
+        'resize-image-200x230': {
+            'w': 200,
+            'h': 230,
+            'title': 'Resize Image to 200x230 Pixels Online Free - IBPS & Banking | SmartPicTools',
+            'desc': 'Resize photo to exact 200 x 230 pixels online for free. Official dimensions for IBPS, SBI PO, and Clerk application forms. 100% private in-browser.',
+            'h1': 'Resize Image to 200 × 230 Pixels',
+            'canonical': 'https://smartpictools.in/resize-image-200x230'
+        },
+        'resize-image-140x60': {
+            'w': 140,
+            'h': 60,
+            'title': 'Resize Signature to 140x60 Pixels Online Free - Banking Form | SmartPicTools',
+            'desc': 'Resize signature image to exact 140 x 60 pixels online for free. Official specification for IBPS, Banking, and SSC exam forms without blur.',
+            'h1': 'Resize Signature to 140 × 60 Pixels',
+            'canonical': 'https://smartpictools.in/resize-image-140x60'
+        },
+        'resize-image-1000x1000': {
+            'w': 1000,
+            'h': 1000,
+            'title': 'Resize Image to 1000x1000 Pixels Online Free - Square Catalog | SmartPicTools',
+            'desc': 'Resize product images to exact 1000 x 1000 pixels square format online for free. Perfect for Meesho, Amazon, Flipkart, and Shopify stores.',
+            'h1': 'Resize Image to 1000 × 1000 Pixels',
+            'canonical': 'https://smartpictools.in/resize-image-1000x1000'
+        }
+    }
+    meta = spokes.get(endpoint)
+    return render_template('resize-image.html', meta=meta)
+
 @app.route('/convert-image')
 def convert_route():
     return render_template('convert-image.html')
@@ -623,6 +658,9 @@ def sitemap():
         ('https://smartpictools.in/crop-image-16-9', '0.9'),
         ('https://smartpictools.in/crop-image-9-16', '0.9'),
         ('https://smartpictools.in/resize-image', '0.9'),
+        ('https://smartpictools.in/resize-image-200x230', '0.9'),
+        ('https://smartpictools.in/resize-image-140x60', '0.9'),
+        ('https://smartpictools.in/resize-image-1000x1000', '0.9'),
         ('https://smartpictools.in/convert-image', '0.9'),
         ('https://smartpictools.in/crop-pdf', '0.9'),
         ('https://smartpictools.in/split-pdf', '0.9'),
