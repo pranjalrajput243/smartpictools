@@ -241,7 +241,7 @@ def crop_spokes_route():
             'preset_key': '9/16',
             'title': 'Crop Image 9:16 Online Free - Shorts Cropper | SmartPicTools',
             'desc': 'Crop photos into 9:16 vertical fullscreen format online for free. YouTube Shorts, and TikTok stories without black borders.',
-            'h1': 'Crop Image 9:16 Vertical (Reels & Shorts)',
+            'h1': 'Crop Image 9:16 (Vertical)',
             'canonical': 'https://smartpictools.in/crop-image-9-16'
         }
     }
