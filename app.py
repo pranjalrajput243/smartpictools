@@ -61,11 +61,14 @@ def universal_hub(src):
     src = src.lower()
     if src in VALID_CONVERSIONS:
         src_name = FORMAT_NAMES.get(src, src.upper())
-        targets = [{
-            'slug': f"{src}-to-{t}",
-            'target': t,
-            'target_name': FORMAT_NAMES.get(t, t.upper())
-        } for t in VALID_CONVERSIONS[src]]
+        targets = []
+        for t in VALID_CONVERSIONS[src]:
+            slug = "pdf-to-word" if (src == "pdf" and t == "doc") else f"{src}-to-{t}"
+            targets.append({
+                'slug': slug,
+                'target': t,
+                'target_name': FORMAT_NAMES.get(t, t.upper())
+            })
         return render_template('format-hub.html', src=src, src_name=src_name, targets=targets)
     return redirect('/')
 
@@ -368,6 +371,36 @@ def crop_pdf_spokes_route():
     }
     meta = spokes.get(endpoint)
     return render_template('crop-pdf.html', meta=meta)
+
+# ⚡ DEDICATED HIGH-INTENT PDF CONVERSION SPOKES
+@app.route('/pdf-to-word')
+@app.route('/pdf-to-doc')
+def pdf_to_word_route():
+    meta = {
+        'src': 'pdf',
+        'tgt': 'doc',
+        'src_name': 'PDF',
+        'tgt_name': 'Word',
+        'title': 'Convert PDF to Word Online Free - Editable DOC Document | SmartPicTools',
+        'desc': 'Convert PDF documents to editable Word (.doc) files online for free. 100% private in-browser text extraction with zero server uploads.',
+        'h1': 'Convert PDF to Word Document',
+        'canonical': 'https://smartpictools.in/pdf-to-word'
+    }
+    return render_template('universal-converter.html', meta=meta)
+
+@app.route('/pdf-to-jpg-300-dpi')
+def pdf_to_jpg_300dpi_route():
+    meta = {
+        'src': 'pdf',
+        'tgt': 'jpg',
+        'src_name': 'PDF',
+        'tgt_name': 'JPG (300 DPI)',
+        'title': 'Convert PDF to JPG 300 DPI Online Free - Ultra HD Print Quality | SmartPicTools',
+        'desc': 'Convert PDF pages to 300 DPI Ultra HD JPG images online for free. Razor-sharp clarity for printing and official portal uploads.',
+        'h1': 'Convert PDF to JPG (300 DPI Ultra HD)',
+        'canonical': 'https://smartpictools.in/pdf-to-jpg-300-dpi'
+    }
+    return render_template('universal-converter.html', meta=meta)
 
 @app.route('/split-pdf')
 def split_pdf_page():
@@ -761,6 +794,8 @@ def sitemap():
         ('https://smartpictools.in/crop-pdf-to-4x6', '0.9'),
         ('https://smartpictools.in/trim-pdf-margins', '0.9'),
         ('https://smartpictools.in/crop-pdf-top-half', '0.9'),
+        ('https://smartpictools.in/pdf-to-word', '0.9'),
+        ('https://smartpictools.in/pdf-to-jpg-300-dpi', '0.9'),
         ('https://smartpictools.in/image-to-pdf', '0.9'),
         ('https://smartpictools.in/photo-to-pdf-maker', '0.9'),
         ('https://smartpictools.in/jpg-to-pdf-a4', '0.9'),
