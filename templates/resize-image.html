@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     
-    <!-- ⚡ HIGH-RANKING KEYWORDS FOR RESIZING -->
-    <title>Resize Image Dimensions Online Free - Change Pixel Width & Height | SmartPicTools</title>
-    <meta name="description" content="Free online tool to resize image dimensions in pixels with live visual transform. Change width and height with aspect ratio lock. 100% private in-browser tool.">
+    <!-- ⚡ DYNAMIC HIGH-RANKING KEYWORDS FOR RESIZING -->
+    <title>{{ meta.title if meta else "Resize Image Dimensions Online Free - Change Pixel Width & Height | SmartPicTools" }}</title>
+    <meta name="description" content="{{ meta.desc if meta else 'Free online tool to resize image dimensions in pixels with live visual transform. Change width and height with aspect ratio lock. 100% private in-browser tool.' }}">
     <meta name="keywords" content="resize image online, resize image dimensions, change photo pixel width height, passport size photo resizer, image resolution changer, free online photo resizer, live image resizer">
     <meta name="robots" content="index, follow, max-image-preview:large">
     <meta name="author" content="SmartPicTools">
-    <link rel="canonical" href="https://smartpictools.in/resize-image">
+    <link rel="canonical" href="{{ meta.canonical if meta else 'https://smartpictools.in/resize-image' }}">
     
     <!-- ⚡ PERMANENT GOOGLE SEARCH CONSOLE VERIFICATION TAG -->
     <meta name="google-site-verification" content="uUq17UUsROyHMRQ8jkqKqrjZmsJnkuxZMKKoJLw_X3E" />
@@ -110,9 +110,13 @@
 
     <!-- MAIN WORKSPACE -->
     <main class="max-w-4xl mx-auto w-full px-4 py-8 sm:py-12 flex-1">
-        <div class="text-center max-w-2xl mx-auto mb-8 sm:mb-10">
-            <h1 class="text-3xl sm:text-5xl font-black text-white tracking-tight">Resize Image Dimensions</h1>
-            <p class="mt-2.5 text-slate-400 text-xs sm:text-sm">Change exact pixel width and height with real-time live scaling preview and proportion lock.</p>
+       <div class="text-center max-w-2xl mx-auto mb-8 sm:mb-10">
+            <h1 class="text-3xl sm:text-5xl font-black text-white tracking-tight">
+                {{ meta.h1 if meta else "Resize Image Dimensions" }}
+            </h1>
+            <p class="mt-2.5 text-slate-400 text-xs sm:text-sm">
+                {{ "Transform image to exact " ~ meta.w ~ " × " ~ meta.h ~ " pixels with real-time live preview. Zero distortion." if meta else "Change exact pixel width and height with real-time live scaling preview and proportion lock." }}
+            </p>
         </div>
 
         <div class="bg-slate-900 rounded-3xl p-5 sm:p-10 border border-slate-800 shadow-2xl relative">
@@ -189,10 +193,32 @@
             </div>
         </div>
 
+        <!-- ⚡ RELATED TOOLS SILO (CLEAN FULL-WIDTH DIRECTLY BELOW WORKSPACE) -->
+        <div class="mt-14 bg-slate-900/90 p-6 rounded-3xl border border-slate-800 space-y-4">
+            <div class="flex items-center gap-2">
+                <span class="text-indigo-400 font-bold text-sm">🔗</span>
+                <h3 class="text-sm font-bold text-white uppercase tracking-wider">Useful Next Steps After Resizing:</h3>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
+                <a href="/crop-image" class="p-3 bg-slate-950/80 hover:bg-slate-950 rounded-xl border border-slate-800 hover:border-indigo-500/50 transition block">
+                    <strong class="text-white block">✂️ Crop Image (Aspect Ratios)</strong>
+                    <span class="text-slate-400 text-[11px]">Square (1:1), Horizontal (16:9), or Vertical (9:16).</span>
+                </a>
+                <a href="/compress-image" class="p-3 bg-slate-950/80 hover:bg-slate-950 rounded-xl border border-slate-800 hover:border-indigo-500/50 transition block">
+                    <strong class="text-white block">🎯 Compress to Exact KB</strong>
+                    <span class="text-slate-400 text-[11px]">Shrink file weight to 20KB or 50KB for online portals.</span>
+                </a>
+                <a href="/convert-image" class="p-3 bg-slate-950/80 hover:bg-slate-950 rounded-xl border border-slate-800 hover:border-indigo-500/50 transition block">
+                    <strong class="text-white block">🔄 Image Format Converter</strong>
+                    <span class="text-slate-400 text-[11px]">Convert resized pictures to WEBP, PNG, JPG, or AVIF.</span>
+                </a>
+            </div>
+        </div>
+
        <!-- ========================================================= -->
         <!-- ⚡ IN-DEPTH PRODUCT DOCUMENTATION & SEO CONTENT          -->
         <!-- ========================================================= -->
-        <section class="mt-16 border-t border-slate-800 pt-12 space-y-12 text-slate-300">
+        <section class="mt-14 border-t border-slate-800 pt-12 space-y-12 text-slate-300">
             
             <!-- 1. DETAILED HOW TO USE (ARTICLE STYLE, NO DISJOINTED CARDS) -->
             <div class="space-y-4">
@@ -407,16 +433,27 @@
                 imgEl.src = e.target.result;
                 loadedImg.src = e.target.result;
 
+                const presetTargetW = {{ meta.w if meta and meta.w else 'null' }};
+                const presetTargetH = {{ meta.h if meta and meta.h else 'null' }};
+
                 loadedImg.onload = () => {
                     naturalW = loadedImg.naturalWidth;
                     naturalH = loadedImg.naturalHeight;
                     ratio = naturalW / naturalH;
 
                     document.getElementById('orig-dim').innerText = `${naturalW} × ${naturalH} px`;
-                    document.getElementById('target-w').value = naturalW;
-                    document.getElementById('target-h').value = naturalH;
-
-                    updateResizeLiveVisual(naturalW, naturalH);
+                    
+                    if (presetTargetW && presetTargetH) {
+                        // Uncheck ratio lock for custom portal dimensions (e.g. 200x230 or 140x60)
+                        document.getElementById('lock-ratio').checked = false;
+                        document.getElementById('target-w').value = presetTargetW;
+                        document.getElementById('target-h').value = presetTargetH;
+                        updateResizeLiveVisual(presetTargetW, presetTargetH);
+                    } else {
+                        document.getElementById('target-w').value = naturalW;
+                        document.getElementById('target-h').value = naturalH;
+                        updateResizeLiveVisual(naturalW, naturalH);
+                    }
                 };
             };
             reader.readAsDataURL(displayBlob);
