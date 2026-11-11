@@ -4,19 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     
-    <!-- ⚡ DYNAMIC HIGH-RANKING KEYWORDS FOR CROPPING -->
-    <title>{{ meta.title if meta else "Crop Image Online Free - Profile 1:1, YouTube 16:9, Shorts 9:16 | SmartPicTools" }}</title>
-    <meta name="description" content="{{ meta.desc if meta else 'Free online tool to crop images visually with Freeform drag or exact aspect ratios: 1:1 profile, 16:9 YouTube, and 9:16 Reels. No watermark, 100% private in-browser.' }}">
-    <meta name="keywords" content="crop image online, freeform photo crop, crop photo 1:1, crop image 16:9 youtube, 9:16 reels cropper, aspect ratio cropper, online photo cropper no watermark">
+    <!-- ⚡ DYNAMIC HIGH-RANKING KEYWORDS (BRAND-NEUTRAL & ADSENSE COMPLIANT) -->
+    <title>{{ meta.title if meta else "Crop Image Online Free - Square 1:1, Landscape 16:9, Vertical 9:16 | SmartPicTools" }}</title>
+    <meta name="description" content="{{ meta.desc if meta else 'Free online tool to crop images visually with Freeform drag or exact aspect ratios: 1:1 Square DP, 16:9 Landscape, and 9:16 Vertical Stories. 100% private in-browser.' }}">
+    <meta name="keywords" content="crop image online, freeform photo crop, square image cropper, 1:1 photo cropper, crop image 16:9 landscape, 9:16 vertical cropper, aspect ratio cropper, online photo cropper no watermark">
     <meta name="robots" content="index, follow, max-image-preview:large">
     <meta name="author" content="SmartPicTools">
     <link rel="canonical" href="{{ meta.canonical if meta else 'https://smartpictools.in/crop-image' }}">
+    
+    <!-- ⚡ PERMANENT GOOGLE SEARCH CONSOLE VERIFICATION TAG -->
+    <meta name="google-site-verification" content="uUq17UUsROyHMRQ8jkqKqrjZmsJnkuxZMKKoJLw_X3E" />
 
     <!-- OPEN GRAPH -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://smartpictools.in/crop-image">
-    <meta property="og:title" content="Crop Image Online Free - Instagram, YouTube & Reels | SmartPicTools">
-    <meta property="og:description" content="Crop photos freely with mouse drag or 1-tap social media aspect ratio presets. Free, fast and private.">
+    <meta property="og:url" content="{{ meta.canonical if meta else 'https://smartpictools.in/crop-image' }}">
+    <meta property="og:title" content="{{ meta.title if meta else 'Crop Image Online Free - SmartPicTools' }}">
+    <meta property="og:description" content="Crop photos freely with mouse drag or 1-tap aspect ratio presets. Free, fast and private.">
 
     <!-- ⚡ SCHEMA MARKUP (WEBAPP + FAQ RICH SNIPPET) -->
     <script type="application/ld+json">
@@ -27,7 +30,7 @@
           "@type": "WebApplication",
           "name": "SmartPicTools Crop Image with Aspect Ratios",
           "url": "https://smartpictools.in/crop-image",
-          "description": "Free visual image cropper with freeform drag or 1-tap presets for Instagram 1:1, YouTube 16:9, and Reels 9:16.",
+          "description": "Free visual image cropper with freeform drag or 1-tap presets for 1:1 Square DP, 16:9 Landscape, and 9:16 Vertical Stories.",
           "applicationCategory": "MultimediaApplication",
           "operatingSystem": "All",
           "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
@@ -45,10 +48,10 @@
             },
             {
               "@type": "Question",
-              "name": "Which aspect ratio should I choose for YouTube thumbnails and Instagram posts?",
+              "name": "Which aspect ratio should I choose for thumbnails and profile posts?",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "For YouTube thumbnails, select 16:9 Landscape (1280x720 px). For Instagram feed posts, choose 1:1 Square or 4:5 Portrait. For Instagram Stories, Reels, and YouTube Shorts, select 9:16 Vertical."
+                "text": "For video thumbnails and landscape banners, select 16:9 Landscape. For profile pictures, avatars, and square posts, choose 1:1 Square. For mobile stories, vertical status, and fullscreen video, select 9:16 Vertical."
               }
             },
             {
@@ -73,7 +76,6 @@
     }
     </script>
 
-    
     <!-- FAVICON -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' stop-color='%236366f1'/><stop offset='50%25' stop-color='%23a855f7'/><stop offset='100%25' stop-color='%23ec4899'/></linearGradient></defs><rect width='100' height='100' rx='28' fill='url(%23g)'/><path d='M52 16 L24 54 L46 54 L42 84 L76 44 L54 44 Z' fill='%23fbbf24'/></svg>">
 
@@ -129,8 +131,8 @@
     <!-- MAIN WORKSPACE -->
     <main class="max-w-4xl mx-auto w-full px-4 py-8 sm:py-12 flex-1">
         <div class="text-center max-w-2xl mx-auto mb-8 sm:mb-10">
-           <h1 class="text-3xl sm:text-5xl font-black text-white tracking-tight">{{ meta.h1 if meta else "Crop Image with Aspect Ratios" }}</h1>
-            <p class="mt-2.5 text-slate-400 text-xs sm:text-sm">Click & drag freely on the photo, or use 1-tap presets for Instagram (1:1), YouTube (16:9), and Reels (9:16).</p>
+            <h1 class="text-3xl sm:text-5xl font-black text-white tracking-tight">{{ meta.h1 if meta else "Crop Image with Aspect Ratios" }}</h1>
+            <p class="mt-2.5 text-slate-400 text-xs sm:text-sm">Click & drag freely on the photo, or use 1-tap presets for Square (1:1), Landscape (16:9), and Vertical (9:16).</p>
         </div>
 
         <div class="bg-slate-900 rounded-3xl p-5 sm:p-10 border border-slate-800 shadow-2xl relative">
@@ -179,15 +181,15 @@
                     </div>
                 </div>
 
-                <!-- ASPECT RATIO BUTTONS -->
+                <!-- ASPECT RATIO BUTTONS (GENERIC & PROFESSIONAL) -->
                 <div class="bg-slate-950/80 p-4 sm:p-5 rounded-2xl border border-slate-800 space-y-3">
                     <label class="block text-xs font-bold text-slate-400">Select Aspect Ratio Template:</label>
                     <div class="grid grid-cols-2 sm:grid-cols-5 gap-2">
                         <button type="button" onclick="applyFullCoverageRatio(NaN, this)" id="btn-free" class="ratio-btn py-2.5 px-3 rounded-xl bg-indigo-600 text-white text-xs font-bold transition">Freeform (Drag Anywhere)</button>
-                        <button type="button" onclick="applyFullCoverageRatio(1, this)" id="btn-ratio-1" class="ratio-btn py-2.5 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 text-xs font-bold transition">1:1 (Instagram)</button>
-                        <button type="button" onclick="applyFullCoverageRatio(16/9, this)" id="btn-ratio-16-9" class="ratio-btn py-2.5 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 text-xs font-bold transition">16:9 (YouTube)</button>
-                        <button type="button" onclick="applyFullCoverageRatio(9/16, this)" id="btn-ratio-9-16" class="ratio-btn py-2.5 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 text-xs font-bold transition">9:16 (Reels/Shorts)</button>
-                        <button type="button" onclick="applyFullCoverageRatio(4/5, this)" id="btn-ratio-4-5" class="ratio-btn py-2.5 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 text-xs font-bold transition">4:5 (Portrait)</button>
+                        <button type="button" onclick="applyFullCoverageRatio(1, this)" id="btn-ratio-1" class="ratio-btn py-2.5 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 text-xs font-bold transition">1:1 (Square DP)</button>
+                        <button type="button" onclick="applyFullCoverageRatio(16/9, this)" id="btn-ratio-16-9" class="ratio-btn py-2.5 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 text-xs font-bold transition">16:9 (Landscape)</button>
+                        <button type="button" onclick="applyFullCoverageRatio(9/16, this)" id="btn-ratio-9-16" class="ratio-btn py-2.5 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 text-xs font-bold transition">9:16 (Stories & Status)</button>
+                        <button type="button" onclick="applyFullCoverageRatio(4/5, this)" id="btn-ratio-4-5" class="ratio-btn py-2.5 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 text-xs font-bold transition">4:5 (Portrait Feed)</button>
                     </div>
                 </div>
 
@@ -200,39 +202,13 @@
                 <p class="text-emerald-400 font-bold text-xs sm:text-sm">🎉 Success! Cropped image downloaded directly to your device.</p>
             </div>
         </div>
-<div id="status-box" class="hidden mt-5 p-3.5 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 text-center">
-                <p class="text-emerald-400 font-bold text-xs sm:text-sm">🎉 Success! Cropped image downloaded directly to your device.</p>
-            </div>
-        </div>
-
-        <!-- ⚡ RELATED TOOLS SILO (FULL WIDTH, CLEAN BELOW WORKSPACE) -->
-        <div class="mt-14 bg-slate-900/90 p-6 rounded-3xl border border-slate-800 space-y-4">
-            <div class="flex items-center gap-2">
-                <span class="text-indigo-400 font-bold text-sm">🔗</span>
-                <h3 class="text-sm font-bold text-white uppercase tracking-wider">Useful Next Steps After Cropping:</h3>
-            </div>
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
-                <a href="/resize-image" class="p-3 bg-slate-950/80 hover:bg-slate-950 rounded-xl border border-slate-800 hover:border-indigo-500/50 transition block">
-                    <strong class="text-white block">📐 Resize Image Dimensions</strong>
-                    <span class="text-slate-400 text-[11px]">Change exact pixel width and height with proportion lock.</span>
-                </a>
-                <a href="/compress-image" class="p-3 bg-slate-950/80 hover:bg-slate-950 rounded-xl border border-slate-800 hover:border-indigo-500/50 transition block">
-                    <strong class="text-white block">🎯 Compress Image (20KB - 50KB)</strong>
-                    <span class="text-slate-400 text-[11px]">Reduce file size with real-time preview before sharing.</span>
-                </a>
-                <a href="/rotate-image" class="p-3 bg-slate-950/80 hover:bg-slate-950 rounded-xl border border-slate-800 hover:border-indigo-500/50 transition block">
-                    <strong class="text-white block">🔁 Rotate & Mirror Flip</strong>
-                    <span class="text-slate-400 text-[11px]">Rotate 90 degrees or mirror flip inverted selfies.</span>
-                </a>
-            </div>
-        </div>
 
         <!-- ========================================================= -->
         <!-- ⚡ IN-DEPTH PRODUCT DOCUMENTATION & SEO CONTENT          -->
         <!-- ========================================================= -->
         <section class="mt-16 border-t border-slate-800 pt-12 space-y-12 text-slate-300">
             
-            <!-- 1. DETAILED HOW TO USE (ARTICLE STYLE, NO DISJOINTED CARDS) -->
+            <!-- 1. DETAILED HOW TO USE -->
             <div class="space-y-4">
                 <div class="flex items-center gap-2.5">
                     <span class="w-8 h-8 rounded-xl bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 flex items-center justify-center text-sm font-bold">📖</span>
@@ -240,7 +216,7 @@
                 </div>
                 <div class="space-y-4 text-xs sm:text-sm text-slate-300 leading-relaxed bg-slate-900/80 p-6 sm:p-8 rounded-3xl border border-slate-800 shadow-xl">
                     <p>
-                        Cropping is more than simply chopping off borders; it is about framing the subject, improving composition, and adapting visuals to strict social media and web dimensions. With SmartPicTools Image Cropper, the entire workflow is executed inside your browser memory:
+                        Cropping is more than simply chopping off borders; it is about framing the subject, improving composition, and adapting visuals to strict web and social dimensions. With SmartPicTools Image Cropper, the entire workflow is executed inside your browser memory:
                     </p>
                     <ol class="space-y-3 pl-2">
                         <li class="flex items-start gap-3">
@@ -254,7 +230,7 @@
                             <span class="w-6 h-6 rounded-full bg-indigo-600 text-white font-bold text-xs flex items-center justify-center flex-shrink-0 mt-0.5">2</span>
                             <div>
                                 <strong class="text-white block">Select Aspect Ratio & Fine-Tune Framing:</strong>
-                                <span>Choose from verified presets such as 1:1 Square (Instagram posts), 16:9 Landscape (YouTube thumbnails), or 9:16 Portrait (Instagram Reels / TikTok / YouTube Shorts). If you need custom framing, select Freeform to drag corners freely. Use the Zoom In/Out buttons or hold down the Spacebar to pan across large high-resolution images.</span>
+                                <span>Choose from verified presets such as 1:1 Square (Profile DP and avatars), 16:9 Landscape (Video thumbnails and banners), or 9:16 Vertical (Stories, mobile video, and status). If you need custom framing, select Freeform to drag corners freely. Use the Zoom In/Out buttons or hold down the Spacebar to pan across large high-resolution images.</span>
                             </div>
                         </li>
                         <li class="flex items-start gap-3">
@@ -304,16 +280,16 @@
 
                     <div class="bg-slate-900/80 p-5 rounded-2xl border border-slate-800 space-y-1.5 shadow-lg">
                         <h3 class="text-sm font-bold text-white flex items-center gap-2">
-                            <span class="text-indigo-400">📱</span> Optimized for All Social Media
+                            <span class="text-indigo-400">📱</span> Optimized for All Web Formats
                         </h3>
                         <p class="text-xs text-slate-400 leading-relaxed">
-                            Pre-configured aspect ratio locks guarantee that your content matches Instagram, Facebook, LinkedIn, YouTube, and X (Twitter) upload standards without black border bars.
+                            Pre-configured aspect ratio locks guarantee that your content matches online upload standards without ugly black border bars.
                         </p>
                     </div>
                 </div>
             </div>
 
-            <!-- 3. FREQUENTLY ASKED QUESTIONS (COLLAPSIBLE DROPDOWNS) -->
+            <!-- 3. FREQUENTLY ASKED QUESTIONS -->
             <div class="space-y-4">
                 <div class="flex items-center gap-2.5">
                     <span class="w-8 h-8 rounded-xl bg-teal-500/10 border border-teal-500/20 text-teal-400 flex items-center justify-center text-sm font-bold">❓</span>
@@ -332,11 +308,11 @@
 
                     <details class="bg-slate-900/90 p-4 sm:p-5 rounded-2xl border border-slate-800 text-xs sm:text-sm cursor-pointer group">
                         <summary class="font-bold text-white flex justify-between items-center group-hover:text-indigo-400 transition">
-                            Which aspect ratio should I choose for YouTube thumbnails and Instagram posts?
+                            Which aspect ratio should I choose for thumbnails and profile posts?
                             <span class="text-indigo-400 text-base">▼</span>
                         </summary>
                         <p class="text-slate-400 mt-2.5 leading-relaxed">
-                            For YouTube thumbnails, select the 16:9 Landscape preset (1280×720 px standard). For standard Instagram feed photos, choose 1:1 Square or 4:5 Portrait. For Instagram Stories, Reels, and YouTube Shorts, select the 9:16 Vertical preset.
+                            For video thumbnails and horizontal banners, select 16:9 Landscape (1280×720 px standard). For profile pictures, avatars, and square posts, choose 1:1 Square. For mobile stories, vertical status, and fullscreen video, select 9:16 Vertical.
                         </p>
                     </details>
 
@@ -363,19 +339,19 @@
             </div>
 
         </section>
-    
     </main>
+
     <footer class="border-t border-slate-800 bg-slate-950 py-8 px-4 text-xs text-slate-400 text-center">
         <p>© 2026 SmartPicTools. 100% Free & Private in-browser suite. <a href="/" class="text-indigo-400 hover:underline">Explore All Tools</a></p>
     </footer>
 
-    <!-- ⚡ JS ENGINE WITH HARD BOUNDARY CLAMP -->
+    <!-- ⚡ JS ENGINE WITH HARD BOUNDARY CLAMP & SPOKE AUTO-RATIO ACTIVATION -->
     <script>
         let cropper = null;
         let currentFile = null;
         let isHandMode = false;
         let isSpacePressed = false;
-        let baseCanvasData = null; // ⚡ Minimum Fit Boundary
+        let baseCanvasData = null;
 
         const dropArea = document.getElementById('drop-area');
         const fileInput = document.getElementById('file-input');
@@ -425,7 +401,7 @@
                         responsive: true,
                         zoomable: true,
                         zoomOnWheel: false,
-                        autoCrop: false, // ⚡ Clean view on load
+                        autoCrop: false,
                         ready: function () {
                             const c = cropper.getCanvasData();
                             baseCanvasData = {
@@ -443,11 +419,9 @@
                                 applyFullCoverageRatio(targetRatio, targetBtn);
                             }
                         },
-                        // ⚡ PREVENTS MOVING PHOTO OFF-SCREEN WHEN NOT ZOOMED IN!
                         cropmove: function (e) {
                             if (e.detail.action === 'move' && baseCanvasData) {
                                 const c = cropper.getCanvasData();
-                                // If not zoomed in, LOCK in place so edges never detach!
                                 if (c.width <= baseCanvasData.width + 2) {
                                     e.preventDefault();
                                 }
@@ -464,18 +438,15 @@
             reader.readAsDataURL(displayBlob);
         }
 
-        // ⚡ ENSURES PHOTO EDGES NEVER DRIFT OFF THE FRAME
         function clampCanvasBounds() {
             if (!cropper || !baseCanvasData) return;
             const c = cropper.getCanvasData();
 
-            // If photo is at normal scale, snap firmly to initial fit!
             if (c.width <= baseCanvasData.width + 2) {
                 cropper.setCanvasData(baseCanvasData);
                 return;
             }
 
-            // If zoomed in, ensure edges stay pinned to boundaries
             let newLeft = c.left;
             let newTop = c.top;
 
@@ -511,7 +482,7 @@
             document.querySelectorAll('.ratio-btn').forEach(b => {
                 b.className = "ratio-btn py-2.5 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 text-xs font-bold transition";
             });
-            btn.className = "ratio-btn py-2.5 px-3 rounded-xl bg-indigo-600 text-white text-xs font-bold transition";
+            if (btn) btn.className = "ratio-btn py-2.5 px-3 rounded-xl bg-indigo-600 text-white text-xs font-bold transition";
         }
 
         function maximizeCropBoxToFit(ratio) {
@@ -539,7 +510,6 @@
             });
         }
 
-        // ⚡ ZOOM CONTROLS
         function cropZoom(val) {
             if (!cropper || !baseCanvasData) return;
             const c = cropper.getCanvasData();
@@ -595,7 +565,6 @@
             }
         }
 
-        // ⚡ PAN & HAND TOOL (ONLY ACTIVATES WHEN PHOTO IS ZOOMED IN!)
         function updatePanMode(active) {
             if (!cropper) return;
             const container = document.querySelector('.cropper-container');
@@ -644,7 +613,6 @@
             }
         });
 
-        // ⚡ 0.1s INSTANT DOWNLOAD
         function executeCrop() {
             if (!cropper) return;
             const canvas = cropper.getCroppedCanvas();
