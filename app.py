@@ -456,12 +456,30 @@ def get_yt_thumb():
         return send_file(io.BytesIO(raw_data), mimetype='image/jpeg', as_attachment=True, download_name=f"yt_thumb_{vid}.jpg")
 
 
-# ⚡ PDF PASSWORD PROTECT & UNLOCK ROUTES
+# ⚡ DEDICATED HIGH-INTENT PDF PASSWORD SPOKES
 @app.route('/pdf-password')
 @app.route('/protect-pdf')
 @app.route('/unlock-pdf')
 def pdf_password_page():
-    return render_template('pdf-password.html')
+    endpoint = request.path.strip('/')
+    spokes = {
+        'protect-pdf': {
+            'mode': 'lock',
+            'title': 'Protect PDF with Password Online Free - AES-256 Encryption | SmartPicTools',
+            'desc': 'Secure your confidential PDF documents with military-grade AES-256 password encryption online for free. 100% private with zero data exposure.',
+            'h1': 'Protect PDF with Password Online',
+            'canonical': 'https://smartpictools.in/protect-pdf'
+        },
+        'unlock-pdf': {
+            'mode': 'unlock',
+            'title': 'Unlock PDF Online Free - Remove Password Permanently | SmartPicTools',
+            'desc': 'Permanently remove passwords from bank statements, salary slips, and encrypted PDFs in 0.05s. 100% private in-browser tool with zero server uploads.',
+            'h1': 'Unlock PDF Online (Remove Password)',
+            'canonical': 'https://smartpictools.in/unlock-pdf'
+        }
+    }
+    meta = spokes.get(endpoint)
+    return render_template('pdf-password.html', meta=meta)
 
 # 301 Permanent Redirects to Preserve Google SEO Juice (Zero 404 Errors)
 @app.route('/pdf-converter')
