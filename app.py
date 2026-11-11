@@ -372,6 +372,29 @@ def crop_pdf_spokes_route():
 @app.route('/split-pdf')
 def split_pdf_page():
     return render_template('split-pdf.html')
+    # ⚡ DEDICATED HIGH-INTENT SPLIT PDF SPOKES
+@app.route('/extract-pages-from-pdf')
+@app.route('/separate-pdf-pages')
+def split_pdf_spokes_route():
+    endpoint = request.path.strip('/')
+    spokes = {
+        'extract-pages-from-pdf': {
+            'mode': 'extract',
+            'title': 'Extract Pages from PDF Online Free - Save Selected Pages | SmartPicTools',
+            'desc': 'Extract specific pages or page ranges from PDF document online for free. 100% preserves searchable text (Ctrl+F) and vector quality.',
+            'h1': 'Extract Pages from PDF Online Free',
+            'canonical': 'https://smartpictools.in/extract-pages-from-pdf'
+        },
+        'separate-pdf-pages': {
+            'mode': 'all-separate',
+            'title': 'Separate PDF Pages Online Free - Split into Single Files | SmartPicTools',
+            'desc': 'Split multi-page PDF into individual 1-page PDF files bundled in a clean ZIP archive. 100% private in-browser tool with zero server uploads.',
+            'h1': 'Separate PDF Pages (Split All into Single Files)',
+            'canonical': 'https://smartpictools.in/separate-pdf-pages'
+        }
+    }
+    meta = spokes.get(endpoint)
+    return render_template('split-pdf.html', meta=meta)
 
 # ⚡ YOUTUBE THUMBNAIL DOWNLOADER ROUTES
 @app.route('/youtube-thumbnail-downloader')
@@ -724,6 +747,8 @@ def sitemap():
         ('https://smartpictools.in/photo-to-pdf-maker', '0.9'),
         ('https://smartpictools.in/jpg-to-pdf-a4', '0.9'),
         ('https://smartpictools.in/split-pdf', '0.9'),
+        ('https://smartpictools.in/extract-pages-from-pdf', '0.9'),
+        ('https://smartpictools.in/separate-pdf-pages', '0.9'),
         ('https://smartpictools.in/youtube-thumbnail-downloader', '0.9'),
         ('https://smartpictools.in/pdf-password', '0.9'),
         ('https://smartpictools.in/protect-pdf', '0.9'),
