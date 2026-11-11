@@ -92,9 +92,14 @@
         }
     </script>
 
-    <style>
+   <style>
         body { font-family: 'Plus Jakarta Sans', sans-serif; -webkit-tap-highlight-color: transparent; }
-        .page-card.selected { border-color: #6366f1 !important; background-color: rgba(99, 102, 241, 0.15) !important; }
+        /* ⚡ UNSELECTED CARDS (TICK HIDDEN & DIMMED) */
+        .check-badge { display: none !important; }
+        .page-card { opacity: 0.45; transition: all 0.15s ease; border-color: #334155 !important; }
+
+        /* ⚡ SELECTED CARDS (BRIGHT BLUE BORDER & CHECKMARK VISIBLE) */
+        .page-card.selected { opacity: 1; border-color: #6366f1 !important; background-color: rgba(99, 102, 241, 0.20) !important; }
         .page-card.selected .check-badge { display: flex !important; }
     </style>
 </head>
@@ -594,6 +599,15 @@
                 const card = document.getElementById(`page-card-${p}`);
                 if (card) {
                     card.classList.toggle('selected', selectedPages.has(p));
+                }
+            }
+
+            // ⚡ Auto-scroll grid to the selected page (e.g. jumps straight to page 50)
+            if (selectedPages.size > 0) {
+                const minPage = Math.min(...selectedPages);
+                const targetCard = document.getElementById(`page-card-${minPage}`);
+                if (targetCard) {
+                    targetCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
                 }
             }
         }
