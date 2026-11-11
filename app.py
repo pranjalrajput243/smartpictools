@@ -337,6 +337,37 @@ def image_to_pdf_spokes_route():
 @app.route('/crop-pdf')
 def crop_pdf_page():
     return render_template('crop-pdf.html')
+    # ⚡ DEDICATED HIGH-INTENT CROP PDF SPOKES
+@app.route('/crop-pdf-to-4x6')
+@app.route('/trim-pdf-margins')
+@app.route('/crop-pdf-top-half')
+def crop_pdf_spokes_route():
+    endpoint = request.path.strip('/')
+    spokes = {
+        'crop-pdf-to-4x6': {
+            'preset': 'standard-label',
+            'title': 'Crop PDF to 4x6 Online Free - Thermal Shipping Label Cropper | SmartPicTools',
+            'desc': 'Crop A4 PDF shipping labels to 4x6 inch thermal printer format online for free. Preserves 100% sharp barcodes and searchable text.',
+            'h1': 'Crop PDF to 4×6 (Shipping Label)',
+            'canonical': 'https://smartpictools.in/crop-pdf-to-4x6'
+        },
+        'trim-pdf-margins': {
+            'preset': 'trim',
+            'title': 'Trim PDF Margins Online Free - Remove White Borders | SmartPicTools',
+            'desc': 'Trim unwanted white margins from multi-page PDFs, books, and documents online for free. Preserves 100% searchable text (Ctrl+F works).',
+            'h1': 'Trim PDF Margins (Remove White Space)',
+            'canonical': 'https://smartpictools.in/trim-pdf-margins'
+        },
+        'crop-pdf-top-half': {
+            'preset': 'top-half',
+            'title': 'Crop PDF Top Half Online Free - A4 Half Sheet Cutter | SmartPicTools',
+            'desc': 'Crop the top half of A4 PDF documents and shipping manifests online for free. 100% private in-browser tool with zero server uploads.',
+            'h1': 'Crop PDF Top Half (A4 Half Sheet)',
+            'canonical': 'https://smartpictools.in/crop-pdf-top-half'
+        }
+    }
+    meta = spokes.get(endpoint)
+    return render_template('crop-pdf.html', meta=meta)
 
 @app.route('/split-pdf')
 def split_pdf_page():
@@ -686,6 +717,9 @@ def sitemap():
         ('https://smartpictools.in/resize-image-1000x1000', '0.9'),
         ('https://smartpictools.in/convert-image', '0.9'),
         ('https://smartpictools.in/crop-pdf', '0.9'),
+        ('https://smartpictools.in/crop-pdf-to-4x6', '0.9'),
+        ('https://smartpictools.in/trim-pdf-margins', '0.9'),
+        ('https://smartpictools.in/crop-pdf-top-half', '0.9'),
         ('https://smartpictools.in/image-to-pdf', '0.9'),
         ('https://smartpictools.in/photo-to-pdf-maker', '0.9'),
         ('https://smartpictools.in/jpg-to-pdf-a4', '0.9'),
