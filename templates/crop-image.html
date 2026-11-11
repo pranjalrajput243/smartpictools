@@ -185,12 +185,12 @@
                 <div class="bg-slate-950/80 p-4 sm:p-5 rounded-2xl border border-slate-800 space-y-3">
                     <label class="block text-xs font-bold text-slate-400">Select Aspect Ratio Template:</label>
                     <div class="grid grid-cols-2 sm:grid-cols-5 gap-2">
-                        <button type="button" onclick="applyFullCoverageRatio(NaN, this)" id="btn-free" class="ratio-btn py-2.5 px-3 rounded-xl bg-indigo-600 text-white text-xs font-bold transition">Freeform (Drag Anywhere)</button>
-                        <button type="button" onclick="applyFullCoverageRatio(1, this)" id="btn-ratio-1" class="ratio-btn py-2.5 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 text-xs font-bold transition">1:1 (Square DP)</button>
-                        <button type="button" onclick="applyFullCoverageRatio(16/9, this)" id="btn-ratio-16-9" class="ratio-btn py-2.5 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 text-xs font-bold transition">16:9 (Landscape)</button>
-                        <button type="button" onclick="applyFullCoverageRatio(9/16, this)" id="btn-ratio-9-16" class="ratio-btn py-2.5 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 text-xs font-bold transition">9:16 (Vertical)</button>
-                        <button type="button" onclick="applyFullCoverageRatio(4/5, this)" id="btn-ratio-4-5" class="ratio-btn py-2.5 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 text-xs font-bold transition">4:5 (Portrait Feed)</button>
-                    </div>
+                    <button type="button" onclick="applyFullCoverageRatio(NaN, this)" id="btn-free" class="ratio-btn py-2.5 px-3 rounded-xl bg-indigo-600 text-white text-xs font-bold transition">Freeform</button>
+                    <button type="button" onclick="applyFullCoverageRatio(1, this)" id="btn-ratio-1" class="ratio-btn py-2.5 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 text-xs font-bold transition">Square (1:1)</button>
+                    <button type="button" onclick="applyFullCoverageRatio(16/9, this)" id="btn-ratio-16-9" class="ratio-btn py-2.5 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 text-xs font-bold transition">Horizontal (16:9)</button>
+                    <button type="button" onclick="applyFullCoverageRatio(9/16, this)" id="btn-ratio-9-16" class="ratio-btn py-2.5 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 text-xs font-bold transition">Vertical (9:16)</button>
+                    <button type="button" onclick="applyFullCoverageRatio(4/5, this)" id="btn-ratio-4-5" class="ratio-btn py-2.5 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 text-xs font-bold transition">Portrait (4:5)</button>
+                </div>
                 </div>
 
                 <button type="button" id="crop-download-btn" onclick="executeCrop()" class="w-full py-4 px-6 rounded-2xl bg-gradient-to-r from-indigo-600 via-indigo-500 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-extrabold text-sm sm:text-base shadow-lg shadow-indigo-500/25 transition active:scale-[0.99] flex items-center justify-center gap-3">
