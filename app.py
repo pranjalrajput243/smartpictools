@@ -215,18 +215,26 @@ def crop_spokes_route():
         'crop-image-1-1': {
             'ratio': 1.0,
             'preset_key': '1',
-            'title': 'Crop Image 1:1 Square Online Free - DP Cropper | SmartPicTools',
-            'desc': 'Crop photos into perfect 1:1 square aspect ratio online for free. Ideal for posts, WhatsApp DP, and profile pictures. 100% private in-browser.',
-            'h1': 'Crop Image 1:1 Square (Profile & DP)',
+            'title': 'Crop Image 1:1 Square Online Free - Professional Aspect Ratio | SmartPicTools',
+            'desc': 'Crop photos into perfect 1:1 square aspect ratio online for free. 100% private in-browser tool with zero server uploads.',
+            'h1': 'Crop Image 1:1 (Square)',
             'canonical': 'https://smartpictools.in/crop-image-1-1'
         },
         'crop-image-16-9': {
             'ratio': 16 / 9,
             'preset_key': '16/9',
-            'title': 'Crop Image 16:9 Online Free - YouTube Thumbnail Cropper | SmartPicTools',
-            'desc': 'Crop photos into official 16:9 widescreen landscape ratio online for free. Perfect for YouTube thumbnails, desktop wallpapers, and banners.',
-            'h1': 'Crop Image 16:9 Landscape (YouTube Thumbnail)',
+            'title': 'Crop Image 16:9 Horizontal Online Free - Landscape Ratio | SmartPicTools',
+            'desc': 'Crop photos into standard 16:9 horizontal landscape aspect ratio online for free. 100% private in-browser tool with zero server uploads.',
+            'h1': 'Crop Image 16:9 (Horizontal)',
             'canonical': 'https://smartpictools.in/crop-image-16-9'
+        },
+        'crop-image-9-16': {
+            'ratio': 9 / 16,
+            'preset_key': '9/16',
+            'title': 'Crop Image 9:16 Vertical Online Free - Fullscreen Aspect Ratio | SmartPicTools',
+            'desc': 'Crop photos into 9:16 vertical fullscreen aspect ratio online for free. 100% private in-browser tool with zero server uploads.',
+            'h1': 'Crop Image 9:16 (Vertical)',
+            'canonical': 'https://smartpictools.in/crop-image-9-16'
         },
         'crop-image-9-16': {
             'ratio': 9 / 16,
