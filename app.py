@@ -310,6 +310,29 @@ def favicon_converter_page():
 @app.route('/image-to-pdf')
 def image_to_pdf_alias():
     return render_template('image-to-pdf.html')
+# ⚡ DEDICATED HIGH-INTENT IMAGE TO PDF SPOKES
+@app.route('/photo-to-pdf-maker')
+@app.route('/jpg-to-pdf-a4')
+def image_to_pdf_spokes_route():
+    endpoint = request.path.strip('/')
+    spokes = {
+        'photo-to-pdf-maker': {
+            'fit_mode': 'fit',
+            'title': 'Photo to PDF Maker Online Free - 0% White Borders | SmartPicTools',
+            'desc': 'Convert and merge multiple photos into single PDF online for free with edge-to-edge full fit and zero white margins. 100% private in-browser.',
+            'h1': 'Photo to PDF Maker (Edge-to-Edge)',
+            'canonical': 'https://smartpictools.in/photo-to-pdf-maker'
+        },
+        'jpg-to-pdf-a4': {
+            'fit_mode': 'a4',
+            'title': 'Convert JPG to PDF A4 Online Free - Standard Document Size | SmartPicTools',
+            'desc': 'Convert JPG, PNG, and images to standard A4 PDF document online for free. Official size for college assignments, office, and official submissions.',
+            'h1': 'Convert JPG to PDF (A4 Document Size)',
+            'canonical': 'https://smartpictools.in/jpg-to-pdf-a4'
+        }
+    }
+    meta = spokes.get(endpoint)
+    return render_template('image-to-pdf.html', meta=meta)
 
 @app.route('/crop-pdf')
 def crop_pdf_page():
@@ -663,6 +686,9 @@ def sitemap():
         ('https://smartpictools.in/resize-image-1000x1000', '0.9'),
         ('https://smartpictools.in/convert-image', '0.9'),
         ('https://smartpictools.in/crop-pdf', '0.9'),
+        ('https://smartpictools.in/image-to-pdf', '0.9'),
+        ('https://smartpictools.in/photo-to-pdf-maker', '0.9'),
+        ('https://smartpictools.in/jpg-to-pdf-a4', '0.9'),
         ('https://smartpictools.in/split-pdf', '0.9'),
         ('https://smartpictools.in/youtube-thumbnail-downloader', '0.9'),
         ('https://smartpictools.in/pdf-password', '0.9'),
