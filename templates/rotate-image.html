@@ -15,6 +15,10 @@
     <!-- ⚡ PERMANENT GOOGLE SEARCH CONSOLE VERIFICATION TAG -->
     <meta name="google-site-verification" content="uUq17UUsROyHMRQ8jkqKqrjZmsJnkuxZMKKoJLw_X3E" />
 
+    <!-- ⚡ GOOGLE ADSENSE OFFICIAL CODE -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6941008868816067" crossorigin="anonymous"></script>
+
+    
     <!-- OPEN GRAPH -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://smartpictools.in/rotate-image">
@@ -172,93 +176,189 @@
             </div>
         </div>
 
-<!-- ========================================================= -->
-        <!-- ⚡ IN-DEPTH PRODUCT DOCUMENTATION & SEO CONTENT          -->
+        <!-- ⚡ RELATED TOOLS SILO (CLEAN FULL-WIDTH DIRECTLY BELOW WORKSPACE) -->
+        <div class="mt-14 bg-slate-900/90 p-6 rounded-3xl border border-slate-800 space-y-4">
+            <div class="flex items-center gap-2">
+                <span class="text-indigo-400 font-bold text-sm">🔗</span>
+                <h3 class="text-sm font-bold text-white uppercase tracking-wider">Helpful Next Steps After Rotating:</h3>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
+                <a href="/crop-image" class="p-3 bg-slate-950/80 hover:bg-slate-950 rounded-xl border border-slate-800 hover:border-indigo-500/50 transition block">
+                    <strong class="text-white block">✂️ Crop Image (Aspect Ratios)</strong>
+                    <span class="text-slate-400 text-[11px]">Square (1:1), Horizontal (16:9), or Vertical (9:16).</span>
+                </a>
+                <a href="/compress-image" class="p-3 bg-slate-950/80 hover:bg-slate-950 rounded-xl border border-slate-800 hover:border-indigo-500/50 transition block">
+                    <strong class="text-white block">🎯 Compress Image (Exact KB)</strong>
+                    <span class="text-slate-400 text-[11px]">Shrink file weight to 20KB, 50KB, or 100KB for forms.</span>
+                </a>
+                <a href="/resize-image" class="p-3 bg-slate-950/80 hover:bg-slate-950 rounded-xl border border-slate-800 hover:border-indigo-500/50 transition block">
+                    <strong class="text-white block">📐 Resize Image Dimensions</strong>
+                    <span class="text-slate-400 text-[11px]">Adjust width and height in pixels with proportion lock.</span>
+                </a>
+            </div>
+        </div>
+
         <!-- ========================================================= -->
-        <section class="mt-16 border-t border-slate-800 pt-12 space-y-12 text-slate-300">
+        <!-- ⚡ IN-DEPTH PRODUCT DOCUMENTATION & SEO CONTENT (1300+ WORDS) -->
+        <!-- ========================================================= -->
+        <section class="mt-14 border-t border-slate-800 pt-12 space-y-12 text-slate-300">
             
-            <!-- 1. DETAILED HOW TO USE (ARTICLE STYLE, NO DISJOINTED CARDS) -->
+            <!-- 1. COMPREHENSIVE IMAGE ORIENTATION TECHNICAL GUIDE -->
             <div class="space-y-4">
                 <div class="flex items-center gap-2.5">
                     <span class="w-8 h-8 rounded-xl bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 flex items-center justify-center text-sm font-bold">📖</span>
-                    <h2 class="text-xl sm:text-2xl font-black text-white tracking-tight">How to Rotate & Flip Images Online Step-by-Step</h2>
+                    <h2 class="text-xl sm:text-2xl font-black text-white tracking-tight">The Complete Guide to Image Rotation, EXIF Orientation & Mirror Reflections</h2>
                 </div>
                 <div class="space-y-4 text-xs sm:text-sm text-slate-300 leading-relaxed bg-slate-900/80 p-6 sm:p-8 rounded-3xl border border-slate-800 shadow-xl">
                     <p>
-                        Photos captured on smartphones often upload sideways or upside-down due to missing or conflicting camera EXIF orientation tags. Additionally, front-camera selfies frequently invert text on clothing. SmartPicTools allows you to permanently correct photo rotation and mirror reflections right in your browser:
+                        Digital photograph orientation is governed by an underlying interaction between camera hardware sensors and metadata standards. Modern mobile smartphones, digital SLR cameras, and tablet sensors capture raw visual data according to the physical alignment of their CMOS sensor arrays. To indicate how an image should appear when held vertically or horizontally, the camera's internal gyroscope writes a numeric orientation tag (ranging from 1 to 8) into the file's Exchangeable Image File Format (EXIF) header metadata.
                     </p>
-                    <ol class="space-y-3 pl-2">
+                    <p>
+                        A persistent technical frustration occurs when smartphone photos are uploaded to government recruitment portals, e-commerce storefronts, social media platforms, or legacy desktop software. Many web content management systems, automated document scanners, and browser rendering engines automatically strip or ignore EXIF metadata to conserve bandwidth. As a result, upright photographs suddenly revert to their raw sensor alignment—displaying sideways (rotated 90 degrees) or completely upside-down (rotated 180 degrees). Similarly, front-facing mobile cameras automatically save selfies as mirror reflections, causing text on clothing, certificates, and background signage to appear backward and unreadable.
+                    </p>
+                    <p>
+                        Fixing orientation issues reliably requires physical pixel transposition rather than temporary metadata edits. SmartPicTools executes true mathematical coordinate transformations directly within client-side HTML5 Canvas. When rotating 90 degrees clockwise or counter-clockwise, the engine transposes the physical pixel matrix ($[x, y] \to [y, W - 1 - x]$) and swaps the canvas width and height boundaries. When applying a horizontal flip, the horizontal axis is mathematically inverted, instantly resolving front-camera mirror distortions. Because the rotation is baked directly into the pixel array, your exported image displays perfectly upright across every operating system, web portal, and device without relying on fragile EXIF flags.
+                    </p>
+                </div>
+            </div>
+
+            <!-- 2. TRANSFORMATION MATRIX & ORIENTATION TABLE -->
+            <div class="space-y-4">
+                <div class="flex items-center gap-2.5">
+                    <span class="w-8 h-8 rounded-xl bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 flex items-center justify-center text-sm font-bold">📊</span>
+                    <h2 class="text-xl sm:text-2xl font-black text-white tracking-tight">Image Transformation & Coordinate Mapping Standards</h2>
+                </div>
+                <div class="overflow-x-auto bg-slate-900/80 p-5 rounded-3xl border border-slate-800 shadow-xl">
+                    <table class="w-full text-left text-xs text-slate-300">
+                        <thead class="bg-slate-950/80 text-white uppercase text-[10px] tracking-wider border-b border-slate-800">
+                            <tr>
+                                <th class="py-3 px-4">Transformation Operation</th>
+                                <th class="py-3 px-4">Coordinate Mapping</th>
+                                <th class="py-3 px-4">Dimension Change</th>
+                                <th class="py-3 px-4">Primary Real-World Use Case</th>
+                                <th class="py-3 px-4">Quality & Fidelity</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-800/60 font-medium">
+                            <tr class="hover:bg-slate-950/40 transition">
+                                <td class="py-3 px-4 text-white font-bold">90° Clockwise Rotation</td>
+                                <td class="py-3 px-4 text-indigo-400 font-bold">$[x, y] \to [H - 1 - y, x]$</td>
+                                <td class="py-3 px-4 text-emerald-400 font-bold">Width & Height Swapped</td>
+                                <td class="py-3 px-4">Correcting Sideways Mobile Camera Snaps</td>
+                                <td class="py-3 px-4 text-emerald-400 font-bold">100% Lossless Coordinate Transposition</td>
+                            </tr>
+                            <tr class="hover:bg-slate-950/40 transition">
+                                <td class="py-3 px-4 text-white font-bold">90° Counter-Clockwise Rotation</td>
+                                <td class="py-3 px-4 text-indigo-400 font-bold">$[x, y] \to [y, W - 1 - x]$</td>
+                                <td class="py-3 px-4 text-emerald-400 font-bold">Width & Height Swapped</td>
+                                <td class="py-3 px-4">Landscape Document Scans, Architecture</td>
+                                <td class="py-3 px-4 text-emerald-400 font-bold">100% Lossless Coordinate Transposition</td>
+                            </tr>
+                            <tr class="hover:bg-slate-950/40 transition">
+                                <td class="py-3 px-4 text-white font-bold">Horizontal Flip (Mirror)</td>
+                                <td class="py-3 px-4 text-indigo-400 font-bold">$[x, y] \to [W - 1 - x, y]$</td>
+                                <td class="py-3 px-4 text-slate-400 font-bold">Dimensions Preserved</td>
+                                <td class="py-3 px-4">Fixing Inverted Front-Camera Selfies</td>
+                                <td class="py-3 px-4 text-emerald-400 font-bold">Exact Inversion (Text Reads Left-to-Right)</td>
+                            </tr>
+                            <tr class="hover:bg-slate-950/40 transition">
+                                <td class="py-3 px-4 text-white font-bold">Vertical Flip (Reflection)</td>
+                                <td class="py-3 px-4 text-indigo-400 font-bold">$[x, y] \to [x, H - 1 - y]$</td>
+                                <td class="py-3 px-4 text-slate-400 font-bold">Dimensions Preserved</td>
+                                <td class="py-3 px-4">Inverted Flatbed Scans, Water Reflections</td>
+                                <td class="py-3 px-4 text-emerald-400 font-bold">100% Native Pixel Retention</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- 3. STEP-BY-STEP ROTATION WORKFLOW -->
+            <div class="space-y-4">
+                <div class="flex items-center gap-2.5">
+                    <span class="w-8 h-8 rounded-xl bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 flex items-center justify-center text-sm font-bold">⚡</span>
+                    <h2 class="text-xl sm:text-2xl font-black text-white tracking-tight">How to Rotate and Flip Images Online Step-by-Step</h2>
+                </div>
+                <div class="space-y-4 text-xs sm:text-sm text-slate-300 leading-relaxed bg-slate-900/80 p-6 sm:p-8 rounded-3xl border border-slate-800 shadow-xl">
+                    <ol class="space-y-4 pl-2">
                         <li class="flex items-start gap-3">
                             <span class="w-6 h-6 rounded-full bg-cyan-600 text-white font-bold text-xs flex items-center justify-center flex-shrink-0 mt-0.5">1</span>
                             <div>
-                                <strong class="text-white block">Upload Your Image:</strong>
-                                <span>Click the upload zone or drop your picture. Our engine supports JPG, PNG, WEBP, and iPhone HEIC files, rendering the picture instantly in local browser memory.</span>
+                                <strong class="text-white block text-sm mb-0.5">Select and Upload Your Photograph:</strong>
+                                <span>Click on the upload zone or drag and drop your picture into the workspace. The tool accepts JPG, PNG, WEBP, and Apple iPhone files (.heic and .heif), loading your image into browser temporary memory at full camera sensor resolution.</span>
                             </div>
                         </li>
                         <li class="flex items-start gap-3">
                             <span class="w-6 h-6 rounded-full bg-cyan-600 text-white font-bold text-xs flex items-center justify-center flex-shrink-0 mt-0.5">2</span>
                             <div>
-                                <strong class="text-white block">Choose Rotation Angle or Flip Direction:</strong>
-                                <span>Click <strong>Rotate 90° Clockwise</strong> or <strong>Rotate 90° Counter-Clockwise</strong> to turn sideways documents right-side up. Use <strong>Flip Horizontally</strong> to un-mirror reversed selfie photos or <strong>Flip Vertically</strong> for upside-down scans.</span>
+                                <strong class="text-white block text-sm mb-0.5">Click Orientation Controls with Continuous Transition:</strong>
+                                <span>Click <strong>↻ 90° Clockwise</strong> or <strong>↺ 90° Anti-Clock</strong> to rotate orientation in 90-degree increments. Our continuous rotation engine advances orientation smoothly forward (90° → 180° → 270° → 360°) without jarring reverse animation spins.</span>
                             </div>
                         </li>
                         <li class="flex items-start gap-3">
                             <span class="w-6 h-6 rounded-full bg-cyan-600 text-white font-bold text-xs flex items-center justify-center flex-shrink-0 mt-0.5">3</span>
                             <div>
-                                <strong class="text-white block">Download Corrected Image in 0.05s:</strong>
-                                <span>Click 'Download Image'. The transformation is written directly into the image pixel array, ensuring that your photo opens in the correct orientation on every device, website, and operating system without quality loss.</span>
+                                <strong class="text-white block text-sm mb-0.5">Apply Horizontal Mirror or Vertical Flip if Needed:</strong>
+                                <span>If your photo is a front-facing selfie with backwards text, click <strong>⇄ Flip Horizontal</strong> to invert the horizontal axis. For upside-down scans, toggle <strong>⇅ Flip Vertical</strong>. You can combine rotation and flipping simultaneously to achieve any desired angle.</span>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="w-6 h-6 rounded-full bg-cyan-600 text-white font-bold text-xs flex items-center justify-center flex-shrink-0 mt-0.5">4</span>
+                            <div>
+                                <strong class="text-white block text-sm mb-0.5">Export and Download Lossless High-Resolution File:</strong>
+                                <span>Inspect the real-time preview. Once the subject is oriented correctly, click 'Rotate & Download Image'. The canvas physically writes the transformed pixel matrix into a new high-quality JPEG (92% quality factor), saving it directly to your device storage.</span>
                             </div>
                         </li>
                     </ol>
                 </div>
             </div>
 
-            <!-- 2. WHY CHOOSE SMARTPICTOOLS ROTATE & FLIP? -->
+            <!-- 4. WHY CHOOSE SMARTPICTOOLS ROTATE STUDIO (4 TECHNICAL PILLARS) -->
             <div class="space-y-4">
                 <div class="flex items-center gap-2.5">
                     <span class="w-8 h-8 rounded-xl bg-purple-500/10 border border-purple-500/20 text-purple-400 flex items-center justify-center text-sm font-bold">⭐</span>
-                    <h2 class="text-xl sm:text-2xl font-black text-white tracking-tight">Why Choose SmartPicTools Rotate & Flip?</h2>
+                    <h2 class="text-xl sm:text-2xl font-black text-white tracking-tight">Why Choose SmartPicTools Rotate Studio?</h2>
                 </div>
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div class="bg-slate-900/80 p-5 rounded-2xl border border-slate-800 space-y-1.5 shadow-lg">
+                    <div class="bg-slate-900/80 p-6 rounded-3xl border border-slate-800 space-y-2 shadow-lg">
                         <h3 class="text-sm font-bold text-white flex items-center gap-2">
-                            <span class="text-cyan-400">🔄</span> Permanent Orientation Fix (No EXIF Bug)
+                            <span class="text-cyan-400">🔄</span> Permanent Physical Canvas Transposition
                         </h3>
                         <p class="text-xs text-slate-400 leading-relaxed">
-                            Many photo viewers rely on temporary EXIF metadata that gets ignored when uploading to portals or social media. Our tool permanently rotates the physical canvas coordinates so your photo never reverts to sideways.
+                            Many editing apps merely change temporary EXIF metadata tags that get stripped when uploaded to social media or exam portals, causing photos to revert to sideways. Our engine physically bakes the rotated coordinates into the actual pixel array so it displays upright everywhere.
                         </p>
                     </div>
 
-                    <div class="bg-slate-900/80 p-5 rounded-2xl border border-slate-800 space-y-1.5 shadow-lg">
+                    <div class="bg-slate-900/80 p-6 rounded-3xl border border-slate-800 space-y-2 shadow-lg">
                         <h3 class="text-sm font-bold text-white flex items-center gap-2">
-                            <span class="text-cyan-400">💎</span> Lossless Quality Preservation
+                            <span class="text-cyan-400">💎</span> 100% Lossless Coordinate Mapping
                         </h3>
                         <p class="text-xs text-slate-400 leading-relaxed">
-                            Rotating and flipping simply rearranges coordinate geometry without applying destructive compression. Your original megapixels, colors, and sharp lines stay 100% intact.
+                            Rotating by 90, 180, or 270 degrees is a clean mathematical transpose of pixel columns and rows. Because there is zero fractional resampling or diagonal interpolation involved, your photograph retains 100% of its native sharpness, megapixels, and color depth.
                         </p>
                     </div>
 
-                    <div class="bg-slate-900/80 p-5 rounded-2xl border border-slate-800 space-y-1.5 shadow-lg">
+                    <div class="bg-slate-900/80 p-6 rounded-3xl border border-slate-800 space-y-2 shadow-lg">
                         <h3 class="text-sm font-bold text-white flex items-center gap-2">
-                            <span class="text-cyan-400">🤳</span> Front-Camera Selfie Mirror Fix
+                            <span class="text-cyan-400">🤳</span> Front-Camera Selfie Mirror Correction
                         </h3>
                         <p class="text-xs text-slate-400 leading-relaxed">
-                            Easily mirror flip front-facing selfie portraits with one click so reversed text on t-shirts, caps, and background signs reads normally from left to right.
+                            Easily un-mirror reversed front-facing selfie portraits with one click. The horizontal reflection tool inverts the horizontal axis, transforming the mirror image back to a natural third-person perspective so brand logos, t-shirt prints, and background signs read normally.
                         </p>
                     </div>
 
-                    <div class="bg-slate-900/80 p-5 rounded-2xl border border-slate-800 space-y-1.5 shadow-lg">
+                    <div class="bg-slate-900/80 p-6 rounded-3xl border border-slate-800 space-y-2 shadow-lg">
                         <h3 class="text-sm font-bold text-white flex items-center gap-2">
-                            <span class="text-cyan-400">🔒</span> 100% Confidential & In-Browser
+                            <span class="text-cyan-400">🔒</span> 100% In-Browser Confidentiality
                         </h3>
                         <p class="text-xs text-slate-400 leading-relaxed">
-                            No cloud processing or remote servers. All image rotation runs strictly in your browser memory, keeping personal photos, certificates, and documents completely private.
+                            Your personal portrait photos, confidential certificates, and private scans never upload to external servers. All geometric transformations run strictly in your web browser memory (RAM) with zero third-party cloud data transmission.
                         </p>
                     </div>
                 </div>
             </div>
 
-            <!-- 3. FREQUENTLY ASKED QUESTIONS (COLLAPSIBLE DROPDOWNS) -->
+            <!-- 5. EXHAUSTIVE FAQS (7 DETAILED TECHNICAL ANSWERS) -->
             <div class="space-y-4">
                 <div class="flex items-center gap-2.5">
                     <span class="w-8 h-8 rounded-xl bg-teal-500/10 border border-teal-500/20 text-teal-400 flex items-center justify-center text-sm font-bold">❓</span>
@@ -267,79 +367,77 @@
                 <div class="space-y-3">
                     <details class="bg-slate-900/90 p-4 sm:p-5 rounded-2xl border border-slate-800 text-xs sm:text-sm cursor-pointer group">
                         <summary class="font-bold text-white flex justify-between items-center group-hover:text-cyan-400 transition">
-                            Why do photos taken on mobile phones automatically turn sideways when uploaded to websites?
+                            Why do photos captured on smartphones automatically turn sideways when uploaded to websites?
                             <span class="text-cyan-400 text-base">▼</span>
                         </summary>
                         <p class="text-slate-400 mt-2.5 leading-relaxed">
-                            Smartphones save photos according to the camera sensor’s native hardware orientation and embed a small EXIF tag instructing the phone which way is up. However, most web portals and desktop software discard EXIF metadata, causing the photo to display sideways. Our tool physically rotates the actual pixel data so the image displays upright everywhere.
+                            Smartphones save photos according to the camera sensor's native hardware orientation and embed a small EXIF tag instructing software which way is up. However, many online job portals, government databases, and social media platforms discard EXIF metadata to compress files, causing the photo to display sideways. Our tool physically transposes the actual pixel data so the image displays upright across all devices and software.
                         </p>
                     </details>
 
                     <details class="bg-slate-900/90 p-4 sm:p-5 rounded-2xl border border-slate-800 text-xs sm:text-sm cursor-pointer group">
                         <summary class="font-bold text-white flex justify-between items-center group-hover:text-cyan-400 transition">
-                            Does rotating or flipping an image degrade its sharpness or resolution?
+                            Does rotating or flipping an image degrade its sharpness, megapixels, or picture quality?
                             <span class="text-cyan-400 text-base">▼</span>
                         </summary>
                         <p class="text-slate-400 mt-2.5 leading-relaxed">
-                            No. Rotating by 90, 180, or 270 degrees is a clean mathematical transpose of pixel columns and rows. Because there is no fractional re-sampling or blurring involved, the output retains 100% of your picture's original clarity.
+                            No. Rotating by 90, 180, or 270 degrees is an exact mathematical mapping of pixel columns and rows. Because there is no fractional resampling, interpolation, or blurring involved, the output retains 100% of your picture's original resolution, sensor megapixels, and color spaces.
                         </p>
                     </details>
 
                     <details class="bg-slate-900/90 p-4 sm:p-5 rounded-2xl border border-slate-800 text-xs sm:text-sm cursor-pointer group">
                         <summary class="font-bold text-white flex justify-between items-center group-hover:text-cyan-400 transition">
-                            How do I fix a reversed selfie where text on my shirt appears backwards?
+                            How do I fix a reversed front-camera selfie so text on my clothing reads normally?
                             <span class="text-cyan-400 text-base">▼</span>
                         </summary>
                         <p class="text-slate-400 mt-2.5 leading-relaxed">
-                            Simply upload your selfie and click the 'Flip Horizontally' button. This inverts the horizontal axis, transforming the mirror reflection back to a natural third-person perspective so all text and logos read correctly.
+                            Upload your selfie and click the '⇄ Flip Horizontal' button. This inverts the horizontal axis, transforming the mirror reflection back to a natural third-person perspective so all text markings, brand emblems, and signage read properly from left to right.
                         </p>
                     </details>
 
                     <details class="bg-slate-900/90 p-4 sm:p-5 rounded-2xl border border-slate-800 text-xs sm:text-sm cursor-pointer group">
                         <summary class="font-bold text-white flex justify-between items-center group-hover:text-cyan-400 transition">
-                            Can I rotate Apple iPhone HEIC photos directly?
+                            What is the difference between EXIF metadata rotation and physical pixel transposition?
                             <span class="text-cyan-400 text-base">▼</span>
                         </summary>
                         <p class="text-slate-400 mt-2.5 leading-relaxed">
-                            Yes. Photos taken on modern iPhones (.heic/.heif) are decoded client-side inside your browser, rotated to your desired angle, and downloaded as standard, universal JPEG files.
+                            EXIF rotation merely alters a single numeric flag in the file header telling compatible viewers to display the photo rotated, without touching the actual pixels. If the viewing program ignores EXIF, the photo looks sideways. Physical pixel transposition reorganizes the actual coordinate matrix in the canvas, guaranteeing permanent orientation that works everywhere.
                         </p>
                     </details>
 
                     <details class="bg-slate-900/90 p-4 sm:p-5 rounded-2xl border border-slate-800 text-xs sm:text-sm cursor-pointer group">
                         <summary class="font-bold text-white flex justify-between items-center group-hover:text-cyan-400 transition">
-                            Are my private photos uploaded to any server or cloud drive?
+                            Can I rotate heavy Apple iPhone HEIC pictures directly?
                             <span class="text-cyan-400 text-base">▼</span>
                         </summary>
                         <p class="text-slate-400 mt-2.5 leading-relaxed">
-                            Never. SmartPicTools is built on a 100% private client-side architecture. Your photos are rotated strictly within your device's browser memory, and all data is permanently erased the moment you close the tab.
+                            Yes. Photos captured on modern iPhones (.heic and .heif) are decoded client-side inside your browser via WebAssembly. You can rotate and mirror flip live Apple photos directly and export them as universal, high-resolution JPEGs viewable on Windows, Android, and web portals.
+                        </p>
+                    </details>
+
+                    <details class="bg-slate-900/90 p-4 sm:p-5 rounded-2xl border border-slate-800 text-xs sm:text-sm cursor-pointer group">
+                        <summary class="font-bold text-white flex justify-between items-center group-hover:text-cyan-400 transition">
+                            Can I rotate and mirror flip an image at the same time?
+                            <span class="text-cyan-400 text-base">▼</span>
+                        </summary>
+                        <p class="text-slate-400 mt-2.5 leading-relaxed">
+                            Yes. You can click 90° Clockwise or Anti-Clockwise to orient the picture, and then click Flip Horizontal or Flip Vertical. Our engine composites both geometric transformations simultaneously on the canvas, allowing you to achieve any desired compound orientation in a single export.
+                        </p>
+                    </details>
+
+                    <details class="bg-slate-900/90 p-4 sm:p-5 rounded-2xl border border-slate-800 text-xs sm:text-sm cursor-pointer group">
+                        <summary class="font-bold text-white flex justify-between items-center group-hover:text-cyan-400 transition">
+                            Are my personal photographs or private scanned documents stored on your servers?
+                            <span class="text-cyan-400 text-base">▼</span>
+                        </summary>
+                        <p class="text-slate-400 mt-2.5 leading-relaxed">
+                            Never. SmartPicTools is built on a 100% private in-browser architecture. Your photos are rotated strictly within your device's browser memory (RAM), and all data buffers are permanently erased the moment you close your browser tab.
                         </p>
                     </details>
                 </div>
             </div>
 
         </section>
-    <!-- ⚡ RELATED TOOLS SILO (SEO INTERNAL LINKING) -->
-            <div class="mt-12 bg-slate-900/90 p-6 rounded-3xl border border-slate-800 space-y-4">
-                <div class="flex items-center gap-2">
-                    <span class="text-indigo-400 font-bold text-sm">🔗</span>
-                    <h3 class="text-sm font-bold text-white uppercase tracking-wider">Useful Next Steps After Rotating:</h3>
-                </div>
-                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
-                    <a href="/crop-image" class="p-3 bg-slate-950/80 hover:bg-slate-950 rounded-xl border border-slate-800 hover:border-indigo-500/50 transition block">
-                        <strong class="text-white block">✂️ Crop Image (Aspect Ratios)</strong>
-                        <span class="text-slate-400 text-[11px]">Crop unwanted borders with 1:1, 16:9, or 9:16 templates.</span>
-                    </a>
-                    <a href="/compress-image" class="p-3 bg-slate-950/80 hover:bg-slate-950 rounded-xl border border-slate-800 hover:border-indigo-500/50 transition block">
-                        <strong class="text-white block">🎯 Compress Image (Exact KB)</strong>
-                        <span class="text-slate-400 text-[11px]">Shrink file weight to 20KB, 50KB, or 100KB for forms.</span>
-                    </a>
-                    <a href="/resize-image" class="p-3 bg-slate-950/80 hover:bg-slate-950 rounded-xl border border-slate-800 hover:border-indigo-500/50 transition block">
-                        <strong class="text-white block">📐 Resize Image Dimensions</strong>
-                        <span class="text-slate-400 text-[11px]">Adjust width and height in pixels with proportion lock.</span>
-                    </a>
-                </div>
-            </div>
-    
     </main>
     <footer class="border-t border-slate-800 bg-slate-950 py-8 px-4 text-xs text-slate-400 text-center">
         <p>© 2026 SmartPicTools. 100% Free & Private in-browser suite. <a href="/" class="text-indigo-400 hover:underline">Explore All Tools</a></p>
