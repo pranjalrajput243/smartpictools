@@ -751,8 +751,20 @@ def serve_favicon_ico():
     return send_file(buf, mimetype='image/x-icon')
 
 @app.route('/favicon.png')
+@app.route('/favicon-128x128.png')
 def serve_favicon_png():
-    buf = generate_pixel_perfect_favicon(96)
+    buf = generate_pixel_perfect_favicon(128)
+    return send_file(buf, mimetype='image/png')
+
+@app.route('/apple-touch-icon.png')
+@app.route('/apple-touch-icon-precomposed.png')
+def serve_apple_touch_icon():
+    buf = generate_pixel_perfect_favicon(180)
+    return send_file(buf, mimetype='image/png')
+
+@app.route('/favicon-256x256.png')
+def serve_favicon_256():
+    buf = generate_pixel_perfect_favicon(256)
     return send_file(buf, mimetype='image/png')
 
 @app.route('/favicon.svg')
