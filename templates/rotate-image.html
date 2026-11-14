@@ -217,7 +217,7 @@
                         A persistent technical frustration occurs when smartphone photos are uploaded to government recruitment portals, e-commerce storefronts, social media platforms, or legacy desktop software. Many web content management systems, automated document scanners, and browser rendering engines automatically strip or ignore EXIF metadata to conserve bandwidth. As a result, upright photographs suddenly revert to their raw sensor alignment—displaying sideways (rotated 90 degrees) or completely upside-down (rotated 180 degrees). Similarly, front-facing mobile cameras automatically save selfies as mirror reflections, causing text on clothing, certificates, and background signage to appear backward and unreadable.
                     </p>
                     <p>
-                        Fixing orientation issues reliably requires physical pixel transposition rather than temporary metadata edits. SmartPicTools executes true mathematical coordinate transformations directly within client-side HTML5 Canvas. When rotating 90 degrees clockwise or counter-clockwise, the engine transposes the physical pixel matrix ($[x, y] \to [y, W - 1 - x]$) and swaps the canvas width and height boundaries. When applying a horizontal flip, the horizontal axis is mathematically inverted, instantly resolving front-camera mirror distortions. Because the rotation is baked directly into the pixel array, your exported image displays perfectly upright across every operating system, web portal, and device without relying on fragile EXIF flags.
+                        Fixing orientation issues reliably requires physical pixel transposition rather than temporary metadata edits. SmartPicTools executes true mathematical coordinate transformations directly within client-side HTML5 Canvas. When rotating 90 degrees clockwise or counter-clockwise, the engine transposes the physical pixel matrix from horizontal to vertical coordinates and swaps the canvas width and height boundaries. When applying a horizontal flip, the horizontal axis is mathematically inverted, instantly resolving front-camera mirror distortions. Because the rotation is baked directly into the pixel array, your exported image displays perfectly upright across every operating system, web portal, and device without relying on fragile EXIF flags.
                     </p>
                 </div>
             </div>
@@ -242,28 +242,28 @@
                         <tbody class="divide-y divide-slate-800/60 font-medium">
                             <tr class="hover:bg-slate-950/40 transition">
                                 <td class="py-3 px-4 text-white font-bold">90° Clockwise Rotation</td>
-                                <td class="py-3 px-4 text-indigo-400 font-bold">$[x, y] \to [H - 1 - y, x]$</td>
+                                <td class="py-3 px-4 text-indigo-400 font-bold">Rotate Matrix +90°</td>
                                 <td class="py-3 px-4 text-emerald-400 font-bold">Width & Height Swapped</td>
                                 <td class="py-3 px-4">Correcting Sideways Mobile Camera Snaps</td>
                                 <td class="py-3 px-4 text-emerald-400 font-bold">100% Lossless Coordinate Transposition</td>
                             </tr>
                             <tr class="hover:bg-slate-950/40 transition">
                                 <td class="py-3 px-4 text-white font-bold">90° Counter-Clockwise Rotation</td>
-                                <td class="py-3 px-4 text-indigo-400 font-bold">$[x, y] \to [y, W - 1 - x]$</td>
+                                <td class="py-3 px-4 text-indigo-400 font-bold">Rotate Matrix -90°</td>
                                 <td class="py-3 px-4 text-emerald-400 font-bold">Width & Height Swapped</td>
                                 <td class="py-3 px-4">Landscape Document Scans, Architecture</td>
                                 <td class="py-3 px-4 text-emerald-400 font-bold">100% Lossless Coordinate Transposition</td>
                             </tr>
                             <tr class="hover:bg-slate-950/40 transition">
                                 <td class="py-3 px-4 text-white font-bold">Horizontal Flip (Mirror)</td>
-                                <td class="py-3 px-4 text-indigo-400 font-bold">$[x, y] \to [W - 1 - x, y]$</td>
+                                <td class="py-3 px-4 text-indigo-400 font-bold">Invert X-Axis (Left ⇄ Right)</td>
                                 <td class="py-3 px-4 text-slate-400 font-bold">Dimensions Preserved</td>
                                 <td class="py-3 px-4">Fixing Inverted Front-Camera Selfies</td>
                                 <td class="py-3 px-4 text-emerald-400 font-bold">Exact Inversion (Text Reads Left-to-Right)</td>
                             </tr>
                             <tr class="hover:bg-slate-950/40 transition">
                                 <td class="py-3 px-4 text-white font-bold">Vertical Flip (Reflection)</td>
-                                <td class="py-3 px-4 text-indigo-400 font-bold">$[x, y] \to [x, H - 1 - y]$</td>
+                                <td class="py-3 px-4 text-indigo-400 font-bold">Invert Y-Axis (Top ⇅ Bottom)</td>
                                 <td class="py-3 px-4 text-slate-400 font-bold">Dimensions Preserved</td>
                                 <td class="py-3 px-4">Inverted Flatbed Scans, Water Reflections</td>
                                 <td class="py-3 px-4 text-emerald-400 font-bold">100% Native Pixel Retention</td>
