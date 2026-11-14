@@ -802,7 +802,7 @@ def sitemap():
         ('https://smartpictools.in/split-pdf', '0.9'),
         ('https://smartpictools.in/extract-pages-from-pdf', '0.9'),
         ('https://smartpictools.in/separate-pdf-pages', '0.9'),
-        ('https://smartpictools.in/youtube-thumbnail-downloader', '0.9'),
+        # ('https://smartpictools.in/youtube-thumbnail-downloader', '0.9'),
         ('https://smartpictools.in/pdf-password', '0.9'),
         ('https://smartpictools.in/protect-pdf', '0.9'),
         ('https://smartpictools.in/unlock-pdf', '0.9'),
